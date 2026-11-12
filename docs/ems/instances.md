@@ -106,7 +106,7 @@ the instance with the slots in force.
 
 ## Watch it
 
-- The **Media service** tab of the **Dashboard** lists the instances beside what the chosen one holds:
+- The **Media service** tab of the **Status** lists the instances beside what the chosen one holds:
   each **up** or **down**, its card or **CPU only**, and the operations another serves. On a phone the
   list is a menu above it.
 - The **Overview** tab has **GPU** and **VRAM** tiles for each instance with a card, under its name.

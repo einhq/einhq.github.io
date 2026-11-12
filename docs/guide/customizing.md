@@ -114,7 +114,7 @@ panels
 - **`panels`** are parts that modules draw inside other pages; see
   [Change the panels inside pages](#change-the-panels-inside-pages).
 
-An administrator also gets **Nodes** and **Dashboard** under **System**. The
+An administrator also gets **Nodes** and **Status** under **System**. The
 [sidebar](interface.md#the-sidebar) and [top bar](interface.md#the-top-bar) sections of
 [Finding your way around](interface.md) say what each entry is.
 
@@ -123,7 +123,7 @@ The first part of an id says where the entry comes from: `ui.` is EiN's own, and
 [assistant](../assistant/index.md)'s and the [media service module](../ems/index.md)'s, there once
 that module is installed. On an EiN with no modules, the sidebar holds only **Home**, **Search**,
 **Devices** for someone signed in, **Settings**, **Statistics** and **Documentation**, with **Nodes**
-and **Dashboard** for an administrator, and there are no panels.
+and **Status** for an administrator, and there are no panels.
 
 When something in a file cannot be used, `ui-nav` says so after the list, on lines that start with
 `ui-nav:`; [When something goes differently](#when-something-goes-differently) explains each one.
@@ -329,7 +329,7 @@ also appear in the search box's list under **Go to**, like every sidebar entry.
 
 The sidebar lights the entry whose address is the page's, or the start of it, so **Albums** is lit
 on an album too. When several match, the longest address wins: on `/system/nodes` only **Nodes** is
-lit, not **Dashboard** at `/system`. An entry whose address has a `?` in it, like the saved search
+lit, not **Status** at `/system`. An entry whose address has a `?` in it, like the saved search
 above, is never lit.
 
 ## Add buttons to the top bar
@@ -493,7 +493,7 @@ Some pages have keys of their own while they are on screen, such as the photo vi
 ## Change the panels inside pages
 
 Panels are parts that modules draw inside EiN's own pages, such as the **Media service** tab on the
-**Dashboard** or the **People**, **Locations**, **Years** and **Labels** sections of the **Search**
+**Status** or the **People**, **Locations**, **Years** and **Labels** sections of the **Search**
 page. They are in the same files under `"panels"`, so you can reorder, rename or hide them by id
 like any entry. This puts **Years** first on the **Search** page and hides **Labels** there:
 
@@ -515,9 +515,9 @@ Each panel has a slot, the place in a page where it is drawn:
 | `home.start`      | Under **News** on **Home** while there is no news                  | `archive.start-upload` (**Import media**, signed in only)               |
 | `stats.sections`  | A section of **Statistics**                                        | `archive.life-events` (**Events**)                                      |
 | `nodes.tools`     | A tool in the **Nodes** explorer's tool pane                       | `archive.duplicates` (**Duplicates**)                                   |
-| `system.tabs`     | A tab of the **Dashboard**                                         | `ems.media-service` (**Media service**)                                 |
+| `system.tabs`     | A tab of the **Status**                                            | `ems.media-service` (**Media service**)                                 |
 | `device.tabs`     | A tab of a device's page, after **Info**                           | `archive.trips` (**Trips**, on a device with a track)                   |
-| `system.overview` | Gauges beside the computer's own on the **Dashboard**'s overview   | `ems.gpu` (**GPU**)                                                     |
+| `system.overview` | Gauges beside the computer's own on the **Status**'s overview      | `ems.gpu` (**GPU**)                                                     |
 | `about.services`  | A tile in **About EiN**                                            | `assistant.about` (**Language model**), `ems.about` (**Media service**) |
 | `shell.float`     | Floating over every page and the lightbox, under dialogs           | `todo.widget` (**Todo widget**, signed in only)                         |
 
@@ -544,7 +544,7 @@ where they matter:
 | `"signedIn": true`   | Only to someone signed in, never to a visitor browsing without signing in, where [**Visitors may browse**](../reference/settings.md#cfg_guest_browsing) is on. |
 | `"group": "devices"` | Only to the members of that group, and to administrators.                                                                                                      |
 
-EiN uses them itself: **Nodes** and **Dashboard** are `admin`; **Staging**, **Settings**, **Create**
+EiN uses them itself: **Nodes** and **Status** are `admin`; **Staging**, **Settings**, **Create**
 and the account menu are `signedIn`; **Device** under **Create** is the `devices` group's.
 
 This file, for a family with no cameras to register and no devices, hides **Cameras** and

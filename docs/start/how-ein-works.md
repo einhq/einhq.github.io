@@ -156,18 +156,18 @@ down, its steps wait for it rather than fail. Work that fails anyway is tried ag
 six hours and a day, and then marked as needing a person; a file that no decoder can open is not
 tried again.
 
-The **Dashboard**, an administrator's page, sums all this up in one word: **Healthy**,
+The **Status**, an administrator's page, sums all this up in one word: **Healthy**,
 **Catching up**, **Stuck** or **Needs a person**. After a large upload it reads Catching up for a
 while, which is expected. [Changes and pipelines](../concepts/pipelines.md) follows a change from
 event to finished work, [Processing and pipelines](../admin/processing.md) is the administrator's
-side, and [Health and the dashboard](../admin/monitoring.md) explains the four words.
+side, and [Health and status](../admin/monitoring.md) explains the four words.
 
 ## Modules decide what EiN is for
 
 Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, devices,
 and the frame of the Web UI. On its own, its sidebar holds **Home**, **Search**, **Devices**,
 **Settings**, **Statistics** and **Documentation**, and for an administrator **Nodes** and
-**Dashboard**.
+**Status**.
 Everything else comes from modules.
 
 A module is a folder with a manifest, `mod.json`, kept in a repository of its own. What it adds is
@@ -177,11 +177,11 @@ of its commands: every command whose name starts with `search-` is asked when yo
 
 The published modules are in the einhq organisation on GitHub, each named `module-<name>`:
 
-| Module                               | What it is for                                                                                                                                                                                         | What it needs                                                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
-| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, cameras, the trips of the devices that travel, and staging, where uploads wait to be sorted  | The `ems` module, installed along with it, and the media service |
-| [`assistant`](../assistant/index.md) | The chat that answers questions about EiN by running its commands for you                                                                                                                              | A language model                                                 |
-| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares | The media service                                                |
+| Module                               | What it is for                                                                                                                                                                                           | What it needs                                                    |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [`archive`](../archive/index.md)     | The Archive: albums of photos, videos, recordings and documents, people and their family tree, locations, cameras, the trips of the devices that travel, and staging, where uploads wait to be sorted    | The `ems` module, installed along with it, and the media service |
+| [`assistant`](../assistant/index.md) | The chat that answers questions about EiN by running its commands for you                                                                                                                                | A language model                                                 |
+| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive calls it through, the media service's health and graphics card readings on the Status page, and the text vectors that search by meaning compares | The media service                                                |
 
 An administrator installs, updates and removes modules on **Settings → Modules**, with
 `mod install`, or with the installer's `--module` option. [Modules](../admin/modules.md) explains all

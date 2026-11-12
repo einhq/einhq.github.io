@@ -158,7 +158,7 @@ so `ls /var` reads the same on a fresh instance as on one that has run for a yea
 | Path                         | What it is                                                                         |
 | ---------------------------- | ---------------------------------------------------------------------------------- |
 | `/var/logs/system`           | The system log                                                                     |
-| `/var/logs/metrics`          | Measurements of the machine and of EiN over time, for the Dashboard                |
+| `/var/logs/metrics`          | Measurements of the machine and of EiN over time, for the Status page              |
 | `/var/logs/services/<name>`  | Each service's output                                                              |
 | `/var/logs/jobs/<pid>`       | The output of a job started with `nohup`                                           |
 | `/var/sessions`              | The open sessions: one node per session, from a browser or over SSH                |

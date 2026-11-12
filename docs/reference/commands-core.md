@@ -3358,7 +3358,7 @@ Make, list, change and turn off links that open a node without signing in.
 <small>visitors too · reads only</small>
 
 ```text
-share-link [--expires=<string>] [--never] [--session] <subcommand> <target>
+share-link [--expires=<string>] [--never] [--as=<user>] [--session] <subcommand> <target>
 ```
 
 | Argument | What it is |
@@ -3370,10 +3370,12 @@ share-link [--expires=<string>] [--never] [--session] <subcommand> <target>
 | --- | --- |
 | `--expires=<string>` | create and set: when the link stops working, a date or epoch ms (default: 30 days) |
 | `--never` | create and set: the link does not expire. |
+| `--as=<user>` | create: the link shows things as this account sees them, read-only, for a screen that never signs in (yours, or for an administrator one that is not an administrator's) |
 | `--session` | open: act as the link in the whole session, not just this shell. |
 
 ```bash
 share-link create /archive/albums/Exempelalbum
+share-link create /archive/dashboards/Kitchen.yaml --as display --never
 share-link list /archive/albums/Exempelalbum
 share-link remove 0123456789abcdef
 ```

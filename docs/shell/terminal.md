@@ -425,10 +425,10 @@ so without a module they find nothing.
 > menu (see [Your profile, favourites and trash](../guide/profile.md)).
 
 `top` fills the terminal with what EiN is doing and keeps it up to date. Press <kbd>Alt</kbd>+<kbd>M</kbd>
-first to give it the whole window. [Health and the dashboard](../admin/monitoring.md) explains what
+first to give it the whole window. [Health and status](../admin/monitoring.md) explains what
 it shows and all its keys.
 
-![The terminal running top: a CPU graph, memory and disk use, the work waiting and done with the verdict healthy, the open sessions, the running processes and the services](../../assets/shots/terminal-top.webp "top shows on one screen what the Dashboard spreads over several tabs.")
+![The terminal running top: a CPU graph, memory and disk use, the work waiting and done with the verdict healthy, the open sessions, the running processes and the services](../../assets/shots/terminal-top.webp "top shows on one screen what the Status page spreads over several tabs.")
 
 Steps that belong together can be joined with `&&`, and paths with spaces go in quotes, as in bash:
 

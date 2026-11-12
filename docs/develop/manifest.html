@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section class="here"><h2>Developing</h2><ul><li><a href="modules.html">Writing a module</a></li><li><a href="manifest.html" aria-current="page">The module manifest</a></li><li><a href="drivers.html">Writing a driver</a></li><li><a href="source.html">Building from source</a></li></ul></section>
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -211,6 +212,11 @@
 <td><code>ui.open</code></td>
 <td>which route opens a node of a type</td>
 <td><code>ui-build</code>, browser</td>
+</tr>
+<tr>
+<td><code>ui.shareLinks</code></td>
+<td>which nodes the Share dialog offers a link for</td>
+<td>browser</td>
 </tr>
 </tbody></table>
 </div>
@@ -461,7 +467,7 @@
 <h3 id="roots"><code>roots</code><a class="anchor" href="#roots" aria-label="Link to this section"></a></h3>
 <p>The folders directly under <code>/archive</code> that the module&#39;s content lives in. The Archive&#39;s are:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;roots&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;/archive/people&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/locations&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/cameras&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/albums&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;/archive/sources&quot;</span><span class="hljs-punctuation">]</span></code></pre></div>
-<p>Each must be <code>/archive/</code> followed by one name of lower case letters, digits, <code>_</code> and <code>-</code>, starting with a letter. <code>mod setup</code> creates a missing one, owned by the administrator and the users group, with mode 775. Nothing removes one, so removing a module does not delete its content. Name the roots in your module&#39;s own code too, so its dependents can use them: the Archive exports them as <code>@archive/paths</code>.</p>
+<p>Each must be <code>/archive/</code> followed by one name of lower case letters, digits, <code>_</code> and <code>-</code>, starting with a letter. <code>mod setup</code> creates a missing one, owned by the administrator and the users group, with mode 771: anyone else, someone holding a link included, reaches what is shared with them under it but cannot list it. Nothing removes one, so removing a module does not delete its content. Name the roots in your module&#39;s own code too, so its dependents can use them: the Archive exports them as <code>@archive/paths</code>.</p>
 <h3 id="indexes"><code>indexes</code><a class="anchor" href="#indexes" aria-label="Link to this section"></a></h3>
 <p>Database indexes on node attributes, for the queries the module&#39;s data is asked. <code>mod setup</code> creates each one that is missing.</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;indexes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -545,6 +551,30 @@
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;open&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;/etc/automations/&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/automations/{rest}&quot;</span> <span class="hljs-punctuation">}</span></code></pre></div>
 <p><code>/etc/automations/hall-light.yaml</code> then opens at <code>/automations/hall-light</code>, and a deeper
 <code>/etc/automations/upstairs/hall.yaml</code> at <code>/automations/upstairs%2Fhall</code>. Core opens a <code>device</code> at its page itself, and a <code>log</code>, <code>track</code> or <code>control</code> directly under a device at its device&#39;s page, so a module names no route for those; a module adds a tab to the device page with a <code>device.tabs</code> panel instead (<a href="drivers.html#a-tab-on-the-device-page">A tab on the device page</a>).</p>
+<h3 id="uisharelinks"><code>ui.shareLinks</code><a class="anchor" href="#uisharelinks" aria-label="Link to this section"></a></h3>
+<p>Which nodes the <strong>Share</strong> dialog offers a link for, and how the link opens them. Keys are as <code>ui.open</code>&#39;s: a node type, or a folder ending with <code>/</code>.</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;shareLinks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;album&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;shows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;noun&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;album&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;/archive/dashboards/&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;shows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;account&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;noun&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;dashboard&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>shows</code></td>
+<td><code>node</code>: the link shows the node and what it holds, as an album&#39;s does. <code>account</code>: the link signs in read-only as an account the person sharing picks, a display link, as a dashboard&#39;s does on a wall screen</td>
+</tr>
+<tr>
+<td><code>noun</code></td>
+<td>What the dialog calls the node: &quot;Anyone with the link can see this album&quot;</td>
+</tr>
+</tbody></table>
+</div>
+<p>A node no installed module names here is shared with people and groups only. <a href="../guide/sharing.html">Sharing</a> describes both kinds of link, and <a href="../dashboard/screens.html">Show a dashboard on a screen</a> a display link. The field needs core&#39;s module contract 0.14.18 or later.</p>
 <h2 id="what-mod-setup-finds-without-a-field">What <code>mod setup</code> finds without a field<a class="anchor" href="#what-mod-setup-finds-without-a-field" aria-label="Link to this section"></a></h2>
 <p>Some of what a module brings is found by where it is in the module, not by a field in <code>mod.json</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -580,7 +610,7 @@
 </tr>
 <tr>
 <td><code>etc/&lt;x&gt;.d/</code></td>
-<td>links it as <code>/etc/&lt;x&gt;.d/&lt;name&gt;</code>, for whichever module reads <code>/etc/&lt;x&gt;.d/*</code> (<code>assistant.d</code>)</td>
+<td>links it as <code>/etc/&lt;x&gt;.d/&lt;name&gt;</code>, for whichever module reads <code>/etc/&lt;x&gt;.d/*</code> (<code>assistant.d</code>, <code>dashboard.d</code>)</td>
 </tr>
 <tr>
 <td>the rest of <code>etc/</code></td>
@@ -640,7 +670,7 @@ mod setup letters</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/manifest.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-small-manifest">A small manifest</a></li><li><a href="#the-fields-at-a-glance">The fields at a glance</a></li><li><a href="#identity">Identity</a></li><li class="nested"><a href="#name">name</a></li><li class="nested"><a href="#version">version</a></li><li class="nested"><a href="#description-author-license">description, author, license</a></li><li class="nested"><a href="#coreapi">coreApi</a></li><li><a href="#what-a-module-shares-and-uses">What a module shares and uses</a></li><li class="nested"><a href="#exports">exports</a></li><li class="nested"><a href="#imports">imports</a></li><li class="nested"><a href="#dependencies">dependencies</a></li><li><a href="#settings">Settings</a></li><li class="nested"><a href="#configoptions">config.options</a></li><li class="nested"><a href="#a-modules-own-choice-of-values">A module's own choice of values</a></li><li><a href="#drop-ins">Drop-ins</a></li><li class="nested"><a href="#dropins">dropIns</a></li><li><a href="#reference">Reference</a></li><li class="nested"><a href="#environment">environment</a></li><li class="nested"><a href="#nodetypes">nodeTypes</a></li><li><a href="#the-archive">The archive</a></li><li class="nested"><a href="#roots">roots</a></li><li class="nested"><a href="#indexes">indexes</a></li><li><a href="#pages">Pages</a></li><li class="nested"><a href="#uiroutes">ui.routes</a></li><li class="nested"><a href="#uiopen">ui.open</a></li><li><a href="#what-mod-setup-finds-without-a-field">What mod setup finds without a field</a></li><li><a href="#check-a-manifest">Check a manifest</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#a-small-manifest">A small manifest</a></li><li><a href="#the-fields-at-a-glance">The fields at a glance</a></li><li><a href="#identity">Identity</a></li><li class="nested"><a href="#name">name</a></li><li class="nested"><a href="#version">version</a></li><li class="nested"><a href="#description-author-license">description, author, license</a></li><li class="nested"><a href="#coreapi">coreApi</a></li><li><a href="#what-a-module-shares-and-uses">What a module shares and uses</a></li><li class="nested"><a href="#exports">exports</a></li><li class="nested"><a href="#imports">imports</a></li><li class="nested"><a href="#dependencies">dependencies</a></li><li><a href="#settings">Settings</a></li><li class="nested"><a href="#configoptions">config.options</a></li><li class="nested"><a href="#a-modules-own-choice-of-values">A module's own choice of values</a></li><li><a href="#drop-ins">Drop-ins</a></li><li class="nested"><a href="#dropins">dropIns</a></li><li><a href="#reference">Reference</a></li><li class="nested"><a href="#environment">environment</a></li><li class="nested"><a href="#nodetypes">nodeTypes</a></li><li><a href="#the-archive">The archive</a></li><li class="nested"><a href="#roots">roots</a></li><li class="nested"><a href="#indexes">indexes</a></li><li><a href="#pages">Pages</a></li><li class="nested"><a href="#uiroutes">ui.routes</a></li><li class="nested"><a href="#uiopen">ui.open</a></li><li class="nested"><a href="#uisharelinks">ui.shareLinks</a></li><li><a href="#what-mod-setup-finds-without-a-field">What mod setup finds without a field</a></li><li><a href="#check-a-manifest">Check a manifest</a></li></ul></aside>
     </div>
   </body>
 </html>

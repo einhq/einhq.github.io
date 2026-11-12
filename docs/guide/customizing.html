@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html" aria-current="page">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -295,7 +296,7 @@ under your picture.</li>
 <li><strong><code>panels</code></strong> are parts that modules draw inside other pages; see
 <a href="#change-the-panels-inside-pages">Change the panels inside pages</a>.</li>
 </ul>
-<p>An administrator also gets <strong>Nodes</strong> and <strong>Dashboard</strong> under <strong>System</strong>. The
+<p>An administrator also gets <strong>Nodes</strong> and <strong>Status</strong> under <strong>System</strong>. The
 <a href="interface.html#the-sidebar">sidebar</a> and <a href="interface.html#the-top-bar">top bar</a> sections of
 <a href="interface.html">Finding your way around</a> say what each entry is.</p>
 <p>The first part of an id says where the entry comes from: <code>ui.</code> is EiN&#39;s own, and <code>archive.</code>,
@@ -303,7 +304,7 @@ under your picture.</li>
 <a href="../assistant/index.html">assistant</a>&#39;s and the <a href="../ems/index.html">media service module</a>&#39;s, there once
 that module is installed. On an EiN with no modules, the sidebar holds only <strong>Home</strong>, <strong>Search</strong>,
 <strong>Devices</strong> for someone signed in, <strong>Settings</strong>, <strong>Statistics</strong> and <strong>Documentation</strong>, with <strong>Nodes</strong>
-and <strong>Dashboard</strong> for an administrator, and there are no panels.</p>
+and <strong>Status</strong> for an administrator, and there are no panels.</p>
 <p>When something in a file cannot be used, <code>ui-nav</code> says so after the list, on lines that start with
 <code>ui-nav:</code>; <a href="#when-something-goes-differently">When something goes differently</a> explains each one.
 The browser&#39;s console shows the same lines.</p>
@@ -470,7 +471,7 @@ with <code>me.</code> keeps them apart.</li>
 </ul>
 <p>The sidebar lights the entry whose address is the page&#39;s, or the start of it, so <strong>Albums</strong> is lit
 on an album too. When several match, the longest address wins: on <code>/system/nodes</code> only <strong>Nodes</strong> is
-lit, not <strong>Dashboard</strong> at <code>/system</code>. An entry whose address has a <code>?</code> in it, like the saved search
+lit, not <strong>Status</strong> at <code>/system</code>. An entry whose address has a <code>?</code> in it, like the saved search
 above, is never lit.</p>
 <h2 id="add-buttons-to-the-top-bar">Add buttons to the top bar<a class="anchor" href="#add-buttons-to-the-top-bar" aria-label="Link to this section"></a></h2>
 <p>A top-bar button is an entry under <code>&quot;topbar&quot;</code> with an <code>id</code>, a <code>title</code> (its tooltip), an <code>icon</code> and
@@ -629,7 +630,7 @@ which the terminal uses. An entry that asks for one of these as EiN writes it (<
 <a href="../reference/shortcuts.html">Keyboard shortcuts</a> lists every key EiN knows.</p>
 <h2 id="change-the-panels-inside-pages">Change the panels inside pages<a class="anchor" href="#change-the-panels-inside-pages" aria-label="Link to this section"></a></h2>
 <p>Panels are parts that modules draw inside EiN&#39;s own pages, such as the <strong>Media service</strong> tab on the
-<strong>Dashboard</strong> or the <strong>People</strong>, <strong>Locations</strong>, <strong>Years</strong> and <strong>Labels</strong> sections of the <strong>Search</strong>
+<strong>Status</strong> or the <strong>People</strong>, <strong>Locations</strong>, <strong>Years</strong> and <strong>Labels</strong> sections of the <strong>Search</strong>
 page. They are in the same files under <code>&quot;panels&quot;</code>, so you can reorder, rename or hide them by id
 like any entry. This puts <strong>Years</strong> first on the <strong>Search</strong> page and hides <strong>Labels</strong> there:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
@@ -674,7 +675,7 @@ like any entry. This puts <strong>Years</strong> first on the <strong>Search</st
 </tr>
 <tr>
 <td><code>system.tabs</code></td>
-<td>A tab of the <strong>Dashboard</strong></td>
+<td>A tab of the <strong>Status</strong></td>
 <td><code>ems.media-service</code> (<strong>Media service</strong>)</td>
 </tr>
 <tr>
@@ -684,7 +685,7 @@ like any entry. This puts <strong>Years</strong> first on the <strong>Search</st
 </tr>
 <tr>
 <td><code>system.overview</code></td>
-<td>Gauges beside the computer&#39;s own on the <strong>Dashboard</strong>&#39;s overview</td>
+<td>Gauges beside the computer&#39;s own on the <strong>Status</strong>&#39;s overview</td>
 <td><code>ems.gpu</code> (<strong>GPU</strong>)</td>
 </tr>
 <tr>
@@ -730,7 +731,7 @@ where they matter:</p>
 </tr>
 </tbody></table>
 </div>
-<p>EiN uses them itself: <strong>Nodes</strong> and <strong>Dashboard</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
+<p>EiN uses them itself: <strong>Nodes</strong> and <strong>Status</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
 and the account menu are <code>signedIn</code>; <strong>Device</strong> under <strong>Create</strong> is the <code>devices</code> group&#39;s.</p>
 <p>This file, for a family with no cameras to register and no devices, hides <strong>Cameras</strong> and
 <strong>Devices</strong> in the sidebar and <strong>Camera</strong> in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a

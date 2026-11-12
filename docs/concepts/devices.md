@@ -206,7 +206,7 @@ After `device-forget` it is made again at the next reading. Only the administrat
 | `uptime`             | Days since the machine started                                  | 15 minutes | 365 days |
 
 These are the whole machine's, whatever runs on it: the media service and the database load it from
-containers of their own. EiN's own share is on the System dashboard. A disk is each filesystem on a
+containers of their own. EiN's own share is on the System status page. A disk is each filesystem on a
 block device that EiN's container sees, once, wherever it is mounted. The load, the temperatures,
 the total and the uptime are about the machine itself (`diagnostic`), so the card shows the CPU.
 

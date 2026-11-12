@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section class="here"><h2>Getting started</h2><ul><li><a href="how-ein-works.html" aria-current="page">How EiN works</a></li><li><a href="install.html">Install EiN</a></li><li><a href="first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -382,16 +383,16 @@ restarts, and a node that changes ten times while it waits is worked on once. Wh
 down, its steps wait for it rather than fail. Work that fails anyway is tried again after an hour,
 six hours and a day, and then marked as needing a person; a file that no decoder can open is not
 tried again.</p>
-<p>The <strong>Dashboard</strong>, an administrator&#39;s page, sums all this up in one word: <strong>Healthy</strong>,
+<p>The <strong>Status</strong>, an administrator&#39;s page, sums all this up in one word: <strong>Healthy</strong>,
 <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. After a large upload it reads Catching up for a
 while, which is expected. <a href="../concepts/pipelines.html">Changes and pipelines</a> follows a change from
 event to finished work, <a href="../admin/processing.html">Processing and pipelines</a> is the administrator&#39;s
-side, and <a href="../admin/monitoring.html">Health and the dashboard</a> explains the four words.</p>
+side, and <a href="../admin/monitoring.html">Health and status</a> explains the four words.</p>
 <h2 id="modules-decide-what-ein-is-for">Modules decide what EiN is for<a class="anchor" href="#modules-decide-what-ein-is-for" aria-label="Link to this section"></a></h2>
 <p>Core is the tree, the shell and its commands, the pipeline engine, accounts and sharing, devices,
 and the frame of the Web UI. On its own, its sidebar holds <strong>Home</strong>, <strong>Search</strong>, <strong>Devices</strong>,
 <strong>Settings</strong>, <strong>Statistics</strong> and <strong>Documentation</strong>, and for an administrator <strong>Nodes</strong> and
-<strong>Dashboard</strong>.
+<strong>Status</strong>.
 Everything else comes from modules.</p>
 <p>A module is a folder with a manifest, <code>mod.json</code>, kept in a repository of its own. What it adds is
 what its folders hold: commands, services that run in the background, pipelines, pages and sidebar
@@ -418,7 +419,7 @@ of its commands: every command whose name starts with <code>search-</code> is as
 </tr>
 <tr>
 <td><a href="../ems/index.html"><code>ems</code></a></td>
-<td>EiN&#39;s side of the media service: the client the Archive calls it through, the media service&#39;s health and graphics card readings on the Dashboard, and the text vectors that search by meaning compares</td>
+<td>EiN&#39;s side of the media service: the client the Archive calls it through, the media service&#39;s health and graphics card readings on the Status page, and the text vectors that search by meaning compares</td>
 <td>The media service</td>
 </tr>
 </tbody></table>

@@ -39,7 +39,7 @@
 - [Accounts and groups](admin/accounts.md)
 - [Permissions in depth](admin/permissions.md)
 - [Devices and their keys](admin/devices.md)
-- [Health and the dashboard](admin/monitoring.md)
+- [Health and status](admin/monitoring.md)
 - [Processing and pipelines](admin/processing.md)
 - [Services and logs](admin/services-logs.md)
 - [Performance and sizing](admin/performance.md)
@@ -123,6 +123,12 @@
 
 - [Recipes](recipes/index.md)
 - [Recipes commands](recipes/commands.md)
+
+## Dashboards
+
+- [Dashboards](dashboard/index.md)
+- [Show a dashboard on a screen](dashboard/screens.md)
+- [Dashboards commands](dashboard/commands.md)
 
 ## Automation
 

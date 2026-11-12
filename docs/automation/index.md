@@ -540,9 +540,9 @@ automation-status
 | `cannot reach mqtt://…: <why>`               | The broker does not answer, or refuses EiN's account. The bridge tries again by itself, waiting a second, then twice as long each time, up to a minute.                                     |
 | `not running`                                | The `automation-bridge` service is stopped: `service start automation-bridge`, as the administrator.                                                                                        |
 
-The dashboard says the same: its `automation bridge` check is fine while the bridge is connected, or runs without a broker,
+The Status page says the same: its `automation bridge` check is fine while the bridge is connected, or runs without a broker,
 a warning while it cannot reach the broker, and failed while its service is stopped
-([Health and the dashboard](../admin/monitoring.md#read-the-checks)). `devices --drivers` lists the
+([Health and status](../admin/monitoring.md#read-the-checks)). `devices --drivers` lists the
 drivers with their devices while the bridge runs.
 
 ## What a device becomes

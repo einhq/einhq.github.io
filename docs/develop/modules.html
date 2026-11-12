@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and the dashboard</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section class="here"><h2>Developing</h2><ul><li><a href="modules.html" aria-current="page">Writing a module</a></li><li><a href="manifest.html">The module manifest</a></li><li><a href="drivers.html">Writing a driver</a></li><li><a href="source.html">Building from source</a></li></ul></section>
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -685,7 +686,7 @@ opens:</p>
 </tr>
 <tr>
 <td><code>panels</code></td>
-<td>Inside another page, at a <code>slot</code> it names, such as <code>system.tabs</code> (a tab of the <strong>Dashboard</strong>), <code>device.tabs</code> (a tab of a device&#39;s page) or <code>nodes.tools</code></td>
+<td>Inside another page, at a <code>slot</code> it names, such as <code>system.tabs</code> (a tab of the <strong>Status</strong>), <code>device.tabs</code> (a tab of a device&#39;s page) or <code>nodes.tools</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -755,7 +756,7 @@ the administrator sets wins over it. The <code>ems</code> module&#39;s names its
 </thead>
 <tbody><tr>
 <td><code>description</code></td>
-<td>One line for the <strong>Dashboard</strong>&#39;s services and <code>service list</code></td>
+<td>One line for the <strong>Status</strong>&#39;s services and <code>service list</code></td>
 </tr>
 <tr>
 <td><code>restartPolicy</code></td>
@@ -787,7 +788,7 @@ the administrator sets wins over it. The <code>ems</code> module&#39;s names its
 </tr>
 <tr>
 <td><code>gaugeCommand</code></td>
-<td>A command answering meters for <code>top</code> and the <strong>Dashboard</strong>, as JSON <code>[{ label, percent?, value }]</code></td>
+<td>A command answering meters for <code>top</code> and the <strong>Status</strong>, as JSON <code>[{ label, percent?, value }]</code></td>
 </tr>
 <tr>
 <td><code>workClass</code></td>
@@ -867,6 +868,108 @@ for a language model or text vectors. The settings are in
 <p>With the Assistant installed, what the assistant knows about your module&#39;s commands, and how to
 give it more, is in <a href="../assistant/teaching.html">Teaching the assistant</a>. A module that brings a kind
 of device registers a driver from one of its services; see <a href="drivers.html">Writing a driver</a>.</p>
+<h2 id="offer-cards-to-dashboards">Offer cards to dashboards<a class="anchor" href="#offer-cards-to-dashboards" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../dashboard/index.html">Dashboards</a> module installed, a person puts cards on a dashboard
+from those the installed modules offer. A card is a route of your module drawn inside a tile, and
+the module offers it in <code>etc/dashboard.d/cards.json</code>, which <code>mod setup</code> links as
+<code>/etc/dashboard.d/&lt;module&gt;/cards.json</code>. Nothing else is needed: the dashboard names no module, and
+your module does not depend on it. The Todo module&#39;s list card:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;list&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Todo list&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;One list&#x27;s items not done yet, late ones first and then by when they are due.&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;list-check&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;yellow&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;route&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/cards/todo/list&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span> <span class="hljs-number">5</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;min&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">3</span><span class="hljs-punctuation">,</span> <span class="hljs-number">3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;params&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;list&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;list&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;path&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;List&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;x-choices&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;todo-lists&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;path&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;title&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;who&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;boolean&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Who is to do each&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>Lower case letters, digits and <code>-</code>; the card is <code>&lt;module&gt;.&lt;name&gt;</code></td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>What the picker and the tile&#39;s header call it</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td>The route that draws it, without a query; one of your <code>ui.routes</code></td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>[columns, rows]</code> a new one takes, of a dashboard 12 columns wide</td>
+<td>required</td>
+</tr>
+<tr>
+<td><code>min</code></td>
+<td>The smallest <code>[columns, rows]</code> it may be made</td>
+<td><code>[1, 1]</code></td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>One sentence in the picker</td>
+<td>the label</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>A <a href="https://tabler.io/icons">Tabler</a> icon name</td>
+<td><code>puzzle</code></td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>A Mantine colour name, the kind colour of what it shows</td>
+<td><code>gray</code></td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td><code>titled</code> draws a header with its icon and title above the route; <code>plain</code> gives the route the tile</td>
+<td><code>titled</code></td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>A JSON Schema of an object: what a person sets, passed to the route in its query</td>
+<td>no settings</td>
+</tr>
+</tbody></table>
+</div>
+<p>Each parameter has a <code>type</code> (<code>string</code>, <code>number</code>, <code>integer</code>, <code>boolean</code> or <code>array</code> of strings or
+numbers), and may have a <code>title</code>, <code>description</code>, <code>default</code>, <code>minimum</code>, <code>maximum</code>, and <code>enum</code> or
+<code>oneOf</code> (<code>{ &quot;const&quot;: …, &quot;title&quot;: … }</code>) for a fixed choice. <code>format</code> picks the input: <code>path</code> for a
+node, <code>markdown</code>, <code>timezone</code>, <code>date</code> or <code>time</code>. <code>x-choices</code> lists the choices from a read command:
+the form runs <code>command</code> as the person editing, with <code>JSON_OUTPUT=1</code>, and takes <code>value</code> and <code>label</code>
+from each entry of its answer, or of the list at the key path <code>items</code> when the answer is not a list;
+<code>{other}</code> in <code>command</code> is another parameter&#39;s value, so <code>&quot;command&quot;: &quot;device-show {device}&quot;, &quot;items&quot;: &quot;endpointList&quot;</code> lists a chosen device&#39;s endpoints. <code>dashboard-card-add</code> checks a card&#39;s
+values against its <code>params</code> before it puts it on.</p>
+<p>The route is drawn with the values in its query, <code>/cards/todo/list?list=%2Fgroups%2F…&amp;who=true</code>,
+a list as the key repeated. Keep card routes under <code>/cards/&lt;module&gt;/</code>, a first segment none of your
+pages use, and draw them to fill the tile: the tile is a size container, so <code>cqmin</code> units and
+<code>clamp()</code> scale text with it. A card reads its own data as whoever looks at the dashboard and keeps
+itself current, with <code>useNodeEvents</code> for what changes by events or <code>usePolledCommand</code> for what
+changes on a clock. On a screen opened from a <a href="../dashboard/screens.html">display link</a> nobody is
+signed in (<code>isAuthenticated</code> is false): draw no controls there and link nowhere, since every write
+is refused. <code>dashboard-cards</code> lists what the modules offer and says what in a list could not be read.</p>
 <h2 id="write-documentation-for-it">Write documentation for it<a class="anchor" href="#write-documentation-for-it" aria-label="Link to this section"></a></h2>
 <p>A module&#39;s documentation in EiN comes from what it already declares: each command&#39;s <code>spec</code> or
 <code>arg</code> lines, each setting&#39;s <code>label</code> and <code>description</code>, and in <code>mod.json</code> its <code>nodeTypes</code> and the
@@ -1019,7 +1122,7 @@ show them afterwards.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

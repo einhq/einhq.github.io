@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html" aria-current="page">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html" aria-current="page">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -277,7 +278,7 @@ podman compose up -d</code></pre></div>
 <li>Choose the category <strong>Processing</strong>.</li>
 <li>Set <strong>Media worker budget</strong> to the number of jobs you want at once, for example <code>4</code> on a machine with 6 cores, and choose <strong>Save change</strong>. The line under it says &quot;Restarted media-worker.&quot;</li>
 <li>If you set the budget above 4, raise <strong>Media worker jobs in flight</strong> (<code>CFG_CPU_WORKERS</code>) to the same number. It caps how many jobs can be in flight whatever the budget.</li>
-<li>Watch the result on the <strong>Dashboard</strong>, on its <strong>Work</strong> tab, as described in <a href="#watch-it-keep-up">Watch it keep up</a>.</li>
+<li>Watch the result on the <strong>Status</strong>, on its <strong>Work</strong> tab, as described in <a href="#watch-it-keep-up">Watch it keep up</a>.</li>
 </ol>
 <p>Most of these jobs are work for the media service, so with a budget above 4, raise <code>EMS_LIMIT_TOOLS</code> in <code>~/ein/.env</code> to match and run <code>podman compose up -d</code>.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
@@ -302,7 +303,7 @@ config <span class="hljs-built_in">unset</span> CFG_CPU_SLOTS      <span class="
 <p>Your originals take the space they take. On top of them, with the Archive, EiN keeps, in the data folder&#39;s <code>files-volatile</code>, the thumbnails, posters, storyboards and the AV1 versions of videos it makes for the browser, which it can make again if they are lost. In EiN&#39;s terminal, <code>df</code> shows each storage tier&#39;s free space, how much of the disk its own files take, how fast it grows a day, and when it will be full at that rate, with the size of the database and its largest tables:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">df</span></code></pre></div>
-<p>The same figures are on the <strong>Dashboard</strong>, and <code>top</code>&#39;s <strong>Disk</strong> panel shows them live. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</p>
+<p>The same figures are on the <strong>Status</strong>, and <code>top</code>&#39;s <strong>Disk</strong> panel shows them live. <a href="../concepts/files.html">Files and storage</a> explains the tiers.</p>
 <p>The container engine keeps the images, the build&#39;s scratch files and the database in its own storage, usually <code>~/.local/share/containers</code> for rootless podman and <code>/var/lib/docker</code> for Docker, which may be another disk than your data folder. Each update builds new images, and <code>setup.sh</code> removes the ones they replaced once the new EiN answers; a build&#39;s intermediate stages and other images without a name stay. To see what the images take, and to remove the unnamed ones no container uses:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
 podman system <span class="hljs-built_in">df</span>
@@ -321,11 +322,11 @@ podman image prune</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td>The <strong>Dashboard</strong>&#39;s badge</td>
+<td>The <strong>Status</strong>&#39;s badge</td>
 <td><strong>Healthy</strong>: nothing is waiting. <strong>Catching up</strong>: work is waiting and some of it, or a pipeline instance, finished in the last hour. <strong>Stuck</strong>: work is waiting and none finished in the last hour. <strong>Needs a person</strong>: a check failed</td>
 </tr>
 <tr>
-<td>The <strong>Dashboard</strong>&#39;s <strong>Work</strong> tab</td>
+<td>The <strong>Status</strong>&#39;s <strong>Work</strong> tab</td>
 <td>Where the work is, each line of work, what is left of it, how fast it goes, and when it will be done</td>
 </tr>
 <tr>
@@ -350,9 +351,9 @@ podman image prune</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p><strong>Catching up</strong> after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a <strong>Work</strong> tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. <a href="monitoring.html">Health and the dashboard</a> explains the badge, the checks and the tabs.</p>
+<p><strong>Catching up</strong> after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a <strong>Work</strong> tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. <a href="monitoring.html">Health and status</a> explains the badge, the checks and the tabs.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
-<p><strong>The Dashboard reads Stuck.</strong> Nothing has finished in the last hour. Read the checks under the badge on the <strong>Overview</strong> tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. <a href="troubleshooting.html">Troubleshooting</a> goes through the causes.</p>
+<p><strong>The Status page reads Stuck.</strong> Nothing has finished in the last hour. Read the checks under the badge on the <strong>Overview</strong> tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. <a href="troubleshooting.html">Troubleshooting</a> goes through the causes.</p>
 <p><strong>Videos in the Archive never get their browser version.</strong> Check that <strong>Media worker budget</strong> is 2 or more, and on the <strong>Work</strong> tab whether <code>transcode</code> is waiting. Without a graphics card, a long video takes many minutes to encode.</p>
 <p><strong>A container restarts on its own.</strong> Look for <code>Memory cgroup out of memory</code> in the kernel log as in <a href="#when-a-container-reaches-its-limit">When a container reaches its limit</a>, and raise that container&#39;s limit.</p>
 <p><strong>The whole machine slows down or stops responding during an import.</strong> The containers together are using more memory than the machine has. Lower the limits so that they fit the machine, or leave out the language model, and lower the processing settings while the import runs.</p>
@@ -365,7 +366,7 @@ podman image prune</code></pre></div>
 <li><a href="configuration.html">Configuration</a>: where settings live and what a change restarts.</li>
 <li><a href="processing.html">Processing and pipelines</a>: what the pipelines do with each file, and the engine&#39;s settings.</li>
 <li><a href="../ems/index.html">The media service</a> and <a href="../assistant/language-model.html">The language model</a>: the two optional services.</li>
-<li><a href="monitoring.html">Health and the dashboard</a>: the badge, the checks and the Work tab.</li>
+<li><a href="monitoring.html">Health and status</a>: the badge, the checks and the Work tab.</li>
 <li><a href="../reference/settings.html#processing">Settings</a>: every <strong>Processing</strong> setting with its default.</li>
 </ul>
 

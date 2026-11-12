@@ -78,7 +78,7 @@ Install it like any module, in any of three ways:
 | The top bar                        | The **Chat** button, which opens the chat in the side drawer beside the page you are on                                                                                                                   |
 | **About EiN**, in the account menu | A **Language model** tile: the model's name, and "on this host" or the provider's name                                                                                                                    |
 | **Settings → System**              | The **Assistant** group: the model's address, key, provider and name, where it runs, whether it thinks, how much it may write and how long the chat waits for it ([settings](language-model.md#settings)) |
-| **Dashboard → Services**           | The `llm-link` row, which says whether the model answers and where it runs                                                                                                                                |
+| **Status → Services**              | The `llm-link` row, which says whether the model answers and where it runs                                                                                                                                |
 | EiN's terminal                     | The commands `assistant-chat`, `assistant-commands`, `llm-chat`, `llm-status`, `agent-eval` and `assistant-ask` ([Assistant commands](commands.md))                                                       |
 
 Your conversations are kept as logs in your home folder, under `~/.chats/`

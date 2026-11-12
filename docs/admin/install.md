@@ -401,7 +401,7 @@ With Docker, write `docker compose` instead. `down` keeps the database and the d
 > [!WARNING]
 > `podman compose down -v` also deletes the volumes. With an empty `EIN_DB_DIR`, the volume `ein_db` is your database: every name, album, person, setting and account. Never add `-v` unless you mean to start from nothing.
 
-EiN is down while it restarts, and a restart takes longer when there is a module to install. [Services and logs](services-logs.md) covers EiN's own logs and services, the ones inside the container, and [Health and the dashboard](monitoring.md) what to watch.
+EiN is down while it restarts, and a restart takes longer when there is a module to install. [Services and logs](services-logs.md) covers EiN's own logs and services, the ones inside the container, and [Health and status](monitoring.md) what to watch.
 
 ### Start EiN when the machine boots
 

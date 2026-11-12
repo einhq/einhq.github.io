@@ -504,7 +504,7 @@ of those that failed, what its `debug` nodes were sent, and its clock firings, o
 
 Only its owner and the administrator read it. `automation-status` sums the engine up in a line,
 `automations: 4 running, 41 actions`, with a `not run:` line under it for each automation the engine
-holds back, and the `automation-engine` service's line on the dashboard's **Services** tab says the
+holds back, and the `automation-engine` service's line on the Status page's **Services** tab says the
 same.
 
 ## When an automation does not run

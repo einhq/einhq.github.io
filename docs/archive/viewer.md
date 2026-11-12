@@ -636,7 +636,7 @@ the selection bar. Visitors who are not signed in have no favourites and see no 
 
 **A picture you added a moment ago has no thumbnail, faces, text or transcript yet.**
 The media service works through added files in the background, and the viewer fills in as each step
-finishes. Until it is done, an administrator sees the **Dashboard** read **Catching up**. Text in
+finishes. Until it is done, an administrator sees the **Status** read **Catching up**. Text in
 pictures waits until the file leaves staging. See [Getting your photos in](importing.md).
 
 **"This rendition could not be played. It may still be transcoding."**

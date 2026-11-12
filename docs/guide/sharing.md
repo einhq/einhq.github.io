@@ -182,7 +182,9 @@ who opened a link never see the chip: they are not told who else can see somethi
 ## Share an album with a link
 
 A link lets someone without an account see one album, without signing in. The dialog makes links
-for albums only, so they come with the Archive.
+for what a module offers them for: albums, which come with the Archive, and dashboards, whose
+**display links** show them on a screen that never signs in; see
+[Show a dashboard on a screen](../dashboard/screens.md).
 
 1. Open the album and choose **Share**.
 2. Under **Share with a link**, next to "Send a link to someone without an account", choose
@@ -233,7 +235,8 @@ A few things to know about links:
   To go back, open the first link again.
 - **Someone signed in stays themselves.** If the person has an account and is signed in, the album
   opens as their own account sees it.
-- **Where visitors may browse**, someone who opened a link also sees what visitors see.
+- **Where visitors may browse**, someone who opened a link still sees only what the link opens, not
+  what is shared with visitors.
 
 When a link has expired or been deleted, or the address is mistyped, the page says
 **This link no longer works**: "It may have expired, or the person who shared it has turned it off.

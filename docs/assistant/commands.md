@@ -42,7 +42,7 @@ With `JSON_OUTPUT=1`: a summary — the model that answered, how often the right
 
 Answer a question about EiN by running its commands (the chat drawer's backend)
 
-<small>changes things</small>
+<small>reads only</small>
 
 ```text
 assistant-ask [--think] [--resume] [--chat=<string>] [--history=<string>] [--context=<string>] [--max-steps=<string>] [--progress=<string>] <message>

@@ -110,7 +110,7 @@ category gets a full build on its first run, when its grouping settings change, 
 Text in pictures and documents is the one piece of work that waits: it is read when a file is
 filed, not while it is staged.
 
-To see the work, look at the **Dashboard** ([Health and the dashboard](../admin/monitoring.md)), or in the
+To see the work, look at the **Status** ([Health and status](../admin/monitoring.md)), or in the
 terminal:
 
 ```bash
@@ -183,7 +183,7 @@ years of a phone's pictures, copy the files in over SFTP and let EiN work throug
    one tree. [Getting your photos in](importing.md#copy-files-in-over-sftp) has the
    details the person copying needs, and [SSH and SFTP](../shell/ssh-sftp.md) the connection.
 4. **Let it run.** `staging status --user helen` shows how many files are still being read. The
-   **Dashboard** reads **Catching up** while work waits and gets done. A file that is an exact copy
+   **Status** reads **Catching up** while work waits and gets done. A file that is an exact copy
    of one its owner can already open is recorded as a copy and processed no further, so a second
    copy of an export costs little.
 5. **Sort.** The groups appear on the category's **Sort** tab as the files are read; its owner
@@ -338,7 +338,7 @@ the run would have, and `-o` writes over the files there.
 **Files stay "being prepared" for hours.** A large import takes hours, and a bulk-lane category
 waits behind all other work. If `staging status` shows the `indexing` count not going down at all,
 see whether the media service answers ([The media service](../ems/index.md)) and whether the
-**Dashboard** says **Stuck**.
+**Status** says **Stuck**.
 
 **The Sort tab stays at "No groups yet" though the files are read.** Ask for a run with
 `staging organize <category> --user <name> --queue`; it answers `helen/inbox: run asked for at …`.

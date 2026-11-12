@@ -161,15 +161,15 @@ The key is a secret. No shell in EiN sees it, `config-get CFG_LLM_KEY` says only
 
 ## Check that the model answers
 
-| Where                                    | What it tells you                                                                                                 |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `llm-status`                             | Whose the model is and where it runs, from the settings alone, without asking the model                           |
-| `llm-status --checks`                    | Whether the model answers, whose it is, where it runs, and whether it is the tried model. `health` reads the same |
-| **Dashboard → Services**, row `llm-link` | The same checks in one line                                                                                       |
-| **About EiN**, in the account menu       | A **Language model** tile with the model's name, and "on this host" or the provider's name under it               |
-| `podman compose logs llm`                | The server's own log, for a model on your machine                                                                 |
+| Where                                 | What it tells you                                                                                                 |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `llm-status`                          | Whose the model is and where it runs, from the settings alone, without asking the model                           |
+| `llm-status --checks`                 | Whether the model answers, whose it is, where it runs, and whether it is the tried model. `health` reads the same |
+| **Status → Services**, row `llm-link` | The same checks in one line                                                                                       |
+| **About EiN**, in the account menu    | A **Language model** tile with the model's name, and "on this host" or the provider's name under it               |
+| `podman compose logs llm`             | The server's own log, for a model on your machine                                                                 |
 
-![The Services tab of the system dashboard, listing EiN's services; the llm-link row says "ours, qwen3.5-4b at" the model's address](../../assets/shots/system-services.webp "The llm-link row shows at a glance whether the chat's model answers and where it runs.")
+![The Services tab of the System status page, listing EiN's services; the llm-link row says "ours, qwen3.5-4b at" the model's address](../../assets/shots/system-services.webp "The llm-link row shows at a glance whether the chat's model answers and where it runs.")
 
 `llm-link` is not the model itself but a service of the assistant module that watches it. Once a minute it asks the model whether it answers, and writes a line to its log each time the answer changes, so `/var/logs/services/llm-link/stdout.log` shows when the model went away or came back:
 
@@ -179,7 +179,7 @@ llm-link: ours, qwen3.5-4b at http://llm:8190, on the card
 llm-link: http://llm:8190 is not answering; the chat cannot answer until it does
 ```
 
-The log starts over each time the service starts. A model that does not answer is a warning in `health`, never a failure: the archive's work goes on without it. [Health and the dashboard](../admin/monitoring.md) and [Services and logs](../admin/services-logs.md) cover both in general.
+The log starts over each time the service starts. A model that does not answer is a warning in `health`, never a failure: the archive's work goes on without it. [Health and status](../admin/monitoring.md) and [Services and logs](../admin/services-logs.md) cover both in general.
 
 ## Settings
 

@@ -169,6 +169,18 @@ It has four charts: **Births by month**, **Engagements by month**, **Marriages b
   people's pages. A wedding written on both spouses counts twice, and a partnership dated only by a
   **From** date on the relation does not count. See [Record a wedding](family.md#record-a-wedding).
 
+## On a dashboard
+
+With [Dashboards](../dashboard/index.md) installed, the Archive offers two cards for a dashboard:
+
+| Card                   | What it shows                                                                                                                                                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Picture of the day** | One picture filling the card, the same all day or changing each hour: from **This day in earlier years**, from **An album** you choose, or from **The newest pictures**                                         |
+| **Birthdays**          | The birthdays in the **Days ahead**, nearest first, with each face, the age and the days left; choose **Show** to add wedding anniversaries and memorials. As on Home, it lists only the people shared with you |
+
+On a screen opened from a [display link](../dashboard/screens.md) they show what the link's account
+may see.
+
 ## When something goes differently
 
 | What you see                                                       | Why, and what to do                                                                                                                                                                                                                                                                       |
@@ -209,6 +221,7 @@ The Archive has more commands about the family's dates:
 # in EiN's terminal
 timeline --kind birth,death,anniversary    # the family's history, looking back from today
 dayinhistory 12-25 --years 20 --per-year 1 # the pictures of a day, by path
+anniversaries --days-ahead 60 --kind birthday # the birthdays in the next two months, with ages
 person-stats                               # the counts behind the Statistics page's Events charts
 ```
 

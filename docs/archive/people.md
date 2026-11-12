@@ -16,7 +16,7 @@ Two faces in the same photo are never made the same person automatically. Voices
 
 ![A detected face with three outcomes: it joins a person it clearly matches, named or not; it starts an unidentified person when it matches nobody but is clear and at least 48 px across; or it stays unknown, marked Unassigned; below them the actions a person can take: Name or Add to someone, Split off as someone new or Move to…, and Not a person or Not a face](../diagrams/faces.svg "Recognition decides on its own, and anything a person decides afterwards is kept.")
 
-The work is done by the [media service](../ems/index.md) on your own machine; no photo, face or voice is sent anywhere to be analysed. Without the media service no faces are found, and they are found once it runs again. After a large import it takes a while for every picture to be looked at; the **Dashboard** reads **Catching up** until it is done (see [Health and the dashboard](../admin/monitoring.md)).
+The work is done by the [media service](../ems/index.md) on your own machine; no photo, face or voice is sent anywhere to be analysed. Without the media service no faces are found, and they are found once it runs again. After a large import it takes a while for every picture to be looked at; the **Status** reads **Catching up** until it is done (see [Health and status](../admin/monitoring.md)).
 
 Faces are found in the pictures waiting in your [staging area](staging.md) too, before you file them into albums.
 
@@ -333,7 +333,7 @@ Changing the recognition settings does not touch these decisions either.
 
 ## When something goes differently
 
-**No faces are found at all.** Recognition needs the media service. Ask your administrator to check the **Dashboard**; see [The media service](../ems/index.md).
+**No faces are found at all.** Recognition needs the media service. Ask your administrator to check the **Status**; see [The media service](../ems/index.md).
 
 **A face in a photo has no box.** Faces that are very small, blurred or turned far away are not kept. Draw a box around it with **Edit faces** in the viewer, as described in [Name a face in the viewer](#name-a-face-in-the-viewer).
 

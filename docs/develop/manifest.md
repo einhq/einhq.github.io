@@ -60,6 +60,7 @@ A module that adds a few commands, one setting and one page needs little more th
 | `indexes`           | database indexes on node attrs its queries need                 | `mod setup`                 |
 | `ui.routes`         | its pages, by route                                             | `ui-build`                  |
 | `ui.open`           | which route opens a node of a type                              | `ui-build`, browser         |
+| `ui.shareLinks`     | which nodes the Share dialog offers a link for                  | browser                     |
 
 EiN runs `mod setup --all` at every start, for every installed module in dependency order, so a field read by `mod setup` takes effect the next time EiN starts or the next time you run `mod setup <name>`. "Loading, type checks" means the field is read when the module's TypeScript is loaded, and by `deno task check` through the module's generated `deno.jsonc`. `ui-build` bundles the modules' pages; `mod setup` runs it after it has set modules up.
 
@@ -287,7 +288,7 @@ The folders directly under `/archive` that the module's content lives in. The Ar
 "roots": ["/archive/people", "/archive/locations", "/archive/cameras", "/archive/albums", "/archive/sources"]
 ```
 
-Each must be `/archive/` followed by one name of lower case letters, digits, `_` and `-`, starting with a letter. `mod setup` creates a missing one, owned by the administrator and the users group, with mode 775. Nothing removes one, so removing a module does not delete its content. Name the roots in your module's own code too, so its dependents can use them: the Archive exports them as `@archive/paths`.
+Each must be `/archive/` followed by one name of lower case letters, digits, `_` and `-`, starting with a letter. `mod setup` creates a missing one, owned by the administrator and the users group, with mode 771: anyone else, someone holding a link included, reaches what is shared with them under it but cannot list it. Nothing removes one, so removing a module does not delete its content. Name the roots in your module's own code too, so its dependents can use them: the Archive exports them as `@archive/paths`.
 
 ### `indexes`
 
@@ -363,22 +364,40 @@ A key that is a folder, starting and ending with `/`, opens whatever is under it
 `/etc/automations/hall-light.yaml` then opens at `/automations/hall-light`, and a deeper
 `/etc/automations/upstairs/hall.yaml` at `/automations/upstairs%2Fhall`. Core opens a `device` at its page itself, and a `log`, `track` or `control` directly under a device at its device's page, so a module names no route for those; a module adds a tab to the device page with a `device.tabs` panel instead ([A tab on the device page](drivers.md#a-tab-on-the-device-page)).
 
+### `ui.shareLinks`
+
+Which nodes the **Share** dialog offers a link for, and how the link opens them. Keys are as `ui.open`'s: a node type, or a folder ending with `/`.
+
+```json
+"shareLinks": {
+  "album": { "shows": "node", "noun": "album" },
+  "/archive/dashboards/": { "shows": "account", "noun": "dashboard" }
+}
+```
+
+| Field   | What it is                                                                                                                                                                                                   |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `shows` | `node`: the link shows the node and what it holds, as an album's does. `account`: the link signs in read-only as an account the person sharing picks, a display link, as a dashboard's does on a wall screen |
+| `noun`  | What the dialog calls the node: "Anyone with the link can see this album"                                                                                                                                    |
+
+A node no installed module names here is shared with people and groups only. [Sharing](../guide/sharing.md) describes both kinds of link, and [Show a dashboard on a screen](../dashboard/screens.md) a display link. The field needs core's module contract 0.14.18 or later.
+
 ## What `mod setup` finds without a field
 
 Some of what a module brings is found by where it is in the module, not by a field in `mod.json`:
 
-| In the module             | What `mod setup` does with it                                                                         |
-| ------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `bin/`                    | adds it to every shell's `PATH`; each file is a command, a shell script or `#!ts` TypeScript          |
-| `services/<name>/`        | registers and enables a service from its `start.sh`; a service the module no longer ships is retired  |
-| `pipelines/*.yaml`        | defines each pipeline; one the module no longer ships is undefined                                    |
-| `ui/nav.json`             | links it as `/etc/ui/nav.d/<name>.json`: its sidebar, top-bar and panel entries, each opening a route |
-| `ui/index.html`           | links `ui/` as a site under `/var/www/<name>`                                                         |
-| `etc/config`              | links it as `/etc/config.d/<name>`: the module's own choice of setting values                         |
-| `etc/<x>.d/`              | links it as `/etc/<x>.d/<name>`, for whichever module reads `/etc/<x>.d/*` (`assistant.d`)            |
-| the rest of `etc/`        | copies each entry into `/etc` when it is not already there; never overwrites                          |
-| `lib/`, `types/`, `test/` | ordinary source, reached through `imports` and `exports`                                              |
-| `deno.jsonc`              | generated from `mod.json` by `deno task sync:modules`; never edited                                   |
+| In the module             | What `mod setup` does with it                                                                             |
+| ------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `bin/`                    | adds it to every shell's `PATH`; each file is a command, a shell script or `#!ts` TypeScript              |
+| `services/<name>/`        | registers and enables a service from its `start.sh`; a service the module no longer ships is retired      |
+| `pipelines/*.yaml`        | defines each pipeline; one the module no longer ships is undefined                                        |
+| `ui/nav.json`             | links it as `/etc/ui/nav.d/<name>.json`: its sidebar, top-bar and panel entries, each opening a route     |
+| `ui/index.html`           | links `ui/` as a site under `/var/www/<name>`                                                             |
+| `etc/config`              | links it as `/etc/config.d/<name>`: the module's own choice of setting values                             |
+| `etc/<x>.d/`              | links it as `/etc/<x>.d/<name>`, for whichever module reads `/etc/<x>.d/*` (`assistant.d`, `dashboard.d`) |
+| the rest of `etc/`        | copies each entry into `/etc` when it is not already there; never overwrites                              |
+| `lib/`, `types/`, `test/` | ordinary source, reached through `imports` and `exports`                                                  |
+| `deno.jsonc`              | generated from `mod.json` by `deno task sync:modules`; never edited                                       |
 
 Commands are also found by name. Core runs a module's command when it is named after a role: `members-<type>` for what a node of that type holds, `subject-<kind>` for `search --subject`, `search-*` providers for the search box, and `news-<x>`, `events-<x>` and `onthisday-<x>` for the home page's sections. [Writing a module](modules.md) gives each role's arguments and answer. [Teaching the assistant](../assistant/teaching.md) covers what a module gives the assistant through `etc/assistant.d`.
 

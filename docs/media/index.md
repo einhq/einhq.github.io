@@ -188,7 +188,7 @@ for each other instance beside their own, named `models@laptop` and `media-worke
 kinds that instance serves; `media-pool-kinds models --instance laptop` says which.
 
 `media-pool-kinds cpu` and `media-pool-kinds models` say which kinds each takes now. When a worker is
-stopped and no other takes its kinds, they show **no worker** on the **Dashboard**, and the work waits
+stopped and no other takes its kinds, they show **no worker** on the **Status**, and the work waits
 until it starts again; [Work that nothing will run](../admin/processing.md#work-that-nothing-will-run)
 says what to do.
 

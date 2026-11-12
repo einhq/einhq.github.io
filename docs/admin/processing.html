@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Processing and pipelines – EiN documentation</title>
-    <meta name="description" content="This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools and workers run, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings the engine has.">
+    <meta name="description" content="This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools and workers run, how to watch them on the Status and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings the engine has.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/admin/processing.html">
     <meta property="og:title" content="Processing and pipelines – EiN documentation">
-    <meta property="og:description" content="This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools and workers run, how to watch them on the Dashboard and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings the engine has.">
+    <meta property="og:description" content="This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools and workers run, how to watch them on the Status and in the terminal, what to do when work fails or stops moving, how to run work again on purpose, and the settings the engine has.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and the dashboard</a></li><li><a href="processing.html" aria-current="page">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html" aria-current="page">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -77,6 +77,7 @@
 <section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -92,10 +93,10 @@
         </header>
         <article class="prose">
 <p>This page is for the administrator. It covers core&#39;s pipeline engine: how pipelines, steps, pools
-and workers run, how to watch them on the <strong>Dashboard</strong> and in the terminal, what to do when work
+and workers run, how to watch them on the <strong>Status</strong> and in the terminal, what to do when work
 fails or stops moving, how to run work again on purpose, and the settings the engine has.</p>
 <p>Core brings the engine and no pipelines of its own, so an EiN without modules runs none, and the
-<strong>Work</strong> tab of the <strong>Dashboard</strong> stays empty. Pipelines come with modules: of the published ones,
+<strong>Work</strong> tab of the <strong>Status</strong> stays empty. Pipelines come with modules: of the published ones,
 the Archive brings them all, with the workers that run them. <a href="../archive/processing.html">Processing pictures</a>
 covers the Archive&#39;s pipelines, workers and settings. The examples on this page name the
 Archive&#39;s pipelines, such as <code>media-faces</code>, which exist only with the Archive installed.</p>
@@ -118,15 +119,15 @@ and may announce work again on their own.</li>
 <p>Every pipeline runs at most once per node at a time: a file announced ten times while it waits is
 worked on once. Waiting work is kept in nodes, so nothing is lost when EiN restarts.
 <code>pipeline-list</code> prints every pipeline that is defined, with its trigger.</p>
-<h2 id="watch-the-work-on-the-dashboard">Watch the work on the Dashboard<a class="anchor" href="#watch-the-work-on-the-dashboard" aria-label="Link to this section"></a></h2>
+<h2 id="watch-the-work-on-the-status-page">Watch the work on the Status page<a class="anchor" href="#watch-the-work-on-the-status-page" aria-label="Link to this section"></a></h2>
 <ol>
-<li>Sign in as an administrator and choose <strong>Dashboard</strong> in the sidebar, under <strong>System</strong>.</li>
-<li>Read the badge above the title <strong>System dashboard</strong>: <strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or
-<strong>Needs a person</strong>. <a href="monitoring.html">Health and the dashboard</a> explains each word and the
+<li>Sign in as an administrator and choose <strong>Status</strong> in the sidebar, under <strong>System</strong>.</li>
+<li>Read the badge above the title <strong>System status</strong>: <strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or
+<strong>Needs a person</strong>. <a href="monitoring.html">Health and status</a> explains each word and the
 <strong>Overview</strong> tab.</li>
 <li>Choose the <strong>Work</strong> tab.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive&#39;s.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System status page, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive&#39;s.</figcaption></figure>
 <p>At the top, <strong>Where the work is</strong> draws the work as it moves, left to right, in the same five words
 the table below uses:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -267,7 +268,7 @@ that to <code>--after</code> for the next page. Give it pipeline names to narrow
 <strong>Started</strong> and <strong>Duration</strong>. The tabs <strong>All</strong>, <strong>Running</strong>, <strong>Completed</strong>, <strong>Failed</strong> and
 <strong>Cancelled</strong> narrow the list, and <strong>Load more</strong> fetches the next page.</p>
 <p>Choose an instance to open it. Its page is named after the target node, with the way back above
-the name: <strong>System dashboard › Work ›</strong> the pipeline, as on the pipeline&#39;s own page. It shows the
+the name: <strong>System status › Work ›</strong> the pipeline, as on the pipeline&#39;s own page. It shows the
 status and the steps: <strong>Step</strong>, <strong>Status</strong>, <strong>Depends on</strong>, <strong>Command</strong> and <strong>Duration</strong>. A step&#39;s status is one of these:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -405,11 +406,11 @@ pipeline-rerun media-faces/&lt;<span class="hljs-built_in">id</span>&gt;</code><
 <p>Only an administrator sees these buttons, and only an administrator can run these commands. On an
 instance&#39;s page, <strong>Remove</strong> is under ⋮ in the header&#39;s corner.</p>
 <h3 id="work-that-nothing-will-run">Work that nothing will run<a class="anchor" href="#work-that-nothing-will-run" aria-label="Link to this section"></a></h3>
-<p>A line with jobs and no worker never moves. <strong>Work that nothing will run</strong> on the <strong>Dashboard</strong>
+<p>A line with jobs and no worker never moves. <strong>Work that nothing will run</strong> on the <strong>Status</strong>
 and <code>health</code> (as a failed check <code>kind &lt;name&gt;</code>) both say so. The usual cause is that the worker
 service is stopped:</p>
 <ol>
-<li>Open the <strong>Services</strong> tab of the <strong>Dashboard</strong>, or run <code>service-list</code>, and look at the workers;
+<li>Open the <strong>Services</strong> tab of the <strong>Status</strong>, or run <code>service-list</code>, and look at the workers;
 with the Archive installed, they are <code>media-worker</code> and <code>models</code>.</li>
 <li>Start the one that is stopped, or read its log if it keeps stopping.
 <a href="services-logs.html">Services and logs</a> shows how.</li>
@@ -534,7 +535,7 @@ pipeline of your own, see <a href="../develop/modules.html">Writing a module</a>
 <ul>
 <li><a href="../concepts/pipelines.html">Changes and pipelines</a>: how a change becomes finished work.</li>
 <li><a href="../archive/processing.html">Processing pictures</a>: the Archive&#39;s pipelines, workers and settings.</li>
-<li><a href="monitoring.html">Health and the dashboard</a>: the four words and the <strong>Overview</strong> tab.</li>
+<li><a href="monitoring.html">Health and status</a>: the four words and the <strong>Overview</strong> tab.</li>
 <li><a href="performance.html">Performance and sizing</a>: what to set on your machine.</li>
 <li><a href="services-logs.html">Services and logs</a>: starting, stopping and reading the workers.</li>
 <li><a href="troubleshooting.html">Troubleshooting</a>: when work does not get done.</li>
@@ -543,11 +544,11 @@ pipeline of your own, see <a href="../develop/modules.html">Writing a module</a>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="monitoring.html" rel="prev"><span>Previous</span>Health and the dashboard</a><a class="next" href="services-logs.html" rel="next"><span>Next</span>Services and logs</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="monitoring.html" rel="prev"><span>Previous</span>Health and status</a><a class="next" href="services-logs.html" rel="next"><span>Next</span>Services and logs</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-work-is-run">How work is run</a></li><li><a href="#watch-the-work-on-the-dashboard">Watch the work on the Dashboard</a></li><li><a href="#watch-the-work-in-the-terminal">Watch the work in the terminal</a></li><li><a href="#look-at-one-pipeline-and-its-instances">Look at one pipeline and its instances</a></li><li><a href="#when-work-fails">When work fails</a></li><li class="nested"><a href="#failed-work-is-run-again-on-its-own">Failed work is run again on its own</a></li><li class="nested"><a href="#work-that-needs-a-person">Work that needs a person</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li class="nested"><a href="#dropped-events">Dropped events</a></li><li class="nested"><a href="#steps-waiting-for-a-service">Steps waiting for a service</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#the-engines-settings">The engine's settings</a></li><li><a href="#old-instances-are-pruned">Old instances are pruned</a></li><li><a href="#pipelines-come-with-modules">Pipelines come with modules</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-work-is-run">How work is run</a></li><li><a href="#watch-the-work-on-the-status-page">Watch the work on the Status page</a></li><li><a href="#watch-the-work-in-the-terminal">Watch the work in the terminal</a></li><li><a href="#look-at-one-pipeline-and-its-instances">Look at one pipeline and its instances</a></li><li><a href="#when-work-fails">When work fails</a></li><li class="nested"><a href="#failed-work-is-run-again-on-its-own">Failed work is run again on its own</a></li><li class="nested"><a href="#work-that-needs-a-person">Work that needs a person</a></li><li class="nested"><a href="#work-that-nothing-will-run">Work that nothing will run</a></li><li class="nested"><a href="#dropped-events">Dropped events</a></li><li class="nested"><a href="#steps-waiting-for-a-service">Steps waiting for a service</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li><a href="#the-bulk-lane">The bulk lane</a></li><li><a href="#the-engines-settings">The engine's settings</a></li><li><a href="#old-instances-are-pruned">Old instances are pruned</a></li><li><a href="#pipelines-come-with-modules">Pipelines come with modules</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

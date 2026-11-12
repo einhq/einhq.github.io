@@ -73,6 +73,7 @@ const MODULES: Record<string, string> = {
   'album-folders': 'Album folders',
   todo: 'Todo',
   recipes: 'Recipes',
+  dashboard: 'Dashboards',
 };
 
 /** Modules that are not published, which the public documentation leaves out even when the EiN it is made from has them. */

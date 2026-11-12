@@ -350,9 +350,9 @@ If the media service is not running, nothing new is read: files stay "being prep
 uploading and browsing go on working. Nothing is lost; the work waits and goes on once the media
 service answers. [The media service](../ems/index.md) is the administrator's page on it.
 
-Your administrator follows this work on the **Dashboard**, whose verdict reads **Catching up**
+Your administrator follows this work on the **Status**, whose verdict reads **Catching up**
 while work is waiting and getting done. Only **Stuck** or **Needs a person**, for long, means
-something needs looking at; see [Health and the dashboard](../admin/monitoring.md). Anyone can ask
+something needs looking at; see [Health and status](../admin/monitoring.md). Anyone can ask
 the same question in the terminal with `health`, whose first line is the verdict:
 
 ```text

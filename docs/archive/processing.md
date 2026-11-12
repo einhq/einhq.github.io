@@ -6,7 +6,7 @@ the workers that run them and the commands that run the work again. How much run
 the [Media](../media/index.md) module's page.
 
 The pipelines run in core's engine. [Processing and pipelines](../admin/processing.md) covers the
-engine itself: watching the work on the **Dashboard** and in the terminal, failed work and how it
+engine itself: watching the work on the **Status** and in the terminal, failed work and how it
 is run again, the bulk lane, and the engine's own settings.
 
 ## What runs after an upload
@@ -36,7 +36,7 @@ kinds.
 Its other services, which keep albums, person covers, label suggestions and staging up to date,
 are listed in [Services and logs](../admin/services-logs.md). Most of the model work and much of
 the media work are calls into the media service: without it, those steps wait, and their kinds
-show **waiting for EMS** on the **Dashboard**.
+show **waiting for EMS** on the **Status**.
 
 ## The Archive's pipelines
 
@@ -135,12 +135,12 @@ What describes a file is the Media module's to keep current, in every folder:
 
 The `media-heal` pipeline runs `media-scan` for you over `/archive/albums` and over each user's
 staged files, `/home/<user>/staging/files`, whose faces staging uses to suggest groups. Each pass is one instance, which
-shows under **Ongoing** on the **Dashboard** with how far through its folder it has come; it is
+shows under **Ongoing** on the **Status** with how far through its folder it has come; it is
 housekeeping, not work waiting, so `health` does not count it. A pass holds back a gap whose
 pipeline already has work waiting, so it never repeats what is already on its way, and announces
 the rest: a long queue of one kind of work, such as faces, does not keep voices or transcripts
 from being found. It announces every gap as it finds it, so the work it starts shows on the
-dashboard and in `health` until it is done. It remembers where it is every thousand files, so a
+Status page and in `health` until it is done. It remembers where it is every thousand files, so a
 restart of EiN does not send it back to the beginning. When a pass ends, the **Output** of its step
 says how many files it went through, how many gaps it announced and which kinds it held back. A
 pass that fails is a failed instance, run again like any other [failed work](../admin/processing.md).

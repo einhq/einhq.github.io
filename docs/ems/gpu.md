@@ -24,7 +24,7 @@ A card changes how fast the work is done, not what comes out of it, with one exc
 
 A smaller card only makes the work slower: every output is made on any card or none. Video renditions are AV1. The media service encodes them on the card when the card and its build offer the `av1_nvenc` encoder, and on the processor otherwise; on a card without an AV1 encoder the attempt on the card fails and the processor encodes the video instead. `EMS_VIDEO_ENCODER=libsvtav1` in `~/ein/.env` keeps video encoding on the processor.
 
-Search uses the card too, when the media service has no indexing work: after 10 minutes without any, it unloads its indexing models and moves the search models onto the card, as far as they fit, and gives the card back to indexing as soon as work arrives. The **Media service** tab on the dashboard shows which of the two has it, under [Check that EiN uses the card](#check-that-ein-uses-the-card).
+Search uses the card too, when the media service has no indexing work: after 10 minutes without any, it unloads its indexing models and moves the search models onto the card, as far as they fit, and gives the card back to indexing as soon as work arrives. The **Media service** tab on the Status page shows which of the two has it, under [Check that EiN uses the card](#check-that-ein-uses-the-card).
 
 ## What card you need
 
@@ -168,9 +168,9 @@ Under Docker the `restart: always` lines are left out.
 
 ## Check that EiN uses the card
 
-Open **Dashboard** under **System** in the sidebar. On the **Overview** tab, the **Media service** card has a **GPU** tile, with the card's use, its temperature and its power draw, and a **VRAM used** tile, with the share of its memory in use and how much of how much, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one. The card's name opens its device, `/dev/ems` under **Devices**, which keeps the same readings for a month, with the card's power limit ([The media service's machine as a device](index.md#the-media-services-machine-as-a-device)).
+Open **Status** under **System** in the sidebar. On the **Overview** tab, the **Media service** card has a **GPU** tile, with the card's use, its temperature and its power draw, and a **VRAM used** tile, with the share of its memory in use and how much of how much, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one. The card's name opens its device, `/dev/ems` under **Devices**, which keeps the same readings for a month, with the card's power limit ([The media service's machine as a device](index.md#the-media-services-machine-as-a-device)).
 
-![The System dashboard's Overview tab: a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The GPU and VRAM tiles appear only when the media service sees a card")
+![The System status page's Overview tab: a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The GPU and VRAM tiles appear only when the media service sees a card")
 
 The **Media service** tab shows more:
 
@@ -243,13 +243,13 @@ After a reboot or a driver upgrade, a card can be lost to the containers: the me
 EMS_EXPECT_GPU=1
 ```
 
-Apply it with `podman compose up -d`. While the media service sees no card, the dashboard's health badge reads **Needs a person**, and `health` and `ems-status --checks` list:
+Apply it with `podman compose up -d`. While the media service sees no card, the Status page's health badge reads **Needs a person**, and `health` and `ems-status --checks` list:
 
 ```text
 fail  ems gpu  this host is meant to have a card, and none is visible
 ```
 
-The same check fails, with the error, when the card's CUDA context is lost while the media service runs. [Health and the dashboard](../admin/monitoring.md) explains the badge and the checks.
+The same check fails, with the error, when the card's CUDA context is lost while the media service runs. [Health and status](../admin/monitoring.md) explains the badge and the checks.
 
 ## Run without a card
 
@@ -269,7 +269,7 @@ The commands are written for podman. With Docker, write `docker compose` where t
 | The installer says `podman 4.9.3 rejects the CDI spec nvidia-container-toolkit 1.18.1 writes (cdiVersion 0.7.0), so the containers find no card: …` | Apply the [fix](#fix-the-cdi-file-for-podman-before-5) with the command the line ends with, or upgrade podman to 5 or newer.                                                                                                                       |
 | The installer says `Docker 27.5.1 passes the card through its CDI spec from 28.2 on: update Docker`                                                 | Upgrade Docker Engine to 28.2 or newer.                                                                                                                                                                                                            |
 | Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                                                                   | The engine cannot read the CDI file. On podman before 5, apply the [fix](#fix-the-cdi-file-for-podman-before-5); otherwise check that `/var/run/cdi/nvidia.yaml` exists. With Docker, check that it is Engine 28.2 or newer.                       |
-| The card is there but the dashboard's **Media service** card has no **GPU** tile                                                                    | `EIN_GPU` in `~/ein/.env` is `0`, most likely because the card or the toolkit came after the install. [Give the card to EiN](#give-the-card-to-ein).                                                                                               |
+| The card is there but the Status page's **Media service** card has no **GPU** tile                                                                  | `EIN_GPU` in `~/ein/.env` is `0`, most likely because the card or the toolkit came after the install. [Give the card to EiN](#give-the-card-to-ein).                                                                                               |
 | After a reboot the media service does not start, or starts without the card                                                                         | A container keeps the device paths it was made with, and a reboot can renumber them. Make the containers again from the current CDI file: `podman compose up -d --force-recreate`.                                                                 |
 | Models show **CPU** on the **Media service** tab while the card has room                                                                            | The card may be full at that moment, or held by the language model. Look at **Where the models are**, and set the [share](#share-one-card-with-the-language-model) when the two use one card.                                                      |
 | The chat answers slowly on a machine with a card                                                                                                    | The language model got only some of its layers, or none. Its log, `podman compose logs llm`, says how many fit on the card when it started. Raise the part of the card it gets by lowering `LLM_CARD_RESERVE_MB` and `EMS_CARD_SHARE_MB` together. |

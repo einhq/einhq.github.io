@@ -328,8 +328,8 @@ tier    volatile   12% used  801 GB free  full in ~912d
 database  3.4 GB
 ```
 
-In a standard install the two folders are on one disk, so they show the same figures, and `full in` appears once EiN has measured the disk long enough to see it fill. The **Storage** card on the **Dashboard** shows the same;
-see [Health and the dashboard](../admin/monitoring.md).
+In a standard install the two folders are on one disk, so they show the same figures, and `full in` appears once EiN has measured the disk long enough to see it fill. The **Storage** card on the **Status** shows the same;
+see [Health and status](../admin/monitoring.md).
 
 `du` adds up the sizes of the files under a path, including what each file keeps beneath it, such
 as its thumbnails. It counts a file reached by two names once and does not follow softlinks, so a

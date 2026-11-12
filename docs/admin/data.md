@@ -139,7 +139,7 @@ A restore loads the dump into an empty database and puts the files back beside i
    podman compose up -d
    ```
 
-7. Sign in with an account from your backup, and choose **Dashboard** under **System** in the sidebar: the **Storage** card shows the data folder and the database's size, and the badge above the title turns to **Healthy** once the work after the start is done. [Health and the dashboard](monitoring.md) explains what you see.
+7. Sign in with an account from your backup, and choose **Status** under **System** in the sidebar: the **Storage** card shows the data folder and the database's size, and the badge above the title turns to **Healthy** once the work after the start is done. [Health and status](monitoring.md) explains what you see.
 
 With the Archive, if you left out `files-volatile`, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.
 
@@ -231,7 +231,7 @@ Such a copy holds the original files, as they were added. What EiN worked out or
 
 ## See what takes room
 
-In EiN's terminal, [`df`](../reference/commands-core.md#df) shows each part of the data folder, how full its disk is, how fast it grows and when it fills, and the database's size and its largest tables; the storage cards on the dashboard's **Overview** show the same.
+In EiN's terminal, [`df`](../reference/commands-core.md#df) shows each part of the data folder, how full its disk is, how fast it grows and when it fills, and the database's size and its largest tables; the storage cards on the Status page's **Overview** show the same.
 
 ```bash
 # in EiN's terminal
@@ -339,6 +339,6 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 - [Installing in detail](install.md): the files in `~/ein`, the data folder and `.env`.
 - [Updating](updating.md): what an update changes and keeps; back up before it.
 - [Files and storage](../concepts/files.md): how EiN stores file content, and its tiers.
-- [Health and the dashboard](monitoring.md): the **Storage** card and when a disk fills.
+- [Health and status](monitoring.md): the **Storage** card and when a disk fills.
 - [Your profile, favourites and trash](../guide/profile.md): the trash, from the user's side.
 - [SSH and SFTP](../shell/ssh-sftp.md): copying files in and out.

@@ -3,7 +3,7 @@
 This page follows a change through EiN, from the moment a node is saved to the finished work it
 sets off: the events every change announces, the facts a module derives from them, the pipelines
 that act on those facts, and the audit trail that leads back from each result to the change that
-caused it. It is for administrators who want to understand what the **Dashboard** shows, and for
+caused it. It is for administrators who want to understand what the **Status** shows, and for
 anyone writing a module or a pipeline of their own.
 
 The machinery is core's: the events, the engine, the pools and the audit trail. Core ships no
@@ -226,7 +226,7 @@ quote it yourself: `info "$NODE_PATH/exif"`.
 | `priority`    | The pipeline's place in line, higher first, among steps waiting to run                              | `0`     |
 | `coalesce`    | What a trigger for a subject whose run is still going does: `drop` it, or `rerun` once the run ends | `drop`  |
 | `debounceMs`  | How long a trigger waits before it becomes a run, so a burst of changes to one subject is one run   | none    |
-| `entryPoint`  | Marks the pipeline every other one waits on, so the **Dashboard** can say how far an import has got | none    |
+| `entryPoint`  | Marks the pipeline every other one waits on, so the **Status** can say how far an import has got    | none    |
 
 A definition can also declare `vars:` with a default for each, which its commands use like
 `$NODE_PATH`. `pipeline start <name> <path> --var NAME=VALUE` changes one for a single run, and the
@@ -417,11 +417,11 @@ announces each as a fact for the pipeline that fills it, once that pipeline has 
 
 ## Watch and steer the work
 
-The **Dashboard** in an administrator's sidebar shows the state of all this in one word at the top:
+The **Status** in an administrator's sidebar shows the state of all this in one word at the top:
 **Healthy**, **Catching up**, **Stuck** or **Needs a person**. Its **Work** tab draws where the work
 is, from not started through in line to running, and lists every pipeline with how much of its work
 is not started, in line, running, failed, done and cancelled, how much arrives and finishes per hour,
-and what is executing now. [Health and the dashboard](../admin/monitoring.md)
+and what is executing now. [Health and status](../admin/monitoring.md)
 explains the words and the figures.
 
 Choose a pipeline in the list to open its page. It shows the pipeline's trigger, its steps and its
@@ -499,7 +499,7 @@ change instead, such as `event: updated` with `nodeType: file`.
    A definition EiN cannot read gives `pipeline-define:` and the reason, such as
    `invalid pipeline: missing steps` or `step 'mark' depends on unknown step 'read'`.
 3. Upload a photo to one of the albums. The pipeline appears on the **Work** tab of the
-   **Dashboard** once it has run.
+   **Status** once it has run.
 
 Running `pipeline define` again with the same name replaces the definition; new runs use it, and
 `pipeline rerun` brings an existing run up to it. `pipeline undefine mark-unreviewed` removes it and
@@ -552,6 +552,6 @@ audit --all /archive/albums/wrenfield-summer-1987
 - [How EiN works](../start/how-ein-works.md): the short version of this page
 - [Nodes and node types](nodes.md) and [The tree](tree.md): what a change changes
 - [Processing and pipelines](../admin/processing.md): the administrator's side of the engine and its workers
-- [Health and the dashboard](../admin/monitoring.md): the four words and the **Work** tab
+- [Health and status](../admin/monitoring.md): the four words and the **Work** tab
 - [The media service](../ems/index.md): where most steps do their work
 - [Writing a module](../develop/modules.md): shipping pipelines with a module

@@ -122,7 +122,7 @@ With the Archive, on a machine with more cores than the minimum, raise the media
 2. Choose the category **Processing**.
 3. Set **Media worker budget** to the number of jobs you want at once, for example `4` on a machine with 6 cores, and choose **Save change**. The line under it says "Restarted media-worker."
 4. If you set the budget above 4, raise **Media worker jobs in flight** (`CFG_CPU_WORKERS`) to the same number. It caps how many jobs can be in flight whatever the budget.
-5. Watch the result on the **Dashboard**, on its **Work** tab, as described in [Watch it keep up](#watch-it-keep-up).
+5. Watch the result on the **Status**, on its **Work** tab, as described in [Watch it keep up](#watch-it-keep-up).
 
 Most of these jobs are work for the media service, so with a budget above 4, raise `EMS_LIMIT_TOOLS` in `~/ein/.env` to match and run `podman compose up -d`.
 
@@ -161,7 +161,7 @@ Your originals take the space they take. On top of them, with the Archive, EiN k
 df
 ```
 
-The same figures are on the **Dashboard**, and `top`'s **Disk** panel shows them live. [Files and storage](../concepts/files.md) explains the tiers.
+The same figures are on the **Status**, and `top`'s **Disk** panel shows them live. [Files and storage](../concepts/files.md) explains the tiers.
 
 The container engine keeps the images, the build's scratch files and the database in its own storage, usually `~/.local/share/containers` for rootless podman and `/var/lib/docker` for Docker, which may be another disk than your data folder. Each update builds new images, and `setup.sh` removes the ones they replaced once the new EiN answers; a build's intermediate stages and other images without a name stay. To see what the images take, and to remove the unnamed ones no container uses:
 
@@ -183,21 +183,21 @@ PostgreSQL also needs room of its own to clean up and rebuild indexes, so keep a
 
 Whether the machine is big enough shows in whether it keeps up with the work:
 
-| Where                            | What it tells you                                                                                                                                                                                                                      |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The **Dashboard**'s badge        | **Healthy**: nothing is waiting. **Catching up**: work is waiting and some of it, or a pipeline instance, finished in the last hour. **Stuck**: work is waiting and none finished in the last hour. **Needs a person**: a check failed |
-| The **Dashboard**'s **Work** tab | Where the work is, each line of work, what is left of it, how fast it goes, and when it will be done                                                                                                                                   |
-| `top`                            | The processor, EiN's memory and the event loop's lag, the disks, and the work, live                                                                                                                                                    |
-| `host-metrics`                   | EiN's processor and memory use now and over the last 6 hours (`--window` in minutes)                                                                                                                                                   |
-| `pool-stat`                      | The backlog, rates and policy of each line of work in the queues, and each worker's slots and line                                                                                                                                     |
-| `gauges`                         | What the running services report beside the machine's figures, such as the card's memory                                                                                                                                               |
-| `ems-status`                     | With the `ems` module: the media service's models, what it is running, its queues and the memory of its model processes                                                                                                                |
+| Where                         | What it tells you                                                                                                                                                                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The **Status**'s badge        | **Healthy**: nothing is waiting. **Catching up**: work is waiting and some of it, or a pipeline instance, finished in the last hour. **Stuck**: work is waiting and none finished in the last hour. **Needs a person**: a check failed |
+| The **Status**'s **Work** tab | Where the work is, each line of work, what is left of it, how fast it goes, and when it will be done                                                                                                                                   |
+| `top`                         | The processor, EiN's memory and the event loop's lag, the disks, and the work, live                                                                                                                                                    |
+| `host-metrics`                | EiN's processor and memory use now and over the last 6 hours (`--window` in minutes)                                                                                                                                                   |
+| `pool-stat`                   | The backlog, rates and policy of each line of work in the queues, and each worker's slots and line                                                                                                                                     |
+| `gauges`                      | What the running services report beside the machine's figures, such as the card's memory                                                                                                                                               |
+| `ems-status`                  | With the `ems` module: the media service's models, what it is running, its queues and the memory of its model processes                                                                                                                |
 
-**Catching up** after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a **Work** tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. [Health and the dashboard](monitoring.md) explains the badge, the checks and the tabs.
+**Catching up** after an import is normal; the time it takes depends on the machine and on how much there is. A machine that is too small shows as a **Work** tab whose time to completion keeps growing while new files come in, or as containers stopped at their memory limits. [Health and status](monitoring.md) explains the badge, the checks and the tabs.
 
 ## When something goes differently
 
-**The Dashboard reads Stuck.** Nothing has finished in the last hour. Read the checks under the badge on the **Overview** tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. [Troubleshooting](troubleshooting.md) goes through the causes.
+**The Status page reads Stuck.** Nothing has finished in the last hour. Read the checks under the badge on the **Overview** tab: they name the kind of work that is not moving and why, with the Archive often the media service not answering. [Troubleshooting](troubleshooting.md) goes through the causes.
 
 **Videos in the Archive never get their browser version.** Check that **Media worker budget** is 2 or more, and on the **Work** tab whether `transcode` is waiting. Without a graphics card, a long video takes many minutes to encode.
 
@@ -216,5 +216,5 @@ Whether the machine is big enough shows in whether it keeps up with the work:
 - [Configuration](configuration.md): where settings live and what a change restarts.
 - [Processing and pipelines](processing.md): what the pipelines do with each file, and the engine's settings.
 - [The media service](../ems/index.md) and [The language model](../assistant/language-model.md): the two optional services.
-- [Health and the dashboard](monitoring.md): the badge, the checks and the Work tab.
+- [Health and status](monitoring.md): the badge, the checks and the Work tab.
 - [Settings](../reference/settings.md#processing): every **Processing** setting with its default.

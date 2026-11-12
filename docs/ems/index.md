@@ -10,7 +10,7 @@ is for the administrator who installs the media service, watches it and tunes it
 The media service comes in two parts, installed in different ways:
 
 - **The `ems` module**, EiN's side of it: the client the Archive calls the media service through,
-  its health on the **Dashboard**, with the **Media service** tab and the graphics card's readings,
+  its health on the **Status**, with the **Media service** tab and the graphics card's readings,
   and `ems-text-embed`, which turns text into vectors so that things can be found by meaning.
   Installing the `archive` module installs the `ems` module with it ([Modules](../admin/modules.md)).
 - **The media service itself**, the `ems` container that runs beside EiN. The installer's `--ems`
@@ -50,7 +50,7 @@ upload, but nothing new is read:
 
 - Uploads wait in staging as **being prepared**.
 - New files get no metadata, thumbnails, faces, transcripts or search vectors.
-- The **Dashboard** shows the warning `http://ems:8181 is not answering; work that needs it waits`
+- The **Status** shows the warning `http://ems:8181 is not answering; work that needs it waits`
   on its **Overview** tab. A warning does not stop **Healthy**.
 
 None of this work is lost. Each step that needs the media service waits without using up its
@@ -179,7 +179,7 @@ The installer adds it with `--ems`, at the first install or any time after:
    source, it is built on the machine instead, which takes about an hour more. [Install EiN](../start/install.md#what-you-need)
    lists what the machine needs with the media service.
 3. `setup.sh` starts the containers and prints `EiN is up at http://…:8080/` once EiN answers.
-4. Open **Dashboard** under **System** in the sidebar, and choose the **Media service** tab. For the
+4. Open **Status** under **System** in the sidebar, and choose the **Media service** tab. For the
    first minutes the media service loads its models; the tab then shows the **healthy** badge.
 
 `--ems` writes `EIN_EMS=1` to `~/ein/.env`, so a later `./setup.sh` keeps it. When `setup.sh` found
@@ -296,9 +296,9 @@ machine one video read at 145 MB/s with it, against 20 MB/s without.
 
 ## Check that it is running
 
-### On the dashboard
+### On the Status page
 
-Open **Dashboard** under **System** and choose the **Media service** tab. It asks the media service
+Open **Status** under **System** and choose the **Media service** tab. It asks the media service
 how it is, again and again, while the tab is open.
 
 - **Media service**: a badge, **healthy**, **degraded** or **model worker down**, and the facts:
@@ -366,19 +366,19 @@ can act when it goes away. Only the administrators see it.
 | `gpu-power-limit`            | The most the card may draw, in W                                               | 365 days |
 
 The card's readings are there only when the media service sees a card, and `cpu` and `load` only
-from a media service of API 0.3.4 or later. The **Media service** card on the System dashboard's
+from a media service of API 0.3.4 or later. The **Media service** card on the System status page's
 **Overview** draws them, and `ems-gpu` and `ems-memory` read them back in the terminal, `ems-memory`
 with the media service's own share of the memory. What the media service holds and does, its models, lanes and requests, is not the
 machine's and stays on the **Media service** tab.
 
-![The System dashboard's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The Media service card is the media service's machine; its GPU and VRAM tiles show only when it has a card")
+![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The Media service card is the media service's machine; its GPU and VRAM tiles show only when it has a card")
 
 **About EiN** in the account menu also has a **Media service** tile: its version, the API it speaks,
 its commit, how long it has been up and the card it runs on, or **Not answering**.
 
 ### The health checks
 
-The dashboard's verdict and the [`health`](../reference/commands-core.md#health) command read these
+The Status page's verdict and the [`health`](../reference/commands-core.md#health) command read these
 checks about the media service:
 
 | Check        | State | When                                                                       |
@@ -395,7 +395,7 @@ warnings: while the media service restarts or loads its models, the work that ne
 
 ### In the terminal
 
-[`ems-status`](commands.md#ems-status) prints the whole answer the dashboard
+[`ems-status`](commands.md#ems-status) prints the whole answer the Status page
 draws, and its options shorten it:
 
 ```bash
@@ -576,7 +576,7 @@ starts it again by itself. If it keeps stopping, the count after `×` beside **b
 **Work waits for the media service although it answers and runs nothing.** `health` says `… waiting
 for EMS, which could not run it yet` again and again, while the **Media service** tab shows no
 request executing. What the media service answered the last step that could not run ends the
-kind's line in `health`, after `it said:` or `the last could not run … ago:`, and on the dashboard
+kind's line in `health`, after `it said:` or `the last could not run … ago:`, and on the Status page
 it follows the line that is not moving; the whole error is on each waiting step
 (`JSON_OUTPUT=1 pipeline-status <id>`, its `error`). When it ends
 `sshfs: fuse: mount failed: Permission denied (files_unavailable)`, the media service cannot mount
@@ -597,7 +597,7 @@ is set in `compose.ems.yaml`; undo a change to that file with `git -C ~/ein chec
 and run `podman compose up -d`.
 
 **Uploads stay being prepared for a long time.** Look at **Executing** on the **Media service** tab.
-Requests waiting in the lanes mean the media service is busy: after a large import, the **Dashboard**
+Requests waiting in the lanes mean the media service is busy: after a large import, the **Status**
 reads **Catching up** until the work is done. With a card, a model shown as **CPU loaded** is several
 times slower than on the card; see [Performance and sizing](../admin/performance.md).
 
@@ -617,7 +617,7 @@ and podman downloads or builds it in a folder beside its own storage, not in `/t
 - [More than one media service](instances.md)
 - [Installing in detail](../admin/install.md)
 - [Configuration](../admin/configuration.md)
-- [Health and the dashboard](../admin/monitoring.md)
+- [Health and status](../admin/monitoring.md)
 - [Processing and pipelines](../admin/processing.md)
 - [Performance and sizing](../admin/performance.md)
 - [Media service commands](commands.md)

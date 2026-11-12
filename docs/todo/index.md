@@ -197,6 +197,15 @@ a list you can see. They show from a week before they are due until a week after
 events, and choosing one opens its list. [Home and statistics](../guide/home.md) covers the rest of
 Home.
 
+## On a dashboard
+
+With [Dashboards](../dashboard/index.md) installed, Todo offers a **Todo list** card: one list's
+items not done yet, late ones first and then by when they are due, with who is to do each. Choose
+the **List** in the card's settings, and under **Show** everything not done or only what is due
+within a week and late. Signed in, a tick on the card marks an item done; on a screen opened from a
+[display link](../dashboard/screens.md) it only shows. Items falling due are also on a dashboard's
+**Coming up** card, as on Home.
+
 ## Ask the assistant
 
 With the [Assistant](../assistant/index.md) installed, the chat reads and changes your lists too:

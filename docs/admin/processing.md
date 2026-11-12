@@ -1,11 +1,11 @@
 # Processing and pipelines
 
 This page is for the administrator. It covers core's pipeline engine: how pipelines, steps, pools
-and workers run, how to watch them on the **Dashboard** and in the terminal, what to do when work
+and workers run, how to watch them on the **Status** and in the terminal, what to do when work
 fails or stops moving, how to run work again on purpose, and the settings the engine has.
 
 Core brings the engine and no pipelines of its own, so an EiN without modules runs none, and the
-**Work** tab of the **Dashboard** stays empty. Pipelines come with modules: of the published ones,
+**Work** tab of the **Status** stays empty. Pipelines come with modules: of the published ones,
 the Archive brings them all, with the workers that run them. [Processing pictures](../archive/processing.md)
 covers the Archive's pipelines, workers and settings. The examples on this page name the
 Archive's pipelines, such as `media-faces`, which exist only with the Archive installed.
@@ -32,15 +32,15 @@ Every pipeline runs at most once per node at a time: a file announced ten times 
 worked on once. Waiting work is kept in nodes, so nothing is lost when EiN restarts.
 `pipeline-list` prints every pipeline that is defined, with its trigger.
 
-## Watch the work on the Dashboard
+## Watch the work on the Status page
 
-1. Sign in as an administrator and choose **Dashboard** in the sidebar, under **System**.
-2. Read the badge above the title **System dashboard**: **Healthy**, **Catching up**, **Stuck** or
-   **Needs a person**. [Health and the dashboard](monitoring.md) explains each word and the
+1. Sign in as an administrator and choose **Status** in the sidebar, under **System**.
+2. Read the badge above the title **System status**: **Healthy**, **Catching up**, **Stuck** or
+   **Needs a person**. [Health and status](monitoring.md) explains each word and the
    **Overview** tab.
 3. Choose the **Work** tab.
 
-![The Work tab of the System dashboard, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA](../../assets/shots/system-work.webp "One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive's.")
+![The Work tab of the System status page, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA](../../assets/shots/system-work.webp "One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive's.")
 
 At the top, **Where the work is** draws the work as it moves, left to right, in the same five words
 the table below uses:
@@ -140,7 +140,7 @@ A pipeline's page, opened from the **Work** table, shows its description, its **
 **Cancelled** narrow the list, and **Load more** fetches the next page.
 
 Choose an instance to open it. Its page is named after the target node, with the way back above
-the name: **System dashboard › Work ›** the pipeline, as on the pipeline's own page. It shows the
+the name: **System status › Work ›** the pipeline, as on the pipeline's own page. It shows the
 status and the steps: **Step**, **Status**, **Depends on**, **Command** and **Duration**. A step's status is one of these:
 
 | Status      | What it means                                                                                        |
@@ -244,11 +244,11 @@ instance's page, **Remove** is under ⋮ in the header's corner.
 
 ### Work that nothing will run
 
-A line with jobs and no worker never moves. **Work that nothing will run** on the **Dashboard**
+A line with jobs and no worker never moves. **Work that nothing will run** on the **Status**
 and `health` (as a failed check `kind <name>`) both say so. The usual cause is that the worker
 service is stopped:
 
-1. Open the **Services** tab of the **Dashboard**, or run `service-list`, and look at the workers;
+1. Open the **Services** tab of the **Status**, or run `service-list`, and look at the workers;
    with the Archive installed, they are `media-worker` and `models`.
 2. Start the one that is stopped, or read its log if it keeps stopping.
    [Services and logs](services-logs.md) shows how.
@@ -385,7 +385,7 @@ pipeline of your own, see [Writing a module](../develop/modules.md).
 
 - [Changes and pipelines](../concepts/pipelines.md): how a change becomes finished work.
 - [Processing pictures](../archive/processing.md): the Archive's pipelines, workers and settings.
-- [Health and the dashboard](monitoring.md): the four words and the **Overview** tab.
+- [Health and status](monitoring.md): the four words and the **Overview** tab.
 - [Performance and sizing](performance.md): what to set on your machine.
 - [Services and logs](services-logs.md): starting, stopping and reading the workers.
 - [Troubleshooting](troubleshooting.md): when work does not get done.

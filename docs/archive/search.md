@@ -286,7 +286,7 @@ sentence. Your administrator installs both; see [The media service](../ems/index
 
 A file is found by what it shows or says only once the media service has looked at it: a picture
 added a few minutes ago may not turn up by meaning yet. Your administrator's
-[Dashboard](../admin/monitoring.md) reads **Catching up** while that work goes on.
+[Status page](../admin/monitoring.md) reads **Catching up** while that work goes on.
 
 If your administrator chose a hosted provider for the language model, the words you type into a
 search box are sent to that provider to be read. A place in your words that is none of your
@@ -309,7 +309,7 @@ picture finds nothing, and its line in the note says why.
    starting.
 2. If the note keeps coming back, tell your administrator. Anyone signed in can check first: **About EiN**,
    in the menu under your picture, shows the **Media service** tile as `Not answering` while it is
-   down. Your administrator finds more on the Dashboard's **Media service** tab, and
+   down. Your administrator finds more on the Status page's **Media service** tab, and
    [The media service](../ems/index.md) covers what to do.
 
 Elsewhere you see no note, only less: the Search page still finds albums, people, locations and

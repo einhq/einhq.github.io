@@ -1,6 +1,6 @@
 # Services and logs
 
-This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the dashboard and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on [Installing in detail](install.md#run-ein-day-to-day).
+This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the Status page and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on [Installing in detail](install.md#run-ein-day-to-day).
 
 ## What a service is
 
@@ -15,7 +15,7 @@ Core brings ten services, the first ten below, and they are all an EiN without m
 | `pipeline-engine`   | core      | Matches events against pipeline triggers and runs the resulting steps                                                                                                                                                                       |
 | `pipeline-pruner`   | core      | Runs failed pipeline work again after a growing wait, and keeps the pipeline instances and the pools bounded                                                                                                                                |
 | `relations-guard`   | core      | Removes links that would dangle after a node is deleted                                                                                                                                                                                     |
-| `metrics-sampler`   | core      | Samples EiN's own resources, storage and workload into `/var/logs/metrics`, which the dashboard draws, and the machine's readings into its device `/dev/<machine>`                                                                          |
+| `metrics-sampler`   | core      | Samples EiN's own resources, storage and workload into `/var/logs/metrics`, which the Status page draws, and the machine's readings into its device `/dev/<machine>`                                                                        |
 | `session-reaper`    | core      | Removes expired sessions, and turns off expired share links; hourly                                                                                                                                                                         |
 | `tmp-sweeper`       | core      | Removes files left in `/tmp` once they are older than `CFG_TMP_RETENTION_HOURS`; hourly                                                                                                                                                     |
 | `trash-purger`      | core      | Removes trashed files for good once they are older than `CFG_TRASH_RETENTION_DAYS`; twice a day                                                                                                                                             |
@@ -41,12 +41,12 @@ Core brings ten services, the first ten below, and they are all an EiN without m
 
 Every time EiN starts, it registers and enables core's services and those of every module that is set up, then starts every enabled service as the last step of its start. A module's services are added when it is installed and removed with it; see [Modules](modules.md).
 
-## See the services on the dashboard
+## See the services on the Status page
 
-1. Open **Dashboard** under **System** in the sidebar. The dashboard is the administrator's; see [Health and the dashboard](monitoring.md) for its other tabs.
+1. Open **Status** under **System** in the sidebar. The Status page is the administrator's; see [Health and status](monitoring.md) for its other tabs.
 2. Choose the **Services** tab.
 
-![The System dashboard's Services tab: a card titled Services with "23 healthy" at its right, and one row per service with its name and description, the module it comes from, how long it has been up, a green RUNNING badge and buttons to restart and stop it](../../assets/shots/system-services.webp "One row per service, with the ones that need attention sorted to the top")
+![The System status page's Services tab: a card titled Services with "23 healthy" at its right, and one row per service with its name and description, the module it comes from, how long it has been up, a green RUNNING badge and buttons to restart and stop it](../../assets/shots/system-services.webp "One row per service, with the ones that need attention sorted to the top")
 
 The card lists every service, one row each, and asks again every 10 seconds while the tab is open:
 
@@ -58,7 +58,7 @@ The card lists every service, one row each, and asks again every 10 seconds whil
 
 The heading counts them: `21 healthy`, or in red `1 down` when an enabled service is not running. Rows are sorted by what needs attention: failed services first, then other enabled services that are not running, then services that have restarted, then the rest by name.
 
-**Settings → Modules** also shows a module's services and whether each runs, on the module's **Services** tab; the controls are here on the dashboard.
+**Settings → Modules** also shows a module's services and whether each runs, on the module's **Services** tab; the controls are here on the Status page.
 
 ## Restart, stop and start a service
 
@@ -90,10 +90,10 @@ What happens when you stop a service:
 - EiN sends the command the script is running a stop signal and waits for the script to end: 5 seconds by default, and up to 16 minutes for `pipeline-engine`, which lets the steps it runs finish. A script that has not ended by then is closed.
 - Work the service would do waits. A worker that is stopped, such as one of the Archive's media workers, leaves its jobs in the pool, and they run when it starts again; see [Processing and pipelines](processing.md).
 - A stopped service stays stopped until you start it, or until EiN itself starts again, which starts every enabled service.
-- With their modules installed, `ems-link` and `llm-link` add the media service's and the language model's checks to [`health`](../reference/commands-core.md#health). While one is stopped, its checks are missing from the dashboard's verdict rather than failing.
+- With their modules installed, `ems-link` and `llm-link` add the media service's and the language model's checks to [`health`](../reference/commands-core.md#health). While one is stopped, its checks are missing from the Status page's verdict rather than failing.
 
 > [!WARNING]
-> Stopping `http-server` takes the Web UI away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart ein` in `~/ein`. Restarting `http-server` from the dashboard drops the page's connection for a moment.
+> Stopping `http-server` takes the Web UI away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart ein` in `~/ein`. Restarting `http-server` from the Status page drops the page's connection for a moment.
 
 Saving a setting on the Settings page restarts the services that read it by itself; [Configuration](configuration.md#what-a-change-restarts) lists what restarts what.
 
@@ -125,7 +125,7 @@ ems-link             ems            running     yes      0        Watches the me
 …
 ```
 
-`--detail` asks each running service that reports on itself for its line, printed under its row; it is the line the dashboard shows. Without `--detail` the list is quicker. The `MODULE` column is who brings the service, `-` for one added by hand. With `JSON_OUTPUT=1` it is JSON, with each service's start time and its `module`.
+`--detail` asks each running service that reports on itself for its line, printed under its row; it is the line the Status page shows. Without `--detail` the list is quicker. The `MODULE` column is who brings the service, `-` for one added by hand. With `JSON_OUTPUT=1` it is JSON, with each service's start time and its `module`.
 
 [`service-status`](../reference/commands-core.md#service-status) shows one service, and where its output goes, here the `ems` module's `ems-link`:
 
@@ -145,7 +145,7 @@ Output: /var/logs/services/ems-link/stdout.log
 Errors: /var/logs/services/ems-link/stderr.log
 ```
 
-`Last exit code` appears once the script has ended. [`top`](../reference/commands-core.md#top) shows the running services in a panel of its own, beside the machine's figures; [Health and the dashboard](monitoring.md) covers it.
+`Last exit code` appears once the script has ended. [`top`](../reference/commands-core.md#top) shows the running services in a panel of its own, beside the machine's figures; [Health and status](monitoring.md) covers it.
 
 ## Where the logs are
 
@@ -158,13 +158,13 @@ EiN writes to four places. Three are logs in the tree, which you read in EiN's t
 | `/var/logs/services/<name>/stderr.log` | What a service's script prints as errors                                                                                             | Emptied each time the service starts                                                                   |
 | The `ein` container's log              | The same messages as `/var/logs/system`, with the details behind them, such as an error's stack, and what EiN prints while it starts | Until the container is removed or made again, by `podman compose down` or by an `up -d` after a change |
 
-A service's own output goes only to its pair of logs under `/var/logs/services`, never to the container's log. Two other folders hold logs of other kinds: `/var/logs/metrics`, the figures the dashboard draws, and `/var/logs/jobs/<pid>`, the output of a command started with [`nohup`](../reference/commands-core.md#nohup) or kept running with [`detach`](../reference/commands-core.md#detach).
+A service's own output goes only to its pair of logs under `/var/logs/services`, never to the container's log. Two other folders hold logs of other kinds: `/var/logs/metrics`, the figures the Status page draws, and `/var/logs/jobs/<pid>`, the output of a command started with [`nohup`](../reference/commands-core.md#nohup) or kept running with [`detach`](../reference/commands-core.md#detach).
 
-## Read the system log on the dashboard
+## Read the system log on the Status page
 
-Open **Dashboard** under **System** and choose the **Log** tab.
+Open **Status** under **System** and choose the **Log** tab.
 
-![The System dashboard's Log tab: a Recent problems card listing ten WARN lines from pipeline-engine, and below it the Live log card for /var/logs/system with level buttons DEBUG, INFO, WARN and ERROR and buttons to pause and clear](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong; the live log shows what EiN is doing now")
+![The System status page's Log tab: a Recent problems card listing ten WARN lines from pipeline-engine, and below it the Live log card for /var/logs/system with level buttons DEBUG, INFO, WARN and ERROR and buttons to pause and clear](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong; the live log shows what EiN is doing now")
 
 - **Recent problems** lists the last ten lines at WARN or ERROR, newest first, with the time, the part of EiN and the message, and under it what was logged beside the message as `key=value`, as `dmesg` shows it. It is read again every 10 seconds. With none, it says "Nothing logged at WARN or above".
 - **Live log** shows `/var/logs/system` as it is written: the last 200 lines when you open it, then every new line as it arrives, up to 500 kept. It follows the newest line while you are at the bottom, and stays put when you scroll up to read.
@@ -293,7 +293,7 @@ A service is a folder in the tree with a `start.sh`, and optionally a `config.js
    service-start disk-report
    ```
 
-It is on the dashboard from then on, and EiN starts it whenever it starts. Its output is in `/var/logs/services/disk-report/stdout.log`.
+It is on the Status page from then on, and EiN starts it whenever it starts. Its output is in `/var/logs/services/disk-report/stdout.log`.
 
 The keys `config.json` takes:
 
@@ -308,7 +308,7 @@ The keys `config.json` takes:
 | `workClass`     | none    | `background` makes its database work give way to people's, as EiN's own workers do                                      |
 | `statusCommand` | none    | A command whose first line of output is shown under the service's name, in place of its description                     |
 | `checkCommand`  | none    | A command answering checks for `health`, as JSON                                                                        |
-| `gaugeCommand`  | none    | A command answering gauges for `top` and the dashboard, as JSON                                                         |
+| `gaugeCommand`  | none    | A command answering gauges for `top` and the Status page, as JSON                                                       |
 
 To take a service away, stop it, disable it and remove it: `service-stop disk-report`, `service-disable disk-report`, `service-remove disk-report`. Removing it removes only the registration, not the folder. A module's services are declared in the module itself; [Writing a module](../develop/modules.md) covers them.
 
@@ -316,13 +316,13 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 **A service is failed, with `×3` beside it.** It was restarted three times within a minute and failed again. Its `stderr.log` holds the output of the last attempt only, since each start empties it, so read it first: `tail -n 50 /var/logs/services/<name>/stderr.log`. `dmesg | grep "<name>"` shows EiN's lines about it, such as `Service 'media-worker' exited with code 1` and `Service 'media-worker' exceeded max restarts (3) within window`; the container's log has the details behind them. Start it again with **Start** once you have fixed the cause.
 
-**`service start: 'x' is not enabled`.** The service is switched off; the dashboard shows it as **disabled**. Run `service-enable x`, then `service-start x`. Disabling one of core's or a module's services lasts only until EiN starts again, which enables them all.
+**`service start: 'x' is not enabled`.** The service is switched off; the Status page shows it as **disabled**. Run `service-enable x`, then `service-start x`. Disabling one of core's or a module's services lasts only until EiN starts again, which enables them all.
 
-**`service stop: service 'x' is not running`** or **`service 'x' is already running`.** The service was already in that state; the dashboard row may be up to 10 seconds old.
+**`service stop: service 'x' is not running`** or **`service 'x' is already running`.** The service was already in that state; the Status page row may be up to 10 seconds old.
 
 **`service remove: 'x' is running, stop it first`** or **`'x' is enabled, disable it first`.** Stop it and disable it, then remove it.
 
-**`service-restart: permission denied: only an administrator may run it`.** Sign in as `admin`, or use [admin mode](../guide/interface.md#admin-mode) (`admin` in the terminal). The dashboard shows the buttons only to the administrator.
+**`service-restart: permission denied: only an administrator may run it`.** Sign in as `admin`, or use [admin mode](../guide/interface.md#admin-mode) (`admin` in the terminal). The Status page shows the buttons only to the administrator.
 
 **A restart of `pipeline-engine` takes minutes.** It waits for the steps it runs to finish, for up to 16 minutes, and its row shows a spinner meanwhile.
 
@@ -338,7 +338,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 ## Related pages
 
-- [Health and the dashboard](monitoring.md): the verdict, the dashboard's other tabs and `top`
+- [Health and status](monitoring.md): the verdict, the Status page's other tabs and `top`
 - [Processing and pipelines](processing.md): the work the workers and the pipeline engine do
 - [Installing in detail](install.md): the containers, and running them with compose
 - [Configuration](configuration.md): settings, and which services a change restarts

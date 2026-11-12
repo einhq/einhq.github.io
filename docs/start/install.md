@@ -257,7 +257,7 @@ Most of the time goes into downloading the images, and how long that takes depen
 
 After `== Starting EiN`, `setup.sh` prints `Waiting for EiN to answer at …` and then, every 10 seconds, EiN's newest log line when it has changed. The first start takes longer, as EiN also downloads the modules you named. It waits up to 10 minutes, and stops sooner when EiN's container stops or keeps restarting.
 
-With the media service and the model, two parts are still getting ready when the password appears. The media service loads its models for a few minutes after it starts; until then the Dashboard's health check for `ems` says `http://ems:8181 is not answering; work that needs it waits`, and the work resumes by itself. The language model downloads its model the first time it starts, so the assistant may not answer for a while.
+With the media service and the model, two parts are still getting ready when the password appears. The media service loads its models for a few minutes after it starts; until then the Status page's health check for `ems` says `http://ems:8181 is not answering; work that needs it waits`, and the work resumes by itself. The language model downloads its model the first time it starts, so the assistant may not answer for a while.
 
 ### What is where
 

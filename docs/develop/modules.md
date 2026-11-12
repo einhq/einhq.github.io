@@ -378,11 +378,11 @@ bare `Intl.DateTimeFormat` follow the browser's language instead, which gives an
 A module gives the Web UI entries and routes, nothing more. Each entry says where its route
 opens:
 
-| Entry     | Where it appears                                                                                                                                         |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sidebar` | In a section of the sidebar (`main`, `explore`, `browse`, `system`); needs `section`, `label`, `icon` and `to`                                           |
-| `topbar`  | A button in the top bar, or a row of a dropdown it names as `parent`, such as `ui.create`, the **Create** menu                                           |
-| `panels`  | Inside another page, at a `slot` it names, such as `system.tabs` (a tab of the **Dashboard**), `device.tabs` (a tab of a device's page) or `nodes.tools` |
+| Entry     | Where it appears                                                                                                                                      |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sidebar` | In a section of the sidebar (`main`, `explore`, `browse`, `system`); needs `section`, `label`, `icon` and `to`                                        |
+| `topbar`  | A button in the top bar, or a row of a dropdown it names as `parent`, such as `ui.create`, the **Create** menu                                        |
+| `panels`  | Inside another page, at a `slot` it names, such as `system.tabs` (a tab of the **Status**), `device.tabs` (a tab of a device's page) or `nodes.tools` |
 
 A top-bar entry's `action` is `{ "navigate": "/recipes" }` for the page, `{ "dialog": "/recipes/new" }`
 for the dialog over it, `{ "drawer": … }` for the side drawer and `{ "fullscreen": … }` for over
@@ -465,7 +465,7 @@ done
 
 | Key             | What it does                                                                                                      |
 | --------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `description`   | One line for the **Dashboard**'s services and `service list`                                                      |
+| `description`   | One line for the **Status**'s services and `service list`                                                         |
 | `restartPolicy` | `on-failure`, `always` or `never`; with a restart policy EiN starts a failed service again                        |
 | `maxRestarts`   | How many restarts within `restartWindow` before the service stays failed; 3 by default                            |
 | `restartWindow` | That window, in milliseconds; 60000 by default                                                                    |
@@ -473,7 +473,7 @@ done
 | `env`           | Environment variables for the script                                                                              |
 | `statusCommand` | A command answering the service's health in one line, shown beside its status                                     |
 | `checkCommand`  | A command answering checks for `health`, as JSON `[{ name, state, reason }]` with `ok`, `warn` or `fail`          |
-| `gaugeCommand`  | A command answering meters for `top` and the **Dashboard**, as JSON `[{ label, percent?, value }]`                |
+| `gaugeCommand`  | A command answering meters for `top` and the **Status**, as JSON `[{ label, percent?, value }]`                   |
 | `workClass`     | `background` for a service whose work may wait behind people's: its database connections leave some free for them |
 
 Module services use `"restartPolicy": "on-failure"`. A service whose name the module stops
@@ -535,6 +535,69 @@ for a language model or text vectors. The settings are in
 With the Assistant installed, what the assistant knows about your module's commands, and how to
 give it more, is in [Teaching the assistant](../assistant/teaching.md). A module that brings a kind
 of device registers a driver from one of its services; see [Writing a driver](drivers.md).
+
+## Offer cards to dashboards
+
+With the [Dashboards](../dashboard/index.md) module installed, a person puts cards on a dashboard
+from those the installed modules offer. A card is a route of your module drawn inside a tile, and
+the module offers it in `etc/dashboard.d/cards.json`, which `mod setup` links as
+`/etc/dashboard.d/<module>/cards.json`. Nothing else is needed: the dashboard names no module, and
+your module does not depend on it. The Todo module's list card:
+
+```json
+[
+  {
+    "name": "list",
+    "label": "Todo list",
+    "description": "One list's items not done yet, late ones first and then by when they are due.",
+    "icon": "list-check",
+    "color": "yellow",
+    "route": "/cards/todo/list",
+    "size": [4, 5],
+    "min": [3, 3],
+    "params": {
+      "type": "object",
+      "required": ["list"],
+      "properties": {
+        "list": { "type": "string", "format": "path", "title": "List", "x-choices": { "command": "todo-lists", "value": "path", "label": "title" } },
+        "who": { "type": "boolean", "title": "Who is to do each", "default": true }
+      }
+    }
+  }
+]
+```
+
+| Field         | What it is                                                                                        | Default     |
+| ------------- | ------------------------------------------------------------------------------------------------- | ----------- |
+| `name`        | Lower case letters, digits and `-`; the card is `<module>.<name>`                                 | required    |
+| `label`       | What the picker and the tile's header call it                                                     | required    |
+| `route`       | The route that draws it, without a query; one of your `ui.routes`                                 | required    |
+| `size`        | `[columns, rows]` a new one takes, of a dashboard 12 columns wide                                 | required    |
+| `min`         | The smallest `[columns, rows]` it may be made                                                     | `[1, 1]`    |
+| `description` | One sentence in the picker                                                                        | the label   |
+| `icon`        | A [Tabler](https://tabler.io/icons) icon name                                                     | `puzzle`    |
+| `color`       | A Mantine colour name, the kind colour of what it shows                                           | `gray`      |
+| `frame`       | `titled` draws a header with its icon and title above the route; `plain` gives the route the tile | `titled`    |
+| `params`      | A JSON Schema of an object: what a person sets, passed to the route in its query                  | no settings |
+
+Each parameter has a `type` (`string`, `number`, `integer`, `boolean` or `array` of strings or
+numbers), and may have a `title`, `description`, `default`, `minimum`, `maximum`, and `enum` or
+`oneOf` (`{ "const": …, "title": … }`) for a fixed choice. `format` picks the input: `path` for a
+node, `markdown`, `timezone`, `date` or `time`. `x-choices` lists the choices from a read command:
+the form runs `command` as the person editing, with `JSON_OUTPUT=1`, and takes `value` and `label`
+from each entry of its answer, or of the list at the key path `items` when the answer is not a list;
+`{other}` in `command` is another parameter's value, so `"command": "device-show {device}",
+"items": "endpointList"` lists a chosen device's endpoints. `dashboard-card-add` checks a card's
+values against its `params` before it puts it on.
+
+The route is drawn with the values in its query, `/cards/todo/list?list=%2Fgroups%2F…&who=true`,
+a list as the key repeated. Keep card routes under `/cards/<module>/`, a first segment none of your
+pages use, and draw them to fill the tile: the tile is a size container, so `cqmin` units and
+`clamp()` scale text with it. A card reads its own data as whoever looks at the dashboard and keeps
+itself current, with `useNodeEvents` for what changes by events or `usePolledCommand` for what
+changes on a clock. On a screen opened from a [display link](../dashboard/screens.md) nobody is
+signed in (`isAuthenticated` is false): draw no controls there and link nowhere, since every write
+is refused. `dashboard-cards` lists what the modules offer and says what in a list could not be read.
 
 ## Write documentation for it
 

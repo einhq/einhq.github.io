@@ -20,7 +20,7 @@ GitHub:
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [`archive`](../archive/index.md)     | The Archive: albums, media, people and the family tree, locations, cameras and the trips of devices, staging, and the search that finds things among them | The `ems` module, installed along with it, and the [media service](../ems/index.md) to do its work |
 | [`assistant`](../assistant/index.md) | **Chat**: the assistant that answers questions by running EiN's commands for you                                                                          | A [language model](../assistant/language-model.md), either the installer's `--llm` or a hosted one |
-| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Dashboard**              | The [media service](../ems/index.md)                                                               |
+| [`ems`](../ems/index.md)             | EiN's side of the media service: the client the Archive reaches it through, its health and the graphics card's readings on the **Status**                 | The [media service](../ems/index.md)                                                               |
 
 A module needs only what its manifest names as dependencies; EiN installs those with it. A service
 that runs beside EiN, such as the media service or the language model, is no module: the installer
@@ -60,7 +60,7 @@ another tab the module has nothing for is left out:
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **About**        | The introduction from the module's guide, or "It has no guide."                                                                                                               |
 | **Dependencies** | The modules it needs (**It needs**) and the modules that need it (**Needs it**), with the versions accepted, the version installed and each one's state, or **Not installed** |
-| **Services**     | Its background services, their state now and how long they have been up. They are started and stopped on the **Dashboard**'s services tab.                                    |
+| **Services**     | Its background services, their state now and how long they have been up. They are started and stopped on the **Status**'s services tab.                                       |
 | **Pages**        | The addresses of the pages it adds; one without a parameter is a link to the page                                                                                             |
 | **Commands**     | Its commands; each opens to its help                                                                                                                                          |
 | **Settings**     | Its settings with their values, each marked **personal** or **system**; a row opens to the setting's description and, if you may change it, its control                       |
@@ -469,7 +469,7 @@ After fixing the cause, set the module up again with `mod setup archive`, or eve
 place without setup. `mod setup <name>` sets it up.
 
 **Active, but something is missing.** Check its **Services** tab: a service that shows
-`failed` or `disabled` can be started again on the **Dashboard**'s services tab, and
+`failed` or `disabled` can be started again on the **Status**'s services tab, and
 [Services and logs](services-logs.md) explains how to read its log. A module installed from the
 terminal shows its pages in a browser tab that was already open once that page is reloaded.
 

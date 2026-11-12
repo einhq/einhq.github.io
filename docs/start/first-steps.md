@@ -10,7 +10,7 @@ example, apply to what is created after you set them, so set them before the fam
 things.
 
 1. [Sign in and change the admin password](#sign-in-and-change-the-admin-password)
-2. [Check the dashboard](#check-the-dashboard)
+2. [Check the Status page](#check-the-status-page)
 3. [Install the modules you want](#install-the-modules-you-want)
 4. [Decide who sees what](#decide-who-sees-what)
 5. [Create accounts for the family](#create-accounts-for-the-family)
@@ -74,21 +74,21 @@ EiN takes from it only at its first start.
 > Keep the new one in a password manager. If it is lost, only someone who can act as the
 > administrator can set a new one. Step 5 shows how to give a second person that right.
 
-## Check the dashboard
+## Check the Status page
 
-Choose **Dashboard** under **System** in the sidebar. Only administrators have it. The page,
-**System dashboard**, shows a badge above its title for how things stand:
+Choose **Status** under **System** in the sidebar. Only administrators have it. The page,
+**System status**, shows a badge above its title for how things stand:
 
 | Badge              | What it means                                                            | What to do                                                                                             |
 | ------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | **Healthy**        | Nothing is waiting to be done.                                           | Nothing.                                                                                               |
 | **Catching up**    | Work is waiting, and some was done in the last hour, as after an import. | Wait. It turns to **Healthy** when the work is done.                                                   |
-| **Stuck**          | Work is waiting, and none was done in the last hour.                     | Look at the **Work** tab, and read [Health and the dashboard](../admin/monitoring.md).                 |
+| **Stuck**          | Work is waiting, and none was done in the last hour.                     | Look at the **Work** tab, and read [Health and status](../admin/monitoring.md).                        |
 | **Needs a person** | A check failed.                                                          | Read the failed check on the **Overview** tab, and see [Troubleshooting](../admin/troubleshooting.md). |
 
-![The System dashboard's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/dashboard.webp "Healthy means nothing is waiting; while work waits and is being done it reads Catching up, and a fresh install reads Healthy within a minute or two")
+![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/dashboard.webp "Healthy means nothing is waiting; while work waits and is being done it reads Catching up, and a fresh install reads Healthy within a minute or two")
 
-For the first minute after EiN starts, the dashboard may show **warming up** while it takes its
+For the first minute after EiN starts, the Status page may show **warming up** while it takes its
 first readings.
 
 Below the badges, the **Overview** tab lists every check that is not fine. Warnings do not stop
@@ -112,7 +112,7 @@ What EiN is for comes from its modules. Without any, the sidebar holds only **Ho
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `archive`   | **Media**, **Staging**, **Year**, **Map**, **Albums**, **People**, **Locations** and **Cameras** in the sidebar, a **Trips** tab on a device's page, and **Import media**, **Album**, **Person**, **Location** and **Camera** in the **Create** menu | the `ems` module, installed with it, and the media service |
 | `assistant` | **Chat**, in the sidebar and as a top-bar button                                                                                                                                                                                                     | a language model, your own or a hosted one                 |
-| `ems`       | the client for the media service, and the **Media service** tab on the dashboard                                                                                                                                                                     | the media service                                          |
+| `ems`       | the client for the media service, and the **Media service** tab on the Status page                                                                                                                                                                   | the media service                                          |
 
 If you installed with the **EiN Archive** command from einhq.eu, the three are installed already. Open
 **Settings → Modules**, choose each module, and check that its panel says **Active**, not
@@ -252,7 +252,7 @@ or with <kbd>Alt</kbd>+<kbd>T</kbd> wherever you are, and try a first command:
 health
 ```
 
-It says in one line how EiN is doing, the same verdict as the dashboard's badge, and lists the
+It says in one line how EiN is doing, the same verdict as the Status page's badge, and lists the
 checks behind it. `--help` after a command's name says how to use it, and `docs find` followed by
 what you want done finds the command that does it. Press <kbd>Alt</kbd>+<kbd>T</kbd> again to hide
 the terminal; what runs in it goes on.
@@ -293,8 +293,8 @@ does not work offline. [EiN on a phone](../guide/phone.md) shows what differs.
 
 ## Keep EiN running
 
-**Look at the dashboard now and then.** EiN sends no alerts, by e-mail or otherwise: what goes
-wrong shows on the dashboard and in the logs. Its **Storage** card shows how much room each part
+**Look at the Status page now and then.** EiN sends no alerts, by e-mail or otherwise: what goes
+wrong shows on the Status page and in the logs. Its **Storage** card shows how much room each part
 of the data folder has left, and says "full in ~N days" in red when a part fills within two weeks.
 EiN does not stop work for you when the disk fills.
 

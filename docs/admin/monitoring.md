@@ -1,14 +1,14 @@
-# Health and the dashboard
+# Health and status
 
-This page is for the administrator who keeps EiN running: how to tell at a glance whether it is well and keeping up, what each part of the **System dashboard** shows, how to ask the same questions in the terminal or from another computer, and what to do when the answer is not **Healthy**.
+This page is for the administrator who keeps EiN running: how to tell at a glance whether it is well and keeping up, what each part of the **System status** shows, how to ask the same questions in the terminal or from another computer, and what to do when the answer is not **Healthy**.
 
-## Open the dashboard
+## Open the Status page
 
-Choose **Dashboard** under **System** in the sidebar. The sidebar shows it only to administrators; the page is at `/system`, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.
+Choose **Status** under **System** in the sidebar. The sidebar shows it only to administrators; the page is at `/system`, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.
 
-![The System dashboard's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
+![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
 
-The page, **System dashboard**, has up to three badges above its title, with how long EiN has been running beside them (`up 3d 4h`), and five tabs below it, six with the `ems` module installed:
+The page, **System status**, has up to three badges above its title, with how long EiN has been running beside them (`up 3d 4h`), and five tabs below it, six with the `ems` module installed:
 
 | Badge                                                         | What it says                                                                                                               |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -96,7 +96,7 @@ The storage projection is measured over the last seven days. A tier that is not 
 
 ![The Work tab with the Catching up badge and the pipeline table: each pipeline's workload bar and its waiting, queued, running, failed, completed and cancelled counts, the In and Out rates and the ETA](../../assets/shots/system-work.webp "One row per pipeline: Out and ETA say whether a backlog is shrinking and when it will be gone")
 
-- **Where the work is** draws the work left to right as it moves: **Not started** (changes noticed, work not made yet, by pipeline), **In line** (made, waiting for a worker; each line of work under the workers that serve it, the one a worker is on now outlined), and **Running in EiN** (each worker, its slots and the line it is on, with how much of its turn is left). With the `ems` module installed, the media service's lanes and the models it holds follow. Under it, each line that is not moving says why. [Processing and pipelines](processing.md#watch-the-work-on-the-dashboard) explains it.
+- **Where the work is** draws the work left to right as it moves: **Not started** (changes noticed, work not made yet, by pipeline), **In line** (made, waiting for a worker; each line of work under the workers that serve it, the one a worker is on now outlined), and **Running in EiN** (each worker, its slots and the line it is on, with how much of its turn is left). With the `ems` module installed, the media service's lanes and the models it holds follow. Under it, each line that is not moving says why. [Processing and pipelines](processing.md#watch-the-work-on-the-status-page) explains it.
 - The pipeline table has a row for each pipeline doing something, with **Workload**, **Not started**, **In line**, **Running**, **Failed**, **Done** and **Cancelled**; the idle ones fold into one row that **show** opens. **In** is the work arriving for it per hour, **Out** what it finished in the last hour, and **Finishes in** the work not started divided by **Out**; **no rate** when nothing finished recently, `—` when nothing waits. When queue entries were dropped after their delivery attempts, a red **N dropped** stands above the table. Choose a row to see that pipeline's instances.
 - **Lines** lists each line of work in the work pools that has something in it or was done lately: **In line**, **Running**, **In**, **Out**, **Finishes in** and **Oldest in line**. A red **no worker** badge marks a line nothing serves; with the Archive, a yellow **waiting for EMS** badge marks a line resting because the media service refused several of its jobs in a row, with the next try and what the media service answered in its tooltip. **EMS could not run one** marks a line whose last job the media service refused, with its answer in the tooltip, until one of the line's jobs is done.
 - **Ongoing** lists the instances running now, with how far the running step has come, for a step that says, and how long each has run. Steps that have written nothing and moved no progress for the quiet time are listed above it in a yellow box.
@@ -117,7 +117,7 @@ When a line has jobs ready and no running worker serves it for more than five mi
 
 ## The Media service tab
 
-The `ems` module adds this tab, and it is there only while that module is installed. It shows the media service's version, its models, what it runs now and what is on the graphics card; [The media service](../ems/index.md#on-the-dashboard) describes it.
+The `ems` module adds this tab, and it is there only while that module is installed. It shows the media service's version, its models, what it runs now and what is on the graphics card; [The media service](../ems/index.md#on-the-status-page) describes it.
 
 ## The Services tab
 
@@ -166,7 +166,7 @@ EiN keeps sign-ins and downloads for a year: the `access-log-purger` service rem
 
 ## Ask in the terminal
 
-Every figure on the dashboard comes from an ordinary command, and you can run the same commands in EiN's terminal or over SSH. `health` gives the verdict and every check:
+Every figure on the Status page comes from an ordinary command, and you can run the same commands in EiN's terminal or over SSH. `health` gives the verdict and every check:
 
 ```bash
 # in EiN's terminal
@@ -196,7 +196,7 @@ ok    kind faces       1,188 left, 420/h  eta 2.8h
 | The last problems in the log                            | [`dmesg --level warn -n 10`](../reference/commands-core.md#dmesg)                    |
 | What is running now, and who is connected               | [`ps`](../reference/commands-core.md#ps), [`who`](../reference/commands-core.md#who) |
 
-`host-metrics` also shows the event loop's lag, `lag     p99 1.2 ms  max 8.4 ms`, which the dashboard does not: how long ready work waits for EiN's process. High lag with low CPU is the case where everything feels slow and nothing looks busy; [Performance and sizing](performance.md) covers it.
+`host-metrics` also shows the event loop's lag, `lag     p99 1.2 ms  max 8.4 ms`, which the Status page does not: how long ready work waits for EiN's process. High lag with low CPU is the case where everything feels slow and nothing looks busy; [Performance and sizing](performance.md) covers it.
 
 Put `JSON_OUTPUT=1` in front of any of them for the answer as JSON. The verdict is then one of `healthy`, `catching-up`, `stuck` and `needs-person`:
 
@@ -207,14 +207,14 @@ JSON_OUTPUT=1 health | jq -r .verdict
 
 ## Watch it live with top
 
-`top` draws on one screen what the dashboard spreads over its tabs: a CPU graph and the load, memory, the event loop and the services' gauges, the disks, the verdict with every check that is not fine and the work done in the last hour, the running commands, the sessions, the services and the latest problems. It redraws every 2 seconds.
+`top` draws on one screen what the Status page spreads over its tabs: a CPU graph and the load, memory, the event loop and the services' gauges, the disks, the verdict with every check that is not fine and the work done in the last hour, the running commands, the sessions, the services and the latest problems. It redraws every 2 seconds.
 
 ```bash
 # in EiN's terminal
 top
 ```
 
-![The terminal running top: a CPU graph, memory and disk use, the work waiting and done with the verdict healthy, the open sessions, the running processes and the services](../../assets/shots/terminal-top.webp "top fits the whole dashboard into one terminal, and works over SSH")
+![The terminal running top: a CPU graph, memory and disk use, the work waiting and done with the verdict healthy, the open sessions, the running processes and the services](../../assets/shots/terminal-top.webp "top fits the whole Status page into one terminal, and works over SSH")
 
 In the terminal panel, press <kbd>Alt</kbd>+<kbd>M</kbd> first to give it the whole window ([The terminal](../shell/terminal.md)).
 
@@ -232,7 +232,7 @@ In the terminal panel, press <kbd>Alt</kbd>+<kbd>M</kbd> first to give it the wh
 
 ## Check from another computer
 
-EiN sends no e-mail and raises no alert outside itself: the dashboard and `health` are where problems show. To look without opening the Web UI, send `health` over SSH:
+EiN sends no e-mail and raises no alert outside itself: the Status page and `health` are where problems show. To look without opening the Web UI, send `health` over SSH:
 
 ```bash
 # on your own computer
@@ -251,7 +251,7 @@ verdict=$(ssh -p 2222 helen@ein.local 'JSON_OUTPUT=1 health' | jq -r .verdict)
 
 ## Where the figures come from
 
-The `metrics-sampler` service records EiN's own and the work's figures, one log per series under `/var/logs/metrics`, and the machine's as the readings of its device, `/dev/<machine>`; the dashboard, `top` and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.
+The `metrics-sampler` service records EiN's own and the work's figures, one log per series under `/var/logs/metrics`, and the machine's as the readings of its device, `/dev/<machine>`; the Status page, `top` and the commands above read them back. The charts therefore survive a reload of the page and a restart of EiN.
 
 | Series      | What it holds                                     | How often  | Kept     |
 | ----------- | ------------------------------------------------- | ---------- | -------- |
@@ -265,7 +265,7 @@ The `metrics-sampler` service records EiN's own and the work's figures, one log 
 
 With the `ems` module installed, its `ems-sampler` service writes the media service machine's card, memory and CPU every 15 seconds as the readings of its device, `/dev/ems`, which the Overview draws as the **Media service** card ([The media service's machine as a device](../ems/index.md#the-media-services-machine-as-a-device)), and adds an `ems-models` series, every minute, of what the media service holds. Memory and CPU are read both ways: the whole machine's, since the media service and the language model, when installed, load it from containers of their own, and EiN's container's own, from its cgroup. The machine's are its device's readings, `cpu`, `load`, `memory-used` and `memory-total`, with its disks and temperatures beside them, kept for 30 days and a year; [Core's host driver](../concepts/devices.md#cores-host-driver) lists them, and the device's page under **Devices** charts them.
 
-How the tree has grown over the years is not on the dashboard: **Statistics**, under **System**, shows it, and anyone can open it ([Home and statistics](../guide/home.md)).
+How the tree has grown over the years is not on the Status page: **Statistics**, under **System**, shows it, and anyone can open it ([Home and statistics](../guide/home.md)).
 
 ## When something goes differently
 
@@ -281,7 +281,7 @@ How the tree has grown over the years is not on the dashboard: **Statistics**, u
 | **Needs a person**, `failed work` or `queue <name>` failed                                                            | Work failed for good, or queue entries were dropped.                                     | Follow the command in the check's reason, and see [Processing and pipelines](processing.md).                                        |
 | `full in ~N days` in red                                                                                              | A storage tier will be full within two weeks at its present rate.                        | Free space, or move the archive to a bigger disk: [Your data](data.md).                                                             |
 | A machine's CPU or memory tile is red for long                                                                        | The machine's processors or memory are 90% or more in use.                               | [Performance and sizing](performance.md).                                                                                           |
-| **Dashboard** is not in the sidebar                                                                                   | You are not an administrator.                                                            | Ask an administrator, or open `/system` to read the figures; `health` works for everyone.                                           |
+| **Status** is not in the sidebar                                                                                      | You are not an administrator.                                                            | Ask an administrator, or open `/system` to read the figures; `health` works for everyone.                                           |
 
 ## Related pages
 

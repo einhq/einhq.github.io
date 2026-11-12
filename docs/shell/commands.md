@@ -170,7 +170,7 @@ A write to a device's log or track appends to it, with `>` as with `>>`, and a b
 
 ## The system
 
-[Health and the dashboard](../admin/monitoring.md), [Processing and pipelines](../admin/processing.md) and [Services and logs](../admin/services-logs.md) explain what these commands report and what to do about it.
+[Health and status](../admin/monitoring.md), [Processing and pipelines](../admin/processing.md) and [Services and logs](../admin/services-logs.md) explain what these commands report and what to do about it.
 
 ### Health and activity
 

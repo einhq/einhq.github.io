@@ -18,9 +18,9 @@ Three places tell you most of what is wrong. Look at them in this order.
 
    A container that shows `Up` for only a few seconds, again and again, stops and is started again by its restart policy. Its log says why.
 
-2. **The dashboard.** When the Web UI opens, sign in as an administrator and choose **Dashboard** under **System** in the sidebar. The badge above **System dashboard** gives the verdict: **Healthy**, **Catching up**, **Stuck** or **Needs a person**. Below it, the **Overview** tab lists each check that is not fine, with its reason. The **Services** tab shows each of EiN's own services, and the **Log** tab its **Recent problems** and the live log. [Health and the dashboard](monitoring.md) explains every tile.
+2. **The Status page.** When the Web UI opens, sign in as an administrator and choose **Status** under **System** in the sidebar. The badge above **System status** gives the verdict: **Healthy**, **Catching up**, **Stuck** or **Needs a person**. Below it, the **Overview** tab lists each check that is not fine, with its reason. The **Services** tab shows each of EiN's own services, and the **Log** tab its **Recent problems** and the live log. [Health and status](monitoring.md) explains every tile.
 
-   ![The System dashboard with a green Healthy badge above its title, the tabs Overview, Work, Media service, Services, Log and Activity, and a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.")
+   ![The System status page with a green Healthy badge above its title, the tabs Overview, Work, Media service, Services, Log and Activity, and a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The badge in the header is the verdict of the health checks; anything other than Healthy is listed on the Overview tab with its reason.")
 
 3. **`health` in EiN's terminal.** The same verdict and every check, fine or not, in text. On an EiN with the `ems` module installed, it may read:
 
@@ -90,8 +90,8 @@ A container that keeps starting over without a clear message in its log may be r
 | What you see                                                            | What to do                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | The page frame loads but stays empty, and the terminal does not connect | The interface talks to EiN over a WebSocket, which something in between does not pass, usually an HTTPS proxy. See [What EiN needs from the proxy](network.md#what-ein-needs-from-the-proxy).                                                   |
-| The dashboard shows an **offline** badge                                | The page lost its connection to EiN and is reconnecting; the figures are from the last update. It reconnects by itself once EiN answers. When it does not, see [EiN does not start or does not answer](#ein-does-not-start-or-does-not-answer). |
-| **Dashboard** and **Nodes** are missing from the sidebar                | They are for administrators. A member of `sudo` chooses **Administer…** in the account menu first.                                                                                                                                              |
+| The Status page shows an **offline** badge                              | The page lost its connection to EiN and is reconnecting; the figures are from the last update. It reconnects by itself once EiN answers. When it does not, see [EiN does not start or does not answer](#ein-does-not-start-or-does-not-answer). |
+| **Status** and **Nodes** are missing from the sidebar                   | They are for administrators. A member of `sudo` chooses **Administer…** in the account menu first.                                                                                                                                              |
 | A module's pages do not appear after it was installed                   | Reload the page. When they still do not appear, look for `mod: ui-build failed:` in the output of the install, and see [Modules](modules.md).                                                                                                   |
 | Large uploads fail behind a proxy, often with 413                       | The proxy limits the size of a request. See [Ports, HTTPS and remote access](network.md).                                                                                                                                                       |
 
@@ -99,7 +99,7 @@ A container that keeps starting over without a clear message in its log may be r
 
 Everything EiN does after a file arrives is pipeline work, done in the background: with the Archive, everything from thumbnails to faces to transcriptions. [Processing and pipelines](processing.md) explains how it is run; this section is about finding why it stopped.
 
-Start with `health`, or the **Overview** and **Work** tabs of the dashboard. Each check that is not fine points at one of the cases below.
+Start with `health`, or the **Overview** and **Work** tabs of the Status page. Each check that is not fine points at one of the cases below.
 
 ### Failed work
 
@@ -149,7 +149,7 @@ A step that failed on its input, such as a file no program can open, is not run 
 | What `health` says                                                                              | What it means and what to do                                                                                                                                                                                                                                                        |
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `stuck: … jobs waiting, none done in the last hour`                                             | Work waits and nothing takes it. The checks below the verdict say which kind; look there.                                                                                                                                                                                           |
-| `… waiting, and no worker offers this kind`                                                     | No running service takes this kind of work. The dashboard shows it in red as **Work that nothing will run**, with the pipelines that queue it. Usually a module's service has stopped: see [A service has stopped](#a-service-has-stopped).                                         |
+| `… waiting, and no worker offers this kind`                                                     | No running service takes this kind of work. The Status page shows it in red as **Work that nothing will run**, with the pipelines that queue it. Usually a module's service has stopped: see [A service has stopped](#a-service-has-stopped).                                       |
 | **Work that nothing will run** says no defined pipeline queues this kind any more               | The jobs belong to a pipeline that changed or is gone. If it queues the step under another kind now, run the `pool cancel` command the message shows; if it is no longer defined, run `pipeline-prune`. See [Work that nothing will run](processing.md#work-that-nothing-will-run). |
 | `… waiting, the oldest for …, none done in the last hour`                                       | A kind of work has stopped draining. Check the service that does it, and, with the Archive, the media service when the work needs it.                                                                                                                                               |
 | `… running steps silent for … or more: …`                                                       | Steps that started but have said nothing for a long time. A long video can take that long. When one is truly stuck, stop it and run it again with **Restart** on the step, or `pipeline-step-restart <pipeline>/<id> <step>`.                                                       |
@@ -170,14 +170,14 @@ EiN runs its own services inside its container: the Web UI, SSH, the pipeline en
 
 2. Read the failed one's log, `/var/logs/services/<name>/stderr.log` and `stdout.log`, to see why it stopped.
 
-3. Start it again, on the dashboard's **Services** tab with its **Start** button, or in the terminal:
+3. Start it again, on the Status page's **Services** tab with its **Start** button, or in the terminal:
 
    ```bash
    # in EiN's terminal, as an administrator
    service-start trash-purger
    ```
 
-A service shown as `disabled` has no buttons on the dashboard; enable it first with `service-enable <name>`. Restarting EiN, `podman compose restart ein`, starts every enabled service again. [Services and logs](services-logs.md) lists the services and what each does.
+A service shown as `disabled` has no buttons on the Status page; enable it first with `service-enable <name>`. Restarting EiN, `podman compose restart ein`, starts every enabled service again. [Services and logs](services-logs.md) lists the services and what each does.
 
 ## The disk fills up
 
@@ -238,7 +238,7 @@ The Archive's thumbnails, video renditions, faces, picture vectors, transcriptio
    ems-status
    ```
 
-   `ems-status` shows its version, every model and its state, what it is running and what it is degraded in. On the dashboard, the **Media service** tab shows the same.
+   `ems-status` shows its version, every model and its state, what it is running and what it is degraded in. On the Status page, the **Media service** tab shows the same.
 
 2. When `health` says `http://ems:8181 is not answering; work that needs it waits`:
 
@@ -300,7 +300,7 @@ When the media service is updated, the `ems-link` service runs the failed instan
 
 ## Related pages
 
-- [Health and the dashboard](monitoring.md): every check, tile and gauge.
+- [Health and status](monitoring.md): every check, tile and gauge.
 - [Services and logs](services-logs.md): EiN's services and where each writes.
 - [Processing and pipelines](processing.md): how work is queued and run.
 - [The media service](../ems/index.md) and [The language model](../assistant/language-model.md): the two optional containers.

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 438 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 448 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -258,7 +258,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 143 in full](../archive/commands.md).
+[All 144 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -271,6 +271,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [album-random](../archive/commands.md#album-random) | The path of one album somebody made, at random. |
 | [album-span](../archive/commands.md#album-span) | Write an album's time span (timeStart/timeEnd/mediaCount) onto the album node: its media's, widened to the days set by hand (spanStart/spanEnd) and to its trip. |
 | [album-stack](../archive/commands.md#album-stack) | Reconcile album-local stacks of consecutive, perceptually similar photos. |
+| [anniversaries](../archive/commands.md#anniversaries) | Birthdays, memorials and wedding anniversaries around a day, nearest first, with the age or years married. |
 | [archive-bridge](../archive/commands.md#archive-bridge) | Derive the archive's domain events, of its media analysis, staging, albums and locations, from VFS mutations (long-running) |
 | [archive-parse](../archive/commands.md#archive-parse) | Turn a written search into search filters (kinds, years, people and locations as subjects, an area, what the pictures show) |
 | [assign-faces](../archive/commands.md#assign-faces) | Match an image's detected faces to existing people, creating unnamed people for the rest. |
@@ -440,6 +441,22 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [automation-status](../automation/commands.md#automation-status) | Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the automations; or, given one, what each of its nodes last did. |
 | [automation-trigger](../automation/commands.md#automation-trigger) | Press a button node of a running automation: what it is wired to runs now, as its owner. |
 | [automations](../automation/commands.md#automations) | The automations, whose each is, whether it runs, and what is wrong with those that do not. |
+
+## Dashboards
+
+[All 9 in full](../dashboard/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [dashboard-card-add](../dashboard/commands.md#dashboard-card-add) | Put a card on a dashboard. |
+| [dashboard-card-remove](../dashboard/commands.md#dashboard-card-remove) | Take a card off a dashboard. |
+| [dashboard-card-set](../dashboard/commands.md#dashboard-card-set) | Change a card on a dashboard: its size, title, what it shows, or its place. |
+| [dashboard-cards](../dashboard/commands.md#dashboard-cards) | List the cards the installed modules offer for dashboards. |
+| [dashboard-copy](../dashboard/commands.md#dashboard-copy) | Make a new dashboard laid out as another one. |
+| [dashboard-create](../dashboard/commands.md#dashboard-create) | Make a new, empty dashboard. |
+| [dashboard-set](../dashboard/commands.md#dashboard-set) | Change a dashboard's title, colour, description, columns or wall. |
+| [dashboard-show](../dashboard/commands.md#dashboard-show) | Show one dashboard: its cards, each with the route it is drawn with. |
+| [dashboards](../dashboard/commands.md#dashboards) | List the dashboards you can see. |
 
 ## Media service
 
