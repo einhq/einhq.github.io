@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 21 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 22 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
+[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-crop](#file-crop) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
 
 ## C
 
@@ -113,6 +113,33 @@ exif-extract /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 With `JSON_OUTPUT=1`: nothing; the exif node is written under the file and its facts on it, or nothing for a file a module holds.
 
 ## F
+
+### `file-crop`
+
+Cut a part of a picture out at its own resolution, into a new file.
+
+<small>changes things</small>
+
+```text
+file-crop [--box=<string>] [--width=<string>] [--height=<string>] [-o <path>] <file>
+```
+
+| Argument | What it is                                    |
+| -------- | --------------------------------------------- |
+| `<file>` | The picture to cut from; it is never written. |
+
+| Option              | What it does                                                                                  |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| `--box=<string>`    | x,y,width,height of the part, in fractions of the picture as it is shown (turned and flopped) |
+| `--width=<string>`  | The most pixels across the cut is written at; it is never enlarged.                           |
+| `--height=<string>` | The most pixels high the cut is written at; it is never enlarged.                             |
+| `-o <path>`         | The file to write (--output), a .jpg, .png, .webp or .avif; it must not be there yet.         |
+
+```bash
+file-crop /archive/scans/1952/portrait.tif --box 0.4,0.3,0.1,0.1 --width 1200 -o /tmp/eye.jpg
+```
+
+With `JSON_OUTPUT=1`: The file written, its size, and the size of the picture as shown (frame)
 
 ### `file-restore`
 

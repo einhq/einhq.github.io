@@ -1247,7 +1247,7 @@ group <subcommand>
 
 ### `group-add-member`
 
-Add a user to a group.
+Add a user to a group; to users (everyone), put back an account taken out of it.
 
 <small>administrators only · changes things</small>
 
@@ -1396,7 +1396,7 @@ group-members [--limit=<string>] <group>
 
 ### `group-remove-member`
 
-Remove a user from a group.
+Remove a user from a group; from users (everyone), take the account out of what is shared with every account.
 
 <small>administrators only · changes things</small>
 

@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 449 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 450 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -88,7 +88,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [gauges](commands-core.md#gauges) | List the gauges running services draw beside the host's (a card's memory, say) |
 | [grep](commands-core.md#grep) | Search for patterns in input. |
 | [group](commands-core.md#group) | Manage groups. |
-| [group-add-member](commands-core.md#group-add-member) | Add a user to a group. |
+| [group-add-member](commands-core.md#group-add-member) | Add a user to a group; to users (everyone), put back an account taken out of it. |
 | [group-create](commands-core.md#group-create) | Create a new group. |
 | [group-delete](commands-core.md#group-delete) | Delete a group: what it owned goes to another group, and ACL entries naming it are dropped. |
 | [group-exists](commands-core.md#group-exists) | Check if a group exists. |
@@ -97,7 +97,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [group-is-member](commands-core.md#group-is-member) | Check if a user is a member of a group. |
 | [group-list](commands-core.md#group-list) | List the groups; as JSON with each one's description, built-in role and whether it has a home. |
 | [group-members](commands-core.md#group-members) | List members of a group. |
-| [group-remove-member](commands-core.md#group-remove-member) | Remove a user from a group. |
+| [group-remove-member](commands-core.md#group-remove-member) | Remove a user from a group; from users (everyone), take the account out of what is shared with every account. |
 | [group-resolve](commands-core.md#group-resolve) | Resolve group name to GID or vice versa. |
 | [group-update](commands-core.md#group-update) | Update a group's title or description; its gid is fixed when it is created. |
 | [head](commands-core.md#head) | Output the first part of files, logs, or stdin; on a queue, the next entries without consuming them. |
@@ -477,7 +477,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 21 in full](../media/commands.md).
+[All 22 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -485,6 +485,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [detect-chapters](../media/commands.md#detect-chapters) | Find a video's cuts and write them as its chapters (metadata/chapters) |
 | [embed-picture](../media/commands.md#embed-picture) | Embed a photo or a video's keyframes for search by what is in the picture. |
 | [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
+| [file-crop](../media/commands.md#file-crop) | Cut a part of a picture out at its own resolution, into a new file. |
 | [file-restore](../media/commands.md#file-restore) | Restore a photo into a new version beside it: faded colours back, dust and scratches filled, grain lessened. |
 | [file-set-text](../media/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
 | [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
