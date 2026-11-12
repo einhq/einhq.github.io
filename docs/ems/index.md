@@ -62,8 +62,9 @@ The media service's own code is under the MIT licence, as [The licence](../devel
 also downloads and carries models and tools made by others, each under its own licence. None of
 their own licences forbids commercial use; two state no licence for their weights, and GFPGAN's
 names parts under non-commercial terms ([Using EiN commercially](#using-ein-commercially)). This is
-what the image carries, all of it used by the Archive but LaMa, the scratch detector, SCUNet and
-GFPGAN, which the Archive does not call:
+what the image carries, all of it used by the Archive but GFPGAN, which the Archive does not call;
+LaMa, the scratch detector and SCUNet run when someone restores a photo
+([Restore a faded or damaged photo](../archive/viewer.md#restore-a-faded-or-damaged-photo)):
 
 | What it does in EiN                                 | Model or tool                                                                                                                                                                                                                      | Licence: code / weights                                                         | Note                                                  |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------- |

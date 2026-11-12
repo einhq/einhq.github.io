@@ -183,7 +183,7 @@ folded is remembered in this browser, for the next picture and the next visit. F
 | Place             | The location the file is linked to, as a link, the street address, and a small map. **Enlarge map** opens a large map of the spot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Weather           | For a file with a place and a date: the weather that hour, such as **14.5 °C · Wind 4 m/s, from SW · 40 % cloud**, and under it where that came from, an SMHI station or Open-Meteo. See [The weather at a place and time](places.md#the-weather-at-a-place-and-time).                                                                                                                                                                                                                                                                                                                                                                       |
 | Stack             | For a photo stacked with others in this album: **N stacked photos**, or **Kept separate**, with a thumbnail of each and **Front** on the one the album shows. Click a thumbnail to see it in the viewer. **Make front**, **Keep separate** and **Allow stacking** are there when you may change the album and every photo in the stack. See [Albums](albums.md).                                                                                                                                                                                                                                                                             |
-| Versions          | For a file with other versions, such as the camera RAW of a JPEG: each one's name, which downloads it, with its kind of file and size. See [Camera RAW](file-types.md#camera-raw).                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Versions          | For a file with other versions, such as the camera RAW of a JPEG or a restored copy: each one's name, which downloads it, with its kind of file and size; a restored copy also what was done to it and **Compare**. See [Camera RAW](file-types.md#camera-raw) and [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                                                                                                                                                                                                    |
 | Similar           | Up to 12 pictures that look most like this one, nearest first, leaving out the picture itself and the rest of its stack. Click one to walk these pictures in the viewer. **Show all** opens the **Media** page with every picture like it. Not shown for recordings.                                                                                                                                                                                                                                                                                                                                                                         |
 | Comments          | Comments on the file, with who wrote them and when: the full name set on their account (its username when it has none), beside the picture of the person the account is linked to ([Your picture and the person you are](../guide/profile.md#your-picture-and-the-person-you-are)). Everyone who can see the file reads them. If you may change the file, write one in **Add a comment…**, which grows as you add lines, and press the send button inside it (**Comment**) or <kbd>Ctrl</kbd>+<kbd>Enter</kbd>. The bin beside a comment of your own (**Delete comment**) asks **Delete comment?** and removes it when you press **Delete**. |
 | Details           | The machine-written facts, folded until you open it. See [The Details section](#the-details-section).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -265,6 +265,7 @@ may change the file, and for any signed-in reader for **Add to album**.
 | **Add to album**                      | Signed-in readers                                                                  | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
 | **Edit faces**                        | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
 | **Edit subtitles**, **Add subtitles** | Readers who may change the file, on videos and recordings                          | Opens what is said, line by line, beside the video or recording, to correct it. See [Correct the subtitles](#correct-the-subtitles).                                                                                                                                                                         |
+| **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                            |
 | **Rotate left**, **Rotate right**     | Readers who may change the file, on photos and videos                              | Turns the file a quarter turn.                                                                                                                                                                                                                                                                               |
 | **Mirror horizontally**               | Readers who may change the file, on photos and videos                              | Flips the file left to right. A tick shows while it is mirrored.                                                                                                                                                                                                                                             |
 
@@ -272,7 +273,7 @@ A turn or a flip is kept on the file, for everyone who sees it. EiN moves the fa
 picture and makes the smaller versions it shows again. A video is re-encoded by the media service,
 which takes a while; until it is done the video plays the old way round. To undo a turn, turn it
 back. The rotate and mirror rows are not offered for a file that cannot be decoded. There is no
-cropping and no colour editing in EiN.
+cropping and no colour editing in EiN; **Restore…** makes a copy and leaves the photo as it is.
 
 ### Change the description, labels or location
 
@@ -351,6 +352,43 @@ The dialog for a face's name is **Who is this?**, with **Now marked as Helen Oka
 
 Changes you make to faces are decisions by a person, and later recognition runs leave them alone;
 see [People and faces](people.md).
+
+## Restore a faded or damaged photo
+
+A scanned print or slide often shows its age: colours turned red, yellow or pale, specks of dust,
+scratches and cracks, film grain. **Restore…** in the cog menu makes a restored copy of the photo
+with the [media service](../ems/index.md). The photo itself is never changed: the copy is kept beside
+it as one of its versions.
+
+1. In the cog menu, choose **Restore…**.
+2. Tick what to restore:
+   - **Faded colours** brings back the colours and contrast of a print or slide whose dyes have
+     faded. It is ticked to begin with for a scan, a file from a staging category that holds scans.
+     A black-and-white print toned brown comes out grey.
+   - **Dust and scratches** finds specks, scratches and cracks and paints them over from what is
+     around them. **Dark marks too** also looks for damage darker than the picture, such as black
+     specks on a print. **Quick fill** suits dust and thin scratches; **Careful fill** takes longer
+     and suits creases, tears and torn corners.
+   - **Grain and noise** smooths film grain and the scanner's noise, by as much as the slider says.
+     Grain is part of a photograph: at half strength about half of it is left.
+3. Choose **Restore**. The dialog waits while the media service works: seconds for a small photo, a
+   minute or two for a large scan.
+
+The restored copy then opens beside the original. Finding dust and scratches is a guess, and it
+sometimes takes a detail of the picture for damage: a button, a highlight in an eye, a thin line.
+Turn on **Show what was taken for damage** to see, in red over the original, everything that was
+painted over, and compare the two before you keep the copy.
+
+- **Keep** closes the comparison and leaves the copy among the photo's versions, named
+  `restored-1.png` (`.tif` for a TIFF), then `restored-2.png`, and so on.
+- **Discard** deletes the copy.
+- **Download** saves the copy.
+
+In the details panel, **Versions** lists each restored copy with what was done to it, and
+**Compare** opens the comparison again. A copy is not shown in albums, search or **Media**: the photo
+is. Restoring needs the media service with its restoration models, and someone who may change the
+photo. Running out of time or a picture the media service cannot read ends with a message, and no
+copy is kept.
 
 ## Read the text in a picture
 
