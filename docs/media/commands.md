@@ -121,17 +121,16 @@ Write the text in a picture by hand, in place of what was read from it.
 <small>changes things</small>
 
 ```text
-file-set-text [--text=<string>] [--text-base64=<string>] <file>
+file-set-text [--text=<string>] <file>
 ```
 
 | Argument | What it is             |
 | -------- | ---------------------- |
 | `<file>` | VFS path to a picture. |
 
-| Option                   | What it does                                   |
-| ------------------------ | ---------------------------------------------- |
-| `--text=<string>`        | the text; empty removes it.                    |
-| `--text-base64=<string>` | the text, base64-encoded (for multi-line text) |
+| Option            | What it does                                       |
+| ----------------- | -------------------------------------------------- |
+| `--text=<string>` | the text; empty removes it, - reads it from stdin. |
 
 ```bash
 file-set-text /archive/albums/Exempelalbum_2019/files/brev.jpg --text 'Kära Anna'
@@ -163,21 +162,17 @@ With `JSON_OUTPUT=1`: nothing; the language is set and the picture read again on
 
 ### `file-set-transcript`
 
-Write what is said in a video or a recording by hand, in place of the transcript.
+Write what is said in a video or a recording by hand, in place of the transcript, from WebVTT on stdin.
 
 <small>changes things</small>
 
 ```text
-file-set-transcript [--vtt-base64=<string>] <file>
+file-set-transcript <file>
 ```
 
 | Argument | What it is                          |
 | -------- | ----------------------------------- |
 | `<file>` | VFS path to a video or a recording. |
-
-| Option                  | What it does                                                                     |
-| ----------------------- | -------------------------------------------------------------------------------- |
-| `--vtt-base64=<string>` | the transcript as WebVTT, base64-encoded; without it, WebVTT is read from stdin. |
 
 ```bash
 cat /home/admin/rattad.vtt | file-set-transcript /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV

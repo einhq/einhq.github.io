@@ -100,11 +100,11 @@ fileSetDescription.spec = {
     { name: 'file', type: 'path' as const, description: 'VFS path to file node' },
   ],
   flags: [
-    { name: 'text', type: 'string' as const, description: 'the description; empty clears it' },
-    { name: 'text-base64', type: 'string' as const, description: 'the description, base64-encoded (for multi-line text)' },
+    { name: 'text', type: 'string' as const, description: 'the description; empty clears it, - reads it from stdin' },
   ],
   examples: [
     "file-set-description --text 'Ett exempel' /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg",
+    'cat notes.md | file-set-description --text - /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg',
   ],
   returns: 'nothing; the description is written.',
 };

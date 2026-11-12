@@ -1785,7 +1785,7 @@ face-doubt --clear /archive/photos/2001/IMG_0001.jpg/regions/face-0</code></pre>
 <h3 id="file-set-description"><code>file-set-description</code><a class="anchor" href="#file-set-description" aria-label="Link to this section"></a></h3>
 <p>Set a file&#39;s hand-written description.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>file-set-description [--text=&lt;string&gt;] [--text-base64=&lt;string&gt;] &lt;file&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>file-set-description [--text=&lt;string&gt;] &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1808,15 +1808,12 @@ face-doubt --clear /archive/photos/2001/IMG_0001.jpg/regions/face-0</code></pre>
 </thead>
 <tbody><tr>
 <td><code>--text=&lt;string&gt;</code></td>
-<td>the description; empty clears it.</td>
-</tr>
-<tr>
-<td><code>--text-base64=&lt;string&gt;</code></td>
-<td>the description, base64-encoded (for multi-line text)</td>
+<td>the description; empty clears it, - reads it from stdin.</td>
 </tr>
 </tbody></table>
 </div>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>file-set-description --text <span class="hljs-string">&#x27;Ett exempel&#x27;</span> /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>file-set-description --text <span class="hljs-string">&#x27;Ett exempel&#x27;</span> /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg
+<span class="hljs-built_in">cat</span> notes.md | file-set-description --text - /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the description is written.</p>
 <h3 id="file-set-orientation"><code>file-set-orientation</code><a class="anchor" href="#file-set-orientation" aria-label="Link to this section"></a></h3>
 <p>Rotate or mirror a file for good: writes angle/angleManual/mirror, remaps face boxes and regenerates renditions (a video re-encodes on the media pool)</p>
@@ -3106,7 +3103,7 @@ person create /archive/people/cecilia-exempel --name <span class="hljs-string">&
 </tr>
 <tr>
 <td><code>--body=&lt;string&gt;</code></td>
-<td>event body text (markdown)</td>
+<td>event body text (markdown); - reads it from stdin.</td>
 </tr>
 <tr>
 <td><code>--lat=&lt;string&gt;</code></td>
@@ -5221,7 +5218,7 @@ JSON_OUTPUT=1 subjects-in /archive/albums/Exempelalbum_2019</code></pre></div>
 </tr>
 <tr>
 <td><code>--json=&lt;string&gt;</code></td>
-<td>JSON point or array of points (batch mode)</td>
+<td>JSON point or array of points (batch mode); - reads them from stdin.</td>
 </tr>
 </tbody></table>
 </div>

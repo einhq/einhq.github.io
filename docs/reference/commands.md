@@ -470,7 +470,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [exif-extract](../media/commands.md#exif-extract) | Read a media file's metadata: the probe's dump and what it says of the file under metadata/exif, and its mimetype, dimensions, angle, duration, codec and whether it can be decoded on the file. Each module's hold command runs first, and a file it holds is not read unless forced. |
 | [file-set-text](../media/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
 | [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
-| [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript. |
+| [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript, from WebVTT on stdin. |
 | [fingerprints-scan](../media/commands.md#fingerprints-scan) | Announce every picture, video and recording that was never fingerprinted to the end: it has no fingerprintedAt. |
 | [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
 | [index-document](../media/commands.md#index-document) | Extract text content and generate embedding for a document file. |

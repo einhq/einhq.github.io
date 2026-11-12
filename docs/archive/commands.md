@@ -1083,20 +1083,20 @@ Set a file's hand-written description.
 <small>changes things</small>
 
 ```text
-file-set-description [--text=<string>] [--text-base64=<string>] <file>
+file-set-description [--text=<string>] <file>
 ```
 
 | Argument | What it is             |
 | -------- | ---------------------- |
 | `<file>` | VFS path to file node. |
 
-| Option                   | What it does                                          |
-| ------------------------ | ----------------------------------------------------- |
-| `--text=<string>`        | the description; empty clears it.                     |
-| `--text-base64=<string>` | the description, base64-encoded (for multi-line text) |
+| Option            | What it does                                             |
+| ----------------- | -------------------------------------------------------- |
+| `--text=<string>` | the description; empty clears it, - reads it from stdin. |
 
 ```bash
 file-set-description --text 'Ett exempel' /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg
+cat notes.md | file-set-description --text - /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg
 ```
 
 With `JSON_OUTPUT=1`: nothing; the description is written.
@@ -1942,7 +1942,7 @@ person-add-event [--type=<string>] [--date=<string>] [--qualifier=<string>] [--b
 | `--type=<string>`      | event type: birth, death, marriage, engagement, generic; a dated birth/death also sets born/died.                      |
 | `--date=<string>`      | event date (YYYY[-MM[-DD]])                                                                                            |
 | `--qualifier=<string>` | the date is about, before or after the day it names: about, before or after; a birth/death sets the same on born/died. |
-| `--body=<string>`      | event body text (markdown)                                                                                             |
+| `--body=<string>`      | event body text (markdown); - reads it from stdin.                                                                     |
 | `--lat=<string>`       | latitude for the event position node.                                                                                  |
 | `--lng=<string>`       | longitude for the event position node.                                                                                 |
 | `--writer=<path>`      | the person who wrote the text, linked as the event's `writer`; without it, whoever adds the event.                     |
@@ -3270,15 +3270,15 @@ track-append [--lat=<string>] [--lng=<string>] [--ts=<string>] [--alt=<string>] 
 | `<lat>`   | latitude (positional; use --lat= if negative)                                                                      |
 | `<lng>`   | longitude (positional; use --lng= if negative)                                                                     |
 
-| Option              | What it does                                                       |
-| ------------------- | ------------------------------------------------------------------ |
-| `--lat=<string>`    | latitude, as --lat=<n> — required form for a negative coordinate.  |
-| `--lng=<string>`    | longitude, as --lng=<n> — required form for a negative coordinate. |
-| `--ts=<string>`     | ISO timestamp of the fix (default: now)                            |
-| `--alt=<string>`    | altitude in meters.                                                |
-| `--speed=<string>`  | speed in m/s.                                                      |
-| `--course=<string>` | course over ground in degrees.                                     |
-| `--json=<string>`   | JSON point or array of points (batch mode)                         |
+| Option              | What it does                                                         |
+| ------------------- | -------------------------------------------------------------------- |
+| `--lat=<string>`    | latitude, as --lat=<n> — required form for a negative coordinate.    |
+| `--lng=<string>`    | longitude, as --lng=<n> — required form for a negative coordinate.   |
+| `--ts=<string>`     | ISO timestamp of the fix (default: now)                              |
+| `--alt=<string>`    | altitude in meters.                                                  |
+| `--speed=<string>`  | speed in m/s.                                                        |
+| `--course=<string>` | course over ground in degrees.                                       |
+| `--json=<string>`   | JSON point or array of points (batch mode); - reads them from stdin. |
 
 ### `track-home`
 

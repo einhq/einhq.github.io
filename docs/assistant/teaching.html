@@ -209,11 +209,11 @@ assistant-commands find <span class="hljs-string">&#x27;find a recipe by ingredi
     { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;file&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;path&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;VFS path to file node&#x27;</span> },
   ],
   <span class="hljs-attr">flags</span>: [
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;string&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the description; empty clears it&#x27;</span> },
-    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text-base64&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;string&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the description, base64-encoded (for multi-line text)&#x27;</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text&#x27;</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;string&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>, <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the description; empty clears it, - reads it from stdin&#x27;</span> },
   ],
   <span class="hljs-attr">examples</span>: [
     <span class="hljs-string">&quot;file-set-description --text &#x27;Ett exempel&#x27; /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg&quot;</span>,
+    <span class="hljs-string">&#x27;cat notes.md | file-set-description --text - /archive/albums/Exempelalbum_2019/files/IMG_0042.jpg&#x27;</span>,
   ],
   <span class="hljs-attr">returns</span>: <span class="hljs-string">&#x27;nothing; the description is written.&#x27;</span>,
 };</code></pre></div>

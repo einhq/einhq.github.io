@@ -594,7 +594,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <h3 id="comment"><code>comment</code><a class="anchor" href="#comment" aria-label="Link to this section"></a></h3>
 <p>Manage comments on a node (list, add, remove)</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>comment [--body=&lt;string&gt;] [--body-base64=&lt;string&gt;] &lt;subcommand&gt; &lt;path&gt; &lt;slug&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>comment [--body=&lt;string&gt;] &lt;subcommand&gt; &lt;path&gt; &lt;slug&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -625,11 +625,7 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </thead>
 <tbody><tr>
 <td><code>--body=&lt;string&gt;</code></td>
-<td>comment body (add)</td>
-</tr>
-<tr>
-<td><code>--body-base64=&lt;string&gt;</code></td>
-<td>base64-encoded comment body (add)</td>
+<td>comment body (add); - reads it from stdin.</td>
 </tr>
 </tbody></table>
 </div>
@@ -2485,7 +2481,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 </tr>
 <tr>
 <td><code>&lt;data&gt;</code></td>
-<td>JSON entry (alternative to --data)</td>
+<td>JSON entry (alternative to --data); - reads it from stdin.</td>
 </tr>
 </tbody></table>
 </div>
@@ -2498,7 +2494,7 @@ labels /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>--data=&lt;string&gt;</code></td>
-<td>JSON payload for the entry.</td>
+<td>JSON payload for the entry; - reads it from stdin.</td>
 </tr>
 <tr>
 <td><code>--at=&lt;string&gt;</code></td>

@@ -302,7 +302,7 @@ Manage comments on a node (list, add, remove)
 <small>reads only</small>
 
 ```text
-comment [--body=<string>] [--body-base64=<string>] <subcommand> <path> <slug>
+comment [--body=<string>] <subcommand> <path> <slug>
 ```
 
 | Argument | What it is |
@@ -313,8 +313,7 @@ comment [--body=<string>] [--body-base64=<string>] <subcommand> <path> <slug>
 
 | Option | What it does |
 | --- | --- |
-| `--body=<string>` | comment body (add) |
-| `--body-base64=<string>` | base64-encoded comment body (add) |
+| `--body=<string>` | comment body (add); - reads it from stdin. |
 
 ### `completion`
 
@@ -1641,11 +1640,11 @@ log-append [--data=<string>] [--at=<string>] <log> <data>
 | Argument | What it is |
 | --- | --- |
 | `<log>` | VFS path to the log node. |
-| `<data>` | JSON entry (alternative to --data) |
+| `<data>` | JSON entry (alternative to --data); - reads it from stdin. |
 
 | Option | What it does |
 | --- | --- |
-| `--data=<string>` | JSON payload for the entry. |
+| `--data=<string>` | JSON payload for the entry; - reads it from stdin. |
 | `--at=<string>` | ISO timestamp to backdate the entry to. |
 
 ### `log-read`

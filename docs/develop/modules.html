@@ -420,11 +420,11 @@ are bash scripts.</p>
 </tr>
 <tr>
 <td><code>cmd.stdin</code></td>
-<td>Standard input: <code>for await (const line of cmd.stdin.lines())</code></td>
+<td>Standard input: <code>for await (const line of cmd.stdin.lines())</code>, or all of it with <code>cmd.stdin.text()</code></td>
 </tr>
 <tr>
-<td><code>cmd.execute(script)</code></td>
-<td>Run a shell line and get its <code>code</code>, <code>stdout</code> and <code>stderr</code>; quote paths with <code>shq</code></td>
+<td><code>cmd.execute(script, { stdin })</code></td>
+<td>Run a shell line and get its <code>code</code>, <code>stdout</code> and <code>stderr</code>; quote paths with <code>shq</code>, and pass text as <code>stdin</code></td>
 </tr>
 <tr>
 <td><code>cmd.progress(fraction)</code></td>

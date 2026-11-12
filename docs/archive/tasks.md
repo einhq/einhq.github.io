@@ -53,6 +53,7 @@ EiN runs most of the analysis by itself after an upload; the commands here are f
 | Set where it was taken                        | `file-set-position <file> --lat=50.2632 --lng=-5.0510`              | [file-set-position](commands.md#file-set-position)                    |
 | Rotate or mirror it for good                  | `file-set-orientation --rotate cw <file>`                           | [file-set-orientation](commands.md#file-set-orientation)              |
 | Write its description                         | `file-set-description --text 'Christmas morning' <file>`            | [file-set-description](commands.md#file-set-description)              |
+| Write a longer description, from a file       | `cat notes.md \| file-set-description --text - <file>`              | [file-set-description](commands.md#file-set-description)              |
 | Correct the text read from it                 | `file-set-text <file> --text 'Dear Peggy'`                          | [file-set-text](../media/commands.md#file-set-text)                   |
 | Read its text again in another language       | `file-set-text-language <file> en`                                  | [file-set-text-language](../media/commands.md#file-set-text-language) |
 | Correct what is said in a video or recording  | `cat corrected.vtt \| file-set-transcript <file>`                   | [file-set-transcript](../media/commands.md#file-set-transcript)       |

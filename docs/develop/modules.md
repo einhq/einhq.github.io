@@ -199,8 +199,8 @@ Module code imports from core only `@ein/client`, the module API. What a command
 | `cmd.args`                                       | The words after the command's name; read flags from them with `parseArgs`                                     |
 | `cmd.json`                                       | True when the caller wants JSON, as the Web UI and `JSON_OUTPUT=1` do                                         |
 | `cmd.writeLn`, `cmd.writeJSON`, `cmd.writeError` | Write a line, a JSON answer, or a line on stderr                                                              |
-| `cmd.stdin`                                      | Standard input: `for await (const line of cmd.stdin.lines())`                                                 |
-| `cmd.execute(script)`                            | Run a shell line and get its `code`, `stdout` and `stderr`; quote paths with `shq`                            |
+| `cmd.stdin`                                      | Standard input: `for await (const line of cmd.stdin.lines())`, or all of it with `cmd.stdin.text()`           |
+| `cmd.execute(script, { stdin })`                 | Run a shell line and get its `code`, `stdout` and `stderr`; quote paths with `shq`, and pass text as `stdin`  |
 | `cmd.progress(fraction)`                         | Say how much of the work is done, 0 to 1; a pipeline step shows it under Ongoing, and it keeps it off quiet   |
 | `cmd.sys.vfs`                                    | The tree, read and written with `cmd.access`, the caller's access: nodes, their content, queries and searches |
 | `cmd.env`, `cmd.cwd`                             | The caller's environment, settings included, and working folder                                               |

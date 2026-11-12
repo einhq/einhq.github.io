@@ -246,7 +246,7 @@
 <h3 id="file-set-text"><code>file-set-text</code><a class="anchor" href="#file-set-text" aria-label="Link to this section"></a></h3>
 <p>Write the text in a picture by hand, in place of what was read from it.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>file-set-text [--text=&lt;string&gt;] [--text-base64=&lt;string&gt;] &lt;file&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>file-set-text [--text=&lt;string&gt;] &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -269,11 +269,7 @@
 </thead>
 <tbody><tr>
 <td><code>--text=&lt;string&gt;</code></td>
-<td>the text; empty removes it.</td>
-</tr>
-<tr>
-<td><code>--text-base64=&lt;string&gt;</code></td>
-<td>the text, base64-encoded (for multi-line text)</td>
+<td>the text; empty removes it, - reads it from stdin.</td>
 </tr>
 </tbody></table>
 </div>
@@ -304,9 +300,9 @@
 file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg auto</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the language is set and the picture read again on the media pool.</p>
 <h3 id="file-set-transcript"><code>file-set-transcript</code><a class="anchor" href="#file-set-transcript" aria-label="Link to this section"></a></h3>
-<p>Write what is said in a video or a recording by hand, in place of the transcript.</p>
+<p>Write what is said in a video or a recording by hand, in place of the transcript, from WebVTT on stdin.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>file-set-transcript [--vtt-base64=&lt;string&gt;] &lt;file&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>file-set-transcript &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -317,19 +313,6 @@ file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg auto</co
 <tbody><tr>
 <td><code>&lt;file&gt;</code></td>
 <td>VFS path to a video or a recording.</td>
-</tr>
-</tbody></table>
-</div>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Option</th>
-<th>What it does</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>--vtt-base64=&lt;string&gt;</code></td>
-<td>the transcript as WebVTT, base64-encoded; without it, WebVTT is read from stdin.</td>
 </tr>
 </tbody></table>
 </div>
