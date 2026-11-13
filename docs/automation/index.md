@@ -651,6 +651,12 @@ something, "turn on the hall lamp", gives a
 [proposal card](../assistant/chat.md#when-the-assistant-offers-to-make-a-change) with the `echo`
 line, which you run or decline.
 
+Asking for an automation, "turn the hall lamp on when there is motion after dark", gives a proposal
+card too. The assistant looks up the devices you name, makes the automation from the
+[starting point](automations.md#a-starting-point-with-your-devices) it fits with your devices set,
+tries the line with `--dry-run` first, and proposes it once nothing is wrong with it. One that fits
+no starting point is proposed as an `automation-set` line with its YAML.
+
 ## From the terminal
 
 The devices' own commands, `devices`, `device-show`, `device-history`, `device-label` and

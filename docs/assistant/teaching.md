@@ -263,6 +263,7 @@ Each module keeps the questions about its part in `etc/assistant.d/eval.json`:
 | `ask`       | The question, as a user would type it.                                                                                                             |
 | `context`   | Optional. What the app shows when it is asked: `route`, `section`, `title`, `about`, `node`, or `lightbox` for a picture open in the viewer.       |
 | `commands`  | The commands that do the job. Reaching any of them counts. An empty list means the question should be answered without a command, like a greeting. |
+| `proposes`  | Optional. Words the line the assistant proposes must each hold, such as the endpoints of the devices the question names.                           |
 | `resolvers` | At the top level. Commands that turn a name into a path, so calling one of them first is not counted as a wrong first choice.                      |
 
 ### Run it
@@ -281,7 +282,7 @@ agent-eval --print-prompt
 - `--fixtures=<path>` asks the questions of one file instead of every module's, and `--prompt=<path>` tries another prompt file without replacing the installed one.
 - `--user=<path>` asks as another person, by the path of their node.
 
-At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (`reached`) and how many did so first (`firstChoice`), how many were answered and in the right language, how many lines ran, failed or became proposals, and the time per question, with how much of it the model took.
+At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (`reached`) and how many did so first (`firstChoice`), how many were answered and in the right language, how many lines ran, failed or became proposals, of the questions with `proposes` how many proposed a line holding every word (`proposalsOk` of `proposalsWanted`), and the time per question, with how much of it the model took.
 
 A full run over every module's questions takes a long time. Run it so it survives a dropped connection, and keep the results in a file that is written after every question:
 

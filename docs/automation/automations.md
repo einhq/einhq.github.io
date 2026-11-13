@@ -157,6 +157,39 @@ lamp is switched on; when the timer says false, it is switched off.
    It runs the latest readings you may read through the automation and says what each node would
    say now, without switching anything.
 
+### A starting point with your devices
+
+A starting point's devices and numbers are its slots, and `--set` gives them yours as it is made, so
+there is nothing to change afterwards:
+
+```bash
+# in EiN's terminal
+automation-new hall-light --from motion-light --set motion=hall-sensor/motion \
+  --set lamp=hall-lamp/switch-0 --set light-level=none --description 'The hall lamp on at motion'
+```
+
+```text
+made /etc/automations/hall-light.yaml from motion-light
+```
+
+`none` leaves out a device a starting point can do without: this motion light has no light sensor,
+so it goes on at motion at any light. Set like this, the automation is checked first, as
+`automation-check` does, and is not made while something is wrong with it: a slot left unset, or an
+endpoint you may not read or a control you may not switch. `--dry-run` makes nothing, and prints the
+YAML it would write and what is wrong with it.
+
+| Starting point  | Slots                                                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `motion-light`  | `motion`, `lamp`, `light-level` (or `none`), `dark-below` (30), `off-after` (5m)                                                                  |
+| `button-toggle` | `button`, `lamp`, `press`: `single`, `double` or `long`, or `none` for every press (single)                                                       |
+| `heater`        | `temperature`, `heater`, `on-below` (19), `off-above` (21), `away`: a switch that is on while no one is home, or `none`                           |
+| `morning`       | `lamp`, `at` (06:30), `days`: `weekdays`, `weekends` or some of `mon,tue,…`, or `none` for every day (weekdays), `value` written to the lamp (on) |
+| `dusk-to-dawn`  | `lamp`, `location` as `<latitude>, <longitude>`, `from` (sunset), `until` (sunrise)                                                               |
+| `inbox`         | `folder` watched, `match` (`*.pdf`, or `none` for every file), `to`: the folder each file is moved to                                             |
+
+A device is given as `<device>/<endpoint>`, as `device-show <device>` lists them, and a number or a
+time in parentheses is what the slot holds when it is not set.
+
 The automation engine reads the folder again within a second of a change, so the automation works
 from the moment it is saved. `automations` lists them all, and `automation-status hall-light` says
 what each of its nodes last sent while it runs.
@@ -164,8 +197,9 @@ what each of its nodes last sent while it runs.
 ## Where automations are
 
 - Each automation is a file `/etc/automations/<name>.yaml`, called by its name: `hall-light`.
-  `automation-new` makes one, empty or from a starting point (`automation-new --examples` lists
-  them), on the database, so it is backed up with everything else.
+  `automation-new` makes one, empty or from a starting point, with its devices set or not
+  (`automation-new --examples` lists them), on the database, so it is backed up with everything
+  else.
 - Only members of the `automation` group see the folder and write in it. The administrator adds
   someone with `group-add-member automation helen`, or in **Settings → Groups**.
 - `automation-disable hall-light` turns one off without removing it, and `automation-enable

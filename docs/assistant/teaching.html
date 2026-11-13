@@ -376,6 +376,10 @@ Which recipes use rhubarb?</code></pre></div>
 <td>The commands that do the job. Reaching any of them counts. An empty list means the question should be answered without a command, like a greeting.</td>
 </tr>
 <tr>
+<td><code>proposes</code></td>
+<td>Optional. Words the line the assistant proposes must each hold, such as the endpoints of the devices the question names.</td>
+</tr>
+<tr>
 <td><code>resolvers</code></td>
 <td>At the top level. Commands that turn a name into a path, so calling one of them first is not counted as a wrong first choice.</td>
 </tr>
@@ -393,7 +397,7 @@ agent-eval --print-prompt</code></pre></div>
 <li><code>--fixtures=&lt;path&gt;</code> asks the questions of one file instead of every module&#39;s, and <code>--prompt=&lt;path&gt;</code> tries another prompt file without replacing the installed one.</li>
 <li><code>--user=&lt;path&gt;</code> asks as another person, by the path of their node.</li>
 </ul>
-<p>At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (<code>reached</code>) and how many did so first (<code>firstChoice</code>), how many were answered and in the right language, how many lines ran, failed or became proposals, and the time per question, with how much of it the model took.</p>
+<p>At the end it prints a summary as JSON: the model that answered, how many questions there were, how many reached one of their commands (<code>reached</code>) and how many did so first (<code>firstChoice</code>), how many were answered and in the right language, how many lines ran, failed or became proposals, of the questions with <code>proposes</code> how many proposed a line holding every word (<code>proposalsOk</code> of <code>proposalsWanted</code>), and the time per question, with how much of it the model took.</p>
 <p>A full run over every module&#39;s questions takes a long time. Run it so it survives a dropped connection, and keep the results in a file that is written after every question:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">nohup</span> agent-eval --out /tmp/agent-eval.json</code></pre></div>

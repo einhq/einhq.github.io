@@ -221,14 +221,62 @@ automation-check hall-light</code></pre></div>
 say now, without switching anything.</p>
 </li>
 </ol>
+<h3 id="a-starting-point-with-your-devices">A starting point with your devices<a class="anchor" href="#a-starting-point-with-your-devices" aria-label="Link to this section"></a></h3>
+<p>A starting point&#39;s devices and numbers are its slots, and <code>--set</code> gives them yours as it is made, so
+there is nothing to change afterwards:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+automation-new hall-light --from motion-light --<span class="hljs-built_in">set</span> motion=hall-sensor/motion \
+  --<span class="hljs-built_in">set</span> lamp=hall-lamp/switch-0 --<span class="hljs-built_in">set</span> light-level=none --description <span class="hljs-string">&#x27;The hall lamp on at motion&#x27;</span></code></pre></div>
+<div class="code"><pre tabindex="0"><code>made /etc/automations/hall-light.yaml from motion-light</code></pre></div>
+<p><code>none</code> leaves out a device a starting point can do without: this motion light has no light sensor,
+so it goes on at motion at any light. Set like this, the automation is checked first, as
+<code>automation-check</code> does, and is not made while something is wrong with it: a slot left unset, or an
+endpoint you may not read or a control you may not switch. <code>--dry-run</code> makes nothing, and prints the
+YAML it would write and what is wrong with it.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Starting point</th>
+<th>Slots</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>motion-light</code></td>
+<td><code>motion</code>, <code>lamp</code>, <code>light-level</code> (or <code>none</code>), <code>dark-below</code> (30), <code>off-after</code> (5m)</td>
+</tr>
+<tr>
+<td><code>button-toggle</code></td>
+<td><code>button</code>, <code>lamp</code>, <code>press</code>: <code>single</code>, <code>double</code> or <code>long</code>, or <code>none</code> for every press (single)</td>
+</tr>
+<tr>
+<td><code>heater</code></td>
+<td><code>temperature</code>, <code>heater</code>, <code>on-below</code> (19), <code>off-above</code> (21), <code>away</code>: a switch that is on while no one is home, or <code>none</code></td>
+</tr>
+<tr>
+<td><code>morning</code></td>
+<td><code>lamp</code>, <code>at</code> (06:30), <code>days</code>: <code>weekdays</code>, <code>weekends</code> or some of <code>mon,tue,…</code>, or <code>none</code> for every day (weekdays), <code>value</code> written to the lamp (on)</td>
+</tr>
+<tr>
+<td><code>dusk-to-dawn</code></td>
+<td><code>lamp</code>, <code>location</code> as <code>&lt;latitude&gt;, &lt;longitude&gt;</code>, <code>from</code> (sunset), <code>until</code> (sunrise)</td>
+</tr>
+<tr>
+<td><code>inbox</code></td>
+<td><code>folder</code> watched, <code>match</code> (<code>*.pdf</code>, or <code>none</code> for every file), <code>to</code>: the folder each file is moved to</td>
+</tr>
+</tbody></table>
+</div>
+<p>A device is given as <code>&lt;device&gt;/&lt;endpoint&gt;</code>, as <code>device-show &lt;device&gt;</code> lists them, and a number or a
+time in parentheses is what the slot holds when it is not set.</p>
 <p>The automation engine reads the folder again within a second of a change, so the automation works
 from the moment it is saved. <code>automations</code> lists them all, and <code>automation-status hall-light</code> says
 what each of its nodes last sent while it runs.</p>
 <h2 id="where-automations-are">Where automations are<a class="anchor" href="#where-automations-are" aria-label="Link to this section"></a></h2>
 <ul>
 <li>Each automation is a file <code>/etc/automations/&lt;name&gt;.yaml</code>, called by its name: <code>hall-light</code>.
-<code>automation-new</code> makes one, empty or from a starting point (<code>automation-new --examples</code> lists
-them), on the database, so it is backed up with everything else.</li>
+<code>automation-new</code> makes one, empty or from a starting point, with its devices set or not
+(<code>automation-new --examples</code> lists them), on the database, so it is backed up with everything
+else.</li>
 <li>Only members of the <code>automation</code> group see the folder and write in it. The administrator adds
 someone with <code>group-add-member automation helen</code>, or in <strong>Settings → Groups</strong>.</li>
 <li><code>automation-disable hall-light</code> turns one off without removing it, and <code>automation-enable hall-light</code> on again. To remove one, remove its file.</li>
@@ -773,7 +821,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#eins-events">EiN's events</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li class="nested"><a href="#a-starting-point-with-your-devices">A starting point with your devices</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#eins-events">EiN's events</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>
