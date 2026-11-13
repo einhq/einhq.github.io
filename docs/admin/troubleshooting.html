@@ -313,8 +313,8 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 <td>The jobs belong to a pipeline that changed or is gone. If it queues the step under another kind now, run the <code>pool cancel</code> command the message shows; if it is no longer defined, run <code>pipeline-prune</code>. See <a href="processing.html#work-that-nothing-will-run">Work that nothing will run</a>.</td>
 </tr>
 <tr>
-<td><code>… waiting, the oldest for …, none done in the last hour</code></td>
-<td>A kind of work has stopped draining. Check the service that does it, and, with the Archive, the media service when the work needs it.</td>
+<td><code>… waiting, the oldest for …, and the workers that take it are idle</code></td>
+<td>Work waits while the workers that take it do nothing: EiN is not handing it out. Read the <strong>Log</strong> tab for why, and restart EiN.</td>
 </tr>
 <tr>
 <td><code>… running steps silent for … or more: …</code></td>
@@ -486,8 +486,8 @@ llm-status --checks</code></pre></div>
 <td>The container engine cannot hand the graphics card to the media service or the language model. See <a href="../ems/gpu.html">The graphics card</a>.</td>
 </tr>
 <tr>
-<td><code>health</code> says <code>… waiting for EMS, which could not run it yet; next try in …</code></td>
-<td>The media service is busy or could not load what the work needs, or cannot reach the files; what it answered follows <code>it said:</code>. EiN tries again at the time it names. When it keeps saying so, see <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
+<td><code>health</code> says <code>… waiting: EMS has not been able to run it for …</code></td>
+<td>For half an hour the media service has been busy, could not load what the work needs, or could not reach the files. What it answered is under <strong>Where the work is</strong> on the <strong>Work</strong> tab. EiN keeps trying on its own. See <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
 </tr>
 <tr>
 <td>A waiting step&#39;s error ends <code>fuse: mount failed: Permission denied (files_unavailable)</code></td>

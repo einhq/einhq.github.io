@@ -302,20 +302,26 @@
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
 <td>ok</td>
-<td><code>340 left, 120/h  eta 2.8h</code>, or <code>340 waiting, the oldest for 4m10s</code></td>
-<td>Nothing: a line of work that is being done, or has just arrived.</td>
+<td><code>340 left, 120/h  eta 2.8h</code>, <code>340 waiting, the oldest for 4m10s</code>, or <code>340 waiting behind other work, the oldest for 2h05m</code></td>
+<td>Nothing: a line of work that is being done, has just arrived, or waits while its worker does other lines. The <strong>Work</strong> tab shows which.</td>
+</tr>
+<tr>
+<td><code>kind &lt;name&gt;</code></td>
+<td>ok</td>
+<td><code>340 waiting: EMS could not run it just now, and it is tried again on its own in 1m30s</code></td>
+<td>Nothing: with the Archive, the media service was busy, restarting or loading a model. The check goes back to the line above as soon as one of the jobs is done.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
 <td>warn</td>
-<td><code>340 waiting for EMS, which could not run it yet; next try in 1m30s; it said: …</code></td>
-<td>With the Archive: the media service could not take the jobs; they are tried again on their own. What it answered follows <code>it said:</code>. See <a href="../ems/index.html">The media service</a> if it lasts.</td>
+<td><code>340 waiting: EMS has not been able to run it for 42m00s. See EMS on the Services tab; the Work tab shows what it answered</code></td>
+<td>With the Archive: the media service has turned this work away for half an hour. Look at it on <strong>Services</strong>; what it answered is under <strong>Where the work is</strong> on <strong>Work</strong>. See <a href="../ems/index.html">The media service</a>.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
 <td>warn</td>
-<td><code>340 waiting, the oldest for 2h05m, none done in the last hour</code></td>
-<td>The worker for this line is not getting through it. Check the <strong>Services</strong> tab and the <strong>Log</strong> tab. When its steps could not run yet, the line ends with <code>the last could not run … ago:</code> and why.</td>
+<td><code>340 waiting, the oldest for 2h05m, and the workers that take it are idle: EiN is not handing it out. The Log tab may say why</code></td>
+<td>Work waits while the workers that take it do nothing. Read the <strong>Log</strong> tab for why; restarting EiN starts its workers anew.</td>
 </tr>
 <tr>
 <td><code>kind &lt;name&gt;</code></td>
@@ -489,7 +495,7 @@ audit --sid session-01JC4ZK3E2 --no-pipeline</code></pre></div>
 health</code></pre></div>
 <p>On an EiN with the Archive and the <code>ems</code> module, it reads like this:</p>
 <div class="code"><pre tabindex="0"><code>catching up: 1,240 jobs waiting, the slowest kind done in 2h48m
-warn  kind transcribe  40 waiting for EMS, which could not run it yet; next try in 1m30s; it said: transcribe-file: ems: speech.transcribe loading whisper (busy)
+warn  kind transcribe  40 waiting: EMS has not been able to run it for 42m00s. See EMS on the Services tab; the Work tab shows what it answered
 ok    ems              EMS 3f2a91c answering, up 2.1h
 ok    intake           12 matched triggers waiting to start pipeline work
 ok    kind faces       1,188 left, 420/h  eta 2.8h</code></pre></div>
@@ -681,14 +687,14 @@ verdict=$(ssh -p 2222 helen@ein.local <span class="hljs-string">&#x27;JSON_OUTPU
 <td>Wait; it reconnects by itself. If it stays, reload the page and see <a href="troubleshooting.html">Troubleshooting</a>.</td>
 </tr>
 <tr>
-<td><strong>Stuck</strong>, with <code>waiting for EMS</code> on the kinds</td>
-<td>With the Archive: the media service is down, restarting or busy loading models.</td>
+<td><strong>Stuck</strong>, with <code>EMS has not been able to run it</code> on a kind</td>
+<td>With the Archive: the media service is down, restarting over and over, or cannot load a model.</td>
 <td>See <a href="../ems/index.html">The media service</a>. The work goes on by itself once it answers.</td>
 </tr>
 <tr>
-<td><strong>Stuck</strong>, with <code>none done in the last hour</code> on a kind</td>
-<td>The worker for that kind is stopped or hangs.</td>
-<td>Look on <strong>Services</strong> for a stopped or often restarted worker, and on <strong>Log</strong> for its errors. <a href="services-logs.html">Services and logs</a>.</td>
+<td><strong>Stuck</strong>, with <code>the workers that take it are idle</code> on a kind</td>
+<td>The work is not handed out.</td>
+<td>Read the <strong>Log</strong> tab, and restart EiN. <a href="services-logs.html">Services and logs</a>.</td>
 </tr>
 <tr>
 <td><strong>Needs a person</strong>, <code>kind &lt;name&gt;</code> failed</td>
