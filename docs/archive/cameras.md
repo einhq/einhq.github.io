@@ -194,6 +194,8 @@ counting stopped at its limit), and the camera's labels. For those who may chang
 corner has **Share** and **Edit**, and the ⋮ menu has **Add event** and **Move to trash**. On a
 phone they are all under ⋮.
 
+![The camera page of Ruby's iPhone: Ruby Wrenfield and "75 files · 2025–2026" under the name, Share and Edit at the top right, and the tabs Info and Media; on the Info tab its timeline with the albums Christmas in Wellington and Ruby's Wellington on the left, and on the right Camera with Apple, iPhone 15 and Pacific/Auckland above Link existing media, Owners with Ruby Wrenfield, dates unknown, and Device with Ruby's iPhone](../../assets/shots/camera.webp "A phone's camera: who owns it, the albums it took pictures for, and the phone it is part of.")
+
 | Tab       | What it shows                                                                                                                                                                                         |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Info**  | The page opens here: the camera's timeline, and beside it its settings, owners, device and description (see below).                                                                                   |

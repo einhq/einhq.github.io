@@ -324,19 +324,19 @@
             <div class="intro">
               <h3>It tells you whether it is keeping up</h3>
               <p>
-                Work that fails is tried again after an hour, six hours and a day. The Dashboard sums it all up in one word, Healthy, Catching up, Stuck or Needs a person,
-                with the reasons for it. See <a href="docs/admin/monitoring.html">Health and the dashboard</a>.
+                Work that fails is tried again after an hour, six hours and a day. The Status page sums it all up in one word, Healthy, Catching up, Stuck or Needs a person,
+                with the reasons for it. See <a href="docs/admin/monitoring.html">Health and status</a>.
               </p>
             </div>
             <div class="shot">
               <img
-                src="assets/shots/dashboard.webp"
-                srcset="assets/shots/dashboard.webp 1200w, assets/shots/dashboard@2x.webp 2400w"
+                src="assets/shots/status.webp"
+                srcset="assets/shots/status.webp 1200w, assets/shots/status@2x.webp 2400w"
                 sizes="(min-width: 1240px) 635px, (min-width: 961px) 52vw, 92vw"
                 width="1200"
                 height="650"
                 loading="lazy"
-                alt="The system dashboard saying Catching up, with a warning that OCR work waits, CPU, memory, GPU and video memory gauges, the work done per hour, and the instances by state"
+                alt="The Status page saying Healthy, with tabs for Overview, Work, Media service, Services, Log and Activity, the machine&#x27;s CPU, memory and temperature, and the media service&#x27;s CPU, memory, GPU and video memory, each with its recent history"
               >
             </div>
           </div>
@@ -417,7 +417,7 @@
               width="1440"
               height="900"
               loading="lazy"
-              alt="The Chat page: a list of conversations, and an answer that ran one command"
+              alt="The Chat page asking whether all the services are running: the answer ran two commands, says all 32 are running and none has stopped, and lists them in a table with each one&#x27;s status, module and description"
             >
           </div>
           <p class="next">
@@ -472,7 +472,7 @@
                 sizes="(min-width: 1240px) 1160px, 92vw"
                 width="1440"
                 height="900"
-                alt="EiN's photo viewer showing three people on a coastal lookout near Wellington, with a side panel listing the phone that took it, the album, the three people with their ages, the address and a small map, and similar pictures"
+                alt="EiN's photo viewer showing three people on a coastal lookout near Wellington, with a side panel listing the phone that took it, the album, the three people with their ages, the address and a small map, the weather, and similar pictures"
               >
               <ol class="callouts" aria-label="What the panel shows">
                 <li class="c-camera" style="--x: 72.3%; --y: 11.6%">
@@ -481,7 +481,7 @@
                 <li class="c-album" style="--x: 72.3%; --y: 19.8%"><span>The album it is in</span></li>
                 <li class="c-person" style="--x: 72.3%; --y: 30%"><span>Who is in it, and how old each was that day</span></li>
                 <li class="c-place" style="--x: 72.3%; --y: 47%"><span>Where, from the GPS in the file</span></li>
-                <li class="c-media" style="--x: 72.3%; --y: 76%"><span>Pictures that look alike</span></li>
+                <li class="c-media" style="--x: 72.3%; --y: 83%"><span>Pictures that look alike</span></li>
               </ol>
             </div>
             <figcaption>Christmas in Wellington, 2025: Ruby with her aunt Helen and Helen's husband David. From the archive of the invented Wrenfield family.</figcaption>
@@ -555,7 +555,7 @@
               width="1200"
               height="644"
               loading="lazy"
-              alt="The Media page searched for Christmas tree: a black-and-white print of two children by a tree, then family Christmases in colour and two video moments, each with its match in percent"
+              alt="The Media page searched for Christmas tree: moments from a home video of four children by a tree, a black-and-white print of two children by one, and family Christmases in colour, each with its match in percent"
             >
           </div>
         </div>
@@ -678,7 +678,7 @@
                   width="390"
                   height="844"
                   loading="lazy"
-                  alt="The Wellington photo of Ruby, Helen and David in the viewer on a phone, with the phone that took it, the album and the people's ages below it"
+                  alt="A Wellington photo of Ruby, Helen and David in the viewer on a phone, with the phone that took it, the album and the people's ages below it"
                 >
               </div>
               <div class="shot shot-phone">
@@ -716,10 +716,10 @@
               <li>
                 <a href="assets/shots/home@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/home.webp" width="640" height="400" loading="lazy"
-                    alt="The home page: a news feed of albums added, each with its first pictures, and a birthday coming up">
+                    alt="The home page: a news feed of albums added, each with its first pictures, and the birthdays and a to-do coming up">
                 </a>
                 <h4>Home</h4>
-                <p>What is new, what is coming up and this day in years past. The core lays the page out; modules fill it, here with the Archive&#x27;s albums and a birthday.</p>
+                <p>What is new, what is coming up and this day in years past. The core lays the page out; modules fill it, here with the Archive&#x27;s albums and birthdays.</p>
               </li>
               <li>
                 <a href="assets/shots/finder@2x.webp" data-shot data-width="2880" data-height="1800">
@@ -746,25 +746,25 @@
                 <p>The tree itself: any folder, each node with its type, size, mode, owner and group, and a preview of the one selected.</p>
               </li>
               <li>
-                <a href="assets/shots/dashboard@2x.webp" data-shot data-width="2400" data-height="1300">
-                  <img src="assets/shots/thumbs/dashboard.webp" width="640" height="347" loading="lazy"
-                    alt="The system dashboard saying Catching up, with CPU, memory, GPU and video memory gauges">
+                <a href="assets/shots/status@2x.webp" data-shot data-width="2400" data-height="1300">
+                  <img src="assets/shots/thumbs/status.webp" width="640" height="347" loading="lazy"
+                    alt="The Status page saying Healthy, with the machine&#x27;s CPU, memory and temperature, and the media service&#x27;s CPU, memory, GPU and video memory">
                 </a>
-                <h4>System dashboard</h4>
-                <p>One word on whether it is keeping up, with the machine&#x27;s load and how long the disks will last.</p>
+                <h4>Status</h4>
+                <p>One word on whether it is keeping up, with the load on the machine and on the media service.</p>
               </li>
               <li>
                 <a href="assets/shots/system-work@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/system-work.webp" width="640" height="400" loading="lazy"
-                    alt="The Work tab: a table of pipelines with bars for their workload and counts of waiting, running, failed and completed jobs">
+                    alt="The Work tab: where the work is, from not started through the workers and the media service to the models loaded, above a table of pipelines with bars for their workload and counts of jobs in each state">
                 </a>
                 <h4>Work</h4>
-                <p>Every pipeline, with what waits, runs, failed and is done, and how fast.</p>
+                <p>Where the work is, from waiting to on a model, and every pipeline with what waits, runs, failed and is done, and how fast.</p>
               </li>
               <li>
                 <a href="assets/shots/system-log@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/system-log.webp" width="640" height="400" loading="lazy"
-                    alt="The Log tab: ten recent warnings from the pipeline engine, and a live log of pipeline steps and HTTP connections">
+                    alt="The Log tab: two recent warnings from the pipeline engine, and a live log of pipeline steps and HTTP connections">
                 </a>
                 <h4>Log</h4>
                 <p>Recent problems, and the system log as it is written.</p>
@@ -772,7 +772,7 @@
               <li>
                 <a href="assets/shots/settings@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/settings.webp" width="640" height="400" loading="lazy"
-                    alt="The Settings page on the Albums category, with stack similarity and stack time gap">
+                    alt="The Settings page&#x27;s System tab on the Access log category, with how many days the access log keeps sign-ins and downloads">
                 </a>
                 <h4>Settings</h4>
                 <p>Every setting by category, the core&#x27;s and each module&#x27;s, with its default and what it does.</p>
@@ -796,7 +796,7 @@
               <li>
                 <a href="assets/shots/docs@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/docs.webp" width="640" height="400" loading="lazy"
-                    alt="The documentation&#x27;s overview page with its guide and reference sections">
+                    alt="The documentation&#x27;s welcome page, with the core&#x27;s sections and each module&#x27;s beside it">
                 </a>
                 <h4>Documentation</h4>
                 <p>A guide, and reference pages read from the installation as it is: every command, setting, variable and node type.</p>
@@ -833,7 +833,7 @@
               <li>
                 <a href="assets/shots/chat-page@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/chat-page.webp" width="640" height="400" loading="lazy"
-                    alt="The Chat page: a list of conversations and an answer naming three people and their ages">
+                    alt="The Chat page asking whether all the services are running, and an answer that all 32 are, with a table of them">
                 </a>
                 <h4>Chats</h4>
                 <p>Earlier conversations, and each answer with the commands it ran.</p>
@@ -928,10 +928,11 @@
               </li>
               <li>
                 <a href="assets/shots/place@2x.webp" data-shot data-width="2880" data-height="1800">
-                  <img src="assets/shots/thumbs/place.webp" width="640" height="400" loading="lazy" alt="The cottage at Malpas: a circle on the map and its resident">
+                  <img src="assets/shots/thumbs/place.webp" width="640" height="400" loading="lazy"
+                    alt="The cottage at Malpas on its Info tab: who moved in and out, its position and 300 m circle, and its residents since 1999">
                 </a>
                 <h4>A place</h4>
-                <p>Who lived there and what was taken there.</p>
+                <p>Who lived there and when, with Map and Media tabs for where it is and what was taken there.</p>
               </li>
               <li>
                 <a href="assets/shots/map@2x.webp" data-shot data-width="2880" data-height="1800">
@@ -958,14 +959,15 @@
               </li>
               <li>
                 <a href="assets/shots/camera@2x.webp" data-shot data-width="2880" data-height="1800">
-                  <img src="assets/shots/thumbs/camera.webp" width="640" height="400" loading="lazy" alt="Ruby&#x27;s iPhone: make, model, time zone and current owner">
+                  <img src="assets/shots/thumbs/camera.webp" width="640" height="400" loading="lazy"
+                    alt="Ruby&#x27;s iPhone on its Info tab: its albums by date, its make, model and time zone, its owner and the phone it is part of">
                 </a>
                 <h4>A camera</h4>
-                <p>One phone: its owner, time zone, timeline and media, and the device it records into.</p>
+                <p>One phone, with Info and Media tabs: its albums by date, make, model, time zone and owner, and the device it is part of.</p>
               </li>
               <li>
-                <a href="assets/shots/recording@2x.webp" data-shot data-width="2280" data-height="1280">
-                  <img src="assets/shots/thumbs/recording.webp" width="640" height="359" loading="lazy" alt="A recording with a waveform and a timed transcript">
+                <a href="assets/shots/recording@2x.webp" data-shot data-width="2880" data-height="1280">
+                  <img src="assets/shots/thumbs/recording.webp" width="640" height="284" loading="lazy" alt="A recording with a waveform and a timed transcript">
                 </a>
                 <h4>A recording</h4>
                 <p>A transcript that follows the player, line by line.</p>
@@ -987,7 +989,7 @@
               <li>
                 <a href="assets/shots/import@2x.webp" data-shot data-width="2880" data-height="1800">
                   <img src="assets/shots/thumbs/import.webp" width="640" height="400" loading="lazy"
-                    alt="The Import media dialog: choose files or a folder, or copy them over SFTP">
+                    alt="Import media: the inbox or a new category to import into, buttons to choose files or a folder, and the folder to copy them to over SFTP">
                 </a>
                 <h4>Import</h4>
                 <p>New files go to your own staging area first; big imports go over SFTP.</p>

@@ -35,7 +35,7 @@ Open **Settings** in the sidebar and choose the **Modules** tab. Everyone who is
 tab; for anyone but an administrator it is the only one, and it shows the modules without the
 buttons that change them.
 
-![The Modules tab of Settings: archive 0.3.0, assistant 0.2.0 and ems 0.2.0 listed at the left, and archive open at the right, Active, with its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and the pages of its guide below](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
+![The Modules tab of Settings: album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive 0.19.31 open at the right, Active, available to Everyone, with Reference and guide, its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and the pages of its guide below](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
 
 The list at the left holds every installed module with its description. A module that works shows
 its version at the right; one that does not shows a badge instead and is listed first:
@@ -107,7 +107,7 @@ the module.
    (see [Keep a module to some groups](#keep-a-module-to-some-groups)), then choose **Install** and
    the module's name.
 
-![The Published modules panel on Settings → Modules: archive 0.3.0, assistant 0.2.0 and ems 0.2.0 from github.com/einhq, each marked The deployment's, with a Refresh button at the top right](../../assets/shots/modules-published.webp "The published modules and what is installed of each; on this EiN all three came with the deployment, so none offers Install.")
+![The Published modules panel on Settings → Modules, headed Add a module: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the

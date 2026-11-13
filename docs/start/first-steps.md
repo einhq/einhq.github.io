@@ -86,7 +86,7 @@ Choose **Status** under **System** in the sidebar. Only administrators have it. 
 | **Stuck**          | Work is waiting, and none was done in the last hour.                     | Look at the **Work** tab, and read [Health and status](../admin/monitoring.md).                        |
 | **Needs a person** | A check failed.                                                          | Read the failed check on the **Overview** tab, and see [Troubleshooting](../admin/troubleshooting.md). |
 
-![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/dashboard.webp "Healthy means nothing is waiting; while work waits and is being done it reads Catching up, and a fresh install reads Healthy within a minute or two")
+![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/status.webp "Healthy means nothing is waiting; while work waits and is being done it reads Catching up, and a fresh install reads Healthy within a minute or two")
 
 For the first minute after EiN starts, the Status page may show **warming up** while it takes its
 first readings.
@@ -215,7 +215,7 @@ their own staging area, which only they see, until they file it into an album.
    other group the person should be in.
 6. Choose **Create user**. EiN says "Created helen." and opens the account.
 
-![Settings → Users with the Administrator account open: Profile, Groups with Users ticked and greyed, and the New user button beside the filter](../../assets/shots/settings-users.webp "The Users tab lists every account; the button beside the filter makes a new one")
+![Settings → Users with the Administrator account open: Profile, Groups with Administrators ticked and greyed as its primary group and Users ticked as a choice, and the New user button beside the filter](../../assets/shots/settings-users.webp "The Users tab lists every account; the button beside the filter makes a new one")
 
 If everyone with an account is family, the **Users** group already covers them, and you need no
 other group. If some accounts are not family, make a group for the family:

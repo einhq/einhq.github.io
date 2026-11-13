@@ -96,7 +96,7 @@ user-groups helen
    the arrow means you may not list what it holds.
 3. Choose **Properties** in the node's context menu, or press <kbd>Alt</kbd>+<kbd>Enter</kbd>.
 
-![The Nodes page at /archive/people/peggy-wrenfield: folders cameras, children, events, homes and partners, each rwxrwxr-x, owned by admin, group users; the tool pane shows Peggy Wrenfield's picture with her mode, owner and group](../../assets/shots/nodes.webp "The Nodes page shows every node's mode, owner and group, and the properties dialog changes them.")
+![The Nodes page at /archive/people/peggy-wrenfield: folders cameras, children, events, homes and partners, each rwxrwx--x, owned by admin, group users, and a link to her cover picture; the tool pane shows Peggy Wrenfield's picture with her mode, owner and group](../../assets/shots/nodes.webp "The Nodes page shows every node's mode, owner and group, and the properties dialog changes them.")
 
 The properties dialog has three tabs:
 
@@ -311,7 +311,7 @@ administrator sets under **Settings → Permissions**, on the **Sharing** card. 
 new album, made in the Web UI or with `album create`, and what staging publishes start with
 it.
 
-![The Permissions tab of Settings: the New users card with the Users group ticked, the Visitors card with Visitors may browse on, the Sharing card saying "Shared with Users: the owner can change it, members can see it, anyone else can't see it", with Owner empty, Group Users and Permissions Owner Edit, Group "users" View, Everyone else None, as 0750, and the Sign-in sessions card](../../assets/shots/settings-permissions.webp "The Sharing card sets what every new album starts with, and says in a sentence what that comes to.")
+![The Permissions tab of Settings: the New users card with Users (users) chosen under Groups, the Visitors card with Visitors may browse on, the Sharing card saying "Shared with Users: the owner can change it, members can see it, anyone else can't see it", with Owner empty (the person who creates it), Group Users and Permissions Owner Edit, Group "users" View, Everyone else None, as 0750, and the Sign-in sessions card](../../assets/shots/settings-permissions.webp "The Sharing card sets what every new album starts with, and says in a sentence what that comes to.")
 
 | Setting                                                                       | On the card                                                                        | Default                   |
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------- |

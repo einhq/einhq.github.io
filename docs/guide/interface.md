@@ -81,7 +81,7 @@ itself in the middle, and the side drawer at the right when something is open in
 
 ![A labelled outline of the Web UI: the top bar with the EiN mark, search box, Random album, chat, Create, terminal and your picture; the sidebar with its sections and the collapse button; a page header with title, tabs and actions; the page; and the side drawer with the chat](../diagrams/frame.svg "The frame stays the same on every page; only the page in the middle changes.")
 
-![The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events](../../assets/shots/home.webp "Home, signed in as the administrator, with the archive and assistant modules installed.")
+![The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events](../../assets/shots/home.webp "Home, signed in as the administrator, with the Archive, the assistant, Todo and Recipes installed.")
 
 What you see depends on the modules installed on your EiN. EiN itself gives the frame, Home,
 Search, Settings, Statistics, Documentation and the administrator's pages. The
@@ -125,7 +125,7 @@ Choose the plus to make something. Each row opens a form in a dialog over the pa
 EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
 plus in the top bar. With the Archive installed, the menu has these rows:
 
-![The Create New menu open under the plus: Import media, Album, Person, Location and Camera](../../assets/shots/create-menu.webp "The Create menu's rows come from the modules; these are the archive's.")
+![The Create New menu open under the plus: Import media, Album, Person, Location, Recipe, Camera, Device and Dashboard](../../assets/shots/create-menu.webp "The Create menu gathers the rows that EiN and the installed modules give it.")
 
 | Row              | Opens                                                                                | More                                              |
 | ---------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------- |
@@ -139,7 +139,7 @@ plus in the top bar. With the Archive installed, the menu has these rows:
 
 Choose your picture at the right end of the top bar. The menu is headed **Account**.
 
-![The account menu open under the picture: Favourites, Profile, Trash, Shortcuts with the ? key, About EiN and Logout](../../assets/shots/account-menu.webp "The account menu holds your own pages and signing out.")
+![The account menu open under the picture: Favourites, Profile, Trash, Arrange navigation, Shortcuts with the ? key, About EiN and Logout](../../assets/shots/account-menu.webp "The account menu holds your own pages and signing out.")
 
 | Row                        | Shown                                                     | What it does                                                                                                                                                                                                           |
 | -------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -283,7 +283,7 @@ the **Keyboard shortcuts** dialog. It lists the keys that work anywhere, the key
 under **Go to** (see [The sidebar](#the-sidebar)), and a group for each part of the screen that has keys of its own, such as the viewer or the **Nodes** explorer, while that
 part is on screen.
 
-![The Keyboard shortcuts dialog over the Home page, listing the Anywhere group](../../assets/shots/shortcuts.webp "Press ? on any page to see the keys that work there.")
+![The Keyboard shortcuts dialog over the Home page, listing the Anywhere keys and, under Go to, Alt with a letter for each page](../../assets/shots/shortcuts.webp "Press ? on any page to see the keys that work there.")
 
 | Keys                                                              | What they do                                             |
 | ----------------------------------------------------------------- | -------------------------------------------------------- |

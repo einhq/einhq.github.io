@@ -39,7 +39,7 @@ on the tree's cards and no **Add home** button.
 Open a person and choose the **Family** tab. The address ends in `?tab=family`, so you can link to
 someone's tree directly.
 
-![Peggy Wrenfield's Family tab: her card outlined at the top beside Arthur Wrenfield's, and on the row below, which runs past both edges, their children Helen Okafor and Thomas Wrenfield beside their partners David Okafor, Annika Lindqvist and Rachel Moore](../../assets/shots/family.webp "Generations are rows and couples sit side by side, so the tree reads like a family tree on paper.")
+![Peggy Wrenfield's Family tab: her card outlined at the top beside Arthur Wrenfield's, and on the row below, which runs past both edges, their children Helen Okafor, Thomas Wrenfield and Jon Wrenfield beside their partners David Okafor, Annika Lindqvist and Rachel Moore](../../assets/shots/family.webp "Generations are rows and couples sit side by side, so the tree reads like a family tree on paper.")
 
 The tree is drawn the way family trees usually are:
 

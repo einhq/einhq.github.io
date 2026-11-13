@@ -304,6 +304,8 @@ machine one video read at 145 MB/s with it, against 20 MB/s without.
 Open **Status** under **System** and choose the **Media service** tab. It asks the media service
 how it is, again and again, while the tab is open.
 
+![The Media service tab: the Media service card, Healthy, with version, commit, api, uptime, batch worker and query worker up, card NVIDIA GeForce RTX 5060 Ti, driver and url; Graphics card, Quiet, "No indexing work, so its models are unloaded and search runs on the graphics card"; Where the models are, siglip-text, text-query and the chat model and others on the card and the two search models hatched as standby in RAM beside the workers; and Models, 2 of 19 loaded](../../assets/shots/system-ems.webp "With no indexing work the card is quiet: search runs on it, and a copy in RAM stands by for when indexing takes it.")
+
 - **Media service**: a badge, **healthy**, **degraded** or **model worker down**, and the facts:
   **version**, **commit**, **api**, **uptime**, **batch worker** and **query worker** (`up`, or `down`,
   with `×` and the number of restarts), **card**, **driver** and **url**. Under them, when there is a
@@ -374,7 +376,7 @@ from a media service of API 0.3.4 or later. The **Media service** card on the Sy
 with the media service's own share of the memory. What the media service holds and does, its models, lanes and requests, is not the
 machine's and stays on the **Media service** tab.
 
-![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The Media service card is the media service's machine; its GPU and VRAM tiles show only when it has a card")
+![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/status.webp "The Media service card is the media service's machine; its GPU and VRAM tiles show only when it has a card")
 
 **About EiN** in the account menu also has a **Media service** tile: its version, the API it speaks,
 its commit, how long it has been up and the card it runs on, or **Not answering**.

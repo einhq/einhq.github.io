@@ -46,7 +46,7 @@ Every time EiN starts, it registers and enables core's services and those of eve
 1. Open **Status** under **System** in the sidebar. The Status page is the administrator's; see [Health and status](monitoring.md) for its other tabs.
 2. Choose the **Services** tab.
 
-![The System status page's Services tab: a card titled Services with "23 healthy" at its right, and one row per service with its name and description, the module it comes from, how long it has been up, a green RUNNING badge and buttons to restart and stop it](../../assets/shots/system-services.webp "One row per service, with the ones that need attention sorted to the top")
+![The System status page's Services tab: a card titled Services with "33 healthy" at its right, and one row per service with its name and description, the module it comes from, how long it has been up, a green RUNNING badge and buttons to restart and stop it](../../assets/shots/system-services.webp "One row per service, with the ones that need attention sorted to the top")
 
 The card lists every service, one row each, and asks again every 10 seconds while the tab is open:
 
@@ -164,7 +164,7 @@ A service's own output goes only to its pair of logs under `/var/logs/services`,
 
 Open **Status** under **System** and choose the **Log** tab.
 
-![The System status page's Log tab: a Recent problems card listing ten WARN lines from pipeline-engine, and below it the Live log card for /var/logs/system with level buttons DEBUG, INFO, WARN and ERROR and buttons to pause and clear](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong; the live log shows what EiN is doing now")
+![The System status page's Log tab: a Recent problems card listing two WARN lines from pipeline-engine, and below it the Live log card for /var/logs/system with level buttons DEBUG, INFO, WARN and ERROR and buttons to pause and clear](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong; the live log shows what EiN is doing now")
 
 - **Recent problems** lists the last ten lines at WARN or ERROR, newest first, with the time, the part of EiN and the message, and under it what was logged beside the message as `key=value`, as `dmesg` shows it. It is read again every 10 seconds. With none, it says "Nothing logged at WARN or above".
 - **Live log** shows `/var/logs/system` as it is written: the last 200 lines when you open it, then every new line as it arrives, up to 500 kept. It follows the newest line while you are at the bottom, and stays put when you scroll up to read.

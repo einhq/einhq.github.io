@@ -158,7 +158,7 @@ For each recording, EiN:
 - takes a fingerprint of the sound, which finds the same recording twice. A recording shorter than
   about 2.5 seconds gets none.
 
-![The viewer on a recording called Voice 001.m4a: a waveform with the playhead near the start, the play controls under it, and the transcript beside it with the current line in bold](../../assets/shots/recording.webp "A recording's tile and player show a picture of its sound, and the transcript beside it is searchable.")
+![The viewer on a recording called Voice 001.m4a: a waveform with the playhead a third of the way in, the play controls under it, and the transcript beside it under chips for two speakers, the current line in bold](../../assets/shots/recording.webp "A recording's tile and player show a picture of its sound, and the transcript beside it is searchable.")
 
 ## Documents
 

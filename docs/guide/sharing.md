@@ -53,7 +53,7 @@ open the same dialog; see [The visibility chip](#the-visibility-chip). Opened by
 only look, the dialog shows who has access without letting them change it, and says "Only Helen
 Okafor and people who can edit it can change who it is shared with."
 
-![The Share dialog of the album "Sailing in the archipelago": Who can see it with the Default and Private buttons; People with access listing the owner, the Administrators group, Everyone with an account and Visitors who are not signed in; Share with a link with a Create link button; Close and Save at the foot](../../assets/shots/share.webp "One dialog decides who sees an album and who may change it, and makes the link for someone without an account.")
+![The Share dialog of the album "Sailing in the archipelago": Who can see it with the Default and Private buttons; People with access with the Add people or groups box over the owner, Everyone with an account at Can view and Visitors who are not signed in at No access; Share with a link with a Create link button; Close and Save at the foot](../../assets/shots/share.webp "One dialog decides who sees an album and who may change it, and makes the link for someone without an account.")
 
 The dialog is headed with what it shares, such as **Share “Christmas at the cottage”**, and has
 up to four parts: **Who can see it**, **People with access**, **Share with a link** (albums only)

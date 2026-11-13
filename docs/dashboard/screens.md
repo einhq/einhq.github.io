@@ -6,6 +6,8 @@ account sees it, so its todo lists, devices and birthdays are filled in, while w
 can change nothing. This page is for whoever sets up the screen; making the account is the
 administrator's.
 
+![The Kitchen dashboard full screen, as a screen on the wall shows it: a clock, the weather, a picture, Birthdays, a Todo list, Coming up and a Device card with a map, as glass tiles over the coloured pattern](../../assets/shots/dashboard-wall.webp "What a screen shows: the dashboard full screen, filled in as its account sees it.")
+
 ## An account for screens
 
 A display link shows the dashboard, and anything else, as one account sees it. Rather than your

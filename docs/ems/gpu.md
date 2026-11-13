@@ -170,7 +170,7 @@ Under Docker the `restart: always` lines are left out.
 
 Open **Status** under **System** in the sidebar. On the **Overview** tab, the **Media service** card has a **GPU** tile, with the card's use, its temperature and its power draw, and a **VRAM used** tile, with the share of its memory in use and how much of how much, each with the last six hours. Both are missing when the media service sees no card: no tile means no card, not an idle one. The card's name opens its device, `/dev/ems` under **Devices**, which keeps the same readings for a month, with the card's power limit ([The media service's machine as a device](index.md#the-media-services-machine-as-a-device)).
 
-![The System status page's Overview tab: a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/dashboard.webp "The GPU and VRAM tiles appear only when the media service sees a card")
+![The System status page's Overview tab: a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM](../../assets/shots/status.webp "The GPU and VRAM tiles appear only when the media service sees a card")
 
 The **Media service** tab shows more:
 

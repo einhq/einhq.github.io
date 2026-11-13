@@ -12,6 +12,10 @@
  * pictures to build/nodes/; `make images` turns both into the WebP files under assets/. The browser
  * is Playwright's chromium from ~/.cache/ms-playwright. Exits non-zero when any shot fails.
  *
+ * `--demo-avatar` draws the administrator's account in the top bar as the demo draws it, its initials,
+ * for shots taken from an instance whose administrator is linked to a real person (the Status
+ * page's, from an instance under real load).
+ *
  * Some shots need what only a fully processed instance has: `search` and `postcard` need the media
  * service answering, `chat` the assistant's language model, and `dashboard` says Healthy only once
  * nothing waits.
@@ -21,7 +25,7 @@ import { type Browser, chromium, type Page } from 'playwright';
 
 const flags = parseArgs(Deno.args, {
   string: ['url', 'user', 'password', 'only', 'out'],
-  boolean: ['nodes'],
+  boolean: ['nodes', 'demo-avatar'],
   default: { url: 'http://localhost:8080', user: 'admin', out: 'build' },
 });
 const BASE = flags.url.replace(/\/$/, '');
@@ -56,14 +60,22 @@ async function open(page: Page, route: string, ms?: number) {
 async function viewer(page: Page, albumName: string, file: string) {
   await open(page, album(albumName));
   await page.locator('main img:not(.mrx-entity-header-background)').first().click();
-  await settle(page, 2500);
+  // A key pressed before the viewer has settled, or while it slides, is lost.
+  await settle(page, 5000);
   const wanted = encodeURIComponent(encodeURIComponent(`/archive/albums/${albumName}/${file}`));
   for (let i = 0; i < 80 && !page.url().includes(wanted); i++) {
     await page.keyboard.press('ArrowRight');
-    await page.waitForTimeout(700);
+    await page.waitForTimeout(1500);
   }
   if (!page.url().includes(wanted)) throw new Error(`viewer: ${albumName}/${file} not reached`);
   await settle(page, 3500);
+}
+
+/** Home, once its news has come: it is read after the page, and takes seconds on a busy instance. */
+async function home(page: Page) {
+  await open(page, '/', 1000);
+  await page.getByText(/added/).first().waitFor({ timeout: 60000 });
+  await settle(page, 4000);
 }
 
 /** Drags one finger from (x, y) by (dx, dy), as CDP touch events: Playwright has no gesture API. */
@@ -96,7 +108,8 @@ async function ask(page: Page, question: string) {
   const input = page.getByPlaceholder(/Ask about what is kept here/);
   await input.click();
   await input.fill(question);
-  await page.keyboard.press('Enter');
+  // Enter is a new line in the box; Ctrl+Enter sends.
+  await page.keyboard.press('Control+Enter');
   // Done when it has run its commands, is neither running nor thinking, and the text holds still
   // between two looks: the answer streams in after the last command.
   let before = '';
@@ -124,15 +137,18 @@ const SHOTS: Shot[] = [
   },
   { id: 'albums', run: (page) => open(page, '/albums') },
   { id: 'album', run: (page) => open(page, album('sailing-2025'), 5000) },
-  { id: 'faces', run: (page) => open(page, '/people/Helen_Okafor?tab=faces', 5000) },
-  { id: 'family', run: (page) => open(page, '/people/Peggy_Wrenfield?tab=family', 5000) },
-  { id: 'person', run: (page) => open(page, '/people/Peggy_Wrenfield', 5000) },
+  { id: 'faces', run: (page) => open(page, '/people/helen-okafor?tab=faces', 5000) },
+  { id: 'family', run: (page) => open(page, '/people/peggy-wrenfield?tab=family', 5000) },
+  { id: 'person', run: (page) => open(page, '/people/peggy-wrenfield', 5000) },
   { id: 'place', run: (page) => open(page, '/locations/The_cottage_at_Malpas', 5000) },
+  { id: 'place-map', run: (page) => open(page, '/locations/The_cottage_at_Malpas?tab=map', 6000) },
   { id: 'map', run: (page) => open(page, '/map?c=59.2898%2C18.7502&z=11', 6000) },
   { id: 'year', run: (page) => open(page, '/year?year=2025', 5000) },
   { id: 'cameras', run: (page) => open(page, '/cameras', 5000) },
-  // Says "Healthy" only while nothing waits: take it on an instance that has caught up.
-  { id: 'dashboard', clip: { x: 240, y: 48, width: 1200, height: 650 }, run: (page) => open(page, '/system', 6000) },
+  // The Status page's tabs that show no archive, only the machine and its work, are taken from an
+  // instance under real load (`--only status,system-work,system-ems,system-services --demo-avatar`).
+  // The Log tab names files and accounts, so it comes from the demo.
+  { id: 'status', clip: { x: 240, y: 48, width: 1200, height: 650 }, run: (page) => open(page, '/system', 6000) },
   {
     id: 'recording',
     clip: { x: 0, y: 0, width: 1440, height: 640 },
@@ -182,12 +198,12 @@ const SHOTS: Shot[] = [
       await terminalLine(page, 'ls /archive');
       // -maxdepth 1: the people found but not yet named are person nodes too, one folder down.
       await terminalLine(page, 'find /archive/people -maxdepth 1 -type person | wc -l');
-      await terminalLine(page, 'person-info /archive/people/Peggy_Wrenfield');
+      await terminalLine(page, 'person-info /archive/people/peggy-wrenfield');
       await terminalLine(page, 'cd /archive/albums/christmas-2019 && cat 20191225_155434.jpg', 5000);
     },
   },
   // The gallery: one view of each page, the core's and the modules', as it opens.
-  { id: 'home', run: (page) => open(page, '/', 5000) },
+  { id: 'home', run: (page) => home(page) },
   {
     id: 'finder',
     run: async (page) => {
@@ -195,13 +211,15 @@ const SHOTS: Shot[] = [
       await page.keyboard.press('Control+k');
       await settle(page, 800);
       await page.keyboard.type('>person', { delay: 30 });
-      // A busy instance can take a while to look through every node.
+      // A busy instance can take a while to look through every node; the search starts a moment after the typing.
+      await page.getByText('Looking…').waitFor({ timeout: 5000 }).catch(() => {});
       await page.getByText('Looking…').waitFor({ state: 'detached', timeout: 90000 });
       await settle(page, 1500);
     },
   },
-  { id: 'nodes', run: (page) => open(page, `/system/nodes?path=${encodeURIComponent('/archive/people/Peggy_Wrenfield')}`, 4000) },
+  { id: 'nodes', run: (page) => open(page, `/system/nodes?path=${encodeURIComponent('/archive/people/peggy-wrenfield')}`, 4000) },
   { id: 'system-work', run: (page) => open(page, '/system?tab=work', 6000) },
+  { id: 'system-ems', run: (page) => open(page, '/system?tab=ems.media-service', 6000) },
   { id: 'system-log', run: (page) => open(page, '/system?tab=log', 5000) },
   { id: 'settings', run: (page) => open(page, '/settings', 4000) },
   { id: 'settings-users', run: (page) => open(page, '/settings?tab=users', 4000) },
@@ -214,10 +232,38 @@ const SHOTS: Shot[] = [
   { id: 'people-unknown', run: (page) => open(page, '/people/unknown', 5000) },
   { id: 'locations', run: (page) => open(page, '/locations', 5000) },
   { id: 'camera', run: (page) => open(page, '/cameras/ruby-iphone', 5000) },
+  // Erik's iPhone is a tracker as well as a camera: its device has a track, so the Trips tab.
+  { id: 'devices', run: (page) => open(page, '/devices', 5000) },
+  { id: 'device', run: (page) => open(page, '/devices/erik-iphone', 5000) },
+  { id: 'device-trips', run: (page) => open(page, '/devices/erik-iphone?tab=archive.trips', 6000) },
+  // The Dashboards module's: the list, the kitchen dashboard, and the same full screen on a wall.
+  { id: 'dashboards', run: (page) => open(page, '/dashboards', 5000) },
+  { id: 'dashboard', run: (page) => open(page, '/dashboards/Kitchen', 6000) },
+  {
+    id: 'dashboard-wall',
+    run: async (page) => {
+      await open(page, '/dashboards/Kitchen', 3000);
+      await page.getByRole('button', { name: 'Full screen', exact: true }).click();
+      // The pointer still, so the corner's buttons and the cursor go.
+      await settle(page, 6000);
+    },
+  },
   { id: 'import', run: (page) => open(page, '/staging/import', 4000) },
-  { id: 'chat-page', run: (page) => open(page, '/chat', 4000) },
-  { id: 'phone-home', phone: true, run: (page) => open(page, '/', 5000) },
-  { id: 'phone-person', phone: true, run: (page) => open(page, '/people/Helen_Okafor', 5000) },
+  // The Chat page answering a question about the system rather than the archive.
+  {
+    id: 'chat-page',
+    run: async (page) => {
+      await open(page, '/chat', 3000);
+      await ask(page, 'Are all the services running? If any has stopped, say why.');
+      // From the question down: the conversation scrolls to the end of the answer.
+      await page.evaluate(() => {
+        for (const el of document.querySelectorAll<HTMLElement>('main *')) if (el.scrollTop > 0) el.scrollTop = 0;
+      });
+      await settle(page, 1000);
+    },
+  },
+  { id: 'phone-home', phone: true, run: (page) => home(page) },
+  { id: 'phone-person', phone: true, run: (page) => open(page, '/people/helen-okafor', 5000) },
   // The documentation's (docs/): the dialogs, menus and pages its guides walk through.
   {
     id: 'share',
@@ -303,6 +349,16 @@ const SHOTS: Shot[] = [
     },
   },
 ];
+
+/** The demo administrator's avatar in the top bar, in place of whatever picture this instance's has. */
+async function demoAvatar(page: Page) {
+  await page.evaluate(async () => {
+    const img = document.querySelector<HTMLImageElement>('header button[aria-label="Administrator"] img');
+    if (!img) return;
+    img.src = 'https://ui-avatars.com/api/?name=admin&background=0d9488&color=fff';
+    await img.decode();
+  });
+}
 
 /** Playwright's chromium, the newest revision installed. */
 function findChromium(): string {
@@ -467,6 +523,7 @@ try {
       try {
         page = await newPage(browser, shot);
         await shot.run(page);
+        if (flags['demo-avatar']) await demoAvatar(page);
         await page.screenshot({ path: `${flags.out}/shots/${shot.id}.png`, clip: shot.clip });
         console.log(`shot: ${shot.id}`);
       } catch (e) {

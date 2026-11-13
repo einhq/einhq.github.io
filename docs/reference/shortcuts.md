@@ -11,7 +11,7 @@ keys that open a page under **Go to**, and a group for each part of the screen t
 **Pictures** for a grid of pictures and **Nodes**, and with the Archive installed **Lightbox**,
 **Video** and **Audio** for the viewer, **Staging** and **Memories**. Press <kbd>?</kbd> again or <kbd>Esc</kbd> to close it.
 
-![The Keyboard shortcuts dialog over the Home page, listing the Anywhere group](../../assets/shots/shortcuts.webp "The ? dialog lists only the keys of what is on screen now.")
+![The Keyboard shortcuts dialog over the Home page, listing the Anywhere keys and, under Go to, Alt with a letter for each page](../../assets/shots/shortcuts.webp "The ? dialog lists only the keys of what is on screen now.")
 
 Some pages also show their keys at the foot of the page while you work, such as the Archive's
 **Sort** tab in staging; each key there is a button too.

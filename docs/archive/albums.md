@@ -192,7 +192,7 @@ album has a position, and it has no devices whose routes to show.**
 
 ### The Info tab
 
-![The album's Info tab: the Album section with Name, When, Holds and On the map, and the People, Places and Cameras sections with counts](../../assets/shots/album-info.webp "The Info tab sums up who and what is in the album, each with a link.")
+![The album's Info tab: the Album section with Name, When, Holds and On the map, the People, Places and Cameras sections with counts, and Devices with Erik's iPhone and a box to add a device to the map](../../assets/shots/album-info.webp "The Info tab sums up who and what is in the album, each with a link.")
 
 | Section           | What it shows                                                                                                                                                                                              |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

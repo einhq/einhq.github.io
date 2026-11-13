@@ -6,7 +6,7 @@ This page is for the administrator who keeps EiN running: how to tell at a glanc
 
 Choose **Status** under **System** in the sidebar. The sidebar shows it only to administrators; the page is at `/system`, and someone who is not an administrator and opens that address reads the same figures without the controls to start and stop services.
 
-![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/dashboard.webp "The badge above the title answers the first question: is anything wrong")
+![The System status page's Overview tab with the Healthy badge above the title, a card for the machine EiN runs on, with its CPU, memory and hottest temperature, and one for the media service's machine, with its CPU, memory, GPU and VRAM, and the start of the Work card](../../assets/shots/status.webp "The badge above the title answers the first question: is anything wrong")
 
 The page, **System status**, has up to three badges above its title, with how long EiN has been running beside them (`up 3d 4h`), and five tabs below it, six with the `ems` module installed:
 
@@ -95,7 +95,7 @@ The storage projection is measured over the last seven days. A tier that is not 
 
 **Work** shows what the pipelines are doing; [Processing and pipelines](processing.md) explains pipelines, how to rerun, cancel and retry work, and what each one does.
 
-![The Work tab with the Catching up badge and the pipeline table: each pipeline's workload bar and its waiting, queued, running, failed, completed and cancelled counts, the In and Out rates and the ETA](../../assets/shots/system-work.webp "One row per pipeline: Out and ETA say whether a backlog is shrinking and when it will be gone")
+![The Work tab under the Healthy badge: Where the work is, with the columns Not started, In line, Running in EiN, At the media service and On a model, nothing waiting and two search models loaded, above the start of the pipeline table with media-album's row](../../assets/shots/system-work.webp "Where the work is shows where everything stands now; the table below says, per pipeline, how fast it goes and when it will be done")
 
 - **Where the work is** draws the work left to right as it moves: **Not started** (changes noticed, work not made yet, by pipeline), **In line** (made, waiting for a worker; each line of work under the workers that serve it, the one a worker is on now outlined), and **Running in EiN** (each worker, its slots and the line it is on, with how much of its turn is left). With the `ems` module installed, the media service's lanes and the models it holds follow. Under it, each line that is not moving says why. [Processing and pipelines](processing.md#watch-the-work-on-the-status-page) explains it.
 - The pipeline table has a row for each pipeline doing something, with **Workload**, **Not started**, **In line**, **Running**, **Failed**, **Done** and **Cancelled**; the idle ones fold into one row that **show** opens. **In** is the work arriving for it per hour, **Out** what it finished in the last hour, and **Finishes in** the work not started divided by **Out**; **no rate** when nothing finished recently, `—` when nothing waits. When queue entries were dropped after their delivery attempts, a red **N dropped** stands above the table. Choose a row to see that pipeline's instances.
@@ -120,11 +120,13 @@ When a line has jobs ready and no running worker serves it for more than five mi
 
 The `ems` module adds this tab, and it is there only while that module is installed. It shows the media service's version, its models, what it runs now and what is on the graphics card; [The media service](../ems/index.md#on-the-status-page) describes it.
 
+![The Media service tab: the Media service card, Healthy, with its version, commit, api, uptime, both workers up, the card, an NVIDIA GeForce RTX 5060 Ti, and its driver, and below them Graphics card, Quiet, saying search runs on the card; Where the models are, with a bar for the graphics card's 15.9 GB and one for the RAM; and the start of Models, 2 of 19 loaded](../../assets/shots/system-ems.webp "Which models the media service holds, and where: on the card, in RAM, or both")
+
 ## The Services tab
 
 **Services** lists the services inside EiN, the ones that are not running first. Each row has the service's name, its own status line or description, how long it has been up, how many times it has restarted (`×3`), and its state: **running**, **starting**, **stopping**, **stopped**, **failed** or **disabled**. The heading counts them, `21 healthy`, or in red `2 down` when enabled services are not running.
 
-![The Services tab: a list of services such as album-metadata, ems-link and http-server, each with the module it comes from, up a few minutes and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
+![The Services tab, 33 healthy: a row per service, such as access-log-purger, album-metadata, archive-bridge and ems-link, each with its description or status line, the module it comes from, up about 50 minutes and running, with restart and stop buttons](../../assets/shots/system-services.webp "A service that has restarted many times, or is down while enabled, is the row to look at")
 
 An administrator has **Restart** and **Stop** on a running service and **Start** on a stopped one. A disabled service has no buttons; enable it from the terminal first. [Services and logs](services-logs.md) explains each service and the commands behind these buttons.
 
@@ -132,7 +134,7 @@ An administrator has **Restart** and **Stop** on a running service and **Start**
 
 **Log** has two cards. **Recent problems** shows the last 10 lines logged at WARN or ERROR, newest first, each with what was logged beside its message (the step, the pool, what a service answered) under it, or **Nothing logged at WARN or above**. **Live log** follows the system log, `/var/logs/system`, as it is written: choose **DEBUG**, **INFO**, **WARN** or **ERROR** to show that level and above, pause it, or clear it. While you read further up, new lines do not scroll the view away.
 
-![The Log tab: Recent problems with ten WARN lines from pipeline-engine, and below it the Live log of /var/logs/system with INFO lines from pool-worker, pipeline-engine and http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
+![The Log tab: Recent problems with two WARN lines from pipeline-engine, "pooled step lost its job, re-queued", and below it the Live log of /var/logs/system with INFO lines from pipeline-engine and http](../../assets/shots/system-log.webp "Recent problems answers whether anything went wrong while you were not watching")
 
 With the Archive, a warning such as `pooled step could not run yet, job waiting` means the media service was not ready for a job; the job is tried again on its own, and the kind's other jobs run meanwhile. `pooled step could not run yet, kind resting` means it refused several in a row, so the whole kind waits. [Services and logs](services-logs.md) covers the logs and `dmesg`.
 

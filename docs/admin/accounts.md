@@ -74,7 +74,7 @@ taken", "Repeat the password" or "The passwords do not match". If the account wa
 password could not be set, the account opens with the reason in its **Password** section; set the
 password there.
 
-![Settings → Users with the Administrator account open: its Profile, and Groups with Administrators and Users ticked and greyed](../../assets/shots/settings-users.webp "Each account opens in a panel beside the list, where every change is made in place")
+![Settings → Users with the Administrator account open: its Profile, and Groups with Administrators ticked and greyed as its primary group, and Users ticked as a box you may untick](../../assets/shots/settings-users.webp "Each account opens in a panel beside the list, where every change is made in place")
 
 ## Change an account
 

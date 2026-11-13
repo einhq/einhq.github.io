@@ -236,10 +236,14 @@ weather-forecast --place=Göteborg --days=3 --hours=12
 weather-forecast --lat=48.85 --lng=-3.01
 ```
 
+## A location's page
+
 The header shows the location's name and address, the people who live there, and its labels. If
 you may change the location, it also has **Share**, **Edit** and a ⋮ menu with **Add event** and
 **Move to trash**. On a phone all of these are in the ⋮ menu. Sharing a location works as for
 anything else; see [Sharing](../guide/sharing.md).
+
+![The location page of The cottage at Malpas: its map across the header, Freya Wrenfield under the name, Share and Edit at the top right, and the tabs Info, Map and Media; on the Info tab its timeline of Arthur, Peggy and Freya Wrenfield moving in and out from 1999 to 2021 on the left, and on the right Place with the position 50.24400, -5.02700, "Set by hand" and "Circle, radius 300 m", and Residents listing Freya Wrenfield since 2021 as current, Arthur Wrenfield 1999 – 2014 and Peggy Wrenfield 1999 – 2021](../../assets/shots/place.webp "The Info tab puts who lived here, and when, beside where the place lies and the shape that decides which pictures belong to it.")
 
 | Tab       | What it shows                                                                                                            |
 | --------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -274,6 +278,8 @@ how many, with a link to them on the **Map** tab; see
 [Pick from suggested locations](#pick-from-suggested-locations).
 
 ### The Map tab
+
+![The Map tab of The cottage at Malpas: the header shrunk to the name and the tabs Info, Map and Media, over a street map of Malpas on the Truro River with the location's circle drawn round the village and the layers button in the corner](../../assets/shots/place-map.webp "The Map tab draws the location's shape on a map that fills the window.")
 
 The **Map** tab shows the location's circle, polygon or point and the pictures linked to it that
 have a position. The map opens fitted to both and fills the window below the tabs, as an album's

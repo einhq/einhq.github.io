@@ -34,6 +34,8 @@ menu. [Modules](../admin/modules.md) covers installing and removing modules.
 The **Dashboards** page shows every dashboard you can see as a tile. Its picture is the dashboard's
 layout in small, each card in its colour. Type in **Filter dashboards…** to narrow them by title.
 
+![The Dashboards page: the New dashboard button and the Filter dashboards… box above two tiles, Hallway, "The screen by the front door", with 4 cards, and Kitchen, "By the fridge", with 7 cards, each with its layout in small and By admin](../../assets/shots/dashboards.webp "Each tile draws its dashboard's layout in small, each card in its colour.")
+
 ## Add cards
 
 On the dashboard's page, choose **Add card** (in the **⋮** menu, or the tile at the end while you
@@ -72,6 +74,8 @@ the pointer over a card holds it still for a few seconds, and where the computer
 reduced motion, the rows fade from one to the next instead of gliding. A **Note** too long for its
 tile scrolls; make it larger.
 
+![The Kitchen dashboard's page, By the fridge, with Share, Full screen, Arrange and the ⋮ menu at the top right, and its cards: a clock, the weather at Home, a picture of an older couple with coffee on a boat, Birthdays, a Todo list, Coming up with a todo and the birthdays ahead, and a Device card with Erik's iPhone's position on a map](../../assets/shots/dashboard.webp "Cards from Dashboards, the Archive and Todo side by side on one page.")
+
 ## Arrange it
 
 Choose **Arrange** on the dashboard's page. Each card gets a row of buttons in its top corner and
@@ -101,6 +105,8 @@ Everything changes at once for everyone looking at the dashboard, a screen on th
 Choose **Full screen** on the dashboard's page. Its cards fill the screen as glass tiles over the
 pattern in its colour, as large as the screen allows; the pattern lights a tile now and then. The
 address in the browser now opens it full screen, so you can bookmark it.
+
+![The Kitchen dashboard full screen: its seven cards as glass tiles over the coloured pattern, the clock, the weather with the hours and days ahead, the picture, Birthdays, the Todo list, Coming up, and the Device card with Erik's iPhone's position and when it was taken](../../assets/shots/dashboard-wall.webp "Full screen, the cards fill the screen as glass tiles, each as large as it allows.")
 
 - Move the pointer to see the buttons in the corner: **Fill the screen** hides the browser too,
   **Arrange** goes back to the page to arrange it, and **×** (or <kbd>Esc</kbd>) leaves.

@@ -6,7 +6,7 @@ albums people made lately, and the birthdays and anniversaries around today, and
 everyone who uses EiN. Home's layout and the rest of the Statistics page are EiN's own, and
 [Home and statistics](../guide/home.md) covers them.
 
-![The Home page of the Wrenfield family's archive: the Welcome header, News with four albums the Administrator added 3 weeks ago, each with a row of pictures ending in a +N tile, and an Events card with one entry, Noah Price turns 7, in 3 weeks](../../assets/shots/home.webp "News lists the albums made lately and Events what comes round in the next month. On this day is missing here because nothing was taken on that date in earlier years.")
+![The Home page of the Wrenfield family's archive: the Welcome header, News with albums the Administrator added 1h ago, Christmas in Wellington first, each with a row of pictures ending in a +N tile, and an Events card with five entries, from "Candles for Noah, seven · Shopping" in 6 days to Freya Wrenfield turns 31 in 4 weeks](../../assets/shots/home.webp "News lists the albums made lately and Events what comes round in the next month. On this day is missing here because nothing was taken on that date in earlier years.")
 
 The Archive fills all three of Home's sections. Like everything on Home, they show only what you
 may see: an album or a person that is not shared with you does not appear.

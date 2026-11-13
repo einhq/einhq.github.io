@@ -39,6 +39,8 @@ tracker sending its position or one posting to a webhook, is **online** while it
 from in the last 15 minutes; a device that says nothing of whether it is on has neither **online**
 nor **offline**. Choose a card to open the device.
 
+![The Devices page: the header "6 devices · 2 online" with a filter box, All and Online, and the Name (A-Z) sort, above cards for Erik's iPhone, Freya's phone, fry, Jon's X-Pro1, Media service and Ruby's iPhone, each with its initials and badges such as tracker, online, host and the number of endpoints; fry and Media service show their CPU use](../../assets/shots/devices.webp "Every device you may see, with what it is and how many endpoints it has.")
+
 - Type in the filter box to narrow the cards by label, name, what it is, manufacturer or model.
 - **Show** **All** devices or only those **Online**.
 - **Sort** by **Name (A-Z)** or by **Latest value**, the device that reported most lately first.
@@ -50,6 +52,8 @@ yet**: "Devices appear here when a driver finds them, or when someone makes one 
 
 The header names the device, its manufacturer and model, whether it is online, what it is, and how
 long ago its last value came. Under it are three tabs, and any that modules add:
+
+![The device page of Erik's iPhone: the tracker badge and "last value 460 d ago" under the name, Share and Edit at the top right, and the tabs Overview, History, Info and Trips; on Overview a Position tile with a small map of the track up to its pin, the coordinates 59.28599° N, 18.69303° E, "10 Aug 2025, 14:10, 460 d ago" and Over time](../../assets/shots/device.webp "A tracker's Overview is its last position, with the way it came that day.")
 
 | Tab          | What it shows                                                                                            |
 | ------------ | -------------------------------------------------------------------------------------------------------- |

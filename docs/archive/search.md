@@ -38,7 +38,7 @@ into a search, with the best matches first in one grid.
 
 To go back to the feed, empty the box, press <kbd>Enter</kbd> and remove any chips with their ×.
 
-![The Media page searching "Christmas tree": a grid of Christmas pictures from a black-and-white print to recent photos and videos, each tile with a match percentage from 100% down to 90%](../../assets/shots/search.webp "Nothing in these pictures carries a label or a description: EiN finds the tree by what the pictures show.")
+![The Media page searching "Christmas tree": a grid of Christmas pictures from a black-and-white print to recent photos and videos, each tile with a match percentage from 100% down to 72%](../../assets/shots/search.webp "Nothing in these pictures carries a label or a description: EiN finds the tree by what the pictures show.")
 
 ### What your words are compared with
 

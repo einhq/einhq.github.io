@@ -26,7 +26,7 @@ press of the browser's Back button closes the viewer and returns you to the page
 
 ## What the viewer shows
 
-![The viewer on a photo of Ruby Wrenfield, Helen Okafor and David Okafor on a coastal road, with their names on the face boxes, the bar under the picture, and the details panel on the right listing the camera, the album, the three people with their ages, the place with a map, and similar pictures](../../assets/shots/lightbox.webp "The viewer on a computer. The bar under the picture gives the position in the list, the date and the place; the details panel beside it says who took it, who is in it and how old they were that day.")
+![The viewer on a photo of Ruby Wrenfield, Helen Okafor and David Okafor on a coastal road, with their names on the face boxes, the bar under the picture, and the details panel on the right listing the camera, the album, the three people with their ages, the place with a map, the weather, and similar pictures](../../assets/shots/lightbox.webp "The viewer on a computer. The bar under the picture gives the position in the list, the date and the place; the details panel beside it says who took it, who is in it and how old they were that day.")
 
 On a computer:
 
@@ -234,7 +234,7 @@ the face and a placeholder name, such as **Unknown 8F3C81**. Click one to open t
 viewer, where you name them or say they are someone you already have. [People and faces](people.md)
 describes the review and how recognition works.
 
-![The viewer on a black-and-white scanned print of a bride and groom on church steps, dated Saturday, 16 June 1956; the details panel names Helen's scanner as the camera, the album Arthur and Peggy's wedding, and two faces listed as Unknown 8F3C81 and Unknown P8A00J](../../assets/shots/scan.webp "A scanned print. The camera row names the scanner it was digitized on, and the two faces nobody has named yet wait under placeholder names; clicking one opens the review where you say who it is.")
+![The viewer on a black-and-white scanned print of a bride and groom on church steps, dated Saturday, 16 June 1956; the details panel names Helen's scanner as the camera, the album Arthur and Peggy's wedding, and two faces listed as Unknown RVVY0G and Unknown JCJY21](../../assets/shots/scan.webp "A scanned print. The camera row names the scanner it was digitized on, and the two faces nobody has named yet wait under placeholder names; clicking one opens the review where you say who it is.")
 
 ### The Details section
 
@@ -553,7 +553,7 @@ press it, or **Stop following** in the card, to let go. On a phone the button is
 
 ## Listen to a recording
 
-![The viewer on a recording called Voice 001.m4a: a waveform with the playhead line near the start; under it pause, buttons to go back and forward ten seconds, the volume, the clock 0:42 / 2:11, and the subtitle and fullscreen buttons; and the details panel with the speaker chip Speaker 1 · 1:38 above the transcript, the current line in bold](../../assets/shots/recording.webp "A recording plays against a picture of its sound. The transcript beside it follows along, and clicking a line jumps there.")
+![The viewer on a recording called Voice 001.m4a: a waveform with the playhead line a third of the way in; under it pause, buttons to go back and forward ten seconds, the volume, the clock 0:42 / 2:11, and the subtitle and fullscreen buttons; and the details panel with the speaker chips Speaker 1 · 0:15 and Speaker 2 · 1:36 above the transcript, the current line in bold](../../assets/shots/recording.webp "A recording plays against a picture of its sound. The transcript beside it follows along, and clicking a line jumps there.")
 
 A recording starts playing when it opens. Its picture is the waveform of the sound, and the waveform
 is the timeline: the part already played is brighter, a line marks where you are, and a click or a

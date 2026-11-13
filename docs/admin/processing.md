@@ -40,7 +40,7 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
    **Overview** tab.
 3. Choose the **Work** tab.
 
-![The Work tab of the System status page, marked Catching up: a table with a row per pipeline, from document-index to media-ocr, each with a green workload bar and its Waiting, Queued, Running, Failed, Completed and Cancelled counts and its In, Out and ETA](../../assets/shots/system-work.webp "One row per pipeline says how much is left, how fast it goes, and when it will be done; the pipelines here are the Archive's.")
+![The Work tab of the System status page, marked Healthy: Where the work is, with the columns Not started, In line, Running in EiN, At the media service and On a model, nothing waiting and two search models loaded, and below it the pipeline table's first row, media-album, with its workload bar, its Not started, In line, Running, Failed, Done and Cancelled counts and its In and Out](../../assets/shots/system-work.webp "Where the work is shows where everything stands now; below it, one row per pipeline says how much is left, how fast it goes, and when it will be done.")
 
 At the top, **Where the work is** draws the work as it moves, left to right, in the same five words
 the table below uses:

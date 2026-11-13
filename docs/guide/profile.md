@@ -8,7 +8,7 @@ delete waits before it is removed for good. It is for everyone who has an accoun
 All three open from the account menu, **Favourites** once the Archive is installed. Choose your
 picture at the right end of the top bar:
 
-![The account menu open under the picture in the top bar: Favourites, Profile and Trash, then Shortcuts with the ? key and About EiN, then Logout](../../assets/shots/account-menu.webp "Favourites, Profile and Trash are the pages of your own account.")
+![The account menu open under the picture in the top bar: Favourites, Profile and Trash, then Arrange navigation, Shortcuts with the ? key and About EiN, then Logout](../../assets/shots/account-menu.webp "Favourites, Profile and Trash are the pages of your own account.")
 
 They need you to be signed in. A visitor who opens one of them is asked to sign in first, and lands
 on the page afterwards. [Finding your way around](interface.md) describes the rest of the account
@@ -86,7 +86,7 @@ Choose your picture, then **Profile**, then the **Preferences** tab. It says: "T
 alone. They are stored in your home directory and follow you to the terminal as well." Your
 preferences belong to your account, so they follow you to every browser and device you sign in on.
 
-![The Preferences tab of the profile: the text saying they apply to you alone, the Find a setting box, the Overrides only button, the categories Appearance, Playback, Sharing and Shell, and the Header entrance setting set to drawn with the Default badge](../../assets/shots/preferences.webp "Preferences are grouped in categories; the badge under each says whether the value is the default or your own.")
+![The Preferences tab of the profile: the text saying they apply to you alone, the Find a setting box, the Overrides only button, the categories Appearance, Automation, Language, Playback, Sharing and Shell, and the Header entrance setting set to drawn with the Default badge](../../assets/shots/preferences.webp "Preferences are grouped in categories; the badge under each says whether the value is the default or your own.")
 
 The tab is laid out like the administrator's settings page:
 

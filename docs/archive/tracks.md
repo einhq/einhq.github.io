@@ -39,6 +39,8 @@ Its address is the device's page with `?tab=archive.trips`, such as
 the device's page on it; a live track on the **Map** page, **Device** on a camera's **Info** tab and
 a device in an album's **Info** tab open the device's page as it opens.
 
+![The Trips tab of Erik's iPhone: Trips, Travel and Fixes at the top with Upload GPX, How it travels and Find trips again, "2 trips", and a card for each: 6 Aug 2025 – 10 Aug 2025, "3 days · 59.4 km · 17.3 km out at most", with 3 legs, and 22 Apr 2025, "1 day · 21.8 km · 12.8 km out at most", with 1 leg, each with New album… and Put in an album…](../../assets/shots/device-trips.webp "Each trip found in the track is a card, newest first, ready to become an album.")
+
 At its top, **Trips**, **Travel** and **Fixes** choose what it shows:
 
 | View       | What it shows                                                                                           |

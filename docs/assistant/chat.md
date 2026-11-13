@@ -149,7 +149,7 @@ Where the administrator has turned on **Visitors may browse** (see [Browse witho
 
 ## Your conversations
 
-![The Chat page: the sidebar on the left, a box of recent chats with their titles, dates, message counts and a trash icon each, and the conversation on the right, with the question box, the bulb and the send button at the bottom](../../assets/shots/chat-page.webp "The Chat page keeps every conversation you have had, newest first.")
+![The Chat page: the sidebar on the left, the box of recent chats with the Filter chats… box and one chat, its title, time, "2 messages" and a trash icon, and the conversation on the right: the question "Are all the services running? If any has stopped, say why.", a folded line "Ran 2 commands", the answer that all 32 services are running and a table of them with their status, module and description, and the question box, the bulb and the send button at the bottom](../../assets/shots/chat-page.webp "The Chat page keeps every conversation you have had, newest first, and asks about EiN itself as readily as about what it keeps.")
 
 - **Start a new chat** with the plus button (**New chat**). Start one for each new topic: the assistant remembers only what was said in the current chat. If the chat you are in has no messages yet, **New chat** stays in it rather than making another empty one.
 - **Titles** are the first question, on one line, cut at 60 characters. A chat cannot be renamed.

@@ -41,7 +41,7 @@ When an update of the media service brings other face models, EiN looks for the 
 
 Open **People** in the sidebar, under **Browse**.
 
-![The People page: a header with "19 people", a filter box, a "384 unidentified" button and the "Most pictured" sort, above a grid of cards with each person's face, name and number of pictures](../../assets/shots/people.webp "Everyone with a name, the most pictured first; the button at the top leads to the people still waiting for one.")
+![The People page: a header with "19 people", a filter box, a "431 unidentified" button and the "Most pictured" sort, above a grid of cards with each person's face, name and number of pictures](../../assets/shots/people.webp "Everyone with a name, the most pictured first; the button at the top leads to the people still waiting for one.")
 
 - The header counts the named people (**19 people**). The filter box (**Filter people…**) matches the name and the full name as you type.
 - **N unidentified** opens the people recognition found but nobody has named yet. It is there only when there are some. On a phone it is an icon with the count as a badge.
@@ -58,7 +58,7 @@ You can also find a person from the search box in the top bar, or with `@` and t
 
 Click **N unidentified** on the People page, or open `/people/unknown`.
 
-![The Unidentified people page: the header "384 unidentified · 200 loaded" with "Most found" and "Any count", and cards that each show one large face, up to three small ones, a badge such as "11 FACES" and a "Who is this?" box](../../assets/shots/people-unknown.webp "Each card is one person recognition put together; typing a name in its box names every face in it.")
+![The Unidentified people page: the header "431 unidentified · 200 loaded" with "Most found" and "Any count", and cards that each show one large face, up to three small ones, a badge such as "6 FACES" and a "Who is this?" box](../../assets/shots/people-unknown.webp "Each card is one person recognition put together; typing a name in its box names every face in it.")
 
 The page is headed **Unidentified people**: "Faces and voices recognized as the same person, but nobody has said who they are." Under it, **N unidentified** says how many there are, and **N loaded** how many the page has fetched so far.
 
@@ -182,7 +182,7 @@ Later faces only join a person through faces that already belong to them, so a p
 
 Click a person on the People page, a name in the viewer, or a person in search results.
 
-![Peggy Wrenfield's page: her cover picture, the names "Peggy Wrenfield" and "Margaret Wrenfield", "1934 – 2021 · died aged 86" and "6 photos · 1956–2019", Share and Edit buttons, the tabs Timeline, Info, Media, Faces, Heard in, Family and Homes, and the Timeline tab listing her death, moves, an album and a partnership by year](../../assets/shots/person.webp "The header places a person in time; the tabs hold everything else.")
+![Peggy Wrenfield's page: her cover picture, the names "Peggy Wrenfield" and "Margaret Wrenfield", "1934 – 2021 · died aged 86" and "7 photos · 1956–2019", Share and Edit buttons, the tabs Timeline, Info, Media, Faces, Heard in, Family and Homes, and the Timeline tab listing her death, moves, an album and a partnership by year](../../assets/shots/person.webp "The header places a person in time; the tabs hold everything else.")
 
 The header shows:
 
@@ -211,7 +211,7 @@ On the **Media** tab you can select pictures as in an album. If you may change t
 
 On a phone, the tabs show only their icons, except the one that is open, and the header's buttons fold into ⋮.
 
-![Helen Okafor's page on a phone: her picture across the top, "Born 1958 · 68", Crouch End and "36 photos · 1968–2025", a row with the Timeline tab and six tab icons, and her timeline of albums by year](../../assets/shots/phone-person.webp "On a phone the same page fits one column; the tab icons are in the same order as on a computer.")
+![Helen Okafor's page on a phone: her picture across the top, "Born 1958 · 68", Crouch End and "40 photos · 1968–2025", a row with the Timeline tab and six tab icons, and her timeline of albums by year](../../assets/shots/phone-person.webp "On a phone the same page fits one column; the tab icons are in the same order as on a computer.")
 
 ## Correct a person's faces
 

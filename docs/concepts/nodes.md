@@ -282,7 +282,7 @@ own installation lists what it has, with how many of each:
 - In the terminal, run `docs node-types`. Each line has the type, its count, the module it comes
   from (`core` for core's own) and its description.
 
-![EiN's Documentation page open at Node types: cards for File, Region, EXIF and Person, each with its description, the archive badge on the module's types, and how many are in the tree](../../assets/shots/docs-node-types.webp "Your installation's own list of types follows the modules installed and counts what is in the tree.")
+![EiN's Documentation page open at Node types: cards for File, Region, EXIF and Person, each with its description, the badge of the module that adds it, archive or media, and how many are in the tree](../../assets/shots/docs-node-types.webp "Your installation's own list of types follows the modules installed and counts what is in the tree.")
 
 ## When something goes differently
 
