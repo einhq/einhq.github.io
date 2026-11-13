@@ -729,26 +729,28 @@ Change a camera's settings.
 <small>changes things</small>
 
 ```text
-camera-update [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<string>] [--timezone=<string>] [--digitizer] [--quicktime-utc] [--description=<string>] [--clips=<string>] [--clip-days=<string>] [--clear=<string>] <camera>
+camera-update [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<string>] [--timezone=<string>] [--clock-offset=<string>] [--clock-from=<string>] [--digitizer] [--quicktime-utc] [--description=<string>] [--clips=<string>] [--clip-days=<string>] [--clear=<string>] <camera>
 ```
 
 | Argument   | What it is               |
 | ---------- | ------------------------ |
 | `<camera>` | VFS path to camera node. |
 
-| Option                   | What it does                                                                                    |
-| ------------------------ | ----------------------------------------------------------------------------------------------- |
-| `--name=<string>`        | display name.                                                                                   |
-| `--make=<string>`        | manufacturer, as exif writes it.                                                                |
-| `--model=<string>`       | model, as exif writes it.                                                                       |
-| `--serial=<string>`      | serial number (the strong match key)                                                            |
-| `--timezone=<string>`    | IANA timezone its clock was set to, e.g. Europe/Stockholm.                                      |
-| `--digitizer`            | mark as a scanner and suppress its camera dates on linked media.                                |
-| `--quicktime-utc`        | read its videos' QuickTime CreateDate as UTC (phones), not local time.                          |
-| `--description=<string>` | free-text note.                                                                                 |
-| `--clips=<string>`       | what opens a clip of its device's stream: face (the default), motion (a face or motion) or off. |
-| `--clip-days=<string>`   | days its clips are kept (30); 0 keeps them.                                                     |
-| `--clear=<string>`       | remove a field (repeatable)                                                                     |
+| Option                    | What it does                                                                                    |
+| ------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--name=<string>`         | display name.                                                                                   |
+| `--make=<string>`         | manufacturer, as exif writes it.                                                                |
+| `--model=<string>`        | model, as exif writes it.                                                                       |
+| `--serial=<string>`       | serial number (the strong match key)                                                            |
+| `--timezone=<string>`     | IANA timezone its clock was set to, e.g. Europe/Stockholm.                                      |
+| `--clock-offset=<string>` | how far its clock ran ahead of the time in its zone, e.g. +23h2m, -5m, 0 once right.            |
+| `--clock-from=<string>`   | with --clock-offset: the date it applies from (all its pictures without it)                     |
+| `--digitizer`             | mark as a scanner and suppress its camera dates on linked media.                                |
+| `--quicktime-utc`         | read its videos' QuickTime CreateDate as UTC (phones), not local time.                          |
+| `--description=<string>`  | free-text note.                                                                                 |
+| `--clips=<string>`        | what opens a clip of its device's stream: face (the default), motion (a face or motion) or off. |
+| `--clip-days=<string>`    | days its clips are kept (30); 0 keeps them.                                                     |
+| `--clear=<string>`        | remove a field (repeatable)                                                                     |
 
 ### `cluster-faces`
 

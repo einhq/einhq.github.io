@@ -1213,7 +1213,7 @@ camera-device anna-phone --off</code></pre></div>
 <h3 id="camera-update"><code>camera-update</code><a class="anchor" href="#camera-update" aria-label="Link to this section"></a></h3>
 <p>Change a camera&#39;s settings.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>camera-update [--name=&lt;string&gt;] [--make=&lt;string&gt;] [--model=&lt;string&gt;] [--serial=&lt;string&gt;] [--timezone=&lt;string&gt;] [--digitizer] [--quicktime-utc] [--description=&lt;string&gt;] [--clips=&lt;string&gt;] [--clip-days=&lt;string&gt;] [--clear=&lt;string&gt;] &lt;camera&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>camera-update [--name=&lt;string&gt;] [--make=&lt;string&gt;] [--model=&lt;string&gt;] [--serial=&lt;string&gt;] [--timezone=&lt;string&gt;] [--clock-offset=&lt;string&gt;] [--clock-from=&lt;string&gt;] [--digitizer] [--quicktime-utc] [--description=&lt;string&gt;] [--clips=&lt;string&gt;] [--clip-days=&lt;string&gt;] [--clear=&lt;string&gt;] &lt;camera&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1253,6 +1253,14 @@ camera-device anna-phone --off</code></pre></div>
 <tr>
 <td><code>--timezone=&lt;string&gt;</code></td>
 <td>IANA timezone its clock was set to, e.g. Europe/Stockholm.</td>
+</tr>
+<tr>
+<td><code>--clock-offset=&lt;string&gt;</code></td>
+<td>how far its clock ran ahead of the time in its zone, e.g. +23h2m, -5m, 0 once right.</td>
+</tr>
+<tr>
+<td><code>--clock-from=&lt;string&gt;</code></td>
+<td>with --clock-offset: the date it applies from (all its pictures without it)</td>
 </tr>
 <tr>
 <td><code>--digitizer</code></td>
