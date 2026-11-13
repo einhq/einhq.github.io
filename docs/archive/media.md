@@ -92,7 +92,7 @@ A bar at the bottom says how many are selected and offers what you may do with t
 | **Label**                       | Puts labels on them. See [Put labels on pictures](#put-labels-on-pictures).             | You may change every selected file. |
 | **Delete**                      | Moves them to your trash, with **Undo** in the message that follows.                    | You may change every selected file. |
 
-On a phone the buttons fold into one **Actions** menu. Your favourites and your trash are described in [Your profile, favourites and trash](../guide/profile.md).
+On a phone, or when the window has no room for them all, the buttons fold into one **Actions** menu. Your favourites and your trash are described in [Your profile, favourites and trash](../guide/profile.md).
 
 ### Upload from the Media page
 

@@ -434,8 +434,8 @@ leaves the selection alone. A picture that has the keyboard's focus opens with <
 ## The selection bar
 
 As soon as one picture is selected, a bar floats at the foot of the page with the count, for example
-**24 selected**, and buttons for what you can do. On a narrow screen the buttons fold into one
-**Actions** menu.
+**24 selected**, and buttons for what you can do. On a narrow screen, or when there are more
+buttons than the window has room for, they fold into one **Actions** menu.
 
 Which buttons you see depends on the page and on what you may change. On an album page, in order:
 
