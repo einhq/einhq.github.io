@@ -275,18 +275,21 @@ If the password is not changed, the reason shows in a red box above the fields:
 | Message                                                  | What it means                                  | What to do                                                     |
 | -------------------------------------------------------- | ---------------------------------------------- | -------------------------------------------------------------- |
 | `user passwd: authentication failed`                     | **Current password** is not your password.     | Type it again. If you have forgotten it, see the next section. |
-| `user passwd: no existing password found, contact admin` | Your account has no password to check against. | Ask an administrator to set one.                               |
+| `user passwd: no existing password found, contact admin` | Your account has no password to check against. | Ask an administrator for a sign-in link.                       |
 
 ### If you have forgotten your password
 
-EiN sends no e-mail and has no link for a forgotten password. Ask an administrator to set a new one
-for you: they do it in your account under **Settings → Users**, in its **Password** section, with
-**Set password**. Your old password stops working at once. Sign in with the one they give you, then
-change it on the **Security** tab to one that only you know.
+EiN sends no e-mail, so there is no "forgot password" button. Ask an administrator for a sign-in
+link: they make one in your account under **Settings → Users** and send it to you however they
+like. Open it, choose a new password, and you are signed in; [Sign in with a link](interface.md#sign-in-with-a-link)
+shows the steps. Your old password stops working once you have chosen the new one.
 
-An administrator cannot make you choose a new password at your next sign-in; EiN has no such
-switch. An account that an administrator made without a password, and an account marked as needing one
-(`mustResetPassword`), cannot sign in at all until an administrator sets a password for it. [Accounts and groups](../admin/accounts.md) covers this from the administrator's side.
+An administrator can also set a new password for you in the same place, with **Set password**. Sign
+in with the one they give you, then change it on the **Security** tab to one that only you know.
+
+An account that an administrator made without a password, and an account marked as needing one
+(`mustResetPassword`), cannot sign in at all until a password is set, by an administrator or with a
+sign-in link. [Accounts and groups](../admin/accounts.md) covers this from the administrator's side.
 
 ## Favourites
 

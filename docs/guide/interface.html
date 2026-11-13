@@ -110,6 +110,22 @@ you land on the sign-in page first and go on to that page once you are in.</p>
 <p>A fresh installation has one account, <code>admin</code>, whose password the installer prints once.
 <a href="../start/install.html">Install EiN</a> and <a href="../start/first-steps.html">First steps</a> take it from there.</p>
 </aside>
+<h3 id="sign-in-with-a-link">Sign in with a link<a class="anchor" href="#sign-in-with-a-link" aria-label="Link to this section"></a></h3>
+<p>An administrator can send you a sign-in link instead of a password, an address that ends in
+<code>/invite/</code> and a long code. Use it when your account is new, or when you have forgotten your
+password.</p>
+<ol>
+<li>Open the link. EiN greets you by name and shows your <strong>username</strong>, which may not be what you
+expect: note it, you sign in with it from then on (or with your e-mail address, if your account
+has one).</li>
+<li>In <strong>Password</strong>, type the password you want, and type it again in <strong>Repeat</strong>.</li>
+<li>Choose <strong>Set password and sign in</strong>.</li>
+</ol>
+<p>EiN signs you in and opens <strong>Home</strong>. The password is now yours: you sign in with it in the browser
+and over SSH and SFTP, and the link stops working. A link works once and for a few days, a week
+unless the administrator chose otherwise. When it no longer works, the page says &quot;This link no
+longer works&quot;: it has expired, been used already, or been replaced by a newer one. Ask for a new
+one.</p>
 <h3 id="if-you-cannot-sign-in">If you cannot sign in<a class="anchor" href="#if-you-cannot-sign-in" aria-label="Link to this section"></a></h3>
 <p>The sign-in page says what went wrong in a red box above the fields:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -128,7 +144,7 @@ you land on the sign-in page first and go on to that page once you are in.</p>
 <tr>
 <td><code>login: authentication failed</code></td>
 <td>The username or e-mail, or the password, is wrong. EiN does not say which, so that nobody can find out which accounts exist.</td>
-<td>Check both and try again. If you have forgotten your password, ask an administrator to set another one.</td>
+<td>Check both and try again. If you have forgotten your password, ask an administrator for a sign-in link.</td>
 </tr>
 <tr>
 <td><code>login: account disabled</code></td>
@@ -138,7 +154,7 @@ you land on the sign-in page first and go on to that page once you are in.</p>
 <tr>
 <td><code>login: password reset required</code></td>
 <td>Your password is right, but your account is waiting for an administrator to set a password.</td>
-<td>Ask an administrator to set one.</td>
+<td>Ask an administrator for a <a href="#sign-in-with-a-link">sign-in link</a>.</td>
 </tr>
 <tr>
 <td><code>login: too many failed sign-ins; try again in N s</code></td>
@@ -838,7 +854,7 @@ height down a page.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/interface.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#sign-in">Sign in</a></li><li class="nested"><a href="#if-you-cannot-sign-in">If you cannot sign in</a></li><li><a href="#browse-without-signing-in">Browse without signing in</a></li><li><a href="#sign-out">Sign out</a></li><li><a href="#the-parts-of-the-screen">The parts of the screen</a></li><li><a href="#the-top-bar">The top bar</a></li><li class="nested"><a href="#the-create-menu">The Create menu</a></li><li class="nested"><a href="#the-account-menu">The account menu</a></li><li class="nested"><a href="#admin-mode">Admin mode</a></li><li><a href="#the-sidebar">The sidebar</a></li><li><a href="#page-headers">Page headers</a></li><li><a href="#pages-dialogs-the-side-drawer-and-full-screen">Pages, dialogs, the side drawer and full screen</a></li><li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li><li><a href="#messages-and-other-things-you-will-see">Messages and other things you will see</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#sign-in">Sign in</a></li><li class="nested"><a href="#sign-in-with-a-link">Sign in with a link</a></li><li class="nested"><a href="#if-you-cannot-sign-in">If you cannot sign in</a></li><li><a href="#browse-without-signing-in">Browse without signing in</a></li><li><a href="#sign-out">Sign out</a></li><li><a href="#the-parts-of-the-screen">The parts of the screen</a></li><li><a href="#the-top-bar">The top bar</a></li><li class="nested"><a href="#the-create-menu">The Create menu</a></li><li class="nested"><a href="#the-account-menu">The account menu</a></li><li class="nested"><a href="#admin-mode">Admin mode</a></li><li><a href="#the-sidebar">The sidebar</a></li><li><a href="#page-headers">Page headers</a></li><li><a href="#pages-dialogs-the-side-drawer-and-full-screen">Pages, dialogs, the side drawer and full screen</a></li><li><a href="#keyboard-shortcuts">Keyboard shortcuts</a></li><li><a href="#messages-and-other-things-you-will-see">Messages and other things you will see</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -80,7 +80,7 @@ password there.
 
 Pick the account in the list. Its panel shows its picture, display name, username and uid, and
 badges for its state: **Administrator**, **Guest**, **Disabled**, **Needs a password** or
-**Signed in now**. Below are four sections, each saved on its own.
+**Signed in now**. Below are five sections, each saved on its own.
 
 ### Profile
 
@@ -124,14 +124,34 @@ Type a **New password**, **Repeat** it, and choose **Set password**. **Password 
 beside it. Their current password stops working at once, in the browser and over SSH and SFTP,
 but browsers and terminals where they are signed in stay signed in.
 
-EiN has no rules for passwords: it takes any password that is not empty. It has no "forgot
-password" by e-mail and cannot make someone choose a new password at their next sign-in. When
-someone has forgotten theirs, set a new one here and ask them to change it on their profile's
-**Security** tab (see [Change your password](../guide/profile.md#change-your-password)).
+EiN has no rules for passwords: it takes any password that is not empty. It sends no e-mail, so it
+has no "forgot password" of its own, and cannot make someone choose a new password at their next
+sign-in. When someone has forgotten theirs, or has never had one, send them a
+[sign-in link](#sign-in-link) to choose their own. Or set one here and ask them to change it on
+their profile's **Security** tab (see [Change your password](../guide/profile.md#change-your-password)).
 
 An account marked `mustResetPassword` has no usable password. It shows **Needs a password**, and
-cannot sign in by any means, an SSH key included, until you set one here; setting it clears the
-mark.
+cannot sign in by any means, an SSH key included, until a password is set, here or with a sign-in
+link; setting it clears the mark.
+
+### Sign-in link
+
+A link the person opens to choose their own password. It also shows them their username, which
+they may not know, such as an account you made for them, or one brought over from another system.
+
+1. Choose **Make a sign-in link**. The link appears, an address on this EiN that ends in `/invite/`
+   and a long code, with when it expires: in 7 days.
+2. Click the link to copy it, and send it to the person however you like: a message, a mail of your
+   own, a note. EiN sends nothing itself.
+3. They open it, see their username, and choose a password, which signs them in
+   ([Sign in with a link](../guide/interface.md#sign-in-with-a-link) shows their side).
+
+The link works once: choosing a password with it spends it, and the section is empty again. Until
+then, anyone who has the link can choose the account's password, so send it only to the person.
+**Make a new link** replaces it, and the old one stops working; **Turn off** takes it away. A
+disabled account gets no link: choose **Enable sign-in** first, and a link made before it was
+disabled works again once it is enabled, if it has not expired. In the terminal,
+`user-invite <username> --new --days 30` makes one that works longer, up to 90 days.
 
 ### Sign-in and removal
 
@@ -301,6 +321,8 @@ administrator, apart from reading lists and changing your own name and password.
 # in EiN's terminal, as the administrator
 user-create helen --title='Helen Okafor' --email=helen@example.com --groups=users,family
 user-passwd helen                    # asks for the new password after Password:
+user-invite helen --new              # a sign-in link, /invite/<code>, for 7 days; --days 1 to 90
+user-invite helen                    # show it again; --off takes it away
 user-update helen --name='Helen Okafor' --description='Scans the family letters'
 user-set-primary-group helen family
 user-disable helen                   # signs her out everywhere and keeps her out
@@ -339,7 +361,7 @@ list every option.
 
 | What you see                                                                    | What it means                                                                        | What to do                                                                         |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| **Needs a password** on an account                                              | It has no password, or is marked `mustResetPassword` until it is given one.          | Set one under **Password**.                                                        |
+| **Needs a password** on an account                                              | It has no password, or is marked `mustResetPassword` until it is given one.          | Send a **Sign-in link**, or set one under **Password**.                            |
 | Someone does not see a folder or album shared with a group you just put them in | Group changes apply at the next sign-in.                                             | Ask them to sign out and in, or choose **Disable sign-in** and **Enable sign-in**. |
 | **Create user** says "Already taken"                                            | An account or a group has that name. Each account's personal group is named like it. | Choose another username.                                                           |
 | "Another account has this address" under **E-mail**                             | Two accounts cannot share an address.                                                | Use another address, or remove it from the other account.                          |

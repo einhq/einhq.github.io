@@ -22,6 +22,24 @@ you land on the sign-in page first and go on to that page once you are in.
 > A fresh installation has one account, `admin`, whose password the installer prints once.
 > [Install EiN](../start/install.md) and [First steps](../start/first-steps.md) take it from there.
 
+### Sign in with a link
+
+An administrator can send you a sign-in link instead of a password, an address that ends in
+`/invite/` and a long code. Use it when your account is new, or when you have forgotten your
+password.
+
+1. Open the link. EiN greets you by name and shows your **username**, which may not be what you
+   expect: note it, you sign in with it from then on (or with your e-mail address, if your account
+   has one).
+2. In **Password**, type the password you want, and type it again in **Repeat**.
+3. Choose **Set password and sign in**.
+
+EiN signs you in and opens **Home**. The password is now yours: you sign in with it in the browser
+and over SSH and SFTP, and the link stops working. A link works once and for a few days, a week
+unless the administrator chose otherwise. When it no longer works, the page says "This link no
+longer works": it has expired, been used already, or been replaced by a newer one. Ask for a new
+one.
+
 ### If you cannot sign in
 
 The sign-in page says what went wrong in a red box above the fields:
@@ -29,9 +47,9 @@ The sign-in page says what went wrong in a red box above the fields:
 | Message                                             | What it means                                                                                                                | What to do                                                                                              |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | `Username or e-mail is required`                    | The first field is empty.                                                                                                    | Fill it in.                                                                                             |
-| `login: authentication failed`                      | The username or e-mail, or the password, is wrong. EiN does not say which, so that nobody can find out which accounts exist. | Check both and try again. If you have forgotten your password, ask an administrator to set another one. |
+| `login: authentication failed`                      | The username or e-mail, or the password, is wrong. EiN does not say which, so that nobody can find out which accounts exist. | Check both and try again. If you have forgotten your password, ask an administrator for a sign-in link. |
 | `login: account disabled`                           | Your password is right, but an administrator has turned off sign-in for your account.                                        | Ask an administrator.                                                                                   |
-| `login: password reset required`                    | Your password is right, but your account is waiting for an administrator to set a password.                                  | Ask an administrator to set one.                                                                        |
+| `login: password reset required`                    | Your password is right, but your account is waiting for an administrator to set a password.                                  | Ask an administrator for a [sign-in link](#sign-in-with-a-link).                                        |
 | `login: too many failed sign-ins; try again in N s` | There have been too many wrong passwords from your network address.                                                          | Wait the number of seconds it gives, then try again.                                                    |
 
 A wrong password takes about a second to be answered. After five failed sign-ins from one network

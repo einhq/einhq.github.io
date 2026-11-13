@@ -200,7 +200,7 @@ password there.</p>
 <h2 id="change-an-account">Change an account<a class="anchor" href="#change-an-account" aria-label="Link to this section"></a></h2>
 <p>Pick the account in the list. Its panel shows its picture, display name, username and uid, and
 badges for its state: <strong>Administrator</strong>, <strong>Guest</strong>, <strong>Disabled</strong>, <strong>Needs a password</strong> or
-<strong>Signed in now</strong>. Below are four sections, each saved on its own.</p>
+<strong>Signed in now</strong>. Below are five sections, each saved on its own.</p>
 <h3 id="profile">Profile<a class="anchor" href="#profile" aria-label="Link to this section"></a></h3>
 <p><strong>Display name</strong>, <strong>E-mail</strong> and <strong>Description</strong>, saved with <strong>Save profile</strong>. The display name is
 how the account is named to others; the person can change their own name and description too, on
@@ -235,13 +235,31 @@ once, sign them out everywhere with <strong>Disable sign-in</strong> and then <s
 <p>Type a <strong>New password</strong>, <strong>Repeat</strong> it, and choose <strong>Set password</strong>. <strong>Password set</strong> appears
 beside it. Their current password stops working at once, in the browser and over SSH and SFTP,
 but browsers and terminals where they are signed in stay signed in.</p>
-<p>EiN has no rules for passwords: it takes any password that is not empty. It has no &quot;forgot
-password&quot; by e-mail and cannot make someone choose a new password at their next sign-in. When
-someone has forgotten theirs, set a new one here and ask them to change it on their profile&#39;s
-<strong>Security</strong> tab (see <a href="../guide/profile.html#change-your-password">Change your password</a>).</p>
+<p>EiN has no rules for passwords: it takes any password that is not empty. It sends no e-mail, so it
+has no &quot;forgot password&quot; of its own, and cannot make someone choose a new password at their next
+sign-in. When someone has forgotten theirs, or has never had one, send them a
+<a href="#sign-in-link">sign-in link</a> to choose their own. Or set one here and ask them to change it on
+their profile&#39;s <strong>Security</strong> tab (see <a href="../guide/profile.html#change-your-password">Change your password</a>).</p>
 <p>An account marked <code>mustResetPassword</code> has no usable password. It shows <strong>Needs a password</strong>, and
-cannot sign in by any means, an SSH key included, until you set one here; setting it clears the
-mark.</p>
+cannot sign in by any means, an SSH key included, until a password is set, here or with a sign-in
+link; setting it clears the mark.</p>
+<h3 id="sign-in-link">Sign-in link<a class="anchor" href="#sign-in-link" aria-label="Link to this section"></a></h3>
+<p>A link the person opens to choose their own password. It also shows them their username, which
+they may not know, such as an account you made for them, or one brought over from another system.</p>
+<ol>
+<li>Choose <strong>Make a sign-in link</strong>. The link appears, an address on this EiN that ends in <code>/invite/</code>
+and a long code, with when it expires: in 7 days.</li>
+<li>Click the link to copy it, and send it to the person however you like: a message, a mail of your
+own, a note. EiN sends nothing itself.</li>
+<li>They open it, see their username, and choose a password, which signs them in
+(<a href="../guide/interface.html#sign-in-with-a-link">Sign in with a link</a> shows their side).</li>
+</ol>
+<p>The link works once: choosing a password with it spends it, and the section is empty again. Until
+then, anyone who has the link can choose the account&#39;s password, so send it only to the person.
+<strong>Make a new link</strong> replaces it, and the old one stops working; <strong>Turn off</strong> takes it away. A
+disabled account gets no link: choose <strong>Enable sign-in</strong> first, and a link made before it was
+disabled works again once it is enabled, if it has not expired. In the terminal,
+<code>user-invite &lt;username&gt; --new --days 30</code> makes one that works longer, up to 90 days.</p>
 <h3 id="sign-in-and-removal">Sign-in and removal<a class="anchor" href="#sign-in-and-removal" aria-label="Link to this section"></a></h3>
 <p><strong>Signed in now</strong> lists where the person is signed in: <strong>In the browser</strong>, <strong>Over SSH</strong> or <strong>In a
 terminal</strong>, each with the address it comes from and since when. Earlier sign-ins, failed ones
@@ -413,6 +431,8 @@ administrator, apart from reading lists and changing your own name and password.
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 user-create helen --title=<span class="hljs-string">&#x27;Helen Okafor&#x27;</span> --email=helen@example.com --<span class="hljs-built_in">groups</span>=<span class="hljs-built_in">users</span>,family
 user-passwd helen                    <span class="hljs-comment"># asks for the new password after Password:</span>
+user-invite helen --new              <span class="hljs-comment"># a sign-in link, /invite/&lt;code&gt;, for 7 days; --days 1 to 90</span>
+user-invite helen                    <span class="hljs-comment"># show it again; --off takes it away</span>
 user-update helen --name=<span class="hljs-string">&#x27;Helen Okafor&#x27;</span> --description=<span class="hljs-string">&#x27;Scans the family letters&#x27;</span>
 user-set-primary-group helen family
 user-disable helen                   <span class="hljs-comment"># signs her out everywhere and keeps her out</span>
@@ -452,7 +472,7 @@ list every option.</p>
 <tbody><tr>
 <td><strong>Needs a password</strong> on an account</td>
 <td>It has no password, or is marked <code>mustResetPassword</code> until it is given one.</td>
-<td>Set one under <strong>Password</strong>.</td>
+<td>Send a <strong>Sign-in link</strong>, or set one under <strong>Password</strong>.</td>
 </tr>
 <tr>
 <td>Someone does not see a folder or album shared with a group you just put them in</td>
@@ -517,7 +537,7 @@ list every option.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/accounts.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-accounts-are-managed">Where accounts are managed</a></li><li><a href="#the-accounts-and-groups-ein-starts-with">The accounts and groups EiN starts with</a></li><li><a href="#create-an-account">Create an account</a></li><li><a href="#change-an-account">Change an account</a></li><li class="nested"><a href="#profile">Profile</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#password">Password</a></li><li class="nested"><a href="#sign-in-and-removal">Sign-in and removal</a></li><li><a href="#delete-an-account">Delete an account</a></li><li><a href="#create-and-change-groups">Create and change groups</a></li><li class="nested"><a href="#a-groups-shared-home">A group's shared home</a></li><li class="nested"><a href="#delete-a-group">Delete a group</a></li><li><a href="#what-new-accounts-start-with">What new accounts start with</a></li><li><a href="#let-a-second-person-administer">Let a second person administer</a></li><li><a href="#signing-in-and-why-it-fails">Signing in and why it fails</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-accounts-are-managed">Where accounts are managed</a></li><li><a href="#the-accounts-and-groups-ein-starts-with">The accounts and groups EiN starts with</a></li><li><a href="#create-an-account">Create an account</a></li><li><a href="#change-an-account">Change an account</a></li><li class="nested"><a href="#profile">Profile</a></li><li class="nested"><a href="#groups">Groups</a></li><li class="nested"><a href="#password">Password</a></li><li class="nested"><a href="#sign-in-link">Sign-in link</a></li><li class="nested"><a href="#sign-in-and-removal">Sign-in and removal</a></li><li><a href="#delete-an-account">Delete an account</a></li><li><a href="#create-and-change-groups">Create and change groups</a></li><li class="nested"><a href="#a-groups-shared-home">A group's shared home</a></li><li class="nested"><a href="#delete-a-group">Delete a group</a></li><li><a href="#what-new-accounts-start-with">What new accounts start with</a></li><li><a href="#let-a-second-person-administer">Let a second person administer</a></li><li><a href="#signing-in-and-why-it-fails">Signing in and why it fails</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

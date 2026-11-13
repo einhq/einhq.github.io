@@ -279,6 +279,10 @@ Give each person:
 
 They sign in on the sign-in page with **Username or e-mail**, **Password** and **Sign in**. Ask
 them to change their password at once, under **Profile → Security**.
+
+Or make the account without a password and send them a sign-in link instead, from the account's
+**Sign-in link** section under **Settings → Users** (see [Accounts and groups](../admin/accounts.md#sign-in-link)):
+opening it shows them their username and lets them choose their own password.
 [Finding your way around](../guide/interface.md) is a good page to send them, with the overview of
 each module you installed, such as [The Archive](../archive/index.md).
 
