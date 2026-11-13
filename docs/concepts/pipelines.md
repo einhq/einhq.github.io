@@ -366,6 +366,8 @@ The Media module's pipelines and the Archive's, and what starts them:
 | `media-speaker-faces`  | `media.faces.completed`, for a video with voices                          | Ties a video's voices to the faces seen speaking them                           |
 | `media-speaker-assign` | `media.speakers.detected`, `media.speakers.face-changed`                  | Decides which person each voice is                                              |
 | `media-camera`         | `media.metadata.interpreted`, with a camera in it                         | Links a file to the camera that made it                                         |
+| `media-damage`         | `media.metadata.interpreted`, for a scan, and `media.damage.missing`      | How faded, dusty and scratched a scan is                                        |
+| `media-restore`        | `media.restore.requested`                                                 | A restoration asked for in the background, into a copy among the versions       |
 | `media-camera-cover`   | `media.renditions.made`, for a video                                      | Offers the video's poster frame to its camera as a cover                        |
 | `media-geocode`        | `media.position.available`                                                | The address of a file's GPS position                                            |
 | `media-weather`        | `location.point.changed`, `media.weather.owed`                            | The weather at a photo's position and date                                      |

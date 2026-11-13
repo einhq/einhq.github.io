@@ -13,23 +13,25 @@ once to the primary, so adding an instance never holds anything up.
 
 Each kind of work in the media pool names the media service's operations its steps call. An instance
 takes a kind when it serves every one of them, and when it makes their results the way the primary
-makes them: the same face models, picture and text embedders, text reader and transcription
-settings. A result made otherwise would look stale to EiN, or would be a vector in another space
+makes them: the same face models, picture and text embedders, text reader, way of reading damage
+and transcription settings. A result made otherwise would look stale to EiN, or would be a vector in another space
 than the ones stored, so such a kind stays with the primary.
 
-| Kind            | Worker         | Operations                                                               |
-| --------------- | -------------- | ------------------------------------------------------------------------ |
-| `ingest`        | `media-worker` | `media.probe`                                                            |
-| `stills`        | `media-worker` | `image.renditions`, `video.poster`, `audio.waveform`, `video.storyboard` |
-| `transcode`     | `media-worker` | `video.transcode`, `audio.transcode`                                     |
-| `fingerprint`   | `media-worker` | `fingerprint.compute`                                                    |
-| `shots`         | `models`       | `video.shots`                                                            |
-| `embed-picture` | `models`       | `vision.embed`                                                           |
-| `ocr`           | `models`       | `ocr.read`, `text.embed`                                                 |
-| `embed-text`    | `models`       | `text.embed`                                                             |
-| `transcribe`    | `models`       | `speech.transcribe`, `text.embed`                                        |
-| `faces`         | `models`       | `faces.detect`, `faces.detect_video`, `image.renditions`, `video.poster` |
-| `diarize`       | `models`       | `speech.voiceprint`, `speech.active_speakers`                            |
+| Kind            | Worker         | Operations                                                                                               |
+| --------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| `ingest`        | `media-worker` | `media.probe`                                                                                            |
+| `stills`        | `media-worker` | `image.renditions`, `video.poster`, `audio.waveform`, `video.storyboard`                                 |
+| `transcode`     | `media-worker` | `video.transcode`, `audio.transcode`                                                                     |
+| `fingerprint`   | `media-worker` | `fingerprint.compute`                                                                                    |
+| `shots`         | `models`       | `video.shots`                                                                                            |
+| `embed-picture` | `models`       | `vision.embed`                                                                                           |
+| `ocr`           | `models`       | `ocr.read`, `text.embed`                                                                                 |
+| `embed-text`    | `models`       | `text.embed`                                                                                             |
+| `transcribe`    | `models`       | `speech.transcribe`, `text.embed`                                                                        |
+| `faces`         | `models`       | `faces.detect`, `faces.detect_video`, `image.renditions`, `video.poster`                                 |
+| `diarize`       | `models`       | `speech.voiceprint`, `speech.active_speakers`                                                            |
+| `damage`        | `models`       | `image.damage`                                                                                           |
+| `restore`       | `models`       | `image.unfade`, `image.defects`, `image.inpaint`, `image.denoise`, `image.copy_tags`, `image.renditions` |
 
 The other kinds of the media pool run in EiN alone and stay with the primary. A search a person is
 waiting on goes to the primary too; when it does not answer, the search goes to an instance that

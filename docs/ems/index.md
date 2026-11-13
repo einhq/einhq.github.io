@@ -64,7 +64,9 @@ their own licences forbids commercial use; two state no licence for their weight
 names parts under non-commercial terms ([Using EiN commercially](#using-ein-commercially)). This is
 what the image carries, all of it used by the Archive but GFPGAN, which the Archive does not call;
 LaMa, the scratch detector and SCUNet run when someone restores a photo
-([Restore a faded or damaged photo](../archive/viewer.md#restore-a-faded-or-damaged-photo)):
+([Restore a faded or damaged photo](../archive/viewer.md#restore-a-faded-or-damaged-photo)), and
+the scratch detector also when a scan arrives, to tell how dusty and scratched it is
+([Find the scans worth restoring](../archive/viewer.md#find-the-scans-worth-restoring)):
 
 | What it does in EiN                                 | Model or tool                                                                                                                                                                                                                      | Licence: code / weights                                                         | Note                                                  |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------- |

@@ -72,14 +72,14 @@ show **waiting for EMS** on the **Status**.
 Each media pipeline belongs to a family of work, which it names with `wants`, so a folder can ask
 for only some of it ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)):
 
-| Family            | What it covers                                                                                                                           | Pipelines                                                                                        |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                          |
-| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                         |
-| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                          |
-| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                                     |
-| `fingerprints`    | The fingerprints that find copies, look-alikes and photo stacks                                                                          | the Media module's `media-fingerprint`                                                           |
-| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera, the weather                                           | `media-interpret`, and the face, voice, camera, geocoding, weather and duplicate pipelines above |
+| Family            | What it covers                                                                                                                           | Pipelines                                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `renditions`      | A picture's sizes, a video's poster frames, hover clip, playable copy, storyboard and chapters, a recording's playable copy and waveform | the Media module's `media-stills` and `media-transcode`                                                          |
+| `picture-vectors` | Searching by what is in a picture                                                                                                        | the Media module's `media-embed-picture`                                                                         |
+| `text`            | The text written in a picture, and a document's text                                                                                     | the Media module's `media-ocr`, `document-index` and `media-embed-text`                                          |
+| `transcripts`     | What is said in a video or recording                                                                                                     | the Media module's `media-transcribe` and `media-embed-text`                                                     |
+| `fingerprints`    | The fingerprints that find copies, look-alikes and photo stacks                                                                          | the Media module's `media-fingerprint`                                                                           |
+| `archive`         | The date and the place, faces and voices and who they are, duplicates, the camera, the weather, a scan's damage                          | `media-interpret`, `media-damage`, and the face, voice, camera, geocoding, weather and duplicate pipelines above |
 
 The Media module's `media-ingest` and `media-reindex` name no family, since every family needs what
 they read, and nor do the pipelines that work on the Archive's own folders and on the devices'
@@ -102,8 +102,9 @@ Every kind of work above that is not run by the engine goes as a job into the po
 `/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
 its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-assign`,
 `speaker-assign`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media module's own
-`ingest`, `stills`, `transcode` and `fingerprint`; `models` takes the Archive's `faces` and
-`diarize`, beside the Media module's `shots`, `embed-picture`, `ocr`, `embed-text` and `transcribe`,
+`ingest`, `stills`, `transcode` and `fingerprint`; `models` takes the Archive's `faces`, `diarize`
+and `damage`, beside the Media module's `shots`, `embed-picture`, `ocr`, `embed-text`, `transcribe`
+and `restore`,
 and `models-second` the same kinds in the reverse order. How much of it runs at once is set there,
 in [How much runs at once](../media/index.md#how-much-runs-at-once).
 

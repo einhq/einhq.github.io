@@ -171,6 +171,15 @@
 </tbody></table>
 </div>
 <p>Choosing a kind keeps the feed: the videos alone are still newest first, by date. The kind goes into the page&#39;s address (<code>/media?kind=video</code>), so a link you copy opens the same view. A document&#39;s tile is a picture of its first page, and the viewer shows the document to read (<a href="viewer.html#read-a-document">Read a document</a>); <a href="file-types.html">Supported files</a> lists which ones EiN reads the text of.</p>
+<h3 id="find-damaged-scans">Find damaged scans<a class="anchor" href="#find-damaged-scans" aria-label="Link to this section"></a></h3>
+<p><strong>Damage</strong> keeps the scans EiN found worn: <strong>Faded</strong>, <strong>Dusty</strong> or <strong>Scratched</strong>, or <strong>Any
+condition</strong> for everything. EiN looks at every scan as it arrives, a file from a staging category
+that holds scans, and photos from a camera or a phone are never in these lists. The choice becomes
+a chip in the box, such as <strong>Faded</strong>, and the page turns into a search; remove the chip with its ×,
+or choose <strong>Any condition</strong>, to return. Select what you find and choose <strong>Restore…</strong> to restore them
+all in the background (<a href="viewer.html#restore-many-photos-at-once">Restore many photos at once</a>).
+<a href="viewer.html#find-the-scans-worth-restoring">Find the scans worth restoring</a> says what each one means.</p>
+<p>On a phone, <strong>Damage</strong> folds into the button with a sliders icon with the other choices.</p>
 <h3 id="narrow-by-label">Narrow by label<a class="anchor" href="#narrow-by-label" aria-label="Link to this section"></a></h3>
 <p>When the pictures shown carry labels, a row of label pills appears above them, each with the number of pictures that carry it. Click a pill to keep only those pictures: the label becomes a <code>#label</code> chip in the box, and the page turns into a search. Click another pill to narrow further, to pictures that carry both labels. Remove a chip with its × to widen the view again.</p>
 <p>A label that every picture shown already carries would narrow nothing, so it is left out of the row, as are the labels you have already chosen. <a href="#labels">Labels</a> explains how pictures get them.</p>
@@ -214,6 +223,11 @@
 <td><strong>Set time</strong></td>
 <td>Sets when the pictures were taken. See <a href="dates-places.html">Dates and places of pictures</a>.</td>
 <td>You may change every selected file.</td>
+</tr>
+<tr>
+<td><strong>Restore…</strong></td>
+<td>Restores the photos in the background, each into a copy among its versions. See <a href="viewer.html#restore-many-photos-at-once">Restore many photos at once</a>.</td>
+<td>The selection holds a JPEG, PNG, TIFF, WebP or BMP photo, and you may change every one.</td>
 </tr>
 <tr>
 <td><strong>Set location</strong></td>
@@ -448,6 +462,7 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 search --tag sailing --kind photo,video          <span class="hljs-comment"># pictures that carry a label</span>
 search <span class="hljs-string">&#x27;christmas tree&#x27;</span> --kind photo             <span class="hljs-comment"># pictures by what they show</span>
+search --has damage=faded --kind photo           <span class="hljs-comment"># the scans found faded</span>
 timeline --year 1968 --kind album,auto-album,birth,death  <span class="hljs-comment"># what the Year page shows for 1968</span>
 labels                                           <span class="hljs-comment"># every label in use, with its count</span>
 label add <span class="hljs-string">&#x27;/archive/albums/Summer 2020&#x27;</span> sailing  <span class="hljs-comment"># put a label on an album</span>
@@ -462,7 +477,7 @@ label-model show sailing                         <span class="hljs-comment"># ho
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/media.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-media-page">The Media page</a></li><li class="nested"><a href="#browse-the-feed">Browse the feed</a></li><li class="nested"><a href="#choose-a-layout">Choose a layout</a></li><li class="nested"><a href="#show-only-what-you-added">Show only what you added</a></li><li class="nested"><a href="#show-one-kind-of-file">Show one kind of file</a></li><li class="nested"><a href="#narrow-by-label">Narrow by label</a></li><li class="nested"><a href="#search-from-the-media-page">Search from the Media page</a></li><li class="nested"><a href="#act-on-pictures">Act on pictures</a></li><li class="nested"><a href="#upload-from-the-media-page">Upload from the Media page</a></li><li><a href="#the-year-page">The Year page</a></li><li class="nested"><a href="#pick-a-year">Pick a year</a></li><li class="nested"><a href="#what-a-year-shows">What a year shows</a></li><li class="nested"><a href="#narrow-the-year-to-a-person-a-place-or-a-label">Narrow the year to a person, a place or a label</a></li><li><a href="#labels">Labels</a></li><li class="nested"><a href="#put-labels-on-pictures">Put labels on pictures</a></li><li class="nested"><a href="#put-labels-on-an-album-a-person-a-location-or-a-camera">Put labels on an album, a person, a location or a camera</a></li><li class="nested"><a href="#find-what-carries-a-label">Find what carries a label</a></li><li class="nested"><a href="#the-labels-folder">The labels folder</a></li><li class="nested"><a href="#let-ein-suggest-where-a-label-belongs">Let EiN suggest where a label belongs</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#in-the-terminal">In the terminal</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-media-page">The Media page</a></li><li class="nested"><a href="#browse-the-feed">Browse the feed</a></li><li class="nested"><a href="#choose-a-layout">Choose a layout</a></li><li class="nested"><a href="#show-only-what-you-added">Show only what you added</a></li><li class="nested"><a href="#show-one-kind-of-file">Show one kind of file</a></li><li class="nested"><a href="#find-damaged-scans">Find damaged scans</a></li><li class="nested"><a href="#narrow-by-label">Narrow by label</a></li><li class="nested"><a href="#search-from-the-media-page">Search from the Media page</a></li><li class="nested"><a href="#act-on-pictures">Act on pictures</a></li><li class="nested"><a href="#upload-from-the-media-page">Upload from the Media page</a></li><li><a href="#the-year-page">The Year page</a></li><li class="nested"><a href="#pick-a-year">Pick a year</a></li><li class="nested"><a href="#what-a-year-shows">What a year shows</a></li><li class="nested"><a href="#narrow-the-year-to-a-person-a-place-or-a-label">Narrow the year to a person, a place or a label</a></li><li><a href="#labels">Labels</a></li><li class="nested"><a href="#put-labels-on-pictures">Put labels on pictures</a></li><li class="nested"><a href="#put-labels-on-an-album-a-person-a-location-or-a-camera">Put labels on an album, a person, a location or a camera</a></li><li class="nested"><a href="#find-what-carries-a-label">Find what carries a label</a></li><li class="nested"><a href="#the-labels-folder">The labels folder</a></li><li class="nested"><a href="#let-ein-suggest-where-a-label-belongs">Let EiN suggest where a label belongs</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#in-the-terminal">In the terminal</a></li></ul></aside>
     </div>
   </body>
 </html>

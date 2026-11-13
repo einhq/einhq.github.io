@@ -251,6 +251,8 @@ you click its icon, and then stays open for the next picture and the next visit,
 | **Taken at**              | The capture time exactly as stored, such as `2025-12-27T13:16:18+13:00`.                                                                                                                                                                     |
 | **Taken at (UTC)**        | The same moment in UTC.                                                                                                                                                                                                                      |
 | **Time source**           | Where the date came from, in words, and any note left with it.                                                                                                                                                                               |
+| **Damage**                | For a scan, what EiN found it has: faded colours, dust, scratches, or none. See [Find the scans worth restoring](#find-the-scans-worth-restoring).                                                                                           |
+| **Restoring**             | A restoration asked for many photos at once that has not been made yet, or why it could not be. See [Restore many photos at once](#restore-many-photos-at-once).                                                                             |
 | **Created**, **Modified** | The file's created and modified times.                                                                                                                                                                                                       |
 | Hashes                    | Fingerprints of the file's bytes, such as `sha256`.                                                                                                                                                                                          |
 
@@ -266,7 +268,7 @@ may change the file, and for any signed-in reader for **Add to album**.
 | **Add to album**                      | Signed-in readers                                                                  | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
 | **Edit faces**                        | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
 | **Edit subtitles**, **Add subtitles** | Readers who may change the file, on videos and recordings                          | Opens what is said, line by line, beside the video or recording, to correct it. See [Correct the subtitles](#correct-the-subtitles).                                                                                                                                                                         |
-| **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                            |
+| **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo); to restore many at once, [Restore many photos at once](#restore-many-photos-at-once).                                      |
 | **Remove a blemish…**                 | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Paint over a spot, a stain or a tear to have it filled, in a copy beside the photo. See [Remove a blemish](#remove-a-blemish).                                                                                                                                                                               |
 | **Rotate left**, **Rotate right**     | Readers who may change the file, on photos and videos                              | Turns the file a quarter turn.                                                                                                                                                                                                                                                                               |
 | **Mirror horizontally**               | Readers who may change the file, on photos and videos                              | Flips the file left to right. A tick shows while it is mirrored.                                                                                                                                                                                                                                             |
@@ -427,6 +429,37 @@ show the original for up to an hour after the switch, until their copy of the pi
 Restoring needs the media service with its restoration models, and someone who may change the
 photo. Running out of time or a picture the media service cannot read ends with a message, and no
 copy is kept.
+
+### Find the scans worth restoring
+
+EiN looks at every scan as it arrives, a file from a staging category that holds scans, and notes
+how faded, dusty and scratched it is. The details panel says what it found under **Damage**: for
+example "Faded colours, dust", or "None found". On the Media page, **Damage** lists the scans found
+**Faded**, **Dusty** or **Scratched**; see [Find damaged scans](media.md#find-damaged-scans).
+
+- **Faded** is a print or slide whose colours **Faded colours** would change a lot. A photo whose
+  colours are meant to be strong or dark, a sunset or a room lit by candles, can be found faded too.
+- **Dusty** and **Scratched** are specks and long thin marks on the smooth parts of the picture,
+  such as a sky or a wall, where they show most. Marks among leaves, grass or a crowd are not
+  counted, since the picture's own thin light details look like them there.
+
+It only notes: nothing is restored until you ask. Scans already in the archive are looked at by the
+media pass that runs every hour, and a scan's colours are looked at again after the media service
+measures them another way. Blur is not noted: nothing in EiN restores it.
+
+### Restore many photos at once
+
+Select the photos on the Media page, for example everything **Damage** found **Faded**, and choose
+**Restore…** in the selection bar. Tick what to restore as for one photo: with **Faded** chosen,
+**Faded colours** is ticked, with **Dusty** or **Scratched** **Dust and scratches**. Choose
+**Restore** and EiN restores them in the background, one after another, while you go on with
+something else: a few seconds each for a small scan, a minute or more for a large one.
+
+Each photo gets its restored copy among its versions, as one restored on its own does, to compare
+and keep or discard. Until its turn comes, its details panel says "Queued, waiting its turn" under
+**Restoring**. A photo the media service could not restore says why there instead, and is not tried
+again until you ask once more. Files of the selection that cannot be restored, such as videos or
+HEIF photos, are left out, and the dialog says how many.
 
 ## Remove a blemish
 

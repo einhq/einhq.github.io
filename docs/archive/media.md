@@ -57,6 +57,18 @@ The switch is off by default, and like the layout it is remembered in this brows
 
 Choosing a kind keeps the feed: the videos alone are still newest first, by date. The kind goes into the page's address (`/media?kind=video`), so a link you copy opens the same view. A document's tile is a picture of its first page, and the viewer shows the document to read ([Read a document](viewer.md#read-a-document)); [Supported files](file-types.md) lists which ones EiN reads the text of.
 
+### Find damaged scans
+
+**Damage** keeps the scans EiN found worn: **Faded**, **Dusty** or **Scratched**, or **Any
+condition** for everything. EiN looks at every scan as it arrives, a file from a staging category
+that holds scans, and photos from a camera or a phone are never in these lists. The choice becomes
+a chip in the box, such as **Faded**, and the page turns into a search; remove the chip with its ×,
+or choose **Any condition**, to return. Select what you find and choose **Restore…** to restore them
+all in the background ([Restore many photos at once](viewer.md#restore-many-photos-at-once)).
+[Find the scans worth restoring](viewer.md#find-the-scans-worth-restoring) says what each one means.
+
+On a phone, **Damage** folds into the button with a sliders icon with the other choices.
+
 ### Narrow by label
 
 When the pictures shown carry labels, a row of label pills appears above them, each with the number of pictures that carry it. Click a pill to keep only those pictures: the label becomes a `#label` chip in the box, and the page turns into a search. Click another pill to narrow further, to pictures that carry both labels. Remove a chip with its × to widen the view again.
@@ -82,15 +94,16 @@ Select pictures as you would in an album: hover over a picture and tick its box,
 
 A bar at the bottom says how many are selected and offers what you may do with them:
 
-| Button                          | What it does                                                                            | Shown when                          |
-| ------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------- |
-| **Favourite** / **Unfavourite** | Hearts the pictures, or takes them out of your favourites when all of them are hearted. | You are signed in.                  |
-| **Download**                    | Downloads one file as itself, several as one zip file.                                  | Always.                             |
-| **Add to album**                | Links the pictures into an album you choose, or one you name there.                     | You are signed in.                  |
-| **Set time**                    | Sets when the pictures were taken. See [Dates and places of pictures](dates-places.md). | You may change every selected file. |
-| **Set location**                | Sets where they were taken. See [Dates and places of pictures](dates-places.md).        | You may change every selected file. |
-| **Label**                       | Puts labels on them. See [Put labels on pictures](#put-labels-on-pictures).             | You may change every selected file. |
-| **Delete**                      | Moves them to your trash, with **Undo** in the message that follows.                    | You may change every selected file. |
+| Button                          | What it does                                                                                                                                          | Shown when                                                                              |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **Favourite** / **Unfavourite** | Hearts the pictures, or takes them out of your favourites when all of them are hearted.                                                               | You are signed in.                                                                      |
+| **Download**                    | Downloads one file as itself, several as one zip file.                                                                                                | Always.                                                                                 |
+| **Add to album**                | Links the pictures into an album you choose, or one you name there.                                                                                   | You are signed in.                                                                      |
+| **Set time**                    | Sets when the pictures were taken. See [Dates and places of pictures](dates-places.md).                                                               | You may change every selected file.                                                     |
+| **Restore…**                    | Restores the photos in the background, each into a copy among its versions. See [Restore many photos at once](viewer.md#restore-many-photos-at-once). | The selection holds a JPEG, PNG, TIFF, WebP or BMP photo, and you may change every one. |
+| **Set location**                | Sets where they were taken. See [Dates and places of pictures](dates-places.md).                                                                      | You may change every selected file.                                                     |
+| **Label**                       | Puts labels on them. See [Put labels on pictures](#put-labels-on-pictures).                                                                           | You may change every selected file.                                                     |
+| **Delete**                      | Moves them to your trash, with **Undo** in the message that follows.                                                                                  | You may change every selected file.                                                     |
 
 On a phone, or when the window has no room for them all, the buttons fold into one **Actions** menu. Your favourites and your trash are described in [Your profile, favourites and trash](../guide/profile.md).
 
@@ -248,6 +261,7 @@ The Media page, the Year page and labels all run ordinary commands, which you ca
 # in EiN's terminal
 search --tag sailing --kind photo,video          # pictures that carry a label
 search 'christmas tree' --kind photo             # pictures by what they show
+search --has damage=faded --kind photo           # the scans found faded
 timeline --year 1968 --kind album,auto-album,birth,death  # what the Year page shows for 1968
 labels                                           # every label in use, with its count
 label add '/archive/albums/Summer 2020' sailing  # put a label on an album

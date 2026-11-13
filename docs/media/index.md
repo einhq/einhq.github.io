@@ -177,6 +177,15 @@ hours of background work: only a file with no mark is asked about, and what it h
 | Transcribe a video or recording again, whatever made its words | `transcribe-file -f /archive/albums/christmas-2019/MVI_0412.mp4` |
 | Embed every stored text and transcript again, as they are      | `media-reembed`                                                  |
 
+## Restoring and reading damage
+
+The Media module makes a picture's restored copies, through the [media service](../ems/index.md):
+`file-restore` restores one while someone waits, and `file-restore --queue` many in the background,
+each picture's request kept on it until `media-restore` has made its copy, as the `restore` kind of
+the `models` worker. `find-damage` reads how faded, dusty and scratched a picture is and keeps it on
+the file, where `search --has damage=faded` finds it; the Archive runs it on its scans
+([Find the scans worth restoring](../archive/viewer.md#find-the-scans-worth-restoring)).
+
 ## The workers
 
 Each module puts the work a crawl must not start all at once as jobs into the pool

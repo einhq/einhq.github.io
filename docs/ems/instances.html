@@ -102,8 +102,8 @@ once to the primary, so adding an instance never holds anything up.</p>
 <h2 id="what-an-instance-takes">What an instance takes<a class="anchor" href="#what-an-instance-takes" aria-label="Link to this section"></a></h2>
 <p>Each kind of work in the media pool names the media service&#39;s operations its steps call. An instance
 takes a kind when it serves every one of them, and when it makes their results the way the primary
-makes them: the same face models, picture and text embedders, text reader and transcription
-settings. A result made otherwise would look stale to EiN, or would be a vector in another space
+makes them: the same face models, picture and text embedders, text reader, way of reading damage
+and transcription settings. A result made otherwise would look stale to EiN, or would be a vector in another space
 than the ones stored, so such a kind stays with the primary.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -167,6 +167,16 @@ than the ones stored, so such a kind stays with the primary.</p>
 <td><code>diarize</code></td>
 <td><code>models</code></td>
 <td><code>speech.voiceprint</code>, <code>speech.active_speakers</code></td>
+</tr>
+<tr>
+<td><code>damage</code></td>
+<td><code>models</code></td>
+<td><code>image.damage</code></td>
+</tr>
+<tr>
+<td><code>restore</code></td>
+<td><code>models</code></td>
+<td><code>image.unfade</code>, <code>image.defects</code>, <code>image.inpaint</code>, <code>image.denoise</code>, <code>image.copy_tags</code>, <code>image.renditions</code></td>
 </tr>
 </tbody></table>
 </div>
