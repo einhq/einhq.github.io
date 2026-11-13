@@ -129,6 +129,7 @@ Nobody sets these for you. Export one in a shell, or put it in front of a comman
 | `OVERPASS_URL` | `https://overpass-api.de/api/interpreter https://overpass.private.coffee/api/interpreter` | Where track-places asks OpenStreetMap's Overpass API for the harbours, islands and bays a track stayed at: one or more endpoints, separated by spaces, tried in turn. Point it at your own server to avoid the public ones' rate limit. From the archive module. |
 | `SMHI_METOBS_URL` | `https://opendata-download-metobs.smhi.se/api/version/1.0` | Where weather asks SMHI's meteorological observations for the weather stations and their hourly values. From the archive module. |
 | `OPEN_METEO_ARCHIVE_URL` | `https://archive-api.open-meteo.com/v1/archive` | Where weather asks Open-Meteo's historical weather API for the hourly weather of places with no SMHI station near them. From the archive module. |
+| `OPEN_METEO_FORECAST_URL` | `https://api.open-meteo.com/v1/forecast` | Where weather-forecast, and the dashboard's weather card, ask Open-Meteo's forecast API for the weather now and in the days ahead. From the archive module. |
 
 ## Set for a pipeline step
 

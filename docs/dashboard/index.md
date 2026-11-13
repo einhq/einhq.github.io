@@ -59,7 +59,8 @@ The cards that come with Dashboards:
 | **Reading**     | One reading of a device, large, with how it went over the last hours                                                                                                                                                         |
 | **Note**        | A few words of your own, in Markdown                                                                                                                                                                                         |
 
-Other modules add their own: the Archive the **Picture of the day** and **Birthdays**, Todo a
+Other modules add their own: the Archive the **Picture of the day**, **Birthdays** and
+[**Weather**](../archive/home.md#on-a-dashboard), Todo a
 **Todo list**, and [Automation](../automation/index.md#on-a-dashboard) a **Camera** and a
 **Button**. A card whose module is removed later says so on the dashboard until you take it off.
 

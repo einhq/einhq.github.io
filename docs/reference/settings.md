@@ -628,7 +628,7 @@ Every setting of an EiN with all its modules: 106 of them, in the groups the Set
 
 ### `CFG_WEATHER`
 
-**Look up the weather**. Let EiN ask SMHI and Open-Meteo what the weather was at a place and time, for photos and for the days of a track's trips. Each lookup sends the coordinates and the date to them; turn it off to keep them from being sent.
+**Look up the weather**. Let EiN ask SMHI and Open-Meteo what the weather was at a place and time, for photos and for the days of a track's trips, and Open-Meteo for the forecast a dashboard's weather card shows. Each lookup sends the coordinates and the date to them; turn it off to keep them from being sent.
 
 | | |
 | --- | --- |

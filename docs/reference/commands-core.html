@@ -1279,9 +1279,22 @@ device-label hall-sensor/temperature <span class="hljs-string">&#x27;Hall temper
 device-show /dev/ruby-phone</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: DeviceInfo.</p>
 <h3 id="devices"><code>devices</code><a class="anchor" href="#devices" aria-label="Link to this section"></a></h3>
-<p>Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers.</p>
+<p>Every device under /dev you may see, or those a word names: its name, label, whether it answers and its main value; or the drivers.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>devices [--online] [--class=&lt;string&gt;] [--drivers]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>devices [--online] [--class=&lt;string&gt;] [--drivers] [&lt;word&gt;...]</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[&lt;word&gt;...]</code></td>
+<td>only the devices whose name or label holds this word, or any of several: lamp, hall.</td>
+</tr>
+</tbody></table>
+</div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1304,6 +1317,7 @@ device-show /dev/ruby-phone</code></pre></div>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>devices
+devices lamp
 devices --online
 devices --class host,storage
 devices --drivers</code></pre></div>

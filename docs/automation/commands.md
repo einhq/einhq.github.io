@@ -176,29 +176,33 @@ automation-ignore d0ad08c5e709 --undo
 
 ### `automation-new`
 
-Make an automation under /etc/automations, empty or from a starting point (members of the automation group)
+Make an automation under /etc/automations, empty or from a starting point with its slots set to your devices; one with slots set is checked, and refused with problems (members of the automation group)
 
 <small>changes things</small>
 
 ```text
-automation-new [--from=<string>] [--examples] <name>
+automation-new [--from=<string>] [--set=<string>] [--description=<string>] [--dry-run] [--examples] <name>
 ```
 
 | Argument | What it is                             |
 | -------- | -------------------------------------- |
 | `<name>` | its name: letters, digits, ., - and _. |
 
-| Option            | What it does                                                    |
-| ----------------- | --------------------------------------------------------------- |
-| `--from=<string>` | a starting point: motion-light, button-toggle, heater, morning. |
-| `--examples`      | list the starting points.                                       |
+| Option                   | What it does                                                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--from=<string>`        | a starting point: empty, motion-light, button-toggle, heater, morning, inbox, dusk-to-dawn, tour.                                           |
+| `--set=<string>`         | a slot of the starting point, <slot>=<value>: an endpoint as <device>/<endpoint>, none to leave an optional one out; --examples lists them. |
+| `--description=<string>` | what it does, a sentence (the starting point says it when not given)                                                                        |
+| `--dry-run`              | write nothing: print the YAML it would write and what is wrong with it.                                                                     |
+| `--examples`             | list the starting points and their slots.                                                                                                   |
 
 ```bash
 automation-new hall-light --from motion-light
+automation-new hall-light --from motion-light --set motion=hall-sensor/motion --set lamp=hall-lamp/switch-0 --set light-level=none --dry-run
 automation-new --examples
 ```
 
-With `JSON_OUTPUT=1`: AutomationSetAnswer: name, path, written, created, problems.
+With `JSON_OUTPUT=1`: AutomationSetAnswer: name, path, written, created, problems, and with --dry-run the YAML as text.
 
 ### `automation-set`
 

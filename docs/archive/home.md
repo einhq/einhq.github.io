@@ -171,15 +171,18 @@ It has four charts: **Births by month**, **Engagements by month**, **Marriages b
 
 ## On a dashboard
 
-With [Dashboards](../dashboard/index.md) installed, the Archive offers two cards for a dashboard:
+With [Dashboards](../dashboard/index.md) installed, the Archive offers three cards for a dashboard:
 
-| Card                   | What it shows                                                                                                                                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Picture of the day** | One picture filling the card, the same all day or changing each hour: from **This day in earlier years**, from **An album** you choose, or from **The newest pictures**                                         |
-| **Birthdays**          | The birthdays in the **Days ahead**, nearest first, with each face, the age and the days left; choose **Show** to add wedding anniversaries and memorials. As on Home, it lists only the people shared with you |
+| Card                   | What it shows                                                                                                                                                                                                           |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Picture of the day** | One picture filling the card, the same all day or changing each hour: from **This day in earlier years**, from **An album** you choose, or from **The newest pictures**                                                 |
+| **Birthdays**          | The birthdays in the **Days ahead**, nearest first, with each face, the age and the days left; choose **Show** to add wedding anniversaries and memorials. As on Home, it lists only the people shared with you         |
+| **Weather**            | The weather at a **Place**, given by name or as coordinates such as `57.71, 11.97`: now, and as the card has room, the next hours in a row under it and up to **Days ahead** days, under it or beside it on a wide card |
 
 On a screen opened from a [display link](../dashboard/screens.md) they show what the link's account
-may see.
+may see. The weather is the place's own forecast, read every fifteen minutes, with the hours and
+days in the place's time ([The weather ahead](places.md#the-weather-ahead)); it says so when
+**Look up the weather** is turned off.
 
 ## When something goes differently
 

@@ -172,8 +172,9 @@ place where nothing had a name, and a location you deleted that a stay needs aga
 ## The weather at a place and time
 
 EiN can look up what the weather was at a place and an hour: the air temperature, the wind's speed
-and the direction it blew from, and how much of the sky was covered by cloud. Every lookup sends the
-place and the date to a weather service; an administrator who does not want that turns off **Look
+and the direction it blew from, and how much of the sky was covered by cloud. It can also tell the
+weather ahead ([The weather ahead](#the-weather-ahead)). Every lookup sends the place and the date
+to a weather service; an administrator who does not want that turns off **Look
 up the weather** (`CFG_WEATHER`) in **Settings → System**, under **Places**.
 
 Each value comes from the first of these that has it:
@@ -217,6 +218,23 @@ A track's trips get their weather this way too: each whole hour of a trip, the w
 track was then, summed up for each day and for the whole trip on the album made of it
 ([The Trip tab](albums.md#the-trip-tab)). A trip is looked up once it has been found in the track,
 and again for a week after each day, since the last hours are sometimes observed later.
+
+### The weather ahead
+
+`weather-forecast` gives the weather at a place now and ahead: the kind of weather, the
+temperature and what it feels like, rain and snow with the chance of any, the wind and its gusts,
+and the sunrise and sunset of each day. It reads the hours from the one under way (`--hours`, 24
+unless you give it) and the days from today (`--days`, 7 unless you give it, at most 16), in the
+place's own time. It comes from Open-Meteo's forecast, which takes the best of the national weather
+models for the place, and needs the same **Look up the weather** setting as the rest. The forecast
+is kept for ten minutes, so many screens showing it ask once. The weather card for a dashboard
+([On a dashboard](home.md#on-a-dashboard)) shows it.
+
+```bash
+# in EiN's terminal
+weather-forecast --place=Göteborg --days=3 --hours=12
+weather-forecast --lat=48.85 --lng=-3.01
+```
 
 The header shows the location's name and address, the people who live there, and its labels. If
 you may change the location, it also has **Share**, **Edit** and a ⋮ menu with **Add event** and

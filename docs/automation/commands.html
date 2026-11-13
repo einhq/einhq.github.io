@@ -285,9 +285,9 @@ automation-found 7c2ebd614055</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-ignore d0ad08c5e709
 automation-ignore d0ad08c5e709 --undo</code></pre></div>
 <h3 id="automation-new"><code>automation-new</code><a class="anchor" href="#automation-new" aria-label="Link to this section"></a></h3>
-<p>Make an automation under /etc/automations, empty or from a starting point (members of the automation group)</p>
+<p>Make an automation under /etc/automations, empty or from a starting point with its slots set to your devices; one with slots set is checked, and refused with problems (members of the automation group)</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>automation-new [--from=&lt;string&gt;] [--examples] &lt;name&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>automation-new [--from=&lt;string&gt;] [--set=&lt;string&gt;] [--description=&lt;string&gt;] [--dry-run] [--examples] &lt;name&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -310,17 +310,30 @@ automation-ignore d0ad08c5e709 --undo</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>--from=&lt;string&gt;</code></td>
-<td>a starting point: motion-light, button-toggle, heater, morning.</td>
+<td>a starting point: empty, motion-light, button-toggle, heater, morning, inbox, dusk-to-dawn, tour.</td>
+</tr>
+<tr>
+<td><code>--set=&lt;string&gt;</code></td>
+<td>a slot of the starting point, <slot>=<value>: an endpoint as <device>/<endpoint>, none to leave an optional one out; --examples lists them.</td>
+</tr>
+<tr>
+<td><code>--description=&lt;string&gt;</code></td>
+<td>what it does, a sentence (the starting point says it when not given)</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td>write nothing: print the YAML it would write and what is wrong with it.</td>
 </tr>
 <tr>
 <td><code>--examples</code></td>
-<td>list the starting points.</td>
+<td>list the starting points and their slots.</td>
 </tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-new hall-light --from motion-light
+automation-new hall-light --from motion-light --<span class="hljs-built_in">set</span> motion=hall-sensor/motion --<span class="hljs-built_in">set</span> lamp=hall-lamp/switch-0 --<span class="hljs-built_in">set</span> light-level=none --dry-run
 automation-new --examples</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: AutomationSetAnswer: name, path, written, created, problems.</p>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationSetAnswer: name, path, written, created, problems, and with --dry-run the YAML as text.</p>
 <h3 id="automation-set"><code>automation-set</code><a class="anchor" href="#automation-set" aria-label="Link to this section"></a></h3>
 <p>Write an automation&#39;s YAML, made when it is new; one with problems is refused unless --draft.</p>
 <p><small>changes things</small></p>

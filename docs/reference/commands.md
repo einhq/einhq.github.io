@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 450 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 451 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -64,7 +64,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [device-key](commands-core.md#device-key) | The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off) |
 | [device-label](commands-core.md#device-label) | Name a device or one of its endpoints, as its page and cards show it; for members of the devices group. |
 | [device-show](commands-core.md#device-show) | A device and each of its endpoints: a log's or control's latest value, a track's fixes, a stream's size and codec, and whether you may write a control. |
-| [devices](commands-core.md#devices) | Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers. |
+| [devices](commands-core.md#devices) | Every device under /dev you may see, or those a word names: its name, label, whether it answers and its main value; or the drivers. |
 | [df](commands-core.md#df) | Free space per storage tier, the size of its files, its growth per day and when it fills, and the database size and its largest tables. |
 | [dirname](commands-core.md#dirname) | Strip last component from file name. |
 | [dmesg](commands-core.md#dmesg) | Print system log. |
@@ -258,7 +258,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 144 in full](../archive/commands.md).
+[All 145 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -405,6 +405,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [trip-list](../archive/commands.md#trip-list) | A track's trips and stays, as track-trips last derived them. |
 | [voiceprint-file](../archive/commands.md#voiceprint-file) | Find the voices of an audio or video recording: who speaks when, with one voiceprint per voice. |
 | [weather](../archive/commands.md#weather) | The weather at a place and time, or every hour of a span with --to: temperature, wind and cloud cover from the nearest SMHI station, or from Open-Meteo. |
+| [weather-forecast](../archive/commands.md#weather-forecast) | The weather at a place now and in the hours and days ahead, from Open-Meteo. |
 | [weather-photo](../archive/commands.md#weather-photo) | Look up the weather a photo was taken in, at its point and capture time, and write it on its position node. |
 
 ## Assistant
@@ -434,7 +435,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [automation-engine](../automation/commands.md#automation-engine) | Run the automations under /etc/automations and /etc/automations.d when a reading, a press, a device coming or going or the clock says so, each as its owner (the automation-engine service) |
 | [automation-found](../automation/commands.md#automation-found) | The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
 | [automation-ignore](../automation/commands.md#automation-ignore) | Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group) |
-| [automation-new](../automation/commands.md#automation-new) | Make an automation under /etc/automations, empty or from a starting point (members of the automation group) |
+| [automation-new](../automation/commands.md#automation-new) | Make an automation under /etc/automations, empty or from a starting point with its slots set to your devices; one with slots set is checked, and refused with problems (members of the automation group) |
 | [automation-set](../automation/commands.md#automation-set) | Write an automation's YAML, made when it is new; one with problems is refused unless --draft. |
 | [automation-show](../automation/commands.md#automation-show) | An automation's YAML, whose it is, whether it runs and what is wrong with it; in JSON mode also its graph with every node placed. |
 | [automation-snmp](../automation/commands.md#automation-snmp) | Walk a device's SNMP objects under an OID (the system group unless one is given), for members of the devices group. |

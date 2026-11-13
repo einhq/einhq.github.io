@@ -781,13 +781,17 @@ With `JSON_OUTPUT=1`: DeviceInfo.
 
 ### `devices`
 
-Every device under /dev you may see: its name, label, whether it answers and its main value; or the drivers.
+Every device under /dev you may see, or those a word names: its name, label, whether it answers and its main value; or the drivers.
 
 <small>reads only</small>
 
 ```text
-devices [--online] [--class=<string>] [--drivers]
+devices [--online] [--class=<string>] [--drivers] [<word>...]
 ```
+
+| Argument | What it is |
+| --- | --- |
+| `[<word>...]` | only the devices whose name or label holds this word, or any of several: lamp, hall. |
 
 | Option | What it does |
 | --- | --- |
@@ -797,6 +801,7 @@ devices [--online] [--class=<string>] [--drivers]
 
 ```bash
 devices
+devices lamp
 devices --online
 devices --class host,storage
 devices --drivers
