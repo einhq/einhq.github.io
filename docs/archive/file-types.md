@@ -108,7 +108,10 @@ A RAW whose JPEG came later, or that was uploaded before EiN did this, is filed 
 [**Hide RAW files**](albums.md#hide-raw-files) in its album's menu, or with
 [`raw --sort`](commands.md#raw). A RAW with no JPEG of its name stays a picture of its own, and so
 does one with two pictures of its name in the folder (a JPEG and a HEIC, say), since EiN cannot
-tell which it belongs to. When EiN finds a RAW of its own to be a duplicate of another picture, it
+tell which it belongs to. A RAW that arrives again after it was filed, as an import run a second
+time can bring it, takes the place of the version already under its JPEG when the two hold the
+same bytes; when they differ it stays where it is, and the sort says the version already exists.
+When EiN finds a RAW of its own to be a duplicate of another picture, it
 suggests keeping the RAW, as the better format ([Which copy is kept](duplicates.md#which-copy-is-kept)).
 
 ## Videos
