@@ -519,9 +519,14 @@ kinds it read and searches the rest of your sentence as words.</p>
 <a href="../shell/terminal.html">terminal</a>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 search <span class="hljs-string">&quot;Christmas tree&quot;</span> --kind photo
-search --subject-name person:peggy --from 1968 --to 1968</code></pre></div>
+search --subject-name person:peggy --from 1968 --to 1968
+search --occasion midsummer --from 1995 --to 2000</code></pre></div>
 <p>The first finds photos by what they show; the second lists everything with a person whose name
-contains Peggy, taken in 1968. Without <code>--kind</code>, <code>search</code> finds every kind at once, and a person&#39;s
+contains Peggy, taken in 1968; the third what was taken at midsummer in each of the years 1995 to
+2000. <code>--occasion</code> knows the days of <code>midsummer</code>, <code>easter</code>, <code>christmas</code>, <code>new-year</code>, <code>walpurgis</code>,
+<code>national-day</code> and <code>lucia</code> in every year, also by their Swedish names (<code>midsommar</code>, <code>påsk</code>, <code>jul</code>,
+<code>nyår</code>, <code>valborg</code>, <code>nationaldagen</code>), and without <code>--from</code> and <code>--to</code> it looks in every year. The
+assistant uses it when you ask in <a href="../assistant/chat.html">Chat</a> for pictures from a holiday. Without <code>--kind</code>, <code>search</code> finds every kind at once, and a person&#39;s
 name finds the person first and the pictures they are in after them: <code>search &quot;Peggy Wrenfield&quot;</code>
 puts Peggy ahead of every photo of her, even one named after her. Its options are in the
 <a href="../reference/commands-core.html#search">command reference</a>, the Archive&#39;s providers behind it, such

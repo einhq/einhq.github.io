@@ -194,23 +194,24 @@ album has a position, and it has no devices whose routes to show.**
 
 ![The album's Info tab: the Album section with Name, When, Holds and On the map, and the People, Places and Cameras sections with counts](../../assets/shots/album-info.webp "The Info tab sums up who and what is in the album, each with a link.")
 
-| Section           | What it shows                                                                                                                               |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Album**         | **Name**, **When** (its dates), **Holds** (for example "31 photos · 6 videos") and **On the map**: **All of them**, or how many of how many |
-| **About**         | The description                                                                                                                             |
-| **People**        | The people in its pictures, most often first                                                                                                |
-| **Places**        | The locations its pictures are linked to                                                                                                    |
-| **Cameras**       | The cameras that took its pictures, most pictures first                                                                                     |
-| **Devices**       | The devices whose tracks the Map tab draws: those the cameras of its pictures are part of, then those added to the album                    |
-| **Photographers** | The people who took them                                                                                                                    |
-| **Labels**        | The labels its pictures carry, with how many carry each                                                                                     |
+| Section           | What it shows                                                                                                                                                                                              |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Album**         | **Name**, **When** (its dates), **Holds** (for example "31 photos · 6 videos") and **On the map**: **All of them**, or how many of how many                                                                |
+| **About**         | The description                                                                                                                                                                                            |
+| **Comments**      | What people wrote about the album, as in the viewer ([The details panel](viewer.md#the-details-panel)): everyone who sees the album reads them, and if you may change it you write one and delete your own |
+| **People**        | The people in its pictures, most often first                                                                                                                                                               |
+| **Places**        | The locations its pictures are linked to                                                                                                                                                                   |
+| **Cameras**       | The cameras that took its pictures, most pictures first                                                                                                                                                    |
+| **Devices**       | The devices whose tracks the Map tab draws: those the cameras of its pictures are part of, then those added to the album                                                                                   |
+| **Photographers** | The people who took them                                                                                                                                                                                   |
+| **Labels**        | The labels its pictures carry, with how many carry each                                                                                                                                                    |
 
 Each name opens its page. In **People**, **Places** and **Cameras**, the number beside a name
 searches the album for the pictures that have it. In **Devices**, the number is how many of the
 pictures the device's cameras took, and a device added to the album says **added** instead. In **Labels**, a label searches the album for that label. **People**, **Places**,
 **Cameras** and **Photographers** show their first 10, then **Show all N** and **Show fewer**;
 **Devices** and **Labels** show them all. When nobody is tagged and nothing is linked to a location
-or a camera, the tab says so.
+or a camera, the tab says so. **Comments** is there when the album has some, or when you may change it.
 
 ## Choose which devices the map shows
 
