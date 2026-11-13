@@ -327,10 +327,15 @@ The `search` command answers the same questions as the two pages, in EiN's
 # in EiN's terminal
 search "Christmas tree" --kind photo
 search --subject-name person:peggy --from 1968 --to 1968
+search --occasion midsummer --from 1995 --to 2000
 ```
 
 The first finds photos by what they show; the second lists everything with a person whose name
-contains Peggy, taken in 1968. Without `--kind`, `search` finds every kind at once, and a person's
+contains Peggy, taken in 1968; the third what was taken at midsummer in each of the years 1995 to
+2000. `--occasion` knows the days of `midsummer`, `easter`, `christmas`, `new-year`, `walpurgis`,
+`national-day` and `lucia` in every year, also by their Swedish names (`midsommar`, `påsk`, `jul`,
+`nyår`, `valborg`, `nationaldagen`), and without `--from` and `--to` it looks in every year. The
+assistant uses it when you ask in [Chat](../assistant/chat.md) for pictures from a holiday. Without `--kind`, `search` finds every kind at once, and a person's
 name finds the person first and the pictures they are in after them: `search "Peggy Wrenfield"`
 puts Peggy ahead of every photo of her, even one named after her. Its options are in the
 [command reference](../reference/commands-core.md#search), the Archive's providers behind it, such
