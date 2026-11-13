@@ -79,17 +79,21 @@ The server keeps what it last read in a cache, so a follow-up question in the sa
 
 With the media service on the same card, the two divide its memory. The model leaves the media service `LLM_CARD_RESERVE_MB` of the card, 8800 MB unless you change it, loads as many of its layers as fit in the rest, and runs the others on the processor. It works its part out each time it starts, from what the media service holds then, so it gets the same part whichever of the two started first. On a 16 GB card every layer fits; on a smaller one some run on the processor, and the answers come more slowly.
 
-To change the division, set both sides in `~/ein/.env` and apply it:
+To change the division, set the media service's share 400 MB below the model's reserve, with the slider on the **Media service** tab or in EiN's terminal, and the reserve in `~/ein/.env`, then start the model again:
+
+```bash
+# in EiN's terminal
+config set CFG_EMS_CARD_SHARE_MB 8400
+```
 
 ```ini
 # in ~/ein/.env
 LLM_CARD_RESERVE_MB=8800   # what the model leaves the media service of the card
-EMS_CARD_SHARE_MB=8400     # the most the media service takes; 400 MB less than the line above
 ```
 
 ```bash
 # on the machine EiN runs on, in ~/ein
-podman compose up -d
+podman compose up -d llm
 ```
 
 [The graphics card](../ems/gpu.md) covers the card itself, and [Performance and sizing](../admin/performance.md) how much card and memory each part needs.

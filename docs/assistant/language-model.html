@@ -192,12 +192,13 @@ llm-status --checks</code></pre></div>
 <p>The server keeps what it last read in a cache, so a follow-up question in the same chat reads only the new message. It stays loaded between questions.</p>
 <h3 id="share-the-graphics-card-with-the-media-service">Share the graphics card with the media service<a class="anchor" href="#share-the-graphics-card-with-the-media-service" aria-label="Link to this section"></a></h3>
 <p>With the media service on the same card, the two divide its memory. The model leaves the media service <code>LLM_CARD_RESERVE_MB</code> of the card, 8800 MB unless you change it, loads as many of its layers as fit in the rest, and runs the others on the processor. It works its part out each time it starts, from what the media service holds then, so it gets the same part whichever of the two started first. On a 16 GB card every layer fits; on a smaller one some run on the processor, and the answers come more slowly.</p>
-<p>To change the division, set both sides in <code>~/ein/.env</code> and apply it:</p>
+<p>To change the division, set the media service&#39;s share 400 MB below the model&#39;s reserve, with the slider on the <strong>Media service</strong> tab or in EiN&#39;s terminal, and the reserve in <code>~/ein/.env</code>, then start the model again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+config <span class="hljs-built_in">set</span> CFG_EMS_CARD_SHARE_MB 8400</code></pre></div>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
-<span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">8800</span>   <span class="hljs-comment"># what the model leaves the media service of the card</span>
-<span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">8400</span>     <span class="hljs-comment"># the most the media service takes; 400 MB less than the line above</span></code></pre></div>
+<span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">8800</span>   <span class="hljs-comment"># what the model leaves the media service of the card</span></code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose up -d</code></pre></div>
+podman compose up -d llm</code></pre></div>
 <p><a href="../ems/gpu.html">The graphics card</a> covers the card itself, and <a href="../admin/performance.html">Performance and sizing</a> how much card and memory each part needs.</p>
 <h3 id="settings-for-the-container">Settings for the container<a class="anchor" href="#settings-for-the-container" aria-label="Link to this section"></a></h3>
 <p>These go in <code>~/ein/.env</code> and take effect at the next <code>podman compose up -d</code>.</p>

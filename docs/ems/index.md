@@ -319,8 +319,9 @@ how it is, again and again, while the tab is open.
   what is free. **RAM** splits the media service's memory into each model held there and its workers'
   own. A search model drawn hatched, as **standby**, is in RAM as well as on the card while the card
   is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
-  card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
-  times it has. How busy the card is, its temperature and its power are the **GPU** tile of the
+  card, so search never stops. Under the card's bar, **Media service's share** sets how much of the
+  card the media service may hold ([Share one card with the language model](gpu.md#share-one-card-with-the-language-model)).
+  Under the bars, the RAM each worker rebuilds itself at, and how many times it has. How busy the card is, its temperature and its power are the **GPU** tile of the
   **Media service** card on the **Overview** tab.
 - **Models**: every model the media service can load, in four columns by what it is doing,
   **Working**, **Loaded, idle**, **Loading or unloading** and **Not loaded**, each with where it is and
@@ -498,7 +499,7 @@ These are the settings an administrator is most likely to need:
 | `EMS_WHISPER_LANGUAGES`   | empty                         | The languages spoken in your recordings, as codes separated by commas, the most common first. Detection is biased towards them; empty lets detection alone decide.                                                                             |
 | `EMS_WHISPER_LANGUAGE`    | empty                         | One language every recording is transcribed as; detection never runs. Right only when every recording is in that language.                                                                                                                     |
 | `EMS_EXPECT_GPU`          | empty                         | `1`: the machine is meant to have a card, and the `ems gpu` check fails when none is visible.                                                                                                                                                  |
-| `EMS_CARD_SHARE_MB`       | `0`                           | The most of the card the media service holds, in MB, for a card shared with the language model; `0` is all of it.                                                                                                                              |
+| `EMS_CARD_SHARE_MB`       | empty                         | The most of the card the media service holds when it starts, in MB, until EiN's `CFG_EMS_CARD_SHARE_MB` gives it another; empty is all of it, `0` none. [Share one card](gpu.md#share-one-card-with-the-language-model).                       |
 | `EMS_CARD_QUIET_AFTER`    | `600`                         | Seconds without indexing work before search gets the card; `0` keeps search on the CPU.                                                                                                                                                        |
 | `EMS_MODEL_IDLE_EVICT`    | `21600`                       | Seconds a model may sit unused before it is unloaded.                                                                                                                                                                                          |
 | `EMS_MODEL_PINNED`        | `text-query`                  | Models loaded at start and never unloaded, separated by commas. The search models, `text-query` and `siglip-text`, are pinned in the query worker whatever this says, and only there, so the default pins nothing unless `EMS_QUERY_WORKER=0`. |

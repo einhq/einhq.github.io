@@ -264,7 +264,7 @@ podman run --<span class="hljs-built_in">rm</span> --device nvidia.com/gpu=all d
 <p>The <strong>Media service</strong> tab shows more:</p>
 <ul>
 <li><strong>Media service</strong>, at the top, names the <strong>card</strong> and its <strong>driver</strong>, and under them <strong>Graphics card</strong> says who has the card now: <strong>busy</strong> while indexing has it and search runs on the processor, <strong>quiet</strong> when there is no indexing work and search runs on the card as far as it fits, <strong>switching</strong> while it is handed over. With no card to share, or with <code>EMS_CARD_QUIET_AFTER=0</code>, the mode is off and the tab leaves this out.</li>
-<li><strong>Where the models are</strong> splits the card&#39;s memory into each model on it, the media service&#39;s own runtime, and the <strong>chat model and others</strong>, which is the language model when it shares the card; and the media service&#39;s RAM into each model there. A search model in RAM while it is also on the card is its <strong>standby</strong> copy.</li>
+<li><strong>Where the models are</strong> splits the card&#39;s memory into each model on it, the media service&#39;s own runtime, and the <strong>chat model and others</strong>, which is the language model when it shares the card; and the media service&#39;s RAM into each model there. A search model in RAM while it is also on the card is its <strong>standby</strong> copy. Under the card&#39;s bar, <strong>Media service&#39;s share</strong> sets how much of the card the media service may hold (<a href="#share-one-card-with-the-language-model">Share one card with the language model</a>).</li>
 <li><strong>Models</strong> puts every model under what it is doing, <strong>Working</strong>, <strong>Loaded, idle</strong>, <strong>Loading or unloading</strong> or <strong>Not loaded</strong>, with its place, <strong>GPU</strong> or <strong>RAM</strong>, and size.</li>
 <li><strong>The last 6 hours</strong> shows which models were on the card and in RAM, and when.</li>
 </ul>
@@ -282,7 +282,18 @@ llm: all of the model's layers fit there</code></pre></div>
 podman compose <span class="hljs-built_in">exec</span> ems python3 scripts/gpu_selftest.py</code></pre></div>
 <p><code>--only</code> with part of a check&#39;s name runs only the checks that match.</p>
 <h2 id="share-one-card-with-the-language-model">Share one card with the language model<a class="anchor" href="#share-one-card-with-the-language-model" aria-label="Link to this section"></a></h2>
-<p>With both <code>--ems</code> and <code>--llm</code> on one card, the two services split it by one number, set on both sides in <code>~/ein/.env</code>:</p>
+<p>With both <code>--ems</code> and <code>--llm</code> on one card, each keeps to its own part of it:</p>
+<ul>
+<li><strong>The media service&#39;s share</strong> is the most of the card its models hold. A model that would take it past the share runs on the processor, even while the rest of the card is free.</li>
+<li><strong>The language model&#39;s reserve</strong> is how much of the card the language model leaves the media service. It takes as many layers as fit in the rest when it starts, and runs the others on the processor.</li>
+</ul>
+<p>Set the media service&#39;s share on the <strong>Media service</strong> tab of the Status page: under the <strong>Graphics card</strong> bar in <strong>Where the models are</strong>, drag <strong>Media service&#39;s share</strong> between <strong>none</strong> and <strong>all</strong>. Under the slider, the tab says what the media service and the card&#39;s other programs hold now, and which models run on the processor at the share chosen.</p>
+<figure class="shot"><a href="../../assets/shots/ems-card-share@2x.webp"><img src="../../assets/shots/ems-card-share.webp" srcset="../../assets/shots/ems-card-share.webp 1x, ../../assets/shots/ems-card-share@2x.webp 2x" alt="Where the models are: the Graphics card bar, 5.1 GB of 15.9 GB held by the chat model and others, and under it the Media service's share slider at 9.5 GB, between none and all, saying the media service holds 0 MB now and other programs, such as a language model, 5.1 GB" width="1200" height="340" loading="lazy" decoding="async"></a><figcaption>The share takes effect at once; the language model&#39;s reserve is set where it runs</figcaption></figure>
+<p>The share takes effect at once. Models that no longer fit leave the card, those at work when their work is done, and each loads next on the card or the processor as the share leaves room for it. <strong>none</strong> runs every model on the processor. Speech needs 4.4 GB of the share for its model on the card; with less, recordings are transcribed on the processor, at about twice their length. Transcripts already made stay as they are, wherever they were made.</p>
+<p>The slider sets <a href="../reference/settings.html#cfg_ems_card_share_mb"><code>CFG_EMS_CARD_SHARE_MB</code></a>, and the <code>ems-link</code> service gives it to the media service, again after each of its restarts. The terminal sets it the same way:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+config <span class="hljs-built_in">set</span> CFG_EMS_CARD_SHARE_MB 9700</code></pre></div>
+<p>Until it is set, the media service keeps the share it starts with, from <code>~/ein/.env</code>. The language model&#39;s reserve is set there too, and is read when the model starts:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -295,8 +306,8 @@ podman compose <span class="hljs-built_in">exec</span> ems python3 scripts/gpu_s
 <tbody><tr>
 <td><code>EMS_CARD_SHARE_MB</code></td>
 <td>the media service</td>
-<td><code>0</code></td>
-<td>The most of the card, in MB, the media service&#39;s processes hold. A model that would take it past this runs on the processor, even while the rest of the card is free. <code>0</code> is the whole card.</td>
+<td>empty</td>
+<td>The share the media service starts with, in MB, until EiN&#39;s setting gives it another. Empty is the whole card, <code>0</code> none of it.</td>
 </tr>
 <tr>
 <td><code>LLM_CARD_RESERVE_MB</code></td>
@@ -307,14 +318,13 @@ podman compose <span class="hljs-built_in">exec</span> ems python3 scripts/gpu_s
 </tbody></table>
 </div>
 <p>Set the language model&#39;s reserve 400 MB above the media service&#39;s share: the language model counts the card as <code>nvidia-smi</code> does, and some 400 MB of that are never usable by the media service. The media service then never loads into the language model&#39;s part. The language model fits its layers into the card less its reserve each time it starts, its restarts included, whatever the media service holds at the time, so it gets the same part whichever of the two started first. <code>setup.sh</code> sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.</p>
-<p>On a 16 GB card, the pair EiN&#39;s own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers:</p>
+<p>On a 16 GB card, the pair EiN&#39;s own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers. Set the share with the slider or <code>config set CFG_EMS_CARD_SHARE_MB 9700</code>, and the reserve in <code>~/ein/.env</code>:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
-<span class="hljs-attr">EMS_CARD_SHARE_MB</span>=<span class="hljs-number">9700</span>
 <span class="hljs-attr">LLM_CARD_RESERVE_MB</span>=<span class="hljs-number">10100</span></code></pre></div>
-<p>Apply it:</p>
+<p>Apply the reserve by starting the language model again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose up -d</code></pre></div>
-<p>On a smaller card the language model gets fewer layers and answers more slowly; on an 8 GB card it runs on the processor. A language model at a hosted provider has no part of the card, so leave <code>EMS_CARD_SHARE_MB</code> at <code>0</code> and the media service uses all of it. <a href="../assistant/language-model.html">The language model</a> covers the model itself and the hosted alternative, and <a href="../admin/performance.html">Performance and sizing</a> how memory and processor are shared.</p>
+podman compose up -d llm</code></pre></div>
+<p>To give the language model more of the card, lower the share first, then its reserve. On a smaller card the language model gets fewer layers and answers more slowly; on an 8 GB card it runs on the processor. A language model at a hosted provider has no part of the card, so leave the share at <strong>all</strong> and the media service uses all of it. <a href="../assistant/language-model.html">The language model</a> covers the model itself and the hosted alternative, and <a href="../admin/performance.html">Performance and sizing</a> how memory and processor are shared.</p>
 <h2 id="be-told-when-the-card-goes-missing">Be told when the card goes missing<a class="anchor" href="#be-told-when-the-card-goes-missing" aria-label="Link to this section"></a></h2>
 <p>After a reboot or a driver upgrade, a card can be lost to the containers: the media service then still runs, on the processor, and the work only gets slower. To have this show as a failure instead, tell the media service that the machine has a card:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
@@ -375,15 +385,15 @@ podman compose up -d</code></pre></div>
 </tr>
 <tr>
 <td>Models show <strong>CPU</strong> on the <strong>Media service</strong> tab while the card has room</td>
-<td>The card may be full at that moment, or held by the language model. Look at <strong>Where the models are</strong>, and set the <a href="#share-one-card-with-the-language-model">share</a> when the two use one card.</td>
+<td>The card may be full at that moment, held by the language model, or kept from the media service by its share. Look at <strong>Where the models are</strong> and the <strong>Media service&#39;s share</strong> under it (<a href="#share-one-card-with-the-language-model">Share one card</a>).</td>
 </tr>
 <tr>
 <td>The chat answers slowly on a machine with a card</td>
-<td>The language model got only some of its layers, or none. Its log, <code>podman compose logs llm</code>, says how many fit on the card when it started. Raise the part of the card it gets by lowering <code>LLM_CARD_RESERVE_MB</code> and <code>EMS_CARD_SHARE_MB</code> together.</td>
+<td>The language model got only some of its layers, or none. Its log, <code>podman compose logs llm</code>, says how many fit on the card when it started. Raise the part of the card it gets by lowering the media service&#39;s share and <code>LLM_CARD_RESERVE_MB</code> together.</td>
 </tr>
 <tr>
 <td>A transcription waits for a long time</td>
-<td>On a machine with a card, whisper waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.</td>
+<td>While the media service&#39;s share holds whisper, it waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.</td>
 </tr>
 </tbody></table>
 </div>

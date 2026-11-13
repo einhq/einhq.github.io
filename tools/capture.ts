@@ -146,7 +146,7 @@ const SHOTS: Shot[] = [
   { id: 'year', run: (page) => open(page, '/year?year=2025', 5000) },
   { id: 'cameras', run: (page) => open(page, '/cameras', 5000) },
   // The Status page's tabs that show no archive, only the machine and its work, are taken from an
-  // instance under real load (`--only status,system-work,system-ems,system-services --demo-avatar`).
+  // instance under real load (`--only status,system-work,system-ems,ems-card-share,system-services --demo-avatar`).
   // The Log tab names files and accounts, so it comes from the demo.
   { id: 'status', clip: { x: 240, y: 48, width: 1200, height: 650 }, run: (page) => open(page, '/system', 6000) },
   {
@@ -220,6 +220,23 @@ const SHOTS: Shot[] = [
   { id: 'nodes', run: (page) => open(page, `/system/nodes?path=${encodeURIComponent('/archive/people/peggy-wrenfield')}`, 4000) },
   { id: 'system-work', run: (page) => open(page, '/system?tab=work', 6000) },
   { id: 'system-ems', run: (page) => open(page, '/system?tab=ems.media-service', 6000) },
+  {
+    // Where the models are, its card's bar and the media service's share under it, from the same
+    // instance under real load.
+    id: 'ems-card-share',
+    clip: { x: 240, y: 120, width: 1200, height: 340 },
+    run: async (page) => {
+      await open(page, '/system?tab=ems.media-service', 6000);
+      // Its top just under the page's sticky tabs, whatever the cards above it hold.
+      await page.getByText('Where the models are').evaluate((title) => {
+        const card = title.closest('.mantine-Card-root');
+        let scroller = card?.parentElement ?? null;
+        while (scroller && scroller.scrollHeight <= scroller.clientHeight) scroller = scroller.parentElement;
+        if (card) (scroller ?? document.scrollingElement)?.scrollBy(0, card.getBoundingClientRect().top - 130);
+      });
+      await settle(page, 1000);
+    },
+  },
   { id: 'system-log', run: (page) => open(page, '/system?tab=log', 5000) },
   { id: 'settings', run: (page) => open(page, '/settings', 4000) },
   { id: 'settings-users', run: (page) => open(page, '/settings?tab=users', 4000) },

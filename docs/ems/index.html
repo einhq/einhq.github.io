@@ -547,8 +547,9 @@ it, the media service&#39;s own runtime there, the <strong>chat model and others
 what is free. <strong>RAM</strong> splits the media service&#39;s memory into each model held there and its workers&#39;
 own. A search model drawn hatched, as <strong>standby</strong>, is in RAM as well as on the card while the card
 is quiet: the card answers the searches, and the RAM copy answers the moment indexing takes the
-card, so search never stops. Under the bars, the RAM each worker rebuilds itself at, and how many
-times it has. How busy the card is, its temperature and its power are the <strong>GPU</strong> tile of the
+card, so search never stops. Under the card&#39;s bar, <strong>Media service&#39;s share</strong> sets how much of the
+card the media service may hold (<a href="gpu.html#share-one-card-with-the-language-model">Share one card with the language model</a>).
+Under the bars, the RAM each worker rebuilds itself at, and how many times it has. How busy the card is, its temperature and its power are the <strong>GPU</strong> tile of the
 <strong>Media service</strong> card on the <strong>Overview</strong> tab.</li>
 <li><strong>Models</strong>: every model the media service can load, in four columns by what it is doing,
 <strong>Working</strong>, <strong>Loaded, idle</strong>, <strong>Loading or unloading</strong> and <strong>Not loaded</strong>, each with where it is and
@@ -797,8 +798,8 @@ the containers again with the limit.</p>
 </tr>
 <tr>
 <td><code>EMS_CARD_SHARE_MB</code></td>
-<td><code>0</code></td>
-<td>The most of the card the media service holds, in MB, for a card shared with the language model; <code>0</code> is all of it.</td>
+<td>empty</td>
+<td>The most of the card the media service holds when it starts, in MB, until EiN&#39;s <code>CFG_EMS_CARD_SHARE_MB</code> gives it another; empty is all of it, <code>0</code> none. <a href="gpu.html#share-one-card-with-the-language-model">Share one card</a>.</td>
 </tr>
 <tr>
 <td><code>EMS_CARD_QUIET_AFTER</code></td>

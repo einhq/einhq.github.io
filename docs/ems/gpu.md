@@ -175,7 +175,7 @@ Open **Status** under **System** in the sidebar. On the **Overview** tab, the **
 The **Media service** tab shows more:
 
 - **Media service**, at the top, names the **card** and its **driver**, and under them **Graphics card** says who has the card now: **busy** while indexing has it and search runs on the processor, **quiet** when there is no indexing work and search runs on the card as far as it fits, **switching** while it is handed over. With no card to share, or with `EMS_CARD_QUIET_AFTER=0`, the mode is off and the tab leaves this out.
-- **Where the models are** splits the card's memory into each model on it, the media service's own runtime, and the **chat model and others**, which is the language model when it shares the card; and the media service's RAM into each model there. A search model in RAM while it is also on the card is its **standby** copy.
+- **Where the models are** splits the card's memory into each model on it, the media service's own runtime, and the **chat model and others**, which is the language model when it shares the card; and the media service's RAM into each model there. A search model in RAM while it is also on the card is its **standby** copy. Under the card's bar, **Media service's share** sets how much of the card the media service may hold ([Share one card with the language model](#share-one-card-with-the-language-model)).
 - **Models** puts every model under what it is doing, **Working**, **Loaded, idle**, **Loading or unloading** or **Not loaded**, with its place, **GPU** or **RAM**, and size.
 - **The last 6 hours** shows which models were on the card and in RAM, and when.
 
@@ -208,31 +208,48 @@ podman compose exec ems python3 scripts/gpu_selftest.py
 
 ## Share one card with the language model
 
-With both `--ems` and `--llm` on one card, the two services split it by one number, set on both sides in `~/ein/.env`:
+With both `--ems` and `--llm` on one card, each keeps to its own part of it:
 
-| Variable              | Read by            | Default | What it sets                                                                                                                                                                                 |
-| --------------------- | ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EMS_CARD_SHARE_MB`   | the media service  | `0`     | The most of the card, in MB, the media service's processes hold. A model that would take it past this runs on the processor, even while the rest of the card is free. `0` is the whole card. |
-| `LLM_CARD_RESERVE_MB` | the language model | `8800`  | How much of the card the language model leaves the media service. It takes as many layers as fit in the rest, and runs the others on the processor.                                          |
+- **The media service's share** is the most of the card its models hold. A model that would take it past the share runs on the processor, even while the rest of the card is free.
+- **The language model's reserve** is how much of the card the language model leaves the media service. It takes as many layers as fit in the rest when it starts, and runs the others on the processor.
+
+Set the media service's share on the **Media service** tab of the Status page: under the **Graphics card** bar in **Where the models are**, drag **Media service's share** between **none** and **all**. Under the slider, the tab says what the media service and the card's other programs hold now, and which models run on the processor at the share chosen.
+
+![Where the models are: the Graphics card bar, 5.1 GB of 15.9 GB held by the chat model and others, and under it the Media service's share slider at 9.5 GB, between none and all, saying the media service holds 0 MB now and other programs, such as a language model, 5.1 GB](../../assets/shots/ems-card-share.webp "The share takes effect at once; the language model's reserve is set where it runs")
+
+The share takes effect at once. Models that no longer fit leave the card, those at work when their work is done, and each loads next on the card or the processor as the share leaves room for it. **none** runs every model on the processor. Speech needs 4.4 GB of the share for its model on the card; with less, recordings are transcribed on the processor, at about twice their length. Transcripts already made stay as they are, wherever they were made.
+
+The slider sets [`CFG_EMS_CARD_SHARE_MB`](../reference/settings.md#cfg_ems_card_share_mb), and the `ems-link` service gives it to the media service, again after each of its restarts. The terminal sets it the same way:
+
+```bash
+# in EiN's terminal
+config set CFG_EMS_CARD_SHARE_MB 9700
+```
+
+Until it is set, the media service keeps the share it starts with, from `~/ein/.env`. The language model's reserve is set there too, and is read when the model starts:
+
+| Variable              | Read by            | Default | What it sets                                                                                                                                        |
+| --------------------- | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EMS_CARD_SHARE_MB`   | the media service  | empty   | The share the media service starts with, in MB, until EiN's setting gives it another. Empty is the whole card, `0` none of it.                      |
+| `LLM_CARD_RESERVE_MB` | the language model | `8800`  | How much of the card the language model leaves the media service. It takes as many layers as fit in the rest, and runs the others on the processor. |
 
 Set the language model's reserve 400 MB above the media service's share: the language model counts the card as `nvidia-smi` does, and some 400 MB of that are never usable by the media service. The media service then never loads into the language model's part. The language model fits its layers into the card less its reserve each time it starts, its restarts included, whatever the media service holds at the time, so it gets the same part whichever of the two started first. `setup.sh` sets neither, so the media service may use the whole card while the language model leaves it 8800 MB; set both when the two share a card.
 
-On a 16 GB card, the pair EiN's own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers:
+On a 16 GB card, the pair EiN's own test machine runs with leaves the media service 9.7 GB, more than the 7.3 GB its busiest work has needed, and the language model the 6.2 GB that hold all of its layers. Set the share with the slider or `config set CFG_EMS_CARD_SHARE_MB 9700`, and the reserve in `~/ein/.env`:
 
 ```ini
 # in ~/ein/.env
-EMS_CARD_SHARE_MB=9700
 LLM_CARD_RESERVE_MB=10100
 ```
 
-Apply it:
+Apply the reserve by starting the language model again:
 
 ```bash
 # on the machine EiN runs on, in ~/ein
-podman compose up -d
+podman compose up -d llm
 ```
 
-On a smaller card the language model gets fewer layers and answers more slowly; on an 8 GB card it runs on the processor. A language model at a hosted provider has no part of the card, so leave `EMS_CARD_SHARE_MB` at `0` and the media service uses all of it. [The language model](../assistant/language-model.md) covers the model itself and the hosted alternative, and [Performance and sizing](../admin/performance.md) how memory and processor are shared.
+To give the language model more of the card, lower the share first, then its reserve. On a smaller card the language model gets fewer layers and answers more slowly; on an 8 GB card it runs on the processor. A language model at a hosted provider has no part of the card, so leave the share at **all** and the media service uses all of it. [The language model](../assistant/language-model.md) covers the model itself and the hosted alternative, and [Performance and sizing](../admin/performance.md) how memory and processor are shared.
 
 ## Be told when the card goes missing
 
@@ -259,20 +276,20 @@ Without a card, or with `EIN_GPU=0`, the media service and the language model ru
 
 The commands are written for podman. With Docker, write `docker compose` where they say `podman compose`.
 
-| What you see                                                                                                                                        | What to do                                                                                                                                                                                                                                         |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The installer says `no NVIDIA card: everything runs on the processor, more slowly`                                                                  | The machine has no NVIDIA card, or the system does not list one. EiN works without it.                                                                                                                                                             |
-| The installer says `an NVIDIA card is present but nvidia-smi cannot reach its driver`                                                               | The driver is missing or not loaded. Run `nvidia-smi` to see why; a reboot after installing the driver is often needed.                                                                                                                            |
-| The installer says `610 or newer is needed to encode video on the card`                                                                             | Install a newer driver. Until then the models still use the card where they can; video is encoded on the processor.                                                                                                                                |
-| The installer says `install nvidia-container-toolkit 1.18 or newer`, or `1.18 or newer is needed`                                                   | Install or upgrade the toolkit ([Prepare the machine](#prepare-the-machine), step 2).                                                                                                                                                              |
-| The installer says `but no CDI spec: sudo systemctl enable --now nvidia-cdi-refresh.service`                                                        | Run that command, then check that `/var/run/cdi/nvidia.yaml` exists.                                                                                                                                                                               |
-| The installer says `podman 4.9.3 rejects the CDI spec nvidia-container-toolkit 1.18.1 writes (cdiVersion 0.7.0), so the containers find no card: …` | Apply the [fix](#fix-the-cdi-file-for-podman-before-5) with the command the line ends with, or upgrade podman to 5 or newer.                                                                                                                       |
-| The installer says `Docker 27.5.1 passes the card through its CDI spec from 28.2 on: update Docker`                                                 | Upgrade Docker Engine to 28.2 or newer.                                                                                                                                                                                                            |
-| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                                                                   | The engine cannot read the CDI file. On podman before 5, apply the [fix](#fix-the-cdi-file-for-podman-before-5); otherwise check that `/var/run/cdi/nvidia.yaml` exists. With Docker, check that it is Engine 28.2 or newer.                       |
-| The card is there but the Status page's **Media service** card has no **GPU** tile                                                                  | `EIN_GPU` in `~/ein/.env` is `0`, most likely because the card or the toolkit came after the install. [Give the card to EiN](#give-the-card-to-ein).                                                                                               |
-| After a reboot the media service does not start, or starts without the card                                                                         | A container keeps the device paths it was made with, and a reboot can renumber them. Make the containers again from the current CDI file: `podman compose up -d --force-recreate`.                                                                 |
-| Models show **CPU** on the **Media service** tab while the card has room                                                                            | The card may be full at that moment, or held by the language model. Look at **Where the models are**, and set the [share](#share-one-card-with-the-language-model) when the two use one card.                                                      |
-| The chat answers slowly on a machine with a card                                                                                                    | The language model got only some of its layers, or none. Its log, `podman compose logs llm`, says how many fit on the card when it started. Raise the part of the card it gets by lowering `LLM_CARD_RESERVE_MB` and `EMS_CARD_SHARE_MB` together. |
-| A transcription waits for a long time                                                                                                               | On a machine with a card, whisper waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.                                                                                        |
+| What you see                                                                                                                                        | What to do                                                                                                                                                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The installer says `no NVIDIA card: everything runs on the processor, more slowly`                                                                  | The machine has no NVIDIA card, or the system does not list one. EiN works without it.                                                                                                                                                                   |
+| The installer says `an NVIDIA card is present but nvidia-smi cannot reach its driver`                                                               | The driver is missing or not loaded. Run `nvidia-smi` to see why; a reboot after installing the driver is often needed.                                                                                                                                  |
+| The installer says `610 or newer is needed to encode video on the card`                                                                             | Install a newer driver. Until then the models still use the card where they can; video is encoded on the processor.                                                                                                                                      |
+| The installer says `install nvidia-container-toolkit 1.18 or newer`, or `1.18 or newer is needed`                                                   | Install or upgrade the toolkit ([Prepare the machine](#prepare-the-machine), step 2).                                                                                                                                                                    |
+| The installer says `but no CDI spec: sudo systemctl enable --now nvidia-cdi-refresh.service`                                                        | Run that command, then check that `/var/run/cdi/nvidia.yaml` exists.                                                                                                                                                                                     |
+| The installer says `podman 4.9.3 rejects the CDI spec nvidia-container-toolkit 1.18.1 writes (cdiVersion 0.7.0), so the containers find no card: …` | Apply the [fix](#fix-the-cdi-file-for-podman-before-5) with the command the line ends with, or upgrade podman to 5 or newer.                                                                                                                             |
+| The installer says `Docker 27.5.1 passes the card through its CDI spec from 28.2 on: update Docker`                                                 | Upgrade Docker Engine to 28.2 or newer.                                                                                                                                                                                                                  |
+| Starting fails with `unresolvable CDI devices nvidia.com/gpu=all`                                                                                   | The engine cannot read the CDI file. On podman before 5, apply the [fix](#fix-the-cdi-file-for-podman-before-5); otherwise check that `/var/run/cdi/nvidia.yaml` exists. With Docker, check that it is Engine 28.2 or newer.                             |
+| The card is there but the Status page's **Media service** card has no **GPU** tile                                                                  | `EIN_GPU` in `~/ein/.env` is `0`, most likely because the card or the toolkit came after the install. [Give the card to EiN](#give-the-card-to-ein).                                                                                                     |
+| After a reboot the media service does not start, or starts without the card                                                                         | A container keeps the device paths it was made with, and a reboot can renumber them. Make the containers again from the current CDI file: `podman compose up -d --force-recreate`.                                                                       |
+| Models show **CPU** on the **Media service** tab while the card has room                                                                            | The card may be full at that moment, held by the language model, or kept from the media service by its share. Look at **Where the models are** and the **Media service's share** under it ([Share one card](#share-one-card-with-the-language-model)).   |
+| The chat answers slowly on a machine with a card                                                                                                    | The language model got only some of its layers, or none. Its log, `podman compose logs llm`, says how many fit on the card when it started. Raise the part of the card it gets by lowering the media service's share and `LLM_CARD_RESERVE_MB` together. |
+| A transcription waits for a long time                                                                                                               | While the media service's share holds whisper, it waits for about 4 GB of the card to be free rather than move to the processor. It goes on once other models are unloaded.                                                                              |
 
 [Troubleshooting](../admin/troubleshooting.md) has more. [The media service](index.md) covers the media service beyond its card, and [The language model](../assistant/language-model.md) the model beyond its card.
