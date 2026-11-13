@@ -81,6 +81,11 @@ position, the file name, and a Google Photos time that agrees with them. A scan 
 date a person gives it: with **Set time**, with `file-set-time`, in an XMP sidecar, or by changing
 it in Google Photos. Until then it is undated, rather than dated to the day it was scanned.
 
+A date in an XMP sidecar keeps the precision it was written with: `1985`, `1985-06`, `1985-06-12`
+or a time. A date the scan application marks approximate, as when someone typed "ca. 1985", is shown
+as `~1985` in the viewer and its details panel, and pointing at the date says "approximate". A date
+set by hand replaces it and is exact.
+
 **Time source** on a scan adds "a scan: its scanner’s clocks are not when it was taken". The mark
 goes with the file when it is filed into an album, so the scan stays undated there until someone
 dates it.

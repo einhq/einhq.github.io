@@ -51,6 +51,7 @@ On a computer:
 
 The date is shown as precisely as it is known, and no more. A picture known only to the year shows
 **1975**, one known to the month shows **March 2004**, and neither is given an invented day or hour.
+A date known only approximately shows a tilde, **~1985**.
 
 Point at the date to see where it came from: **from the camera clock**, **from GPS**, **entered by
 hand**, **from Google Photos or a sidecar** or **from the file name**. A scan adds **a scan: its
