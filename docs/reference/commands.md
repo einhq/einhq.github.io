@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 451 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 453 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 222 in full](commands-core.md).
+[All 224 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -236,6 +236,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [user-groups](commands-core.md#user-groups) | List groups a user belongs to. |
 | [user-id](commands-core.md#user-id) | Print user and group IDs. |
 | [user-info](commands-core.md#user-info) | Display user account information. |
+| [user-invite](commands-core.md#user-invite) | An account's sign-in link, with which its person chooses their own password at /invite/<token>: shown, made new (--new) or taken away (--off); for an administrator. |
+| [user-invite-accept](commands-core.md#user-invite-accept) | Which account a sign-in link is for, and with --password, choose its password with it, which spends the link and signs in. |
 | [user-list](commands-core.md#user-list) | List the user accounts; as JSON with each one's primary group, e-mail address, description, person and built-in role, and for an administrator whether a password is set. |
 | [user-passwd](commands-core.md#user-passwd) | Change user password. |
 | [user-resolve](commands-core.md#user-resolve) | Resolve username to UID or vice versa. |
