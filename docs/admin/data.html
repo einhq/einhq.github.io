@@ -172,7 +172,7 @@
 <ol>
 <li><p>Stop EiN, but not its database, so nothing changes while you copy:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose stop ein</code></pre></div>
+podman compose stop core</code></pre></div>
 <p>The Web UI, SSH and SFTP are down until step 5.</p>
 </li>
 <li><p>Find the database&#39;s container and dump the database, with the TimescaleDB version it was made with:</p>
@@ -195,7 +195,7 @@ rsync -a --delete --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/
 </li>
 <li><p>Start EiN again:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose start ein</code></pre></div>
+podman compose start core</code></pre></div>
 </li>
 </ol>
 <p>A backup tool that copies the whole data folder as root, such as one that backs up the whole machine, takes <code>db</code> too. That copy is a database only when the database was stopped while it was taken (<code>podman compose stop db</code>, then <code>podman compose start db</code>); the dump is one either way.</p>
@@ -214,7 +214,7 @@ podman compose start ein</code></pre></div>
 </li>
 <li><p>Stop EiN and find the database&#39;s container:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose stop ein
+podman compose stop core
 db=$(podman ps -q --filter label=com.docker.compose.project=ein --filter label=com.docker.compose.service=db)</code></pre></div>
 </li>
 <li><p>Replace the database with the dump:</p>
@@ -403,7 +403,7 @@ podman unshare <span class="hljs-built_in">rm</span> -rf ~/ein</code></pre></div
 </tr>
 <tr>
 <td>The update after a backup reports that EiN did not come up</td>
-<td>A dump was still running when EiN started. Wait for it to finish, then <code>podman compose restart ein</code>.</td>
+<td>A dump was still running when EiN started. Wait for it to finish, then <code>podman compose restart core</code>.</td>
 </tr>
 </tbody></table>
 </div>

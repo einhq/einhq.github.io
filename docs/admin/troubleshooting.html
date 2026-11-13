@@ -100,7 +100,7 @@
 <li><p><strong>The containers.</strong> On the machine EiN runs on, see whether every container is up and whether the database, and the media service when it is installed, are healthy:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose ps
-podman compose logs --<span class="hljs-built_in">tail</span> 100 ein     <span class="hljs-comment"># the end of EiN&#x27;s log; db, and ems or llm when installed, for the others</span></code></pre></div>
+podman compose logs --<span class="hljs-built_in">tail</span> 100 core     <span class="hljs-comment"># the end of EiN&#x27;s log; db, and ems or llm when installed, for the others</span></code></pre></div>
 <p>A container that shows <code>Up</code> for only a few seconds, again and again, stops and is started again by its restart policy. Its log says why.</p>
 </li>
 <li><p><strong>The Status page.</strong> When the Web UI opens, sign in as an administrator and choose <strong>Status</strong> under <strong>System</strong> in the sidebar. The badge above <strong>System status</strong> gives the verdict: <strong>Healthy</strong>, <strong>Catching up</strong>, <strong>Stuck</strong> or <strong>Needs a person</strong>. Below it, the <strong>Overview</strong> tab lists each check that is not fine, with its reason. The <strong>Services</strong> tab shows each of EiN&#39;s own services, and the <strong>Log</strong> tab its <strong>Recent problems</strong> and the live log. <a href="monitoring.html">Health and status</a> explains every tile.</p>
@@ -155,7 +155,7 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 </tr>
 </thead>
 <tbody><tr>
-<td><code>podman compose ps</code> shows <code>ein</code> as <code>Created</code> or not at all, and <code>db</code> as starting or unhealthy</td>
+<td><code>podman compose ps</code> shows <code>core</code> as <code>Created</code> or not at all, and <code>db</code> as starting or unhealthy</td>
 <td>EiN waits for the database to answer a query. Read <code>podman compose logs db</code>. A first start of the database restarts it once, which takes a little while.</td>
 </tr>
 <tr>
@@ -168,7 +168,7 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 </tr>
 <tr>
 <td>The log shows the modules being installed, and nothing answers yet</td>
-<td>EiN is downloading modules. Wait, and follow it with <code>podman compose logs -f ein</code>.</td>
+<td>EiN is downloading modules. Wait, and follow it with <code>podman compose logs -f core</code>.</td>
 </tr>
 <tr>
 <td><code>some modules could not be installed or replaced; continuing boot</code> in the log</td>
@@ -179,7 +179,7 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 <td>A module&#39;s setup failed and the others carried on. See <a href="modules.html#when-a-module-does-not-work">When a module does not work</a>.</td>
 </tr>
 <tr>
-<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein</code></td>
+<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs core</code></td>
 <td>Read the log it names, then go through the lines above. When <code>EIN_BIND</code> is an address other than <code>0.0.0.0</code> or <code>127.0.0.1</code>, EiN is running and <code>setup.sh</code> only looked in the wrong place: see <a href="network.html">Ports, HTTPS and remote access</a>.</td>
 </tr>
 <tr>
@@ -211,7 +211,7 @@ dmesg -n 50 --level=warn                       <span class="hljs-comment"># the 
 </thead>
 <tbody><tr>
 <td><code>setup.sh</code> showed no admin password at the end</td>
-<td><code>setup.sh</code> shows a password it made, from <code>INITIAL_ADMIN_PASSWORD</code> in <code>~/ein/.env</code>. A password you chose at the install it never shows: it says <code>Sign in as admin with the password you chose.</code> and removes the line once EiN has taken it. Otherwise the line is gone because you deleted it, or because <code>.env</code> was written before <code>setup.sh</code> kept the password there. Then a new EiN made a random one and wrote it to its log once, as <code>Admin password set to:</code>; find it with <code>podman compose logs ein | grep &#39;Admin password set to&#39;</code>. The log is gone once the containers have been made again, by an update or by <code>podman compose down</code>, and an EiN whose database was there before keeps the password it had.</td>
+<td><code>setup.sh</code> shows a password it made, from <code>INITIAL_ADMIN_PASSWORD</code> in <code>~/ein/.env</code>. A password you chose at the install it never shows: it says <code>Sign in as admin with the password you chose.</code> and removes the line once EiN has taken it. Otherwise the line is gone because you deleted it, or because <code>.env</code> was written before <code>setup.sh</code> kept the password there. Then a new EiN made a random one and wrote it to its log once, as <code>Admin password set to:</code>; find it with <code>podman compose logs core | grep &#39;Admin password set to&#39;</code>. The log is gone once the containers have been made again, by an update or by <code>podman compose down</code>, and an EiN whose database was there before keeps the password it had.</td>
 </tr>
 <tr>
 <td>The <code>admin</code> password is lost</td>
@@ -341,7 +341,7 @@ service-list --detail</code></pre></div>
 service-start trash-purger</code></pre></div>
 </li>
 </ol>
-<p>A service shown as <code>disabled</code> has no buttons on the Status page; enable it first with <code>service-enable &lt;name&gt;</code>. Restarting EiN, <code>podman compose restart ein</code>, starts every enabled service again. <a href="services-logs.html">Services and logs</a> lists the services and what each does.</p>
+<p>A service shown as <code>disabled</code> has no buttons on the Status page; enable it first with <code>service-enable &lt;name&gt;</code>. Restarting EiN, <code>podman compose restart core</code>, starts every enabled service again. <a href="services-logs.html">Services and logs</a> lists the services and what each does.</p>
 <h2 id="the-disk-fills-up">The disk fills up<a class="anchor" href="#the-disk-fills-up" aria-label="Link to this section"></a></h2>
 <p>Two places fill up, and they may be on different disks:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -401,7 +401,7 @@ health                   <span class="hljs-comment"># the verdict and every chec
 dmesg --level=warn       <span class="hljs-comment"># warnings and errors since EiN started</span></code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose ps
-podman compose logs --<span class="hljs-built_in">tail</span> 200 ein</code></pre></div>
+podman compose logs --<span class="hljs-built_in">tail</span> 200 core</code></pre></div>
 <p>Read the logs before you send them on: they name your accounts, paths and addresses.</p>
 <h2 id="archive">Archive<a class="anchor" href="#archive" aria-label="Link to this section"></a></h2>
 <p>With the <a href="../archive/index.html">Archive</a> installed:</p>

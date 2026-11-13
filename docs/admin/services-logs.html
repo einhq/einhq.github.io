@@ -94,7 +94,7 @@
         <article class="prose">
 <p>This page is for whoever runs EiN: the services that run inside EiN and keep it working, how to see and restart them on the Status page and in the terminal, and where EiN, its services and its containers write what they do. The containers themselves, and how to start and stop them with compose, are on <a href="install.html#run-ein-day-to-day">Installing in detail</a>.</p>
 <h2 id="what-a-service-is">What a service is<a class="anchor" href="#what-a-service-is" aria-label="Link to this section"></a></h2>
-<p>Inside the <code>ein</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive&#39;s workers that process your media. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (<code>db</code>), and the media service (<code>ems</code>) and the language model (<code>llm</code>) when they are installed, are containers beside EiN. The <code>ems</code> module and the Assistant watch the last two through services of their own, <code>ems-link</code> and <code>llm-link</code>.</p>
+<p>Inside the <code>core</code> container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive&#39;s workers that process your media. Each service is a shell script, <code>start.sh</code>, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (<code>db</code>), and the media service (<code>ems</code>) and the language model (<code>llm</code>) when they are installed, are containers beside EiN. The <code>ems</code> module and the Assistant watch the last two through services of their own, <code>ems-link</code> and <code>llm-link</code>.</p>
 <p>Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core&#39;s with the module they come from. With the <a href="../archive/index.html">Archive</a>, the <code>ems</code> and <code>media</code> modules it brings along (<a href="../ems/index.html">The media service</a> and <a href="../media/index.html">Media</a>) and the <a href="../assistant/index.html">Assistant</a> installed, there are 22:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -306,7 +306,7 @@ service-start-all      <span class="hljs-comment"># every enabled service that i
 <li>With their modules installed, <code>ems-link</code> and <code>llm-link</code> add the media service&#39;s and the language model&#39;s checks to <a href="../reference/commands-core.html#health"><code>health</code></a>. While one is stopped, its checks are missing from the Status page&#39;s verdict rather than failing.</li>
 </ul>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Stopping <code>http-server</code> takes the Web UI away, the page you stopped it from included, and stopping <code>ssh-server</code> closes SSH and SFTP. Start them again from the other one (<code>service-start http-server</code> over SSH), or restart EiN&#39;s container: <code>podman compose restart ein</code> in <code>~/ein</code>. Restarting <code>http-server</code> from the Status page drops the page&#39;s connection for a moment.</p>
+<p>Stopping <code>http-server</code> takes the Web UI away, the page you stopped it from included, and stopping <code>ssh-server</code> closes SSH and SFTP. Start them again from the other one (<code>service-start http-server</code> over SSH), or restart EiN&#39;s container: <code>podman compose restart core</code> in <code>~/ein</code>. Restarting <code>http-server</code> from the Status page drops the page&#39;s connection for a moment.</p>
 </aside>
 <p>Saving a setting on the Settings page restarts the services that read it by itself; <a href="configuration.html#what-a-change-restarts">Configuration</a> lists what restarts what.</p>
 <h2 id="when-ein-restarts-a-service-by-itself">When EiN restarts a service by itself<a class="anchor" href="#when-ein-restarts-a-service-by-itself" aria-label="Link to this section"></a></h2>
@@ -364,7 +364,7 @@ Errors: /var/logs/services/ems-link/stderr.log</code></pre></div>
 <td>Emptied each time the service starts</td>
 </tr>
 <tr>
-<td>The <code>ein</code> container&#39;s log</td>
+<td>The <code>core</code> container&#39;s log</td>
 <td>The same messages as <code>/var/logs/system</code>, with the details behind them, such as an error&#39;s stack, and what EiN prints while it starts</td>
 <td>Until the container is removed or made again, by <code>podman compose down</code> or by an <code>up -d</code> after a change</td>
 </tr>
@@ -421,8 +421,8 @@ ems-link: down — not answering</code></pre></div>
 <h2 id="read-the-containers-log">Read the container&#39;s log<a class="anchor" href="#read-the-containers-log" aria-label="Link to this section"></a></h2>
 <p>The container&#39;s log is on the machine EiN runs on, and compose shows it:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose logs --<span class="hljs-built_in">tail</span> 200 ein     <span class="hljs-comment"># the last 200 lines</span>
-podman compose logs -f ein             <span class="hljs-comment"># follow; Ctrl+C ends it</span>
+podman compose logs --<span class="hljs-built_in">tail</span> 200 core     <span class="hljs-comment"># the last 200 lines</span>
+podman compose logs -f core             <span class="hljs-comment"># follow; Ctrl+C ends it</span>
 podman compose logs db                 <span class="hljs-comment"># the database: ems or llm for the others, when installed</span></code></pre></div>
 <p>With Docker, write <code>docker compose</code>. Each line reads <code>[2026-10-25 21:35:02] [INFO ] [service-registry] Service &#39;label-models&#39; started</code>, followed by any details the message carries. This is the log to read when EiN does not start, since the tree&#39;s logs are not there until it has, and when a line in the system log needs its details: the system log keeps the message only. It also holds the admin password a new EiN prints once, <code>Admin password set to: …</code>, which is gone once the container is made again, as after <code>podman compose down</code>.</p>
 <p>The database, and the media service and the language model when installed, write only to their containers&#39; logs. <a href="../ems/index.html#on-the-machine">The media service</a> covers reading its log.</p>
@@ -557,9 +557,9 @@ service-start disk-report</code></pre></div>
 <p><strong><code>service-restart: permission denied: only an administrator may run it</code>.</strong> Sign in as <code>admin</code>, or use <a href="../guide/interface.html#admin-mode">admin mode</a> (<code>admin</code> in the terminal). The Status page shows the buttons only to the administrator.</p>
 <p><strong>A restart of <code>pipeline-engine</code> takes minutes.</strong> It waits for the steps it runs to finish, for up to 16 minutes, and its row shows a spinner meanwhile.</p>
 <p><strong><code>ems-link</code> says <code>not answering</code>.</strong> With the <code>ems</code> module installed, this means the media service&#39;s container is down or still starting; <code>ems-link</code> only reports it. <a href="../ems/index.html#when-something-goes-differently">The media service</a> has what to do.</p>
-<p><strong>The system log starts only a little while ago.</strong> It is emptied each time EiN starts. Older lines, as far back as the container&#39;s life, are in the container&#39;s log: <code>podman compose logs ein</code>.</p>
+<p><strong>The system log starts only a little while ago.</strong> It is emptied each time EiN starts. Older lines, as far back as the container&#39;s life, are in the container&#39;s log: <code>podman compose logs core</code>.</p>
 <p><strong>The Live log says &quot;Waiting for the stream&quot; or shows <code>connecting</code>.</strong> The page has lost its connection to EiN, for example while <code>http-server</code> restarts. It reconnects by itself; reload the page if it does not.</p>
-<p><strong>The Web UI is gone after stopping <code>http-server</code>.</strong> Start it over SSH with <code>service-start http-server</code>, or restart the container with <code>podman compose restart ein</code>.</p>
+<p><strong>The Web UI is gone after stopping <code>http-server</code>.</strong> Start it over SSH with <code>service-start http-server</code>, or restart the container with <code>podman compose restart core</code>.</p>
 <p><a href="troubleshooting.html">Troubleshooting</a> covers problems that are not a service&#39;s own.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>

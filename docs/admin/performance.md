@@ -6,7 +6,7 @@ EiN without modules needs little. Most of what this page sizes and tunes comes w
 
 ## What uses the machine
 
-EiN runs as two containers, `ein` and `db`, and up to four with the media service and the language model. Each has its own appetite, and three of them have a memory limit that compose sets from `~/ein/.env`.
+EiN runs as two containers, `core` and `db`, and up to four with the media service and the language model. Each has its own appetite, and three of them have a memory limit that compose sets from `~/ein/.env`.
 
 | Container | What uses the machine                                                                                                                                       | Memory limit                | Processor   |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ----------- |

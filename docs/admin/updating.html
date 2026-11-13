@@ -217,7 +217,7 @@ brought a new commit, it says <code>Updated /home/anna/ein to …; running its s
 new one:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
 ~/ein/setup.sh</code></pre></div>
-<p><code>./setup.sh --only ein</code> updates one service, <code>ein</code>, <code>ems</code>, <code>db</code> or <code>llm</code>, and restarts only that
+<p><code>./setup.sh --only core</code> updates one service, <code>core</code>, <code>ems</code>, <code>db</code> or <code>llm</code>, and restarts only that
 one, leaving the others running.</p>
 <p>Every run of <code>setup.sh</code> is an update, also one that only adds or removes an option, such as
 <code>./setup.sh --ems</code>. To apply a changed line of <code>.env</code> without updating, run <code>podman compose up -d</code>
@@ -354,7 +354,7 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>Nothing was changed. When the build&#39;s output shows a download that failed, run <code>setup.sh</code> again later; otherwise the output names what stopped the build.</td>
 </tr>
 <tr>
-<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein</code></td>
+<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs core</code></td>
 <td>Read the log it names. <code>podman compose ps</code> shows whether <code>db</code> became healthy; EiN does not start before it. <a href="troubleshooting.html">Troubleshooting</a> covers what the log may say.</td>
 </tr>
 <tr>

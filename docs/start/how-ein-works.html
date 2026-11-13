@@ -437,7 +437,7 @@ aside otherwise.</p>
 modules&#39; services all run in it. The installer sets it up on one machine with podman or Docker and
 compose, each part in a container of its own: EiN, PostgreSQL and, if you choose them, the media
 service and the language model.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: ein with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only ein's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: core with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only core's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
   <title>What runs where</title>
   <defs>
     <marker id="start-how-ein-works-md-2-system-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -471,7 +471,7 @@ service and the language model.</p>
   <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(252 110) scale(3)"
     fill="#a9e34b" />
   <text x="276" y="116" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN</text>
-  <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ein</text>
+  <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">core</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
     <tspan x="248" y="182">The Web UI</tspan>
     <tspan x="248" y="216">The shell</tspan>
@@ -534,7 +534,7 @@ service and the language model.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>ein</code></td>
+<td><code>core</code></td>
 <td>EiN itself, the only container with ports open to other machines</td>
 <td>Always</td>
 </tr>

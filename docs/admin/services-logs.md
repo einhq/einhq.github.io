@@ -4,7 +4,7 @@ This page is for whoever runs EiN: the services that run inside EiN and keep it 
 
 ## What a service is
 
-Inside the `ein` container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive's workers that process your media. Each service is a shell script, `start.sh`, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (`db`), and the media service (`ems`) and the language model (`llm`) when they are installed, are containers beside EiN. The `ems` module and the Assistant watch the last two through services of their own, `ems-link` and `llm-link`.
+Inside the `core` container, EiN runs a set of long-running jobs it calls services: the web server, the SSH server, the pipeline engine, small loops that tidy up on a timer, and the services modules bring, such as the Archive's workers that process your media. Each service is a shell script, `start.sh`, that EiN runs in a shell of its own as the administrator. A service is not a container: the database (`db`), and the media service (`ems`) and the language model (`llm`) when they are installed, are containers beside EiN. The `ems` module and the Assistant watch the last two through services of their own, `ems-link` and `llm-link`.
 
 Core brings ten services, the first ten below, and they are all an EiN without modules runs. Each module brings its own, listed after core's with the module they come from. With the [Archive](../archive/index.md), the `ems` and `media` modules it brings along ([The media service](../ems/index.md) and [Media](../media/index.md)) and the [Assistant](../assistant/index.md) installed, there are 22:
 
@@ -93,7 +93,7 @@ What happens when you stop a service:
 - With their modules installed, `ems-link` and `llm-link` add the media service's and the language model's checks to [`health`](../reference/commands-core.md#health). While one is stopped, its checks are missing from the Status page's verdict rather than failing.
 
 > [!WARNING]
-> Stopping `http-server` takes the Web UI away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart ein` in `~/ein`. Restarting `http-server` from the Status page drops the page's connection for a moment.
+> Stopping `http-server` takes the Web UI away, the page you stopped it from included, and stopping `ssh-server` closes SSH and SFTP. Start them again from the other one (`service-start http-server` over SSH), or restart EiN's container: `podman compose restart core` in `~/ein`. Restarting `http-server` from the Status page drops the page's connection for a moment.
 
 Saving a setting on the Settings page restarts the services that read it by itself; [Configuration](configuration.md#what-a-change-restarts) lists what restarts what.
 
@@ -156,7 +156,7 @@ EiN writes to four places. Three are logs in the tree, which you read in EiN's t
 | `/var/logs/system`                     | EiN's own messages: each line with a time, a level, the part of EiN that wrote it and the message                                    | Emptied each time EiN starts                                                                           |
 | `/var/logs/services/<name>/stdout.log` | What a service's script prints                                                                                                       | Emptied each time the service starts                                                                   |
 | `/var/logs/services/<name>/stderr.log` | What a service's script prints as errors                                                                                             | Emptied each time the service starts                                                                   |
-| The `ein` container's log              | The same messages as `/var/logs/system`, with the details behind them, such as an error's stack, and what EiN prints while it starts | Until the container is removed or made again, by `podman compose down` or by an `up -d` after a change |
+| The `core` container's log             | The same messages as `/var/logs/system`, with the details behind them, such as an error's stack, and what EiN prints while it starts | Until the container is removed or made again, by `podman compose down` or by an `up -d` after a change |
 
 A service's own output goes only to its pair of logs under `/var/logs/services`, never to the container's log. Two other folders hold logs of other kinds: `/var/logs/metrics`, the figures the Status page draws, and `/var/logs/jobs/<pid>`, the output of a command started with [`nohup`](../reference/commands-core.md#nohup) or kept running with [`detach`](../reference/commands-core.md#detach).
 
@@ -219,8 +219,8 @@ The container's log is on the machine EiN runs on, and compose shows it:
 
 ```bash
 # on the machine EiN runs on, in ~/ein
-podman compose logs --tail 200 ein     # the last 200 lines
-podman compose logs -f ein             # follow; Ctrl+C ends it
+podman compose logs --tail 200 core     # the last 200 lines
+podman compose logs -f core             # follow; Ctrl+C ends it
 podman compose logs db                 # the database: ems or llm for the others, when installed
 ```
 
@@ -328,11 +328,11 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 **`ems-link` says `not answering`.** With the `ems` module installed, this means the media service's container is down or still starting; `ems-link` only reports it. [The media service](../ems/index.md#when-something-goes-differently) has what to do.
 
-**The system log starts only a little while ago.** It is emptied each time EiN starts. Older lines, as far back as the container's life, are in the container's log: `podman compose logs ein`.
+**The system log starts only a little while ago.** It is emptied each time EiN starts. Older lines, as far back as the container's life, are in the container's log: `podman compose logs core`.
 
 **The Live log says "Waiting for the stream" or shows `connecting`.** The page has lost its connection to EiN, for example while `http-server` restarts. It reconnects by itself; reload the page if it does not.
 
-**The Web UI is gone after stopping `http-server`.** Start it over SSH with `service-start http-server`, or restart the container with `podman compose restart ein`.
+**The Web UI is gone after stopping `http-server`.** Start it over SSH with `service-start http-server`, or restart the container with `podman compose restart core`.
 
 [Troubleshooting](troubleshooting.md) covers problems that are not a service's own.
 

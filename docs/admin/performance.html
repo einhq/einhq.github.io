@@ -95,7 +95,7 @@
 <p>This page is for the administrator who runs EiN on their own machine: what each part of EiN uses of the processor, memory and disk, how big a machine to give it, how to set the containers&#39; memory limits, and which settings decide how much processing runs at once. The graphics card has a page of its own, <a href="../ems/gpu.html">The graphics card</a>.</p>
 <p>EiN without modules needs little. Most of what this page sizes and tunes comes with modules: the media service, which the <a href="../archive/index.html">Archive</a> needs, and the language model, which the <a href="../assistant/index.html">Assistant</a> answers with, are containers of their own, and the settings that pace media processing belong to the Archive. How big a machine they need is kept here, on this page alone.</p>
 <h2 id="what-uses-the-machine">What uses the machine<a class="anchor" href="#what-uses-the-machine" aria-label="Link to this section"></a></h2>
-<p>EiN runs as two containers, <code>ein</code> and <code>db</code>, and up to four with the media service and the language model. Each has its own appetite, and three of them have a memory limit that compose sets from <code>~/ein/.env</code>.</p>
+<p>EiN runs as two containers, <code>core</code> and <code>db</code>, and up to four with the media service and the language model. Each has its own appetite, and three of them have a memory limit that compose sets from <code>~/ein/.env</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>

@@ -649,12 +649,12 @@ user passwd admin</code></pre></div>
 <td>podman&#39;s own notice that <code>podman compose</code> runs <code>podman-compose</code>. It is not an error.</td>
 </tr>
 <tr>
-<td><code>setup.sh: EiN stopped before it answered; its log is above: podman compose logs ein</code></td>
+<td><code>setup.sh: EiN stopped before it answered; its log is above: podman compose logs core</code></td>
 <td>EiN&#39;s container stopped, or restarted three times. The last lines of its log are printed above the message; they name what went wrong. See <a href="../admin/troubleshooting.html">Troubleshooting</a>.</td>
 </tr>
 <tr>
-<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein</code></td>
-<td>Look at what EiN is doing with <code>cd ~/ein &amp;&amp; podman compose logs ein</code>. A first start that downloads modules over a slow connection can take this long; <code>podman compose ps</code> shows whether it still runs.</td>
+<td><code>setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs core</code></td>
+<td>Look at what EiN is doing with <code>cd ~/ein &amp;&amp; podman compose logs core</code>. A first start that downloads modules over a slow connection can take this long; <code>podman compose ps</code> shows whether it still runs.</td>
 </tr>
 <tr>
 <td>Starting fails with <code>unresolvable CDI devices nvidia.com/gpu=all</code></td>
@@ -684,7 +684,7 @@ user passwd admin</code></pre></div>
 </div>
 <p>To find a random admin password in the log, as long as the containers have not been made again since:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
-<span class="hljs-built_in">cd</span> ~/ein &amp;&amp; podman compose logs ein | grep <span class="hljs-string">&#x27;Admin password set to&#x27;</span></code></pre></div>
+<span class="hljs-built_in">cd</span> ~/ein &amp;&amp; podman compose logs core | grep <span class="hljs-string">&#x27;Admin password set to&#x27;</span></code></pre></div>
 <p><a href="../admin/troubleshooting.html">Troubleshooting</a> has more questions and answers.</p>
 <h2 id="next">Next<a class="anchor" href="#next" aria-label="Link to this section"></a></h2>
 <ul>

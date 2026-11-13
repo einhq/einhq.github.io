@@ -40,7 +40,7 @@ Do this before every [update](updating.md) and on a schedule of your own. The ex
 
    ```bash
    # on the machine EiN runs on, in ~/ein
-   podman compose stop ein
+   podman compose stop core
    ```
 
    The Web UI, SSH and SFTP are down until step 5.
@@ -79,7 +79,7 @@ Do this before every [update](updating.md) and on a schedule of your own. The ex
 
    ```bash
    # on the machine EiN runs on, in ~/ein
-   podman compose start ein
+   podman compose start core
    ```
 
 A backup tool that copies the whole data folder as root, such as one that backs up the whole machine, takes `db` too. That copy is a database only when the database was stopped while it was taken (`podman compose stop db`, then `podman compose start db`); the dump is one either way.
@@ -105,7 +105,7 @@ A restore loads the dump into an empty database and puts the files back beside i
 
    ```bash
    # on the machine EiN runs on, in ~/ein
-   podman compose stop ein
+   podman compose stop core
    db=$(podman ps -q --filter label=com.docker.compose.project=ein --filter label=com.docker.compose.service=db)
    ```
 
@@ -330,7 +330,7 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 | After a restore, some pictures open as a broken image                   | Their files are missing from the data folder: the files and the database came from different moments. Restore both from the same backup.                  |
 | A module is missing after a restore                                     | It was installed from **Settings → Modules** and its folder was not restored. Install it again there; see [Modules](modules.md).                          |
 | `rsync` says permission denied                                          | Under Docker the data folder belongs to root; run it with `sudo`.                                                                                         |
-| The update after a backup reports that EiN did not come up              | A dump was still running when EiN started. Wait for it to finish, then `podman compose restart ein`.                                                      |
+| The update after a backup reports that EiN did not come up              | A dump was still running when EiN started. Wait for it to finish, then `podman compose restart core`.                                                     |
 
 [Troubleshooting](troubleshooting.md) covers problems that are not about the data.
 

@@ -112,7 +112,7 @@ new one:
 ~/ein/setup.sh
 ```
 
-`./setup.sh --only ein` updates one service, `ein`, `ems`, `db` or `llm`, and restarts only that
+`./setup.sh --only core` updates one service, `core`, `ems`, `db` or `llm`, and restarts only that
 one, leaving the others running.
 
 Every run of `setup.sh` is an update, also one that only adds or removes an option, such as
@@ -230,7 +230,7 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | `fatal: Not possible to fast-forward, aborting.`, or a message about local changes, after a source line         | A repository under `~/ein/src` was changed or moved to another commit by hand. `git -C ~/ein/src/<name> status` shows what; `git -C ~/ein/src/<name> checkout -- .` and `git -C ~/ein/src/<name> switch main` put it back. |
 | The download or the build stops with no space left on the device                                                | The container engine's storage is full. Free the space old images take (above), or see `podman system df`.                                                                                                                 |
 | `setup.sh: the images did not build, so EiN runs on as it was; the build's output is above`                     | Nothing was changed. When the build's output shows a download that failed, run `setup.sh` again later; otherwise the output names what stopped the build.                                                                  |
-| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs ein`                 | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
+| `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs core`                | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
 | EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
 | A module is still the old version                                                                               | `setup.sh` does not update modules, and EiN's start replaces only one it cannot run. Use **Update** on **Settings → Modules**.                                                                                             |
 | A module's pages or commands are gone, and **Settings → Modules** shows a badge on it                           | It does not fit the new EiN, and EiN found no release of it that does. The lines at the end of `setup.sh`'s output say why; [When a module does not work](modules.md#when-a-module-does-not-work) explains each message.   |

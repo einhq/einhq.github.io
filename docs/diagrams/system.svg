@@ -32,7 +32,7 @@
   <polygon points="0,0 -1.5,-.866 -1,-1.732 1,-1.732 1.5,-.866 3,-1.732 4.5,-.866 4,0 3,0 3,1.732 1.5,2.598 1,1.732 0,1.732" transform="translate(252 110) scale(3)"
     fill="#a9e34b" />
   <text x="276" y="116" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#eceff4">EiN</text>
-  <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">ein</text>
+  <text x="420" y="116" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">core</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
     <tspan x="248" y="182">The Web UI</tspan>
     <tspan x="248" y="216">The shell</tspan>
