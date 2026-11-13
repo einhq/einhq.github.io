@@ -126,6 +126,8 @@ installed; any folder you may read works the same way.
   shell for those. A command that would ask a question, such as a password or "Remove module?",
   stops instead with `<name>: no terminal to answer on`, followed by the option that gives the
   answer: `mod remove --force`, `user-passwd --new-password`, `user-elevate --password`. Commands sent this way are not added to your history.
+- What you pipe in reaches the command byte for byte and ends where your input ends, so
+  `ssh -p 2222 helen@ein.local 'cat > ~/photo.jpg' < photo.jpg` copies a photo in.
 - Errors arrive on their own stream, as with any SSH server, so `2>/dev/null` on your side drops them
   and `2>errors.txt` keeps them apart from the output.
   Use the exit status to tell success from failure.
