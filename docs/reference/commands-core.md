@@ -3080,8 +3080,8 @@ search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--fr
 | `--include-stacked` | with --under, include hidden stack members (internal aggregate mode) |
 | `--within=<path>` | media anywhere in the tree under this directory, at any depth; by time, with the undated after the dated when there is no date window. Inside an unlisted tree (staging) it lists what the library's searches leave out. |
 | `--undated` | only media with no capture time, in the order it arrived. |
-| `--missing=<string>` | only what lacks this attr, dotted for a nested one (duplicate.deferred); repeatable, each must be missing. |
-| `--has=<string>` | only what holds this value in an attr, as <attr>=<value>: the attr is the value, or a list holding it (labels=sea); repeatable, each must hold. |
+| `--missing=<string>` | only what lacks this attr, dotted for a nested one (duplicate.deferred); repeatable, each must be missing. Quick on an attr core or a module keeps statistics on (labels, damage); on another one it may read the whole library. |
+| `--has=<string>` | only what holds this value in an attr, as <attr>=<value>: the attr is the value, or a list holding it (labels=sea); repeatable, each must hold. Quick on an attr core or a module indexes (labels, damage); on another one it may read the whole library. |
 | `--like=<path>` | rank by how much each picture looks like this photo or video (more like this), or like a label's tag directory (/archive/tags/<label>, by its model), instead of by words; the other filters still narrow it. |
 | `--bbox=<string>` | region as north,south,east,west. |
 | `--circle=<string>` | region as lat,lng,radiusMeters. |
