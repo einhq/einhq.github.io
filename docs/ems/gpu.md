@@ -217,7 +217,7 @@ Set the media service's share on the **Media service** tab of the Status page: u
 
 ![Where the models are: the Graphics card bar, 5.1 GB of 15.9 GB held by the chat model and others, and under it the Media service's share slider at 9.5 GB, between none and all, saying the media service holds 0 MB now and other programs, such as a language model, 5.1 GB](../../assets/shots/ems-card-share.webp "The share takes effect at once; the language model's reserve is set where it runs")
 
-The share takes effect at once. Models that no longer fit leave the card, those at work when their work is done, and each loads next on the card or the processor as the share leaves room for it. **none** runs every model on the processor. Speech needs 4.4 GB of the share for its model on the card; with less, recordings are transcribed on the processor, at about twice their length. Transcripts already made stay as they are, wherever they were made.
+The share takes effect at once. Models that no longer fit leave the card, those at work when their work is done, and each loads next on the card or the processor as the share leaves room for it. **none** runs every model on the processor, and once the media service has finished the work it is doing, none of its programs holds any of the card, so `nvidia-smi` no longer lists them. Speech needs 4.4 GB of the share for its model on the card; with less, recordings are transcribed on the processor, at about twice their length. Transcripts already made stay as they are, wherever they were made.
 
 The slider sets [`CFG_EMS_CARD_SHARE_MB`](../reference/settings.md#cfg_ems_card_share_mb), and the `ems-link` service gives it to the media service, again after each of its restarts. The terminal sets it the same way:
 
