@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 22 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 23 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-crop](#file-crop) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
+[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-crop](#file-crop) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [find-damage](#find-damage) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
 
 ## C
 
@@ -148,12 +148,12 @@ Restore a photo into a new version beside it: faded colours back, dust and scrat
 <small>changes things</small>
 
 ```text
-file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--grain=<string>] [-v] <file>
+file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--grain=<string>] [--queue] [--requested] [-v] <file>
 ```
 
-| Argument | What it is                                                                  |
-| -------- | --------------------------------------------------------------------------- |
-| `<file>` | The picture to restore (JPEG, PNG, TIFF, WebP or BMP); it is never written. |
+| Argument | What it is                                                                                              |
+| -------- | ------------------------------------------------------------------------------------------------------- |
+| `<file>` | The picture to restore (JPEG, PNG, TIFF, WebP or BMP), or with --queue any number; it is never written. |
 
 | Option             | What it does                                                                                                                                                         |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -163,15 +163,18 @@ file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--g
 | `--fill=<string>`  | With --dust or --mask, how the damage is filled: ns (the default) or telea for dust and thin scratches, lama for creases and tears.                                  |
 | `--mask=<path>`    | Fill what this mask marks instead of finding the damage: a one-channel PNG the size of the picture as stored, nonzero where marked. It is copied beside the version. |
 | `--grain=<string>` | Lessen grain and noise, at this strength (above 0, at most 1; 0.5 keeps about half the grain)                                                                        |
+| `--queue`          | Restore the pictures named in the media pool, nobody waiting: each gets its steps as restoreRequest, and a version when its turn comes.                              |
+| `--requested`      | Run the steps a picture's restoreRequest asks for, and clear it (what the media pool runs)                                                                           |
 | `-v`               | Say each step as it runs.                                                                                                                                            |
 
 ```bash
 file-restore /archive/scans/1974/print-07.jpg --unfade --dust
 file-restore /archive/scans/1952/portrait.tif --dust --dark --fill lama --grain 0.5
 file-restore /archive/scans/1974/print-07.jpg --unfade --mask /archive/scans/1974/print-07-mask.png
+file-restore --queue --unfade --dust /archive/scans/1974/*.jpg
 ```
 
-With `JSON_OUTPUT=1`: The version written, with the steps that made it and, with --dust or --mask, its mask and marks.
+With `JSON_OUTPUT=1`: The version written, with the steps that made it and, with --dust or --mask, its mask and marks; with --queue the pictures queued and those refused, and why.
 
 ### `file-set-text`
 
@@ -238,6 +241,31 @@ cat /home/admin/rattad.vtt | file-set-transcript /archive/albums/Exempelalbum_20
 ```
 
 With `JSON_OUTPUT=1`: nothing; the transcript is written, searchable, and not transcribed again.
+
+### `find-damage`
+
+Read how faded, dusty and scratched a picture is, and keep it on the file to find those worth restoring.
+
+<small>changes things</small>
+
+```text
+find-damage [-f] [-v] <file>
+```
+
+| Argument | What it is                                                                       |
+| -------- | -------------------------------------------------------------------------------- |
+| `<file>` | The picture to read (JPEG, PNG, TIFF, WebP or BMP); its bytes are never written. |
+
+| Option | What it does                            |
+| ------ | --------------------------------------- |
+| `-f`   | Read again even if already read.        |
+| `-v`   | Say what was found, or why nothing was. |
+
+```bash
+find-damage /archive/scans/1974/print-07.jpg
+```
+
+With `JSON_OUTPUT=1`: The kinds of damage found (faded, dust, scratches), the scores from 0 to 1, what read them and when.
 
 ### `fingerprints-scan`
 

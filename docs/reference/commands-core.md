@@ -3055,7 +3055,7 @@ Faceted search over content: text, time, region, kind, tags, subjects (people, l
 <small>reads only</small>
 
 ```text
-search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--occasion=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
+search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--occasion=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--has=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
 ```
 
 | Argument | What it is |
@@ -3081,6 +3081,7 @@ search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--fr
 | `--within=<path>` | media anywhere in the tree under this directory, at any depth; by time, with the undated after the dated when there is no date window. Inside an unlisted tree (staging) it lists what the library's searches leave out. |
 | `--undated` | only media with no capture time, in the order it arrived. |
 | `--missing=<string>` | only what lacks this attr, dotted for a nested one (duplicate.deferred); repeatable, each must be missing. |
+| `--has=<string>` | only what holds this value in an attr, as <attr>=<value>: the attr is the value, or a list holding it (labels=sea); repeatable, each must hold. |
 | `--like=<path>` | rank by how much each picture looks like this photo or video (more like this), or like a label's tag directory (/archive/tags/<label>, by its model), instead of by words; the other filters still narrow it. |
 | `--bbox=<string>` | region as north,south,east,west. |
 | `--circle=<string>` | region as lat,lng,radiusMeters. |
@@ -3107,6 +3108,7 @@ search --like /archive/albums/Exempelalbum/files/IMG_0001.jpg --subject person:a
 search --within /home/anna/staging/files --sort time
 search --within /home/anna/staging/files --undated --facets
 search --within /home/anna/staging/files --missing duplicate.deferred
+search --has labels=sea --kind photo
 ```
 
 With `JSON_OUTPUT=1`: a page of matching media, each with its path, name and date; with --group-by the albums (or other containers) holding the matches, or the people in them, instead, counted and dated; with --facets per-year, per-kind and per-label counts.

@@ -101,7 +101,7 @@ With `JSON_OUTPUT=1`: list: each instance with its address, files address, slots
 
 ### `ems-link`
 
-Watch every instance of the media service: log when one comes or goes, and run failed work again when one's build changes (the ems-link service)
+Watch every instance of the media service: log when one comes or goes, run failed work again when one's build changes, and keep the primary's card at the share CFG_EMS_CARD_SHARE_MB names (the ems-link service)
 
 <small>administrators only · changes things</small>
 
@@ -169,14 +169,13 @@ Show media service health: version, every model and its state, what is executing
 <small>reads only</small>
 
 ```text
-ems-status [--brief] [--checks] [--card] [--instance=<string>]
+ems-status [--brief] [--checks] [--instance=<string>]
 ```
 
 | Option                | What it does                                                                                        |
 | --------------------- | --------------------------------------------------------------------------------------------------- |
 | `--brief`             | One line, degradation first (used by service-list --detail)                                         |
 | `--checks`            | The checks health reads: answering, model worker, degradations, card.                               |
-| `--card`              | The card's mode alone: quiet, busy, switching or off; fails when EMS cannot say.                    |
 | `--instance=<string>` | The instance to ask (ems-instance list); main, the primary, by default, and for --checks every one. |
 
 ### `ems-text-embed`

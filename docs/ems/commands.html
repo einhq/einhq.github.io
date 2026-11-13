@@ -222,7 +222,7 @@ ems-instance <span class="hljs-built_in">set</span> laptop --cpu-slots 2
 ems-instance remove laptop</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: list: each instance with its address, files address, slots and whether a key is set, and while it answers its own name, ops, card and build. show: one, or one field of it.</p>
 <h3 id="ems-link"><code>ems-link</code><a class="anchor" href="#ems-link" aria-label="Link to this section"></a></h3>
-<p>Watch every instance of the media service: log when one comes or goes, and run failed work again when one&#39;s build changes (the ems-link service)</p>
+<p>Watch every instance of the media service: log when one comes or goes, run failed work again when one&#39;s build changes, and keep the primary&#39;s card at the share CFG_EMS_CARD_SHARE_MB names (the ems-link service)</p>
 <p><small>administrators only · changes things</small></p>
 <div class="code"><pre tabindex="0"><code>ems-link</code></pre></div>
 <h3 id="ems-memory"><code>ems-memory</code><a class="anchor" href="#ems-memory" aria-label="Link to this section"></a></h3>
@@ -264,7 +264,7 @@ ems-models --instance laptop</code></pre></div>
 <h3 id="ems-status"><code>ems-status</code><a class="anchor" href="#ems-status" aria-label="Link to this section"></a></h3>
 <p>Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>ems-status [--brief] [--checks] [--card] [--instance=&lt;string&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>ems-status [--brief] [--checks] [--instance=&lt;string&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -279,10 +279,6 @@ ems-models --instance laptop</code></pre></div>
 <tr>
 <td><code>--checks</code></td>
 <td>The checks health reads: answering, model worker, degradations, card.</td>
-</tr>
-<tr>
-<td><code>--card</code></td>
-<td>The card&#39;s mode alone: quiet, busy, switching or off; fails when EMS cannot say.</td>
 </tr>
 <tr>
 <td><code>--instance=&lt;string&gt;</code></td>

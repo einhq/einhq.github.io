@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 106 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 107 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -600,6 +600,18 @@ Every setting of an EiN with all its modules: 106 of them, in the groups the Set
 | Default | `90` |
 | Kind | number |
 | Restarts | `models`, `models-second`, `media-worker` |
+| From the module | Media service |
+
+### `CFG_EMS_CARD_SHARE_MB`
+
+**Media service's share of the graphics card (MB)**. The most of the graphics card the media service's models hold, in MB; a model that needs more than is left runs on the processor instead, slower. 0 keeps every model on the processor. Leave room for a language model on the same card by lowering it. The media service's page sets it with the slider under the card.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means the media service's own share (EMS_CARD_SHARE_MB), by default the whole card |
+| Kind | number |
+| Restarts | `ems-link` |
 | From the module | Media service |
 
 ## Modules

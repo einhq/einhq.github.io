@@ -4617,7 +4617,7 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 <h3 id="search"><code>search</code><a class="anchor" href="#search" aria-label="Link to this section"></a></h3>
 <p>Faceted search over content: text, time, region, kind, tags, subjects (people, locations, devices) and containers.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>search [-l &lt;number&gt;] [--limit=&lt;number&gt;] [--kind=&lt;string&gt;] [--tag=&lt;string&gt;] [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--occasion=&lt;string&gt;] [--after=&lt;string&gt;] [--before=&lt;string&gt;] [--creator=&lt;string&gt;] [--subject=&lt;string&gt;] [--subject-name=&lt;string&gt;] [--under=&lt;path&gt;] [--include-stacked] [--within=&lt;path&gt;] [--undated] [--missing=&lt;string&gt;] [--like=&lt;path&gt;] [--bbox=&lt;string&gt;] [--circle=&lt;string&gt;] [--polygon=&lt;string&gt;] [--sort=&lt;string&gt;] [--at=&lt;string&gt;] [--facets] [--group-by=&lt;string&gt;] [--layout] [--cursor=&lt;string&gt;] [--above=&lt;string&gt;] [--max-scan=&lt;number&gt;] [--fields=&lt;string&gt;] [&lt;query&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>search [-l &lt;number&gt;] [--limit=&lt;number&gt;] [--kind=&lt;string&gt;] [--tag=&lt;string&gt;] [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--occasion=&lt;string&gt;] [--after=&lt;string&gt;] [--before=&lt;string&gt;] [--creator=&lt;string&gt;] [--subject=&lt;string&gt;] [--subject-name=&lt;string&gt;] [--under=&lt;path&gt;] [--include-stacked] [--within=&lt;path&gt;] [--undated] [--missing=&lt;string&gt;] [--has=&lt;string&gt;] [--like=&lt;path&gt;] [--bbox=&lt;string&gt;] [--circle=&lt;string&gt;] [--polygon=&lt;string&gt;] [--sort=&lt;string&gt;] [--at=&lt;string&gt;] [--facets] [--group-by=&lt;string&gt;] [--layout] [--cursor=&lt;string&gt;] [--above=&lt;string&gt;] [--max-scan=&lt;number&gt;] [--fields=&lt;string&gt;] [&lt;query&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -4707,6 +4707,10 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 <td>only what lacks this attr, dotted for a nested one (duplicate.deferred); repeatable, each must be missing.</td>
 </tr>
 <tr>
+<td><code>--has=&lt;string&gt;</code></td>
+<td>only what holds this value in an attr, as <attr>=<value>: the attr is the value, or a list holding it (labels=sea); repeatable, each must hold.</td>
+</tr>
+<tr>
 <td><code>--like=&lt;path&gt;</code></td>
 <td>rank by how much each picture looks like this photo or video (more like this), or like a label&#39;s tag directory (/archive/tags/<label>, by its model), instead of by words; the other filters still narrow it.</td>
 </tr>
@@ -4770,7 +4774,8 @@ search --under /archive/albums/Exempelalbum --group-by person
 search --like /archive/albums/Exempelalbum/files/IMG_0001.jpg --subject person:anna-exempel
 search --within /home/anna/staging/files --<span class="hljs-built_in">sort</span> <span class="hljs-keyword">time</span>
 search --within /home/anna/staging/files --undated --facets
-search --within /home/anna/staging/files --missing duplicate.deferred</code></pre></div>
+search --within /home/anna/staging/files --missing duplicate.deferred
+search --has labels=sea --kind photo</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: a page of matching media, each with its path, name and date; with --group-by the albums (or other containers) holding the matches, or the people in them, instead, counted and dated; with --facets per-year, per-kind and per-label counts.</p>
 <h3 id="sed"><code>sed</code><a class="anchor" href="#sed" aria-label="Link to this section"></a></h3>
 <p>Stream editor for filtering and transforming text.</p>

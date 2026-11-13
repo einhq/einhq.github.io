@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 453 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 454 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -471,7 +471,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-files-grant](../ems/commands.md#ems-files-grant) | Names for paths through ems-files for a while, and the EMS-Files header that reaches them, to try a media service's way to EiN's files by hand. |
 | [ems-gpu](../ems/commands.md#ems-gpu) | The GPU of an instance of the media service now, with the last six hours of utilization and VRAM, from its machine device. |
 | [ems-instance](../ems/commands.md#ems-instance) | The media service's instances: list them and what each serves, or add, change or remove one beside the primary. |
-| [ems-link](../ems/commands.md#ems-link) | Watch every instance of the media service: log when one comes or goes, and run failed work again when one's build changes (the ems-link service) |
+| [ems-link](../ems/commands.md#ems-link) | Watch every instance of the media service: log when one comes or goes, run failed work again when one's build changes, and keep the primary's card at the share CFG_EMS_CARD_SHARE_MB names (the ems-link service) |
 | [ems-memory](../ems/commands.md#ems-memory) | The memory of the media service's machine now, with the last six hours, and what EMS holds of it. |
 | [ems-models](../ems/commands.md#ems-models) | What the media service held over the last hours, a sample a minute, with the work EiN had waiting beside it. |
 | [ems-sampler](../ems/commands.md#ems-sampler) | Drive the machine each instance of the media service runs on as a device, and sample what it holds (the ems-sampler service) |
@@ -480,7 +480,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media
 
-[All 22 in full](../media/commands.md).
+[All 23 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -493,6 +493,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-text](../media/commands.md#file-set-text) | Write the text in a picture by hand, in place of what was read from it. |
 | [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
 | [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript, from WebVTT on stdin. |
+| [find-damage](../media/commands.md#find-damage) | Read how faded, dusty and scratched a picture is, and keep it on the file to find those worth restoring. |
 | [fingerprints-scan](../media/commands.md#fingerprints-scan) | Announce every picture, video and recording that was never fingerprinted to the end: it has no fingerprintedAt. |
 | [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions, a document's PDF) for a media file or a document. |
 | [index-document](../media/commands.md#index-document) | Extract text content and generate embedding for a document file. |
