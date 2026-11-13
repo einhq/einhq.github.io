@@ -274,7 +274,9 @@ camera, and changing it re-dates them.
   archive's own time zone. Set it for a camera bought abroad, or one left on home time during a
   trip: Helen's Coolpix stayed on London time when she took it to Wellington, and with its
   **Timezone** set to `Europe/London`, EiN reads its clock as London time and gets the moment of
-  each picture right.
+  each picture right. Leave it empty for a phone, whose clock follows the local time wherever it
+  is: its pictures carry their own zone or a GPS time, and the few that carry neither are read in
+  the archive's time zone.
 - **Scanner or digitizer**: the camera's clock records when a file was scanned, not when the
   photograph was taken, so EiN dates pictures neither by it nor by a date in the file names it
   gives them. Pictures with no other date stay
