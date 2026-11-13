@@ -10,7 +10,7 @@ The commands the archive module adds. They are there once the module is installe
 
 ### `album`
 
-Manage albums (create, info, list, set, add files)
+Manage albums (create, info, list, set, add or move files)
 
 <small>reads only</small>
 
@@ -18,21 +18,21 @@ Manage albums (create, info, list, set, add files)
 album [--name=<string>] [--share=<string>] [--create] [--description=<string>] [--cover=<string>] [--limit=<string>] [--cursor=<string>] <subcommand> <path> <files>...
 ```
 
-| Argument       | What it is                                                                                                     |
-| -------------- | -------------------------------------------------------------------------------------------------------------- |
-| `<subcommand>` | create \| info \| list \| set \| add.                                                                          |
-| `<path>`       | album path.                                                                                                    |
-| `<files>...`   | add: the files to put in the album: linked, or moved there out of staging; info: more albums, up to 50 in all. |
+| Argument       | What it is                                                                                                                                                      |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<subcommand>` | create \| info \| list \| set \| add \| move.                                                                                                                   |
+| `<path>`       | album path.                                                                                                                                                     |
+| `<files>...`   | add: the files to put in the album: linked, or moved there out of staging; move: the files or links to move into the album; info: more albums, up to 50 in all. |
 
-| Option                   | What it does                                                                                            |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `--name=<string>`        | create, add --create: the album display name (defaults to the slug)                                     |
-| `--share=<string>`       | create, add --create: who sees it (default, private, shared, everyone; default: as your new albums are) |
-| `--create`               | add: make the album first when it is not there.                                                         |
-| `--description=<string>` | album description (create)                                                                              |
-| `--cover=<string>`       | cover media path (create)                                                                               |
-| `--limit=<string>`       | albums per list page (max 1000)                                                                         |
-| `--cursor=<string>`      | list: the last name of the page before (pages are in the store's name order)                            |
+| Option                   | What it does                                                                                                    |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `--name=<string>`        | create, add or move --create: the album display name (defaults to the slug)                                     |
+| `--share=<string>`       | create, add or move --create: who sees it (default, private, shared, everyone; default: as your new albums are) |
+| `--create`               | add, move: make the album first when it is not there.                                                           |
+| `--description=<string>` | album description (create)                                                                                      |
+| `--cover=<string>`       | cover media path (create)                                                                                       |
+| `--limit=<string>`       | albums per list page (max 1000)                                                                                 |
+| `--cursor=<string>`      | list: the last name of the page before (pages are in the store's name order)                                    |
 
 ```bash
 album info /archive/albums/Exempelalbum_2019
@@ -42,9 +42,10 @@ album set /archive/albums/Exempelalbum_2019 spanStart 2019-05-30
 album set /archive/albums/Exempelalbum_2019 next /archive/albums/Exempelalbum_2020
 album create /archive/albums/Stugan --name 'Stugan' --share private
 album add /archive/albums/Sommar_2020 /home/anna/staging/files/inbox/upload-2026-10-01/IMG_0001.jpg --create --name 'Sommar 2020'
+album move /archive/albums/Sommar_2020 /archive/albums/Exempelalbum_2019/IMG_0412.jpg /archive/albums/Exempelalbum_2019/IMG_0413.jpg
 ```
 
-With `JSON_OUTPUT=1`: for `info`, each album's list row with its id, cover, neighbours in a series and child count, a suggested album's parts and candidate albums, and the paths that name none (AlbumInfoAnswer); for `list`, the albums under a root, a suggested album's with what staging decides it by and its best match (AlbumListResult); for `add`, the files linked and moved and where each now files, whether it made the album, and the staging journal entries that undo the moves (AlbumAddResult); for `create` and `set`, nothing.
+With `JSON_OUTPUT=1`: for `info`, each album's list row with its id, cover, neighbours in a series and child count, a suggested album's parts and candidate albums, and the paths that name none (AlbumInfoAnswer); for `list`, the albums under a root, a suggested album's with what staging decides it by and its best match (AlbumListResult); for `add`, the files linked and moved and where each now files, whether it made the album, and the staging journal entries that undo the moves (AlbumAddResult); for `move`, each file moved and where it now is, the links removed, and what was already there or did not move (AlbumMoveResult); for `create` and `set`, nothing.
 
 ### `album-cover`
 

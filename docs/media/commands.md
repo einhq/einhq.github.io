@@ -272,7 +272,7 @@ With `JSON_OUTPUT=1`: how many files it looked at and how many it announced as m
 
 ### `generate-derivatives`
 
-Generate web derivatives (still pictures, transcoded renditions) for a media file.
+Generate web derivatives (still pictures, transcoded renditions, a document's PDF) for a media file or a document.
 
 <small>changes things</small>
 
@@ -284,13 +284,13 @@ generate-derivatives [-v] [-f] [--only=<string>] [--size=<string>] [--prune] <in
 | --------- | ----------------------- |
 | `<input>` | VFS path to media file. |
 
-| Option            | What it does                                                                               |
-| ----------------- | ------------------------------------------------------------------------------------------ |
-| `-v`              | Verbose output.                                                                            |
-| `-f`              | Force regenerate even if derivatives exist.                                                |
-| `--only=<string>` | Generate one class only: still \| transcode \| preview \| storyboard.                      |
-| `--size=<string>` | Generate only these roles (comma-separated): roles of /etc/renditions.yaml, or storyboard. |
-| `--prune`         | Delete renditions under thumbnails/ that are no longer targets.                            |
+| Option            | What it does                                                                                    |
+| ----------------- | ----------------------------------------------------------------------------------------------- |
+| `-v`              | Verbose output.                                                                                 |
+| `-f`              | Force regenerate even if derivatives exist.                                                     |
+| `--only=<string>` | Generate one class only: still \| transcode \| preview \| storyboard.                           |
+| `--size=<string>` | Generate only these roles (comma-separated): roles of /etc/renditions.yaml, storyboard, or pdf. |
+| `--prune`         | Delete renditions under thumbnails/ that are no longer targets.                                 |
 
 ```bash
 generate-derivatives /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg

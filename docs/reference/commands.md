@@ -262,7 +262,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 | Command | What it does |
 | --- | --- |
-| [album](../archive/commands.md#album) | Manage albums (create, info, list, set, add files) |
+| [album](../archive/commands.md#album) | Manage albums (create, info, list, set, add or move files) |
 | [album-cover](../archive/commands.md#album-cover) | Give an album without a cover a random one of its own pictures (coverPhoto softlink) |
 | [album-device-add](../archive/commands.md#album-device-add) | Put devices on an album's list, whose tracks its map draws. |
 | [album-device-list](../archive/commands.md#album-device-list) | The devices whose tracks an album's map draws: those the cameras of its media are linked to and those added by hand, and the devices of its media taken off the list. |
@@ -492,7 +492,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [file-set-text-language](../media/commands.md#file-set-text-language) | Set the language the text in a picture is written in (or auto), and read the picture again in it. |
 | [file-set-transcript](../media/commands.md#file-set-transcript) | Write what is said in a video or a recording by hand, in place of the transcript, from WebVTT on stdin. |
 | [fingerprints-scan](../media/commands.md#fingerprints-scan) | Announce every picture, video and recording that was never fingerprinted to the end: it has no fingerprintedAt. |
-| [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions) for a media file. |
+| [generate-derivatives](../media/commands.md#generate-derivatives) | Generate web derivatives (still pictures, transcoded renditions, a document's PDF) for a media file or a document. |
 | [index-document](../media/commands.md#index-document) | Extract text content and generate embedding for a document file. |
 | [media-bridge](../media/commands.md#media-bridge) | Derive the facts of a media file itself from VFS mutations: arrived, changed, turned, removed, read, its renditions made, its text and transcript, and the unread files a moved directory carried (long-running) |
 | [media-pool-kinds](../media/commands.md#media-pool-kinds) | The kinds of work a worker of the media pool takes, from the modules' drop-ins, as pipeline-worker's flags. |

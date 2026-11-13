@@ -469,7 +469,7 @@ fingerprints-scan --if-idle --<span class="hljs-built_in">limit</span> 0</code><
 <p>With <code>JSON_OUTPUT=1</code>: how many files it looked at and how many it announced as media.fingerprints.stale.</p>
 <h2 id="g">G<a class="anchor" href="#g" aria-label="Link to this section"></a></h2>
 <h3 id="generate-derivatives"><code>generate-derivatives</code><a class="anchor" href="#generate-derivatives" aria-label="Link to this section"></a></h3>
-<p>Generate web derivatives (still pictures, transcoded renditions) for a media file.</p>
+<p>Generate web derivatives (still pictures, transcoded renditions, a document&#39;s PDF) for a media file or a document.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>generate-derivatives [-v] [-f] [--only=&lt;string&gt;] [--size=&lt;string&gt;] [--prune] &lt;input&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -506,7 +506,7 @@ fingerprints-scan --if-idle --<span class="hljs-built_in">limit</span> 0</code><
 </tr>
 <tr>
 <td><code>--size=&lt;string&gt;</code></td>
-<td>Generate only these roles (comma-separated): roles of /etc/renditions.yaml, or storyboard.</td>
+<td>Generate only these roles (comma-separated): roles of /etc/renditions.yaml, storyboard, or pdf.</td>
 </tr>
 <tr>
 <td><code>--prune</code></td>

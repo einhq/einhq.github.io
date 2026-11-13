@@ -4617,7 +4617,7 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 <h3 id="search"><code>search</code><a class="anchor" href="#search" aria-label="Link to this section"></a></h3>
 <p>Faceted search over content: text, time, region, kind, tags, subjects (people, locations, devices) and containers.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>search [-l &lt;number&gt;] [--limit=&lt;number&gt;] [--kind=&lt;string&gt;] [--tag=&lt;string&gt;] [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--after=&lt;string&gt;] [--before=&lt;string&gt;] [--creator=&lt;string&gt;] [--subject=&lt;string&gt;] [--subject-name=&lt;string&gt;] [--under=&lt;path&gt;] [--include-stacked] [--within=&lt;path&gt;] [--undated] [--missing=&lt;string&gt;] [--like=&lt;path&gt;] [--bbox=&lt;string&gt;] [--circle=&lt;string&gt;] [--polygon=&lt;string&gt;] [--sort=&lt;string&gt;] [--at=&lt;string&gt;] [--facets] [--group-by=&lt;string&gt;] [--layout] [--cursor=&lt;string&gt;] [--above=&lt;string&gt;] [--max-scan=&lt;number&gt;] [--fields=&lt;string&gt;] [&lt;query&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>search [-l &lt;number&gt;] [--limit=&lt;number&gt;] [--kind=&lt;string&gt;] [--tag=&lt;string&gt;] [--from=&lt;string&gt;] [--to=&lt;string&gt;] [--occasion=&lt;string&gt;] [--after=&lt;string&gt;] [--before=&lt;string&gt;] [--creator=&lt;string&gt;] [--subject=&lt;string&gt;] [--subject-name=&lt;string&gt;] [--under=&lt;path&gt;] [--include-stacked] [--within=&lt;path&gt;] [--undated] [--missing=&lt;string&gt;] [--like=&lt;path&gt;] [--bbox=&lt;string&gt;] [--circle=&lt;string&gt;] [--polygon=&lt;string&gt;] [--sort=&lt;string&gt;] [--at=&lt;string&gt;] [--facets] [--group-by=&lt;string&gt;] [--layout] [--cursor=&lt;string&gt;] [--above=&lt;string&gt;] [--max-scan=&lt;number&gt;] [--fields=&lt;string&gt;] [&lt;query&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -4661,6 +4661,10 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 <tr>
 <td><code>--to=&lt;string&gt;</code></td>
 <td>taken before this date, exclusive (--to 2000 includes all of 2000)</td>
+</tr>
+<tr>
+<td><code>--occasion=&lt;string&gt;</code></td>
+<td>taken on a holiday&#39;s days, every year of --from/--to (or every year): midsummer, midsommar, easter, påsk, christmas, jul, new-year, nyår, walpurgis, valborg, national-day, nationaldagen, lucia.</td>
 </tr>
 <tr>
 <td><code>--after=&lt;string&gt;</code></td>
@@ -4760,6 +4764,7 @@ scp -r <span class="hljs-string">&quot;/archive/albums/Summer 2020&quot;</span> 
 search --subject person:anna-exempel --subject person:bo-exempel --kind photo --<span class="hljs-built_in">sort</span> -<span class="hljs-keyword">time</span>
 search --subject-name <span class="hljs-string">&#x27;person:anna&#x27;</span> --kind video
 search --bbox=$(location-region Exempelstad --bbox-only) --from 2007 --to 2007
+search --occasion midsummer --from 1995 --to 2000
 search --subject person:anna-exempel --group-by album
 search --under /archive/albums/Exempelalbum --group-by person
 search --like /archive/albums/Exempelalbum/files/IMG_0001.jpg --subject person:anna-exempel

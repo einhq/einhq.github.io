@@ -3055,7 +3055,7 @@ Faceted search over content: text, time, region, kind, tags, subjects (people, l
 <small>reads only</small>
 
 ```text
-search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
+search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--occasion=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
 ```
 
 | Argument | What it is |
@@ -3070,6 +3070,7 @@ search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--fr
 | `--tag=<string>` | filter by label (repeatable, intersected) |
 | `--from=<string>` | taken at/after this date (2020, 2020-05, 2020-05-01) |
 | `--to=<string>` | taken before this date, exclusive (--to 2000 includes all of 2000) |
+| `--occasion=<string>` | taken on a holiday's days, every year of --from/--to (or every year): midsummer, midsommar, easter, påsk, christmas, jul, new-year, nyår, walpurgis, valborg, national-day, nationaldagen, lucia. |
 | `--after=<string>` | alias for --from. |
 | `--before=<string>` | alias for --to. |
 | `--creator=<string>` | media created (uploaded or imported) by a user, by name or uid. |
@@ -3099,6 +3100,7 @@ search segelbåt --kind photo
 search --subject person:anna-exempel --subject person:bo-exempel --kind photo --sort -time
 search --subject-name 'person:anna' --kind video
 search --bbox=$(location-region Exempelstad --bbox-only) --from 2007 --to 2007
+search --occasion midsummer --from 1995 --to 2000
 search --subject person:anna-exempel --group-by album
 search --under /archive/albums/Exempelalbum --group-by person
 search --like /archive/albums/Exempelalbum/files/IMG_0001.jpg --subject person:anna-exempel
