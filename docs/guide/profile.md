@@ -354,7 +354,7 @@ What you delete goes to _your_ trash, also when it belongs to someone else who l
 If a picture disappears from an album of yours, the person who deleted it has it in their trash.
 
 While something is in the trash, it is gone for everyone: from search, `ls` and every other list,
-and with the Archive from albums and the map. It keeps what EiN worked out about it, such as faces
+and with the Archive from albums, the map and the counts of the people in it. It keeps what EiN worked out about it, such as faces
 and a transcript, and comes back with all of it when you restore it.
 
 ### What is deleted for good at once

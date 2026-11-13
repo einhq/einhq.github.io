@@ -48,7 +48,7 @@ Open **People** in the sidebar, under **Browse**.
 - **Sort** offers **Most pictured** (the default), **Name (A-Z)** and **Name (Z-A)**. Your choice is remembered in this browser. A name that starts with `?`, a placeholder for someone known only from a family record, sorts after the real names.
 - Each card shows the person's cover picture, their name and how many pictures they are in, or their full name when they are in none. Click a card to open the [person's page](#a-persons-page).
 
-The number on a card counts the files of the library the person is seen or heard in: a picture with their face or a box naming them, or a recording with their voice. A picture with two of their faces counts once, as does a recording they speak in many times. Files still waiting in someone's staging area count once they are filed.
+The number on a card counts the files of the library the person is seen or heard in: a picture with their face or a box naming them, or a recording with their voice. A picture with two of their faces counts once, as does a recording they speak in many times. Files still waiting in someone's staging area count once they are filed, and files in a trash count again once they are restored.
 
 When nobody has been named yet, the page says **No people yet** and "Face recognition finds people in the pictures; name them under Unidentified, or add someone here." with a **New person** button.
 
@@ -64,7 +64,7 @@ The page is headed **Unidentified people**: "Faces and voices recognized as the 
 
 - **Sort** offers **Most found** (the default) and **Newest**.
 - **Found** shows only people found at least so many times: **Any count**, **2+ times**, **5+ times**, **10+ times** or **50+ times**. A face and a recording the voice is heard in count one time each.
-- Each card shows one large glimpse and up to three small ones: the best faces first, then round play buttons that play the voice's longest turn. A voice heard in a video shows the video in its button: the moment the person speaks, those moments one after another while the pointer rests on it, and what is on screen as you listen. The badges say **N faces** and **heard in N** (recordings).
+- Each card shows one large glimpse and up to three small ones: the best faces first, then round play buttons that play the voice's longest turn. A voice heard in a video shows the video in its button: the moment the person speaks, those moments one after another while the pointer rests on it, and what is on screen as you listen. The badges say **N faces** and **heard in N** (recordings). A face or recording on a file in a trash is left out of both, and of the glimpses, until the file is restored.
 - **Load more (N of M)** at the foot fetches the next cards.
 
 Both choices are kept in the address, so a link opens the same view.
