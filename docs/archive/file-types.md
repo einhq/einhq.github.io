@@ -12,7 +12,7 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 | [Photos](#photos)               | JPEG, HEIC, PNG, TIFF, WebP, AVIF, GIF, BMP, camera RAW    | date, place, camera, thumbnails, faces, text in the picture, what it shows, look-alikes                             |
 | [Videos](#videos)               | MP4, MOV, M4V, MTS and M2TS, MPG, AVI, MKV, WebM, 3GP, FLV | date, place, camera, a playable version, a preview clip, chapters, faces, what is said and who says it, look-alikes |
 | [Recordings](#recordings)       | M4A, MP3, WAV, FLAC, Ogg and Opus, AMR                     | date, a playable version, a picture of the sound, what is said and who says it, the same recording twice            |
-| [Documents](#documents)         | PDF, Word, OpenDocument and plain text                     | the text, for search; the text of scanned pages too                                                                 |
+| [Documents](#documents)         | PDF, Word, OpenDocument, RTF and plain text                | a picture of the first page, a version to read in the viewer, the text for search; the text of scanned pages too    |
 | [Sidecar files](#sidecar-files) | Google Takeout JSON, XMP                                   | nothing of their own: they give their picture its date, place and caption                                           |
 | [GPS tracks](#gps-tracks)       | GPX                                                        | the route, added to the track of the device it was recorded on                                                      |
 | [Family trees](#family-trees)   | GEDCOM                                                     | the people, their relations, events and homes, found among the archive's people or added                            |
@@ -177,10 +177,16 @@ is about: a search for `Christmas letter` finds the family newsletter of 2019. S
 A document's text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.
 
-Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
-**Download** to open one on your device. The **Documents** choice on the [Media page](media.md#show-one-kind-of-file)
-also lists RTF files and old Word (`.doc`) files, but EiN does not read their text: search finds
-them by their file name only. To have their text read, save them as PDF or `.docx` first.
+EiN also draws the first page of a PDF, Word (`.docx` and old `.doc`), OpenDocument, RTF or plain
+text file, which is its tile in an album and on the Media page, and makes a PDF of a Word,
+OpenDocument or RTF file once, which the viewer shows. The viewer shows a PDF as it is and plain text
+as text ([Read a document](viewer.md#read-a-document)). A document EiN cannot open keeps a plain
+tile; use **Download** to open it on your device.
+
+The **Documents** choice on the [Media page](media.md#show-one-kind-of-file) also lists Markdown and
+HTML files, which the viewer shows as text. EiN does not read the text of RTF files and old Word
+(`.doc`) files: search finds them by their file name only. To have their text read, save them as PDF
+or `.docx` first.
 
 ## Sidecar files
 

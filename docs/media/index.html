@@ -142,11 +142,16 @@ staging area as an exact copy of one its owner already has
 <p>The thumbnails, display sizes, video and sound copies are listed in <code>/etc/renditions.yaml</code>, each
 under the role it plays: <code>thumb</code>, the square thumbnail, and <code>grid</code>, <code>small</code>, <code>medium</code> and <code>large</code>,
 which keep the picture&#39;s shape; a video&#39;s <code>preview</code>, the silent clip a tile plays, and its
-<code>playback</code>; a recording&#39;s <code>playback</code>; and the <code>storyboard</code>, a video&#39;s frames on one sheet. The
+<code>playback</code>; a recording&#39;s <code>playback</code>; and the <code>storyboard</code>, a video&#39;s frames on one sheet. A picture
+role&#39;s <code>kinds</code> says what it is made of: <code>photo</code>, <code>video</code>, <code>audio</code> (the waveform) and <code>document</code> (a
+document&#39;s first page). A file from before documents got pictures has no <code>document</code> in its kinds,
+and documents get no picture until it is added. The
 pages ask for a role, so changing a size there changes what they show. <code>renditions</code> in the
 terminal says what the file holds now, and names any entry it leaves out as wrong.</p>
 <p>Two pipelines make them, once a file&#39;s metadata is read: <code>media-stills</code> the pictures (a photo&#39;s
-sizes, a video&#39;s poster frames and then its hover clip, a recording&#39;s waveform), and
+sizes, a video&#39;s poster frames and then its hover clip, a recording&#39;s waveform, and as soon as a
+document is written its first page, with the PDF of a Word, OpenDocument or RTF file, <code>view.pdf</code>,
+which the viewer shows), and
 <code>media-transcode</code> the video and sound a browser can play, with a video&#39;s storyboard and its
 chapters, the cuts its player marks. A folder whose <code>processing</code> setting leaves out <code>renditions</code>
 gets none (<a href="../concepts/pipelines.html#which-processing-a-folder-wants">Which processing a folder wants</a>).</p>

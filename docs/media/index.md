@@ -50,12 +50,17 @@ staging area as an exact copy of one its owner already has
 The thumbnails, display sizes, video and sound copies are listed in `/etc/renditions.yaml`, each
 under the role it plays: `thumb`, the square thumbnail, and `grid`, `small`, `medium` and `large`,
 which keep the picture's shape; a video's `preview`, the silent clip a tile plays, and its
-`playback`; a recording's `playback`; and the `storyboard`, a video's frames on one sheet. The
+`playback`; a recording's `playback`; and the `storyboard`, a video's frames on one sheet. A picture
+role's `kinds` says what it is made of: `photo`, `video`, `audio` (the waveform) and `document` (a
+document's first page). A file from before documents got pictures has no `document` in its kinds,
+and documents get no picture until it is added. The
 pages ask for a role, so changing a size there changes what they show. `renditions` in the
 terminal says what the file holds now, and names any entry it leaves out as wrong.
 
 Two pipelines make them, once a file's metadata is read: `media-stills` the pictures (a photo's
-sizes, a video's poster frames and then its hover clip, a recording's waveform), and
+sizes, a video's poster frames and then its hover clip, a recording's waveform, and as soon as a
+document is written its first page, with the PDF of a Word, OpenDocument or RTF file, `view.pdf`,
+which the viewer shows), and
 `media-transcode` the video and sound a browser can play, with a video's storyboard and its
 chapters, the cuts its player marks. A folder whose `processing` setting leaves out `renditions`
 gets none ([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)).

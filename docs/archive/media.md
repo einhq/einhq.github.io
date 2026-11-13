@@ -55,7 +55,7 @@ The switch is off by default, and like the layout it is remembered in this brows
 | **Audio**     | Recordings.                                                        |
 | **Documents** | PDF, Word, OpenDocument, RTF, Markdown, HTML and plain text files. |
 
-Choosing a kind keeps the feed: the videos alone are still newest first, by date. The kind goes into the page's address (`/media?kind=video`), so a link you copy opens the same view. Documents show as a placeholder tile with no picture; [Supported files](file-types.md) lists which ones EiN reads the text of.
+Choosing a kind keeps the feed: the videos alone are still newest first, by date. The kind goes into the page's address (`/media?kind=video`), so a link you copy opens the same view. A document's tile is a picture of its first page, and the viewer shows the document to read ([Read a document](viewer.md#read-a-document)); [Supported files](file-types.md) lists which ones EiN reads the text of.
 
 ### Narrow by label
 

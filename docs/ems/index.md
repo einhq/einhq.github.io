@@ -93,8 +93,9 @@ LaMa, the scratch detector and SCUNet run when someone restores a photo
 | Dates, places, cameras: metadata                    | [ExifTool](https://exiftool.org/)                                                                                                                                                                                                  | The same terms as Perl: [Artistic][artistic] or [GPL][gpl-perl]                 |                                                       |
 | Camera RAW files                                    | [rawpy](https://github.com/letmaik/rawpy) with [LibRaw](https://github.com/LibRaw/LibRaw)                                                                                                                                          | [MIT][mit]; [LGPL-2.1][lgpl-2.1] or [CDDL-1.0][cddl]                            |                                                       |
 | Pictures for the models, HEIC included              | [Pillow](https://github.com/python-pillow/Pillow) and [pi-heif](https://github.com/bigcat88/pillow_heif), pillow-heif without its encoders                                                                                         | [MIT-CMU][mit-cmu]; [BSD-3-Clause][bsd-3]                                       | Its wheels bundle libheif and libde265, both LGPL-3.0 |
-| Text of PDF files                                   | [pypdfium2](https://github.com/pypdfium2-team/pypdfium2) with [PDFium](https://pdfium.googlesource.com/pdfium)                                                                                                                     | [Apache-2.0][apache] or [BSD-3-Clause][bsd-3]; PDFium [BSD-3-Clause][bsd-3]     |                                                       |
+| Text and pages of PDF files                         | [pypdfium2](https://github.com/pypdfium2-team/pypdfium2) with [PDFium](https://pdfium.googlesource.com/pdfium)                                                                                                                     | [Apache-2.0][apache] or [BSD-3-Clause][bsd-3]; PDFium [BSD-3-Clause][bsd-3]     |                                                       |
 | Text of Word and OpenDocument files                 | [python-docx](https://github.com/python-openxml/python-docx) and [odfpy](https://github.com/eea/odfpy)                                                                                                                             | [MIT][mit]; [GPL-2.0 or later][gpl-2.0], or [Apache-2.0][apache]                |                                                       |
+| Pictures of documents; Word and RTF files as PDF    | [LibreOffice](https://www.libreoffice.org/), Debian's `libreoffice-writer-nogui`, with the [Liberation fonts](https://github.com/liberationfonts/liberation-fonts)                                                                 | [MPL-2.0][mpl]; fonts [OFL-1.1][ofl]                                            | Runs as a program of its own                          |
 
 [cc-by]: https://creativecommons.org/licenses/by/4.0/legalcode
 [apache]: https://www.apache.org/licenses/LICENSE-2.0
@@ -106,6 +107,8 @@ LaMa, the scratch detector and SCUNet run when someone restores a photo
 [lgpl-3.0]: https://www.gnu.org/licenses/lgpl-3.0.html
 [gpl-2.0]: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 [cddl]: https://opensource.org/license/cddl-1-0
+[mpl]: https://www.mozilla.org/en-US/MPL/2.0/
+[ofl]: https://openfontlicense.org/open-font-license-official-text/
 [imagemagick]: https://imagemagick.org/license/
 [artistic]: https://dev.perl.org/licenses/artistic.html
 [gpl-perl]: https://dev.perl.org/licenses/gpl1.html

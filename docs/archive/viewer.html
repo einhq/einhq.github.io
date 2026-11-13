@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Viewing photos, videos and recordings – EiN documentation</title>
-    <meta name="description" content="The viewer shows one photo, video or recording at a time, large, with what EiN knows about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how to open the viewer and move through files, what the details panel tells you, and how to work with faces, text in pictures, playback, transcripts and slideshows.">
+    <meta name="description" content="The viewer shows one photo, video, recording or document at a time, large, with what EiN knows about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how to open the viewer and move through files, what the details panel tells you, and how to work with faces, text in pictures, playback, transcripts, documents and slideshows.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/archive/viewer.html">
     <meta property="og:title" content="Viewing photos, videos and recordings – EiN documentation">
-    <meta property="og:description" content="The viewer shows one photo, video or recording at a time, large, with what EiN knows about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how to open the viewer and move through files, what the details panel tells you, and how to work with faces, text in pictures, playback, transcripts and slideshows.">
+    <meta property="og:description" content="The viewer shows one photo, video, recording or document at a time, large, with what EiN knows about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how to open the viewer and move through files, what the details panel tells you, and how to work with faces, text in pictures, playback, transcripts, documents and slideshows.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -92,10 +92,10 @@
           <h1>Viewing photos, videos and recordings</h1>
         </header>
         <article class="prose">
-<p>The viewer shows one photo, video or recording at a time, large, with what EiN knows about it
-beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how
-to open the viewer and move through files, what the details panel tells you, and how to work with
-faces, text in pictures, playback, transcripts and slideshows.</p>
+<p>The viewer shows one photo, video, recording or document at a time, large, with what EiN knows
+about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a
+phone: how to open the viewer and move through files, what the details panel tells you, and how to
+work with faces, text in pictures, playback, transcripts, documents and slideshows.</p>
 <h2 id="open-the-viewer">Open the viewer<a class="anchor" href="#open-the-viewer" aria-label="Link to this section"></a></h2>
 <p>Click any picture in a grid: an album, the <strong>Media</strong> page, a person&#39;s <strong>Media</strong> tab, your
 <strong>Favourites</strong>, a search result. The picture grows out of its tile and fills the screen over the
@@ -953,6 +953,21 @@ Saving does not wait for the media service: when it is away, the lines are saved
 finds the new words once the service is back.</p>
 <p>For a recording or video you reach from a search for words that are said in it, the viewer opens at
 the moment they are said.</p>
+<h2 id="read-a-document">Read a document<a class="anchor" href="#read-a-document" aria-label="Link to this section"></a></h2>
+<p>A document opens in the viewer to be read:</p>
+<ul>
+<li>a <strong>PDF</strong> in your browser&#39;s own PDF reader, with its pages, zoom, search and printing;</li>
+<li>a <strong>Word</strong> (<code>.docx</code> or <code>.doc</code>), <strong>OpenDocument</strong> or <strong>RTF</strong> file the same way, as the PDF EiN made
+of it;</li>
+<li>a <strong>plain text</strong> file, a Markdown note or an HTML page as its text. A long one shows its first
+256 KB; <strong>Download</strong> has the rest.</li>
+</ul>
+<p>While the PDF reader has the keyboard, the arrow keys move through the document; click the bar under
+it to move between files with them again. On a phone, where a browser often cannot show a PDF inside
+a page, the viewer shows the first page and <strong>Open the document</strong>, which opens the PDF on its own.
+In a slideshow a document shows its first page.</p>
+<p>A document whose PDF EiN has not made yet, or one it cannot open, shows its first page or an icon
+and says so. Use <strong>Download</strong> in the More menu to open it on your device.</p>
 <h2 id="watch-a-slideshow">Watch a slideshow<a class="anchor" href="#watch-a-slideshow" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Open the picture to start from, in the album or list you want to show.</li>
@@ -1045,9 +1060,11 @@ current browser on another device, or <strong>Download</strong> the original.</p
 could be made from it.&quot;
 The uploaded file itself cannot be read; the reason is under the message. <strong>Download</strong> it to check
 the file on your own device.</p>
-<p><strong>A PDF or a Word file shows nothing.</strong>
-The viewer has no reader for documents. Use <strong>Download</strong> in the More menu to open the file on your
-device. Its text can still be found with search; see <a href="file-types.html">Supported files</a>.</p>
+<p><strong>A document says &quot;EiN cannot show this document here&quot;.</strong>
+A Word, OpenDocument or RTF file is shown as the PDF EiN makes of it, and that PDF is not made yet,
+or the file cannot be opened. Wait a while and open it again, or use <strong>Download</strong> in the More menu to
+open the file on your device. Its text can still be found with search; see
+<a href="file-types.html">Supported files</a>.</p>
 <p><strong>Show text is not in the More menu.</strong>
 No text was read from this picture, or it is a video or a recording. Add the text yourself with
 <strong>Add text</strong>, if you may change the file.</p>
@@ -1104,7 +1121,7 @@ file-set-text-language /archive/albums/cornwall-1968/img20120303_133900582.jpg e
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/viewer.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-viewer">Open the viewer</a></li><li><a href="#what-the-viewer-shows">What the viewer shows</a></li><li class="nested"><a href="#the-date-under-the-picture">The date under the picture</a></li><li class="nested"><a href="#the-more-menu">The More menu</a></li><li><a href="#move-between-files-and-close-the-viewer">Move between files and close the viewer</a></li><li><a href="#zoom-in-on-a-photo">Zoom in on a photo</a></li><li><a href="#keyboard-shortcuts-in-the-viewer">Keyboard shortcuts in the viewer</a></li><li><a href="#on-a-phone-or-tablet">On a phone or tablet</a></li><li><a href="#the-details-panel">The details panel</a></li><li class="nested"><a href="#people-in-the-picture">People in the picture</a></li><li class="nested"><a href="#the-details-section">The Details section</a></li><li><a href="#change-a-file-from-the-cog-menu">Change a file from the cog menu</a></li><li class="nested"><a href="#change-the-description-labels-or-location">Change the description, labels or location</a></li><li><a href="#faces-in-the-viewer">Faces in the viewer</a></li><li class="nested"><a href="#draw-or-correct-a-face-box">Draw or correct a face box</a></li><li><a href="#restore-a-faded-or-damaged-photo">Restore a faded or damaged photo</a></li><li class="nested"><a href="#show-the-restored-copy">Show the restored copy</a></li><li><a href="#remove-a-blemish">Remove a blemish</a></li><li><a href="#read-the-text-in-a-picture">Read the text in a picture</a></li><li class="nested"><a href="#correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand</a></li><li class="nested"><a href="#read-the-text-again-in-another-language">Read the text again in another language</a></li><li><a href="#play-a-video">Play a video</a></li><li class="nested"><a href="#the-timeline-and-chapters">The timeline and chapters</a></li><li class="nested"><a href="#subtitles">Subtitles</a></li><li class="nested"><a href="#faces-in-a-video">Faces in a video</a></li><li><a href="#listen-to-a-recording">Listen to a recording</a></li><li><a href="#read-along-with-a-transcript">Read along with a transcript</a></li><li class="nested"><a href="#correct-the-subtitles">Correct the subtitles</a></li><li><a href="#watch-a-slideshow">Watch a slideshow</a></li><li><a href="#mark-a-favourite">Mark a favourite</a></li><li><a href="#what-you-see-depends-on-who-you-are">What you see depends on who you are</a></li><li><a href="#when-something-is-not-as-expected">When something is not as expected</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#open-the-viewer">Open the viewer</a></li><li><a href="#what-the-viewer-shows">What the viewer shows</a></li><li class="nested"><a href="#the-date-under-the-picture">The date under the picture</a></li><li class="nested"><a href="#the-more-menu">The More menu</a></li><li><a href="#move-between-files-and-close-the-viewer">Move between files and close the viewer</a></li><li><a href="#zoom-in-on-a-photo">Zoom in on a photo</a></li><li><a href="#keyboard-shortcuts-in-the-viewer">Keyboard shortcuts in the viewer</a></li><li><a href="#on-a-phone-or-tablet">On a phone or tablet</a></li><li><a href="#the-details-panel">The details panel</a></li><li class="nested"><a href="#people-in-the-picture">People in the picture</a></li><li class="nested"><a href="#the-details-section">The Details section</a></li><li><a href="#change-a-file-from-the-cog-menu">Change a file from the cog menu</a></li><li class="nested"><a href="#change-the-description-labels-or-location">Change the description, labels or location</a></li><li><a href="#faces-in-the-viewer">Faces in the viewer</a></li><li class="nested"><a href="#draw-or-correct-a-face-box">Draw or correct a face box</a></li><li><a href="#restore-a-faded-or-damaged-photo">Restore a faded or damaged photo</a></li><li class="nested"><a href="#show-the-restored-copy">Show the restored copy</a></li><li><a href="#remove-a-blemish">Remove a blemish</a></li><li><a href="#read-the-text-in-a-picture">Read the text in a picture</a></li><li class="nested"><a href="#correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand</a></li><li class="nested"><a href="#read-the-text-again-in-another-language">Read the text again in another language</a></li><li><a href="#play-a-video">Play a video</a></li><li class="nested"><a href="#the-timeline-and-chapters">The timeline and chapters</a></li><li class="nested"><a href="#subtitles">Subtitles</a></li><li class="nested"><a href="#faces-in-a-video">Faces in a video</a></li><li><a href="#listen-to-a-recording">Listen to a recording</a></li><li><a href="#read-along-with-a-transcript">Read along with a transcript</a></li><li class="nested"><a href="#correct-the-subtitles">Correct the subtitles</a></li><li><a href="#read-a-document">Read a document</a></li><li><a href="#watch-a-slideshow">Watch a slideshow</a></li><li><a href="#mark-a-favourite">Mark a favourite</a></li><li><a href="#what-you-see-depends-on-who-you-are">What you see depends on who you are</a></li><li><a href="#when-something-is-not-as-expected">When something is not as expected</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
     </div>
   </body>
 </html>

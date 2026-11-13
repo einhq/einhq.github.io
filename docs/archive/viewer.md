@@ -1,9 +1,9 @@
 # Viewing photos, videos and recordings
 
-The viewer shows one photo, video or recording at a time, large, with what EiN knows about it
-beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a phone: how
-to open the viewer and move through files, what the details panel tells you, and how to work with
-faces, text in pictures, playback, transcripts and slideshows.
+The viewer shows one photo, video, recording or document at a time, large, with what EiN knows
+about it beside it. This page is for everyone who looks at pictures in EiN, on a computer or on a
+phone: how to open the viewer and move through files, what the details panel tells you, and how to
+work with faces, text in pictures, playback, transcripts, documents and slideshows.
 
 ## Open the viewer
 
@@ -628,6 +628,24 @@ finds the new words once the service is back.
 For a recording or video you reach from a search for words that are said in it, the viewer opens at
 the moment they are said.
 
+## Read a document
+
+A document opens in the viewer to be read:
+
+- a **PDF** in your browser's own PDF reader, with its pages, zoom, search and printing;
+- a **Word** (`.docx` or `.doc`), **OpenDocument** or **RTF** file the same way, as the PDF EiN made
+  of it;
+- a **plain text** file, a Markdown note or an HTML page as its text. A long one shows its first
+  256 KB; **Download** has the rest.
+
+While the PDF reader has the keyboard, the arrow keys move through the document; click the bar under
+it to move between files with them again. On a phone, where a browser often cannot show a PDF inside
+a page, the viewer shows the first page and **Open the document**, which opens the PDF on its own.
+In a slideshow a document shows its first page.
+
+A document whose PDF EiN has not made yet, or one it cannot open, shows its first page or an icon
+and says so. Use **Download** in the More menu to open it on your device.
+
 ## Watch a slideshow
 
 1. Open the picture to start from, in the album or list you want to show.
@@ -701,9 +719,11 @@ could be made from it."
 The uploaded file itself cannot be read; the reason is under the message. **Download** it to check
 the file on your own device.
 
-**A PDF or a Word file shows nothing.**
-The viewer has no reader for documents. Use **Download** in the More menu to open the file on your
-device. Its text can still be found with search; see [Supported files](file-types.md).
+**A document says "EiN cannot show this document here".**
+A Word, OpenDocument or RTF file is shown as the PDF EiN makes of it, and that PDF is not made yet,
+or the file cannot be opened. Wait a while and open it again, or use **Download** in the More menu to
+open the file on your device. Its text can still be found with search; see
+[Supported files](file-types.md).
 
 **Show text is not in the More menu.**
 No text was read from this picture, or it is a video or a recording. Add the text yourself with

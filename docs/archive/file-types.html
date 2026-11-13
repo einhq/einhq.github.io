@@ -122,8 +122,8 @@ lists the formats EiN recognises, what it makes from each, and what happens to t
 </tr>
 <tr>
 <td><a href="#documents">Documents</a></td>
-<td>PDF, Word, OpenDocument and plain text</td>
-<td>the text, for search; the text of scanned pages too</td>
+<td>PDF, Word, OpenDocument, RTF and plain text</td>
+<td>a picture of the first page, a version to read in the viewer, the text for search; the text of scanned pages too</td>
 </tr>
 <tr>
 <td><a href="#sidecar-files">Sidecar files</a></td>
@@ -345,10 +345,15 @@ An SVG drawing is text too, so EiN treats it as a document, not as a picture.</l
 </ul>
 <p>A document&#39;s text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.</p>
-<p>Documents have no thumbnail: they show as a plain tile, and the viewer has no reader for them. Use
-<strong>Download</strong> to open one on your device. The <strong>Documents</strong> choice on the <a href="media.html#show-one-kind-of-file">Media page</a>
-also lists RTF files and old Word (<code>.doc</code>) files, but EiN does not read their text: search finds
-them by their file name only. To have their text read, save them as PDF or <code>.docx</code> first.</p>
+<p>EiN also draws the first page of a PDF, Word (<code>.docx</code> and old <code>.doc</code>), OpenDocument, RTF or plain
+text file, which is its tile in an album and on the Media page, and makes a PDF of a Word,
+OpenDocument or RTF file once, which the viewer shows. The viewer shows a PDF as it is and plain text
+as text (<a href="viewer.html#read-a-document">Read a document</a>). A document EiN cannot open keeps a plain
+tile; use <strong>Download</strong> to open it on your device.</p>
+<p>The <strong>Documents</strong> choice on the <a href="media.html#show-one-kind-of-file">Media page</a> also lists Markdown and
+HTML files, which the viewer shows as text. EiN does not read the text of RTF files and old Word
+(<code>.doc</code>) files: search finds them by their file name only. To have their text read, save them as PDF
+or <code>.docx</code> first.</p>
 <h2 id="sidecar-files">Sidecar files<a class="anchor" href="#sidecar-files" aria-label="Link to this section"></a></h2>
 <p>A sidecar is a small file beside a picture that says things about it:</p>
 <ul>
