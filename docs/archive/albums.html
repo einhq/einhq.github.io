@@ -188,7 +188,7 @@ the colours);</li>
 <li>its labels. Choosing one searches for everything that carries it.</li>
 </ul>
 <p>If you may change the album, the header also has <strong>Upload</strong>, <strong>Share</strong> and <strong>Edit</strong>, and under
-<strong>⋮</strong> the items <strong>Add event</strong> and <strong>Move to trash</strong>, and <strong>Hide RAW files</strong> while the album has
+<strong>⋮</strong> the items <strong>New folder</strong>, <strong>Add event</strong> and <strong>Move to trash</strong>, and <strong>Hide RAW files</strong> while the album has
 camera RAW files that a picture of the same name can take (<a href="#hide-raw-files">Hide RAW files</a>). On a phone they are all under <strong>⋮</strong>. If you may
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else&#39;s album you usually have none of
@@ -499,10 +499,12 @@ album, a lock on a card marks a folder that keeps its own sharing.</p>
 <p>Choose a card to open the folder. It opens like an album page of its own, with the same tabs. The
 album&#39;s grid shows only the pictures at the album&#39;s own level: open a folder to see what is in it.
 An album that holds only folders says <strong>No media here — open a folder above.</strong></p>
-<p>The Web UI shows folders but has no button that makes one. They come from an import, from
-copying folders over <a href="../shell/ssh-sftp.html">SFTP</a>, or from <code>mkdir</code> in the
-<a href="../shell/terminal.html">terminal</a>. Once a folder is there, open it and choose <strong>Upload</strong> to upload
-into it. The selection bar&#39;s <strong>Stack</strong>, <strong>Set as cover</strong> and <strong>Share</strong> are offered in the album
+<p>To make a folder, choose <strong>⋮</strong>, then <strong>New folder</strong>, in the header of the album or of the folder
+to make it in. Type its <strong>Name</strong> and choose <strong>Create</strong>; the card appears at once. Folders also come
+from an import, from copying folders over <a href="../shell/ssh-sftp.html">SFTP</a>, or from <code>mkdir</code> in the
+<a href="../shell/terminal.html">terminal</a>. Open a folder and choose <strong>Upload</strong> to upload into it, or move
+pictures into it with <code>mv</code> in the terminal: <strong>Move to album</strong> moves pictures into an album itself,
+not into one of its folders. The selection bar&#39;s <strong>Stack</strong>, <strong>Set as cover</strong> and <strong>Share</strong> are offered in the album
 itself, not in its folders.</p>
 <h2 id="add-a-note-to-a-day">Add a note to a day<a class="anchor" href="#add-a-note-to-a-day" aria-label="Link to this section"></a></h2>
 <p>A note tells what happened on a day of the album: who arrived, where you sailed, why it rained.</p>
@@ -519,8 +521,8 @@ wrote it.</li>
 it, a pencil on the note (<strong>Edit event</strong>) opens it again, with <strong>Delete</strong> to send it to the trash;
 EiN says <strong>Event moved to the trash</strong> and offers <strong>Undo</strong>.</p>
 <h2 id="select-pictures">Select pictures<a class="anchor" href="#select-pictures" aria-label="Link to this section"></a></h2>
-<p>You select pictures to act on several at once: download them, add them to another album, give them
-a date or a place, delete them.</p>
+<p>You select pictures to act on several at once: download them, add them to another album or move
+them there, give them a date or a place, delete them.</p>
 <figure class="shot"><a href="../../assets/shots/selection@2x.webp"><img src="../../assets/shots/selection.webp" srcset="../../assets/shots/selection.webp 1x, ../../assets/shots/selection@2x.webp 2x" alt="The album with every picture of 4 August 2025 selected, the day's heading reading 24 / 24, and the selection bar at the foot with 24 selected and its buttons" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Choosing a day&#39;s heading selects all of that day; the bar at the foot acts on the selection.</figcaption></figure>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -587,6 +589,11 @@ leaves the selection alone. A picture that has the keyboard&#39;s focus opens wi
 <td><strong>Add to album</strong></td>
 <td>Adds the pictures to another album, as <a href="#add-pictures-that-are-already-in-ein">above</a>.</td>
 <td>When you are signed in</td>
+</tr>
+<tr>
+<td><strong>Move to album</strong></td>
+<td>Moves the pictures out of this album into another one, as <a href="#move-pictures-to-another-album">below</a>.</td>
+<td>On an album you may change</td>
 </tr>
 <tr>
 <td><strong>Set time</strong></td>
@@ -712,16 +719,37 @@ they are gone for good. <a href="../guide/profile.html">Your profile, favourites
 <a href="../concepts/links.html">Links</a> what deleting and the trash do to links.</p>
 <p>When you delete a picture, what EiN worked out about it, such as faces and a transcript, goes with
 it, and comes back with it if you restore it.</p>
-<h3 id="move-a-picture-to-another-album">Move a picture to another album<a class="anchor" href="#move-a-picture-to-another-album" aria-label="Link to this section"></a></h3>
-<p>The Web UI has no button that moves a picture from one album to another. <strong>Add to album</strong>
-links it into the other album; if you then delete it from the first, it goes to the trash and leaves
-the other album too.</p>
-<p>To move pictures, use <code>mv</code> in the <a href="../shell/terminal.html">terminal</a>, if you may change both albums.
-<code>mv</code> keeps every link to them working, in other albums, covers and favourites:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">mv</span> -n <span class="hljs-string">&quot;/archive/albums/Sailing in the archipelago/IMG_0412.jpg&quot;</span> <span class="hljs-string">&quot;/archive/albums/Erik&#x27;s archipelago/&quot;</span></code></pre></div>
+<h3 id="move-pictures-to-another-album">Move pictures to another album<a class="anchor" href="#move-pictures-to-another-album" aria-label="Link to this section"></a></h3>
+<ol>
+<li>Select the pictures in the album, or in one of its folders.</li>
+<li>Choose <strong>Move to album</strong> in the selection bar.</li>
+<li><strong>Move to an album</strong> opens. Before you type, it lists the albums you moved or sorted pictures
+into lately; choose one, or press its number. Otherwise type part of an album&#39;s name in <strong>Find an
+album, or name a new one</strong> and choose it from the list, or type a name that is not taken and
+choose <strong>New album “<name>”</strong> to make that album.</li>
+</ol>
+<p>The pictures leave this album and go into the other album itself, not into one of its folders. EiN says, for example,
+<strong>12 moved to Erik&#39;s archipelago</strong>, and offers <strong>Undo</strong>, which moves them back.</p>
+<ul>
+<li>Every link to a moved picture keeps working: in other albums it was added to, as an album&#39;s
+cover, as a favourite.</li>
+<li>A picture that was only added to this album from elsewhere is not moved: it stays where it lives,
+and is added to the other album instead of this one.</li>
+<li>A picture the other album already has is taken out of this one, and not added twice. When the
+other album only had it added, the picture now lives there instead.</li>
+<li>A picture whose name is taken in the other album gets a number after its name, as
+<code>IMG_0412 (2).jpg</code>.</li>
+<li>A picture you may not move stays, and the message says why, for example <strong>2 could not be moved:
+…</strong>.</li>
+</ul>
+<p><strong>Move to album</strong> is offered on an album you may change, not on a suggested album from staging,
+whose pictures you file in the <a href="staging.html">Sort stream</a>. The album you move the pictures to must
+be one you may change as well.</p>
 <p>A moved picture keeps the sharing it had. To give it the sharing of the album it moved into, select
 it there, choose <strong>Share</strong>, then <strong>Like the album</strong> and <strong>Save</strong>.</p>
+<p>In the <a href="../shell/terminal.html">terminal</a>, <code>album move</code> does the same:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+album move <span class="hljs-string">&quot;/archive/albums/Erik&#x27;s archipelago&quot;</span> <span class="hljs-string">&quot;/archive/albums/Sailing in the archipelago/IMG_0412.jpg&quot;</span></code></pre></div>
 <h2 id="undo-a-change">Undo a change<a class="anchor" href="#undo-a-change" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -737,6 +765,14 @@ it there, choose <strong>Share</strong>, then <strong>Like the album</strong> an
 <tr>
 <td><strong>Add to album</strong></td>
 <td><strong>Undo</strong> in EiN&#39;s message takes the pictures out again, and files from staging go back to it. An album made in the same step may stay behind, empty; move it to the trash if you do not want it.</td>
+</tr>
+<tr>
+<td><strong>Move to album</strong></td>
+<td><strong>Undo</strong> in EiN&#39;s message moves the pictures back. An album made in the same step stays behind, empty; move it to the trash if you do not want it.</td>
+</tr>
+<tr>
+<td><strong>New folder</strong></td>
+<td>Open the folder, choose <strong>⋮</strong>, then <strong>Move to trash</strong></td>
 </tr>
 <tr>
 <td><strong>Delete</strong> or <strong>Remove</strong></td>
@@ -914,7 +950,7 @@ and <a href="commands.html#album-random"><code>album-random</code></a> have ever
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/albums.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-trip-tab">The Trip tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-the-map-shows">Choose which devices the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-a-picture-to-another-album">Move a picture to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#hide-raw-files">Hide RAW files</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#browse-the-albums">Browse the albums</a></li><li class="nested"><a href="#open-an-album-at-random">Open an album at random</a></li><li><a href="#create-an-album">Create an album</a></li><li><a href="#what-an-album-page-shows">What an album page shows</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li class="nested"><a href="#the-trip-tab">The Trip tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li><a href="#choose-which-devices-the-map-shows">Choose which devices the map shows</a></li><li><a href="#add-pictures-to-an-album">Add pictures to an album</a></li><li class="nested"><a href="#upload-straight-into-the-album">Upload straight into the album</a></li><li class="nested"><a href="#add-pictures-that-are-already-in-ein">Add pictures that are already in EiN</a></li><li><a href="#change-an-albums-name-description-and-dates">Change an album's name, description and dates</a></li><li><a href="#choose-the-cover">Choose the cover</a></li><li><a href="#stacks-of-similar-photos">Stacks of similar photos</a></li><li><a href="#folders-inside-an-album">Folders inside an album</a></li><li><a href="#add-a-note-to-a-day">Add a note to a day</a></li><li><a href="#select-pictures">Select pictures</a></li><li><a href="#the-selection-bar">The selection bar</a></li><li><a href="#delete-or-remove-pictures">Delete or remove pictures</a></li><li class="nested"><a href="#move-pictures-to-another-album">Move pictures to another album</a></li><li><a href="#undo-a-change">Undo a change</a></li><li><a href="#hide-raw-files">Hide RAW files</a></li><li><a href="#move-an-album-to-the-trash">Move an album to the trash</a></li><li><a href="#suggested-albums-from-staging">Suggested albums from staging</a></li><li><a href="#if-something-looks-different">If something looks different</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

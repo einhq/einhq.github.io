@@ -98,7 +98,7 @@ The header holds, from the top:
 - its labels. Choosing one searches for everything that carries it.
 
 If you may change the album, the header also has **Upload**, **Share** and **Edit**, and under
-**⋮** the items **Add event** and **Move to trash**, and **Hide RAW files** while the album has
+**⋮** the items **New folder**, **Add event** and **Move to trash**, and **Hide RAW files** while the album has
 camera RAW files that a picture of the same name can take ([Hide RAW files](#hide-raw-files)). On a phone they are all under **⋮**. If you may
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else's album you usually have none of
@@ -385,10 +385,12 @@ Choose a card to open the folder. It opens like an album page of its own, with t
 album's grid shows only the pictures at the album's own level: open a folder to see what is in it.
 An album that holds only folders says **No media here — open a folder above.**
 
-The Web UI shows folders but has no button that makes one. They come from an import, from
-copying folders over [SFTP](../shell/ssh-sftp.md), or from `mkdir` in the
-[terminal](../shell/terminal.md). Once a folder is there, open it and choose **Upload** to upload
-into it. The selection bar's **Stack**, **Set as cover** and **Share** are offered in the album
+To make a folder, choose **⋮**, then **New folder**, in the header of the album or of the folder
+to make it in. Type its **Name** and choose **Create**; the card appears at once. Folders also come
+from an import, from copying folders over [SFTP](../shell/ssh-sftp.md), or from `mkdir` in the
+[terminal](../shell/terminal.md). Open a folder and choose **Upload** to upload into it, or move
+pictures into it with `mv` in the terminal: **Move to album** moves pictures into an album itself,
+not into one of its folders. The selection bar's **Stack**, **Set as cover** and **Share** are offered in the album
 itself, not in its folders.
 
 ## Add a note to a day
@@ -409,8 +411,8 @@ EiN says **Event moved to the trash** and offers **Undo**.
 
 ## Select pictures
 
-You select pictures to act on several at once: download them, add them to another album, give them
-a date or a place, delete them.
+You select pictures to act on several at once: download them, add them to another album or move
+them there, give them a date or a place, delete them.
 
 ![The album with every picture of 4 August 2025 selected, the day's heading reading 24 / 24, and the selection bar at the foot with 24 selected and its buttons](../../assets/shots/selection.webp "Choosing a day's heading selects all of that day; the bar at the foot acts on the selection.")
 
@@ -442,6 +444,7 @@ Which buttons you see depends on the page and on what you may change. On an albu
 | **Favourite** / **Unfavourite**         | Adds the pictures to your favourites, or takes them out when every one is there already. EiN says, for example, **12 files added to favourites**, with **Undo**. [Your profile, favourites and trash](../guide/profile.md) has the Favourites page.                                                                   | When you are signed in                                             |
 | **Download**                            | Saves the original files: one file as itself, several as one zip named after the album.                                                                                                                                                                                                                               | Always                                                             |
 | **Add to album**                        | Adds the pictures to another album, as [above](#add-pictures-that-are-already-in-ein).                                                                                                                                                                                                                                | When you are signed in                                             |
+| **Move to album**                       | Moves the pictures out of this album into another one, as [below](#move-pictures-to-another-album).                                                                                                                                                                                                                   | On an album you may change                                         |
 | **Set time**                            | Gives the pictures a date and time. [Dates and places of pictures](dates-places.md) covers the dialog.                                                                                                                                                                                                                | When you may change every selected picture                         |
 | **Stack**                               | Stacks the pictures, as [above](#stacks-of-similar-photos). Needs two or more.                                                                                                                                                                                                                                        | On an album you may change                                         |
 | **Set as cover**                        | Makes the picture the album's cover. Needs exactly one.                                                                                                                                                                                                                                                               | On an album you may change                                         |
@@ -481,22 +484,42 @@ they are gone for good. [Your profile, favourites and trash](../guide/profile.md
 When you delete a picture, what EiN worked out about it, such as faces and a transcript, goes with
 it, and comes back with it if you restore it.
 
-### Move a picture to another album
+### Move pictures to another album
 
-The Web UI has no button that moves a picture from one album to another. **Add to album**
-links it into the other album; if you then delete it from the first, it goes to the trash and leaves
-the other album too.
+1. Select the pictures in the album, or in one of its folders.
+2. Choose **Move to album** in the selection bar.
+3. **Move to an album** opens. Before you type, it lists the albums you moved or sorted pictures
+   into lately; choose one, or press its number. Otherwise type part of an album's name in **Find an
+   album, or name a new one** and choose it from the list, or type a name that is not taken and
+   choose **New album “<name>”** to make that album.
 
-To move pictures, use `mv` in the [terminal](../shell/terminal.md), if you may change both albums.
-`mv` keeps every link to them working, in other albums, covers and favourites:
+The pictures leave this album and go into the other album itself, not into one of its folders. EiN says, for example,
+**12 moved to Erik's archipelago**, and offers **Undo**, which moves them back.
 
-```bash
-# in EiN's terminal
-mv -n "/archive/albums/Sailing in the archipelago/IMG_0412.jpg" "/archive/albums/Erik's archipelago/"
-```
+- Every link to a moved picture keeps working: in other albums it was added to, as an album's
+  cover, as a favourite.
+- A picture that was only added to this album from elsewhere is not moved: it stays where it lives,
+  and is added to the other album instead of this one.
+- A picture the other album already has is taken out of this one, and not added twice. When the
+  other album only had it added, the picture now lives there instead.
+- A picture whose name is taken in the other album gets a number after its name, as
+  `IMG_0412 (2).jpg`.
+- A picture you may not move stays, and the message says why, for example **2 could not be moved:
+  …**.
+
+**Move to album** is offered on an album you may change, not on a suggested album from staging,
+whose pictures you file in the [Sort stream](staging.md). The album you move the pictures to must
+be one you may change as well.
 
 A moved picture keeps the sharing it had. To give it the sharing of the album it moved into, select
 it there, choose **Share**, then **Like the album** and **Save**.
+
+In the [terminal](../shell/terminal.md), `album move` does the same:
+
+```bash
+# in EiN's terminal
+album move "/archive/albums/Erik's archipelago" "/archive/albums/Sailing in the archipelago/IMG_0412.jpg"
+```
 
 ## Undo a change
 
@@ -504,6 +527,8 @@ it there, choose **Share**, then **Like the album** and **Save**.
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Favourite** or **Unfavourite** | **Undo** in EiN's message, or the other button                                                                                                                                                   |
 | **Add to album**                 | **Undo** in EiN's message takes the pictures out again, and files from staging go back to it. An album made in the same step may stay behind, empty; move it to the trash if you do not want it. |
+| **Move to album**                | **Undo** in EiN's message moves the pictures back. An album made in the same step stays behind, empty; move it to the trash if you do not want it.                                               |
+| **New folder**                   | Open the folder, choose **⋮**, then **Move to trash**                                                                                                                                            |
 | **Delete** or **Remove**         | **Undo** in EiN's message, or **Restore** on the Trash page for what was deleted                                                                                                                 |
 | **Move to trash** on an album    | **Undo** in EiN's message, or **Restore** on the Trash page                                                                                                                                      |
 | **Delete** on a note             | **Undo** in EiN's message, or **Restore** on the Trash page                                                                                                                                      |
