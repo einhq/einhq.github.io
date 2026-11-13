@@ -98,7 +98,7 @@ The header holds, from the top:
 - its labels. Choosing one searches for everything that carries it.
 
 If you may change the album, the header also has **Upload**, **Share** and **Edit**, and under
-**⋮** the items **New folder**, **Add event** and **Move to trash**, and **Hide RAW files** while the album has
+**⋮** the items **Add event** and **Move to trash**, and **Hide RAW files** while the album has
 camera RAW files that a picture of the same name can take ([Hide RAW files](#hide-raw-files)). On a phone they are all under **⋮**. If you may
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else's album you usually have none of
@@ -385,12 +385,11 @@ Choose a card to open the folder. It opens like an album page of its own, with t
 album's grid shows only the pictures at the album's own level: open a folder to see what is in it.
 An album that holds only folders says **No media here — open a folder above.**
 
-To make a folder, choose **⋮**, then **New folder**, in the header of the album or of the folder
-to make it in. Type its **Name** and choose **Create**; the card appears at once. Folders also come
-from an import, from copying folders over [SFTP](../shell/ssh-sftp.md), or from `mkdir` in the
-[terminal](../shell/terminal.md). Open a folder and choose **Upload** to upload into it, or move
-pictures into it with `mv` in the terminal: **Move to album** moves pictures into an album itself,
-not into one of its folders. The selection bar's **Stack**, **Set as cover** and **Share** are offered in the album
+The Web UI shows folders but has no button that makes one. They come from an import, from
+copying folders over [SFTP](../shell/ssh-sftp.md), or from `mkdir` in the
+[terminal](../shell/terminal.md). Once a folder is there, open it and choose **Upload** to upload
+into it, or move pictures into it with `mv` in the terminal: **Move to album** moves pictures into
+an album itself, not into one of its folders. The selection bar's **Stack**, **Set as cover** and **Share** are offered in the album
 itself, not in its folders.
 
 ## Add a note to a day
@@ -528,7 +527,6 @@ album move "/archive/albums/Erik's archipelago" "/archive/albums/Sailing in the 
 | **Favourite** or **Unfavourite** | **Undo** in EiN's message, or the other button                                                                                                                                                   |
 | **Add to album**                 | **Undo** in EiN's message takes the pictures out again, and files from staging go back to it. An album made in the same step may stay behind, empty; move it to the trash if you do not want it. |
 | **Move to album**                | **Undo** in EiN's message moves the pictures back. An album made in the same step stays behind, empty; move it to the trash if you do not want it.                                               |
-| **New folder**                   | Open the folder, choose **⋮**, then **Move to trash**                                                                                                                                            |
 | **Delete** or **Remove**         | **Undo** in EiN's message, or **Restore** on the Trash page for what was deleted                                                                                                                 |
 | **Move to trash** on an album    | **Undo** in EiN's message, or **Restore** on the Trash page                                                                                                                                      |
 | **Delete** on a note             | **Undo** in EiN's message, or **Restore** on the Trash page                                                                                                                                      |

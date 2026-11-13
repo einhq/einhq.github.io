@@ -188,7 +188,7 @@ the colours);</li>
 <li>its labels. Choosing one searches for everything that carries it.</li>
 </ul>
 <p>If you may change the album, the header also has <strong>Upload</strong>, <strong>Share</strong> and <strong>Edit</strong>, and under
-<strong>⋮</strong> the items <strong>New folder</strong>, <strong>Add event</strong> and <strong>Move to trash</strong>, and <strong>Hide RAW files</strong> while the album has
+<strong>⋮</strong> the items <strong>Add event</strong> and <strong>Move to trash</strong>, and <strong>Hide RAW files</strong> while the album has
 camera RAW files that a picture of the same name can take (<a href="#hide-raw-files">Hide RAW files</a>). On a phone they are all under <strong>⋮</strong>. If you may
 only look at the album, none of them is there. With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else&#39;s album you usually have none of
@@ -499,12 +499,11 @@ album, a lock on a card marks a folder that keeps its own sharing.</p>
 <p>Choose a card to open the folder. It opens like an album page of its own, with the same tabs. The
 album&#39;s grid shows only the pictures at the album&#39;s own level: open a folder to see what is in it.
 An album that holds only folders says <strong>No media here — open a folder above.</strong></p>
-<p>To make a folder, choose <strong>⋮</strong>, then <strong>New folder</strong>, in the header of the album or of the folder
-to make it in. Type its <strong>Name</strong> and choose <strong>Create</strong>; the card appears at once. Folders also come
-from an import, from copying folders over <a href="../shell/ssh-sftp.html">SFTP</a>, or from <code>mkdir</code> in the
-<a href="../shell/terminal.html">terminal</a>. Open a folder and choose <strong>Upload</strong> to upload into it, or move
-pictures into it with <code>mv</code> in the terminal: <strong>Move to album</strong> moves pictures into an album itself,
-not into one of its folders. The selection bar&#39;s <strong>Stack</strong>, <strong>Set as cover</strong> and <strong>Share</strong> are offered in the album
+<p>The Web UI shows folders but has no button that makes one. They come from an import, from
+copying folders over <a href="../shell/ssh-sftp.html">SFTP</a>, or from <code>mkdir</code> in the
+<a href="../shell/terminal.html">terminal</a>. Once a folder is there, open it and choose <strong>Upload</strong> to upload
+into it, or move pictures into it with <code>mv</code> in the terminal: <strong>Move to album</strong> moves pictures into
+an album itself, not into one of its folders. The selection bar&#39;s <strong>Stack</strong>, <strong>Set as cover</strong> and <strong>Share</strong> are offered in the album
 itself, not in its folders.</p>
 <h2 id="add-a-note-to-a-day">Add a note to a day<a class="anchor" href="#add-a-note-to-a-day" aria-label="Link to this section"></a></h2>
 <p>A note tells what happened on a day of the album: who arrived, where you sailed, why it rained.</p>
@@ -769,10 +768,6 @@ album move <span class="hljs-string">&quot;/archive/albums/Erik&#x27;s archipela
 <tr>
 <td><strong>Move to album</strong></td>
 <td><strong>Undo</strong> in EiN&#39;s message moves the pictures back. An album made in the same step stays behind, empty; move it to the trash if you do not want it.</td>
-</tr>
-<tr>
-<td><strong>New folder</strong></td>
-<td>Open the folder, choose <strong>⋮</strong>, then <strong>Move to trash</strong></td>
 </tr>
 <tr>
 <td><strong>Delete</strong> or <strong>Remove</strong></td>
