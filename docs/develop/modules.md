@@ -587,7 +587,8 @@ node, `markdown`, `timezone`, `date` or `time`. `x-choices` lists the choices fr
 the form runs `command` as the person editing, with `JSON_OUTPUT=1`, and takes `value` and `label`
 from each entry of its answer, or of the list at the key path `items` when the answer is not a list;
 `{other}` in `command` is another parameter's value, so `"command": "device-show {device}",
-"items": "endpointList"` lists a chosen device's endpoints. `dashboard-card-add` checks a card's
+"items": "endpointList"` lists a chosen device's endpoints. `where` keeps the entries whose fields
+have one of the given values: `"where": { "type": "control" }` lists only its controls. `dashboard-card-add` checks a card's
 values against its `params` before it puts it on.
 
 The route is drawn with the values in its query, `/cards/todo/list?list=%2Fgroups%2F…&who=true`,

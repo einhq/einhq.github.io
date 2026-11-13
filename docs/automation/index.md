@@ -28,6 +28,7 @@ household that uses them. [Automations](automations.md) covers making automation
 | The `rtsp` driver                                                                          | A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see [A camera](#a-camera)                                                                                                         |
 | The `onvif` driver                                                                         | A camera that speaks ONVIF, found on the network: its streams as `rtsp`'s, its motion and the people it sees, and its presets and moves where it turns; see [An ONVIF camera](#an-onvif-camera)                                        |
 | The **Live** tab                                                                           | A camera's picture as it comes, on its device page                                                                                                                                                                                     |
+| The **Camera** and **Button** cards                                                        | For [dashboards](../dashboard/index.md): a camera's picture, and one large button for a control; see [On a dashboard](#on-a-dashboard)                                                                                                 |
 | The `automation-bridge` service                                                            | Hears the broker and runs the drivers                                                                                                                                                                                                  |
 | The `automation-engine` service                                                            | Runs the [automations](automations.md) under `/etc/automations`, each as its owner                                                                                                                                                     |
 | The group `automation`                                                                     | Its members make automations                                                                                                                                                                                                           |
@@ -586,6 +587,30 @@ the device reports it. When the bridge is not connected, the write is refused wi
 stopped with `hall-plug's driver shelly is not running`: a command is never kept for later, since a
 lamp switched on an hour after it was asked would surprise.
 [Switch something](../guide/devices.md#switch-something) has the rest.
+
+## On a dashboard
+
+With the [Dashboards](../dashboard/index.md) module, Automation offers two cards beside the
+dashboard's own **Device** and **Reading**:
+
+- **Camera**: a camera's picture filling the card, a new one every 10 seconds (**Seconds between
+  pictures**), with the camera's name and the time the picture is from at its foot. Tap it to watch
+  it live, as on the **Live** tab, for five minutes; tap again to go back to pictures. **Always
+  live** plays it live all the time. **Stream** picks the smaller of its streams, which costs
+  less to send, and **Picture** whether it fills the card or shows all of it. A camera that cannot
+  be played live (no restreamer, or a codec the browser does not play) shows its pictures, and says
+  why at the top.
+- **Button**: one large button for a device's control, lit while the control is what the button
+  sets. Without **Sets it to**, it presses a button, such as a [virtual device](virtual-devices.md)'s
+  `momentary` control an automation starts on, and switches something on and off to the other.
+  With it, it sets the control to that value, such as `eco` for a mode or `21` for a heater, as a
+  scene button does. **Ask first** makes the first press only ask for a second, for a door or a
+  gate. **Icon** takes a [Tabler icon](https://tabler.io/icons)'s name, such as `bell` or `garage`.
+
+Who may press a button is who may write its control
+([Who may do what](#who-may-do-what)). On a screen opened from a
+[display link](../dashboard/screens.md), which changes nothing, a button shows its state and does
+nothing when pressed, and a camera shows its pictures if the screen's account may read the camera.
 
 ## Readings on the bus
 

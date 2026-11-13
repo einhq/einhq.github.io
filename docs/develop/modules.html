@@ -960,7 +960,8 @@ numbers), and may have a <code>title</code>, <code>description</code>, <code>def
 node, <code>markdown</code>, <code>timezone</code>, <code>date</code> or <code>time</code>. <code>x-choices</code> lists the choices from a read command:
 the form runs <code>command</code> as the person editing, with <code>JSON_OUTPUT=1</code>, and takes <code>value</code> and <code>label</code>
 from each entry of its answer, or of the list at the key path <code>items</code> when the answer is not a list;
-<code>{other}</code> in <code>command</code> is another parameter&#39;s value, so <code>&quot;command&quot;: &quot;device-show {device}&quot;, &quot;items&quot;: &quot;endpointList&quot;</code> lists a chosen device&#39;s endpoints. <code>dashboard-card-add</code> checks a card&#39;s
+<code>{other}</code> in <code>command</code> is another parameter&#39;s value, so <code>&quot;command&quot;: &quot;device-show {device}&quot;, &quot;items&quot;: &quot;endpointList&quot;</code> lists a chosen device&#39;s endpoints. <code>where</code> keeps the entries whose fields
+have one of the given values: <code>&quot;where&quot;: { &quot;type&quot;: &quot;control&quot; }</code> lists only its controls. <code>dashboard-card-add</code> checks a card&#39;s
 values against its <code>params</code> before it puts it on.</p>
 <p>The route is drawn with the values in its query, <code>/cards/todo/list?list=%2Fgroups%2F…&amp;who=true</code>,
 a list as the key repeated. Keep card routes under <code>/cards/&lt;module&gt;/</code>, a first segment none of your

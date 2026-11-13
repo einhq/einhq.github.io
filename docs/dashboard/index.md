@@ -60,7 +60,8 @@ The cards that come with Dashboards:
 | **Note**        | A few words of your own, in Markdown                                                                                                                                                                                         |
 
 Other modules add their own: the Archive the **Picture of the day** and **Birthdays**, Todo a
-**Todo list**. A card whose module is removed later says so on the dashboard until you take it off.
+**Todo list**, and [Automation](../automation/index.md#on-a-dashboard) a **Camera** and a
+**Button**. A card whose module is removed later says so on the dashboard until you take it off.
 
 A card holding more than its tile has room for, such as a long **Coming up** list or a device with
 many readings, shows it all in turn rather than scrolling: after a few seconds the next row glides

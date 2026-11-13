@@ -159,6 +159,10 @@ household that uses them. <a href="automations.html">Automations</a> covers maki
 <td>A camera&#39;s picture as it comes, on its device page</td>
 </tr>
 <tr>
+<td>The <strong>Camera</strong> and <strong>Button</strong> cards</td>
+<td>For <a href="../dashboard/index.html">dashboards</a>: a camera&#39;s picture, and one large button for a control; see <a href="#on-a-dashboard">On a dashboard</a></td>
+</tr>
+<tr>
 <td>The <code>automation-bridge</code> service</td>
 <td>Hears the broker and runs the drivers</td>
 </tr>
@@ -815,6 +819,28 @@ the device reports it. When the bridge is not connected, the write is refused wi
 stopped with <code>hall-plug&#39;s driver shelly is not running</code>: a command is never kept for later, since a
 lamp switched on an hour after it was asked would surprise.
 <a href="../guide/devices.html#switch-something">Switch something</a> has the rest.</p>
+<h2 id="on-a-dashboard">On a dashboard<a class="anchor" href="#on-a-dashboard" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../dashboard/index.html">Dashboards</a> module, Automation offers two cards beside the
+dashboard&#39;s own <strong>Device</strong> and <strong>Reading</strong>:</p>
+<ul>
+<li><strong>Camera</strong>: a camera&#39;s picture filling the card, a new one every 10 seconds (<strong>Seconds between
+pictures</strong>), with the camera&#39;s name and the time the picture is from at its foot. Tap it to watch
+it live, as on the <strong>Live</strong> tab, for five minutes; tap again to go back to pictures. <strong>Always
+live</strong> plays it live all the time. <strong>Stream</strong> picks the smaller of its streams, which costs
+less to send, and <strong>Picture</strong> whether it fills the card or shows all of it. A camera that cannot
+be played live (no restreamer, or a codec the browser does not play) shows its pictures, and says
+why at the top.</li>
+<li><strong>Button</strong>: one large button for a device&#39;s control, lit while the control is what the button
+sets. Without <strong>Sets it to</strong>, it presses a button, such as a <a href="virtual-devices.html">virtual device</a>&#39;s
+<code>momentary</code> control an automation starts on, and switches something on and off to the other.
+With it, it sets the control to that value, such as <code>eco</code> for a mode or <code>21</code> for a heater, as a
+scene button does. <strong>Ask first</strong> makes the first press only ask for a second, for a door or a
+gate. <strong>Icon</strong> takes a <a href="https://tabler.io/icons">Tabler icon</a>&#39;s name, such as <code>bell</code> or <code>garage</code>.</li>
+</ul>
+<p>Who may press a button is who may write its control
+(<a href="#who-may-do-what">Who may do what</a>). On a screen opened from a
+<a href="../dashboard/screens.html">display link</a>, which changes nothing, a button shows its state and does
+nothing when pressed, and a camera shows its pictures if the screen&#39;s account may read the camera.</p>
 <h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
 <p>Every reading, press and change of state is kept in its endpoint and published on the routing key
 <code>dev.&lt;device&gt;.&lt;endpoint&gt;</code>, and a device coming or going on <code>dev.&lt;device&gt;</code>, where the automation
@@ -1056,7 +1082,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>
