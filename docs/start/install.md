@@ -331,7 +331,7 @@ Everything the Archive command installs can be added to EiN Core afterwards. Run
 - A module given with `--module` is installed by EiN at its next start, which that same run brings about.
 - `--no-ems`, `--no-llm` and `--no-mqtt` take the media service, the model or the broker out again. Their data stays.
 
-Modules can also be installed without a restart. In the Web UI, open **Settings → Modules**, click the **Published modules** button beside the filter, and click **Install** on the module. In the terminal, `mod install archive` does the same ([reference](../reference/commands-core.md#mod-install)). [Modules](../admin/modules.md) covers updating and removing them, and why a module you remove in **Settings → Modules** comes back at the next start while `EIN_MODULES` in `.env` still names it.
+Modules can also be installed without a restart. In the Web UI, open **Settings → Modules**, click the **Add a module** button beside the filter, and click **Install** on the module. In the terminal, `mod install archive` does the same ([reference](../reference/commands-core.md#mod-install)). [Modules](../admin/modules.md) covers updating and removing them, and why a module you remove in **Settings → Modules** comes back at the next start while `EIN_MODULES` in `.env` still names it.
 
 Instead of `--llm`, the assistant can use a hosted model, set in `~/ein/.env`: see [The language model](../assistant/language-model.md).
 

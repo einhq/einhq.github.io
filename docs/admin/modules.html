@@ -230,15 +230,16 @@ installed, what it exports, and the modules that use it.</p>
 the module.</p>
 <ol>
 <li>Open <strong>Settings → Modules</strong>.</li>
-<li>Choose the <strong>Published modules</strong> button beside the filter box, the box with an arrow. The panel
-at the right lists the published modules, each with its version, its description and its
+<li>Choose the <strong>Add a module</strong> button beside the filter box, the box with an arrow. The panel at
+the right is headed <strong>Add a module</strong>: the <strong>From a repository</strong> box at the top, then
+<strong>Published</strong>, the published modules, each with its version, its description and its
 repository.</li>
 <li>Choose <strong>Install</strong> on the module you want.</li>
 <li>EiN asks who the module is for. Keep <strong>Everyone</strong>, or choose <strong>Only some groups</strong> and the groups
 (see <a href="#keep-a-module-to-some-groups">Keep a module to some groups</a>), then choose <strong>Install</strong> and
 the module&#39;s name.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Published modules panel on Settings → Modules, headed Add a module: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; these came with the deployment, so none offers Install.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Add a module panel on Settings → Modules: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; these came with the deployment, so none offers Install.</figcaption></figure>
 <p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the
 page.</p>
@@ -383,8 +384,8 @@ it was, does not set up, and <code>setup.sh</code>&#39;s list ends with the reas
 <h2 id="update-a-module">Update a module<a class="anchor" href="#update-a-module" aria-label="Link to this section"></a></h2>
 <p>Updating EiN with <code>setup.sh</code> does not update its modules. Update them here instead.</p>
 <ul>
-<li>On <strong>Settings → Modules</strong>, open <strong>Published modules</strong> and choose <strong>Update</strong> on a module marked
-<strong>Update available</strong>.</li>
+<li>On <strong>Settings → Modules</strong>, open <strong>Add a module</strong> and choose <strong>Update</strong> on a module marked
+<strong>Update available</strong> under <strong>Published</strong>.</li>
 <li>Or open the module&#39;s panel. A module installed from its repository has a section <strong>Installed
 from its repository</strong>, saying which repository and commit it came from and when, with <strong>Update</strong>
 and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest release for one installed at a release, and
@@ -505,7 +506,7 @@ both.</p>
 did not answer&quot; with the reason, and the other sources are still listed.</p>
 <p>A module that is in no source can still be installed from its repository&#39;s address:
 <code>mod install https://forge.example:3000/wrenfield/module-recipes</code>, or the <strong>From a repository</strong> box
-at the top of the <strong>Published modules</strong> panel, whose <strong>Install</strong> asks who the module is for as on a
+at the top of the <strong>Add a module</strong> panel, whose <strong>Install</strong> asks who the module is for as on a
 published one. EiN fetches modules over plain
 HTTPS, so the forge must answer git&#39;s HTTP protocol and serve an archive of a commit, as GitHub,
 Forgejo and Gitea do. <a href="../develop/modules.html">Writing a module</a> is for making one of your own.</p>
@@ -539,7 +540,7 @@ does. The usual ones:</p>
 </thead>
 <tbody><tr>
 <td><code>archive: requires module &#39;ems&#39; (^0.1.0), which is not installed</code></td>
-<td>Install the missing module: <code>mod install ems</code>, or <strong>Install</strong> in <strong>Published modules</strong>.</td>
+<td>Install the missing module: <code>mod install ems</code>, or <strong>Install</strong> in <strong>Add a module</strong>.</td>
 </tr>
 <tr>
 <td><code>archive: requires &#39;ems&#39; ^0.2.0, but 0.1.0 is installed</code></td>

@@ -68,7 +68,7 @@ Install it like any module, in any of three ways:
 
   On a machine where EiN runs already, `~/ein/setup.sh --module assistant` does the same; add
   `--llm` for the model.
-- **On Settings → Modules**: open **Published modules** and choose **Install** on `assistant`.
+- **On Settings → Modules**: open **Add a module** and choose **Install** on `assistant`.
 - **In EiN's terminal**, as the administrator: `mod install assistant`.
 
 [Modules](../admin/modules.md) explains each way, and how to update and remove a module.

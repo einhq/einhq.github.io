@@ -99,15 +99,16 @@ You need to be an administrator: signed in as `admin`, or in
 the module.
 
 1. Open **Settings → Modules**.
-2. Choose the **Published modules** button beside the filter box, the box with an arrow. The panel
-   at the right lists the published modules, each with its version, its description and its
+2. Choose the **Add a module** button beside the filter box, the box with an arrow. The panel at
+   the right is headed **Add a module**: the **From a repository** box at the top, then
+   **Published**, the published modules, each with its version, its description and its
    repository.
 3. Choose **Install** on the module you want.
 4. EiN asks who the module is for. Keep **Everyone**, or choose **Only some groups** and the groups
    (see [Keep a module to some groups](#keep-a-module-to-some-groups)), then choose **Install** and
    the module's name.
 
-![The Published modules panel on Settings → Modules, headed Add a module: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
+![The Add a module panel on Settings → Modules: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the
@@ -263,8 +264,8 @@ it was, does not set up, and `setup.sh`'s list ends with the reason, such as
 
 Updating EiN with `setup.sh` does not update its modules. Update them here instead.
 
-- On **Settings → Modules**, open **Published modules** and choose **Update** on a module marked
-  **Update available**.
+- On **Settings → Modules**, open **Add a module** and choose **Update** on a module marked
+  **Update available** under **Published**.
 - Or open the module's panel. A module installed from its repository has a section **Installed
   from its repository**, saying which repository and commit it came from and when, with **Update**
   and **Remove**. **Update** there fetches the newest release for one installed at a release, and
@@ -422,7 +423,7 @@ did not answer" with the reason, and the other sources are still listed.
 
 A module that is in no source can still be installed from its repository's address:
 `mod install https://forge.example:3000/wrenfield/module-recipes`, or the **From a repository** box
-at the top of the **Published modules** panel, whose **Install** asks who the module is for as on a
+at the top of the **Add a module** panel, whose **Install** asks who the module is for as on a
 published one. EiN fetches modules over plain
 HTTPS, so the forge must answer git's HTTP protocol and serve an archive of a commit, as GitHub,
 Forgejo and Gitea do. [Writing a module](../develop/modules.md) is for making one of your own.
@@ -458,7 +459,7 @@ does. The usual ones:
 
 | Problem                                                           | What to do                                                                                                                                                                                     |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Published modules**.                                                                                                        |
+| `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Add a module**.                                                                                                             |
 | `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                                                                    |
 | `archive: needs @ein/client ^0.7.0, this core provides 0.6.0`     | The module is written for another version of EiN, often after EiN was updated, and EiN's start found no release of it that fits. Update the module once one is published; until then it waits. |
 

@@ -198,7 +198,7 @@ has the command.
 2. In EiN's terminal, `health` says whether the system is healthy or catching up;
    [Health and status](monitoring.md) explains its checks.
 3. Open **Settings → Modules** and look for a module with a badge instead of its version, and for
-   **Update available** under **Published modules**. Update the modules there; see
+   **Update available** under **Add a module**. Update the modules there; see
    [Modules](modules.md#update-a-module).
 
 ## Free the space old images take

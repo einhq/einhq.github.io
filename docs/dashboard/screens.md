@@ -13,7 +13,7 @@ administrator's.
 A display link shows the dashboard, and anything else, as one account sees it. Rather than your
 own, use an account made for screens, so a screen sees only what it should:
 
-1. An administrator makes an account, such as **Kitchen display**, in **Settings → Accounts**; see
+1. An administrator makes an account, such as **Kitchen display**, in **Settings → Users**; see
    [Accounts and groups](../admin/accounts.md). It needs no password anyone knows.
 2. Put it in the groups whose things the screen shows, such as your household's group for its todo
    lists, and **devices** for the devices.

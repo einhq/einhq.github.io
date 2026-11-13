@@ -414,7 +414,8 @@ Rows can go into the menus EiN has as well:
 
 - **`"parent": "ui.create"`** adds a row to the **Create New** menu under the plus. The archive's
   rows are **Import media** (5), **Album** (10), **Person** (20), **Location** (30) and **Camera**
-  (40).
+  (40); Recipes puts **Recipe** at 31, EiN its **Device** at 50 (`ui.create-device`), and Dashboards
+  **Dashboard** at 60.
 - **`"parent": "ui.account"`** adds a row to the menu under your picture, after **Me**. The archive
   puts **Favourites** there (10), and EiN its **Profile** (900, `ui.profile`) and **Trash** (910,
   `ui.trash`), which can be moved, renamed and hidden like any entry. The menu's other rows, **Me**,

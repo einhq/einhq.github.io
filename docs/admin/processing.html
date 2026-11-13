@@ -128,12 +128,13 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 <li>Choose the <strong>Work</strong> tab.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/system-work@2x.webp"><img src="../../assets/shots/system-work.webp" srcset="../../assets/shots/system-work.webp 1x, ../../assets/shots/system-work@2x.webp 2x" alt="The Work tab of the System status page, marked Healthy: Where the work is, with the columns Not started, In line, Running in EiN, At the media service and On a model, nothing waiting and two search models loaded, and below it the pipeline table's first row, media-album, with its workload bar, its Not started, In line, Running, Failed, Done and Cancelled counts and its In and Out" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Where the work is shows where everything stands now; below it, one row per pipeline says how much is left, how fast it goes, and when it will be done.</figcaption></figure>
-<p>At the top, <strong>Where the work is</strong> draws the work as it moves, left to right, in the same five words
-the table below uses:</p>
+<p>At the top, <strong>Where the work is</strong> draws the work as it moves, left to right. Its first three columns
+count what the table below counts as <strong>Not started</strong>, <strong>In line</strong> and <strong>Running</strong>; what failed or
+finished is only in the table.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
-<th>Place</th>
+<th>Column</th>
 <th>What it counts</th>
 </tr>
 </thead>
@@ -146,16 +147,16 @@ the table below uses:</p>
 <td>Work that is made, with its next step waiting for a worker, or for an earlier step of its own</td>
 </tr>
 <tr>
-<td><strong>Running</strong></td>
+<td><strong>Running in EiN</strong></td>
 <td>Steps a worker is running this moment</td>
 </tr>
 <tr>
-<td><strong>Failed</strong></td>
-<td>Work that failed</td>
+<td><strong>At the media service</strong></td>
+<td>With the media service: the requests in its lanes</td>
 </tr>
 <tr>
-<td><strong>Done</strong></td>
-<td>Work that finished</td>
+<td><strong>On a model</strong></td>
+<td>With the media service: the models it holds</td>
 </tr>
 </tbody></table>
 </div>

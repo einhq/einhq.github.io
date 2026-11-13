@@ -63,8 +63,9 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 | **Trips**    | With the [Archive](../archive/index.md), on a device that has a track: [its trips](../archive/tracks.md) |
 | **Live**     | With the [Automation](../automation/index.md) module, on a camera: its picture as it comes               |
 
-Members of the `devices` group also have **Edit** in the header's corner, and **Forget** under ⋮
-(see [Rename or forget a device](#rename-or-forget-a-device)); on a phone both are under ⋮.
+The header's corner has **Share**, which decides who sees the device ([Sharing](sharing.md)).
+Members of the `devices` group also have **Edit** beside it, and **Forget** under ⋮ (see
+[Rename or forget a device](#rename-or-forget-a-device)); on a phone they are all under ⋮.
 
 The address is `/devices/` and the device's name, such as `/devices/hall-plug`, and the tab is in
 `?tab=` ([Addresses in the Web UI](../reference/routes.md#eins-own-pages)). A device opened from the

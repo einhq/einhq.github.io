@@ -329,11 +329,12 @@ how it is, again and again, while the tab is open.
   outlined where it was in RAM and underlined while it worked, under the card's mode and the work EiN
   had waiting. A model loaded again and again shows as a row that flickers. The `ems-sampler`
   service records what the media service holds once a minute, for a week.
-- **Executing**: the requests running or waiting now, and the three lanes they go through, **models**,
-  **tools** and **encodes**, each with how many run at once. When requests wait, a request a person
-  is waiting on goes first. Then, when more than one system sends the media service work, the
-  system that has used it the least; the tab then shows **Callers** too, each system with how much
-  it has used and what it runs and waits for now. Of that system's requests, one for a model that is
+- **Executing**: the requests running or waiting now, and the four lanes they go through, **models**,
+  **tools**, **encodes** and **watches** (a camera's frames on their way to the faces model, when
+  [a camera is watched for faces](../automation/index.md#a-camera)), each with how many run at once.
+  When requests wait, a request a person is waiting on goes first. Then, when more than one system
+  sends the media service work, the system that has used it the least; the tab then shows
+  **Callers** too, each system with how much it has used and what it runs and waits for now. Of that system's requests, one for a model that is
   already working goes first, so the media service does not load one model after another, unless
   another has waited five minutes.
 
@@ -341,7 +342,7 @@ When the media service does not answer, the tab shows only **The media service i
 with the address it tried.
 
 The **Work** tab's **Where the work is** ends with the media service's part: **At the media
-service**, its three lanes with their slots and the requests in them, and **On a model**, the models
+service**, its four lanes with their slots and the requests in them, and **On a model**, the models
 it holds, the working ones first and the search models apart. With [more than one media service](instances.md), the tab lists them beside it, and the Work tab's two columns have a group for each.
 
 The **Overview** tab shows the machine the media service runs on as the **Media service** card,

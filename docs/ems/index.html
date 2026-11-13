@@ -557,18 +557,19 @@ and last used.</li>
 outlined where it was in RAM and underlined while it worked, under the card&#39;s mode and the work EiN
 had waiting. A model loaded again and again shows as a row that flickers. The <code>ems-sampler</code>
 service records what the media service holds once a minute, for a week.</li>
-<li><strong>Executing</strong>: the requests running or waiting now, and the three lanes they go through, <strong>models</strong>,
-<strong>tools</strong> and <strong>encodes</strong>, each with how many run at once. When requests wait, a request a person
-is waiting on goes first. Then, when more than one system sends the media service work, the
-system that has used it the least; the tab then shows <strong>Callers</strong> too, each system with how much
-it has used and what it runs and waits for now. Of that system&#39;s requests, one for a model that is
+<li><strong>Executing</strong>: the requests running or waiting now, and the four lanes they go through, <strong>models</strong>,
+<strong>tools</strong>, <strong>encodes</strong> and <strong>watches</strong> (a camera&#39;s frames on their way to the faces model, when
+<a href="../automation/index.html#a-camera">a camera is watched for faces</a>), each with how many run at once.
+When requests wait, a request a person is waiting on goes first. Then, when more than one system
+sends the media service work, the system that has used it the least; the tab then shows
+<strong>Callers</strong> too, each system with how much it has used and what it runs and waits for now. Of that system&#39;s requests, one for a model that is
 already working goes first, so the media service does not load one model after another, unless
 another has waited five minutes.</li>
 </ul>
 <p>When the media service does not answer, the tab shows only <strong>The media service is not answering</strong>,
 with the address it tried.</p>
 <p>The <strong>Work</strong> tab&#39;s <strong>Where the work is</strong> ends with the media service&#39;s part: <strong>At the media
-service</strong>, its three lanes with their slots and the requests in them, and <strong>On a model</strong>, the models
+service</strong>, its four lanes with their slots and the requests in them, and <strong>On a model</strong>, the models
 it holds, the working ones first and the search models apart. With <a href="instances.html">more than one media service</a>, the tab lists them beside it, and the Work tab&#39;s two columns have a group for each.</p>
 <p>The <strong>Overview</strong> tab shows the machine the media service runs on as the <strong>Media service</strong> card,
 beside the card of the machine EiN runs on, even when they are the same machine: its CPU, its memory

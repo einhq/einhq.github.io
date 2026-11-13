@@ -185,8 +185,9 @@ describes, is offered to whoever may change it, which the camera's **Share** dia
 ## A camera's page
 
 Click a card on the Cameras page, or the camera's name in the viewer. The page's address is
-`/cameras/` and the camera's folder name, such as `/cameras/Davids_7D`, and the **Media** tab adds
-`?tab=media`.
+`/cameras/` and the camera's folder name, such as `/cameras/ruby-iphone` for Ruby's iPhone, and the
+**Media** tab adds `?tab=media`. A camera registered in the Web UI is named after itself, with `_`
+for spaces and no punctuation: **David's 7D** would be `/cameras/Davids_7D`.
 
 Under the name, the header shows the current owners (up to three, then "and N more"), how many
 files the camera took and in which years, such as **75 files · 2025–2026** (**N+ files** when

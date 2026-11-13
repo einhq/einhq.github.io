@@ -81,15 +81,16 @@ itself in the middle, and the side drawer at the right when something is open in
 
 ![A labelled outline of the Web UI: the top bar with the EiN mark, search box, Random album, chat, Create, terminal and your picture; the sidebar with its sections and the collapse button; a page header with title, tabs and actions; the page; and the side drawer with the chat](../diagrams/frame.svg "The frame stays the same on every page; only the page in the middle changes.")
 
-![The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events](../../assets/shots/home.webp "Home, signed in as the administrator, with the Archive, the assistant, Todo and Recipes installed.")
+![The Home page of the Wrenfield family's archive: the sidebar on the left, the search box and buttons in the top bar, and the Welcome header over News and Events](../../assets/shots/home.webp "Home, signed in as the administrator, with the Archive, the assistant, Todo and Recipes among the modules installed.")
 
 What you see depends on the modules installed on your EiN. EiN itself gives the frame, Home,
 Search, Settings, Statistics, Documentation and the administrator's pages. The
 [Archive](../archive/index.md) adds the pages for photos, albums, people and places, and the
 [assistant](../assistant/index.md) adds the chat. This page describes the frame every EiN has and
-marks what each module adds; the screenshots show EiN with both installed. Without modules, the
-sidebar holds only EiN's own entries, and the top bar has no **Random album**, chat button or
-**Create** menu.
+marks what each module adds; the screenshots show EiN with both installed, and other modules such
+as Todo, Recipes, Dashboards and Automation. Without modules, the sidebar holds only EiN's own
+entries, and the top bar has no **Random album** or chat button, and a **Create** menu only for
+members of the `devices` group.
 
 The browser tab is titled with the page's name followed by `· EiN`, for example `Albums · EiN`;
 on Home it says `EiN` alone. The interface is in English and always dark: there is no light theme
@@ -122,8 +123,9 @@ on that page itself: on the **Chat** page there is no chat button.
 ### The Create menu
 
 Choose the plus to make something. Each row opens a form in a dialog over the page you are on.
-EiN itself puts no rows in this menu; the modules do. Without a module that adds one, there is no
-plus in the top bar. With the Archive installed, the menu has these rows:
+EiN itself puts one row in this menu, **Device**, for members of the `devices` group; the modules
+put the others. With no row for you, there is no plus in the top bar. With the Archive, Recipes and
+Dashboards installed, the menu has these rows:
 
 ![The Create New menu open under the plus: Import media, Album, Person, Location, Recipe, Camera, Device and Dashboard](../../assets/shots/create-menu.webp "The Create menu gathers the rows that EiN and the installed modules give it.")
 
@@ -133,7 +135,10 @@ plus in the top bar. With the Archive installed, the menu has these rows:
 | **Album**        | **Create Album**                                                                     | [Albums](../archive/albums.md)                    |
 | **Person**       | **Create Person**                                                                    | [People and faces](../archive/people.md)          |
 | **Location**     | **Create Location**                                                                  | [Locations and the map](../archive/places.md)     |
+| **Recipe**       | **New recipe**, with Recipes                                                         | [Recipes](../recipes/index.md)                    |
 | **Camera**       | **Register Camera**                                                                  | [Cameras](../archive/cameras.md)                  |
+| **Device**       | **New Device**, for members of the `devices` group                                   | [Devices](devices.md)                             |
+| **Dashboard**    | **New dashboard**, with Dashboards                                                   | [Dashboards](../dashboard/index.md)               |
 
 ### The account menu
 
@@ -147,6 +152,7 @@ Choose your picture at the right end of the top bar. The menu is headed **Accoun
 | **Favourites**             | With the Archive                                          | The pictures you have marked with a heart.                                                                                                                                                                             |
 | **Profile**                | Always                                                    | Your name, description, preferences and password.                                                                                                                                                                      |
 | **Trash**                  | Always                                                    | What you have deleted, to restore or remove for good.                                                                                                                                                                  |
+| **Arrange navigation**     | Always                                                    | Lets you drag the entries of the sidebar, the top bar and this menu where you want them; see [Arrange by dragging](customizing.md#arrange-by-dragging).                                                                |
 | **Shortcuts** <kbd>?</kbd> | Always                                                    | Opens the list of keyboard shortcuts.                                                                                                                                                                                  |
 | **About EiN**              | Always                                                    | A dialog with EiN's version, how long it has been running, the installed modules with their versions, the services it uses (the language model, the media service) and the versions of PostgreSQL and Deno it runs on. |
 | **Administer…**            | For members of the `sudo` group, outside admin mode       | Admin mode, below.                                                                                                                                                                                                     |

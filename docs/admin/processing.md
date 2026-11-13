@@ -42,16 +42,17 @@ worked on once. Waiting work is kept in nodes, so nothing is lost when EiN resta
 
 ![The Work tab of the System status page, marked Healthy: Where the work is, with the columns Not started, In line, Running in EiN, At the media service and On a model, nothing waiting and two search models loaded, and below it the pipeline table's first row, media-album, with its workload bar, its Not started, In line, Running, Failed, Done and Cancelled counts and its In and Out](../../assets/shots/system-work.webp "Where the work is shows where everything stands now; below it, one row per pipeline says how much is left, how fast it goes, and when it will be done.")
 
-At the top, **Where the work is** draws the work as it moves, left to right, in the same five words
-the table below uses:
+At the top, **Where the work is** draws the work as it moves, left to right. Its first three columns
+count what the table below counts as **Not started**, **In line** and **Running**; what failed or
+finished is only in the table.
 
-| Place           | What it counts                                                                                                |
-| --------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Not started** | Changes EiN has noticed and not made into work yet, by pipeline: a new photo that still needs its faces found |
-| **In line**     | Work that is made, with its next step waiting for a worker, or for an earlier step of its own                 |
-| **Running**     | Steps a worker is running this moment                                                                         |
-| **Failed**      | Work that failed                                                                                              |
-| **Done**        | Work that finished                                                                                            |
+| Column                   | What it counts                                                                                                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| **Not started**          | Changes EiN has noticed and not made into work yet, by pipeline: a new photo that still needs its faces found |
+| **In line**              | Work that is made, with its next step waiting for a worker, or for an earlier step of its own                 |
+| **Running in EiN**       | Steps a worker is running this moment                                                                         |
+| **At the media service** | With the media service: the requests in its lanes                                                             |
+| **On a model**           | With the media service: the models it holds                                                                   |
 
 - **Not started** names the pipelines with the most waiting.
 - **In line** shows the **lines**: a step that takes time, such as finding faces or reading the text
