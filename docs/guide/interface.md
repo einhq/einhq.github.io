@@ -29,8 +29,8 @@ An administrator can send you a sign-in link instead of a password, an address t
 password.
 
 1. Open the link. EiN greets you by name and shows your **username**, which may not be what you
-   expect: note it, you sign in with it from then on (or with your e-mail address, if your account
-   has one).
+   expect, and the e-mail address you can sign in with instead when your account has one: note
+   them, you sign in with either from then on.
 2. In **Password**, type the password you want, and type it again in **Repeat**.
 3. Choose **Set password and sign in**.
 
