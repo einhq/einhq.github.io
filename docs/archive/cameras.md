@@ -19,8 +19,8 @@ registered, the pictures it took are linked to it, and:
   tracks of the devices they are part of (see [Albums](albums.md#the-info-tab));
 - the Search page finds cameras and narrows albums by them, and `@` in a search box picks one to
   keep the pictures it took (see [Search and the finder](search.md#find-albums-people-locations-and-cameras));
-- the camera's **Timezone**, **Scanner or digitizer** and **Video times in UTC** settings correct
-  the dates of every picture it took.
+- the camera's **Timezone**, **Clock is off by**, **Scanner or digitizer** and **Video times in
+  UTC** settings correct the dates of every picture it took.
 
 ## How EiN recognises a camera
 
@@ -207,7 +207,8 @@ and stopped using it, the events written on it, and the albums holding pictures 
 none, it says "Nothing recorded for &lt;camera&gt; yet. Owners with dates, and albums with photos it
 took, appear on its timeline." On the right, and above the timeline on a phone:
 
-- **Camera** lists Make, Model, Serial number, Timezone, "Capture dates: Scanner dates suppressed"
+- **Camera** lists Make, Model, Serial number, Timezone, "Clock off by" with the date it applies
+  from, "Capture dates: Scanner dates suppressed"
   for a scanner and "Video times: UTC"; with nothing but a name it says "Nothing recorded beyond the
   name." Under them is **Link existing media** (see
   [Link the files a camera missed](#link-the-files-a-camera-missed)).
@@ -218,9 +219,10 @@ took, appear on its timeline." On the right, and above the timeline on a phone:
   left out for those who may not change the camera when there is no device.
 - **About** shows the description, when there is one.
 
-The **Media** tab is the place to correct a camera whose clock was wrong: select its pictures and
-use **Set time**, as [Dates and places of pictures](dates-places.md#set-the-time-of-several-pictures-at-once)
-describes.
+A camera whose clock was wrong by the same amount for all its pictures, or from some date on, is
+corrected with **Clock is off by** (see [Clocks, time zones and scanners](#clocks-time-zones-and-scanners)).
+For a few pictures, the **Media** tab is the place: select them and use **Set time**, as
+[Dates and places of pictures](dates-places.md#set-the-time-of-several-pictures-at-once) describes.
 
 **Move to trash** sends the camera to your trash, and the message's **Undo** brings it back (see
 [Your profile, favourites and trash](../guide/profile.md)).
@@ -251,12 +253,14 @@ pictures.
 
 1. On the camera's page, click **Edit**. The **Edit camera** dialog opens.
 2. Change what you need: **Name**, **Make**, **Model**, **Serial number**, **Timezone** (a list of
-   time zones you can type in, such as `Pacific/Auckland`), **Scanner or digitizer**,
+   time zones you can type in, such as `Pacific/Auckland`), **Clock is off by** and its **From**,
+   **Scanner or digitizer**,
    **Video times in UTC**, **Description** and **Labels**; and, for a camera that is a device with
    a stream, **Clips** and **Keep clips (days)** (see [A security camera](#a-security-camera)).
 3. Click **Save**.
 
-A changed **Timezone**, **Scanner or digitizer** or **Video times in UTC** re-dates every file
+A changed **Timezone**, **Clock is off by**, **Scanner or digitizer** or **Video times in UTC**
+re-dates every file
 already linked to the camera, and the page says "Re-dated N linked files.", or "Removed scanner
 dates from N linked files." when you turned the scanner setting on.
 
@@ -268,7 +272,7 @@ large archive, and **Save** waits for it. Files linked under the old fingerprint
 
 ## Clocks, time zones and scanners
 
-Three settings tell EiN how to read a camera's dates. Each one applies to every file linked to the
+Four settings tell EiN how to read a camera's dates. Each one applies to the files linked to the
 camera, and changing it re-dates them.
 
 - **Timezone**: the time zone the camera's clock was set to. A camera's clock writes a time without
@@ -280,6 +284,15 @@ camera, and changing it re-dates them.
   each picture right. Leave it empty for a phone, whose clock follows the local time wherever it
   is: its pictures carry their own zone or a GPS time, and the few that carry neither are read in
   the archive's time zone.
+- **Clock is off by**: how far the camera's clock was ahead of the right time, such as `+23h 2m`
+  for a clock set a day ahead and a little slow, or `-5m` for one five minutes behind; `d`, `h`,
+  `m` and `s` count days, hours, minutes and seconds. EiN takes it off each picture's time before
+  reading it in the camera's **Timezone**, or the archive's. Under **From**, give the date the clock
+  was off from (`2017`, `2017-06` or `2017-06-20`), or leave it empty for all its pictures. Saving
+  adds the setting to the ones before: a picture from before its date keeps the earlier setting, and
+  `0` from a date says the clock was put right then. **Edit** shows the latest one, and the
+  **Info** tab lists it. To find the amount, compare one of its pictures with another camera's from
+  the same moment.
 - **Scanner or digitizer**: the camera's clock records when a file was scanned, not when the
   photograph was taken, so EiN dates pictures neither by it nor by a date in the file names it
   gives them. Pictures with no other date stay
@@ -415,6 +428,7 @@ link to the device a camera is part of is its child `device`. The commands below
 | Which camera a make and model, or a serial number, is matched to | [`camera-match`](commands.md#camera-match) `--make <make> --model <model>`, or `--serial <serial>`                                                            |
 | Register a camera                                                | [`camera-create`](commands.md#camera-create) `--name <name> --make <make> --model <model>`, with `--serial`, `--timezone`, `--digitizer` or `--quicktime-utc` |
 | Change a camera's settings                                       | [`camera-update`](commands.md#camera-update) `<camera> --timezone <zone>`, or `--clear <field>`                                                               |
+| Say how far a camera's clock was off, from a date                | `camera-update <camera> --clock-offset=+23h2m --clock-from=2017-06`; `camera-info` lists the settings                                                         |
 | Say what a security camera's clips are around, and keep them     | `camera-update <camera> --clips face`, `motion` or `off`, and `--clip-days <days>` (0 keeps them)                                                             |
 | Record a clip of a security camera now                           | [`camera-clip`](commands.md#camera-clip) `<device>`, with `--post <seconds>`                                                                                  |
 | Show a camera and its owners                                     | [`camera-info`](commands.md#camera-info) `<camera>`                                                                                                           |

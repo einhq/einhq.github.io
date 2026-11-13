@@ -109,8 +109,8 @@ of, such as a phone, if it has one;</li>
 tracks of the devices they are part of (see <a href="albums.html#the-info-tab">Albums</a>);</li>
 <li>the Search page finds cameras and narrows albums by them, and <code>@</code> in a search box picks one to
 keep the pictures it took (see <a href="search.html#find-albums-people-locations-and-cameras">Search and the finder</a>);</li>
-<li>the camera&#39;s <strong>Timezone</strong>, <strong>Scanner or digitizer</strong> and <strong>Video times in UTC</strong> settings correct
-the dates of every picture it took.</li>
+<li>the camera&#39;s <strong>Timezone</strong>, <strong>Clock is off by</strong>, <strong>Scanner or digitizer</strong> and <strong>Video times in
+UTC</strong> settings correct the dates of every picture it took.</li>
 </ul>
 <h2 id="how-ein-recognises-a-camera">How EiN recognises a camera<a class="anchor" href="#how-ein-recognises-a-camera" aria-label="Link to this section"></a></h2>
 <p>When a file arrives, EiN reads what the camera wrote into it: the make (the EXIF tag <code>Make</code>), the
@@ -311,7 +311,8 @@ and stopped using it, the events written on it, and the albums holding pictures 
 none, it says &quot;Nothing recorded for &lt;camera&gt; yet. Owners with dates, and albums with photos it
 took, appear on its timeline.&quot; On the right, and above the timeline on a phone:</p>
 <ul>
-<li><strong>Camera</strong> lists Make, Model, Serial number, Timezone, &quot;Capture dates: Scanner dates suppressed&quot;
+<li><strong>Camera</strong> lists Make, Model, Serial number, Timezone, &quot;Clock off by&quot; with the date it applies
+from, &quot;Capture dates: Scanner dates suppressed&quot;
 for a scanner and &quot;Video times: UTC&quot;; with nothing but a name it says &quot;Nothing recorded beyond the
 name.&quot; Under them is <strong>Link existing media</strong> (see
 <a href="#link-the-files-a-camera-missed">Link the files a camera missed</a>).</li>
@@ -322,9 +323,10 @@ no device.&quot; (see <a href="#a-phone-that-records-where-it-was">A phone that 
 left out for those who may not change the camera when there is no device.</li>
 <li><strong>About</strong> shows the description, when there is one.</li>
 </ul>
-<p>The <strong>Media</strong> tab is the place to correct a camera whose clock was wrong: select its pictures and
-use <strong>Set time</strong>, as <a href="dates-places.html#set-the-time-of-several-pictures-at-once">Dates and places of pictures</a>
-describes.</p>
+<p>A camera whose clock was wrong by the same amount for all its pictures, or from some date on, is
+corrected with <strong>Clock is off by</strong> (see <a href="#clocks-time-zones-and-scanners">Clocks, time zones and scanners</a>).
+For a few pictures, the <strong>Media</strong> tab is the place: select them and use <strong>Set time</strong>, as
+<a href="dates-places.html#set-the-time-of-several-pictures-at-once">Dates and places of pictures</a> describes.</p>
 <p><strong>Move to trash</strong> sends the camera to your trash, and the message&#39;s <strong>Undo</strong> brings it back (see
 <a href="../guide/profile.html">Your profile, favourites and trash</a>).</p>
 <h2 id="link-the-files-a-camera-missed">Link the files a camera missed<a class="anchor" href="#link-the-files-a-camera-missed" aria-label="Link to this section"></a></h2>
@@ -350,12 +352,14 @@ pictures.</p>
 <ol>
 <li>On the camera&#39;s page, click <strong>Edit</strong>. The <strong>Edit camera</strong> dialog opens.</li>
 <li>Change what you need: <strong>Name</strong>, <strong>Make</strong>, <strong>Model</strong>, <strong>Serial number</strong>, <strong>Timezone</strong> (a list of
-time zones you can type in, such as <code>Pacific/Auckland</code>), <strong>Scanner or digitizer</strong>,
+time zones you can type in, such as <code>Pacific/Auckland</code>), <strong>Clock is off by</strong> and its <strong>From</strong>,
+<strong>Scanner or digitizer</strong>,
 <strong>Video times in UTC</strong>, <strong>Description</strong> and <strong>Labels</strong>; and, for a camera that is a device with
 a stream, <strong>Clips</strong> and <strong>Keep clips (days)</strong> (see <a href="#a-security-camera">A security camera</a>).</li>
 <li>Click <strong>Save</strong>.</li>
 </ol>
-<p>A changed <strong>Timezone</strong>, <strong>Scanner or digitizer</strong> or <strong>Video times in UTC</strong> re-dates every file
+<p>A changed <strong>Timezone</strong>, <strong>Clock is off by</strong>, <strong>Scanner or digitizer</strong> or <strong>Video times in UTC</strong>
+re-dates every file
 already linked to the camera, and the page says &quot;Re-dated N linked files.&quot;, or &quot;Removed scanner
 dates from N linked files.&quot; when you turned the scanner setting on.</p>
 <p>A changed <strong>Make</strong>, <strong>Model</strong> or <strong>Serial number</strong> links the files already in the archive that carry
@@ -364,7 +368,7 @@ the new fingerprint and are linked to no other camera, and the page says &quot;L
 with a serial number is linked quickly; one known only by its make and model can take minutes in a
 large archive, and <strong>Save</strong> waits for it. Files linked under the old fingerprint stay linked.</p>
 <h2 id="clocks-time-zones-and-scanners">Clocks, time zones and scanners<a class="anchor" href="#clocks-time-zones-and-scanners" aria-label="Link to this section"></a></h2>
-<p>Three settings tell EiN how to read a camera&#39;s dates. Each one applies to every file linked to the
+<p>Four settings tell EiN how to read a camera&#39;s dates. Each one applies to the files linked to the
 camera, and changing it re-dates them.</p>
 <ul>
 <li><strong>Timezone</strong>: the time zone the camera&#39;s clock was set to. A camera&#39;s clock writes a time without
@@ -376,6 +380,15 @@ trip: Helen&#39;s Coolpix stayed on London time when she took it to Wellington, 
 each picture right. Leave it empty for a phone, whose clock follows the local time wherever it
 is: its pictures carry their own zone or a GPS time, and the few that carry neither are read in
 the archive&#39;s time zone.</li>
+<li><strong>Clock is off by</strong>: how far the camera&#39;s clock was ahead of the right time, such as <code>+23h 2m</code>
+for a clock set a day ahead and a little slow, or <code>-5m</code> for one five minutes behind; <code>d</code>, <code>h</code>,
+<code>m</code> and <code>s</code> count days, hours, minutes and seconds. EiN takes it off each picture&#39;s time before
+reading it in the camera&#39;s <strong>Timezone</strong>, or the archive&#39;s. Under <strong>From</strong>, give the date the clock
+was off from (<code>2017</code>, <code>2017-06</code> or <code>2017-06-20</code>), or leave it empty for all its pictures. Saving
+adds the setting to the ones before: a picture from before its date keeps the earlier setting, and
+<code>0</code> from a date says the clock was put right then. <strong>Edit</strong> shows the latest one, and the
+<strong>Info</strong> tab lists it. To find the amount, compare one of its pictures with another camera&#39;s from
+the same moment.</li>
 <li><strong>Scanner or digitizer</strong>: the camera&#39;s clock records when a file was scanned, not when the
 photograph was taken, so EiN dates pictures neither by it nor by a date in the file names it
 gives them. Pictures with no other date stay
@@ -564,6 +577,10 @@ link to the device a camera is part of is its child <code>device</code>. The com
 <tr>
 <td>Change a camera&#39;s settings</td>
 <td><a href="commands.html#camera-update"><code>camera-update</code></a> <code>&lt;camera&gt; --timezone &lt;zone&gt;</code>, or <code>--clear &lt;field&gt;</code></td>
+</tr>
+<tr>
+<td>Say how far a camera&#39;s clock was off, from a date</td>
+<td><code>camera-update &lt;camera&gt; --clock-offset=+23h2m --clock-from=2017-06</code>; <code>camera-info</code> lists the settings</td>
 </tr>
 <tr>
 <td>Say what a security camera&#39;s clips are around, and keep them</td>

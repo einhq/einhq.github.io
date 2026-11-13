@@ -291,7 +291,10 @@ When a camera's pictures come out hours off:
   **Timezone**, which links its pictures and dates them by it. [Cameras](cameras.md) has the details.
 - **A phone's videos are off by exactly its time zone**: turn on **Video times in UTC** for that
   phone. Phones keep their videos' recording time in UTC.
-- **The clock was wrong by some amount**: use **Set time** as described above.
+- **The clock was wrong by some amount**, a day ahead or some minutes fast: open the camera's page,
+  press **Edit** and set **Clock is off by**, from the date it was wrong if not for all its
+  pictures (see [Clocks, time zones and scanners](cameras.md#clocks-time-zones-and-scanners)). For
+  a few pictures, use **Set time** as described above.
 
 A time from the **Set time** dialog carries no time zone and is read in the archive's time zone, so
 a picture from a trip abroad that you re-time loses its "your time" line. In the terminal you can
@@ -411,7 +414,8 @@ Set location 50.153,-5.066 on /archive/albums/Peggy's Falmouth/P1000413.JPG
   means the camera's clock was wrong.
 - **All pictures from one camera are some hours off.** Set the camera's **Timezone**, or for a
   phone's videos turn on **Video times in UTC**, as described under
-  [Time zones](#time-zones).
+  [Time zones](#time-zones). A clock that was simply wrong, by a day or some minutes, takes
+  **Clock is off by**.
 - **Set time is not in the selection bar.** You may not change every selected picture: select only
   pictures you may change, or ask whoever owns the others. Your favourites and the pictures behind a
   pile on the map do not offer **Set time** at all; select the pictures in their album instead.
