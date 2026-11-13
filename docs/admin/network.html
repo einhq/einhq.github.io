@@ -366,6 +366,7 @@ address. <a href="devices.html#device-keys">Devices and their keys</a> says more
 <li>After five failures from one address, that address is refused without its password being checked, with &quot;too many failed sign-ins; try again in&quot; and the number of seconds. The wait starts at a second and doubles with each further failure, up to 15 minutes.</li>
 <li>After five failures at one account, each attempt at it waits, up to 10 seconds, but the account is never locked: someone guessing a password cannot lock its owner out.</li>
 <li>A failed attempt is answered no sooner than a second after it was made.</li>
+<li>A successful sign-in is not counted: once an address&#39;s wait has passed, it may sign in with the right password as often as it likes, and its next failure waits as long as it would have without them.</li>
 <li>Failures are forgotten an hour after the last one.</li>
 </ul>
 <p>Repeated failures are logged as &quot;repeated failed sign-ins&quot;, with the address or account; <a href="services-logs.html">Services and logs</a> shows where to read them.</p>

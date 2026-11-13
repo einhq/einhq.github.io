@@ -225,6 +225,7 @@ EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address
 - After five failures from one address, that address is refused without its password being checked, with "too many failed sign-ins; try again in" and the number of seconds. The wait starts at a second and doubles with each further failure, up to 15 minutes.
 - After five failures at one account, each attempt at it waits, up to 10 seconds, but the account is never locked: someone guessing a password cannot lock its owner out.
 - A failed attempt is answered no sooner than a second after it was made.
+- A successful sign-in is not counted: once an address's wait has passed, it may sign in with the right password as often as it likes, and its next failure waits as long as it would have without them.
 - Failures are forgotten an hour after the last one.
 
 Repeated failures are logged as "repeated failed sign-ins", with the address or account; [Services and logs](services-logs.md) shows where to read them.
