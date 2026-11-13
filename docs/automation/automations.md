@@ -176,16 +176,21 @@ made /etc/automations/hall-light.yaml from motion-light
 so it goes on at motion at any light. Set like this, the automation is checked first, as
 `automation-check` does, and is not made while something is wrong with it: a slot left unset, or an
 endpoint you may not read or a control you may not switch. `--dry-run` makes nothing, and prints the
-YAML it would write and what is wrong with it.
+YAML it would write and what is wrong with it. `automation-set --dry-run` checks YAML of your own
+the same way, writing nothing.
 
-| Starting point  | Slots                                                                                                                                             |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `motion-light`  | `motion`, `lamp`, `light-level` (or `none`), `dark-below` (30), `off-after` (5m)                                                                  |
-| `button-toggle` | `button`, `lamp`, `press`: `single`, `double` or `long`, or `none` for every press (single)                                                       |
-| `heater`        | `temperature`, `heater`, `on-below` (19), `off-above` (21), `away`: a switch that is on while no one is home, or `none`                           |
-| `morning`       | `lamp`, `at` (06:30), `days`: `weekdays`, `weekends` or some of `mon,tue,…`, or `none` for every day (weekdays), `value` written to the lamp (on) |
-| `dusk-to-dawn`  | `lamp`, `location` as `<latitude>, <longitude>`, `from` (sunset), `until` (sunrise)                                                               |
-| `inbox`         | `folder` watched, `match` (`*.pdf`, or `none` for every file), `to`: the folder each file is moved to                                             |
+`automation-check` also names a node left out of the flow: one that sends nowhere though it is no
+action, or one nothing sends to though it only acts on what comes in. The engine runs such an
+automation as it is, so the check is where you hear of it.
+
+| Starting point  | Slots                                                                                                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `motion-light`  | `motion`, `lamp`, `light-level` (or `none`), `dark-below` (30), `off-after` (5m)                                                                                                |
+| `button-toggle` | `button`, `lamp`, `press`: `single`, `double` or `long`, or `none` for every press (single)                                                                                     |
+| `heater`        | `temperature`, `heater`, `on-below` (19) and `off-above` (21), one of them `none` to only switch it off or only on, `away`: a switch that is on while no one is home, or `none` |
+| `morning`       | `lamp`, `at` (06:30), `days`: `weekdays`, `weekends` or some of `mon,tue,…`, or `none` for every day (weekdays), `value` written to the lamp (on)                               |
+| `dusk-to-dawn`  | `lamp`, `location` as `<latitude>, <longitude>`, `from` (sunset), `until` (sunrise)                                                                                             |
+| `inbox`         | `folder` watched, `match` (`*.pdf`, or `none` for every file), `to`: the folder each file is moved to                                                                           |
 
 A device is given as `<device>/<endpoint>`, as `device-show <device>` lists them, and a number or a
 time in parentheses is what the slot holds when it is not set.

@@ -125,6 +125,8 @@ set -e
 person-add-event --date=2021-12 --body='Graduated' /archive/people/ruby-wrenfield
 ```
 
+A command that can say what it would do without doing it, such as `automation-new --dry-run`, is tried that way before the card is shown. If the try fails, the assistant is told why and corrects the command, so a card does not offer a change that would be refused.
+
 To decide:
 
 1. Read the commands. Check the names, dates and paths: the card shows what the assistant understood.

@@ -232,7 +232,11 @@ automation-new hall-light --from motion-light --<span class="hljs-built_in">set<
 so it goes on at motion at any light. Set like this, the automation is checked first, as
 <code>automation-check</code> does, and is not made while something is wrong with it: a slot left unset, or an
 endpoint you may not read or a control you may not switch. <code>--dry-run</code> makes nothing, and prints the
-YAML it would write and what is wrong with it.</p>
+YAML it would write and what is wrong with it. <code>automation-set --dry-run</code> checks YAML of your own
+the same way, writing nothing.</p>
+<p><code>automation-check</code> also names a node left out of the flow: one that sends nowhere though it is no
+action, or one nothing sends to though it only acts on what comes in. The engine runs such an
+automation as it is, so the check is where you hear of it.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -250,7 +254,7 @@ YAML it would write and what is wrong with it.</p>
 </tr>
 <tr>
 <td><code>heater</code></td>
-<td><code>temperature</code>, <code>heater</code>, <code>on-below</code> (19), <code>off-above</code> (21), <code>away</code>: a switch that is on while no one is home, or <code>none</code></td>
+<td><code>temperature</code>, <code>heater</code>, <code>on-below</code> (19) and <code>off-above</code> (21), one of them <code>none</code> to only switch it off or only on, <code>away</code>: a switch that is on while no one is home, or <code>none</code></td>
 </tr>
 <tr>
 <td><code>morning</code></td>

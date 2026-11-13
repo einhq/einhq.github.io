@@ -652,10 +652,11 @@ something, "turn on the hall lamp", gives a
 line, which you run or decline.
 
 Asking for an automation, "turn the hall lamp on when there is motion after dark", gives a proposal
-card too. The assistant looks up the devices you name, makes the automation from the
-[starting point](automations.md#a-starting-point-with-your-devices) it fits with your devices set,
-tries the line with `--dry-run` first, and proposes it once nothing is wrong with it. One that fits
-no starting point is proposed as an `automation-set` line with its YAML.
+card too. The assistant looks up the devices you name and makes the automation from the
+[starting point](automations.md#a-starting-point-with-your-devices) it fits, with your devices set.
+One that fits no starting point is proposed as an `automation-set` line with its YAML. Either line
+is tried with `--dry-run` before you see it, and one with something wrong goes back to the assistant
+to correct, so the card you get is one that can run.
 
 ## From the terminal
 

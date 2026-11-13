@@ -322,7 +322,7 @@ automation-ignore d0ad08c5e709 --undo</code></pre></div>
 </tr>
 <tr>
 <td><code>--dry-run</code></td>
-<td>write nothing: print the YAML it would write and what is wrong with it.</td>
+<td>write nothing: say what is wrong with it, and in text the YAML it would write.</td>
 </tr>
 <tr>
 <td><code>--examples</code></td>
@@ -333,11 +333,11 @@ automation-ignore d0ad08c5e709 --undo</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-new hall-light --from motion-light
 automation-new hall-light --from motion-light --<span class="hljs-built_in">set</span> motion=hall-sensor/motion --<span class="hljs-built_in">set</span> lamp=hall-lamp/switch-0 --<span class="hljs-built_in">set</span> light-level=none --dry-run
 automation-new --examples</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: AutomationSetAnswer: name, path, written, created, problems, and with --dry-run the YAML as text.</p>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationSetAnswer: name, path, written, created, problems.</p>
 <h3 id="automation-set"><code>automation-set</code><a class="anchor" href="#automation-set" aria-label="Link to this section"></a></h3>
 <p>Write an automation&#39;s YAML, made when it is new; one with problems is refused unless --draft.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>automation-set [--yaml=&lt;string&gt;] [--json=&lt;string&gt;] [--draft] &lt;automation&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>automation-set [--yaml=&lt;string&gt;] [--json=&lt;string&gt;] [--draft] [--dry-run] &lt;automation&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -369,6 +369,10 @@ automation-new --examples</code></pre></div>
 <tr>
 <td><code>--draft</code></td>
 <td>write it even with problems, unless it is not YAML; it is not run until they are gone.</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td>write nothing: say what is wrong with it as automation-check does, devices you may not read or switch among it.</td>
 </tr>
 </tbody></table>
 </div>

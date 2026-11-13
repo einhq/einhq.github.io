@@ -889,10 +889,11 @@ something, &quot;turn on the hall lamp&quot;, gives a
 <a href="../assistant/chat.html#when-the-assistant-offers-to-make-a-change">proposal card</a> with the <code>echo</code>
 line, which you run or decline.</p>
 <p>Asking for an automation, &quot;turn the hall lamp on when there is motion after dark&quot;, gives a proposal
-card too. The assistant looks up the devices you name, makes the automation from the
-<a href="automations.html#a-starting-point-with-your-devices">starting point</a> it fits with your devices set,
-tries the line with <code>--dry-run</code> first, and proposes it once nothing is wrong with it. One that fits
-no starting point is proposed as an <code>automation-set</code> line with its YAML.</p>
+card too. The assistant looks up the devices you name and makes the automation from the
+<a href="automations.html#a-starting-point-with-your-devices">starting point</a> it fits, with your devices set.
+One that fits no starting point is proposed as an <code>automation-set</code> line with its YAML. Either line
+is tried with <code>--dry-run</code> before you see it, and one with something wrong goes back to the assistant
+to correct, so the card you get is one that can run.</p>
 <h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
 <p>The devices&#39; own commands, <code>devices</code>, <code>device-show</code>, <code>device-history</code>, <code>device-label</code> and
 <code>device-forget</code>, are EiN&#39;s; <a href="../guide/devices.html#from-the-terminal">Devices</a> lists them. The module

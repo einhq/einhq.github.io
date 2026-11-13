@@ -193,7 +193,7 @@ automation-new [--from=<string>] [--set=<string>] [--description=<string>] [--dr
 | `--from=<string>`        | a starting point: empty, motion-light, button-toggle, heater, morning, inbox, dusk-to-dawn, tour.                                           |
 | `--set=<string>`         | a slot of the starting point, <slot>=<value>: an endpoint as <device>/<endpoint>, none to leave an optional one out; --examples lists them. |
 | `--description=<string>` | what it does, a sentence (the starting point says it when not given)                                                                        |
-| `--dry-run`              | write nothing: print the YAML it would write and what is wrong with it.                                                                     |
+| `--dry-run`              | write nothing: say what is wrong with it, and in text the YAML it would write.                                                              |
 | `--examples`             | list the starting points and their slots.                                                                                                   |
 
 ```bash
@@ -202,7 +202,7 @@ automation-new hall-light --from motion-light --set motion=hall-sensor/motion --
 automation-new --examples
 ```
 
-With `JSON_OUTPUT=1`: AutomationSetAnswer: name, path, written, created, problems, and with --dry-run the YAML as text.
+With `JSON_OUTPUT=1`: AutomationSetAnswer: name, path, written, created, problems.
 
 ### `automation-set`
 
@@ -211,18 +211,19 @@ Write an automation's YAML, made when it is new; one with problems is refused un
 <small>changes things</small>
 
 ```text
-automation-set [--yaml=<string>] [--json=<string>] [--draft] <automation>
+automation-set [--yaml=<string>] [--json=<string>] [--draft] [--dry-run] <automation>
 ```
 
 | Argument       | What it is          |
 | -------------- | ------------------- |
 | `<automation>` | <name> or its file. |
 
-| Option            | What it does                                                                           |
-| ----------------- | -------------------------------------------------------------------------------------- |
-| `--yaml=<string>` | the YAML, written as given.                                                            |
-| `--json=<string>` | its graph as JSON, written as YAML.                                                    |
-| `--draft`         | write it even with problems, unless it is not YAML; it is not run until they are gone. |
+| Option            | What it does                                                                                                    |
+| ----------------- | --------------------------------------------------------------------------------------------------------------- |
+| `--yaml=<string>` | the YAML, written as given.                                                                                     |
+| `--json=<string>` | its graph as JSON, written as YAML.                                                                             |
+| `--draft`         | write it even with problems, unless it is not YAML; it is not run until they are gone.                          |
+| `--dry-run`       | write nothing: say what is wrong with it as automation-check does, devices you may not read or switch among it. |
 
 ```bash
 automation-set hall-light < hall-light.yaml
