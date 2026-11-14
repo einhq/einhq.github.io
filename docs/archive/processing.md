@@ -43,8 +43,8 @@ show **waiting for EMS** on the **Status**.
 | Pipeline               | What it does                                                                                                        | Kind of work                |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | `media-interpret`      | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name                     | `interpret`                 |
-| `media-faces`          | Finds the faces in a photo and crops each one                                                                       | `faces`                     |
-| `media-video-faces`    | Finds the faces in a video and when each is on screen                                                               | `faces`                     |
+| `media-faces`          | Finds the faces in a photo and crops each one                                                                       | `faces`, `face-crops`       |
+| `media-video-faces`    | Finds the faces in a video and when each is on screen, and crops each one                                           | `faces`, `face-crops`       |
 | `media-face-assign`    | Matches a found face to a person                                                                                    | `face-assign`               |
 | `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                                         | `diarize`                   |
 | `media-speaker-assign` | Decides which person each voice is                                                                                  | `speaker-assign`            |
@@ -93,14 +93,16 @@ is read once they are filed into a folder that wants it.
 The thumbnails, display sizes and playable copies of the Archive's pictures, videos and recordings,
 and the pipelines that make them, `media-stills` and `media-transcode`, are the Media module's:
 [The renditions it makes](../media/index.md#the-renditions-it-makes). The Archive's own are a
-picture's face crops, which `detect-faces` cuts, `file-set-orientation` cuts again when a picture is
-turned, and `regenerate-face-crops --missing` cuts where a crash left one empty.
+picture's and a video's face crops, which `detect-faces` cuts, `file-set-orientation` cuts again
+when a picture is turned, and `regenerate-face-crops --missing` cuts where one was left empty. The
+face pipelines run it on each file after `detect-faces`, as a step of kind `face-crops`, so a crop the
+media service could not cut during detection is cut once it can.
 
 ## The workers
 
 Every kind of work above that is not run by the engine goes as a job into the pool
 `/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
-its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-assign`,
+its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-crops`, `face-assign`,
 `speaker-assign`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media module's own
 `ingest`, `stills`, `transcode` and `fingerprint`; `models` takes the Archive's `faces`, `diarize`
 and `damage`, beside the Media module's `shots`, `embed-picture`, `ocr`, `embed-text`, `transcribe`

@@ -152,12 +152,12 @@ show <strong>waiting for EMS</strong> on the <strong>Status</strong>.</p>
 <tr>
 <td><code>media-faces</code></td>
 <td>Finds the faces in a photo and crops each one</td>
-<td><code>faces</code></td>
+<td><code>faces</code>, <code>face-crops</code></td>
 </tr>
 <tr>
 <td><code>media-video-faces</code></td>
-<td>Finds the faces in a video and when each is on screen</td>
-<td><code>faces</code></td>
+<td>Finds the faces in a video and when each is on screen, and crops each one</td>
+<td><code>faces</code>, <code>face-crops</code></td>
 </tr>
 <tr>
 <td><code>media-face-assign</code></td>
@@ -319,12 +319,14 @@ is read once they are filed into a folder that wants it.</p>
 <p>The thumbnails, display sizes and playable copies of the Archive&#39;s pictures, videos and recordings,
 and the pipelines that make them, <code>media-stills</code> and <code>media-transcode</code>, are the Media module&#39;s:
 <a href="../media/index.html#the-renditions-it-makes">The renditions it makes</a>. The Archive&#39;s own are a
-picture&#39;s face crops, which <code>detect-faces</code> cuts, <code>file-set-orientation</code> cuts again when a picture is
-turned, and <code>regenerate-face-crops --missing</code> cuts where a crash left one empty.</p>
+picture&#39;s and a video&#39;s face crops, which <code>detect-faces</code> cuts, <code>file-set-orientation</code> cuts again
+when a picture is turned, and <code>regenerate-face-crops --missing</code> cuts where one was left empty. The
+face pipelines run it on each file after <code>detect-faces</code>, as a step of kind <code>face-crops</code>, so a crop the
+media service could not cut during detection is cut once it can.</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
-its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-assign</code>,
+its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-crops</code>, <code>face-assign</code>,
 <code>speaker-assign</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media module&#39;s own
 <code>ingest</code>, <code>stills</code>, <code>transcode</code> and <code>fingerprint</code>; <code>models</code> takes the Archive&#39;s <code>faces</code>, <code>diarize</code>
 and <code>damage</code>, beside the Media module&#39;s <code>shots</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>
