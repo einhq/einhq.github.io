@@ -41,14 +41,17 @@ On a computer:
   [Chatting with the assistant](../assistant/chat.md).
 - **Left and right edges**: arrows to the previous and the next file.
 - **The bar under the picture**, from left to right:
+  - the heart, **Favourite (s)**, when you are signed in;
   - where you are in the list, such as **24 of 26**. The **Media** page leaves this out, because it
     loads its feed a part at a time and does not know the whole count;
+  - **Start slideshow**, which reads **Stop slideshow** while one runs;
   - the date and time the picture was taken, such as **Saturday, 27 December 2025, 13:16:18**;
   - the place: the name of the location the picture is linked to, or else the street address read
     from its GPS position;
-  - **Show text** / **Hide text** (<kbd>t</kbd>), when text was read from the photo;
-  - the heart, **Favourite (s)**, when you are signed in;
-  - **Start slideshow**;
+  - as far as there is room, in this order: **Show text** / **Hide text** (<kbd>t</kbd>) when text
+    was read from the photo, **Pin faces** / **Unpin faces** (<kbd>f</kbd>) on photos and videos,
+    and **Fullscreen**. Those the bar has no room for, without cutting the date or the place short,
+    are rows of the More menu instead;
   - **More** (⋮).
 
 ### The date under the picture
@@ -68,11 +71,25 @@ date a picture gets and how to change it.
 
 **More** (⋮) at the right end of the bar holds what you do to the view rather than to the file:
 
-| Row                                            | What it does                                                                                                                             |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found. For photos and videos. |
-| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                       |
-| **Download**                                   | Saves the original file to your device.                                                                                                  |
+| Row                                            | What it does                                                                                                                                                        |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it. Here only when the bar has no room for it.                                                                               |
+| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found. Here only when the bar has no room for it.        |
+| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen. Here only when the bar has no room for it.                                                                                       |
+| **Show toolbar** / **Hide toolbar**            | Shows the [cog menu](#change-a-file-from-the-cog-menu)'s actions as a row of icons over the top of the picture. When you may change the file or add it to an album. |
+| **Download**                                   | Saves the original file to your device.                                                                                                                             |
+
+The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
+picture to picture and the next time you open it.
+
+### The toolbar
+
+**Show toolbar** floats the actions of the [cog menu](#change-a-file-from-the-cog-menu) as icons on
+a dark, rounded strip just inside the top of the picture: **Edit**, **Share**, **Add to album**,
+**Edit faces**, **Edit text**, **Restore…**, **Rotate left**, **Rotate right** and the others, as
+the file allows. Point at an icon to see its name. An action that is on, such as drawing faces or a
+mirrored picture, has its icon coloured. The toolbar works with the details panel closed, and is
+hidden during a slideshow.
 
 The file name at the top of the details panel downloads the original too. To download several files
 at once, select them in the grid and use **Download** in the selection bar.
@@ -138,7 +155,8 @@ narrower.
 ![The viewer on a phone held upright: the date in a dark pill over the top of the picture, the position and the place under it, and the details sheet pulled up over the bottom half with the camera, the album and three people with their ages](../../assets/shots/phone-lightbox.webp "On a phone the details are a sheet you pull up from under the picture with a swipe.")
 
 - The date sits in a dark pill centred over the top of the picture, with the time beneath it.
-- The bar under the picture keeps only the position in the list and the place.
+- The bar under the picture keeps the position in the list and the place, and the text, faces and
+  fullscreen buttons as far as there is room.
 - ⋮ in the top right corner holds **Favourite**, **Start slideshow**, the rows of the
   [More menu](#the-more-menu) and **Chat**.
 - The details panel is closed when the viewer opens. Held upright, swipe up on the picture to pull
@@ -315,9 +333,10 @@ Face boxes stay hidden until you point at a face; then that face's box and name 
 name to do what clicking it in the details panel does: open a named person's page, or the review of
 a face nobody has named yet.
 
-- **Pin faces** in the More menu, or <kbd>f</kbd>, shows every box with its name. They stay pinned as
-  you move from file to file, until you unpin them or reload the page. On a touch screen, where
-  nothing can be pointed at, pinning is the way to see the boxes.
+- **Pin faces** in the bar or the More menu, or <kbd>f</kbd>, shows every box with its name. They
+  stay pinned as you move from file to file and the next time you open the viewer on this device,
+  until you unpin them. On a touch screen, where nothing can be pointed at, pinning is the way to
+  see the boxes.
 - With the faces pinned, click a box as you would its name. Unpinned, a box is part of the picture:
   a click or a double-click on a face does what it does anywhere else on the picture, so zooming in
   on a face never opens the person by accident.
@@ -717,7 +736,8 @@ The slideshow follows the list's order and goes round from the last file to the 
 stop it. There is no shuffle. <kbd>←</kbd> and <kbd>→</kbd> still step back and forward. While it
 runs, the screen is kept from going to sleep.
 
-To stop the slideshow, click the picture, press <kbd>Esc</kbd>, or leave fullscreen.
+To stop the slideshow, press **Stop slideshow** in the bar, click the picture, press <kbd>Esc</kbd>,
+or leave fullscreen.
 
 To change the timing or turn the pan and zoom off, open your picture at the top right, choose
 **Profile**, then the **Preferences** tab, and look under **Playback**:
