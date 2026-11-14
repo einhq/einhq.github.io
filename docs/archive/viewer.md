@@ -24,7 +24,8 @@ it to someone who may see the file. Stepping to another
 file replaces the address once you stop on it, instead of adding to the browser's history, so one
 press of the browser's Back button closes the viewer and returns you to the page underneath. A
 picture opened from **Similar** is the exception: Back returns to the picture it is like, and you
-walk the list you were in again.
+walk the list you were in again. A page the viewer leads to, such as a person's when you click
+their name, opens over the viewer: Back returns to the picture you were on.
 
 ## What the viewer shows
 
@@ -212,14 +213,14 @@ at the end of the row instead.
 
 If a face is not the person named, or you are not sure it is, press **This is wrong** (the question
 mark on a phone). The card asks **Who is this, if not &lt;name&gt;?**, still under their picture to
-compare with, and you either:
+compare with. Say who it is at the top, or press one of the buttons under the line:
 
 - say who it is: pick someone, or type a name and choose **New person: &lt;name&gt;**, and press
-  **Move**; or
+  **Move**.
 - press **Mark as doubtful** to leave it to somebody who knows. The face stays the person's, marked
   as doubtful until somebody answers, here or on the person's Faces tab (see
   [Doubtful faces](people.md#doubtful-faces)).
-- press **Make unknown** when it was named by mistake and you do not know who it is. The face
+- press **Mark as unknown** when it was named by mistake and you do not know who it is. The face
   leaves the person and is listed again as a face nobody has named yet, such as **Unknown 8F3C81**,
   to be named later.
 - press **Not a person** when the face is not anybody's: a pattern, a statue, a face on a poster.
@@ -233,7 +234,7 @@ the name and press **Is this them?** in the card. It asks **Is this &lt;name&gt;
 - **Yes**: it is them. The face stays theirs, as a person's decision, and the doubt goes.
 - **No, it is…**: pick who it is instead, or a new name, as above, and press **Move**.
 - **Withdraw**: takes your doubt back without answering it.
-- **Make unknown**: it is not them, and you do not know who it is either; as above.
+- **Mark as unknown**: it is not them, and you do not know who it is either; as above.
 - **Not a person** or **Remove tag**: as above.
 
 Readers who may not change the picture see the orange question mark and who marked the face, but

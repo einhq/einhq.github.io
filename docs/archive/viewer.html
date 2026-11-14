@@ -112,7 +112,8 @@ it to someone who may see the file. Stepping to another
 file replaces the address once you stop on it, instead of adding to the browser&#39;s history, so one
 press of the browser&#39;s Back button closes the viewer and returns you to the page underneath. A
 picture opened from <strong>Similar</strong> is the exception: Back returns to the picture it is like, and you
-walk the list you were in again.</p>
+walk the list you were in again. A page the viewer leads to, such as a person&#39;s when you click
+their name, opens over the viewer: Back returns to the picture you were on.</p>
 <h2 id="what-the-viewer-shows">What the viewer shows<a class="anchor" href="#what-the-viewer-shows" aria-label="Link to this section"></a></h2>
 <figure class="shot"><a href="../../assets/shots/lightbox@2x.webp"><img src="../../assets/shots/lightbox.webp" srcset="../../assets/shots/lightbox.webp 1x, ../../assets/shots/lightbox@2x.webp 2x" alt="The viewer on a photo of Ruby Wrenfield, Helen Okafor and David Okafor on a coastal road, with their names on the face boxes, the bar under the picture, and the details panel on the right listing the camera, the album, the three people with their ages, the place with a map, the weather, and similar pictures" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The viewer on a computer. The bar under the picture gives the position in the list, the date and the place; the details panel beside it says who took it, who is in it and how old they were that day.</figcaption></figure>
 <p>On a computer:</p>
@@ -130,6 +131,7 @@ loads its feed a part at a time and does not know the whole count;</li>
 <li>the date and time the picture was taken, such as <strong>Saturday, 27 December 2025, 13:16:18</strong>;</li>
 <li>the place: the name of the location the picture is linked to, or else the street address read
 from its GPS position;</li>
+<li><strong>Show text</strong> / <strong>Hide text</strong> (<kbd>t</kbd>), when text was read from the photo;</li>
 <li>the heart, <strong>Favourite (s)</strong>, when you are signed in;</li>
 <li><strong>Start slideshow</strong>;</li>
 <li><strong>More</strong> (⋮).</li>
@@ -158,14 +160,6 @@ date a picture gets and how to change it.</p>
 <tbody><tr>
 <td><strong>Pin faces</strong> / <strong>Unpin faces</strong> (<kbd>f</kbd>)</td>
 <td>Shows every face box with its name, or hides them again. It reads <strong>No faces</strong>, greyed out, when none were found. For photos and videos.</td>
-</tr>
-<tr>
-<td><strong>Show text</strong> / <strong>Hide text</strong> (<kbd>t</kbd>)</td>
-<td>Lays the text read from the photo over it. Shown only when text was read.</td>
-</tr>
-<tr>
-<td><strong>Edit text</strong> / <strong>Add text</strong></td>
-<td>Opens the text for writing by hand. Shown on photos you may change.</td>
 </tr>
 <tr>
 <td><strong>Fullscreen</strong> / <strong>Exit fullscreen</strong></td>
@@ -434,14 +428,14 @@ moving away closes it. On a phone there is nothing to point with, so the actions
 at the end of the row instead.</p>
 <p>If a face is not the person named, or you are not sure it is, press <strong>This is wrong</strong> (the question
 mark on a phone). The card asks <strong>Who is this, if not &lt;name&gt;?</strong>, still under their picture to
-compare with, and you either:</p>
+compare with. Say who it is at the top, or press one of the buttons under the line:</p>
 <ul>
 <li>say who it is: pick someone, or type a name and choose <strong>New person: &lt;name&gt;</strong>, and press
-<strong>Move</strong>; or</li>
+<strong>Move</strong>.</li>
 <li>press <strong>Mark as doubtful</strong> to leave it to somebody who knows. The face stays the person&#39;s, marked
 as doubtful until somebody answers, here or on the person&#39;s Faces tab (see
 <a href="people.html#doubtful-faces">Doubtful faces</a>).</li>
-<li>press <strong>Make unknown</strong> when it was named by mistake and you do not know who it is. The face
+<li>press <strong>Mark as unknown</strong> when it was named by mistake and you do not know who it is. The face
 leaves the person and is listed again as a face nobody has named yet, such as <strong>Unknown 8F3C81</strong>,
 to be named later.</li>
 <li>press <strong>Not a person</strong> when the face is not anybody&#39;s: a pattern, a statue, a face on a poster.
@@ -455,7 +449,7 @@ the name and press <strong>Is this them?</strong> in the card. It asks <strong>I
 <li><strong>Yes</strong>: it is them. The face stays theirs, as a person&#39;s decision, and the doubt goes.</li>
 <li><strong>No, it is…</strong>: pick who it is instead, or a new name, as above, and press <strong>Move</strong>.</li>
 <li><strong>Withdraw</strong>: takes your doubt back without answering it.</li>
-<li><strong>Make unknown</strong>: it is not them, and you do not know who it is either; as above.</li>
+<li><strong>Mark as unknown</strong>: it is not them, and you do not know who it is either; as above.</li>
 <li><strong>Not a person</strong> or <strong>Remove tag</strong>: as above.</li>
 </ul>
 <p>Readers who may not change the picture see the orange question mark and who marked the face, but
@@ -552,6 +546,11 @@ may change the file, and for any signed-in reader for <strong>Add to album</stro
 <td><strong>Edit faces</strong></td>
 <td>Readers who may change the file, on photos and videos, not on a phone held upright</td>
 <td>Draw, move or remove face boxes. See <a href="#draw-or-correct-a-face-box">Draw or correct a face box</a>.</td>
+</tr>
+<tr>
+<td><strong>Edit text</strong>, <strong>Add text</strong></td>
+<td>Readers who may change the file, on photos</td>
+<td>Opens the text in the picture to correct it, or to write it by hand. See <a href="#correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand</a>.</td>
 </tr>
 <tr>
 <td><strong>Edit subtitles</strong>, <strong>Add subtitles</strong></td>
@@ -778,17 +777,18 @@ Swedish and Finnish. The media service does the reading in the background. A pic
 staging area is read once it is filed into an album.</p>
 <figure class="shot"><a href="../../assets/shots/postcard@2x.webp"><img src="../../assets/shots/postcard.webp" srcset="../../assets/shots/postcard.webp 1x, ../../assets/shots/postcard@2x.webp 2x" alt="The viewer on a handwritten postcard from 1968, with the text read from it laid over a darkened copy in a typewriter face: Dear Joan, the cottage is ours! The boys are in the river all day and Helen has read every book in the house. Arthur is on the roof with a bucket of tar, singing. Back on the 30th. Love, Peggy" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Show text lays the words read from Peggy&#39;s postcard over the picture. The pencil at its top right opens the text for correcting.</figcaption></figure>
 <ul>
-<li><strong>Show text</strong>, in the More menu, or <kbd>t</kbd>, darkens the picture and lays the text over it in
-a typewriter face. Long text scrolls. The row is there only when text was read.</li>
-<li>The text stays shown as you move from picture to picture, until you close the viewer, so you can
-page through a scanned letter. It is hidden during a slideshow.</li>
+<li><strong>Show text</strong>, in the bar under the picture, or <kbd>t</kbd>, darkens the picture and lays the
+text over it in a typewriter face. Long text scrolls. The button is there only when text was read.</li>
 <li><strong>Hide text</strong>, or <kbd>t</kbd> again, takes it away.</li>
+<li>The text is hidden until you first show it. After that the viewer keeps your choice, shown or
+hidden, from picture to picture and the next time you open it on this device, so you can page
+through a scanned letter. It is hidden during a slideshow.</li>
 </ul>
 <p>The text is also under <strong>Text in image</strong> in the <a href="#the-details-section">Details section</a>, and
 search finds pictures by it; see <a href="search.html">Search and the finder</a>.</p>
 <h3 id="correct-the-text-or-add-it-by-hand">Correct the text, or add it by hand<a class="anchor" href="#correct-the-text-or-add-it-by-hand" aria-label="Link to this section"></a></h3>
 <ol>
-<li>In the More menu, choose <strong>Edit text</strong>, or <strong>Add text</strong> when nothing was read. With the text
+<li>In the <a href="#change-a-file-from-the-cog-menu">cog menu</a>, choose <strong>Edit text</strong>, or <strong>Add text</strong> when nothing was read. With the text
 shown, the pencil at its top right does the same.</li>
 <li>The dialog <strong>Text in the picture</strong> opens: the picture on the left (above, on a narrow screen), which you can zoom to read
 closely, and a text box on the right.</li>
@@ -1118,9 +1118,9 @@ A Word, OpenDocument or RTF file is shown as the PDF EiN makes of it, and that P
 or the file cannot be opened. Wait a while and open it again, or use <strong>Download</strong> in the More menu to
 open the file on your device. Its text can still be found with search; see
 <a href="file-types.html">Supported files</a>.</p>
-<p><strong>Show text is not in the More menu.</strong>
+<p><strong>There is no Show text under the picture.</strong>
 No text was read from this picture, or it is a video or a recording. Add the text yourself with
-<strong>Add text</strong>, if you may change the file.</p>
+<strong>Add text</strong> in the cog menu, if you may change the file.</p>
 <p><strong>Start slideshow is greyed out.</strong>
 The list holds only one file. Open the viewer from an album or a longer list.</p>
 <p><strong>The date or the place is wrong.</strong>
