@@ -34,12 +34,15 @@ their name, opens over the viewer: Back returns to the picture you were on.
 On a computer:
 
 - **Top left**: the close button (×).
-- **Top right**: **Chat**, where the assistant module is installed, which opens the assistant in a drawer beside the picture, or as a dialog over it in a
-  window narrower than 992 pixels. You can ask it about the picture you are looking at; see
-  [Chatting with the assistant](../assistant/chat.md).
 - **Left and right edges**: arrows to the previous and the next file. With the
   [details panel](#the-details-panel) hidden, a handle sticks out of the right edge low down,
   above the bar: **Show details (i)** brings the panel back.
+- **Chat**, where the assistant module is installed: at the right end of the details panel's foot,
+  or in the handle under **Show details** while the panel is hidden. It opens the assistant in a
+  drawer beside the picture, or as a dialog over it in a window narrower than 992 pixels, and is not
+  shown while the chat is open; the chat's own × closes it. You can ask it about the picture you are
+  looking at; see [Chatting with the assistant](../assistant/chat.md). Without the details panel,
+  as from a share link, **Chat** is at the top right.
 - **The bar under the picture**, from left to right:
   - the heart, **Favourite (s)**, when you may mark favourites;
   - where you are in the list, such as **24 of 26**. The **Media** page leaves this out, because it
@@ -49,8 +52,8 @@ On a computer:
   - the place: the name of the location the picture is linked to, or else the street address read
     from its GPS position;
   - **Show text** / **Hide text** (<kbd>t</kbd>) when text was read from the photo, **Pin faces** /
-    **Unpin faces** (<kbd>f</kbd>) on photos and videos, **Fullscreen**, **Show toolbar** /
-    **Hide toolbar** when you may change the file or add it to an album, and **Download**;
+    **Unpin faces** (<kbd>f</kbd>) on photos and videos with faces found, **Fullscreen**, **Show toolbar** /
+    **Hide toolbar** when you may change the file, and **Download**;
   - **More** (⋮), only when some of these did not fit.
 
   The buttons stay in the bar as far as there is room without cutting the date or the place short.
@@ -75,15 +78,15 @@ date a picture gets and how to change it.
 **More** (⋮) at the right end of the bar holds the bar's buttons it has no room for, in the bar's
 order:
 
-| Row                                            | What it does                                                                                                                                                     |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                                               |
-| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                                           |
-| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                                       |
-| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found.                                                |
-| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                                               |
-| **Show toolbar** / **Hide toolbar**            | Shows the [cog menu](#change-a-file-from-the-cog-menu)'s actions as a row of icons at the top of the viewer. When you may change the file or add it to an album. |
-| **Download**                                   | Saves the original file to your device.                                                                                                                          |
+| Row                                            | What it does                                                                                                                               |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                         |
+| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                     |
+| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                 |
+| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.                                               |
+| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                         |
+| **Show toolbar** / **Hide toolbar**            | Shows the [cog menu](#change-a-file-from-the-cog-menu)'s actions as a row of icons at the top of the viewer. When you may change the file. |
+| **Download**                                   | Saves the original file to your device.                                                                                                    |
 
 The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
 picture to picture and the next time you open it.
