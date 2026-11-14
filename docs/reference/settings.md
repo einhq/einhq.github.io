@@ -604,7 +604,7 @@ Every setting of an EiN with all its modules: 107 of them, in the groups the Set
 
 ### `CFG_EMS_CARD_SHARE_MB`
 
-**Media service's share of the graphics card (MB)**. The most of the graphics card the media service's models hold, in MB; a model that needs more than is left runs on the processor instead, slower. 0 keeps every model on the processor. Leave room for a language model on the same card by lowering it. The media service's page sets it with the slider under the card.
+**Media service's share of the graphics card (MB)**. The most of the graphics card the media service's models hold, in MB; a model that needs more than is left runs on the processor instead, slower. 0 keeps every model on the processor. Leave room for a language model on the same card by lowering it. Settings → Media service sets it, and so does the slider under the card on the media service's status page.
 
 | | |
 | --- | --- |

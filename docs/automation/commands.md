@@ -288,7 +288,7 @@ Whether the automation bridge hears the MQTT broker, which drivers it registered
 <small>reads only</small>
 
 ```text
-automation-status [--brief] [--checks] [--automations] [<automation>]
+automation-status [--brief] [--checks] [--automations] [--streams] [<automation>]
 ```
 
 | Argument         | What it is                           |
@@ -300,14 +300,16 @@ automation-status [--brief] [--checks] [--automations] [<automation>]
 | `--brief`       | one line, as the services list shows it.                          |
 | `--checks`      | the checks health reads, as JSON.                                 |
 | `--automations` | one line on the automation engine, as the services list shows it. |
+| `--streams`     | whether the restreamer answers, and how many streams it has.      |
 
 ```bash
 automation-status
 automation-status --brief
+automation-status --streams
 automation-status hall-light
 ```
 
-With `JSON_OUTPUT=1`: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, automations {running, actions, problems}; with an automation, AutomationRunStatus: name, running, problems, nodes.
+With `JSON_OUTPUT=1`: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, automations {running, actions, problems}; with an automation, AutomationRunStatus: name, running, problems, nodes; with --streams, RestreamerStatus: configured, url, rtsp, answering, streams, error.
 
 ### `automation-trigger`
 

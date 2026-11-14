@@ -447,7 +447,7 @@ automation-snmp 192.0.2.40 1.3.6.1.4.1.4526 --community home</code></pre></div>
 <h3 id="automation-status"><code>automation-status</code><a class="anchor" href="#automation-status" aria-label="Link to this section"></a></h3>
 <p>Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the automations; or, given one, what each of its nodes last did.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>automation-status [--brief] [--checks] [--automations] [&lt;automation&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>automation-status [--brief] [--checks] [--automations] [--streams] [&lt;automation&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -480,12 +480,17 @@ automation-snmp 192.0.2.40 1.3.6.1.4.1.4526 --community home</code></pre></div>
 <td><code>--automations</code></td>
 <td>one line on the automation engine, as the services list shows it.</td>
 </tr>
+<tr>
+<td><code>--streams</code></td>
+<td>whether the restreamer answers, and how many streams it has.</td>
+</tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>automation-status
 automation-status --brief
+automation-status --streams
 automation-status hall-light</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, automations {running, actions, problems}; with an automation, AutomationRunStatus: name, running, problems, nodes.</p>
+<p>With <code>JSON_OUTPUT=1</code>: AutomationStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, automations {running, actions, problems}; with an automation, AutomationRunStatus: name, running, problems, nodes; with --streams, RestreamerStatus: configured, url, rtsp, answering, streams, error.</p>
 <h3 id="automation-trigger"><code>automation-trigger</code><a class="anchor" href="#automation-trigger" aria-label="Link to this section"></a></h3>
 <p>Press a button node of a running automation: what it is wired to runs now, as its owner.</p>
 <p><small>changes things</small></p>
