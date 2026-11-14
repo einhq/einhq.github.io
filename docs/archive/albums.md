@@ -121,7 +121,8 @@ address (`?tab=map`, `?tab=info`, `?tab=trip`), so a link can open the album on 
 #### Search inside an album
 
 The box at the top of the Media tab, **Search the album — words, or type @ to pick someone**,
-searches the pictures of this album and nothing else. It stays in the top bar while you scroll.
+searches the pictures of this album and nothing else. It stays in the top bar while you scroll; on
+a phone it floats at the bottom of the screen instead.
 
 - **`@` and a name** picks a person, a location or a label from the list that opens, as in
   [search](search.md#pick-something-exactly-with-). Press <kbd>Enter</kbd> and the grid keeps only
