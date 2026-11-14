@@ -33,7 +33,9 @@ their name, opens over the viewer: Back returns to the picture you were on.
 
 On a computer:
 
-- **Top left**: the close button (×).
+- **Top right**: the cog, which shows or hides the [toolbar](#the-toolbar) when you may change the
+  file, and close (×) beside it. They sit at the top of the details panel while it is open, and over
+  the picture's background while it is hidden.
 - **Left and right edges**: arrows to the previous and the next file. With the
   [details panel](#the-details-panel) hidden, a handle sticks out of the right edge low down,
   above the bar: **Show details (i)** brings the panel back.
@@ -78,23 +80,23 @@ date a picture gets and how to change it.
 **More** (⋮) at the right end of the bar holds the bar's buttons it has no room for, in the bar's
 order:
 
-| Row                                            | What it does                                                                                                                               |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                         |
-| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                     |
-| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                 |
-| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.                                               |
-| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                         |
-| **Show toolbar** / **Hide toolbar**            | Shows the [cog menu](#change-a-file-from-the-cog-menu)'s actions as a row of icons at the top of the viewer. When you may change the file. |
-| **Download**                                   | Saves the original file to your device.                                                                                                    |
+| Row                                            | What it does                                                                                          |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                    |
+| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                |
+| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                            |
+| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.          |
+| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                    |
+| **Show toolbar** / **Hide toolbar**            | On a phone, shows the [toolbar](#the-toolbar) at the top of the viewer. When you may change the file. |
+| **Download**                                   | Saves the original file to your device.                                                               |
 
 The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
 picture to picture and the next time you open it.
 
 ### The toolbar
 
-**Show toolbar** floats the actions of the [cog menu](#change-a-file-from-the-cog-menu) as icons on
-a dark, rounded strip at the top of the viewer, where it stays from picture to picture (on a phone
+The cog at the top right (on a phone **Show toolbar** in ⋮) floats the
+[file's actions](#change-a-file-from-the-toolbar) as icons on a dark, rounded strip at the top of the viewer, where it stays from picture to picture (on a phone
 under the date, with larger icons): **Edit**, **Share**, **Add to album**,
 **Edit faces**, **Edit text**, **Restore…**, **Rotate left**, **Rotate right** and the others, as
 the file allows. Point at an icon to see its name. An action that is on, such as drawing faces or a
@@ -115,7 +117,7 @@ last.
 While the next picture slides in, the position, the date and the place turn to it once it covers
 more than half the screen. A swipe you take back before letting go turns them back.
 
-To close the viewer, press × at the top left, press <kbd>Esc</kbd>, use the browser's Back button,
+To close the viewer, press × at the top right, press <kbd>Esc</kbd>, use the browser's Back button,
 or on a phone swipe down on the picture. The picture shrinks back into its tile, so you see where
 you were in the grid.
 
@@ -205,7 +207,7 @@ folded is remembered in this browser, for the next picture and the next visit. F
 
 | Row               | What it shows                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The file          | The file name, which downloads the original, and its size. Under it a line of facts: `3200 × 2400 · 7.7 MP · ISO 100 · 1/250 s`; a video adds its length and frame rate, and a recording its length, kbps, kHz and `mono` or `stereo`; a document shows its first page's size in millimetres, such as `210 × 297 mm`. Then the sharing chip, which says who can see the file ([Sharing](../guide/sharing.md)), and the file's labels; a label opens a search for it ([Media, Year and labels](media.md)). The cog at the right opens the [cog menu](#change-a-file-from-the-cog-menu).                                                                                            |
+| The file          | The file name, which downloads the original, and its size. Under it a line of facts: `3200 × 2400 · 7.7 MP · ISO 100 · 1/250 s`; a video adds its length and frame rate, and a recording its length, kbps, kHz and `mono` or `stereo`; a document shows its first page's size in millimetres, such as `210 × 297 mm`. Then the sharing chip, which says who can see the file ([Sharing](../guide/sharing.md)), and the file's labels; a label opens a search for it ([Media, Year and labels](media.md)). On a computer the cog and close sit at the right.                                                                                                                       |
 | Description       | What someone wrote about the file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Copies in staging | Only for a file of yours still in your staging area: its exact copies and look-alikes. See [Duplicates](duplicates.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Transcript        | For videos and recordings with speech: what is said, line by line. See [Read along with a transcript](#read-along-with-a-transcript).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -296,16 +298,17 @@ you click its icon, and then stays open for the next picture and the next visit,
 | **Created**, **Modified** | The file's created and modified times.                                                                                                                                                                                                       |
 | Hashes                    | Fingerprints of the file's bytes, such as `sha256`.                                                                                                                                                                                          |
 
-## Change a file from the cog menu
+## Change a file from the toolbar
 
-The cog at the top right of the details panel (**Edit media**) opens a menu. It is there when you
-may change the file, and for any signed-in reader for **Add to album**.
+The [toolbar](#the-toolbar) holds what you can do to the file. It is there when you may change the
+file: show it with the cog at the top right, or on a phone with **Show toolbar** in ⋮. To add a file
+you may only see to an album, select it in a grid and use **Add to album** in the selection bar.
 
-| Row                                   | Who sees it                                                                        | What it does                                                                                                                                                                                                                                                                                                 |
+| Icon                                  | Who sees it                                                                        | What it does                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Edit**                              | Readers who may change the file                                                    | Opens **Edit file**: description, labels and location. See below.                                                                                                                                                                                                                                            |
 | **Share**                             | Readers who may change the file                                                    | Opens the Share dialog for this file. See [Sharing](../guide/sharing.md).                                                                                                                                                                                                                                    |
-| **Add to album**                      | Signed-in readers                                                                  | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
+| **Add to album**                      | Readers who may change the file                                                    | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
 | **Edit faces**                        | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
 | **Edit text**, **Add text**           | Readers who may change the file, on photos                                         | Opens the text in the picture to correct it, or to write it by hand. See [Correct the text, or add it by hand](#correct-the-text-or-add-it-by-hand).                                                                                                                                                         |
 | **Edit subtitles**, **Add subtitles** | Readers who may change the file, on videos and recordings                          | Opens what is said, line by line, beside the video or recording, to correct it. See [Correct the subtitles](#correct-the-subtitles).                                                                                                                                                                         |
@@ -317,12 +320,12 @@ may change the file, and for any signed-in reader for **Add to album**.
 A turn or a flip is kept on the file, for everyone who sees it. EiN moves the face boxes with the
 picture and makes the smaller versions it shows again. A video is re-encoded by the media service,
 which takes a while; until it is done the video plays the old way round. To undo a turn, turn it
-back. The rotate and mirror rows are not offered for a file that cannot be decoded. There is no
+back. The rotate and mirror icons are not offered for a file that cannot be decoded. There is no
 cropping and no colour editing in EiN; **Restore…** makes a copy and leaves the photo as it is.
 
 ### Change the description, labels or location
 
-1. In the cog menu, choose **Edit**. The **Edit file** dialog opens, with the file name under its
+1. On the toolbar, choose **Edit**. The **Edit file** dialog opens, with the file name under its
    title.
 2. In **Description**, write what the picture shows or what you know about it. Formatting such as
    bold and lists is kept.
@@ -365,7 +368,7 @@ picture while you draw, and the one on the bar still plays. A box you draw on a 
 that moment and shows from half a second before it to half a second after. A box already there can
 be chosen and removed or given to someone else, but not moved or resized.
 
-1. In the cog menu, choose **Edit faces**. The bar under the picture reads **Draw a new box or
+1. On the toolbar, choose **Edit faces**. The bar under the picture reads **Draw a new box or
    select a face**, and every box shows.
 2. To add a face, drag a box over it. To change a face, click its box.
 3. Drag the box to move it, or drag one of the round handles on its edges and corners to resize it.
@@ -380,7 +383,7 @@ be chosen and removed or given to someone else, but not moved or resized.
 A box you drew is given an unidentified person of its own, and the review opens so you can name
 them or say they are someone already in the archive. A found face whose box you move or resize
 keeps its person, but becomes a tag and no longer helps recognition. To leave **Edit faces**, choose
-it again in the cog menu, press × in the bar under the picture, or press <kbd>Esc</kbd>.
+it again on the toolbar, press × in the bar under the picture, or press <kbd>Esc</kbd>.
 
 The dialog for a face's name is **Who is this?**, with **Now marked as Helen Okafor** or
 **Not marked as anyone** under the title:
@@ -400,11 +403,11 @@ see [People and faces](people.md).
 ## Restore a faded or damaged photo
 
 A scanned print or slide often shows its age: colours turned red, yellow or pale, specks of dust,
-scratches and cracks, film grain, a picture out of focus or blurred by a moving camera. **Restore…** in the cog menu makes a restored copy of the photo
+scratches and cracks, film grain, a picture out of focus or blurred by a moving camera. **Restore…** on the toolbar makes a restored copy of the photo
 with the [media service](../ems/index.md). The photo itself is never changed: the copy is kept beside
 it as one of its versions.
 
-1. In the cog menu, choose **Restore…**.
+1. On the toolbar, choose **Restore…**.
 2. Tick what to restore:
    - **Faded colours** brings back the colours and contrast of a print or slide whose dyes have
      faded. It is ticked to begin with for a scan, a file from a staging category that holds scans.
@@ -515,7 +518,7 @@ HEIF photos, are left out, and the dialog says how many.
 A spot, a stain or a tear on any photo can be painted over and filled from what is around it, with
 the careful fill **Restore…** uses for creases and tears.
 
-1. In the cog menu, choose **Remove a blemish…**.
+1. On the toolbar, choose **Remove a blemish…**.
 2. With **Paint**, brush over the blemish; **Erase** takes paint away again, **Size** sets the
    brush and the arrow takes back the last stroke. The picture zooms and moves as it does while
    correcting the marks.
@@ -542,7 +545,7 @@ search finds pictures by it; see [Search and the finder](search.md).
 
 ### Correct the text, or add it by hand
 
-1. In the [cog menu](#change-a-file-from-the-cog-menu), choose **Edit text**, or **Add text** when nothing was read. With the text
+1. On the [toolbar](#change-a-file-from-the-toolbar), choose **Edit text**, or **Add text** when nothing was read. With the text
    shown, the pencil at its top right does the same.
 2. The dialog **Text in the picture** opens: the picture on the left (above, on a narrow screen), which you can zoom to read
    closely, and a text box on the right.
@@ -678,7 +681,7 @@ The transcript is written by a machine, and it mishears: a name, a word in a dia
 invents over a quiet stretch, or one it never heard. You can correct it on a video or a recording
 you may change.
 
-1. In the cog menu at the top right of the details panel, choose **Edit subtitles**, or **Add
+1. On the toolbar, choose **Edit subtitles**, or **Add
    subtitles** when there are none.
 2. The dialog **Subtitles** opens where the viewer was playing, and pauses it: the video (or the
    recording's waveform) on the left, above a timeline that shows where every line lies, and the
@@ -775,12 +778,12 @@ the selection bar. Visitors who are not signed in have no favourites and see no 
 
 ## What you see depends on who you are
 
-| You are                              | What differs                                                                                                                                                                                           |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Signed in, and may change the file   | Everything on this page.                                                                                                                                                                               |
-| Signed in, and may only see the file | The cog menu holds only **Add to album**. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit subtitles**, **Edit faces**, rotate or mirror. |
-| A visitor who is not signed in       | No heart, no cog menu and no sharing chip. **Path** is plain text.                                                                                                                                     |
-| Someone who opened a share link      | The pictures without the details panel; its handle and <kbd>i</kbd> are not there.                                                                                                                     |
+| You are                              | What differs                                                                                                                                                                                                                       |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signed in, and may change the file   | Everything on this page.                                                                                                                                                                                                           |
+| Signed in, and may only see the file | No cog and no toolbar; **Add to album** is in a grid's selection bar. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit subtitles**, **Edit faces**, rotate or mirror. |
+| A visitor who is not signed in       | No heart, no cog and no sharing chip. **Path** is plain text.                                                                                                                                                                      |
+| Someone who opened a share link      | The pictures without the details panel; its handle and <kbd>i</kbd> are not there.                                                                                                                                                 |
 
 [Sharing](../guide/sharing.md) explains who can see what.
 
@@ -812,7 +815,7 @@ open the file on your device. Its text can still be found with search; see
 
 **There is no Show text under the picture.**
 No text was read from this picture, or it is a video or a recording. Add the text yourself with
-**Add text** in the cog menu, if you may change the file.
+**Add text** on the toolbar, if you may change the file.
 
 **Start slideshow is greyed out.**
 The list holds only one file. Open the viewer from an album or a longer list.
