@@ -121,8 +121,8 @@ If you installed with the **EiN Archive** command from einhq.eu, the three are i
 To install a module:
 
 1. Open **Settings → Modules**.
-2. Choose the **Add a module** button beside the filter.
-3. Choose **Install** beside the module. EiN installs the modules it needs as well, and says
+2. Choose **Install** beside the filter.
+3. Choose **Install** on the module's card, under **Not installed**. EiN installs the modules it needs as well, and says
    so: "Installed, with ems".
 4. The module's pages appear in the sidebar without a reload.
 
@@ -313,7 +313,7 @@ It updates `~/ein`, then downloads the newest images of EiN and its services and
 again, keeping your options in `~/ein/.env`, your data and the installed modules. `~/ein/setup.sh`
 alone does the same, `~/ein` included, without checking the machine. There are no releases: an update
 takes the newest code, and there is no going back to the previous one. Modules are updated
-separately, with **Update** in **Settings → Modules → Add a module**.
+separately, with **Update** under **Updates** after **Install** in **Settings → Modules**.
 [Updating](../admin/updating.md) explains what an update touches.
 
 **After the machine restarts**, check that EiN came back. The installer makes EiN start at boot

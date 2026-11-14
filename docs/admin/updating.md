@@ -197,8 +197,8 @@ has the command.
 1. In `~/ein`, `podman compose ps` shows every container up, and `db`, and `ems` when it is installed, healthy.
 2. In EiN's terminal, `health` says whether the system is healthy or catching up;
    [Health and status](monitoring.md) explains its checks.
-3. Open **Settings → Modules** and look for a module with a badge instead of its version, and for
-   **Update available** under **Add a module**. Update the modules there; see
+3. Open **Settings → Modules** and look for a module with a badge instead of its version, then
+   choose **Install** beside the filter and look under **Updates**. Update the modules there; see
    [Modules](modules.md#update-a-module).
 
 ## Free the space old images take

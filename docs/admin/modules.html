@@ -139,8 +139,11 @@ there.</p>
 <p>Open <strong>Settings</strong> in the sidebar and choose the <strong>Modules</strong> tab. Everyone who is signed in has this
 tab; for anyone but an administrator it is the only one, and it shows the modules without the
 buttons that change them.</p>
-<figure class="shot"><a href="../../assets/shots/settings-modules@2x.webp"><img src="../../assets/shots/settings-modules.webp" srcset="../../assets/shots/settings-modules.webp 1x, ../../assets/shots/settings-modules@2x.webp 2x" alt="The Modules tab of Settings: album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive 0.19.31 open at the right, Active, available to Everyone, with Reference and guide, its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and the pages of its guide below" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each installed module, whether it works, and everything it brings, in one place.</figcaption></figure>
-<p>The list at the left holds every installed module with its description. A module that works shows
+<figure class="shot"><a href="../../assets/shots/settings-modules@2x.webp"><img src="../../assets/shots/settings-modules.webp" srcset="../../assets/shots/settings-modules.webp 1x, ../../assets/shots/settings-modules@2x.webp 2x" alt="The Modules tab of Settings: the Install button beside the filter, album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive open at the right with its version, Active and its description, the buttons Update, Remove and Documentation, its tabs Overview, Dependencies, Services, Pages, Commands, Settings and Node types, and on Overview its details beside the pages of its guide" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each installed module, whether it works, and everything it brings, in one place.</figcaption></figure>
+<p>The list at the left holds every installed module with its description; above it, beside the
+filter box, is the administrator&#39;s <strong>Install</strong> button (see <a href="#install-a-module">Install a module</a>).
+Anyone else has <strong>Published</strong> there instead, which lists the published modules without a way to
+install them. A module that works shows
 its version at the right; one that does not shows a badge instead and is listed first:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -165,12 +168,14 @@ its version at the right; one that does not shows a badge instead and is listed 
 </div>
 <p>Type in the filter box to narrow the list by name or description. <strong>Show only active modules</strong>, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.</p>
-<p>Choose a module to open its panel. At the top it shows the module&#39;s name, its version and the core
-API it is written for (<code>version 0.1.0 · core API ^0.7.0</code>), where it is installed
-(<code>/usr/modules/archive</code>), when it was set up, and its state. <strong>Reference and guide</strong> opens the
-module&#39;s own page in <strong>Documentation</strong>, with its pages in this guide and every command, setting and
-node type it brings. Below are tabs, each with a count; <strong>About</strong> and <strong>Dependencies</strong> are always there, and
-another tab the module has nothing for is left out:</p>
+<p>Choose a module to open its panel. At the top are the module&#39;s name, its version, its state and
+what it is; a long description shows three lines, and <strong>More</strong> opens the rest. Under them are the
+buttons: <strong>Update</strong> and <strong>Remove</strong> for the administrator, on a module installed from its repository
+(see <a href="#update-a-module">Update a module</a> and <a href="#remove-a-module">Remove a module</a>), and
+<strong>Documentation</strong>, which opens the module&#39;s own page in <strong>Documentation</strong>, with its pages in this
+guide and every command, setting and node type it brings. When its setup failed, why is said under
+the buttons. Below are tabs; <strong>Overview</strong> and <strong>Dependencies</strong> are always there, the others show
+how many things each holds, and a tab the module has nothing for is left out:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -179,8 +184,8 @@ another tab the module has nothing for is left out:</p>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>About</strong></td>
-<td>The introduction from the module&#39;s guide, or &quot;It has no guide.&quot;</td>
+<td><strong>Overview</strong></td>
+<td>Its details, and beside them <strong>In the guide</strong>: its pages in this guide, or &quot;The guide has no section on it.&quot;</td>
 </tr>
 <tr>
 <td><strong>Dependencies</strong></td>
@@ -208,6 +213,44 @@ another tab the module has nothing for is left out:</p>
 </tr>
 </tbody></table>
 </div>
+<p>The details on <strong>Overview</strong> are:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Detail</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Available to</strong></td>
+<td><strong>Everyone</strong>, or the groups it is kept to; see <a href="#keep-a-module-to-some-groups">Keep a module to some groups</a></td>
+</tr>
+<tr>
+<td><strong>Version</strong></td>
+<td>The version in its <code>mod.json</code></td>
+</tr>
+<tr>
+<td><strong>Core API</strong></td>
+<td>The version of EiN&#39;s module API it is written for, such as <code>^0.7.0</code></td>
+</tr>
+<tr>
+<td><strong>Source</strong></td>
+<td>The repository it was installed from, as a link, or <strong>Comes with the deployment</strong></td>
+</tr>
+<tr>
+<td><strong>Installed</strong></td>
+<td>The release, branch or tag it was installed at and its commit, such as <code>v0.1.0 · 5e1c07a42</code>, and when; one installed at a commit shows the commit alone</td>
+</tr>
+<tr>
+<td><strong>Set up</strong></td>
+<td>When EiN last set it up, or <strong>Not since EiN started</strong></td>
+</tr>
+<tr>
+<td><strong>Folder</strong></td>
+<td>Where it is inside EiN, such as <code>/usr/modules/archive</code></td>
+</tr>
+</tbody></table>
+</div>
 <p>A module&#39;s system settings are the same ones the <strong>System</strong> tab lists, and its personal ones are
 those on <strong>Profile → Preferences</strong>; they save the same way:
 <a href="configuration.html">Configuration</a> explains where a value comes from and what a change restarts.</p>
@@ -230,16 +273,16 @@ installed, what it exports, and the modules that use it.</p>
 the module.</p>
 <ol>
 <li>Open <strong>Settings → Modules</strong>.</li>
-<li>Choose the <strong>Add a module</strong> button beside the filter box, the box with an arrow. The panel at
-the right is headed <strong>Add a module</strong>: the <strong>From a repository</strong> box at the top, then
-<strong>Published</strong>, the published modules, each with its version, its description and its
-repository.</li>
-<li>Choose <strong>Install</strong> on the module you want.</li>
+<li>Choose <strong>Install</strong> beside the filter box. The panel at the right is headed <strong>Install a module</strong>
+and lists the published modules in groups: <strong>Updates</strong>, <strong>Not installed</strong> and <strong>Installed</strong>,
+each with how many it holds. A module under <strong>Updates</strong> or <strong>Not installed</strong> is a card with its
+version, its repository and what it is.</li>
+<li>Choose <strong>Install</strong> on the card of the module you want.</li>
 <li>EiN asks who the module is for. Keep <strong>Everyone</strong>, or choose <strong>Only some groups</strong> and the groups
 (see <a href="#keep-a-module-to-some-groups">Keep a module to some groups</a>), then choose <strong>Install</strong> and
 the module&#39;s name.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Add a module panel on Settings → Modules: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; these came with the deployment, so none offers Install.</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Install a module panel on Settings → Modules: its Refresh button, then the group Installed with album-folders, archive and assistant from github.com/einhq, a row each marked The deployment's, and at the foot the From a repository's address box with its Install button" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; these came with the deployment, so none offers Install.</figcaption></figure>
 <p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the
 page.</p>
@@ -249,36 +292,30 @@ the module&#39;s files are in place and the last thing it did, and <strong>Insta
 it, since EiN installs one thing at a time. A module of many files, such as one with map tiles, can
 take a long while. When it ends, the tab says what it installed, with a link to each module, or why
 it failed.</p>
-<p>Each published module carries a badge for what is installed of it:</p>
+<p>The group a published module is in says what is installed of it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
-<th>Badge</th>
-<th>What it means</th>
+<th>Group</th>
+<th>What it holds</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>none</td>
-<td>Not installed; the button reads <strong>Install</strong>.</td>
+<td><strong>Updates</strong></td>
+<td>Modules installed from this repository with a newer release out. The card says which version is installed, such as &quot;0.1.0 installed&quot;, and its button reads <strong>Update</strong>.</td>
+</tr>
+<tr>
+<td><strong>Not installed</strong></td>
+<td>Modules no version of which is installed; the button reads <strong>Install</strong>.</td>
 </tr>
 <tr>
 <td><strong>Installed</strong></td>
-<td>Installed from this repository, at its newest release, or at a commit past it.</td>
-</tr>
-<tr>
-<td><strong>Update available</strong></td>
-<td>Installed from this repository, and a newer release is out; the button reads <strong>Update</strong>. Hold the pointer over the badge to see what is installed and what is published.</td>
-</tr>
-<tr>
-<td><strong>Installed from elsewhere</strong></td>
-<td>A module of this name is installed from another repository.</td>
-</tr>
-<tr>
-<td><strong>The deployment&#39;s</strong></td>
-<td>The module comes with the deployment itself (see <a href="#modules-the-deployment-provides">Modules the deployment provides</a>) and cannot be installed over.</td>
+<td>The rest, a row each that opens the module&#39;s panel: installed from this repository at its newest release, or at a commit past it, or else marked <strong>Installed from elsewhere</strong>, from another repository, or <strong>The deployment&#39;s</strong>, when the deployment itself provides it (see <a href="#modules-the-deployment-provides">Modules the deployment provides</a>) and it cannot be installed over.</td>
 </tr>
 </tbody></table>
 </div>
+<p>When nothing is to be installed or updated, the panel says &quot;Every published module is installed,
+and none has a newer release this EiN can run.&quot;</p>
 <p>A module written for a different core API says &quot;Needs core API ^0.6.0, which this EiN does not
 provide.&quot; (with its own range), and its button is greyed out. When only its newest release is
 written for another core API and an older one runs here, the module is listed at that older
@@ -289,15 +326,17 @@ again.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 mod search</code></pre></div>
 <div class="code"><pre tabindex="0"><code>archive 0.1.0
-  EiN module: the family archive, with people, media, places and staging
+  The family archive, with people, media, places and staging
   https://github.com/einhq/module-archive
 assistant 0.1.0 [installed]
-  EiN module: the chat that answers questions about the archive
+  The chat that answers questions about the archive
   https://github.com/einhq/module-assistant
 ems 0.1.0
-  EiN module: the client for EMS, the media service
+  The client for EMS, the media service
   https://github.com/einhq/module-ems</code></pre></div>
-<p>Words after <code>mod search</code> narrow the list to modules whose name or description holds them all.</p>
+<p>A module&#39;s description is the one in its <code>mod.json</code> at the release listed, or its repository&#39;s
+when that has none. Words after <code>mod search</code> narrow the list to modules whose name or description
+holds them all.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 mod install archive</code></pre></div>
 <div class="code"><pre tabindex="0"><code>Fetching https://github.com/einhq/module-archive at v0.1.0 (5e1c07a42)...
@@ -384,11 +423,11 @@ it was, does not set up, and <code>setup.sh</code>&#39;s list ends with the reas
 <h2 id="update-a-module">Update a module<a class="anchor" href="#update-a-module" aria-label="Link to this section"></a></h2>
 <p>Updating EiN with <code>setup.sh</code> does not update its modules. Update them here instead.</p>
 <ul>
-<li>On <strong>Settings → Modules</strong>, open <strong>Add a module</strong> and choose <strong>Update</strong> on a module marked
-<strong>Update available</strong> under <strong>Published</strong>.</li>
-<li>Or open the module&#39;s panel. A module installed from its repository has a section <strong>Installed
-from its repository</strong>, saying which repository and commit it came from and when, with <strong>Update</strong>
-and <strong>Remove</strong>. <strong>Update</strong> there fetches the newest release for one installed at a release, and
+<li>On <strong>Settings → Modules</strong>, choose <strong>Install</strong> beside the filter box and choose <strong>Update</strong> on a
+module under <strong>Updates</strong>.</li>
+<li>Or open the module&#39;s panel. A module installed from its repository has <strong>Update</strong> and
+<strong>Remove</strong> under its name, and its <strong>Overview</strong> says under <strong>Source</strong> and <strong>Installed</strong> which
+repository and commit it came from and when. <strong>Update</strong> there fetches the newest release for one installed at a release, and
 the newest commit of the branch for one installed from a branch. One installed at any other tag
 gets that tag again, and one installed at a commit stays there, and its panel offers no
 <strong>Update</strong>. The top of the tab says how it goes, as for an install, and when it ends what it
@@ -419,8 +458,9 @@ and administrators, have it: its commands, its entries in the sidebar and the to
 its personal settings, and the module itself on <strong>Settings → Modules</strong> and on the Docs page&#39;s
 reference. For everyone else it is as if it were not installed.</p>
 <ul>
-<li>On <strong>Settings → Modules</strong>, open the module. Its section <strong>Available to</strong> says who has it. Choose
-the groups in the box and choose <strong>Save</strong>; empty the box to make it everyone&#39;s again.</li>
+<li>On <strong>Settings → Modules</strong>, open the module. <strong>Available to</strong>, on its <strong>Overview</strong>, says who has
+it. Choose <strong>Change</strong>, choose the groups in the box and choose <strong>Save</strong>; empty the box to make it
+everyone&#39;s again.</li>
 <li>When you install a module there, <strong>Install</strong> asks first who it is for: <strong>Everyone</strong>, or <strong>Only
 some groups</strong> with the groups to choose. The modules it needs and brings along stay everyone&#39;s,
 and an <strong>Update</strong> asks nothing and keeps whom the module was for.</li>
@@ -460,7 +500,7 @@ Removing the module forgets its groups.
 <h2 id="remove-a-module">Remove a module<a class="anchor" href="#remove-a-module" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Open <strong>Settings → Modules</strong> and choose the module.</li>
-<li>In <strong>Installed from its repository</strong>, choose <strong>Remove</strong>.</li>
+<li>Choose <strong>Remove</strong> under its name.</li>
 <li>EiN says what goes: &quot;Removing assistant stops its services and takes its commands, pages and
 files away. What it made in the archive stays.&quot; When other modules need it, it adds which ones
 and that they will not work without it. Choose <strong>Remove assistant</strong> to go ahead, or <strong>Cancel</strong>.</li>
@@ -505,9 +545,9 @@ both.</p>
 <p>A source that does not answer is named above the published modules, as &quot;<a href="https://forge.example:3000/wrenfield">https://forge.example:3000/wrenfield</a>
 did not answer&quot; with the reason, and the other sources are still listed.</p>
 <p>A module that is in no source can still be installed from its repository&#39;s address:
-<code>mod install https://forge.example:3000/wrenfield/module-recipes</code>, or the <strong>From a repository</strong> box
-at the top of the <strong>Add a module</strong> panel, whose <strong>Install</strong> asks who the module is for as on a
-published one. EiN fetches modules over plain
+<code>mod install https://forge.example:3000/wrenfield/module-recipes</code>, or the <strong>From a repository&#39;s
+address</strong> box at the foot of the <strong>Install a module</strong> panel, whose <strong>Install</strong> asks who the module is
+for as on a published one. EiN fetches modules over plain
 HTTPS, so the forge must answer git&#39;s HTTP protocol and serve an archive of a commit, as GitHub,
 Forgejo and Gitea do. <a href="../develop/modules.html">Writing a module</a> is for making one of your own.</p>
 <h2 id="where-modules-are-kept">Where modules are kept<a class="anchor" href="#where-modules-are-kept" aria-label="Link to this section"></a></h2>
@@ -540,7 +580,7 @@ does. The usual ones:</p>
 </thead>
 <tbody><tr>
 <td><code>archive: requires module &#39;ems&#39; (^0.1.0), which is not installed</code></td>
-<td>Install the missing module: <code>mod install ems</code>, or <strong>Install</strong> in <strong>Add a module</strong>.</td>
+<td>Install the missing module: <code>mod install ems</code>, or <strong>Install</strong> on the <strong>Install a module</strong> panel.</td>
 </tr>
 <tr>
 <td><code>archive: requires &#39;ems&#39; ^0.2.0, but 0.1.0 is installed</code></td>

@@ -229,8 +229,8 @@ themselves. Step 3 says how to add either part.</p>
 <p>To install a module:</p>
 <ol>
 <li>Open <strong>Settings → Modules</strong>.</li>
-<li>Choose the <strong>Add a module</strong> button beside the filter.</li>
-<li>Choose <strong>Install</strong> beside the module. EiN installs the modules it needs as well, and says
+<li>Choose <strong>Install</strong> beside the filter.</li>
+<li>Choose <strong>Install</strong> on the module&#39;s card, under <strong>Not installed</strong>. EiN installs the modules it needs as well, and says
 so: &quot;Installed, with ems&quot;.</li>
 <li>The module&#39;s pages appear in the sidebar without a reload.</li>
 </ol>
@@ -412,7 +412,7 @@ curl -fsSL https://einhq.eu/install.sh | bash</code></pre></div>
 again, keeping your options in <code>~/ein/.env</code>, your data and the installed modules. <code>~/ein/setup.sh</code>
 alone does the same, <code>~/ein</code> included, without checking the machine. There are no releases: an update
 takes the newest code, and there is no going back to the previous one. Modules are updated
-separately, with <strong>Update</strong> in <strong>Settings → Modules → Add a module</strong>.
+separately, with <strong>Update</strong> under <strong>Updates</strong> after <strong>Install</strong> in <strong>Settings → Modules</strong>.
 <a href="../admin/updating.html">Updating</a> explains what an update touches.</p>
 <p><strong>After the machine restarts</strong>, check that EiN came back. The installer makes EiN start at boot
 where it can: under podman it enables <code>podman-restart.service</code>, and lingering for your user, and

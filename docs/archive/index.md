@@ -49,8 +49,8 @@ Installing takes an administrator. Any of these installs the Archive with the `e
   On an EiN that is already installed, `~/ein/setup.sh --ems --module archive` does the same.
   Without `--ems`, the installer's `archive` line says `low` and reminds you that the Archive needs
   the media service.
-- **In the Web UI**: open **Settings → Modules**, choose the **Add a module** button
-  beside the filter, and choose **Install** beside `archive`. When it brings `ems` along, EiN says
+- **In the Web UI**: open **Settings → Modules**, choose **Install** beside the filter, and
+  choose **Install** on `archive`. When it brings `ems` along, EiN says
   "Installed, with ems".
 - **In the terminal**, as the administrator:
 

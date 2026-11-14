@@ -138,19 +138,19 @@ page rather than searching for everything.
 
 ### Other pages
 
-| Page                                 | Parameter     | What it does                                                                                               |
-| ------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------------------- |
-| `/settings?tab=modules`              | `module`      | The module open, for example `module=archive`                                                              |
-| `/settings?tab=modules`              | `section`     | Its part: `dependencies`, `services`, `pages`, `commands`, `settings` or `types` (**About** when left out) |
-| `/settings?tab=modules`              | `published=1` | The modules published for installing                                                                       |
-| `/settings?tab=users`                | `user`        | The account open, by username                                                                              |
-| `/settings?tab=groups`               | `group`       | The group open, by name                                                                                    |
-| `/settings?tab=users`, `?tab=groups` | `new=1`       | The form for a new account or group                                                                        |
-| `/system/nodes`                      | `path`        | The path open in the explorer, for example `path=/archive`                                                 |
-| `/devices`                           | `q`           | The filter typed into the page's own search box                                                            |
-| `/devices/<name>`                    | `endpoint`    | On **History**, the endpoint charted, by its name, for example `endpoint=switch-0-power`                   |
-| `/docs`                              | `find`        | The words in the documentation's search box                                                                |
-| `/login`                             | `next`        | Where to go after signing in                                                                               |
+| Page                                 | Parameter     | What it does                                                                                                 |
+| ------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------ |
+| `/settings?tab=modules`              | `module`      | The module open, for example `module=archive`                                                                |
+| `/settings?tab=modules`              | `section`     | Its tab: `dependencies`, `services`, `pages`, `commands`, `settings` or `types` (**Overview** when left out) |
+| `/settings?tab=modules`              | `published=1` | **Install a module**: the modules published for installing                                                   |
+| `/settings?tab=users`                | `user`        | The account open, by username                                                                                |
+| `/settings?tab=groups`               | `group`       | The group open, by name                                                                                      |
+| `/settings?tab=users`, `?tab=groups` | `new=1`       | The form for a new account or group                                                                          |
+| `/system/nodes`                      | `path`        | The path open in the explorer, for example `path=/archive`                                                   |
+| `/devices`                           | `q`           | The filter typed into the page's own search box                                                              |
+| `/devices/<name>`                    | `endpoint`    | On **History**, the endpoint charted, by its name, for example `endpoint=switch-0-power`                     |
+| `/docs`                              | `find`        | The words in the documentation's search box                                                                  |
+| `/login`                             | `next`        | Where to go after signing in                                                                                 |
 
 ## Links into the documentation
 

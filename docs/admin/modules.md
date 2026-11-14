@@ -35,9 +35,12 @@ Open **Settings** in the sidebar and choose the **Modules** tab. Everyone who is
 tab; for anyone but an administrator it is the only one, and it shows the modules without the
 buttons that change them.
 
-![The Modules tab of Settings: album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive 0.19.31 open at the right, Active, available to Everyone, with Reference and guide, its tabs About, Dependencies, Services, Pages, Commands, Settings and Node types, and the pages of its guide below](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
+![The Modules tab of Settings: the Install button beside the filter, album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive open at the right with its version, Active and its description, the buttons Update, Remove and Documentation, its tabs Overview, Dependencies, Services, Pages, Commands, Settings and Node types, and on Overview its details beside the pages of its guide](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
 
-The list at the left holds every installed module with its description. A module that works shows
+The list at the left holds every installed module with its description; above it, beside the
+filter box, is the administrator's **Install** button (see [Install a module](#install-a-module)).
+Anyone else has **Published** there instead, which lists the published modules without a way to
+install them. A module that works shows
 its version at the right; one that does not shows a badge instead and is listed first:
 
 | Badge            | What it means                                                                                                   |
@@ -49,22 +52,36 @@ its version at the right; one that does not shows a badge instead and is listed 
 Type in the filter box to narrow the list by name or description. **Show only active modules**, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
-Choose a module to open its panel. At the top it shows the module's name, its version and the core
-API it is written for (`version 0.1.0 · core API ^0.7.0`), where it is installed
-(`/usr/modules/archive`), when it was set up, and its state. **Reference and guide** opens the
-module's own page in **Documentation**, with its pages in this guide and every command, setting and
-node type it brings. Below are tabs, each with a count; **About** and **Dependencies** are always there, and
-another tab the module has nothing for is left out:
+Choose a module to open its panel. At the top are the module's name, its version, its state and
+what it is; a long description shows three lines, and **More** opens the rest. Under them are the
+buttons: **Update** and **Remove** for the administrator, on a module installed from its repository
+(see [Update a module](#update-a-module) and [Remove a module](#remove-a-module)), and
+**Documentation**, which opens the module's own page in **Documentation**, with its pages in this
+guide and every command, setting and node type it brings. When its setup failed, why is said under
+the buttons. Below are tabs; **Overview** and **Dependencies** are always there, the others show
+how many things each holds, and a tab the module has nothing for is left out:
 
 | Tab              | What it shows                                                                                                                                                                 |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **About**        | The introduction from the module's guide, or "It has no guide."                                                                                                               |
+| **Overview**     | Its details, and beside them **In the guide**: its pages in this guide, or "The guide has no section on it."                                                                  |
 | **Dependencies** | The modules it needs (**It needs**) and the modules that need it (**Needs it**), with the versions accepted, the version installed and each one's state, or **Not installed** |
 | **Services**     | Its background services, their state now and how long they have been up. They are started and stopped on the **Status**'s services tab.                                       |
 | **Pages**        | The addresses of the pages it adds; one without a parameter is a link to the page                                                                                             |
 | **Commands**     | Its commands; each opens to its help                                                                                                                                          |
 | **Settings**     | Its settings with their values, each marked **personal** or **system**; a row opens to the setting's description and, if you may change it, its control                       |
 | **Node types**   | The kinds of node it defines, with how many of each exist                                                                                                                     |
+
+The details on **Overview** are:
+
+| Detail           | What it says                                                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Available to** | **Everyone**, or the groups it is kept to; see [Keep a module to some groups](#keep-a-module-to-some-groups)                                            |
+| **Version**      | The version in its `mod.json`                                                                                                                           |
+| **Core API**     | The version of EiN's module API it is written for, such as `^0.7.0`                                                                                     |
+| **Source**       | The repository it was installed from, as a link, or **Comes with the deployment**                                                                       |
+| **Installed**    | The release, branch or tag it was installed at and its commit, such as `v0.1.0 · 5e1c07a42`, and when; one installed at a commit shows the commit alone |
+| **Set up**       | When EiN last set it up, or **Not since EiN started**                                                                                                   |
+| **Folder**       | Where it is inside EiN, such as `/usr/modules/archive`                                                                                                  |
 
 A module's system settings are the same ones the **System** tab lists, and its personal ones are
 those on **Profile → Preferences**; they save the same way:
@@ -99,16 +116,16 @@ You need to be an administrator: signed in as `admin`, or in
 the module.
 
 1. Open **Settings → Modules**.
-2. Choose the **Add a module** button beside the filter box, the box with an arrow. The panel at
-   the right is headed **Add a module**: the **From a repository** box at the top, then
-   **Published**, the published modules, each with its version, its description and its
-   repository.
-3. Choose **Install** on the module you want.
+2. Choose **Install** beside the filter box. The panel at the right is headed **Install a module**
+   and lists the published modules in groups: **Updates**, **Not installed** and **Installed**,
+   each with how many it holds. A module under **Updates** or **Not installed** is a card with its
+   version, its repository and what it is.
+3. Choose **Install** on the card of the module you want.
 4. EiN asks who the module is for. Keep **Everyone**, or choose **Only some groups** and the groups
    (see [Keep a module to some groups](#keep-a-module-to-some-groups)), then choose **Install** and
    the module's name.
 
-![The Add a module panel on Settings → Modules: the From a repository box with its Install button, then Published with a Refresh button, and album-folders 0.14.0, archive 0.19.33 and assistant 0.10.5 from github.com/einhq, each marked The deployment's, the first two with a note that their newest release needs core API ^0.15.0, which this EiN does not provide](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
+![The Install a module panel on Settings → Modules: its Refresh button, then the group Installed with album-folders, archive and assistant from github.com/einhq, a row each marked The deployment's, and at the foot the From a repository's address box with its Install button](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the
@@ -121,15 +138,16 @@ it, since EiN installs one thing at a time. A module of many files, such as one 
 take a long while. When it ends, the tab says what it installed, with a link to each module, or why
 it failed.
 
-Each published module carries a badge for what is installed of it:
+The group a published module is in says what is installed of it:
 
-| Badge                        | What it means                                                                                                                                                            |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| none                         | Not installed; the button reads **Install**.                                                                                                                             |
-| **Installed**                | Installed from this repository, at its newest release, or at a commit past it.                                                                                           |
-| **Update available**         | Installed from this repository, and a newer release is out; the button reads **Update**. Hold the pointer over the badge to see what is installed and what is published. |
-| **Installed from elsewhere** | A module of this name is installed from another repository.                                                                                                              |
-| **The deployment's**         | The module comes with the deployment itself (see [Modules the deployment provides](#modules-the-deployment-provides)) and cannot be installed over.                      |
+| Group             | What it holds                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Updates**       | Modules installed from this repository with a newer release out. The card says which version is installed, such as "0.1.0 installed", and its button reads **Update**.                                                                                                                                                                                                             |
+| **Not installed** | Modules no version of which is installed; the button reads **Install**.                                                                                                                                                                                                                                                                                                            |
+| **Installed**     | The rest, a row each that opens the module's panel: installed from this repository at its newest release, or at a commit past it, or else marked **Installed from elsewhere**, from another repository, or **The deployment's**, when the deployment itself provides it (see [Modules the deployment provides](#modules-the-deployment-provides)) and it cannot be installed over. |
+
+When nothing is to be installed or updated, the panel says "Every published module is installed,
+and none has a newer release this EiN can run."
 
 A module written for a different core API says "Needs core API ^0.6.0, which this EiN does not
 provide." (with its own range), and its button is greyed out. When only its newest release is
@@ -147,17 +165,19 @@ mod search
 
 ```text
 archive 0.1.0
-  EiN module: the family archive, with people, media, places and staging
+  The family archive, with people, media, places and staging
   https://github.com/einhq/module-archive
 assistant 0.1.0 [installed]
-  EiN module: the chat that answers questions about the archive
+  The chat that answers questions about the archive
   https://github.com/einhq/module-assistant
 ems 0.1.0
-  EiN module: the client for EMS, the media service
+  The client for EMS, the media service
   https://github.com/einhq/module-ems
 ```
 
-Words after `mod search` narrow the list to modules whose name or description holds them all.
+A module's description is the one in its `mod.json` at the release listed, or its repository's
+when that has none. Words after `mod search` narrow the list to modules whose name or description
+holds them all.
 
 ```bash
 # in EiN's terminal, as the administrator
@@ -264,11 +284,11 @@ it was, does not set up, and `setup.sh`'s list ends with the reason, such as
 
 Updating EiN with `setup.sh` does not update its modules. Update them here instead.
 
-- On **Settings → Modules**, open **Add a module** and choose **Update** on a module marked
-  **Update available** under **Published**.
-- Or open the module's panel. A module installed from its repository has a section **Installed
-  from its repository**, saying which repository and commit it came from and when, with **Update**
-  and **Remove**. **Update** there fetches the newest release for one installed at a release, and
+- On **Settings → Modules**, choose **Install** beside the filter box and choose **Update** on a
+  module under **Updates**.
+- Or open the module's panel. A module installed from its repository has **Update** and
+  **Remove** under its name, and its **Overview** says under **Source** and **Installed** which
+  repository and commit it came from and when. **Update** there fetches the newest release for one installed at a release, and
   the newest commit of the branch for one installed from a branch. One installed at any other tag
   gets that tag again, and one installed at a commit stays there, and its panel offers no
   **Update**. The top of the tab says how it goes, as for an install, and when it ends what it
@@ -306,8 +326,9 @@ and administrators, have it: its commands, its entries in the sidebar and the to
 its personal settings, and the module itself on **Settings → Modules** and on the Docs page's
 reference. For everyone else it is as if it were not installed.
 
-- On **Settings → Modules**, open the module. Its section **Available to** says who has it. Choose
-  the groups in the box and choose **Save**; empty the box to make it everyone's again.
+- On **Settings → Modules**, open the module. **Available to**, on its **Overview**, says who has
+  it. Choose **Change**, choose the groups in the box and choose **Save**; empty the box to make it
+  everyone's again.
 - When you install a module there, **Install** asks first who it is for: **Everyone**, or **Only
   some groups** with the groups to choose. The modules it needs and brings along stay everyone's,
   and an **Update** asks nothing and keeps whom the module was for.
@@ -361,7 +382,7 @@ Removing the module forgets its groups.
 ## Remove a module
 
 1. Open **Settings → Modules** and choose the module.
-2. In **Installed from its repository**, choose **Remove**.
+2. Choose **Remove** under its name.
 3. EiN says what goes: "Removing assistant stops its services and takes its commands, pages and
    files away. What it made in the archive stays." When other modules need it, it adds which ones
    and that they will not work without it. Choose **Remove assistant** to go ahead, or **Cancel**.
@@ -422,9 +443,9 @@ A source that does not answer is named above the published modules, as "https://
 did not answer" with the reason, and the other sources are still listed.
 
 A module that is in no source can still be installed from its repository's address:
-`mod install https://forge.example:3000/wrenfield/module-recipes`, or the **From a repository** box
-at the top of the **Add a module** panel, whose **Install** asks who the module is for as on a
-published one. EiN fetches modules over plain
+`mod install https://forge.example:3000/wrenfield/module-recipes`, or the **From a repository's
+address** box at the foot of the **Install a module** panel, whose **Install** asks who the module is
+for as on a published one. EiN fetches modules over plain
 HTTPS, so the forge must answer git's HTTP protocol and serve an archive of a commit, as GitHub,
 Forgejo and Gitea do. [Writing a module](../develop/modules.md) is for making one of your own.
 
@@ -459,7 +480,7 @@ does. The usual ones:
 
 | Problem                                                           | What to do                                                                                                                                                                                     |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** in **Add a module**.                                                                                                             |
+| `archive: requires module 'ems' (^0.1.0), which is not installed` | Install the missing module: `mod install ems`, or **Install** on the **Install a module** panel.                                                                                               |
 | `archive: requires 'ems' ^0.2.0, but 0.1.0 is installed`          | Update the module it needs.                                                                                                                                                                    |
 | `archive: needs @ein/client ^0.7.0, this core provides 0.6.0`     | The module is written for another version of EiN, often after EiN was updated, and EiN's start found no release of it that fits. Update the module once one is published; until then it waits. |
 
