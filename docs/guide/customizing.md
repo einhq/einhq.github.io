@@ -509,18 +509,19 @@ like any entry. This puts **Years** first on the **Search** page and hides **Lab
 
 Each panel has a slot, the place in a page where it is drawn:
 
-| Slot              | Where it is drawn                                                  | Panels the modules ship                                                 |
-| ----------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| `search.explore`  | A section of the **Search** page before you search                 | `archive.explore-people`, `-locations`, `-years`, `-labels`             |
-| `search.label`    | Above the **Search** page's results when it searches for one label | `archive.looks-like` (**Looks like**, signed in only)                   |
-| `home.start`      | Under **News** on **Home** while there is no news                  | `archive.start-upload` (**Import media**, signed in only)               |
-| `stats.sections`  | A section of **Statistics**                                        | `archive.life-events` (**Events**)                                      |
-| `nodes.tools`     | A tool in the **Nodes** explorer's tool pane                       | `archive.duplicates` (**Duplicates**)                                   |
-| `system.tabs`     | A tab of the **Status**                                            | `ems.media-service` (**Media service**)                                 |
-| `device.tabs`     | A tab of a device's page, after **Info**                           | `archive.trips` (**Trips**, on a device with a track)                   |
-| `system.overview` | Gauges beside the computer's own on the **Status**'s overview      | `ems.gpu` (**GPU**)                                                     |
-| `about.services`  | A tile in **About EiN**                                            | `assistant.about` (**Language model**), `ems.about` (**Media service**) |
-| `shell.float`     | Floating over every page and the lightbox, under dialogs           | `todo.widget` (**Todo widget**, signed in only)                         |
+| Slot              | Where it is drawn                                                                      | Panels the modules ship                                                                                                                               |
+| ----------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `search.explore`  | A section of the **Search** page before you search                                     | `archive.explore-people`, `-locations`, `-years`, `-labels`                                                                                           |
+| `search.label`    | Above the **Search** page's results when it searches for one label                     | `archive.looks-like` (**Looks like**, signed in only)                                                                                                 |
+| `home.start`      | Under **News** on **Home** while there is no news                                      | `archive.start-upload` (**Import media**, signed in only)                                                                                             |
+| `stats.sections`  | A section of **Statistics**                                                            | `archive.life-events` (**Events**)                                                                                                                    |
+| `nodes.tools`     | A tool in the **Nodes** explorer's tool pane                                           | `archive.duplicates` (**Duplicates**)                                                                                                                 |
+| `system.tabs`     | A tab of the **Status**                                                                | `ems.media-service` (**Media service**)                                                                                                               |
+| `device.tabs`     | A tab of a device's page, after **Info**                                               | `archive.trips` (**Trips**, on a device with a track)                                                                                                 |
+| `system.overview` | Gauges beside the computer's own on the **Status**'s overview                          | `ems.gpu` (**GPU**)                                                                                                                                   |
+| `about.services`  | A tile in **About EiN**                                                                | `assistant.about` (**Language model**), `ems.about` (**Media service**)                                                                               |
+| `shell.float`     | Floating over every page and the lightbox, under dialogs                               | `todo.widget` (**Todo widget**, signed in only)                                                                                                       |
+| `settings.views`  | A page under **Set up** on **Settings → System**, and on its module's **Settings** tab | `assistant.model` (**Language model**), `automation.mqtt` (**MQTT broker**), and EiN's own `ui.language` (**Language and time**), administrators only |
 
 A panel draws a page that a module made for that place. Adding panels of your own works the same
 way in principle, but it is a module's work; see [Writing a module](../develop/modules.md).

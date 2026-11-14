@@ -378,11 +378,11 @@ bare `Intl.DateTimeFormat` follow the browser's language instead, which gives an
 A module gives the Web UI entries and routes, nothing more. Each entry says where its route
 opens:
 
-| Entry     | Where it appears                                                                                                                                      |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sidebar` | In a section of the sidebar (`main`, `explore`, `browse`, `system`); needs `section`, `label`, `icon` and `to`                                        |
-| `topbar`  | A button in the top bar, or a row of a dropdown it names as `parent`, such as `ui.create`, the **Create** menu                                        |
-| `panels`  | Inside another page, at a `slot` it names, such as `system.tabs` (a tab of the **Status**), `device.tabs` (a tab of a device's page) or `nodes.tools` |
+| Entry     | Where it appears                                                                                                                                                                                                  |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sidebar` | In a section of the sidebar (`main`, `explore`, `browse`, `system`); needs `section`, `label`, `icon` and `to`                                                                                                    |
+| `topbar`  | A button in the top bar, or a row of a dropdown it names as `parent`, such as `ui.create`, the **Create** menu                                                                                                    |
+| `panels`  | Inside another page, at a `slot` it names, such as `system.tabs` (a tab of the **Status**), `device.tabs` (a tab of a device's page), `nodes.tools` or `settings.views` (a page under **Set up** on **Settings**) |
 
 A top-bar entry's `action` is `{ "navigate": "/recipes" }` for the page, `{ "dialog": "/recipes/new" }`
 for the dialog over it, `{ "drawer": … }` for the side drawer and `{ "fullscreen": … }` for over
@@ -441,6 +441,37 @@ the administrator sets wins over it. The `ems` module's names its text embedder 
 ```bash
 export CFG_TEXT_EMBEDDER='ems-text-embed'
 ```
+
+### Give a settings view
+
+Settings that belong together, such as a service's address and its key, are easier to set up on a
+page of their own than one by one in their category. A module gives such a page as a route and a
+`settings.views` panel in `ui/nav.json`; **Settings → System** lists it under **Set up**, before the
+categories, and the module's own **Settings** tab under **Settings → Modules** shows it before its
+settings. `description` is the line under its name:
+
+```json
+"panels": [
+  {
+    "id": "recipes.source",
+    "slot": "settings.views",
+    "label": "Recipe source",
+    "description": "Where new recipes come from, and the key it takes.",
+    "icon": "chef-hat",
+    "route": "/settings/recipe-source",
+    "admin": true
+  }
+]
+```
+
+The page reads the settings with `useConfig('system')` from `@ein/ui/hooks` and saves them with its
+`saveAll({ KEY: 'value', … })` or `resetAll([KEY, …])`, one `config set KEY=VALUE…` or
+`config unset KEY…`: all are checked before any is written, and a service that reads several
+restarts once. `SaveBar` and `useViewSave` from `@ein/ui/components` give it the Save and Cancel
+every such page has and say what the save restarted or why it failed; `settingOf` picks one setting
+from the table, and `SettingSource` draws its badge. It saves only what it changed, so a setting
+left alone keeps its source. The page and the categories read the same settings, and a save
+through either is seen by the other at once.
 
 ## Run something in the background
 

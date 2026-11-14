@@ -120,21 +120,29 @@ grep MQTT_DEVICE_PASSWORD .env
 
 ### A broker you already run
 
-Give EiN the broker's address and an account on it, under **Settings → System** in the
-**Automation** group, or with `config set`:
+Give EiN the broker's address and an account on it:
+
+1. Sign in as an administrator, choose **Settings** in the sidebar, and **MQTT broker** under
+   **Set up**.
+2. Fill in **Broker**, `mqtt://host:1883`, or `mqtts://host:8883` for a broker that takes TLS, and
+   the **User** and **Password** EiN signs in with.
+3. Choose **Save**. The three are saved together and `automation-bridge` restarts once. Under
+   **Now** the page says whether EiN is connected to the broker, with how many devices and messages
+   it has heard, or why it is not, such as "Connection refused".
+
+Or with `config set`, the three in one call:
 
 ```bash
-# in EiN's terminal, as the administrator
-config set CFG_AUTOMATION_MQTT_URL mqtt://192.0.2.20:1883
-config set CFG_AUTOMATION_MQTT_USER ein
- config set CFG_AUTOMATION_MQTT_KEY 'the password'   # the leading space keeps it out of your history
+# in EiN's terminal, as the administrator; the leading space keeps the password out of your history
+ config set CFG_AUTOMATION_MQTT_URL=mqtt://192.0.2.20:1883 CFG_AUTOMATION_MQTT_USER=ein 'CFG_AUTOMATION_MQTT_KEY=the password'
 ```
 
-**MQTT broker** takes `mqtt://host:1883`, or `mqtts://host:8883` for a broker that takes TLS.
-**MQTT password** is a key: nobody can read it back, and EiN sends it only to that broker
-([Give a key to another service](../admin/configuration.md#give-a-key-to-another-service)). Saving
-any of the three restarts `automation-bridge`. While **MQTT broker** is empty no device is heard
-on a broker, and only the devices EiN asks over the network itself are read.
+The same three are in the **Automation** category of **Settings → System**, as **MQTT broker**,
+**MQTT user** and **MQTT password**. The password is a key: nobody can read it back, and EiN sends
+it only to that broker ([Give a key to another service](../admin/configuration.md#give-a-key-to-another-service)).
+Giving the **MQTT broker** page a broker on another host without a password removes the one saved
+here, so it is not sent to the new broker. While the broker is empty no device is heard on a
+broker, and only the devices EiN asks over the network itself are read.
 
 ## Connect a device
 

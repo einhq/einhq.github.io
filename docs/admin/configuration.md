@@ -17,11 +17,30 @@ This page is about the system settings. Personal ones, such as **Shell history l
 
 Apart from the settings, the installation has its own environment in `.env`, in the folder EiN was installed in (`~/ein` with the installer). It holds what is fixed before EiN starts: where your files are, which ports the machine publishes, the database password. It can also give a setting its starting value. [Set a value in the deployment](#set-a-value-in-the-deployment) explains how the two meet.
 
+## Set up one thing at a time
+
+The **System** tab of Settings starts with **Set up**: pages that each set up one thing, with only the settings it takes and in plain words, such as choosing who answers the chat and giving its key. Every setting is still in the categories under them, a step further on, and the two never disagree: a page under **Set up** saves the same settings the categories show.
+
+| Under **Set up**      | From                                   | What it sets up                                                                                                                          |
+| --------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Language and time** | EiN                                    | The archive's language, how dates and times are written, chosen by name with how each writes today's date, and which time zone EiN is in |
+| **Language model**    | The [Assistant](../assistant/index.md) | Who answers the chat: the model on this machine, Anthropic, OpenAI or Mistral AI with your key, or another service                       |
+| **MQTT broker**       | [Automation](../automation/index.md)   | The broker devices are heard on, and the account EiN signs in with                                                                       |
+
+A module that is installed adds its own pages there, and a module's pages are also at the top of its **Settings** tab under **Settings → Modules**.
+
+1. Sign in as an administrator, and choose **Settings** in the sidebar, under **System**. The page opens on the first page under **Set up**.
+2. Choose the page in **Set up**, on the left.
+3. Fill it in. **Save** and **Cancel** appear once something is changed; while something is missing, such as a key, a line beside **Save** says what.
+4. Choose **Save**. What belongs together is saved at once, so a service that reads several of the settings restarts once, and a line says what was restarted, such as "Restarted llm-link.". A page that can tell whether it works says so under **Now**: whether the language model answers, or whether EiN is connected to the broker.
+
+The time zone is the one setting on **Language and time** that is not saved there: the installation sets it, as `TZ` in `.env`, and the page only shows it.
+
 ## Change a setting on the Settings page
 
 1. Sign in as an administrator. [Accounts and groups](accounts.md) explains who that is.
 2. Choose **Settings** in the sidebar, under **System**. The page opens on the **System** tab.
-3. Pick a category in the **Categories** list on the left, or type in **Find a setting** to search names, descriptions, modules and keys across every category.
+3. Pick a category in the **Categories** list on the left, under **Set up**, or type in **Find a setting** to search names, descriptions, modules and keys across every category. A page under **Set up** whose name or description matches the search is offered above the results.
 4. Change the value in the setting's field. **Save change** and **Cancel** appear under it.
 5. Choose **Save change**. A line under the setting says what was restarted, for example "Restarted trash-purger.", or why nothing could be.
 
@@ -29,7 +48,9 @@ Apart from the settings, the installation has its own environment in `.env`, in 
 
 Each setting is saved on its own; there is no button that saves the page. The other tabs of Settings hold accounts, groups and modules: [Accounts and groups](accounts.md) covers **Users**, **Groups** and **Permissions**, and [Modules](modules.md) covers **Modules**. The **Permissions** tab shows some of the same settings as **System**, such as the default sharing, and a change made on either shows on both.
 
-The control depends on the kind of value: a switch shows **On** or **Off**, a choice is a list, a number has arrows, a person or a group is picked by name, and a permission mode is a choice of None, View or Edit for the owner, the group and everyone else. On a narrow screen the categories are a **Category** list above the settings instead.
+The control depends on the kind of value: a switch shows **On** or **Off**, a choice is a list, a number has arrows, a person or a group is picked by name, a permission mode is a choice of None, View or Edit for the owner, the group and everyone else, and a date and time format is picked by its name, such as **British English**, with how it writes today's date beside it. On a narrow screen the pages under **Set up** and the categories are a **Show** list above the settings instead.
+
+What is shown is in the page's address, `?view=` with a page under **Set up** and `?category=` with a category, so a link opens it: `/settings?view=assistant.model` is the **Language model** page.
 
 ### Read where a value comes from
 
@@ -83,6 +104,8 @@ config list --scope system           # the system settings only; --scope user fo
 config get CFG_TRASH_RETENTION_DAYS  # the value in force
 config set CFG_TRASH_RETENTION_DAYS 14
 config unset CFG_TRASH_RETENTION_DAYS
+config set CFG_LANGUAGE=sv CFG_TIME_LOCALE=sv-SE   # several at once, each as NAME=VALUE
+config unset CFG_LANGUAGE CFG_TIME_LOCALE
 ```
 
 `config list` prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows `(set)` in place of its value, or nothing when it is not set. On an EiN with the Archive, the Assistant and the `ems` module installed, it starts like this:
@@ -110,18 +133,21 @@ CFG_TRASH_RETENTION_DAYS reset to 30 (default)
 Restarted: trash-purger
 ```
 
+Several settings in one `config set`, each written `NAME=VALUE`, or several names after `config unset`, are saved as one: every value is checked before any is written, and a service that reads more than one of them restarts once, after all of them are saved. It is how the pages under **Set up** save, and what to use for settings that belong together, such as a broker's address and its password, so the service never runs on half the change.
+
 For a port, the answer ends with the note that it takes effect the next time the server starts. For a key, `config set` answers only `CFG_MODULE_SOURCES_KEY set`, without the value. The command line you typed is kept in your shell history like any other; start it with a space to leave it out.
 
 A value of the wrong kind is refused before anything is written:
 
-| Kind            | What `config set` accepts                   | Refused, for example                                                  |
-| --------------- | ------------------------------------------- | --------------------------------------------------------------------- |
-| number          | digits, with an optional minus and decimals | `config set: CFG_TRASH_RETENTION_DAYS: expected a number, got 'four'` |
-| on or off       | `true` or `false`                           | `expected 'true' or 'false', got 'yes'`                               |
-| choice          | one of the setting's choices                | `expected one of en, sv, got 'english'`                               |
-| permission mode | an octal mode such as `0750`                | `expected an octal mode such as 0750, got 'rwxr-x---'`                |
-| person or group | a name of letters, digits, `.`, `_` and `-` | `'Anna Andersson' is not a valid user name`                           |
-| text or key     | anything                                    |                                                                       |
+| Kind                 | What `config set` accepts                   | Refused, for example                                                  |
+| -------------------- | ------------------------------------------- | --------------------------------------------------------------------- |
+| number               | digits, with an optional minus and decimals | `config set: CFG_TRASH_RETENTION_DAYS: expected a number, got 'four'` |
+| on or off            | `true` or `false`                           | `expected 'true' or 'false', got 'yes'`                               |
+| choice               | one of the setting's choices                | `expected one of en, sv, got 'english'`                               |
+| permission mode      | an octal mode such as `0750`                | `expected an octal mode such as 0750, got 'rwxr-x---'`                |
+| person or group      | a name of letters, digits, `.`, `_` and `-` | `'Anna Andersson' is not a valid user name`                           |
+| date and time format | a locale such as `sv-SE` or `en-GB`         | `expected a locale such as en-SE or sv-SE, got 'swedish'`             |
+| text or key          | anything                                    |                                                                       |
 
 An empty value is refused too, with `value must not be empty`, except for the settings where empty means something. To return a setting to its inherited value, use `config unset`, not an empty `config set`.
 

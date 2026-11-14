@@ -253,17 +253,25 @@ them on your router; <a href="../admin/network.html#what-ein-listens-on">Ports, 
 lists it with EiN&#39;s other ports.</p>
 </aside>
 <h3 id="a-broker-you-already-run">A broker you already run<a class="anchor" href="#a-broker-you-already-run" aria-label="Link to this section"></a></h3>
-<p>Give EiN the broker&#39;s address and an account on it, under <strong>Settings → System</strong> in the
-<strong>Automation</strong> group, or with <code>config set</code>:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
-config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_URL mqtt://192.0.2.20:1883
-config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_USER ein
- config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_KEY <span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
-<p><strong>MQTT broker</strong> takes <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS.
-<strong>MQTT password</strong> is a key: nobody can read it back, and EiN sends it only to that broker
-(<a href="../admin/configuration.html#give-a-key-to-another-service">Give a key to another service</a>). Saving
-any of the three restarts <code>automation-bridge</code>. While <strong>MQTT broker</strong> is empty no device is heard
-on a broker, and only the devices EiN asks over the network itself are read.</p>
+<p>Give EiN the broker&#39;s address and an account on it:</p>
+<ol>
+<li>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>MQTT broker</strong> under
+<strong>Set up</strong>.</li>
+<li>Fill in <strong>Broker</strong>, <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS, and
+the <strong>User</strong> and <strong>Password</strong> EiN signs in with.</li>
+<li>Choose <strong>Save</strong>. The three are saved together and <code>automation-bridge</code> restarts once. Under
+<strong>Now</strong> the page says whether EiN is connected to the broker, with how many devices and messages
+it has heard, or why it is not, such as &quot;Connection refused&quot;.</li>
+</ol>
+<p>Or with <code>config set</code>, the three in one call:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator; the leading space keeps the password out of your history</span>
+ config <span class="hljs-built_in">set</span> CFG_AUTOMATION_MQTT_URL=mqtt://192.0.2.20:1883 CFG_AUTOMATION_MQTT_USER=ein <span class="hljs-string">&#x27;CFG_AUTOMATION_MQTT_KEY=the password&#x27;</span></code></pre></div>
+<p>The same three are in the <strong>Automation</strong> category of <strong>Settings → System</strong>, as <strong>MQTT broker</strong>,
+<strong>MQTT user</strong> and <strong>MQTT password</strong>. The password is a key: nobody can read it back, and EiN sends
+it only to that broker (<a href="../admin/configuration.html#give-a-key-to-another-service">Give a key to another service</a>).
+Giving the <strong>MQTT broker</strong> page a broker on another host without a password removes the one saved
+here, so it is not sent to the new broker. While the broker is empty no device is heard on a
+broker, and only the devices EiN asks over the network itself are read.</p>
 <h2 id="connect-a-device">Connect a device<a class="anchor" href="#connect-a-device" aria-label="Link to this section"></a></h2>
 <p>A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
 within seconds of the device connecting it is on the <strong>Devices</strong> page with all it reads and does.

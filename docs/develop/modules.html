@@ -686,7 +686,7 @@ opens:</p>
 </tr>
 <tr>
 <td><code>panels</code></td>
-<td>Inside another page, at a <code>slot</code> it names, such as <code>system.tabs</code> (a tab of the <strong>Status</strong>), <code>device.tabs</code> (a tab of a device&#39;s page) or <code>nodes.tools</code></td>
+<td>Inside another page, at a <code>slot</code> it names, such as <code>system.tabs</code> (a tab of the <strong>Status</strong>), <code>device.tabs</code> (a tab of a device&#39;s page), <code>nodes.tools</code> or <code>settings.views</code> (a page under <strong>Set up</strong> on <strong>Settings</strong>)</td>
 </tr>
 </tbody></table>
 </div>
@@ -734,6 +734,31 @@ which no shell sees. <a href="manifest.html">The module manifest</a> lists every
 <code>etc/config</code>, as <code>export KEY=&#39;value&#39;</code> lines. Setup links the file as <code>/etc/config.d/&lt;name&gt;</code>; a value
 the administrator sets wins over it. The <code>ems</code> module&#39;s names its text embedder this way:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">export</span> CFG_TEXT_EMBEDDER=<span class="hljs-string">&#x27;ems-text-embed&#x27;</span></code></pre></div>
+<h3 id="give-a-settings-view">Give a settings view<a class="anchor" href="#give-a-settings-view" aria-label="Link to this section"></a></h3>
+<p>Settings that belong together, such as a service&#39;s address and its key, are easier to set up on a
+page of their own than one by one in their category. A module gives such a page as a route and a
+<code>settings.views</code> panel in <code>ui/nav.json</code>; <strong>Settings → System</strong> lists it under <strong>Set up</strong>, before the
+categories, and the module&#39;s own <strong>Settings</strong> tab under <strong>Settings → Modules</strong> shows it before its
+settings. <code>description</code> is the line under its name:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;panels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;recipes.source&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;slot&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;settings.views&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Recipe source&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Where new recipes come from, and the key it takes.&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;chef-hat&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;route&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/settings/recipe-source&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;admin&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span></code></pre></div>
+<p>The page reads the settings with <code>useConfig(&#39;system&#39;)</code> from <code>@ein/ui/hooks</code> and saves them with its
+<code>saveAll({ KEY: &#39;value&#39;, … })</code> or <code>resetAll([KEY, …])</code>, one <code>config set KEY=VALUE…</code> or
+<code>config unset KEY…</code>: all are checked before any is written, and a service that reads several
+restarts once. <code>SaveBar</code> and <code>useViewSave</code> from <code>@ein/ui/components</code> give it the Save and Cancel
+every such page has and say what the save restarted or why it failed; <code>settingOf</code> picks one setting
+from the table, and <code>SettingSource</code> draws its badge. It saves only what it changed, so a setting
+left alone keeps its source. The page and the categories read the same settings, and a save
+through either is seen by the other at once.</p>
 <h2 id="run-something-in-the-background">Run something in the background<a class="anchor" href="#run-something-in-the-background" aria-label="Link to this section"></a></h2>
 <p>A service is a script EiN keeps running: a folder <code>services/&lt;name&gt;/</code> with a <code>start.sh</code> and a
 <code>config.json</code>. Setup registers and enables it; EiN starts the enabled services when it starts, and
@@ -1123,7 +1148,7 @@ show them afterwards.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

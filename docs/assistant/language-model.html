@@ -123,7 +123,7 @@
 </tr>
 <tr>
 <td>At a hosted provider</td>
-<td>Four settings in <code>~/ein/.env</code></td>
+<td><strong>Settings → System → Language model</strong>, or <code>~/ein/.env</code></td>
 <td>The provider&#39;s charges. Questions, and what the assistant reads in the archive to answer them, leave your machine.</td>
 </tr>
 </tbody></table>
@@ -241,6 +241,18 @@ podman compose up -d llm</code></pre></div>
 <p>The container&#39;s chat template is written for Qwen3.5, and the server names whatever it loaded <code>qwen3.5-4b</code>. A model of another family needs its own template, which <code>.env</code> cannot choose, and the health check cannot tell that it is not the tried model. Change <code>LLM_GGUF_FILE</code> only to another quantisation of Qwen3.5-4B, or use a server of your own and point EiN at it as described below.</p>
 </aside>
 <h2 id="use-a-hosted-provider-instead">Use a hosted provider instead<a class="anchor" href="#use-a-hosted-provider-instead" aria-label="Link to this section"></a></h2>
+<h3 id="on-the-settings-page">On the Settings page<a class="anchor" href="#on-the-settings-page" aria-label="Link to this section"></a></h3>
+<ol>
+<li>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>Language model</strong> under <strong>Set up</strong>.</li>
+<li>Under <strong>Who answers the chat</strong>, choose the provider: <strong>Anthropic</strong>, <strong>OpenAI</strong> or <strong>Mistral AI</strong>. For any other service that speaks the OpenAI chat API, such as OpenRouter, Groq or an Ollama of your own, choose <strong>Another service</strong> and give its <strong>Name</strong>, which the chat shows, and its <strong>Address</strong>, without <code>/v1</code>.</li>
+<li>Paste the key the provider gave you in <strong>Key</strong>. The field&#39;s description links to the page in your provider account where keys are made. A server of your own may need none.</li>
+<li><strong>Model</strong> suggests a few of the provider&#39;s models and starts with the first; keep it or type another, as the provider writes it.</li>
+<li>Choose <strong>Save</strong>. The four settings are saved together and <code>llm-link</code> restarts once (&quot;Restarted llm-link.&quot;). Under <strong>Now</strong>, the page asks the model whether it answers, as <code>llm-status --checks</code> does.</li>
+<li>Once the key is saved, <strong>Model</strong> lists every model the provider offers: pick another and <strong>Save</strong> again to change it.</li>
+</ol>
+<p>The page says, above <strong>Save</strong>, that questions and what the assistant reads to answer them leave the machine; tell the people who use your EiN before you switch. To go back to the model on your machine, choose <strong>This machine</strong> and <strong>Save</strong>: the four settings are cleared, so what <code>.env</code> says is in force again.</p>
+<p>A key belongs to its provider. Switching to another service without giving a key removes the one saved here, so it is never sent to the new address. A key that comes from <code>.env</code> cannot be removed on the page, so the page asks for the new service&#39;s own key before it saves.</p>
+<h3 id="in-env">In <code>.env</code><a class="anchor" href="#in-env" aria-label="Link to this section"></a></h3>
 <ol>
 <li><p>Open <code>~/ein/.env</code> on the machine EiN runs on. The file has the lines ready, commented out. Remove the <code>#</code> and fill them in:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
@@ -265,7 +277,9 @@ warn  llm model  &lt;model&gt; is untried: the prompts, the fast path and the ev
 <p>The second line is expected for every model but Qwen3.5-4B. It is a warning only: the chat answers, but nobody has measured how well. <a href="#try-a-model-before-you-rely-on-it">Try a model before you rely on it</a> shows how to measure it.</p>
 </li>
 </ol>
-<p>The same settings are on <strong>Settings → System</strong>, in the <strong>Assistant</strong> category, for an administrator who prefers the Web UI: <strong>Language model address</strong>, <strong>Language model key</strong>, <strong>Language model provider</strong> and <strong>Language model</strong>. A value saved there wins over <code>.env</code> and shows the badge <strong>Set here</strong>; a value from <code>.env</code> shows <strong>From deployment</strong>. <strong>Restore inherited value</strong> goes back to the one from <code>.env</code>. In the terminal, <code>config-set CFG_LLM_PROVIDER OpenAI</code> does the same as saving it on the page (<a href="../reference/commands-core.html#config-set">reference</a>).</p>
+<p>The same settings are also, one by one, in the <strong>Assistant</strong> category of <strong>Settings → System</strong>: <strong>Language model address</strong>, <strong>Language model key</strong>, <strong>Language model provider</strong> and <strong>Language model</strong>. A value saved on the page wins over <code>.env</code> and shows the badge <strong>Set here</strong>; a value from <code>.env</code> shows <strong>From deployment</strong>. <strong>Restore inherited value</strong> goes back to the one from <code>.env</code>. In the terminal, <code>config set</code> saves the four together, as the page does (<a href="../reference/commands-core.html#config-set">reference</a>):</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal; the leading space keeps the key out of your history</span>
+ config <span class="hljs-built_in">set</span> CFG_LLM_PROVIDER=Anthropic CFG_LLM_URL=https://api.anthropic.com CFG_LLM_MODEL=claude-opus-5 CFG_LLM_KEY=&lt;your key&gt;</code></pre></div>
 <h3 id="what-a-provider-receives">What a provider receives<a class="anchor" href="#what-a-provider-receives" aria-label="Link to this section"></a></h3>
 <p>Once <code>CFG_LLM_PROVIDER</code> is set, the chat shows a line above the question box, with a globe icon:</p>
 <div class="code"><pre tabindex="0"><code>Answered by OpenAI: your questions, and the names, places and search results used to answer them, leave this server.</code></pre></div>
@@ -289,6 +303,14 @@ warn  llm model  &lt;model&gt; is untried: the prompts, the fast path and the ev
 <td>Whether the model answers, whose it is, where it runs, and whether it is the tried model. <code>health</code> reads the same</td>
 </tr>
 <tr>
+<td><code>llm-status --models</code></td>
+<td>The models the service offers, one per line, as <strong>Model</strong> on the <strong>Language model</strong> page lists them</td>
+</tr>
+<tr>
+<td><strong>Settings → System → Language model</strong></td>
+<td>Under <strong>Now</strong>, the same checks as <code>llm-status --checks</code></td>
+</tr>
+<tr>
 <td><strong>Status → Services</strong>, row <code>llm-link</code></td>
 <td>The same checks in one line</td>
 </tr>
@@ -309,7 +331,7 @@ llm-link: ours, qwen3.5-4b at http://llm:8190, on the card
 llm-link: http://llm:8190 is not answering; the chat cannot answer until it does</code></pre></div>
 <p>The log starts over each time the service starts. A model that does not answer is a warning in <code>health</code>, never a failure: the archive&#39;s work goes on without it. <a href="../admin/monitoring.html">Health and status</a> and <a href="../admin/services-logs.html">Services and logs</a> cover both in general.</p>
 <h2 id="settings">Settings<a class="anchor" href="#settings" aria-label="Link to this section"></a></h2>
-<p>All of these are system settings, on <strong>Settings → System → Assistant</strong> (<strong>Language model command</strong> is under <strong>Search</strong>), in <code>~/ein/.env</code>, or with <code>config-set</code>. <a href="../admin/configuration.html">Configuration</a> explains where a value comes from and which one wins.</p>
+<p>All of these are system settings, on <strong>Settings → System → Assistant</strong> (<strong>Language model command</strong> is under <strong>Search</strong>), in <code>~/ein/.env</code>, or with <code>config-set</code>. The first four are also the <strong>Language model</strong> page under <strong>Set up</strong>. <a href="../admin/configuration.html">Configuration</a> explains where a value comes from and which one wins.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -452,7 +474,7 @@ agent-eval --<span class="hljs-built_in">limit</span> 5 --verbose
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/assistant/language-model.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-language-model-is-for">What the language model is for</a></li><li><a href="#choose-where-the-model-runs">Choose where the model runs</a></li><li><a href="#run-the-model-on-your-machine">Run the model on your machine</a></li><li class="nested"><a href="#what-the-container-runs">What the container runs</a></li><li class="nested"><a href="#share-the-graphics-card-with-the-media-service">Share the graphics card with the media service</a></li><li class="nested"><a href="#settings-for-the-container">Settings for the container</a></li><li><a href="#use-a-hosted-provider-instead">Use a hosted provider instead</a></li><li class="nested"><a href="#what-a-provider-receives">What a provider receives</a></li><li class="nested"><a href="#how-the-key-is-kept">How the key is kept</a></li><li><a href="#check-that-the-model-answers">Check that the model answers</a></li><li><a href="#settings">Settings</a></li><li><a href="#ask-the-model-directly">Ask the model directly</a></li><li class="nested"><a href="#try-a-model-before-you-rely-on-it">Try a model before you rely on it</a></li><li><a href="#who-may-use-the-model">Who may use the model</a></li><li><a href="#take-the-model-away">Take the model away</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-the-language-model-is-for">What the language model is for</a></li><li><a href="#choose-where-the-model-runs">Choose where the model runs</a></li><li><a href="#run-the-model-on-your-machine">Run the model on your machine</a></li><li class="nested"><a href="#what-the-container-runs">What the container runs</a></li><li class="nested"><a href="#share-the-graphics-card-with-the-media-service">Share the graphics card with the media service</a></li><li class="nested"><a href="#settings-for-the-container">Settings for the container</a></li><li><a href="#use-a-hosted-provider-instead">Use a hosted provider instead</a></li><li class="nested"><a href="#on-the-settings-page">On the Settings page</a></li><li class="nested"><a href="#in-env">In .env</a></li><li class="nested"><a href="#what-a-provider-receives">What a provider receives</a></li><li class="nested"><a href="#how-the-key-is-kept">How the key is kept</a></li><li><a href="#check-that-the-model-answers">Check that the model answers</a></li><li><a href="#settings">Settings</a></li><li><a href="#ask-the-model-directly">Ask the model directly</a></li><li class="nested"><a href="#try-a-model-before-you-rely-on-it">Try a model before you rely on it</a></li><li><a href="#who-may-use-the-model">Who may use the model</a></li><li><a href="#take-the-model-away">Take the model away</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

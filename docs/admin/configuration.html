@@ -121,17 +121,53 @@
 </div>
 <p>This page is about the system settings. Personal ones, such as <strong>Shell history length</strong>, or <strong>Seconds per slide</strong> with the Archive installed, are described in <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
 <p>Apart from the settings, the installation has its own environment in <code>.env</code>, in the folder EiN was installed in (<code>~/ein</code> with the installer). It holds what is fixed before EiN starts: where your files are, which ports the machine publishes, the database password. It can also give a setting its starting value. <a href="#set-a-value-in-the-deployment">Set a value in the deployment</a> explains how the two meet.</p>
+<h2 id="set-up-one-thing-at-a-time">Set up one thing at a time<a class="anchor" href="#set-up-one-thing-at-a-time" aria-label="Link to this section"></a></h2>
+<p>The <strong>System</strong> tab of Settings starts with <strong>Set up</strong>: pages that each set up one thing, with only the settings it takes and in plain words, such as choosing who answers the chat and giving its key. Every setting is still in the categories under them, a step further on, and the two never disagree: a page under <strong>Set up</strong> saves the same settings the categories show.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Under <strong>Set up</strong></th>
+<th>From</th>
+<th>What it sets up</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Language and time</strong></td>
+<td>EiN</td>
+<td>The archive&#39;s language, how dates and times are written, chosen by name with how each writes today&#39;s date, and which time zone EiN is in</td>
+</tr>
+<tr>
+<td><strong>Language model</strong></td>
+<td>The <a href="../assistant/index.html">Assistant</a></td>
+<td>Who answers the chat: the model on this machine, Anthropic, OpenAI or Mistral AI with your key, or another service</td>
+</tr>
+<tr>
+<td><strong>MQTT broker</strong></td>
+<td><a href="../automation/index.html">Automation</a></td>
+<td>The broker devices are heard on, and the account EiN signs in with</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module that is installed adds its own pages there, and a module&#39;s pages are also at the top of its <strong>Settings</strong> tab under <strong>Settings → Modules</strong>.</p>
+<ol>
+<li>Sign in as an administrator, and choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>. The page opens on the first page under <strong>Set up</strong>.</li>
+<li>Choose the page in <strong>Set up</strong>, on the left.</li>
+<li>Fill it in. <strong>Save</strong> and <strong>Cancel</strong> appear once something is changed; while something is missing, such as a key, a line beside <strong>Save</strong> says what.</li>
+<li>Choose <strong>Save</strong>. What belongs together is saved at once, so a service that reads several of the settings restarts once, and a line says what was restarted, such as &quot;Restarted llm-link.&quot;. A page that can tell whether it works says so under <strong>Now</strong>: whether the language model answers, or whether EiN is connected to the broker.</li>
+</ol>
+<p>The time zone is the one setting on <strong>Language and time</strong> that is not saved there: the installation sets it, as <code>TZ</code> in <code>.env</code>, and the page only shows it.</p>
 <h2 id="change-a-setting-on-the-settings-page">Change a setting on the Settings page<a class="anchor" href="#change-a-setting-on-the-settings-page" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Sign in as an administrator. <a href="accounts.html">Accounts and groups</a> explains who that is.</li>
 <li>Choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>. The page opens on the <strong>System</strong> tab.</li>
-<li>Pick a category in the <strong>Categories</strong> list on the left, or type in <strong>Find a setting</strong> to search names, descriptions, modules and keys across every category.</li>
+<li>Pick a category in the <strong>Categories</strong> list on the left, under <strong>Set up</strong>, or type in <strong>Find a setting</strong> to search names, descriptions, modules and keys across every category. A page under <strong>Set up</strong> whose name or description matches the search is offered above the results.</li>
 <li>Change the value in the setting&#39;s field. <strong>Save change</strong> and <strong>Cancel</strong> appear under it.</li>
 <li>Choose <strong>Save change</strong>. A line under the setting says what was restarted, for example &quot;Restarted trash-purger.&quot;, or why nothing could be.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/settings@2x.webp"><img src="../../assets/shots/settings.webp" srcset="../../assets/shots/settings.webp 1x, ../../assets/shots/settings@2x.webp 2x" alt="The System tab of Settings: the Find a setting box across all 96 settings with the Overrides only (1) button, a list of categories beginning with Access log, Album folders and Albums, and the Access log category open with Days the access log keeps sign-ins and downloads at 365, marked Default and &quot;Restarts access-log-purger&quot;" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Settings are browsed by category, and each says where its value comes from and what a change restarts.</figcaption></figure>
 <p>Each setting is saved on its own; there is no button that saves the page. The other tabs of Settings hold accounts, groups and modules: <a href="accounts.html">Accounts and groups</a> covers <strong>Users</strong>, <strong>Groups</strong> and <strong>Permissions</strong>, and <a href="modules.html">Modules</a> covers <strong>Modules</strong>. The <strong>Permissions</strong> tab shows some of the same settings as <strong>System</strong>, such as the default sharing, and a change made on either shows on both.</p>
-<p>The control depends on the kind of value: a switch shows <strong>On</strong> or <strong>Off</strong>, a choice is a list, a number has arrows, a person or a group is picked by name, and a permission mode is a choice of None, View or Edit for the owner, the group and everyone else. On a narrow screen the categories are a <strong>Category</strong> list above the settings instead.</p>
+<p>The control depends on the kind of value: a switch shows <strong>On</strong> or <strong>Off</strong>, a choice is a list, a number has arrows, a person or a group is picked by name, a permission mode is a choice of None, View or Edit for the owner, the group and everyone else, and a date and time format is picked by its name, such as <strong>British English</strong>, with how it writes today&#39;s date beside it. On a narrow screen the pages under <strong>Set up</strong> and the categories are a <strong>Show</strong> list above the settings instead.</p>
+<p>What is shown is in the page&#39;s address, <code>?view=</code> with a page under <strong>Set up</strong> and <code>?category=</code> with a category, so a link opens it: <code>/settings?view=assistant.model</code> is the <strong>Language model</strong> page.</p>
 <h3 id="read-where-a-value-comes-from">Read where a value comes from<a class="anchor" href="#read-where-a-value-comes-from" aria-label="Link to this section"></a></h3>
 <p>Under each setting&#39;s description, a badge says where the value in force comes from. A second badge names the module the setting belongs to, and settings that restart a service say which, as in &quot;Restarts trash-purger&quot;.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -193,7 +229,9 @@ config list                          <span class="hljs-comment"># every setting,
 config list --scope system           <span class="hljs-comment"># the system settings only; --scope user for your own</span>
 config get CFG_TRASH_RETENTION_DAYS  <span class="hljs-comment"># the value in force</span>
 config <span class="hljs-built_in">set</span> CFG_TRASH_RETENTION_DAYS 14
-config <span class="hljs-built_in">unset</span> CFG_TRASH_RETENTION_DAYS</code></pre></div>
+config <span class="hljs-built_in">unset</span> CFG_TRASH_RETENTION_DAYS
+config <span class="hljs-built_in">set</span> CFG_LANGUAGE=sv CFG_TIME_LOCALE=sv-SE   <span class="hljs-comment"># several at once, each as NAME=VALUE</span>
+config <span class="hljs-built_in">unset</span> CFG_LANGUAGE CFG_TIME_LOCALE</code></pre></div>
 <p><code>config list</code> prints a setting per line: its name, a tab, its value, and in brackets where the value comes from. A default has no mark. A key shows <code>(set)</code> in place of its value, or nothing when it is not set. On an EiN with the Archive, the Assistant and the <code>ems</code> module installed, it starts like this:</p>
 <div class="code"><pre tabindex="0"><code>CFG_EMS_KEY	(set) (environment)
 CFG_COMMAND_FINDER	assistant-commands (module assistant)
@@ -210,6 +248,7 @@ Restarted: trash-purger
 $ config unset CFG_TRASH_RETENTION_DAYS
 CFG_TRASH_RETENTION_DAYS reset to 30 (default)
 Restarted: trash-purger</code></pre></div>
+<p>Several settings in one <code>config set</code>, each written <code>NAME=VALUE</code>, or several names after <code>config unset</code>, are saved as one: every value is checked before any is written, and a service that reads more than one of them restarts once, after all of them are saved. It is how the pages under <strong>Set up</strong> save, and what to use for settings that belong together, such as a broker&#39;s address and its password, so the service never runs on half the change.</p>
 <p>For a port, the answer ends with the note that it takes effect the next time the server starts. For a key, <code>config set</code> answers only <code>CFG_MODULE_SOURCES_KEY set</code>, without the value. The command line you typed is kept in your shell history like any other; start it with a space to leave it out.</p>
 <p>A value of the wrong kind is refused before anything is written:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -244,6 +283,11 @@ Restarted: trash-purger</code></pre></div>
 <td>person or group</td>
 <td>a name of letters, digits, <code>.</code>, <code>_</code> and <code>-</code></td>
 <td><code>&#39;Anna Andersson&#39; is not a valid user name</code></td>
+</tr>
+<tr>
+<td>date and time format</td>
+<td>a locale such as <code>sv-SE</code> or <code>en-GB</code></td>
+<td><code>expected a locale such as en-SE or sv-SE, got &#39;swedish&#39;</code></td>
 </tr>
 <tr>
 <td>text or key</td>
@@ -459,7 +503,7 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/configuration.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-kinds-of-settings">Two kinds of settings</a></li><li><a href="#change-a-setting-on-the-settings-page">Change a setting on the Settings page</a></li><li class="nested"><a href="#read-where-a-value-comes-from">Read where a value comes from</a></li><li class="nested"><a href="#give-a-key-to-another-service">Give a key to another service</a></li><li><a href="#what-a-change-restarts">What a change restarts</a></li><li><a href="#change-settings-from-the-terminal">Change settings from the terminal</a></li><li><a href="#set-a-value-in-the-deployment">Set a value in the deployment</a></li><li><a href="#how-the-layers-combine">How the layers combine</a></li><li><a href="#edit-the-settings-file-by-hand">Edit the settings file by hand</a></li><li><a href="#when-a-change-does-not-take-effect">When a change does not take effect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-kinds-of-settings">Two kinds of settings</a></li><li><a href="#set-up-one-thing-at-a-time">Set up one thing at a time</a></li><li><a href="#change-a-setting-on-the-settings-page">Change a setting on the Settings page</a></li><li class="nested"><a href="#read-where-a-value-comes-from">Read where a value comes from</a></li><li class="nested"><a href="#give-a-key-to-another-service">Give a key to another service</a></li><li><a href="#what-a-change-restarts">What a change restarts</a></li><li><a href="#change-settings-from-the-terminal">Change settings from the terminal</a></li><li><a href="#set-a-value-in-the-deployment">Set a value in the deployment</a></li><li><a href="#how-the-layers-combine">How the layers combine</a></li><li><a href="#edit-the-settings-file-by-hand">Edit the settings file by hand</a></li><li><a href="#when-a-change-does-not-take-effect">When a change does not take effect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

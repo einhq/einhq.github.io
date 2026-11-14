@@ -16,11 +16,11 @@ The language model does no media processing. Faces, picture descriptions, transc
 
 ## Choose where the model runs
 
-| Where                                 | How you set it up                                 | What it costs                                                                                                      |
-| ------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| On this machine, on the graphics card | `setup.sh --llm` on a machine with an NVIDIA card | Part of the card's memory, shared with the media service. Answers in seconds.                                      |
-| On this machine, on the processor     | `setup.sh --llm` on a machine without a card      | Memory and processor time. The answers are the same, only slower.                                                  |
-| At a hosted provider                  | Four settings in `~/ein/.env`                     | The provider's charges. Questions, and what the assistant reads in the archive to answer them, leave your machine. |
+| Where                                 | How you set it up                                       | What it costs                                                                                                      |
+| ------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| On this machine, on the graphics card | `setup.sh --llm` on a machine with an NVIDIA card       | Part of the card's memory, shared with the media service. Answers in seconds.                                      |
+| On this machine, on the processor     | `setup.sh --llm` on a machine without a card            | Memory and processor time. The answers are the same, only slower.                                                  |
+| At a hosted provider                  | **Settings → System → Language model**, or `~/ein/.env` | The provider's charges. Questions, and what the assistant reads in the archive to answer them, leave your machine. |
 
 The model EiN runs itself is Qwen3.5-4B in llama.cpp's server. The prompts, the chat's shortcuts and the assistant's test questions are tuned for that model, and it is the only one EiN calls tried. Any service that speaks the OpenAI chat API can stand in for it: a hosted provider such as OpenAI, OpenRouter, Mistral or Groq, or a server of your own such as vLLM, Ollama or LM Studio.
 
@@ -115,6 +115,21 @@ These go in `~/ein/.env` and take effect at the next `podman compose up -d`.
 
 ## Use a hosted provider instead
 
+### On the Settings page
+
+1. Sign in as an administrator, choose **Settings** in the sidebar, and **Language model** under **Set up**.
+2. Under **Who answers the chat**, choose the provider: **Anthropic**, **OpenAI** or **Mistral AI**. For any other service that speaks the OpenAI chat API, such as OpenRouter, Groq or an Ollama of your own, choose **Another service** and give its **Name**, which the chat shows, and its **Address**, without `/v1`.
+3. Paste the key the provider gave you in **Key**. The field's description links to the page in your provider account where keys are made. A server of your own may need none.
+4. **Model** suggests a few of the provider's models and starts with the first; keep it or type another, as the provider writes it.
+5. Choose **Save**. The four settings are saved together and `llm-link` restarts once ("Restarted llm-link."). Under **Now**, the page asks the model whether it answers, as `llm-status --checks` does.
+6. Once the key is saved, **Model** lists every model the provider offers: pick another and **Save** again to change it.
+
+The page says, above **Save**, that questions and what the assistant reads to answer them leave the machine; tell the people who use your EiN before you switch. To go back to the model on your machine, choose **This machine** and **Save**: the four settings are cleared, so what `.env` says is in force again.
+
+A key belongs to its provider. Switching to another service without giving a key removes the one saved here, so it is never sent to the new address. A key that comes from `.env` cannot be removed on the page, so the page asks for the new service's own key before it saves.
+
+### In `.env`
+
 1. Open `~/ein/.env` on the machine EiN runs on. The file has the lines ready, commented out. Remove the `#` and fill them in:
 
    ```ini
@@ -147,7 +162,12 @@ These go in `~/ein/.env` and take effect at the next `podman compose up -d`.
 
    The second line is expected for every model but Qwen3.5-4B. It is a warning only: the chat answers, but nobody has measured how well. [Try a model before you rely on it](#try-a-model-before-you-rely-on-it) shows how to measure it.
 
-The same settings are on **Settings → System**, in the **Assistant** category, for an administrator who prefers the Web UI: **Language model address**, **Language model key**, **Language model provider** and **Language model**. A value saved there wins over `.env` and shows the badge **Set here**; a value from `.env` shows **From deployment**. **Restore inherited value** goes back to the one from `.env`. In the terminal, `config-set CFG_LLM_PROVIDER OpenAI` does the same as saving it on the page ([reference](../reference/commands-core.md#config-set)).
+The same settings are also, one by one, in the **Assistant** category of **Settings → System**: **Language model address**, **Language model key**, **Language model provider** and **Language model**. A value saved on the page wins over `.env` and shows the badge **Set here**; a value from `.env` shows **From deployment**. **Restore inherited value** goes back to the one from `.env`. In the terminal, `config set` saves the four together, as the page does ([reference](../reference/commands-core.md#config-set)):
+
+```bash
+# in EiN's terminal; the leading space keeps the key out of your history
+ config set CFG_LLM_PROVIDER=Anthropic CFG_LLM_URL=https://api.anthropic.com CFG_LLM_MODEL=claude-opus-5 CFG_LLM_KEY=<your key>
+```
 
 ### What a provider receives
 
@@ -165,13 +185,15 @@ The key is a secret. No shell in EiN sees it, `config-get CFG_LLM_KEY` says only
 
 ## Check that the model answers
 
-| Where                                 | What it tells you                                                                                                 |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `llm-status`                          | Whose the model is and where it runs, from the settings alone, without asking the model                           |
-| `llm-status --checks`                 | Whether the model answers, whose it is, where it runs, and whether it is the tried model. `health` reads the same |
-| **Status → Services**, row `llm-link` | The same checks in one line                                                                                       |
-| **About EiN**, in the account menu    | A **Language model** tile with the model's name, and "on this host" or the provider's name under it               |
-| `podman compose logs llm`             | The server's own log, for a model on your machine                                                                 |
+| Where                                  | What it tells you                                                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `llm-status`                           | Whose the model is and where it runs, from the settings alone, without asking the model                           |
+| `llm-status --checks`                  | Whether the model answers, whose it is, where it runs, and whether it is the tried model. `health` reads the same |
+| `llm-status --models`                  | The models the service offers, one per line, as **Model** on the **Language model** page lists them               |
+| **Settings → System → Language model** | Under **Now**, the same checks as `llm-status --checks`                                                           |
+| **Status → Services**, row `llm-link`  | The same checks in one line                                                                                       |
+| **About EiN**, in the account menu     | A **Language model** tile with the model's name, and "on this host" or the provider's name under it               |
+| `podman compose logs llm`              | The server's own log, for a model on your machine                                                                 |
 
 ![The Services tab of the System status page, listing EiN's services from access-log-purger to ems-sampler, each with its description or its own status line, such as ems-link's "card quiet · loaded siglip-text:cpu text-query:cpu"; llm-link is further down the list](../../assets/shots/system-services.webp "Each service's row carries its status line, such as ems-link's here; llm-link's, further down, says whether the chat's model answers and where it runs.")
 
@@ -187,7 +209,7 @@ The log starts over each time the service starts. A model that does not answer i
 
 ## Settings
 
-All of these are system settings, on **Settings → System → Assistant** (**Language model command** is under **Search**), in `~/ein/.env`, or with `config-set`. [Configuration](../admin/configuration.md) explains where a value comes from and which one wins.
+All of these are system settings, on **Settings → System → Assistant** (**Language model command** is under **Search**), in `~/ein/.env`, or with `config-set`. The first four are also the **Language model** page under **Set up**. [Configuration](../admin/configuration.md) explains where a value comes from and which one wins.
 
 | Setting                                                             | Label on the settings page                | Default                 | What it does                                                                                                                                                                                                                                          |
 | ------------------------------------------------------------------- | ----------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

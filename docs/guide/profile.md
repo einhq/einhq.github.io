@@ -149,7 +149,9 @@ The choices for **Header entrance**:
 
 Every date and time in the Web UI is written as this preference says, whatever language your
 browser is set to. Its value is a locale: a language and a country, such as `sv-SE`, and the
-country decides the order of the date and whether the clock has 24 hours.
+country decides the order of the date and whether the clock has 24 hours. On **Preferences** you
+pick it by name, such as **British English**, with how it writes today's date beside each, and the
+**×** in the field empties it again. A locale the list does not offer is set with `config set`.
 
 | Value   | A time is written     | A date is written |
 | ------- | --------------------- | ----------------- |
