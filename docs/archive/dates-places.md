@@ -19,7 +19,7 @@ on a phone the date is centred over the top of the picture and the bar at the fo
 - The place is the name of the location the picture is linked to, else its street address, else its
   city and country.
 
-The details panel (**Details (i)**, or <kbd>i</kbd>; on a phone, swipe up) shows more. Its place
+The details panel (open on a computer, else <kbd>i</kbd>; on a phone, swipe up) shows more. Its place
 section has the location's name as a link, the street address and a small map with **Enlarge map**.
 The **Details** row near its foot, folded until you click its icon, holds **Taken at** (the date exactly as stored, with its time zone),
 **Taken at (UTC)** and **Time source**. [Viewing photos, videos and recordings](viewer.md) covers the

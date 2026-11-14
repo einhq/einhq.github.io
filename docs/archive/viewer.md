@@ -34,25 +34,28 @@ their name, opens over the viewer: Back returns to the picture you were on.
 On a computer:
 
 - **Top left**: the close button (×).
-- **Top right**: the details button (ⓘ, tooltip **Details (i)**), which shows or hides the
-  [details panel](#the-details-panel), and beside it **Chat**, where the assistant module is
-  installed, which opens the assistant in a drawer beside the picture, or as a dialog over it in a
+- **Top right**: **Chat**, where the assistant module is installed, which opens the assistant in a drawer beside the picture, or as a dialog over it in a
   window narrower than 992 pixels. You can ask it about the picture you are looking at; see
   [Chatting with the assistant](../assistant/chat.md).
-- **Left and right edges**: arrows to the previous and the next file.
+- **Left and right edges**: arrows to the previous and the next file. With the
+  [details panel](#the-details-panel) hidden, a handle sticks out of the right edge low down,
+  above the bar: **Show details (i)** brings the panel back.
 - **The bar under the picture**, from left to right:
-  - the heart, **Favourite (s)**, when you are signed in;
+  - the heart, **Favourite (s)**, when you may mark favourites;
   - where you are in the list, such as **24 of 26**. The **Media** page leaves this out, because it
     loads its feed a part at a time and does not know the whole count;
   - **Start slideshow**, which reads **Stop slideshow** while one runs;
   - the date and time the picture was taken, such as **Saturday, 27 December 2025, 13:16:18**;
   - the place: the name of the location the picture is linked to, or else the street address read
     from its GPS position;
-  - as far as there is room, in this order: **Show text** / **Hide text** (<kbd>t</kbd>) when text
-    was read from the photo, **Pin faces** / **Unpin faces** (<kbd>f</kbd>) on photos and videos,
-    and **Fullscreen**. Those the bar has no room for, without cutting the date or the place short,
-    are rows of the More menu instead;
-  - **More** (⋮).
+  - **Show text** / **Hide text** (<kbd>t</kbd>) when text was read from the photo, **Pin faces** /
+    **Unpin faces** (<kbd>f</kbd>) on photos and videos, **Fullscreen**, **Show toolbar** /
+    **Hide toolbar** when you may change the file or add it to an album, and **Download**;
+  - **More** (⋮), only when some of these did not fit.
+
+  The buttons stay in the bar as far as there is room without cutting the date or the place short.
+  In a narrower window they move into the More menu from the end: first **Download** and the
+  toolbar, then the view buttons, and last the slideshow and the heart.
 
 ### The date under the picture
 
@@ -69,15 +72,18 @@ date a picture gets and how to change it.
 
 ### The More menu
 
-**More** (⋮) at the right end of the bar holds what you do to the view rather than to the file:
+**More** (⋮) at the right end of the bar holds the bar's buttons it has no room for, in the bar's
+order:
 
-| Row                                            | What it does                                                                                                                                                        |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it. Here only when the bar has no room for it.                                                                               |
-| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found. Here only when the bar has no room for it.        |
-| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen. Here only when the bar has no room for it.                                                                                       |
-| **Show toolbar** / **Hide toolbar**            | Shows the [cog menu](#change-a-file-from-the-cog-menu)'s actions as a row of icons over the top of the picture. When you may change the file or add it to an album. |
-| **Download**                                   | Saves the original file to your device.                                                                                                                             |
+| Row                                            | What it does                                                                                                                                                     |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                                               |
+| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                                           |
+| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                                       |
+| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found.                                                |
+| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                                               |
+| **Show toolbar** / **Hide toolbar**            | Shows the [cog menu](#change-a-file-from-the-cog-menu)'s actions as a row of icons at the top of the viewer. When you may change the file or add it to an album. |
+| **Download**                                   | Saves the original file to your device.                                                                                                                          |
 
 The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
 picture to picture and the next time you open it.
@@ -85,7 +91,8 @@ picture to picture and the next time you open it.
 ### The toolbar
 
 **Show toolbar** floats the actions of the [cog menu](#change-a-file-from-the-cog-menu) as icons on
-a dark, rounded strip just inside the top of the picture: **Edit**, **Share**, **Add to album**,
+a dark, rounded strip at the top of the viewer, where it stays from picture to picture (on a phone
+under the date, with larger icons): **Edit**, **Share**, **Add to album**,
 **Edit faces**, **Edit text**, **Restore…**, **Rotate left**, **Rotate right** and the others, as
 the file allows. Point at an icon to see its name. An action that is on, such as drawing faces or a
 mirrored picture, has its icon coloured. The toolbar works with the details panel closed, and is
@@ -157,8 +164,8 @@ narrower.
 - The date sits in a dark pill centred over the top of the picture, with the time beneath it.
 - The bar under the picture keeps the position in the list and the place, and the text, faces and
   fullscreen buttons as far as there is room.
-- ⋮ in the top right corner holds **Favourite**, **Start slideshow**, the rows of the
-  [More menu](#the-more-menu) and **Chat**.
+- ⋮ in the top right corner holds **Favourite**, **Start slideshow**, the text, faces and
+  fullscreen buttons the bar has no room for, **Show toolbar**, **Download** and **Chat**.
 - The details panel is closed when the viewer opens. Held upright, swipe up on the picture to pull
   up the details sheet over the bottom half, and swipe down on it to put it away. Held sideways,
   the details open as a panel on the right: press **Show details** beside ⋮, or swipe up, and swipe
@@ -183,8 +190,9 @@ fullscreen. An iPhone has no fullscreen for web pages, so there the viewer stays
 
 ## The details panel
 
-On a computer the details panel opens on the right each time you open the viewer. Press the
-details button (ⓘ) or <kbd>i</kbd> to close it while you look; it stays closed until you close the
+On a computer the details panel opens on the right each time you open the viewer. Press
+**Hide details** at its foot, under the divider, or <kbd>i</kbd> to close it while you look; the
+handle at the right edge or <kbd>i</kbd> brings it back, and it stays closed until you close the
 viewer. On a phone you pull it up, as described above.
 
 Each part of the panel is a row with an icon at its left. A row appears only when it has something
@@ -769,7 +777,7 @@ the selection bar. Visitors who are not signed in have no favourites and see no 
 | Signed in, and may change the file   | Everything on this page.                                                                                                                                                                               |
 | Signed in, and may only see the file | The cog menu holds only **Add to album**. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit subtitles**, **Edit faces**, rotate or mirror. |
 | A visitor who is not signed in       | No heart, no cog menu and no sharing chip. **Path** is plain text.                                                                                                                                     |
-| Someone who opened a share link      | The pictures without the details panel; the details button and <kbd>i</kbd> are not there.                                                                                                             |
+| Someone who opened a share link      | The pictures without the details panel; its handle and <kbd>i</kbd> are not there.                                                                                                                     |
 
 [Sharing](../guide/sharing.md) explains who can see what.
 
