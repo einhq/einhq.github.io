@@ -181,10 +181,10 @@ been taken as a place, or the other way round; remove that chip and search again
 3. Add more words or picks, and press <kbd>Enter</kbd>. Each pick becomes a chip.
 
 <kbd>Esc</kbd> closes the list without picking. An `@` word you type without picking from the list
-stays in the box as ordinary words, and the yellow note mentions it. The Year page and the Map have
-boxes of their own that take `@` for a person, a location or a label; see
-[Media, Year and labels](media.md#narrow-the-year-to-a-person-a-place-or-a-label) and
-[Locations and the map](places.md).
+stays in the box as ordinary words, and the yellow note mentions it. The Year page, an album and
+the Map have boxes of their own that take `@` for a person, a location or a label; see
+[Media, Year and labels](media.md#narrow-the-year-to-a-person-a-place-or-a-label),
+[Albums](albums.md#search-inside-an-album) and [Locations and the map](places.md).
 
 ## Search with a picture
 

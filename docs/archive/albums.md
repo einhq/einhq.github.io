@@ -110,11 +110,34 @@ address (`?tab=map`, `?tab=info`, `?tab=trip`), so a link can open the album on 
 
 ### The Media tab
 
+- **Search the album**, the box at the left, finds pictures in this album alone; see
+  [Search inside an album](#search-inside-an-album).
 - **Show** narrows the grid to one kind: **All**, **Images**, **Video**, **Audio** or
   **Documents**. It offers only the kinds the album holds, and is not there at all when the album
   holds one kind.
 - **Sort** puts the pictures **Oldest first** (the default) or **Newest first**. EiN remembers the
   choice in this browser, for every album.
+
+#### Search inside an album
+
+The box at the top of the Media tab, **Search the album — words, or type @ to pick someone**,
+searches the pictures of this album and nothing else. It stays in the top bar while you scroll.
+
+- **`@` and a name** picks a person, a location or a label from the list that opens, as in
+  [search](search.md#pick-something-exactly-with-). Press <kbd>Enter</kbd> and the grid keeps only
+  the pictures that person is in — by their face, a tag without a box, or their voice in a recording
+  — or that were taken at that location, or that carry that label. The pick becomes a chip; its
+  **×** removes it. Several picks must all hold: `@Peggy Wrenfield @Arthur Wrenfield` shows the
+  pictures with both.
+- **Words** describe what a picture shows, says or contains: `boat on the beach`. The grid becomes one
+  list with the best matches first and a match percentage on each tile, and **Sort** is not there
+  while words are searched.
+
+Picks and words go together: `@Peggy Wrenfield cake` finds the pictures of Peggy that look like a
+cake. With only picks, the pictures stay in their days, in the order **Sort** says. When nothing
+matches, the grid says **Nothing in this album matches.** The search goes into the page's address
+(`?subject=person:peggy-wrenfield`, `?q=cake`), so a link opens the album already searched; a
+person's [timeline](family.md#what-appears-on-a-timeline) links to their albums this way.
 
 Folders inside the album come first, as square cards (see
 [Folders inside an album](#folders-inside-an-album)). The pictures follow in sections, one for each
