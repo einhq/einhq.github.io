@@ -71,7 +71,7 @@ Both choices are kept in the address, so a link opens the same view.
 
 To name someone from their card:
 
-1. Click in the card's **Who is this?** box and type the name, for example `Ruby Wrenfield`. Once you type, the box lists the matching people who already have a name.
+1. Click in the card's **Who is this?** box and type the name, for example `Ruby Wrenfield`. Once you type, the box lists the matching people who already have a name, the best match first: the name exactly as typed, then names holding every typed word whole, then names where a typed word only starts or is inside a word (`Johan` in `Johansson`). A match in someone's full or birth name comes after the same match in the name they go by.
 2. Press <kbd>Enter</kbd>, or click one of the listed people, which adds this person to them at
    once. While it is saved, the box shows a spinner and the card fades in and out until it leaves
    the page.
