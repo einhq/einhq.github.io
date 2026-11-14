@@ -70,7 +70,6 @@ date a picture gets and how to change it.
 | Row                                            | What it does                                                                                                                             |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found. For photos and videos. |
-| **Edit text** / **Add text**                   | Opens the text for writing by hand. Shown on photos you may change.                                                                      |
 | **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                       |
 | **Download**                                   | Saves the original file to your device.                                                                                                  |
 
@@ -278,6 +277,7 @@ may change the file, and for any signed-in reader for **Add to album**.
 | **Share**                             | Readers who may change the file                                                    | Opens the Share dialog for this file. See [Sharing](../guide/sharing.md).                                                                                                                                                                                                                                    |
 | **Add to album**                      | Signed-in readers                                                                  | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
 | **Edit faces**                        | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
+| **Edit text**, **Add text**           | Readers who may change the file, on photos                                         | Opens the text in the picture to correct it, or to write it by hand. See [Correct the text, or add it by hand](#correct-the-text-or-add-it-by-hand).                                                                                                                                                         |
 | **Edit subtitles**, **Add subtitles** | Readers who may change the file, on videos and recordings                          | Opens what is said, line by line, beside the video or recording, to correct it. See [Correct the subtitles](#correct-the-subtitles).                                                                                                                                                                         |
 | **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, blur taken out, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo); to restore many at once, [Restore many photos at once](#restore-many-photos-at-once).                      |
 | **Remove a blemish…**                 | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Paint over a spot, a stain or a tear to have it filled, in a copy beside the photo. See [Remove a blemish](#remove-a-blemish).                                                                                                                                                                               |
@@ -499,18 +499,19 @@ staging area is read once it is filed into an album.
 
 ![The viewer on a handwritten postcard from 1968, with the text read from it laid over a darkened copy in a typewriter face: Dear Joan, the cottage is ours! The boys are in the river all day and Helen has read every book in the house. Arthur is on the roof with a bucket of tar, singing. Back on the 30th. Love, Peggy](../../assets/shots/postcard.webp "Show text lays the words read from Peggy's postcard over the picture. The pencil at its top right opens the text for correcting.")
 
-- Each picture opens without its text. **Show text**, in the bar under the picture, or <kbd>t</kbd>,
-  darkens the picture and lays the text over it in a typewriter face. Long text scrolls. The button
-  is there only when text was read.
-- **Hide text**, or <kbd>t</kbd> again, takes it away. Moving to another picture hides it too, and
-  it is hidden during a slideshow.
+- **Show text**, in the bar under the picture, or <kbd>t</kbd>, darkens the picture and lays the
+  text over it in a typewriter face. Long text scrolls. The button is there only when text was read.
+- **Hide text**, or <kbd>t</kbd> again, takes it away.
+- The text is hidden until you first show it. After that the viewer keeps your choice, shown or
+  hidden, from picture to picture and the next time you open it on this device, so you can page
+  through a scanned letter. It is hidden during a slideshow.
 
 The text is also under **Text in image** in the [Details section](#the-details-section), and
 search finds pictures by it; see [Search and the finder](search.md).
 
 ### Correct the text, or add it by hand
 
-1. In the More menu, choose **Edit text**, or **Add text** when nothing was read. With the text
+1. In the [cog menu](#change-a-file-from-the-cog-menu), choose **Edit text**, or **Add text** when nothing was read. With the text
    shown, the pencil at its top right does the same.
 2. The dialog **Text in the picture** opens: the picture on the left (above, on a narrow screen), which you can zoom to read
    closely, and a text box on the right.
@@ -779,7 +780,7 @@ open the file on your device. Its text can still be found with search; see
 
 **There is no Show text under the picture.**
 No text was read from this picture, or it is a video or a recording. Add the text yourself with
-**Add text**, if you may change the file.
+**Add text** in the cog menu, if you may change the file.
 
 **Start slideshow is greyed out.**
 The list holds only one file. Open the viewer from an album or a longer list.
