@@ -290,9 +290,9 @@ do not add entries to it directly.
 | "&lt;child&gt; was born", with "Child of &lt;name&gt;"                         | Their children's **Born**                                |
 | An album                                                                       | The albums with pictures of them                         |
 
-An album's title opens the album. **Show only &lt;name&gt;** beside its number of items opens it
-showing only the pictures of the person whose timeline it is, with them picked in the album's
-search ([Search inside an album](albums.md#search-inside-an-album)).
+An album's title opens the album. Its number of items, "12 items", counts the pictures of the
+person whose timeline it is, and opens the album showing only those, with them picked in the
+album's search ([Search inside an album](albums.md#search-inside-an-album)).
 
 A location's timeline, on the left of its **Info** tab, shows its residents moving in and out, its own events and the albums
 with photos taken there. When it has none, it says "Nothing recorded at &lt;location&gt; yet.
