@@ -121,7 +121,8 @@ The list goes round: after the last file comes the first again, and before the f
 last.
 
 On a computer the old picture fades out where it is, and the new one fades in from the old one's
-edge and settles in the middle: from its left edge going forward, from its right edge going back. On
+edge and settles in the middle: from its left edge going forward, from its right edge going back. Stepping again within half a
+second, as when you run through many pictures, only fades, without the slide. On
 a touch screen the next picture slides in under your finger; the position, the date and the place
 turn to it once it covers more than half the screen, and a swipe you take back before letting go
 turns them back.
