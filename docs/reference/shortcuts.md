@@ -236,7 +236,7 @@ explains each.
 | <kbd>Esc</kbd>               | Closes what lies over the picture first: the enlarged map, the text dialog, drawing a face box. Then stops a slideshow. Then closes the viewer. |
 
 In the **Who is this?** box of an unnamed face, <kbd>Enter</kbd> names it. In the **Text in the
-picture** dialog, <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>⌘</kbd>+<kbd>Enter</kbd> on a Mac) saves.
+picture** dialog, <kbd>Enter</kbd> saves and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.
 While a dialog lies over the viewer, the viewer's keys rest.
 
 #### Videos and recordings
@@ -379,7 +379,8 @@ These keys work with the [Assistant](../assistant/index.md) installed.
 ### The chat
 
 In the chat box ([Chatting with the assistant](../assistant/chat.md)), <kbd>Enter</kbd> sends the
-question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.
+question and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line. The comment box on a file and the
+**Text in the picture** dialog work the same way.
 
 The side drawer the chat opens in can be made wider or narrower from the keyboard: move to its edge
 (**Resize side panel**) with <kbd>Tab</kbd>, then <kbd>←</kbd> makes it 20 pixels wider and

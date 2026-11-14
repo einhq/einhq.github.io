@@ -108,8 +108,7 @@ async function ask(page: Page, question: string) {
   const input = page.getByPlaceholder(/Ask about what is kept here/);
   await input.click();
   await input.fill(question);
-  // Enter is a new line in the box; Ctrl+Enter sends.
-  await page.keyboard.press('Control+Enter');
+  await page.keyboard.press('Enter');
   // Done when it has run its commands, is neither running nor thinking, and the text holds still
   // between two looks: the answer streams in after the last command.
   let before = '';
