@@ -33,7 +33,7 @@ The **System** tab of Settings starts with **Set up**: pages that each set up on
 | **Processing**        | [Media](../media/index.md)             | How much media work runs at once, as a level: **Standard**, **More** or **Full** for the machine's cores                                                                |
 | **Module sources**    | EiN                                    | Where published modules are looked for, one organisation to a row, and the tokens for private ones                                                                      |
 
-A module that is installed adds its own pages there, and a module's pages are also at the top of its **Settings** tab under **Settings → Modules**.
+A module that is installed adds its own pages there, and they are also on its **Set up** tab under **Settings → Modules**.
 
 1. Sign in as an administrator, and choose **Settings** in the sidebar, under **System**. The page opens on the first page under **Set up**.
 2. Choose the page in **Set up**, on the left.

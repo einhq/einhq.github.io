@@ -57,35 +57,40 @@ Type in the filter box to narrow the list by name or description. **Show only ac
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
 Choose a module to open its panel. At the top, on a tile in the module's colour, are its picture,
-name, version, state and what it is; a long description shows three lines, and **More** opens the rest. Under them are the
-buttons: **Update** and **Remove** for the administrator, on a module installed from its repository
-(see [Update a module](#update-a-module) and [Remove a module](#remove-a-module)), and
-**Documentation**, which opens the module's own page in **Documentation**, with its pages in this
-guide and every command, setting and node type it brings. When its setup failed, why is said under
-the tile. Below are tabs; **Overview** and **Dependencies** are always there, the others show
-how many things each holds, and a tab the module has nothing for is left out:
+name, version and state, and under them what it is; a long description shows three lines, and
+**More** opens the rest. At the top right are the buttons: **Update** and **Remove** for the
+administrator, on a module installed from its repository (see [Update a module](#update-a-module)
+and [Remove a module](#remove-a-module)), and **Documentation**, which opens the module's own page
+in **Documentation**, with its pages in this guide and every command, setting and node type it
+brings. When its setup failed, why is said under the tile. Below are tabs; **Overview** is always
+there, the others show how many things each holds, and a tab the module has nothing for is left
+out:
 
-| Tab              | What it shows                                                                                                                                                                 |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Overview**     | Its details, and beside them **In the guide**: its pages in this guide, or "The guide has no section on it."                                                                  |
-| **Dependencies** | The modules it needs (**It needs**) and the modules that need it (**Needs it**), with the versions accepted, the version installed and each one's state, or **Not installed** |
-| **Services**     | Its background services, their state now and how long they have been up. They are started and stopped on the **Status**'s services tab.                                       |
-| **Pages**        | The addresses of the pages it adds; one without a parameter is a link to the page                                                                                             |
-| **Commands**     | Its commands; each opens to its help                                                                                                                                          |
-| **Settings**     | Its settings with their values, each marked **personal** or **system**; a row opens to the setting's description and, if you may change it, its control                       |
-| **Node types**   | The kinds of node it defines, with how many of each exist                                                                                                                     |
+| Tab            | What it shows                                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Overview**   | What it needs and what needs it, its details, and who has it                                                                                                                                     |
+| **Set up**     | For the administrator, the module's pages that each set up one thing, the same ones as under **Set up** on the **System** tab (see [Configuration](configuration.md#set-up-one-thing-at-a-time)) |
+| **Services**   | Its background services, their state now and how long they have been up. They are started and stopped on the **Status**'s services tab.                                                          |
+| **Pages**      | The addresses of the pages it adds; one without a parameter is a link to the page                                                                                                                |
+| **Commands**   | Its commands; each opens to its help                                                                                                                                                             |
+| **Settings**   | Its settings with their values, each marked **personal** or **system**; a row opens to the setting's description and, if you may change it, its control                                          |
+| **Node types** | The kinds of node it defines, with how many of each exist                                                                                                                                        |
 
-The details on **Overview** are:
+**Overview** starts with **Needs**, the modules it needs, and **Needed by**, the modules that need
+it, when there are any: a row each with the versions accepted, such as "Accepts ^0.14.0", the
+version installed, and a badge when that module does not work or is **Not installed**. Choose a row
+to open that module. Beside them, or under them on a narrow screen, are its **Details**:
 
-| Detail           | What it says                                                                                                                                            |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Available to** | **Everyone**, or the groups it is kept to; see [Keep a module to some groups](#keep-a-module-to-some-groups)                                            |
-| **Version**      | The version in its `mod.json`                                                                                                                           |
-| **Core API**     | The version of EiN's module API it is written for, such as `^0.7.0`                                                                                     |
-| **Source**       | The repository it was installed from, as a link, or **Comes with the deployment**                                                                       |
-| **Installed**    | The release, branch or tag it was installed at and its commit, such as `v0.1.0 · 5e1c07a42`, and when; one installed at a commit shows the commit alone |
-| **Set up**       | When EiN last set it up, or **Not since EiN started**                                                                                                   |
-| **Folder**       | Where it is inside EiN, such as `/usr/modules/archive`                                                                                                  |
+| Detail        | What it says                                                                                                                                                                             |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Source**    | The repository it was installed from, as a link, or **Comes with the deployment**                                                                                                        |
+| **Installed** | The release, branch or tag it was installed at and its commit, such as `v0.1.0 · 5e1c07a42`, and when it was installed or last updated; one installed at a commit shows the commit alone |
+| **Core API**  | The version of EiN's module API it is written for, such as `^0.7.0`                                                                                                                      |
+| **Folder**    | Where it is inside EiN, such as `/usr/modules/archive`                                                                                                                                   |
+
+Under them, **Available to** says who has the module; see
+[Keep a module to some groups](#keep-a-module-to-some-groups). Its version is the one in its
+`mod.json`, beside its name at the top.
 
 A module's system settings are the same ones the **System** tab lists, and its personal ones are
 those on **Profile → Preferences**; they save the same way:
@@ -291,14 +296,36 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
 - On **Settings → Modules**, choose **Install** beside the filter box and choose **Update** on a
   module under **Updates**.
 - Or open the module's panel. A module installed from its repository has **Update** and
-  **Remove** under its name, and its **Overview** says under **Source** and **Installed** which
-  repository and commit it came from and when. **Update** there fetches the newest release for one installed at a release, and
-  the newest commit of the branch for one installed from a branch. One installed at any other tag
-  gets that tag again, and one installed at a commit stays there, and its panel offers no
-  **Update**. The top of the tab says how it goes, as for an install, and when it ends what it
-  updated, or that there was nothing newer.
-- In the terminal, `mod install archive` updates an installed module. The same commit again is
-  left alone: `archive is installed at 5e1c07a42 (v0.1.0) already`.
+  **Remove** at the top right, and its **Overview** says under **Source** and **Installed** which
+  repository and commit it came from and when. When the tab opens, EiN asks the module's repository
+  what an update would bring, and the button says so: **Update to 0.3.0** when there is something
+  newer, or a greyed-out **Latest version** when there is not; in the list, a module with something
+  newer has an arrow beside its version. **Update** fetches the newest release this EiN can run for
+  one installed at a release, and the newest commit of the branch for one installed from a branch,
+  which the button names by its commit when the version is the same. One installed at any other
+  tag gets that tag again, and one installed at a commit stays there, and its panel offers no
+  **Update**. When the repository does not answer, the button reads **Update** and tries all the
+  same. The top of the tab says how it goes, as for an install, and when it ends what it updated, or
+  that there was nothing newer.
+- In the terminal, `mod outdated` lists the modules with something newer, and `mod install archive`
+  updates an installed module. The same commit again is left alone:
+  `archive is installed at 5e1c07a42 (v0.1.0) already`.
+
+```bash
+# in EiN's terminal
+mod outdated
+```
+
+```text
+archive 0.3.1 → 0.4.0 (v0.4.0)
+ems 0.1.2 → 0.1.3 (v0.1.3)
+```
+
+`mod outdated` asks the repository of each module installed from one what `mod install` would
+update it to, the same way **Update** does, and lists those that would move on, with the version, or
+the commit when the version is the same, and the release or ref. Names after it check only those
+modules. When every one is current it says `Every module is up to date`; a module whose repository
+does not answer is named with why, and the others are still listed.
 
 An update installs what the new version needs and is missing. It is refused when an installed
 module depends on this one and does not accept the new version; the message names them, for
@@ -331,8 +358,9 @@ its personal settings, and the module itself on **Settings → Modules** and on 
 reference. For everyone else it is as if it were not installed.
 
 - On **Settings → Modules**, open the module. **Available to**, on its **Overview**, says who has
-  it. Choose **Change**, choose the groups in the box and choose **Save**; empty the box to make it
-  everyone's again.
+  it, and lists the groups it can be kept to, each with its picture and what it is for. Tick a group
+  to keep the module to it, and untick it to let it go; each change is saved as you make it. With
+  none ticked the module is everyone's again.
 - When you install a module there, **Install** asks first who it is for: **Everyone**, or **Only
   some groups** with the groups to choose. The modules it needs and brings along stay everyone's,
   and an **Update** asks nothing and keeps whom the module was for.
@@ -386,10 +414,11 @@ Removing the module forgets its groups.
 ## Remove a module
 
 1. Open **Settings → Modules** and choose the module.
-2. Choose **Remove** under its name.
-3. EiN says what goes: "Removing assistant stops its services and takes its commands, pages and
-   files away. What it made in the archive stays." When other modules need it, it adds which ones
-   and that they will not work without it. Choose **Remove assistant** to go ahead, or **Cancel**.
+2. Choose **Remove** at the top right of its panel.
+3. A dialog, **Remove assistant?**, says what goes: "Removing assistant stops its services and
+   takes its commands, pages and files away. What it made in the archive stays." When other modules
+   need it, it adds which ones and that they will not work without it. Choose **Remove assistant**
+   to go ahead, or **Cancel**.
 
 In the terminal, `mod remove` asks first, and `--force` skips the question:
 
