@@ -323,6 +323,10 @@ A picture gets its place from the first of these that has one:
 A scan's own GPS position is where it was scanned, so EiN ignores it, and a Takeout's place for a
 scan too, unless someone set that place in Google Photos.
 
+A position of exactly 0,0, in the sea off West Africa, is what a camera or phone writes when it has
+no GPS fix, and Google Photos when it has no place. EiN takes it for no place, in the file and in a
+sidecar alike, and **Set location** refuses it.
+
 **Street addresses.** EiN looks up each picture's position once in OpenStreetMap's Nominatim
 service, which turns coordinates into a street address. Only the coordinates are sent, never the
 picture. The address shows in the place section of the details panel, and in the viewer's bar when
