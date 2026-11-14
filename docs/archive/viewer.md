@@ -36,8 +36,9 @@ On a computer:
 - **Top right**: the cog, which shows or hides the [toolbar](#the-toolbar) when you may change the
   file, and close (×) beside it. They sit at the top of the details panel while it is open, and over
   the picture's background while it is hidden.
-- **Left and right edges**: arrows to the previous and the next file. With the
-  [details panel](#the-details-panel) hidden, a handle sticks out of the right edge low down,
+- **Over the picture**: an arrow to the next file while the pointer is on the right half of the
+  picture, and to the previous one on the left half. With the [details panel](#the-details-panel)
+  hidden, a handle sticks out of the right edge low down,
   above the bar: **Show details (i)** brings the panel back.
 - **Chat**, where the assistant module is installed: at the right end of the details panel's foot,
   or in the handle under **Show details** while the panel is hidden. It opens the assistant in a
@@ -108,14 +109,22 @@ at once, select them in the grid and use **Download** in the selection bar.
 
 ## Move between files and close the viewer
 
-- **Next file**: <kbd>→</kbd>, the arrow at the right edge, or swipe left on a touch screen.
-- **Previous file**: <kbd>←</kbd>, the arrow at the left edge, or swipe right.
+- **Next file**: <kbd>→</kbd>, a click on the right half of the picture (its arrow shows while you
+  point there), or swipe left on a touch screen.
+- **Previous file**: <kbd>←</kbd>, a click on the left half, or swipe right.
+
+A double-click on a photo zooms instead, so a click on a half steps a moment after it, once it is
+not the start of a double-click. On a video, a recording or a document, a click on the player is the
+player's; click beside it, or on the arrow.
 
 The list goes round: after the last file comes the first again, and before the first comes the
 last.
 
-While the next picture slides in, the position, the date and the place turn to it once it covers
-more than half the screen. A swipe you take back before letting go turns them back.
+On a computer the old picture fades out where it is, and the new one fades in from the old one's
+edge and settles in the middle: from its left edge going forward, from its right edge going back. On
+a touch screen the next picture slides in under your finger; the position, the date and the place
+turn to it once it covers more than half the screen, and a swipe you take back before letting go
+turns them back.
 
 To close the viewer, press × at the top right, press <kbd>Esc</kbd>, use the browser's Back button,
 or on a phone swipe down on the picture. The picture shrinks back into its tile, so you see where
