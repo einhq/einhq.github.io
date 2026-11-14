@@ -272,7 +272,12 @@ podman compose up -d</code></pre></div>
 </div>
 <p>EiN&#39;s settings decide how much it asks for; the media service&#39;s decide how much it does. Asking for more than the media service runs at once only moves the wait into its queue.</p>
 <h2 id="let-more-work-run-at-once">Let more work run at once<a class="anchor" href="#let-more-work-run-at-once" aria-label="Link to this section"></a></h2>
-<p>With the Archive, on a machine with more cores than the minimum, raise the media worker&#39;s budget so that more thumbnails, fingerprints and encodings run side by side:</p>
+<p>With the Archive, on a machine with more cores than the minimum, raise the media worker&#39;s budget so that more thumbnails, fingerprints and encodings run side by side. The quickest way is a level:</p>
+<ol>
+<li>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>, and <strong>Processing</strong> under <strong>Set up</strong>.</li>
+<li>Choose <strong>More</strong>, half the machine&#39;s cores, or <strong>Full</strong>, all of them but one, and <strong>Save</strong>. The page says in a sentence what the level comes to, and the line under it &quot;Restarted media-worker, pipeline-engine.&quot;</li>
+</ol>
+<p><a href="../media/index.html#how-much-runs-at-once">Media</a> says what each level sets. To set the budget yourself instead:</p>
 <ol>
 <li>Sign in as an administrator and choose <strong>Settings</strong> in the sidebar, under <strong>System</strong>.</li>
 <li>Choose the category <strong>Processing</strong>.</li>

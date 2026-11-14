@@ -536,14 +536,17 @@ line as well.</p>
 organisations on GitHub, Forgejo or Gitea, as their addresses separated by spaces. It is
 <code>https://github.com/einhq</code> by default. Each repository named <code>module-&lt;name&gt;</code> in a source is a
 module; <code>mod install &lt;name&gt;</code> takes the first source that has it, and a module&#39;s dependencies come
-from its own organisation first. Change it on <strong>Settings → System</strong>, in its <strong>Modules</strong> group, or
-in the terminal:</p>
+from its own organisation first. Change it on <strong>Settings → System → Module sources</strong>, under
+<strong>Set up</strong>: one organisation to a row, <strong>Add a source</strong> for another, and under <strong>Now</strong> the modules
+each source has, or why EiN could not read it. It is also in the <strong>Modules</strong> category, and in the
+terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 config <span class="hljs-built_in">set</span> CFG_MODULE_SOURCES <span class="hljs-string">&quot;https://github.com/einhq https://forge.example:3000/wrenfield&quot;</span></code></pre></div>
 <p>A source that is not public needs an access token. <strong>Tokens for module sources</strong>,
 <code>CFG_MODULE_SOURCES_KEY</code>, takes one per host, as <code>host=token</code> separated by spaces, such as
 <code>forge.example:3000=…</code>. Like every key, nobody can read it back once set, and EiN sends each token
-only to its own host. <a href="../reference/settings.html#cfg_module_sources">The settings reference</a> has
+only to its own host. On the <strong>Module sources</strong> page, what is typed under <strong>Tokens for private
+sources</strong> replaces every token set before. <a href="../reference/settings.html#cfg_module_sources">The settings reference</a> has
 both.</p>
 <p>A source that does not answer is named above the published modules, as &quot;<a href="https://forge.example:3000/wrenfield">https://forge.example:3000/wrenfield</a>
 did not answer&quot; with the reason, and the other sources are still listed.</p>

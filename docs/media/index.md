@@ -208,7 +208,24 @@ says what to do.
 
 ## How much runs at once
 
-These settings are in the **Processing** category of **Settings → System**, or set with
+**Settings → System → Processing**, under **Set up**, sets how much media work runs at once as a
+level, and says in a sentence what the level comes to:
+
+| Level        | What it sets                                                                                                    |
+| ------------ | --------------------------------------------------------------------------------------------------------------- |
+| **Standard** | The settings' own defaults below: a little at a time, whatever the machine                                      |
+| **More**     | A media worker budget of half the machine's cores                                                               |
+| **Full**     | A budget of all the machine's cores but one, which is left to the database, for a machine that does little else |
+
+Each level sets `CFG_CPU_SLOTS`, `CFG_CPU_WORKERS` and `CFG_CPU_NON_ENTRY_SLOTS` below, two in five of
+the budget kept for work after ingest, and core's `CFG_PIPELINE_MAX_CONCURRENT`, and keeps the
+budget at 2 or more, which a video's encoding takes. A level that comes to the same as one before it
+is not offered, so a machine of two cores has **Standard** alone. Values set one by one that are no
+level's are shown as they are, and kept until a level is chosen and saved. Above a budget of 4, raise
+the media service's `EMS_LIMIT_TOOLS` in `~/ein/.env` to match, as
+[Performance](../admin/performance.md#let-more-work-run-at-once) shows.
+
+These settings, and the model requests the levels leave alone, are in the **Processing** category of **Settings → System**, or set with
 `config set`, and come with the Media module. Saving one restarts the worker that reads it, and work
 in progress is picked up again. [Configuration](../admin/configuration.md) explains how.
 

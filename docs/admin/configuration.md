@@ -21,18 +21,24 @@ Apart from the settings, the installation has its own environment in `.env`, in 
 
 The **System** tab of Settings starts with **Set up**: pages that each set up one thing, with only the settings it takes and in plain words, such as choosing who answers the chat and giving its key. Every setting is still in the categories under them, a step further on, and the two never disagree: a page under **Set up** saves the same settings the categories show.
 
-| Under **Set up**      | From                                   | What it sets up                                                                                                                          |
-| --------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **Language and time** | EiN                                    | The archive's language, how dates and times are written, chosen by name with how each writes today's date, and which time zone EiN is in |
-| **Language model**    | The [Assistant](../assistant/index.md) | Who answers the chat: the model on this machine, Anthropic, OpenAI or Mistral AI with your key, or another service                       |
-| **MQTT broker**       | [Automation](../automation/index.md)   | The broker devices are heard on, and the account EiN signs in with                                                                       |
+| Under **Set up**      | From                                   | What it sets up                                                                                                                                                         |
+| --------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Language and time** | EiN                                    | The archive's language, how dates and times are written, chosen by name with how each writes today's date, and which time zone EiN is in                                |
+| **Sign-in**           | EiN                                    | How long a browser stays signed in unused, how long its session lasts, and how long a browser that opened a share link keeps it, each as a length of time               |
+| **Language model**    | The [Assistant](../assistant/index.md) | Who answers the chat: the model on this machine, Anthropic, OpenAI or Mistral AI with your key, or another service                                                      |
+| **MQTT broker**       | [Automation](../automation/index.md)   | The broker devices are heard on, and the account EiN signs in with                                                                                                      |
+| **Restreamer**        | [Automation](../automation/index.md)   | Where cameras' live views and pictures come from, its RTSP for the media service, and its password                                                                      |
+| **Media service**     | The [media service](../ems/index.md)   | Where the media service answers, its key, and how much of the graphics card its models may hold                                                                         |
+| **Transcription**     | The [media service](../ems/index.md)   | The language spoken in recordings or that it is detected, the pause that ends a line, word or line timings, and whether recordings are transcribed again after a change |
+| **Processing**        | [Media](../media/index.md)             | How much media work runs at once, as a level: **Standard**, **More** or **Full** for the machine's cores                                                                |
+| **Module sources**    | EiN                                    | Where published modules are looked for, one organisation to a row, and the tokens for private ones                                                                      |
 
 A module that is installed adds its own pages there, and a module's pages are also at the top of its **Settings** tab under **Settings → Modules**.
 
 1. Sign in as an administrator, and choose **Settings** in the sidebar, under **System**. The page opens on the first page under **Set up**.
 2. Choose the page in **Set up**, on the left.
 3. Fill it in. **Save** and **Cancel** appear once something is changed; while something is missing, such as a key, a line beside **Save** says what.
-4. Choose **Save**. What belongs together is saved at once, so a service that reads several of the settings restarts once, and a line says what was restarted, such as "Restarted llm-link.". A page that can tell whether it works says so under **Now**: whether the language model answers, or whether EiN is connected to the broker.
+4. Choose **Save**. What belongs together is saved at once, so a service that reads several of the settings restarts once, and a line says what was restarted, such as "Restarted llm-link.". A page that can tell whether it works says so under **Now**: whether the language model, the media service or the restreamer answers, whether EiN is connected to the broker, or which modules each module source has.
 
 The time zone is the one setting on **Language and time** that is not saved there: the installation sets it, as `TZ` in `.env`, and the page only shows it.
 

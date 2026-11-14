@@ -219,7 +219,7 @@ Set the media service's share on the **Media service** tab of the Status page: u
 
 The share takes effect at once. Models that no longer fit leave the card, those at work when their work is done, and each loads next on the card or the processor as the share leaves room for it. **none** runs every model on the processor, and once the media service has finished the work it is doing, none of its programs holds any of the card, so `nvidia-smi` no longer lists them. Speech needs 4.4 GB of the share for its model on the card; with less, recordings are transcribed on the processor, at about twice their length. Transcripts already made stay as they are, wherever they were made.
 
-The slider sets [`CFG_EMS_CARD_SHARE_MB`](../reference/settings.md#cfg_ems_card_share_mb), and the `ems-link` service gives it to the media service, again after each of its restarts. The terminal sets it the same way:
+The slider sets [`CFG_EMS_CARD_SHARE_MB`](../reference/settings.md#cfg_ems_card_share_mb), and the `ems-link` service gives it to the media service, again after each of its restarts. **Settings → System → Media service** sets the same share with a slider of its own, saved with **Save** together with the media service's address and key; **Its own share** there goes back to the share the media service starts with. The terminal sets it the same way:
 
 ```bash
 # in EiN's terminal

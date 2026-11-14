@@ -429,8 +429,10 @@ bring them back.
 organisations on GitHub, Forgejo or Gitea, as their addresses separated by spaces. It is
 `https://github.com/einhq` by default. Each repository named `module-<name>` in a source is a
 module; `mod install <name>` takes the first source that has it, and a module's dependencies come
-from its own organisation first. Change it on **Settings → System**, in its **Modules** group, or
-in the terminal:
+from its own organisation first. Change it on **Settings → System → Module sources**, under
+**Set up**: one organisation to a row, **Add a source** for another, and under **Now** the modules
+each source has, or why EiN could not read it. It is also in the **Modules** category, and in the
+terminal:
 
 ```bash
 # in EiN's terminal, as the administrator
@@ -440,7 +442,8 @@ config set CFG_MODULE_SOURCES "https://github.com/einhq https://forge.example:30
 A source that is not public needs an access token. **Tokens for module sources**,
 `CFG_MODULE_SOURCES_KEY`, takes one per host, as `host=token` separated by spaces, such as
 `forge.example:3000=…`. Like every key, nobody can read it back once set, and EiN sends each token
-only to its own host. [The settings reference](../reference/settings.md#cfg_module_sources) has
+only to its own host. On the **Module sources** page, what is typed under **Tokens for private
+sources** replaces every token set before. [The settings reference](../reference/settings.md#cfg_module_sources) has
 both.
 
 A source that does not answer is named above the published modules, as "https://forge.example:3000/wrenfield

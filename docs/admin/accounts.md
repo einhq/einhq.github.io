@@ -248,17 +248,18 @@ see only through it.
 
 ## What new accounts start with
 
-The **Permissions** tab has four cards. Each says in a sentence what its saved values come to, and
+The **Permissions** tab has three cards. Each says in a sentence what its saved values come to, and
 each setting on it is saved on its own with **Save change**, as on the **System** tab. A value
 changed here is marked **Set here**, and **Restore inherited value** clears it again.
 
-| Card                 | Setting                                                                                             | What it decides                                                                                                                                                               | Default                  |
-| -------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| **New users**        | **Groups** ([`CFG_DEFAULT_USER_GROUPS`](../reference/settings.md#cfg_default_user_groups))          | The groups ticked on the New user form, besides the account's own. Empty means none.                                                                                          | `users`                  |
-| **Visitors**         | **Visitors may browse** ([`CFG_GUEST_BROWSING`](../reference/settings.md#cfg_guest_browsing))       | Whether someone who has not signed in browses as `guest`, seeing what is shared with visitors, instead of being asked to sign in.                                             | off                      |
-| **Sharing**          | **Owner**, **Group**, **Permissions**                                                               | Who owns anything created as shared, such as a new album with the Archive, which group it is shared with, and what the owner, the group and everyone else may do with it.     | creator, `users`, `0750` |
-| **Sign-in sessions** | **Browser sign-in** ([`CFG_SESSION_MAX_AGE_SEC`](../reference/settings.md#cfg_session_max_age_sec)) | How long a browser stays signed in after it was last used: opening EiN or moving between its pages. A tab left unused longer asks to sign in again, then returns to its page. | 1 day                    |
-| **Sign-in sessions** | **Idle session** ([`CFG_SESSION_EXPIRES_SEC`](../reference/settings.md#cfg_session_expires_sec))    | How long a session lasts unused. A change applies to new sign-ins.                                                                                                            | 12 hours                 |
+| Card          | Setting                                                                                       | What it decides                                                                                                                                                           | Default                  |
+| ------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| **New users** | **Groups** ([`CFG_DEFAULT_USER_GROUPS`](../reference/settings.md#cfg_default_user_groups))    | The groups ticked on the New user form, besides the account's own. Empty means none.                                                                                      | `users`                  |
+| **Visitors**  | **Visitors may browse** ([`CFG_GUEST_BROWSING`](../reference/settings.md#cfg_guest_browsing)) | Whether someone who has not signed in browses as `guest`, seeing what is shared with visitors, instead of being asked to sign in.                                         | off                      |
+| **Sharing**   | **Owner**, **Group**, **Permissions**                                                         | Who owns anything created as shared, such as a new album with the Archive, which group it is shared with, and what the owner, the group and everyone else may do with it. | creator, `users`, `0750` |
+
+How long a sign-in lasts is set on **Settings → System → Sign-in**, under **Set up**:
+[Configuration](configuration.md#set-up-one-thing-at-a-time) lists it.
 
 Leave **Visitors may browse** off for a family's own archive. With it off, someone who is not
 signed in can only sign in or open a share link. [Sharing](../guide/sharing.md#visitors-who-are-not-signed-in)

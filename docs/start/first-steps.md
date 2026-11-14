@@ -158,7 +158,7 @@ Each setting says what it does and which module brought it, and is saved on its 
 **Save change**. [Configuration](../admin/configuration.md) explains the page and the same settings
 in the terminal. Start with who sees what.
 
-Open **Settings → Permissions**. Its four cards each say in a sentence what their settings come to.
+Open **Settings → Permissions**. Its cards each say in a sentence what their settings come to.
 
 ![Settings → Permissions with the New users, Visitors, Sharing and Sign-in sessions cards](../../assets/shots/settings-permissions.webp "The demo shown here lets visitors browse; a family's own EiN keeps that off")
 
@@ -192,9 +192,9 @@ albums that exist keep their sharing, which you change with **Share**, as
 also narrow what they create, under **Profile → Preferences → How widely what you create is
 shared**.
 
-**Sign-in sessions.** A browser stays signed in for **1 day** after its last visit
+**Sign-in.** A browser stays signed in for **1 day** after its last visit
 (**Browser sign-in**), and a session unused for **12 hours** ends (**Idle session**). Lengthen both
-if the family should stay signed in longer on their own devices.
+on **Settings → System → Sign-in** if the family should stay signed in longer on their own devices.
 
 [Sharing](../guide/sharing.md) and [Permissions in depth](../admin/permissions.md) explain what each
 choice does.

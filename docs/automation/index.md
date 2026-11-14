@@ -100,6 +100,12 @@ removing modules.
 on the Settings page and need nothing from you. `./setup.sh --no-automation` takes the sidecar out
 again, and `./setup.sh --only automation` updates it alone.
 
+A restreamer of your own is set on **Settings → System → Restreamer**, under **Set up**: its address,
+its RTSP as the media service reaches it, and the password of its account `ein`, saved together so
+`automation-bridge` restarts once. Under **Now** the page says whether the restreamer answers that
+account, with how many streams it has, or why not, such as "the restreamer answered 401" for a wrong
+password. `automation-status --streams` says the same in the terminal.
+
 Under Docker, and podman run as root, EiN reaches the sidecar at the machine's address on its
 container network, so the sidecar needs `EIN_BIND` to be `0.0.0.0`: `setup.sh` says so when it is
 not.
@@ -675,6 +681,7 @@ adds:
 ```bash
 # in EiN's terminal
 automation-status                     # the broker, the drivers, the devices they drive, and the automations
+automation-status --streams           # whether the restreamer answers, and how many streams it has
 automations                           # the automations, and why one does not run
 automation-check hall-light           # what an automation's nodes would say now
 ```

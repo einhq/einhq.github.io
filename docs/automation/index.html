@@ -239,6 +239,11 @@ gives it the cameras itself.</li>
 <code>device</code> account a device added from the network is given: those settings say <strong>From deployment</strong>
 on the Settings page and need nothing from you. <code>./setup.sh --no-automation</code> takes the sidecar out
 again, and <code>./setup.sh --only automation</code> updates it alone.</p>
+<p>A restreamer of your own is set on <strong>Settings → System → Restreamer</strong>, under <strong>Set up</strong>: its address,
+its RTSP as the media service reaches it, and the password of its account <code>ein</code>, saved together so
+<code>automation-bridge</code> restarts once. Under <strong>Now</strong> the page says whether the restreamer answers that
+account, with how many streams it has, or why not, such as &quot;the restreamer answered 401&quot; for a wrong
+password. <code>automation-status --streams</code> says the same in the terminal.</p>
 <p>Under Docker, and podman run as root, EiN reaches the sidecar at the machine&#39;s address on its
 container network, so the sidecar needs <code>EIN_BIND</code> to be <code>0.0.0.0</code>: <code>setup.sh</code> says so when it is
 not.</p>
@@ -908,6 +913,7 @@ to correct, so the card you get is one that can run.</p>
 adds:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 automation-status                     <span class="hljs-comment"># the broker, the drivers, the devices they drive, and the automations</span>
+automation-status --streams           <span class="hljs-comment"># whether the restreamer answers, and how many streams it has</span>
 automations                           <span class="hljs-comment"># the automations, and why one does not run</span>
 automation-check hall-light           <span class="hljs-comment"># what an automation&#x27;s nodes would say now</span></code></pre></div>
 <p><a href="commands.html">Automation commands</a> lists every option.</p>

@@ -531,9 +531,15 @@ behind new media ([Text and transcripts kept current](../media/index.md#text-and
 
 ### Settings on EiN's side
 
-EiN's own settings for the media service are in the **Media service** and **Transcription** groups
-of **Settings → System**, with `CFG_MODEL_SLOTS`, the Media module's, in **Processing**. All can be set
-with `config set`:
+Two pages under **Set up** on **Settings → System** set the ones most often changed, in plain
+words. **Media service** sets the address, the key and the media service's share of the graphics
+card, saved together, and says under **Now** whether the media service answers. **Transcription**
+sets the language spoken, or that it is detected in each recording, the pause that ends a line, and
+whether a transcript times each word or each line; with the Media module, also whether recordings
+transcribed with other settings are transcribed again.
+
+Every one is also in the **Media service** and **Transcription** groups of **Settings → System**,
+with `CFG_MODEL_SLOTS`, the Media module's, in **Processing**. All can be set with `config set`:
 
 | Setting                                                                                     | Default                                                     | What it does                                                                            |
 | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |

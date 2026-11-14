@@ -116,7 +116,12 @@ EiN's settings decide how much it asks for; the media service's decide how much 
 
 ## Let more work run at once
 
-With the Archive, on a machine with more cores than the minimum, raise the media worker's budget so that more thumbnails, fingerprints and encodings run side by side:
+With the Archive, on a machine with more cores than the minimum, raise the media worker's budget so that more thumbnails, fingerprints and encodings run side by side. The quickest way is a level:
+
+1. Sign in as an administrator, choose **Settings** in the sidebar, under **System**, and **Processing** under **Set up**.
+2. Choose **More**, half the machine's cores, or **Full**, all of them but one, and **Save**. The page says in a sentence what the level comes to, and the line under it "Restarted media-worker, pipeline-engine."
+
+[Media](../media/index.md#how-much-runs-at-once) says what each level sets. To set the budget yourself instead:
 
 1. Sign in as an administrator and choose **Settings** in the sidebar, under **System**.
 2. Choose the category **Processing**.
