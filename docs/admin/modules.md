@@ -37,6 +37,10 @@ buttons that change them.
 
 ![The Modules tab of Settings: the Install button beside the filter, album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive open at the right with its version, Active and its description, the buttons Update, Remove and Documentation, its tabs Overview, Dependencies, Services, Pages, Commands, Settings and Node types, and on Overview its details beside the pages of its guide](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
 
+Each module has a picture of its own, a pattern of hats with its initials, in a colour of its own.
+The colour comes from the module's name, so a module has the same one here, on the install panel and
+in the **About EiN** dialog.
+
 The list at the left holds every installed module with its description; above it, beside the
 filter box, is the administrator's **Install** button (see [Install a module](#install-a-module)).
 Anyone else has **Published** there instead, which lists the published modules without a way to
@@ -52,13 +56,13 @@ its version at the right; one that does not shows a badge instead and is listed 
 Type in the filter box to narrow the list by name or description. **Show only active modules**, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
-Choose a module to open its panel. At the top are the module's name, its version, its state and
-what it is; a long description shows three lines, and **More** opens the rest. Under them are the
+Choose a module to open its panel. At the top, on a tile in the module's colour, are its picture,
+name, version, state and what it is; a long description shows three lines, and **More** opens the rest. Under them are the
 buttons: **Update** and **Remove** for the administrator, on a module installed from its repository
 (see [Update a module](#update-a-module) and [Remove a module](#remove-a-module)), and
 **Documentation**, which opens the module's own page in **Documentation**, with its pages in this
 guide and every command, setting and node type it brings. When its setup failed, why is said under
-the buttons. Below are tabs; **Overview** and **Dependencies** are always there, the others show
+the tile. Below are tabs; **Overview** and **Dependencies** are always there, the others show
 how many things each holds, and a tab the module has nothing for is left out:
 
 | Tab              | What it shows                                                                                                                                                                 |
