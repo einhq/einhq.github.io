@@ -182,8 +182,8 @@ hours of background work: only a file with no mark is asked about, and what it h
 The Media module makes a picture's restored copies, through the [media service](../ems/index.md):
 `file-restore` restores one while someone waits, and `file-restore --queue` many in the background,
 each picture's request kept on it until `media-restore` has made its copy, as the `restore` kind of
-the `models` worker. `find-damage` reads how faded, dusty and scratched a picture is and keeps it on
-the file, where `search --has damage=faded` finds it; the Archive runs it on its scans
+the `models` worker. `find-damage` reads how faded, dusty, scratched, blurred and shaken a picture
+is and keeps it on the file, where `search --has damage=faded` finds it; the Archive runs it on its scans
 ([Find the scans worth restoring](../archive/viewer.md#find-the-scans-worth-restoring)).
 
 ## The workers

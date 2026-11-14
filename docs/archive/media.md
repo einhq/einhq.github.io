@@ -59,8 +59,8 @@ Choosing a kind keeps the feed: the videos alone are still newest first, by date
 
 ### Find damaged scans
 
-**Damage** keeps the scans EiN found worn: **Faded**, **Dusty** or **Scratched**, or **Any
-condition** for everything. EiN looks at every scan as it arrives, a file from a staging category
+**Damage** keeps the scans EiN found worn: **Faded**, **Dusty**, **Scratched**, **Out of focus**
+or with **Camera shake**, or **Any condition** for everything. EiN looks at every scan as it arrives, a file from a staging category
 that holds scans, and photos from a camera or a phone are never in these lists. The choice becomes
 a chip in the box, such as **Faded**, and the page turns into a search; remove the chip with its ×,
 or choose **Any condition**, to return. Select what you find and choose **Restore…** to restore them

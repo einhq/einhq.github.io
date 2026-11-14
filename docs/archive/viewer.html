@@ -495,7 +495,7 @@ you click its icon, and then stays open for the next picture and the next visit,
 </tr>
 <tr>
 <td><strong>Damage</strong></td>
-<td>For a scan, what EiN found it has: faded colours, dust, scratches, or none. See <a href="#find-the-scans-worth-restoring">Find the scans worth restoring</a>.</td>
+<td>For a scan, what EiN found it has: faded colours, dust, scratches, out of focus, camera shake, or none. See <a href="#find-the-scans-worth-restoring">Find the scans worth restoring</a>.</td>
 </tr>
 <tr>
 <td><strong>Restoring</strong></td>
@@ -550,7 +550,7 @@ may change the file, and for any signed-in reader for <strong>Add to album</stro
 <tr>
 <td><strong>Restore…</strong></td>
 <td>Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos</td>
-<td>Makes a restored copy beside the photo: faded colours back, dust and scratches filled, grain lessened. See <a href="#restore-a-faded-or-damaged-photo">Restore a faded or damaged photo</a>; to restore many at once, <a href="#restore-many-photos-at-once">Restore many photos at once</a>.</td>
+<td>Makes a restored copy beside the photo: faded colours back, dust and scratches filled, blur taken out, grain lessened. See <a href="#restore-a-faded-or-damaged-photo">Restore a faded or damaged photo</a>; to restore many at once, <a href="#restore-many-photos-at-once">Restore many photos at once</a>.</td>
 </tr>
 <tr>
 <td><strong>Remove a blemish…</strong></td>
@@ -651,7 +651,7 @@ tag, which recognition cannot match.</li>
 see <a href="people.html">People and faces</a>.</p>
 <h2 id="restore-a-faded-or-damaged-photo">Restore a faded or damaged photo<a class="anchor" href="#restore-a-faded-or-damaged-photo" aria-label="Link to this section"></a></h2>
 <p>A scanned print or slide often shows its age: colours turned red, yellow or pale, specks of dust,
-scratches and cracks, film grain. <strong>Restore…</strong> in the cog menu makes a restored copy of the photo
+scratches and cracks, film grain, a picture out of focus or blurred by a moving camera. <strong>Restore…</strong> in the cog menu makes a restored copy of the photo
 with the <a href="../ems/index.html">media service</a>. The photo itself is never changed: the copy is kept beside
 it as one of its versions.</p>
 <ol>
@@ -664,6 +664,9 @@ A black-and-white print toned brown comes out grey.</li>
 around them. <strong>Dark marks too</strong> also looks for damage darker than the picture, such as black
 specks on a print. <strong>Quick fill</strong> suits dust and thin scratches; <strong>Careful fill</strong> takes longer
 and suits creases, tears and torn corners.</li>
+<li><strong>Blur</strong> sharpens a photo that is <strong>Out of focus</strong> or blurred by <strong>Camera shake</strong>, the camera
+moving as it was taken. It brings back detail the blur softened: shake is mended well, a
+slightly soft photo a little, and detail lost in a photo far out of focus does not come back.</li>
 <li><strong>Grain and noise</strong> smooths film grain and the scanner&#39;s noise, by as much as the slider says.
 Grain is part of a photograph: at half strength about half of it is left.</li>
 </ul>
@@ -719,23 +722,29 @@ photo. Running out of time or a picture the media service cannot read ends with 
 copy is kept.</p>
 <h3 id="find-the-scans-worth-restoring">Find the scans worth restoring<a class="anchor" href="#find-the-scans-worth-restoring" aria-label="Link to this section"></a></h3>
 <p>EiN looks at every scan as it arrives, a file from a staging category that holds scans, and notes
-how faded, dusty and scratched it is. The details panel says what it found under <strong>Damage</strong>: for
-example &quot;Faded colours, dust&quot;, or &quot;None found&quot;. On the Media page, <strong>Damage</strong> lists the scans found
-<strong>Faded</strong>, <strong>Dusty</strong> or <strong>Scratched</strong>; see <a href="media.html#find-damaged-scans">Find damaged scans</a>.</p>
+how faded, dusty, scratched, out of focus and shaken it is. The details panel says what it found
+under <strong>Damage</strong>: for example &quot;Faded colours, dust&quot;, or &quot;None found&quot;. On the Media page, <strong>Damage</strong>
+lists the scans found <strong>Faded</strong>, <strong>Dusty</strong>, <strong>Scratched</strong>, <strong>Out of focus</strong> or with <strong>Camera
+shake</strong>; see <a href="media.html#find-damaged-scans">Find damaged scans</a>.</p>
 <ul>
 <li><strong>Faded</strong> is a print or slide whose colours <strong>Faded colours</strong> would change a lot. A photo whose
 colours are meant to be strong or dark, a sunset or a room lit by candles, can be found faded too.</li>
 <li><strong>Dusty</strong> and <strong>Scratched</strong> are specks and long thin marks on the smooth parts of the picture,
 such as a sky or a wall, where they show most. Marks among leaves, grass or a crowd are not
 counted, since the picture&#39;s own thin light details look like them there.</li>
+<li><strong>Out of focus</strong> is a picture with no sharp part anywhere. A portrait with a soft background, or
+a soft subject such as a face or a cup of coffee, has a sharp part somewhere and is not found.</li>
+<li><strong>Camera shake</strong> is a picture whose edges are blurred one way and sharp the other, as a camera
+that moved leaves them.</li>
 </ul>
 <p>It only notes: nothing is restored until you ask. Scans already in the archive are looked at by the
 media pass that runs every hour, and a scan&#39;s colours are looked at again after the media service
-measures them another way. Blur is not noted: nothing in EiN restores it.</p>
+measures them another way.</p>
 <h3 id="restore-many-photos-at-once">Restore many photos at once<a class="anchor" href="#restore-many-photos-at-once" aria-label="Link to this section"></a></h3>
 <p>Select the photos on the Media page, for example everything <strong>Damage</strong> found <strong>Faded</strong>, and choose
 <strong>Restore…</strong> in the selection bar. Tick what to restore as for one photo: with <strong>Faded</strong> chosen,
-<strong>Faded colours</strong> is ticked, with <strong>Dusty</strong> or <strong>Scratched</strong> <strong>Dust and scratches</strong>. Choose
+<strong>Faded colours</strong> is ticked, with <strong>Dusty</strong> or <strong>Scratched</strong> <strong>Dust and scratches</strong>, with <strong>Out of
+focus</strong> or <strong>Camera shake</strong> <strong>Blur</strong>, set to the same. Choose
 <strong>Restore</strong> and EiN restores them in the background, one after another, while you go on with
 something else: a few seconds each for a small scan, a minute or more for a large one.</p>
 <p>Each photo gets its restored copy among its versions, as one restored on its own does, to compare

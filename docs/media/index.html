@@ -329,8 +329,8 @@ hours of background work: only a file with no mark is asked about, and what it h
 <p>The Media module makes a picture&#39;s restored copies, through the <a href="../ems/index.html">media service</a>:
 <code>file-restore</code> restores one while someone waits, and <code>file-restore --queue</code> many in the background,
 each picture&#39;s request kept on it until <code>media-restore</code> has made its copy, as the <code>restore</code> kind of
-the <code>models</code> worker. <code>find-damage</code> reads how faded, dusty and scratched a picture is and keeps it on
-the file, where <code>search --has damage=faded</code> finds it; the Archive runs it on its scans
+the <code>models</code> worker. <code>find-damage</code> reads how faded, dusty, scratched, blurred and shaken a picture
+is and keeps it on the file, where <code>search --has damage=faded</code> finds it; the Archive runs it on its scans
 (<a href="../archive/viewer.html#find-the-scans-worth-restoring">Find the scans worth restoring</a>).</p>
 <h2 id="the-workers">The workers<a class="anchor" href="#the-workers" aria-label="Link to this section"></a></h2>
 <p>Each module puts the work a crawl must not start all at once as jobs into the pool

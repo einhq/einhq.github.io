@@ -143,12 +143,12 @@ With `JSON_OUTPUT=1`: The file written, its size, and the size of the picture as
 
 ### `file-restore`
 
-Restore a photo into a new version beside it: faded colours back, dust and scratches filled, grain lessened.
+Restore a photo into a new version beside it: faded colours back, dust and scratches filled, blur taken out, grain lessened.
 
 <small>changes things</small>
 
 ```text
-file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--grain=<string>] [--queue] [--requested] [-v] <file>
+file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--blur=<string>] [--grain=<string>] [--queue] [--requested] [-v] <file>
 ```
 
 | Argument | What it is                                                                                              |
@@ -162,6 +162,7 @@ file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--g
 | `--dark`           | With --dust, look for damage darker than the picture too.                                                                                                            |
 | `--fill=<string>`  | With --dust or --mask, how the damage is filled: ns (the default) or telea for dust and thin scratches, lama for creases and tears.                                  |
 | `--mask=<path>`    | Fill what this mask marks instead of finding the damage: a one-channel PNG the size of the picture as stored, nonzero where marked. It is copied beside the version. |
+| `--blur=<string>`  | Take out blur: focus for a picture out of focus, motion for one blurred by a moving camera.                                                                          |
 | `--grain=<string>` | Lessen grain and noise, at this strength (above 0, at most 1; 0.5 keeps about half the grain)                                                                        |
 | `--queue`          | Restore the pictures named in the media pool, nobody waiting: each gets its steps as restoreRequest, and a version when its turn comes.                              |
 | `--requested`      | Run the steps a picture's restoreRequest asks for, and clear it (what the media pool runs)                                                                           |
@@ -171,6 +172,7 @@ file-restore [--unfade] [--dust] [--dark] [--fill=<string>] [--mask=<path>] [--g
 file-restore /archive/scans/1974/print-07.jpg --unfade --dust
 file-restore /archive/scans/1952/portrait.tif --dust --dark --fill lama --grain 0.5
 file-restore /archive/scans/1974/print-07.jpg --unfade --mask /archive/scans/1974/print-07-mask.png
+file-restore /archive/scans/1968/party.jpg --blur motion
 file-restore --queue --unfade --dust /archive/scans/1974/*.jpg
 ```
 
@@ -244,7 +246,7 @@ With `JSON_OUTPUT=1`: nothing; the transcript is written, searchable, and not tr
 
 ### `find-damage`
 
-Read how faded, dusty and scratched a picture is, and keep it on the file to find those worth restoring.
+Read how faded, dusty, scratched, blurred and shaken a picture is, and keep it on the file to find those worth restoring.
 
 <small>changes things</small>
 
@@ -265,7 +267,7 @@ find-damage [-f] [-v] <file>
 find-damage /archive/scans/1974/print-07.jpg
 ```
 
-With `JSON_OUTPUT=1`: The kinds of damage found (faded, dust, scratches), the scores from 0 to 1, what read them and when.
+With `JSON_OUTPUT=1`: The kinds of damage found (faded, dust, scratches, blurred, shaken), the scores from 0 to 1, what read them and when.
 
 ### `fingerprints-scan`
 

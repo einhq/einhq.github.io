@@ -179,7 +179,7 @@ also downloads and carries models and tools made by others, each under its own l
 their own licences forbids commercial use; two state no licence for their weights, and GFPGAN&#39;s
 names parts under non-commercial terms (<a href="#using-ein-commercially">Using EiN commercially</a>). This is
 what the image carries, all of it used by the Archive but GFPGAN, which the Archive does not call;
-LaMa, the scratch detector and SCUNet run when someone restores a photo
+LaMa, the scratch detector, SCUNet and Restormer run when someone restores a photo
 (<a href="../archive/viewer.html#restore-a-faded-or-damaged-photo">Restore a faded or damaged photo</a>), and
 the scratch detector also when a scan arrives, to tell how dusty and scratched it is
 (<a href="../archive/viewer.html#find-the-scans-worth-restoring">Find the scans worth restoring</a>):</p>
@@ -301,6 +301,12 @@ the scratch detector also when a scan arrives, to tell how dusty and scratched i
 <td></td>
 </tr>
 <tr>
+<td>Sharper scanned photos, out of focus or shaken</td>
+<td><a href="https://github.com/swz30/Restormer">Restormer</a>, its weights <code>single_image_defocus_deblurring</code> and <code>motion_deblurring</code> from its <a href="https://github.com/swz30/Restormer/releases/tag/v1.0">v1.0 release</a></td>
+<td><a href="https://opensource.org/license/mit">MIT</a> / <a href="https://opensource.org/license/mit">MIT</a></td>
+<td>Trained on DPDD, whose licence is not stated, and GoPro</td>
+</tr>
+<tr>
 <td>Faces in scanned photos redrawn, on request</td>
 <td>Tencent ARC&#39;s <a href="https://github.com/TencentARC/GFPGAN">GFPGAN</a> v1.4, its clean network</td>
 <td><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache-2.0</a> / not stated</td>
@@ -399,6 +405,9 @@ its LICENSE also lists StyleGAN2 (NVIDIA&#39;s Source Code License, for non-comm
 service runs its clean network, which uses none of StyleGAN2&#39;s CUDA code. Its weights state no
 licence of their own and were trained on FFHQ, a dataset NVIDIA releases under CC BY-NC-SA 4.0. An
 installation used commercially checks GFPGAN with its makers too, or leaves face restoration out.</p>
+<p>Restormer, which sharpens a scanned photo out of focus or shaken when someone asks for it, and its
+weights are under MIT. Its weights for photos out of focus were trained on DPDD, a dataset of
+photographs whose licence is stated nowhere; those for a shaken camera on GoPro, under CC BY 4.0.</p>
 <p>The licences in the table set conditions on passing a model or tool on: CC BY 4.0 a credit to its
 maker and a link to the licence, Apache-2.0 a copy of the licence and MIT its
 copyright notice, which this page and the image&#39;s notice give; GPL and LGPL conditions on passing the software and its

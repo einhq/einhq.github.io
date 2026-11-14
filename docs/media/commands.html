@@ -289,9 +289,9 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code>file-crop /archive/scans/1952/portrait.tif --box 0.4,0.3,0.1,0.1 --width 1200 -o /tmp/eye.jpg</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The file written, its size, and the size of the picture as shown (frame)</p>
 <h3 id="file-restore"><code>file-restore</code><a class="anchor" href="#file-restore" aria-label="Link to this section"></a></h3>
-<p>Restore a photo into a new version beside it: faded colours back, dust and scratches filled, grain lessened.</p>
+<p>Restore a photo into a new version beside it: faded colours back, dust and scratches filled, blur taken out, grain lessened.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>file-restore [--unfade] [--dust] [--dark] [--fill=&lt;string&gt;] [--mask=&lt;path&gt;] [--grain=&lt;string&gt;] [--queue] [--requested] [-v] &lt;file&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>file-restore [--unfade] [--dust] [--dark] [--fill=&lt;string&gt;] [--mask=&lt;path&gt;] [--blur=&lt;string&gt;] [--grain=&lt;string&gt;] [--queue] [--requested] [-v] &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -333,6 +333,10 @@
 <td>Fill what this mask marks instead of finding the damage: a one-channel PNG the size of the picture as stored, nonzero where marked. It is copied beside the version.</td>
 </tr>
 <tr>
+<td><code>--blur=&lt;string&gt;</code></td>
+<td>Take out blur: focus for a picture out of focus, motion for one blurred by a moving camera.</td>
+</tr>
+<tr>
 <td><code>--grain=&lt;string&gt;</code></td>
 <td>Lessen grain and noise, at this strength (above 0, at most 1; 0.5 keeps about half the grain)</td>
 </tr>
@@ -353,6 +357,7 @@
 <div class="code" data-lang="bash"><pre tabindex="0"><code>file-restore /archive/scans/1974/print-07.jpg --unfade --dust
 file-restore /archive/scans/1952/portrait.tif --dust --dark --fill lama --grain 0.5
 file-restore /archive/scans/1974/print-07.jpg --unfade --mask /archive/scans/1974/print-07-mask.png
+file-restore /archive/scans/1968/party.jpg --blur motion
 file-restore --queue --unfade --dust /archive/scans/1974/*.jpg</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The version written, with the steps that made it and, with --dust or --mask, its mask and marks; with --queue the pictures queued and those refused, and why.</p>
 <h3 id="file-set-text"><code>file-set-text</code><a class="anchor" href="#file-set-text" aria-label="Link to this section"></a></h3>
@@ -431,7 +436,7 @@ file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg auto</co
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">cat</span> /home/admin/rattad.vtt | file-set-transcript /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: nothing; the transcript is written, searchable, and not transcribed again.</p>
 <h3 id="find-damage"><code>find-damage</code><a class="anchor" href="#find-damage" aria-label="Link to this section"></a></h3>
-<p>Read how faded, dusty and scratched a picture is, and keep it on the file to find those worth restoring.</p>
+<p>Read how faded, dusty, scratched, blurred and shaken a picture is, and keep it on the file to find those worth restoring.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>find-damage [-f] [-v] &lt;file&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -465,7 +470,7 @@ file-set-text-language /archive/albums/Exempelalbum_2019/files/brev.jpg auto</co
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>find-damage /archive/scans/1974/print-07.jpg</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The kinds of damage found (faded, dust, scratches), the scores from 0 to 1, what read them and when.</p>
+<p>With <code>JSON_OUTPUT=1</code>: The kinds of damage found (faded, dust, scratches, blurred, shaken), the scores from 0 to 1, what read them and when.</p>
 <h3 id="fingerprints-scan"><code>fingerprints-scan</code><a class="anchor" href="#fingerprints-scan" aria-label="Link to this section"></a></h3>
 <p>Announce every picture, video and recording that was never fingerprinted to the end: it has no fingerprintedAt.</p>
 <p><small>changes things</small></p>

@@ -251,7 +251,7 @@ you click its icon, and then stays open for the next picture and the next visit,
 | **Taken at**              | The capture time exactly as stored, such as `2025-12-27T13:16:18+13:00`.                                                                                                                                                                     |
 | **Taken at (UTC)**        | The same moment in UTC.                                                                                                                                                                                                                      |
 | **Time source**           | Where the date came from, in words, and any note left with it.                                                                                                                                                                               |
-| **Damage**                | For a scan, what EiN found it has: faded colours, dust, scratches, or none. See [Find the scans worth restoring](#find-the-scans-worth-restoring).                                                                                           |
+| **Damage**                | For a scan, what EiN found it has: faded colours, dust, scratches, out of focus, camera shake, or none. See [Find the scans worth restoring](#find-the-scans-worth-restoring).                                                               |
 | **Restoring**             | A restoration asked for many photos at once that has not been made yet, or why it could not be. See [Restore many photos at once](#restore-many-photos-at-once).                                                                             |
 | **Created**, **Modified** | The file's created and modified times.                                                                                                                                                                                                       |
 | Hashes                    | Fingerprints of the file's bytes, such as `sha256`.                                                                                                                                                                                          |
@@ -268,7 +268,7 @@ may change the file, and for any signed-in reader for **Add to album**.
 | **Add to album**                      | Signed-in readers                                                                  | Opens **Add to an album**. Type part of an album's name to find it, or a name that is not taken to make an album by that name. The file is linked into the album, not copied; a file from your staging area moves into it instead. A message such as **1 added to Christmas in Wellington** offers **Undo**. |
 | **Edit faces**                        | Readers who may change the file, on photos and videos, not on a phone held upright | Draw, move or remove face boxes. See [Draw or correct a face box](#draw-or-correct-a-face-box).                                                                                                                                                                                                              |
 | **Edit subtitles**, **Add subtitles** | Readers who may change the file, on videos and recordings                          | Opens what is said, line by line, beside the video or recording, to correct it. See [Correct the subtitles](#correct-the-subtitles).                                                                                                                                                                         |
-| **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo); to restore many at once, [Restore many photos at once](#restore-many-photos-at-once).                                      |
+| **Restore…**                          | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Makes a restored copy beside the photo: faded colours back, dust and scratches filled, blur taken out, grain lessened. See [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo); to restore many at once, [Restore many photos at once](#restore-many-photos-at-once).                      |
 | **Remove a blemish…**                 | Readers who may change the file, on JPEG, PNG, TIFF, WebP and BMP photos           | Paint over a spot, a stain or a tear to have it filled, in a copy beside the photo. See [Remove a blemish](#remove-a-blemish).                                                                                                                                                                               |
 | **Rotate left**, **Rotate right**     | Readers who may change the file, on photos and videos                              | Turns the file a quarter turn.                                                                                                                                                                                                                                                                               |
 | **Mirror horizontally**               | Readers who may change the file, on photos and videos                              | Flips the file left to right. A tick shows while it is mirrored.                                                                                                                                                                                                                                             |
@@ -360,7 +360,7 @@ see [People and faces](people.md).
 ## Restore a faded or damaged photo
 
 A scanned print or slide often shows its age: colours turned red, yellow or pale, specks of dust,
-scratches and cracks, film grain. **Restore…** in the cog menu makes a restored copy of the photo
+scratches and cracks, film grain, a picture out of focus or blurred by a moving camera. **Restore…** in the cog menu makes a restored copy of the photo
 with the [media service](../ems/index.md). The photo itself is never changed: the copy is kept beside
 it as one of its versions.
 
@@ -373,6 +373,9 @@ it as one of its versions.
      around them. **Dark marks too** also looks for damage darker than the picture, such as black
      specks on a print. **Quick fill** suits dust and thin scratches; **Careful fill** takes longer
      and suits creases, tears and torn corners.
+   - **Blur** sharpens a photo that is **Out of focus** or blurred by **Camera shake**, the camera
+     moving as it was taken. It brings back detail the blur softened: shake is mended well, a
+     slightly soft photo a little, and detail lost in a photo far out of focus does not come back.
    - **Grain and noise** smooths film grain and the scanner's noise, by as much as the slider says.
      Grain is part of a photograph: at half strength about half of it is left.
 3. Choose **Restore**. The dialog waits while the media service works: seconds for a small photo, a
@@ -433,25 +436,31 @@ copy is kept.
 ### Find the scans worth restoring
 
 EiN looks at every scan as it arrives, a file from a staging category that holds scans, and notes
-how faded, dusty and scratched it is. The details panel says what it found under **Damage**: for
-example "Faded colours, dust", or "None found". On the Media page, **Damage** lists the scans found
-**Faded**, **Dusty** or **Scratched**; see [Find damaged scans](media.md#find-damaged-scans).
+how faded, dusty, scratched, out of focus and shaken it is. The details panel says what it found
+under **Damage**: for example "Faded colours, dust", or "None found". On the Media page, **Damage**
+lists the scans found **Faded**, **Dusty**, **Scratched**, **Out of focus** or with **Camera
+shake**; see [Find damaged scans](media.md#find-damaged-scans).
 
 - **Faded** is a print or slide whose colours **Faded colours** would change a lot. A photo whose
   colours are meant to be strong or dark, a sunset or a room lit by candles, can be found faded too.
 - **Dusty** and **Scratched** are specks and long thin marks on the smooth parts of the picture,
   such as a sky or a wall, where they show most. Marks among leaves, grass or a crowd are not
   counted, since the picture's own thin light details look like them there.
+- **Out of focus** is a picture with no sharp part anywhere. A portrait with a soft background, or
+  a soft subject such as a face or a cup of coffee, has a sharp part somewhere and is not found.
+- **Camera shake** is a picture whose edges are blurred one way and sharp the other, as a camera
+  that moved leaves them.
 
 It only notes: nothing is restored until you ask. Scans already in the archive are looked at by the
 media pass that runs every hour, and a scan's colours are looked at again after the media service
-measures them another way. Blur is not noted: nothing in EiN restores it.
+measures them another way.
 
 ### Restore many photos at once
 
 Select the photos on the Media page, for example everything **Damage** found **Faded**, and choose
 **Restore…** in the selection bar. Tick what to restore as for one photo: with **Faded** chosen,
-**Faded colours** is ticked, with **Dusty** or **Scratched** **Dust and scratches**. Choose
+**Faded colours** is ticked, with **Dusty** or **Scratched** **Dust and scratches**, with **Out of
+focus** or **Camera shake** **Blur**, set to the same. Choose
 **Restore** and EiN restores them in the background, one after another, while you go on with
 something else: a few seconds each for a small scan, a minute or more for a large one.
 
