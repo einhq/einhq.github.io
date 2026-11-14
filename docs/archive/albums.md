@@ -110,7 +110,7 @@ address (`?tab=map`, `?tab=info`, `?tab=trip`), so a link can open the album on 
 
 ### The Media tab
 
-- **Search the album**, the box at the left, finds pictures in this album alone; see
+- **Search the album**, the box above the tabs, finds pictures in this album alone; see
   [Search inside an album](#search-inside-an-album).
 - **Show** narrows the grid to one kind: **All**, **Images**, **Video**, **Audio** or
   **Documents**. It offers only the kinds the album holds, and is not there at all when the album
@@ -120,12 +120,13 @@ address (`?tab=map`, `?tab=info`, `?tab=trip`), so a link can open the album on 
 
 #### Search inside an album
 
-The box at the top of the Media tab, **Search the album — words, or type @ to pick someone**,
-searches the pictures of this album and nothing else. It stays in the top bar while you scroll; on
-a phone it floats at the bottom of the screen instead.
+The box above the tabs on the Media tab, **Search the album — words, or type @ to pick someone**,
+searches the pictures of this album and nothing else. It stays at the top with the tabs while you
+scroll; on a phone it floats at the bottom of the screen instead.
 
 - **`@` and a name** picks a person, a location or a label from the list that opens, as in
-  [search](search.md#pick-something-exactly-with-). Press <kbd>Enter</kbd> and the grid keeps only
+  [search](search.md#pick-something-exactly-with-). The list offers only the people in this
+  album's pictures, the most pictured first. Press <kbd>Enter</kbd> and the grid keeps only
   the pictures that person is in — by their face, a tag without a box, or their voice in a recording
   — or that were taken at that location, or that carry that label. The pick becomes a chip; its
   **×** removes it. Several picks must all hold: `@Peggy Wrenfield @Arthur Wrenfield` shows the
