@@ -344,7 +344,7 @@ llm-chat --system <span class="hljs-string">&#x27;Answer in one word.&#x27;</spa
 <h3 id="llm-status"><code>llm-status</code><a class="anchor" href="#llm-status" aria-label="Link to this section"></a></h3>
 <p>Whose the assistant&#39;s language model is, where it runs, and (with --checks) whether it answers.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>llm-status [--checks] [--brief]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>llm-status [--checks] [--brief] [--models]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -360,11 +360,16 @@ llm-chat --system <span class="hljs-string">&#x27;Answer in one word.&#x27;</spa
 <td><code>--brief</code></td>
 <td>The checks in one line (used by service-list --detail)</td>
 </tr>
+<tr>
+<td><code>--models</code></td>
+<td>The models the service offers, as it lists them.</td>
+</tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>llm-status
-llm-status --checks</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: url, model, kind (ours or external), provider for an external one, card (card or cpu) for ours. With --checks, health&#39;s checks.</p>
+llm-status --checks
+llm-status --models</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: url, model, kind (ours or external), provider for an external one, card (card or cpu) for ours. With --checks, health&#39;s checks; with --models, the names of the models the service offers.</p>
 
         </article>
         <footer class="docs-foot">

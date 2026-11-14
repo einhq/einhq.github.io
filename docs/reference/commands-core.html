@@ -851,9 +851,9 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>config-publish</code></pre></div>
 <h3 id="config-set"><code>config-set</code><a class="anchor" href="#config-set" aria-label="Link to this section"></a></h3>
-<p>Change a setting and restart the services that read it only at start.</p>
+<p>Change a setting, or several at once, and restart the services that read them only at start.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>config-set &lt;key&gt; &lt;value&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>config-set &lt;key&gt; [&lt;value&gt;...]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -863,18 +863,21 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </thead>
 <tbody><tr>
 <td><code>&lt;key&gt;</code></td>
-<td>setting name.</td>
+<td>setting name, or KEY=VALUE for each of several settings.</td>
 </tr>
 <tr>
-<td><code>&lt;value&gt;</code></td>
-<td>new value.</td>
+<td><code>[&lt;value&gt;...]</code></td>
+<td>new value, after a setting name alone.</td>
 </tr>
 </tbody></table>
 </div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>config <span class="hljs-built_in">set</span> CFG_TRASH_RETENTION_DAYS 60
+config <span class="hljs-built_in">set</span> CFG_LANGUAGE=sv CFG_TIME_LOCALE=sv-SE</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: settings (each key with the value in force, its scope and source; a key comes back empty), restarted, failed, notes.</p>
 <h3 id="config-unset"><code>config-unset</code><a class="anchor" href="#config-unset" aria-label="Link to this section"></a></h3>
-<p>Reset a setting to its default.</p>
+<p>Reset settings to what the deployment or the default says.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>config-unset &lt;key&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>config-unset &lt;key&gt;...</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -883,11 +886,14 @@ attrs -s <span class="hljs-string">&#x27;description=Ett exempel&#x27;</span> /a
 </tr>
 </thead>
 <tbody><tr>
-<td><code>&lt;key&gt;</code></td>
+<td><code>&lt;key&gt;...</code></td>
 <td>setting name.</td>
 </tr>
 </tbody></table>
 </div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>config <span class="hljs-built_in">unset</span> CFG_TRASH_RETENTION_DAYS
+config <span class="hljs-built_in">unset</span> CFG_LANGUAGE CFG_TIME_LOCALE</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: settings (each key with the value it falls back to, its scope and source), restarted, failed, notes.</p>
 <h3 id="cp"><code>cp</code><a class="anchor" href="#cp" aria-label="Link to this section"></a></h3>
 <p>Copy files and directories.</p>
 <p><small>changes things</small></p>
@@ -5575,7 +5581,7 @@ ssh-keygen -R nas.local</code></pre></div>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>stats-overview</code></pre></div>
 <h3 id="system-info"><code>system-info</code><a class="anchor" href="#system-info" aria-label="Link to this section"></a></h3>
-<p>Which instance this is: host name, uptime, core&#39;s version and commit, the module API, each module&#39;s commit, and the PostgreSQL and Deno versions.</p>
+<p>Which instance this is: host name, uptime, core&#39;s version and commit, the module API, each module&#39;s commit, the PostgreSQL and Deno versions, and its time zone.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>system-info</code></pre></div>
 <h2 id="t">T<a class="anchor" href="#t" aria-label="Link to this section"></a></h2>

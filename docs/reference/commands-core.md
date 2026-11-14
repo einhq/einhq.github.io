@@ -488,32 +488,46 @@ config-publish
 
 ### `config-set`
 
-Change a setting and restart the services that read it only at start.
+Change a setting, or several at once, and restart the services that read them only at start.
 
 <small>changes things</small>
 
 ```text
-config-set <key> <value>
+config-set <key> [<value>...]
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<key>` | setting name. |
-| `<value>` | new value. |
+| `<key>` | setting name, or KEY=VALUE for each of several settings. |
+| `[<value>...]` | new value, after a setting name alone. |
+
+```bash
+config set CFG_TRASH_RETENTION_DAYS 60
+config set CFG_LANGUAGE=sv CFG_TIME_LOCALE=sv-SE
+```
+
+With `JSON_OUTPUT=1`: settings (each key with the value in force, its scope and source; a key comes back empty), restarted, failed, notes.
 
 ### `config-unset`
 
-Reset a setting to its default.
+Reset settings to what the deployment or the default says.
 
 <small>changes things</small>
 
 ```text
-config-unset <key>
+config-unset <key>...
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<key>` | setting name. |
+| `<key>...` | setting name. |
+
+```bash
+config unset CFG_TRASH_RETENTION_DAYS
+config unset CFG_LANGUAGE CFG_TIME_LOCALE
+```
+
+With `JSON_OUTPUT=1`: settings (each key with the value it falls back to, its scope and source), restarted, failed, notes.
 
 ### `cp`
 
@@ -3624,7 +3638,7 @@ stats-overview
 
 ### `system-info`
 
-Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, and the PostgreSQL and Deno versions.
+Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, the PostgreSQL and Deno versions, and its time zone.
 
 <small>reads only</small>
 

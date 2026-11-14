@@ -51,8 +51,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [config-get](commands-core.md#config-get) | Print the effective value of one setting; for a key, only whether it is set. |
 | [config-list](commands-core.md#config-list) | List settings with their effective values. |
 | [config-publish](commands-core.md#config-publish) | Copy settings from this process's environment into /etc/environment. |
-| [config-set](commands-core.md#config-set) | Change a setting and restart the services that read it only at start. |
-| [config-unset](commands-core.md#config-unset) | Reset a setting to its default. |
+| [config-set](commands-core.md#config-set) | Change a setting, or several at once, and restart the services that read them only at start. |
+| [config-unset](commands-core.md#config-unset) | Reset settings to what the deployment or the default says. |
 | [cp](commands-core.md#cp) | Copy files and directories. |
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
 | [date](commands-core.md#date) | Print or set the system date and time. |
@@ -213,7 +213,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [star](commands-core.md#star) | Bookmark nodes as softlinks in $HOME/stars (star <path>..., star -d <path>..., star [list]) |
 | [stat](commands-core.md#stat) | Display file or node status. |
 | [stats-overview](commands-core.md#stats-overview) | Per-type archive growth: nodes and bytes added by year and month. |
-| [system-info](commands-core.md#system-info) | Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, and the PostgreSQL and Deno versions. |
+| [system-info](commands-core.md#system-info) | Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, the PostgreSQL and Deno versions, and its time zone. |
 | [tail](commands-core.md#tail) | Output the last part of files, logs, or stdin (with -f to follow) |
 | [top](commands-core.md#top) | Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses. |
 | [tr](commands-core.md#tr) | Translate or delete characters. |

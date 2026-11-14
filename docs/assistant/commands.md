@@ -149,17 +149,19 @@ Whose the assistant's language model is, where it runs, and (with --checks) whet
 <small>reads only</small>
 
 ```text
-llm-status [--checks] [--brief]
+llm-status [--checks] [--brief] [--models]
 ```
 
 | Option     | What it does                                                                                |
 | ---------- | ------------------------------------------------------------------------------------------- |
 | `--checks` | The checks health reads: whether it answers, where it is, whether its model has been tried. |
 | `--brief`  | The checks in one line (used by service-list --detail)                                      |
+| `--models` | The models the service offers, as it lists them.                                            |
 
 ```bash
 llm-status
 llm-status --checks
+llm-status --models
 ```
 
-With `JSON_OUTPUT=1`: url, model, kind (ours or external), provider for an external one, card (card or cpu) for ours. With --checks, health's checks.
+With `JSON_OUTPUT=1`: url, model, kind (ours or external), provider for an external one, card (card or cpu) for ours. With --checks, health's checks; with --models, the names of the models the service offers.
