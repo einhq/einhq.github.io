@@ -218,6 +218,9 @@ picture to compare with, and you either:
 - press **Mark as doubtful** to leave it to somebody who knows. The face stays the person's, marked
   as doubtful until somebody answers, here or on the person's Faces tab (see
   [Doubtful faces](people.md#doubtful-faces)).
+- press **Make unknown** when it was named by mistake and you do not know who it is. The face
+  leaves the person and is listed again as a face nobody has named yet, such as **Unknown 8F3C81**,
+  to be named later.
 
 A doubtful face always has an orange question mark at the end of its row. Press it, or point at
 the name and press **Is this them?** in the card. It asks **Is this &lt;name&gt;?** and shows who marked the face, such as
@@ -226,6 +229,7 @@ the name and press **Is this them?** in the card. It asks **Is this &lt;name&gt;
 - **Yes**: it is them. The face stays theirs, as a person's decision, and the doubt goes.
 - **No, it is…**: pick who it is instead, or a new name, as above, and press **Move**.
 - **Withdraw**: takes your doubt back without answering it.
+- **Make unknown**: it is not them, and you do not know who it is either; as above.
 
 Readers who may not change the picture see the orange question mark and who marked the face, but
 cannot answer.
