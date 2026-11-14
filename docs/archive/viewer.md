@@ -45,6 +45,7 @@ On a computer:
   - the date and time the picture was taken, such as **Saturday, 27 December 2025, 13:16:18**;
   - the place: the name of the location the picture is linked to, or else the street address read
     from its GPS position;
+  - **Show text** / **Hide text** (<kbd>t</kbd>), when text was read from the photo;
   - the heart, **Favourite (s)**, when you are signed in;
   - **Start slideshow**;
   - **More** (⋮).
@@ -69,7 +70,6 @@ date a picture gets and how to change it.
 | Row                                            | What it does                                                                                                                             |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. It reads **No faces**, greyed out, when none were found. For photos and videos. |
-| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it. Shown only when text was read.                                                                |
 | **Edit text** / **Add text**                   | Opens the text for writing by hand. Shown on photos you may change.                                                                      |
 | **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                       |
 | **Download**                                   | Saves the original file to your device.                                                                                                  |
@@ -499,11 +499,11 @@ staging area is read once it is filed into an album.
 
 ![The viewer on a handwritten postcard from 1968, with the text read from it laid over a darkened copy in a typewriter face: Dear Joan, the cottage is ours! The boys are in the river all day and Helen has read every book in the house. Arthur is on the roof with a bucket of tar, singing. Back on the 30th. Love, Peggy](../../assets/shots/postcard.webp "Show text lays the words read from Peggy's postcard over the picture. The pencil at its top right opens the text for correcting.")
 
-- **Show text**, in the More menu, or <kbd>t</kbd>, darkens the picture and lays the text over it in
-  a typewriter face. Long text scrolls. The row is there only when text was read.
-- The text stays shown as you move from picture to picture, until you close the viewer, so you can
-  page through a scanned letter. It is hidden during a slideshow.
-- **Hide text**, or <kbd>t</kbd> again, takes it away.
+- Each picture opens without its text. **Show text**, in the bar under the picture, or <kbd>t</kbd>,
+  darkens the picture and lays the text over it in a typewriter face. Long text scrolls. The button
+  is there only when text was read.
+- **Hide text**, or <kbd>t</kbd> again, takes it away. Moving to another picture hides it too, and
+  it is hidden during a slideshow.
 
 The text is also under **Text in image** in the [Details section](#the-details-section), and
 search finds pictures by it; see [Search and the finder](search.md).
@@ -777,7 +777,7 @@ or the file cannot be opened. Wait a while and open it again, or use **Download*
 open the file on your device. Its text can still be found with search; see
 [Supported files](file-types.md).
 
-**Show text is not in the More menu.**
+**There is no Show text under the picture.**
 No text was read from this picture, or it is a video or a recording. Add the text yourself with
 **Add text**, if you may change the file.
 
