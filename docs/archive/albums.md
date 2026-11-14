@@ -136,7 +136,7 @@ scroll; on a phone it floats at the bottom of the screen instead.
   while words are searched.
 
 Picks and words go together: `@Peggy Wrenfield cake` finds the pictures of Peggy that look like a
-cake. With only picks, the pictures stay in their days, in the order **Sort** says. When nothing
+cake. The **×** at the end of the box clears it and shows the whole album again. With only picks, the pictures stay in their days, in the order **Sort** says. When nothing
 matches, the grid says **Nothing in this album matches.** The search goes into the page's address
 (`?subject=person:peggy-wrenfield`, `?q=cake`), so a link opens the album already searched; a
 person's [timeline](family.md#what-appears-on-a-timeline) links to their albums this way.

@@ -536,7 +536,7 @@ The map then draws only the matching pictures in view and hides the location pin
 500 best matches in view are drawn. The box takes one person, one location and one label; when you
 pick a second person, the last one counts. A location finds the pictures linked to it. Except on
 a phone, an info icon beside the box shows what the box understood. To show everything again,
-empty the box and press <kbd>Enter</kbd>.
+click the **×** at the end of the box.
 
 Finding pictures by what they show needs the media service; see
 [What needs the media service and a language model](search.md#what-needs-the-media-service-and-a-language-model).

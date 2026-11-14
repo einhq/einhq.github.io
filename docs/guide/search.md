@@ -106,6 +106,12 @@ reads as people, places, years and kinds comes from a module: the Archive reads 
 [Searching your pictures](../archive/search.md#write-what-you-are-looking-for) explains how.
 Without it, the box searches your words as they are.
 
+The button at the end of the box says what it will do. While you type, it is an arrow, which
+searches as <kbd>Enter</kbd> does. Once the search is shown, it is an **×** (**Clear the search**),
+which empties the box, removes its chips and searches again without them. An empty box has neither.
+Every search box behaves this way: on the Media page, in an album, on the Year page and on the
+map. A box that filters a list as you type, such as **Filter albums…**, has only the **×**.
+
 Every search finds only what you are allowed to see; a visitor browsing without signing in finds
 only what is shared with everyone ([Sharing](sharing.md)).
 
