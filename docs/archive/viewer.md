@@ -206,14 +206,14 @@ the name. Click a name to open the person's page.
 Point at a name for a moment and a card opens above it. It shows the person's picture, larger, with
 their full name, the years of their life, where they live now and the start of their description,
 as on their page; for a face nobody has named yet, the face itself. Under that is what you can do
-with the face: **Show at 0:42** on a video (see [Faces in a video](#faces-in-a-video)), and **Not
-sure this is them?** when you may change the picture. Moving the pointer onto the card keeps it open;
+with the face: **Show at 0:42** on a video (see [Faces in a video](#faces-in-a-video)), and **This
+is wrong** when you may change the picture. Moving the pointer onto the card keeps it open;
 moving away closes it. On a phone there is nothing to point with, so the actions are small buttons
 at the end of the row instead.
 
-If you are not sure a face really is the person named, press **Not sure this is them?** (the
-question mark on a phone). The card asks **Not sure this is &lt;name&gt;?**, still under their
-picture to compare with, and you either:
+If a face is not the person named, or you are not sure it is, press **This is wrong** (the question
+mark on a phone). The card asks **Who is this, if not &lt;name&gt;?**, still under their picture to
+compare with, and you either:
 
 - say who it is: pick someone, or type a name and choose **New person: &lt;name&gt;**, and press
   **Move**; or
@@ -223,6 +223,9 @@ picture to compare with, and you either:
 - press **Make unknown** when it was named by mistake and you do not know who it is. The face
   leaves the person and is listed again as a face nobody has named yet, such as **Unknown 8F3C81**,
   to be named later.
+- press **Not a person** when the face is not anybody's: a pattern, a statue, a face on a poster.
+  It leaves the person and is never put on anyone by recognition again. On a tag, a dashed box,
+  the button reads **Remove tag** and removes the box. Either asks once more before it does it.
 
 A doubtful face always has an orange question mark at the end of its row. Press it, or point at
 the name and press **Is this them?** in the card. It asks **Is this &lt;name&gt;?** and shows who marked the face, such as
@@ -232,14 +235,16 @@ the name and press **Is this them?** in the card. It asks **Is this &lt;name&gt;
 - **No, it is…**: pick who it is instead, or a new name, as above, and press **Move**.
 - **Withdraw**: takes your doubt back without answering it.
 - **Make unknown**: it is not them, and you do not know who it is either; as above.
+- **Not a person** or **Remove tag**: as above.
 
 Readers who may not change the picture see the orange question mark and who marked the face, but
 cannot answer.
 
 Faces that recognition has grouped as one person but nobody has named yet are listed with a crop of
-the face and a placeholder name, such as **Unknown 8F3C81**. Click one to open the review over the
-viewer, where you name them or say they are someone you already have. [People and faces](people.md)
-describes the review and how recognition works.
+the face and a placeholder name, such as **Unknown 8F3C81**. Click one, or **Name this person** in
+its card, to open the review over the viewer, where you name them or say they are someone you
+already have. When you may change the picture, the card also has **Not a person** (**Remove tag**
+for a tag), as above. [People and faces](people.md) describes the review and how recognition works.
 
 ![The viewer on a black-and-white scanned print of a bride and groom on church steps, dated Saturday, 16 June 1956; the details panel names Helen's scanner as the camera, the album Arthur and Peggy's wedding, and two faces listed as Unknown RVVY0G and Unknown JCJY21](../../assets/shots/scan.webp "A scanned print. The camera row names the scanner it was digitized on, and the two faces nobody has named yet wait under placeholder names; clicking one opens the review where you say who it is.")
 
@@ -305,18 +310,16 @@ The date is not changed here. To change when pictures were taken, select them in
 
 ## Faces in the viewer
 
-Face boxes stay hidden until you point at a face; then that face's box and name appear.
+Face boxes stay hidden until you point at a face; then that face's box and name appear. Click the
+name to do what clicking it in the details panel does: open a named person's page, or the review of
+a face nobody has named yet.
 
 - **Pin faces** in the More menu, or <kbd>f</kbd>, shows every box with its name. They stay pinned as
   you move from file to file, until you unpin them or reload the page. On a touch screen, where
   nothing can be pointed at, pinning is the way to see the boxes.
-- With the faces pinned, click a named box to open that person's page. Unpinned, a box is part of
-  the picture: a click or a double-click on a face does what it does anywhere else on the picture,
-  so zooming in on a face never opens the person by accident.
-- With the faces pinned, click the box of an unnamed person to open a small field, **Who is this?**. Type a name and press
-  <kbd>Enter</kbd> or the tick. This gives them a name as a person of their own. If they are someone
-  already in the archive, click their placeholder name in the details panel instead and choose the
-  person in the review.
+- With the faces pinned, click a box as you would its name. Unpinned, a box is part of the picture:
+  a click or a double-click on a face does what it does anywhere else on the picture, so zooming in
+  on a face never opens the person by accident.
 - A face that belongs to nobody reads **Unassigned**.
 - A dashed box is a tag: "Tag: a box with a name, not used to recognise faces". It says who is
   there without helping to recognise them in other pictures. A box drawn by hand is a tag, and so
