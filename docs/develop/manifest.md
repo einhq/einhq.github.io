@@ -74,7 +74,7 @@ The name is also the owner shown beside the module's settings, node types and co
 
 ### `version`
 
-The module's version, in semver: `"0.1.0"`. A module that depends on this one names a range, and `mod setup` refuses the dependent when the installed version is outside it. Step it as a caret range reads it: below 1.0.0, raise the minor when something a dependent uses changes or goes, and the patch for anything else; from 1.0.0, the major and the minor. Tag each released version `v<version>` in the module's repository, such as `v0.1.0`, which is what `mod install <name>@v0.1.0` installs.
+The module's version, in semver: `"0.1.0"`. A module that depends on this one names a range, and `mod setup` refuses the dependent when the installed version is outside it. Step it as a caret range reads it: below 1.0.0, raise the minor when something a dependent uses changes or goes, and the patch for anything else; from 1.0.0, the major and the minor. Tag each released version `v<version>` in the module's repository, such as `v0.1.0`, which is what `mod install <name>@v0.1.0` installs. A prerelease, such as `0.2.0-dev.3`, meets the ranges its release meets: a dependent asking for `^0.2.0` takes it, so a range names releases alone.
 
 ### `description`, `author`, `license`
 

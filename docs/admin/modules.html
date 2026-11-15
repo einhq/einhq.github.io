@@ -368,7 +368,10 @@ ways:</p>
 </tbody></table>
 </div>
 <p>A release is a tag <code>v</code> and a version, such as <code>v0.3.1</code>, and the newest is the highest version; a
-prerelease such as <code>v0.4.0-rc.1</code> does not count. When the newest release is written for a core API
+prerelease such as <code>v0.4.0-rc.1</code> does not count, unless <strong>Install prereleases</strong>
+(<a href="../reference/settings.html#cfg_module_prereleases"><code>CFG_MODULE_PRERELEASES</code></a>) is on. Then a
+prerelease is taken like a release, after the release before it and before its own: <code>v0.4.0-rc.1</code>
+comes after <code>v0.3.1</code> and gives way to <code>v0.4.0</code>. When the newest release is written for a core API
 this EiN does not provide, EiN takes the newest release that is written for it instead and says so:
 <code>archive 0.3.0 needs core API ^0.8.0, and this core provides 0.7.2: taking v0.2.4</code>. A ref, such as
 <code>archive@v0.3.0</code>, takes that release or none. A repository with no release is installed at its

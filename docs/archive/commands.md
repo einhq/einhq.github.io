@@ -2691,7 +2691,7 @@ regenerate-face-crops [--limit=<string>] [--after=<string>] [--file=<path>] [--m
 
 | Option             | What it does                                                                      |
 | ------------------ | --------------------------------------------------------------------------------- |
-| `--limit=<string>` | maximum face nodes to scan (default 100)                                          |
+| `--limit=<string>` | maximum face nodes to scan (default 100, every face of --file)                    |
 | `--after=<string>` | resume after the node id returned as nextAfter.                                   |
 | `--file=<path>`    | restrict the batch to one source image.                                           |
 | `--missing`        | cut the crops an interrupted write left without bytes, or never created, instead. |

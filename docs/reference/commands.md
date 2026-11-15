@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 454 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 455 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 224 in full](commands-core.md).
+[All 225 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -131,6 +131,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [mod-info](commands-core.md#mod-info) | Show module information. |
 | [mod-install](commands-core.md#mod-install) | Install modules from their repositories, or update them, with the dependencies they lack, and set them up: one install at a time, which goes on when the session ends. |
 | [mod-list](commands-core.md#mod-list) | List installed modules, those kept to groups only for their members and administrators. |
+| [mod-outdated](commands-core.md#mod-outdated) | The installed modules with a newer release, or a newer commit of the branch or tag they were installed from, than the one installed. |
 | [mod-remove](commands-core.md#mod-remove) | Uninstall a module. |
 | [mod-search](commands-core.md#mod-search) | The published modules: each module-* repository of the module sources (CFG_MODULE_SOURCES), with its version and whether it is installed. |
 | [mod-setup](commands-core.md#mod-setup) | Set up a module already in the modules directory. |

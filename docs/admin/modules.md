@@ -213,7 +213,10 @@ ways:
 | `archive@v0.1.0`, `…/module-archive@<commit>` | That branch or tag, or a commit by its id, whole or its first seven characters or more, which EiN records whole |
 
 A release is a tag `v` and a version, such as `v0.3.1`, and the newest is the highest version; a
-prerelease such as `v0.4.0-rc.1` does not count. When the newest release is written for a core API
+prerelease such as `v0.4.0-rc.1` does not count, unless **Install prereleases**
+([`CFG_MODULE_PRERELEASES`](../reference/settings.md#cfg_module_prereleases)) is on. Then a
+prerelease is taken like a release, after the release before it and before its own: `v0.4.0-rc.1`
+comes after `v0.3.1` and gives way to `v0.4.0`. When the newest release is written for a core API
 this EiN does not provide, EiN takes the newest release that is written for it instead and says so:
 `archive 0.3.0 needs core API ^0.8.0, and this core provides 0.7.2: taking v0.2.4`. A ref, such as
 `archive@v0.3.0`, takes that release or none. A repository with no release is installed at its
