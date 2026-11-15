@@ -120,9 +120,11 @@ player's; click beside it, or on the arrow.
 The list goes round: after the last file comes the first again, and before the first comes the
 last.
 
-On a computer the old picture fades out where it is, and the new one fades in from the old one's
-edge and settles in the middle: from its left edge going forward, from its right edge going back. Stepping again within half a
-second, as when you run through many pictures, only fades, without the slide. On
+On a computer both pictures slide a little, to the left going forward and to the right going back,
+while the old one fades out and the new one fades in over it. Between a wide picture and a narrow
+one, the wide one shows through a frame that narrows to the narrow one's outline, or widens from
+it. Stepping again within a third of a second, as when you run through many pictures, changes the
+picture at once, without the slide; stepping back while a slide still moves runs it back. On
 a touch screen the next picture slides in under your finger; the position, the date and the place
 turn to it once it covers more than half the screen, and a swipe you take back before letting go
 turns them back.
