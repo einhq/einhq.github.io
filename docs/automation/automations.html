@@ -109,7 +109,7 @@ edge, each with a dot that says whether it runs (green), is off (grey) or is hel
 why under its name); tap or drag the handle on the drawer&#39;s edge to slide it away to the left and
 back. <strong>+</strong> beside the list&#39;s filter makes one, empty or from a starting point. On a phone the
 drawer covers the page, and closes when you pick one.</p>
-<p>An automation opens on three tabs, under its name in the bar:</p>
+<p>An automation opens on four tabs, under its name in the bar:</p>
 <ul>
 <li><strong>Graph</strong>: its nodes as cards wired together, which you drag and zoom as a map (the wheel or
 two fingers, a double tap to zoom in). With no card selected, the panel on the right lists the kinds of node by group,
@@ -120,7 +120,9 @@ to light up, and the others dim): <code>true</code> is the green output, <code>f
 the red one, and a switch has one per case. Each kind of node has a colour of its own, on the band
 behind its card&#39;s title. Tap a card to set it up in the panel instead (a drawer on a phone; × goes back to the list): its <strong>Name</strong>, which is what wires and math name it by and its
 key in the YAML (renaming it renames it there too), a <strong>Label</strong> shown on its card instead, and its
-settings, the required ones starred. A button node has <strong>Press</strong>, while the automation runs. At
+settings, the required ones starred. A button node has <strong>Press</strong>, while the automation runs; a
+script node picks one of the automation&#39;s scripts, and the button beside it opens that one on the
+<strong>Scripts</strong> tab. At
 the panel&#39;s foot, <strong>About … nodes</strong> says what the kind does, what it sends and what each setting
 means; fold it away and it stays folded. A card that reads or switches a device has the device to
 pick, and under it the device&#39;s endpoints (its controls, on a card that switches) with their
@@ -129,6 +131,10 @@ automation runs, each wire is labelled at its middle with the last value that we
 how long ago, lit for a moment when one just did; a true wire keeps its last true after its node has
 sent false since. A card says when its timer runs out, and its problems.</li>
 <li><strong>YAML</strong>: the file itself, to read or change as typed.</li>
+<li><strong>Scripts</strong>: the automation&#39;s own scripts (<a href="#scripts-of-its-own">Scripts of its own</a>), one at a
+time in an editor, picked at the top. <strong>New script</strong> makes one, starting with a few lines on what
+it is given; each change saves itself a moment after you make it, as the YAML does, and the bin
+deletes the one open.</li>
 <li><strong>Runs</strong>: what it did, as its <a href="#see-what-automations-did">run log</a> has it, as it happens.</li>
 </ul>
 <p>The bar also says whether it runs, or how many problems it has: tap <strong>3 problems</strong> to read them,
@@ -283,7 +289,10 @@ what each of its nodes last sent while it runs.</p>
 else.</li>
 <li>Only members of the <code>automation</code> group see the folder and write in it. The administrator adds
 someone with <code>group-add-member automation helen</code>, or in <strong>Settings → Groups</strong>.</li>
-<li><code>automation-disable hall-light</code> turns one off without removing it, and <code>automation-enable hall-light</code> on again. To remove one, remove its file.</li>
+<li><code>automation-disable hall-light</code> turns one off without removing it, and <code>automation-enable hall-light</code> on again. To remove one, remove its file: <code>rm</code>, or <code>rm -r</code> once it has scripts, which
+go with it.</li>
+<li>Its own scripts are under the file itself, as its children: <code>/etc/automations/&lt;name&gt;.yaml/scripts/</code>
+(<a href="#scripts-of-its-own">Scripts of its own</a>). Moving or removing the file takes them with it.</li>
 <li>A module can bring automations of its own. They are under <code>/etc/automations.d/&lt;module&gt;/</code>, called
 <code>&lt;module&gt;/&lt;name&gt;</code>, run as the administrator, and change only with the module. The administrator
 turns one off with <code>automation-disable &lt;module&gt;/&lt;name&gt;</code>.</li>
@@ -291,14 +300,15 @@ turns one off with <code>automation-disable &lt;module&gt;/&lt;name&gt;</code>.<
 <h3 id="whose-automation-it-is">Whose automation it is<a class="anchor" href="#whose-automation-it-is" aria-label="Link to this section"></a></h3>
 <p>An automation runs as the owner of its file, with that person&#39;s rights and nothing more: Helen&#39;s
 automation hears only the endpoints Helen may read, switches only what Helen may switch, hears only
-of the files Helen may read, and runs its lines as Helen. One whose owner may not read an endpoint it
+of the files Helen may read, and runs its lines and scripts as Helen. One whose owner may not read an endpoint it
 listens to, write a control it switches, or read a folder it watches, is not run, and says which: rights are checked when the file is read and every minute
 after, so taking a device from someone stops their automations that use it. Copying someone&#39;s
 automation into a file of your own makes it yours.</p>
 <p>A file that others than its owner may change, by its mode or by an entry on its access list, is not
 run, since whoever could change it could act as its owner. <code>automation-new</code> makes the file yours
-alone; after a <code>chmod</code> or a <code>share-set</code> that let others write it, <code>chmod 644</code> and removing the entry
-are the way out.</p>
+alone; after a <code>chmod</code> or a <code>share-set</code> that let others write it, <code>chmod 755</code> and removing the entry
+are the way out. The same goes for its scripts and their folder: each must be the owner&#39;s, and no
+one else&#39;s to change.</p>
 <p>What an automation&#39;s nodes say, in <code>automation-status &lt;name&gt;</code> and its run log, is for its owner (and
 whoever may change its file) to see: it holds the readings the owner may read.</p>
 <h2 id="what-an-automation-says">What an automation says<a class="anchor" href="#what-an-automation-says" aria-label="Link to this section"></a></h2>
@@ -541,8 +551,13 @@ way round.</p>
 </tr>
 <tr>
 <td><code>shell</code></td>
-<td><code>run</code>; <code>timeout</code></td>
-<td>Runs the command line as the automation&#39;s owner (<a href="#lines">Lines</a>) and sends what it printed on</td>
+<td><code>run</code>; <code>outputs</code>; <code>timeout</code></td>
+<td>Runs the command line as the automation&#39;s owner (<a href="#lines">Lines</a>) and sends what it printed on: each <code>name=value</code> line on the output of that name in <code>outputs</code>, the rest on <code>out</code></td>
+</tr>
+<tr>
+<td><code>script</code></td>
+<td><code>script</code>; <code>outputs</code>; <code>timeout</code></td>
+<td>Runs one of the automation&#39;s own scripts as its owner, as a shell node runs a line (<a href="#scripts-of-its-own">Scripts of its own</a>)</td>
 </tr>
 <tr>
 <td><code>link-out</code></td>
@@ -577,11 +592,54 @@ node wired in is its latest value under its id, with <code>-</code> written <cod
 </ul>
 <h3 id="lines">Lines<a class="anchor" href="#lines" aria-label="Link to this section"></a></h3>
 <p>A <code>shell</code> node runs any command line you could type in EiN&#39;s terminal, as the automation&#39;s owner:
-<code>todo-add</code> to put something on a list, a script of your own, <code>echo on &gt; /dev/heater-plug/switch-0</code>.
-The value that came is <code>$VALUE</code> and where it came from <code>$TOPIC</code>; it never becomes part of the line
-itself, so a device can say anything without running anything. What the line prints is the value
-the node sends on, a number when it prints one. A line that fails or runs longer than its <code>timeout</code>
-(30 s unless set) sends nothing, and its node and the run log say why.</p>
+<code>todo-add</code> to put something on a list, a script on the PATH that several automations share,
+<code>echo on &gt; /dev/heater-plug/switch-0</code>. Commands print text, as in the terminal.</p>
+<ul>
+<li>The value that came is <code>$VALUE</code> and where it came from <code>$TOPIC</code>. Each node wired into it is
+there too, with its latest value under its id, <code>-</code> written <code>_</code>, as in <a href="#expressions">math</a>: a node
+<code>set-point</code> is <code>$set_point</code>, empty until it has sent something. None of them ever becomes part of
+the line itself, so a device can say anything without running anything. A node wired in must be
+named so that it can be a variable: beginning with a letter, and not all in capitals, which are the
+environment&#39;s (<code>PATH</code>).</li>
+<li>What the line prints is the value the node sends on <code>out</code>, a number when it prints one. Name
+outputs of its own under <code>outputs</code>, such as <code>outputs: [heat, note]</code>, and each line it prints as
+<code>heat=on</code> sends <code>on</code> on <code>heat</code>, which you wire like any other output; what else it printed still
+goes on <code>out</code> once it is done.</li>
+<li>A line that fails or runs longer than its <code>timeout</code> (30 s unless set) sends nothing, and its node
+and the run log say why.</li>
+</ul>
+<h3 id="scripts-of-its-own">Scripts of its own<a class="anchor" href="#scripts-of-its-own" aria-label="Link to this section"></a></h3>
+<p>A script that belongs to one automation is kept under its file, as one of its children:
+<code>/etc/automations/heating.yaml/scripts/check.sh</code>. Only that automation picks it, and it goes, moves
+and is backed up with the file. Make and edit them on the automation&#39;s <strong>Scripts</strong> tab. A <code>script</code>
+node runs one by its name, as the automation&#39;s owner, given what a shell node is given and answering
+the same way:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-attr">nodes:</span>
+  <span class="hljs-attr">indoor:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">hall-sensor/temperature</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">check</span>] }
+  <span class="hljs-attr">away:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">device</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">house/away</span>, <span class="hljs-attr">to:</span> [<span class="hljs-string">check</span>] }
+  <span class="hljs-attr">check:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">script</span>, <span class="hljs-attr">script:</span> <span class="hljs-string">check.sh</span>, <span class="hljs-attr">outputs:</span> [<span class="hljs-string">heat</span>, <span class="hljs-string">note</span>], <span class="hljs-attr">to:</span> { <span class="hljs-attr">heat:</span> [<span class="hljs-string">boiler</span>], <span class="hljs-attr">note:</span> [<span class="hljs-string">why</span>] } }
+  <span class="hljs-attr">boiler:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">control</span>, <span class="hljs-attr">endpoint:</span> <span class="hljs-string">boiler-plug/switch-0</span> }
+  <span class="hljs-attr">why:</span> { <span class="hljs-attr">type:</span> <span class="hljs-string">debug</span> }</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># /etc/automations/heating.yaml/scripts/check.sh</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$away</span>&quot;</span> = on ]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> heat=off
+  <span class="hljs-built_in">echo</span> note=away
+<span class="hljs-keyword">elif</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">${indoor%.*}</span>&quot;</span> -lt 20 ]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> heat=on
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;note=indoors <span class="hljs-variable">$indoor</span>&quot;</span>
+<span class="hljs-keyword">else</span>
+  <span class="hljs-built_in">echo</span> heat=off
+<span class="hljs-keyword">fi</span></code></pre></div>
+<p>The automation is not run while a script it names is missing, while its owner may not read and run
+it, or while anyone else may change it or its folder: each must be the owner&#39;s, <code>chmod 755</code>, with no
+one else on its access list who may write. The <strong>Scripts</strong> tab makes them so. A module&#39;s automation
+has no scripts of its own; it runs the module&#39;s commands from shell nodes.</p>
+<p>In the terminal, the same is ordinary commands on the file&#39;s children:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">mkdir</span> -p -m 755 /etc/automations/heating.yaml/scripts
+mknode -t file --tier db -m 755 --as mimetype=text/x-shellscript /etc/automations/heating.yaml/scripts/check.sh
+edit /etc/automations/heating.yaml/scripts/check.sh</code></pre></div>
+<p>An automation made before scripts could hang under it may need <code>chmod u+x</code> on its file first, so
+its owner can reach the folder; <strong>New script</strong> does it.</p>
 <p>An automation&#39;s actions run one after another, each when the one before has ended; another
 automation&#39;s do not wait for them.</p>
 <h3 id="eins-events">EiN&#39;s events<a class="anchor" href="#eins-events" aria-label="Link to this section"></a></h3>
@@ -634,7 +692,7 @@ hour ago does not toggle a lamp now. A time of day that passed meanwhile is not 
 that came into a folder meanwhile is not sent.</p>
 <h2 id="more-examples">More examples<a class="anchor" href="#more-examples" aria-label="Link to this section"></a></h2>
 <h3 id="a-tour-of-every-kind-of-node">A tour of every kind of node<a class="anchor" href="#a-tour-of-every-kind-of-node" aria-label="Link to this section"></a></h3>
-<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: eight small flows
+<p><strong>automation/tour</strong>, under System → Automations, is the Automation module&#39;s own: nine small flows
 with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
 devices are invented (<code>example-…</code>), so it switches nothing real, and it comes off. Simulate it with
 the flask to see each flow work, or start one of your own from it: <strong>+</strong> beside the list, starting
@@ -650,8 +708,11 @@ that came.</li>
 <li>A file: file.</li>
 <li>EiN&#39;s events: event in, event out. Only the administrator raises events, so take the event out
 from a copy of your own.</li>
+<li>A script of its own: script, given the shared average and whether anyone is away, and sending
+on <code>heat</code> and <code>note</code>. The tour has no scripts, so make <code>heating.sh</code> on the Scripts tab of a copy
+of your own.</li>
 </ol>
-<p>An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
+<p>An and, or, math, aggregate, shell or script keeps the latest value from each node wired into it, so wire a
 timer&#39;s or a compare&#39;s <strong>out</strong> into it (true and false both), as the motion light does, not its
 true alone: otherwise it holds the last true for ever.</p>
 <h3 id="the-heater-between-two-temperatures">The heater between two temperatures<a class="anchor" href="#the-heater-between-two-temperatures" aria-label="Link to this section"></a></h3>
@@ -744,7 +805,27 @@ same.</p>
 <tbody><tr>
 <td><code>others than its owner may change it, so it is not run</code></td>
 <td>The file can be changed by the group, by anyone, or by someone on its access list</td>
-<td><code>chmod 644</code> the file, and take the others off its access list</td>
+<td><code>chmod 755</code> the file, and take the others off its access list</td>
+</tr>
+<tr>
+<td><code>it has no script check.sh</code></td>
+<td>A script node names a script the automation does not have</td>
+<td>Make it on the Scripts tab, or pick another</td>
+</tr>
+<tr>
+<td><code>its owner may not run the script check.sh</code></td>
+<td>The script, its folder or the automation&#39;s file is not open to its owner</td>
+<td><code>chmod 755</code> the script and its folder, <code>chmod u+x</code> the file</td>
+</tr>
+<tr>
+<td><code>others than its owner may change the script check.sh</code></td>
+<td>The script or its folder is someone else&#39;s, or others may write it</td>
+<td><code>chmod 755</code> both, <code>chown</code> them to the owner, take others off</td>
+</tr>
+<tr>
+<td><code>&lt;node&gt;: AWAY is wired in, but $AWAY would be the environment&#39;s</code></td>
+<td>A node wired into a shell or script has a name a variable cannot have</td>
+<td>Rename that node with small letters, beginning with a letter</td>
 </tr>
 <tr>
 <td><code>its owner may not read hall-sensor/motion, or there is no such endpoint</code></td>
@@ -825,7 +906,7 @@ same.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/automation/automations.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li class="nested"><a href="#a-starting-point-with-your-devices">A starting point with your devices</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#eins-events">EiN's events</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-automations-page">The Automations page</a></li><li><a href="#try-one-out-without-switching-anything">Try one out without switching anything</a></li><li><a href="#a-first-automation">A first automation</a></li><li class="nested"><a href="#a-starting-point-with-your-devices">A starting point with your devices</a></li><li><a href="#where-automations-are">Where automations are</a></li><li class="nested"><a href="#whose-automation-it-is">Whose automation it is</a></li><li><a href="#what-an-automation-says">What an automation says</a></li><li class="nested"><a href="#messages-and-true-and-false">Messages, and true and false</a></li><li class="nested"><a href="#the-nodes">The nodes</a></li><li class="nested"><a href="#expressions">Expressions</a></li><li class="nested"><a href="#lines">Lines</a></li><li class="nested"><a href="#scripts-of-its-own">Scripts of its own</a></li><li class="nested"><a href="#eins-events">EiN's events</a></li><li class="nested"><a href="#over-a-restart">Over a restart</a></li><li><a href="#more-examples">More examples</a></li><li class="nested"><a href="#a-tour-of-every-kind-of-node">A tour of every kind of node</a></li><li class="nested"><a href="#the-heater-between-two-temperatures">The heater between two temperatures</a></li><li class="nested"><a href="#a-button-toggles-a-lamp">A button toggles a lamp</a></li><li class="nested"><a href="#half-past-six-on-weekdays">Half past six on weekdays</a></li><li class="nested"><a href="#a-file-in-a-folder">A file in a folder</a></li><li class="nested"><a href="#from-sunset-to-sunrise">From sunset to sunrise</a></li><li><a href="#see-what-automations-did">See what automations did</a></li><li><a href="#when-an-automation-does-not-run">When an automation does not run</a></li></ul></aside>
     </div>
   </body>
 </html>

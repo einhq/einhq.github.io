@@ -331,8 +331,8 @@ about 2.5 seconds gets none.</li>
 </ul>
 <figure class="shot"><a href="../../assets/shots/recording@2x.webp"><img src="../../assets/shots/recording.webp" srcset="../../assets/shots/recording.webp 1x, ../../assets/shots/recording@2x.webp 2x" alt="The viewer on a recording called Voice 001.m4a: a waveform with the playhead a third of the way in, the play controls under it, and the transcript beside it under chips for two speakers, the current line in bold" width="1440" height="640" loading="lazy" decoding="async"></a><figcaption>A recording&#39;s tile and player show a picture of its sound, and the transcript beside it is searchable.</figcaption></figure>
 <h2 id="documents">Documents<a class="anchor" href="#documents" aria-label="Link to this section"></a></h2>
-<p>EiN reads the text of PDF files, Word (<code>.docx</code>) and OpenDocument (<code>.odt</code>) files and plain text
-files, so that search finds a document by what it
+<p>EiN reads the text of PDF files, Word (<code>.docx</code> and old <code>.doc</code>), RTF and OpenDocument (<code>.odt</code>) files
+and plain text files, so that search finds a document by what it
 is about: a search for <code>Christmas letter</code> finds the family newsletter of 2019. See
 <a href="search.html#find-photos-videos-recordings-and-documents">Search and the finder</a>.</p>
 <ul>
@@ -341,7 +341,9 @@ is read as a picture instead, handwriting included. At most 40 pages of one PDF 
 way; the pages after that keep only the text they hold.</li>
 <li><strong>Plain text.</strong> Any file that is text, whatever its name: <code>.txt</code>, a Markdown note, an HTML page.
 An SVG drawing is text too, so EiN treats it as a document, not as a picture.</li>
-<li><strong>Word and OpenDocument.</strong> A <code>.docx</code> or <code>.odt</code> file.</li>
+<li><strong>Word, RTF and OpenDocument.</strong> A <code>.docx</code>, <code>.doc</code>, <code>.rtf</code> or <code>.odt</code> file. An old Word or RTF file
+is read from a PDF made of it, as the viewer&#39;s is, and a page of it that is only a picture is read
+as a scanned PDF page is.</li>
 </ul>
 <p>A document&#39;s text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.</p>
@@ -351,9 +353,7 @@ OpenDocument or RTF file once, which the viewer shows. The viewer shows a PDF as
 as text (<a href="viewer.html#read-a-document">Read a document</a>). A document EiN cannot open keeps a plain
 tile; use <strong>Download</strong> to open it on your device.</p>
 <p>The <strong>Documents</strong> choice on the <a href="media.html#show-one-kind-of-file">Media page</a> also lists Markdown and
-HTML files, which the viewer shows as text. EiN does not read the text of RTF files and old Word
-(<code>.doc</code>) files: search finds them by their file name only. To have their text read, save them as PDF
-or <code>.docx</code> first.</p>
+HTML files, which the viewer shows as text.</p>
 <h2 id="sidecar-files">Sidecar files<a class="anchor" href="#sidecar-files" aria-label="Link to this section"></a></h2>
 <p>A sidecar is a small file beside a picture that says things about it:</p>
 <ul>

@@ -347,40 +347,41 @@ describes what you see in the interface while this happens.
 
 The Media module's pipelines and the Archive's, and what starts them:
 
-| Pipeline               | Starts on                                                                 | What it does                                                                    |
-| ---------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `media-ingest`         | `media.file.discovered`                                                   | Reads a file's metadata; every other media pipeline waits on it                 |
-| `media-reindex`        | `media.file.content-changed`                                              | Reads the metadata again when a file's bytes changed                            |
-| `media-stills`         | `media.metadata.extracted`, `media.renditions.stale`                      | A photo's sizes, a video's poster frames and hover clip, a recording's waveform |
-| `media-transcode`      | `media.metadata.extracted`, `media.file.turned`, `media.renditions.stale` | Video and audio the browser can play, a video's storyboard and chapters         |
-| `media-interpret`      | `media.metadata.extracted`                                                | When a file was taken and where, from its metadata, a sidecar and its name      |
-| `media-fingerprint`    | `media.metadata.extracted`, `media.fingerprints.stale`                    | The fingerprints that find copies, look-alikes and photo stacks                 |
-| `media-faces`          | `media.metadata.interpreted`, for a picture                               | Finds the faces in a picture and crops each one                                 |
-| `media-video-faces`    | `media.metadata.interpreted`, for a video                                 | Finds the faces a video shows, and when                                         |
-| `media-face-assign`    | `media.face.detected`                                                     | Attaches a found face to a person                                               |
-| `media-embed-picture`  | `media.metadata.extracted`, `media.picture.stale`                         | A picture vector, for search by what is in the picture                          |
-| `media-embed-text`     | `media.text-embedding.stale`                                              | Text vectors for a file's stored texts                                          |
-| `media-ocr`            | `media.metadata.extracted` for a picture, and others                      | Reads the text written in a picture                                             |
-| `media-transcribe`     | `media.metadata.extracted`, `media.transcript.stale`                      | Transcribes a video or recording                                                |
-| `media-voiceprint`     | `media.transcript.generated`, `media.speakers.missing`                    | Finds who speaks when, with a voiceprint per voice                              |
-| `media-speaker-faces`  | `media.faces.completed`, for a video with voices                          | Ties a video's voices to the faces seen speaking them                           |
-| `media-speaker-assign` | `media.speakers.detected`, `media.speakers.face-changed`                  | Decides which person each voice is                                              |
-| `media-camera`         | `media.metadata.interpreted`, with a camera in it                         | Links a file to the camera that made it                                         |
-| `media-damage`         | `media.metadata.interpreted`, for a scan, and `media.damage.missing`      | How faded, dusty, scratched, blurred and shaken a scan is                       |
-| `media-restore`        | `media.restore.requested`                                                 | A restoration asked for in the background, into a copy among the versions       |
-| `media-camera-cover`   | `media.renditions.made`, for a video                                      | Offers the video's poster frame to its camera as a cover                        |
-| `media-geocode`        | `media.position.available`                                                | The address of a file's GPS position                                            |
-| `media-weather`        | `location.point.changed`, `media.weather.owed`                            | The weather at a photo's position and date                                      |
-| `location-link-point`  | `location.point.changed`                                                  | Links a photo to the location containing its position                           |
-| `location-upkeep`      | `location.changed`                                                        | Redraws a location and links the photos inside it again                         |
-| `media-album`          | `media.album.members-changed`                                             | An album's stacks, time span, cover and matching profile                        |
-| `media-duplicates`     | `media.duplicates.stale`                                                  | Decides a staged file's duplicate findings again                                |
-| `document-index`       | a file `updated` or `moved`, `media.text.missing`                         | Extracts the text of PDFs, text and word-processor files for search             |
-| `staging-unzip`        | a file `updated` in a staging category                                    | Expands a zip beside itself and removes it                                      |
-| `staging-sidecars`     | `staging.sidecars.arrived`                                                | Pairs sidecar files with their files                                            |
-| `staging-organize`     | `staging.category.changed`                                                | Suggests groups for a staging category again                                    |
-| `staging-retime`       | `staging.retime.requested`                                                | Dates staged files by their category's time rules                               |
-| `track-stage`          | a file `updated` in staging                                               | Turns a GPX file into its track's route                                         |
+| Pipeline                 | Starts on                                                                 | What it does                                                                    |
+| ------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `media-ingest`           | `media.file.discovered`                                                   | Reads a file's metadata; every other media pipeline waits on it                 |
+| `media-reindex`          | `media.file.content-changed`                                              | Reads the metadata again when a file's bytes changed                            |
+| `media-stills`           | `media.metadata.extracted`, `media.renditions.stale`                      | A photo's sizes, a video's poster frames and hover clip, a recording's waveform |
+| `media-transcode`        | `media.metadata.extracted`, `media.file.turned`, `media.renditions.stale` | Video and audio the browser can play, a video's storyboard and chapters         |
+| `media-interpret`        | `media.metadata.extracted`                                                | When a file was taken and where, from its metadata, a sidecar and its name      |
+| `media-fingerprint`      | `media.metadata.extracted`, `media.fingerprints.stale`                    | The fingerprints that find copies, look-alikes and photo stacks                 |
+| `media-faces`            | `media.metadata.interpreted`, for a picture                               | Finds the faces in a picture and crops each one                                 |
+| `media-video-faces`      | `media.metadata.interpreted`, for a video                                 | Finds the faces a video shows, and when                                         |
+| `media-face-assign`      | `media.face.detected`                                                     | Attaches a found face to a person                                               |
+| `media-embed-picture`    | `media.metadata.extracted`, `media.picture.stale`                         | A picture vector, for search by what is in the picture                          |
+| `media-embed-text`       | `media.text-embedding.stale`                                              | Text vectors for a file's stored texts                                          |
+| `media-ocr`              | `media.metadata.extracted` for a picture, and others                      | Reads the text written in a picture                                             |
+| `media-transcribe`       | `media.metadata.extracted`, `media.transcript.stale`                      | Transcribes a video or recording                                                |
+| `media-voiceprint`       | `media.transcript.generated`, `media.speakers.missing`                    | Finds who speaks when, with a voiceprint per voice                              |
+| `media-voiceprint-stale` | `media.speakers.stale`                                                    | Finds a recording's voices again when other voice models found them             |
+| `media-speaker-faces`    | `media.faces.completed`, for a video with voices                          | Ties a video's voices to the faces seen speaking them                           |
+| `media-speaker-assign`   | `media.speakers.detected`, `media.speakers.face-changed`                  | Decides which person each voice is                                              |
+| `media-camera`           | `media.metadata.interpreted`, with a camera in it                         | Links a file to the camera that made it                                         |
+| `media-damage`           | `media.metadata.interpreted`, for a scan, and `media.damage.missing`      | How faded, dusty, scratched, blurred and shaken a scan is                       |
+| `media-restore`          | `media.restore.requested`                                                 | A restoration asked for in the background, into a copy among the versions       |
+| `media-camera-cover`     | `media.renditions.made`, for a video                                      | Offers the video's poster frame to its camera as a cover                        |
+| `media-geocode`          | `media.position.available`                                                | The address of a file's GPS position                                            |
+| `media-weather`          | `location.point.changed`, `media.weather.owed`                            | The weather at a photo's position and date                                      |
+| `location-link-point`    | `location.point.changed`                                                  | Links a photo to the location containing its position                           |
+| `location-upkeep`        | `location.changed`                                                        | Redraws a location and links the photos inside it again                         |
+| `media-album`            | `media.album.members-changed`                                             | An album's stacks, time span, cover and matching profile                        |
+| `media-duplicates`       | `media.duplicates.stale`                                                  | Decides a staged file's duplicate findings again                                |
+| `document-index`         | a file `updated` or `moved`, `media.text.missing`                         | Extracts the text of PDFs, text and word-processor files for search             |
+| `staging-unzip`          | a file `updated` in a staging category                                    | Expands a zip beside itself and removes it                                      |
+| `staging-sidecars`       | `staging.sidecars.arrived`                                                | Pairs sidecar files with their files                                            |
+| `staging-organize`       | `staging.category.changed`                                                | Suggests groups for a staging category again                                    |
+| `staging-retime`         | `staging.retime.requested`                                                | Dates staged files by their category's time rules                               |
+| `track-stage`            | a file `updated` in staging                                               | Turns a GPX file into its track's route                                         |
 
 [Staging and importing for administrators](../archive/staging-admin.md) explains the staging pipelines in
 detail.

@@ -8,7 +8,10 @@ what to do when an update goes differently.
 
 EiN has no releases and no version numbers to choose between. An update downloads the images
 GitHub builds each night from the newest commit of each repository, and starts them in place of
-what ran before; a change made today reaches an update tomorrow. The engine downloads only the
+what ran before; a change made today reaches an update tomorrow. The media service's changes reach
+GitHub only once it has been run over a set of real photos, videos, recordings and documents and
+answered as it did before (the internal regression suite): one that reads some of them worse waits
+on Forgejo until it is fixed. The engine downloads only the
 layers of an image that changed, so an update of the media service is usually far smaller than its
 30 GB. What it updates depends on what is installed:
 

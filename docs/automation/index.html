@@ -152,7 +152,7 @@ household that uses them. <a href="automations.html">Automations</a> covers maki
 </tr>
 <tr>
 <td>The <code>onvif</code> driver</td>
-<td>A camera that speaks ONVIF, found on the network: its streams as <code>rtsp</code>&#39;s, its motion and the people it sees, and its presets and moves where it turns; see <a href="#an-onvif-camera">An ONVIF camera</a></td>
+<td>A camera that speaks ONVIF, found on the network: its streams as <code>rtsp</code>&#39;s, its events (motion, the people it sees, tampering, a line crossed and the like), and its presets and moves where it turns; see <a href="#an-onvif-camera">An ONVIF camera</a></td>
 </tr>
 <tr>
 <td>The <strong>Live</strong> tab</td>
@@ -309,7 +309,7 @@ and <strong>Add</strong> on a card makes it a device:</p>
 </tr>
 <tr>
 <td>A camera that speaks ONVIF</td>
-<td><strong>Add</strong> asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the <code>onvif</code> driver at once, with its streams, its motion and the people it sees, and its presets and moves where it turns (<a href="#an-onvif-camera">An ONVIF camera</a>).</td>
+<td><strong>Add</strong> asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the <code>onvif</code> driver at once, with its streams, its events, and its presets and moves where it turns (<a href="#an-onvif-camera">An ONVIF camera</a>).</td>
 </tr>
 <tr>
 <td>A printer</td>
@@ -702,8 +702,28 @@ it is followed to a new address too.</p>
 <td>On while the camera sees motion, off when it stops, as the camera itself detects it</td>
 </tr>
 <tr>
-<td><code>person</code></td>
-<td>On while the camera sees a person, for a camera that tells people from the rest</td>
+<td><code>person</code>, <code>vehicle</code>, <code>animal</code></td>
+<td>On while the camera sees a person, a vehicle or an animal, for a camera that tells them from the rest</td>
+</tr>
+<tr>
+<td><code>tamper</code></td>
+<td>On while the camera is covered, turned away or its picture changed all at once</td>
+</tr>
+<tr>
+<td><code>sound</code></td>
+<td>On while the camera hears a sound over the level set on it</td>
+</tr>
+<tr>
+<td><code>line-crossing</code></td>
+<td>An event, <code>crossed</code>, each time something crosses a line drawn on the camera&#39;s picture</td>
+</tr>
+<tr>
+<td><code>intrusion</code></td>
+<td>On while something is inside a field drawn on the camera&#39;s picture</td>
+</tr>
+<tr>
+<td><code>storage-failure</code></td>
+<td>On while the camera&#39;s memory card fails; a diagnostic</td>
 </tr>
 <tr>
 <td><code>ptz-preset</code></td>
@@ -715,8 +735,11 @@ it is followed to a new address too.</p>
 </tr>
 </tbody></table>
 </div>
-<p><code>motion</code> and <code>person</code> are readings like any other, so an <a href="automations.html">automation</a> takes them:
-a person in the back yard at night can turn on its light, or turn the camera to the gate.</p>
+<p>A camera has those it lists among its events, and only where it is set to detect them: lines,
+fields and the sound level are drawn and set on the camera&#39;s own web page. They are readings like
+any other, so an <a href="automations.html">automation</a> takes them: a person in the back yard at night can
+turn on its light, or turn the camera to the gate, and a line crossed at the gate can ring the
+hall.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">echo</span> Gate &gt; /dev/back-yard/ptz-preset    <span class="hljs-comment"># turn to the position saved as Gate</span>
 <span class="hljs-built_in">echo</span> press &gt; /dev/back-yard/ptz-left     <span class="hljs-comment"># a step to the left</span></code></pre></div>

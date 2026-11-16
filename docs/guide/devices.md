@@ -230,8 +230,14 @@ device's track as it moves:
    the address to type instead.
 4. Set how often it reports, for example every 30 seconds, and switch tracking on.
 
+Traccar Client also sends the phone's battery, whether it is charging and what it is doing (still,
+on foot, in a vehicle), which the device keeps as its `battery`, `charging` and `activity`
+([Core's tracker driver](../concepts/devices.md#cores-tracker-driver)); the battery shows on the
+device's card, so a phone about to stop reporting is seen in time.
+
 [OsmAnd](https://osmand.net/) reports the same way: give its online tracking the device's address
-with `&lat={0}&lon={1}&timestamp={2}` added. So does a hardware tracker that posts the OsmAnd
+with `&lat={0}&lon={1}&timestamp={2}` added; `accuracy` and `batt` (the battery in percent) are
+taken too when its address carries them. So does a hardware tracker that posts the OsmAnd
 protocol, or GPRMC sentences, over HTTP.
 
 The phone posts to EiN from wherever it is, so EiN must be reachable from the internet over HTTPS

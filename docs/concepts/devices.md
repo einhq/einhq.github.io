@@ -108,16 +108,16 @@ A driver is what turns a device's own language into endpoints and back: it reads
 sends and appends it to the endpoints, and it sends the device what is written to its controls. A
 device names its driver in its `driver` attribute.
 
-| Driver         | Comes with                                      | What it drives                                                                                                                                            |
-| -------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its `position` track                                              |
-| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading                                                            |
-| `ha-discovery` | the [Automation](../automation/index.md) module | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others                                                    |
-| `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                                                                           |
-| `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                                                                       |
-| `virtual`      | the Automation module                           | No hardware: readings worked out from other devices' and controls that hold what is set; see [Virtual devices](../automation/virtual-devices.md)          |
-| `rtsp`         | the Automation module                           | A camera that sends its picture over RTSP: its streams; see [A camera](../automation/index.md#a-camera)                                                   |
-| `onvif`        | the Automation module                           | A camera that speaks ONVIF: its streams, its motion and people seen, its presets and moves; see [An ONVIF camera](../automation/index.md#an-onvif-camera) |
+| Driver         | Comes with                                      | What it drives                                                                                                                                                                                                 |
+| -------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its `position` track                                                                                                   |
+| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading                                                                                                                 |
+| `ha-discovery` | the [Automation](../automation/index.md) module | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others                                                                                                         |
+| `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                                                                                                                                |
+| `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                                                                                                                            |
+| `virtual`      | the Automation module                           | No hardware: readings worked out from other devices' and controls that hold what is set; see [Virtual devices](../automation/virtual-devices.md)                                                               |
+| `rtsp`         | the Automation module                           | A camera that sends its picture over RTSP: its streams; see [A camera](../automation/index.md#a-camera)                                                                                                        |
+| `onvif`        | the Automation module                           | A camera that speaks ONVIF: its streams, its events (motion, people seen, tampering, sound, a line crossed and the like), its presets and moves; see [An ONVIF camera](../automation/index.md#an-onvif-camera) |
 
 `devices --drivers` lists the drivers running now, with the module each comes from and how many
 devices it drives. A module's drivers run while its service does: when the service is stopped, a
@@ -156,7 +156,19 @@ the device's `position` track:
 - EiN's own positions, a line of JSON each: `{"lat": 59.32, "lng": 18.07, "ts": "2026-11-08T09:00:00Z"}`.
 
 A position at a time the track already has is not added twice, so sending the same file again adds
-nothing.
+nothing. How far off a position may be, when the phone or tracker says it, is kept with it, and one
+more than 150 m off is [left out of the track](../archive/tracks.md#the-route-on-the-map).
+
+What the device says of itself goes to logs of its own, each made the first time it comes:
+
+| Log        | What it holds                                                                             | Sent by                           |
+| ---------- | ----------------------------------------------------------------------------------------- | --------------------------------- |
+| `battery`  | The battery's charge in percent, about the device itself, kept at most every 5 min        | Traccar Client, OsmAnd (`batt`)   |
+| `charging` | Whether it is charging, about the device itself                                           | Traccar Client, OsmAnd (`charge`) |
+| `activity` | What it is doing, as the phone's motion sensors tell: `still`, `on_foot`, `in_vehicle`, … | Traccar Client                    |
+
+A device's battery, from any driver's reading of class `battery`, shows on its card on the
+**Devices** page, and `devices` answers it as `battery`.
 
 ### Core's webhook driver
 
@@ -195,20 +207,39 @@ the `host` driver, and makes the device and each endpoint the first time it has 
 After `device-forget` it is made again at the next reading. Only the administrators see it
 ([Devices for administrators](../admin/devices.md)).
 
-| Endpoint             | Reading                                                         | How often  | Kept     |
-| -------------------- | --------------------------------------------------------------- | ---------- | -------- |
-| `cpu`                | The share of all the machine's processor cores in use, in %     | 15 seconds | 30 days  |
-| `load`               | The 1-minute load average                                       | 15 seconds | 30 days  |
-| `memory-used`        | The share of the machine's memory in use, in %                  | 15 seconds | 30 days  |
-| `<zone>-temperature` | Each thermal zone the kernel has, such as `x86_pkg_temp`, in °C | 15 seconds | 30 days  |
-| `<disk>-used`        | The share of each disk in use, such as `sda1-used`, in %        | 15 minutes | 365 days |
-| `memory-total`       | The machine's memory, in GB                                     | 15 minutes | 365 days |
-| `uptime`             | Days since the machine started                                  | 15 minutes | 365 days |
+| Endpoint             | Reading                                                               | How often  | Kept     |
+| -------------------- | --------------------------------------------------------------------- | ---------- | -------- |
+| `cpu`                | The share of all the machine's processor cores in use, in %           | 15 seconds | 30 days  |
+| `load`               | The 1-minute load average                                             | 15 seconds | 30 days  |
+| `memory-used`        | The share of the machine's memory in use, in %                        | 15 seconds | 30 days  |
+| `<zone>-temperature` | Each thermal zone the kernel has, such as `x86_pkg_temp`, in °C       | 15 seconds | 30 days  |
+| `<fan>-speed`        | Each fan that has turned, such as `nct6798-fan2-speed`, in rpm        | 1 minute   | 30 days  |
+| `<disk>-read`        | What each disk read, such as `sda-read`, in MB/s                      | 1 minute   | 30 days  |
+| `<disk>-written`     | What each disk wrote, in MB/s                                         | 1 minute   | 30 days  |
+| `<disk>-busy`        | The share of the time each disk was busy, in %                        | 1 minute   | 30 days  |
+| `<nic>-received`     | What each network card received, such as `enp2s0-received`, in Mbit/s | 1 minute   | 30 days  |
+| `<nic>-sent`         | What each network card sent, in Mbit/s                                | 1 minute   | 30 days  |
+| `<disk>-used`        | The share of each disk in use, such as `sda1-used`, in %              | 15 minutes | 365 days |
+| `memory-total`       | The machine's memory, in GB                                           | 15 minutes | 365 days |
+| `uptime`             | Days since the machine started                                        | 15 minutes | 365 days |
 
 These are the whole machine's, whatever runs on it: the media service and the database load it from
-containers of their own. EiN's own share is on the System status page. A disk is each filesystem on a
-block device that EiN's container sees, once, wherever it is mounted. The load, the temperatures,
-the total and the uptime are about the machine itself (`diagnostic`), so the card shows the CPU.
+containers of their own. EiN's own share is on the System status page. A disk's use is each
+filesystem on a block device that EiN's container sees, once, wherever it is mounted; its activity
+is each physical disk's, averaged over the minute, `sda` for the disk that holds `sda1`. A fan is
+listed once it has turned, named by its label where the board gives one: a fan connector with
+nothing on it reads 0 for good. Everything but the CPU, the memory used and the disks' use is about
+the machine itself (`diagnostic`), so the card shows the CPU.
+
+Some of the machine is out of EiN's reach from its container, and its device does not have it:
+
+- **Network traffic**, in an installation made with `setup.sh`: EiN's container has a network of
+  its own, which carries EiN's traffic, not the machine's. EiN reads only network cards, so the
+  `<nic>` endpoints appear where EiN runs outside a container or on the machine's own network.
+- **Disk health** (SMART): reading it takes `smartctl` and the disks themselves, which the container
+  is not given.
+- **The containers**: whether each of EiN's is up, and how often it restarted, is the container
+  engine's to say (`podman ps`, `docker ps`), and EiN's container cannot ask it.
 
 In an installation made with `setup.sh`, the machine's name is `EIN_HOSTNAME` in `.env`, which
 `setup.sh` writes ([Installing in detail](../admin/install.md#env)).

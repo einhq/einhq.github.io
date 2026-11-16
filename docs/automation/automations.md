@@ -20,7 +20,7 @@ why under its name); tap or drag the handle on the drawer's edge to slide it awa
 back. **+** beside the list's filter makes one, empty or from a starting point. On a phone the
 drawer covers the page, and closes when you pick one.
 
-An automation opens on three tabs, under its name in the bar:
+An automation opens on four tabs, under its name in the bar:
 
 - **Graph**: its nodes as cards wired together, which you drag and zoom as a map (the wheel or
   two fingers, a double tap to zoom in). With no card selected, the panel on the right lists the kinds of node by group,
@@ -31,7 +31,9 @@ An automation opens on three tabs, under its name in the bar:
   the red one, and a switch has one per case. Each kind of node has a colour of its own, on the band
   behind its card's title. Tap a card to set it up in the panel instead (a drawer on a phone; × goes back to the list): its **Name**, which is what wires and math name it by and its
   key in the YAML (renaming it renames it there too), a **Label** shown on its card instead, and its
-  settings, the required ones starred. A button node has **Press**, while the automation runs. At
+  settings, the required ones starred. A button node has **Press**, while the automation runs; a
+  script node picks one of the automation's scripts, and the button beside it opens that one on the
+  **Scripts** tab. At
   the panel's foot, **About … nodes** says what the kind does, what it sends and what each setting
   means; fold it away and it stays folded. A card that reads or switches a device has the device to
   pick, and under it the device's endpoints (its controls, on a card that switches) with their
@@ -40,6 +42,10 @@ An automation opens on three tabs, under its name in the bar:
   how long ago, lit for a moment when one just did; a true wire keeps its last true after its node has
   sent false since. A card says when its timer runs out, and its problems.
 - **YAML**: the file itself, to read or change as typed.
+- **Scripts**: the automation's own scripts ([Scripts of its own](#scripts-of-its-own)), one at a
+  time in an editor, picked at the top. **New script** makes one, starting with a few lines on what
+  it is given; each change saves itself a moment after you make it, as the YAML does, and the bin
+  deletes the one open.
 - **Runs**: what it did, as its [run log](#see-what-automations-did) has it, as it happens.
 
 The bar also says whether it runs, or how many problems it has: tap **3 problems** to read them,
@@ -208,7 +214,10 @@ what each of its nodes last sent while it runs.
 - Only members of the `automation` group see the folder and write in it. The administrator adds
   someone with `group-add-member automation helen`, or in **Settings → Groups**.
 - `automation-disable hall-light` turns one off without removing it, and `automation-enable
-  hall-light` on again. To remove one, remove its file.
+  hall-light` on again. To remove one, remove its file: `rm`, or `rm -r` once it has scripts, which
+  go with it.
+- Its own scripts are under the file itself, as its children: `/etc/automations/<name>.yaml/scripts/`
+  ([Scripts of its own](#scripts-of-its-own)). Moving or removing the file takes them with it.
 - A module can bring automations of its own. They are under `/etc/automations.d/<module>/`, called
   `<module>/<name>`, run as the administrator, and change only with the module. The administrator
   turns one off with `automation-disable <module>/<name>`.
@@ -217,15 +226,16 @@ what each of its nodes last sent while it runs.
 
 An automation runs as the owner of its file, with that person's rights and nothing more: Helen's
 automation hears only the endpoints Helen may read, switches only what Helen may switch, hears only
-of the files Helen may read, and runs its lines as Helen. One whose owner may not read an endpoint it
+of the files Helen may read, and runs its lines and scripts as Helen. One whose owner may not read an endpoint it
 listens to, write a control it switches, or read a folder it watches, is not run, and says which: rights are checked when the file is read and every minute
 after, so taking a device from someone stops their automations that use it. Copying someone's
 automation into a file of your own makes it yours.
 
 A file that others than its owner may change, by its mode or by an entry on its access list, is not
 run, since whoever could change it could act as its owner. `automation-new` makes the file yours
-alone; after a `chmod` or a `share-set` that let others write it, `chmod 644` and removing the entry
-are the way out.
+alone; after a `chmod` or a `share-set` that let others write it, `chmod 755` and removing the entry
+are the way out. The same goes for its scripts and their folder: each must be the owner's, and no
+one else's to change.
 
 What an automation's nodes say, in `automation-status <name>` and its run log, is for its owner (and
 whoever may change its file) to see: it holds the readings the owner may read.
@@ -320,13 +330,14 @@ way round.
 
 **Actions**:
 
-| Type        | Settings            | It does                                                                                                                                                                                                                                                                              |
-| ----------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `control`   | `endpoint`; `value` | Writes the control, as `echo on > /dev/hall-lamp/switch-0` does: its `value` (`on`, `off`, `toggle`, a number), or else the value that came, true as `on` and false as `off`. A control that already has the value is not written again; `toggle` always is. Then sends the value on |
-| `shell`     | `run`; `timeout`    | Runs the command line as the automation's owner ([Lines](#lines)) and sends what it printed on                                                                                                                                                                                       |
-| `link-out`  | `name`              | Sends the value to every `link-in` of that name in the owner's automations                                                                                                                                                                                                           |
-| `event-out` | `event`; `subject`  | Raises an event for pipelines, about the node at `subject`, or at the value that came ([EiN's events](#eins-events)); the administrator's automations only. Then sends the path on                                                                                                   |
-| `debug`     |                     | Writes the value to the run log                                                                                                                                                                                                                                                      |
+| Type        | Settings                       | It does                                                                                                                                                                                                                                                                              |
+| ----------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `control`   | `endpoint`; `value`            | Writes the control, as `echo on > /dev/hall-lamp/switch-0` does: its `value` (`on`, `off`, `toggle`, a number), or else the value that came, true as `on` and false as `off`. A control that already has the value is not written again; `toggle` always is. Then sends the value on |
+| `shell`     | `run`; `outputs`; `timeout`    | Runs the command line as the automation's owner ([Lines](#lines)) and sends what it printed on: each `name=value` line on the output of that name in `outputs`, the rest on `out`                                                                                                    |
+| `script`    | `script`; `outputs`; `timeout` | Runs one of the automation's own scripts as its owner, as a shell node runs a line ([Scripts of its own](#scripts-of-its-own))                                                                                                                                                       |
+| `link-out`  | `name`                         | Sends the value to every `link-in` of that name in the owner's automations                                                                                                                                                                                                           |
+| `event-out` | `event`; `subject`             | Raises an event for pipelines, about the node at `subject`, or at the value that came ([EiN's events](#eins-events)); the administrator's automations only. Then sends the path on                                                                                                   |
+| `debug`     |                                | Writes the value to the run log                                                                                                                                                                                                                                                      |
 
 ### Expressions
 
@@ -344,11 +355,67 @@ A `math` node works out a value: `value * 1.8 + 32`, `round(value, 1)`, `outdoor
 ### Lines
 
 A `shell` node runs any command line you could type in EiN's terminal, as the automation's owner:
-`todo-add` to put something on a list, a script of your own, `echo on > /dev/heater-plug/switch-0`.
-The value that came is `$VALUE` and where it came from `$TOPIC`; it never becomes part of the line
-itself, so a device can say anything without running anything. What the line prints is the value
-the node sends on, a number when it prints one. A line that fails or runs longer than its `timeout`
-(30 s unless set) sends nothing, and its node and the run log say why.
+`todo-add` to put something on a list, a script on the PATH that several automations share,
+`echo on > /dev/heater-plug/switch-0`. Commands print text, as in the terminal.
+
+- The value that came is `$VALUE` and where it came from `$TOPIC`. Each node wired into it is
+  there too, with its latest value under its id, `-` written `_`, as in [math](#expressions): a node
+  `set-point` is `$set_point`, empty until it has sent something. None of them ever becomes part of
+  the line itself, so a device can say anything without running anything. A node wired in must be
+  named so that it can be a variable: beginning with a letter, and not all in capitals, which are the
+  environment's (`PATH`).
+- What the line prints is the value the node sends on `out`, a number when it prints one. Name
+  outputs of its own under `outputs`, such as `outputs: [heat, note]`, and each line it prints as
+  `heat=on` sends `on` on `heat`, which you wire like any other output; what else it printed still
+  goes on `out` once it is done.
+- A line that fails or runs longer than its `timeout` (30 s unless set) sends nothing, and its node
+  and the run log say why.
+
+### Scripts of its own
+
+A script that belongs to one automation is kept under its file, as one of its children:
+`/etc/automations/heating.yaml/scripts/check.sh`. Only that automation picks it, and it goes, moves
+and is backed up with the file. Make and edit them on the automation's **Scripts** tab. A `script`
+node runs one by its name, as the automation's owner, given what a shell node is given and answering
+the same way:
+
+```yaml
+nodes:
+  indoor: { type: device, endpoint: hall-sensor/temperature, to: [check] }
+  away: { type: device, endpoint: house/away, to: [check] }
+  check: { type: script, script: check.sh, outputs: [heat, note], to: { heat: [boiler], note: [why] } }
+  boiler: { type: control, endpoint: boiler-plug/switch-0 }
+  why: { type: debug }
+```
+
+```bash
+# /etc/automations/heating.yaml/scripts/check.sh
+if [ "$away" = on ]; then
+  echo heat=off
+  echo note=away
+elif [ "${indoor%.*}" -lt 20 ]; then
+  echo heat=on
+  echo "note=indoors $indoor"
+else
+  echo heat=off
+fi
+```
+
+The automation is not run while a script it names is missing, while its owner may not read and run
+it, or while anyone else may change it or its folder: each must be the owner's, `chmod 755`, with no
+one else on its access list who may write. The **Scripts** tab makes them so. A module's automation
+has no scripts of its own; it runs the module's commands from shell nodes.
+
+In the terminal, the same is ordinary commands on the file's children:
+
+```bash
+mkdir -p -m 755 /etc/automations/heating.yaml/scripts
+mknode -t file --tier db -m 755 --as mimetype=text/x-shellscript /etc/automations/heating.yaml/scripts/check.sh
+edit /etc/automations/heating.yaml/scripts/check.sh
+```
+
+An automation made before scripts could hang under it may need `chmod u+x` on its file first, so
+its owner can reach the folder; **New script** does it.
 
 An automation's actions run one after another, each when the one before has ended; another
 automation's do not wait for them.
@@ -413,7 +480,7 @@ that came into a folder meanwhile is not sent.
 
 ### A tour of every kind of node
 
-**automation/tour**, under System → Automations, is the Automation module's own: eight small flows
+**automation/tour**, under System → Automations, is the Automation module's own: nine small flows
 with every kind of node among them, its YAML commented flow by flow (the YAML tab shows it). Its
 devices are invented (`example-…`), so it switches nothing real, and it comes off. Simulate it with
 the flask to see each flow work, or start one of your own from it: **+** beside the list, starting
@@ -429,8 +496,11 @@ point **Tour of every node**, or `automation-new <name> --from tour`, then set y
 7. A file: file.
 8. EiN's events: event in, event out. Only the administrator raises events, so take the event out
    from a copy of your own.
+9. A script of its own: script, given the shared average and whether anyone is away, and sending
+   on `heat` and `note`. The tour has no scripts, so make `heating.sh` on the Scripts tab of a copy
+   of your own.
 
-An and, or, math or aggregate keeps the latest value from each node wired into it, so wire a
+An and, or, math, aggregate, shell or script keeps the latest value from each node wired into it, so wire a
 timer's or a compare's **out** into it (true and false both), as the motion light does, not its
 true alone: otherwise it holds the last true for ever.
 
@@ -550,7 +620,11 @@ same.
 
 | What you see                                                              | What it means                                                                                                                     | What to do                                                          |
 | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `others than its owner may change it, so it is not run`                   | The file can be changed by the group, by anyone, or by someone on its access list                                                 | `chmod 644` the file, and take the others off its access list       |
+| `others than its owner may change it, so it is not run`                   | The file can be changed by the group, by anyone, or by someone on its access list                                                 | `chmod 755` the file, and take the others off its access list       |
+| `it has no script check.sh`                                               | A script node names a script the automation does not have                                                                         | Make it on the Scripts tab, or pick another                         |
+| `its owner may not run the script check.sh`                               | The script, its folder or the automation's file is not open to its owner                                                          | `chmod 755` the script and its folder, `chmod u+x` the file         |
+| `others than its owner may change the script check.sh`                    | The script or its folder is someone else's, or others may write it                                                                | `chmod 755` both, `chown` them to the owner, take others off        |
+| `<node>: AWAY is wired in, but $AWAY would be the environment's`          | A node wired into a shell or script has a name a variable cannot have                                                             | Rename that node with small letters, beginning with a letter        |
 | `its owner may not read hall-sensor/motion, or there is no such endpoint` | The endpoint is misspelt, gone, or not the owner's to read                                                                        | Correct it with `device-show`, or ask whoever shares the device     |
 | `its owner may not read the folder /home/helen/inbox, or there is none`   | The folder is misspelt, gone, or not the owner's to read                                                                          | Correct the path, or have its owner share it (`share-set`)          |
 | `its owner may not write hall-lamp/switch-0, or there is no such control` | The control is misspelt, or narrowed to others ([Keep a switch to some people](../admin/devices.md#keep-a-switch-to-some-people)) | Correct it, or have someone who may switch it own the automation    |

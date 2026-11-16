@@ -156,7 +156,9 @@ over. EiN keeps every position it is given, and as it adds them to a track it re
 - a stretch the track jumps out to and back from, faster than anything on the ground or the water
   goes (over 600 km/h for more than a kilometre), within two hours;
 - a position it jumps back onto exactly, to the last decimal, after being away from it longer than
-  it was there.
+  it was there;
+- a position the phone or tracker itself said may be more than 150 m off, as a guess from a cell
+  tower is. Traccar Client and OsmAnd send how far off each position may be.
 
 A rejected position is not drawn, counted in **Points** or used for trips. A jump that does not come
 back, as when a logger starts again somewhere else, keeps its positions, and the line is broken

@@ -676,7 +676,8 @@ The transcript appears near the top of the details panel, under the file.
 - Where the voice changes, the line carries the speaker's name.
 
 Above the lines is a chip for each voice, such as **Speaker 1 · 1:38**: who it is and how long they
-speak in the file.
+speak in the file. A voice heard for only a few seconds, such as a child answering or someone off
+camera, gets a chip of its own too.
 
 - The small play button on a chip (**Hear Speaker 1**) jumps to the start of that voice's longest turn.
 - Click a chip to say who it is. A named voice opens the person's page. An unnamed one opens the

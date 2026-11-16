@@ -40,32 +40,33 @@ show **waiting for EMS** on the **Status**.
 
 ## The Archive's pipelines
 
-| Pipeline               | What it does                                                                                                        | Kind of work                |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `media-interpret`      | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name                     | `interpret`                 |
-| `media-faces`          | Finds the faces in a photo and crops each one                                                                       | `faces`, `face-crops`       |
-| `media-video-faces`    | Finds the faces in a video and when each is on screen, and crops each one                                           | `faces`, `face-crops`       |
-| `media-face-assign`    | Matches a found face to a person                                                                                    | `face-assign`               |
-| `media-voiceprint`     | Who speaks when in a recording, with a voiceprint per voice                                                         | `diarize`                   |
-| `media-speaker-assign` | Decides which person each voice is                                                                                  | `speaker-assign`            |
-| `media-speaker-faces`  | Ties a video's voices to the faces seen speaking them, once its faces are found                                     | `diarize`, `speaker-assign` |
-| `media-camera`         | Links a file to the camera or phone that took it                                                                    | run by the engine           |
-| `media-camera-cover`   | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
-| `media-geocode`        | Looks up the address of a file's GPS position                                                                       | run by the engine           |
-| `media-weather`        | Looks up the weather a photo was taken in, at its GPS position and its date                                         | run by the engine           |
-| `media-album`          | An album's stacks, time span, missing cover and profile, when its members change                                    | run by the engine           |
-| `media-duplicates`     | Decides the duplicate findings of a staged file again, or once its fingerprints are in                              | `dedupe`                    |
-| `location-link-point`  | Links a photo to the location that contains its GPS point                                                           | run by the engine           |
-| `location-upkeep`      | Redraws a location and relinks the photos inside it when it or its photos change                                    | run by the engine           |
-| `document-index`       | Extracts the text of a document and makes it searchable                                                             | run by the engine           |
-| `staging-unzip`        | Expands a zip that lands in a staging category, then removes the zip                                                | `unzip`                     |
-| `staging-sidecars`     | Pairs Takeout and XMP sidecars with their files                                                                     | `sidecars`                  |
-| `staging-organize`     | Plans a staging category's suggested groups again                                                                   | `organize`                  |
-| `staging-retime`       | Dates staged files again by the rules of the category they were moved into                                          | `retime`                    |
-| `track-stage`          | Gives a GPX file dropped in staging to the device it was recorded on                                                | run by the engine           |
-| `track-trips`          | Finds a track's trips again after points arrive, names the places it stayed, and looks up their weather             | run by the engine           |
-| `gedcom-stage`         | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                              | run by the engine           |
-| `media-heal`           | Goes through the albums or a staging area and announces the files missing work the other pipelines should have done | run by the engine           |
+| Pipeline                 | What it does                                                                                                        | Kind of work                |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `media-interpret`        | When a photo, video or recording was taken and where, from its metadata, a sidecar and its name                     | `interpret`                 |
+| `media-faces`            | Finds the faces in a photo and crops each one                                                                       | `faces`, `face-crops`       |
+| `media-video-faces`      | Finds the faces in a video and when each is on screen, and crops each one                                           | `faces`, `face-crops`       |
+| `media-face-assign`      | Matches a found face to a person                                                                                    | `face-assign`               |
+| `media-voiceprint`       | Who speaks when in a recording, with a voiceprint per voice                                                         | `diarize`                   |
+| `media-voiceprint-stale` | Finds a recording's voices again when the media service runs other voice models, keeping the names given            | `diarize`                   |
+| `media-speaker-assign`   | Decides which person each voice is                                                                                  | `speaker-assign`            |
+| `media-speaker-faces`    | Ties a video's voices to the faces seen speaking them, once its faces are found                                     | `diarize`, `speaker-assign` |
+| `media-camera`           | Links a file to the camera or phone that took it                                                                    | run by the engine           |
+| `media-camera-cover`     | Offers a video's poster frame to the camera that took it, once its renditions are made                              | run by the engine           |
+| `media-geocode`          | Looks up the address of a file's GPS position                                                                       | run by the engine           |
+| `media-weather`          | Looks up the weather a photo was taken in, at its GPS position and its date                                         | run by the engine           |
+| `media-album`            | An album's stacks, time span, missing cover and profile, when its members change                                    | run by the engine           |
+| `media-duplicates`       | Decides the duplicate findings of a staged file again, or once its fingerprints are in                              | `dedupe`                    |
+| `location-link-point`    | Links a photo to the location that contains its GPS point                                                           | run by the engine           |
+| `location-upkeep`        | Redraws a location and relinks the photos inside it when it or its photos change                                    | run by the engine           |
+| `document-index`         | Extracts the text of a document and makes it searchable                                                             | run by the engine           |
+| `staging-unzip`          | Expands a zip that lands in a staging category, then removes the zip                                                | `unzip`                     |
+| `staging-sidecars`       | Pairs Takeout and XMP sidecars with their files                                                                     | `sidecars`                  |
+| `staging-organize`       | Plans a staging category's suggested groups again                                                                   | `organize`                  |
+| `staging-retime`         | Dates staged files again by the rules of the category they were moved into                                          | `retime`                    |
+| `track-stage`            | Gives a GPX file dropped in staging to the device it was recorded on                                                | run by the engine           |
+| `track-trips`            | Finds a track's trips again after points arrive, names the places it stayed, and looks up their weather             | run by the engine           |
+| `gedcom-stage`           | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                              | run by the engine           |
+| `media-heal`             | Goes through the albums or a staging area and announces the files missing work the other pipelines should have done | run by the engine           |
 
 ## Which processing a folder gets
 

@@ -317,7 +317,7 @@ device names its driver in its <code>driver</code> attribute.</p>
 <tr>
 <td><code>onvif</code></td>
 <td>the Automation module</td>
-<td>A camera that speaks ONVIF: its streams, its motion and people seen, its presets and moves; see <a href="../automation/index.html#an-onvif-camera">An ONVIF camera</a></td>
+<td>A camera that speaks ONVIF: its streams, its events (motion, people seen, tampering, sound, a line crossed and the like), its presets and moves; see <a href="../automation/index.html#an-onvif-camera">An ONVIF camera</a></td>
 </tr>
 </tbody></table>
 </div>
@@ -350,7 +350,36 @@ older Traccar Client versions and many hardware trackers;</li>
 <li>EiN&#39;s own positions, a line of JSON each: <code>{&quot;lat&quot;: 59.32, &quot;lng&quot;: 18.07, &quot;ts&quot;: &quot;2026-11-08T09:00:00Z&quot;}</code>.</li>
 </ul>
 <p>A position at a time the track already has is not added twice, so sending the same file again adds
-nothing.</p>
+nothing. How far off a position may be, when the phone or tracker says it, is kept with it, and one
+more than 150 m off is <a href="../archive/tracks.html#the-route-on-the-map">left out of the track</a>.</p>
+<p>What the device says of itself goes to logs of its own, each made the first time it comes:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Log</th>
+<th>What it holds</th>
+<th>Sent by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>battery</code></td>
+<td>The battery&#39;s charge in percent, about the device itself, kept at most every 5 min</td>
+<td>Traccar Client, OsmAnd (<code>batt</code>)</td>
+</tr>
+<tr>
+<td><code>charging</code></td>
+<td>Whether it is charging, about the device itself</td>
+<td>Traccar Client, OsmAnd (<code>charge</code>)</td>
+</tr>
+<tr>
+<td><code>activity</code></td>
+<td>What it is doing, as the phone&#39;s motion sensors tell: <code>still</code>, <code>on_foot</code>, <code>in_vehicle</code>, …</td>
+<td>Traccar Client</td>
+</tr>
+</tbody></table>
+</div>
+<p>A device&#39;s battery, from any driver&#39;s reading of class <code>battery</code>, shows on its card on the
+<strong>Devices</strong> page, and <code>devices</code> answers it as <code>battery</code>.</p>
 <h3 id="cores-webhook-driver">Core&#39;s webhook driver<a class="anchor" href="#cores-webhook-driver" aria-label="Link to this section"></a></h3>
 <p><code>webhook</code> reads what a device or a script posts in the shapes webhooks take, and keeps each field as
 a reading on the endpoint of that name, a log made the first time the field comes. Each reading is
@@ -442,6 +471,42 @@ After <code>device-forget</code> it is made again at the next reading. Only the 
 <td>30 days</td>
 </tr>
 <tr>
+<td><code>&lt;fan&gt;-speed</code></td>
+<td>Each fan that has turned, such as <code>nct6798-fan2-speed</code>, in rpm</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;disk&gt;-read</code></td>
+<td>What each disk read, such as <code>sda-read</code>, in MB/s</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;disk&gt;-written</code></td>
+<td>What each disk wrote, in MB/s</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;disk&gt;-busy</code></td>
+<td>The share of the time each disk was busy, in %</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;nic&gt;-received</code></td>
+<td>What each network card received, such as <code>enp2s0-received</code>, in Mbit/s</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
+<td><code>&lt;nic&gt;-sent</code></td>
+<td>What each network card sent, in Mbit/s</td>
+<td>1 minute</td>
+<td>30 days</td>
+</tr>
+<tr>
 <td><code>&lt;disk&gt;-used</code></td>
 <td>The share of each disk in use, such as <code>sda1-used</code>, in %</td>
 <td>15 minutes</td>
@@ -462,9 +527,22 @@ After <code>device-forget</code> it is made again at the next reading. Only the 
 </tbody></table>
 </div>
 <p>These are the whole machine&#39;s, whatever runs on it: the media service and the database load it from
-containers of their own. EiN&#39;s own share is on the System status page. A disk is each filesystem on a
-block device that EiN&#39;s container sees, once, wherever it is mounted. The load, the temperatures,
-the total and the uptime are about the machine itself (<code>diagnostic</code>), so the card shows the CPU.</p>
+containers of their own. EiN&#39;s own share is on the System status page. A disk&#39;s use is each
+filesystem on a block device that EiN&#39;s container sees, once, wherever it is mounted; its activity
+is each physical disk&#39;s, averaged over the minute, <code>sda</code> for the disk that holds <code>sda1</code>. A fan is
+listed once it has turned, named by its label where the board gives one: a fan connector with
+nothing on it reads 0 for good. Everything but the CPU, the memory used and the disks&#39; use is about
+the machine itself (<code>diagnostic</code>), so the card shows the CPU.</p>
+<p>Some of the machine is out of EiN&#39;s reach from its container, and its device does not have it:</p>
+<ul>
+<li><strong>Network traffic</strong>, in an installation made with <code>setup.sh</code>: EiN&#39;s container has a network of
+its own, which carries EiN&#39;s traffic, not the machine&#39;s. EiN reads only network cards, so the
+<code>&lt;nic&gt;</code> endpoints appear where EiN runs outside a container or on the machine&#39;s own network.</li>
+<li><strong>Disk health</strong> (SMART): reading it takes <code>smartctl</code> and the disks themselves, which the container
+is not given.</li>
+<li><strong>The containers</strong>: whether each of EiN&#39;s is up, and how often it restarted, is the container
+engine&#39;s to say (<code>podman ps</code>, <code>docker ps</code>), and EiN&#39;s container cannot ask it.</li>
+</ul>
 <p>In an installation made with <code>setup.sh</code>, the machine&#39;s name is <code>EIN_HOSTNAME</code> in <code>.env</code>, which
 <code>setup.sh</code> writes (<a href="../admin/install.html#env">Installing in detail</a>).</p>
 <h2 id="writing-to-a-device">Writing to a device<a class="anchor" href="#writing-to-a-device" aria-label="Link to this section"></a></h2>

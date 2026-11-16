@@ -310,8 +310,13 @@ identifier, the device&#39;s name. <strong>Or type the server URL in by hand</st
 the address to type instead.</li>
 <li>Set how often it reports, for example every 30 seconds, and switch tracking on.</li>
 </ol>
+<p>Traccar Client also sends the phone&#39;s battery, whether it is charging and what it is doing (still,
+on foot, in a vehicle), which the device keeps as its <code>battery</code>, <code>charging</code> and <code>activity</code>
+(<a href="../concepts/devices.html#cores-tracker-driver">Core&#39;s tracker driver</a>); the battery shows on the
+device&#39;s card, so a phone about to stop reporting is seen in time.</p>
 <p><a href="https://osmand.net/">OsmAnd</a> reports the same way: give its online tracking the device&#39;s address
-with <code>&amp;lat={0}&amp;lon={1}&amp;timestamp={2}</code> added. So does a hardware tracker that posts the OsmAnd
+with <code>&amp;lat={0}&amp;lon={1}&amp;timestamp={2}</code> added; <code>accuracy</code> and <code>batt</code> (the battery in percent) are
+taken too when its address carries them. So does a hardware tracker that posts the OsmAnd
 protocol, or GPRMC sentences, over HTTP.</p>
 <p>The phone posts to EiN from wherever it is, so EiN must be reachable from the internet over HTTPS
 (<a href="../admin/network.html#phones-and-trackers-posting">Phones and trackers posting</a>). The address holds

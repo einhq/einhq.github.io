@@ -162,8 +162,8 @@ For each recording, EiN:
 
 ## Documents
 
-EiN reads the text of PDF files, Word (`.docx`) and OpenDocument (`.odt`) files and plain text
-files, so that search finds a document by what it
+EiN reads the text of PDF files, Word (`.docx` and old `.doc`), RTF and OpenDocument (`.odt`) files
+and plain text files, so that search finds a document by what it
 is about: a search for `Christmas letter` finds the family newsletter of 2019. See
 [Search and the finder](search.md#find-photos-videos-recordings-and-documents).
 
@@ -172,7 +172,9 @@ is about: a search for `Christmas letter` finds the family newsletter of 2019. S
   way; the pages after that keep only the text they hold.
 - **Plain text.** Any file that is text, whatever its name: `.txt`, a Markdown note, an HTML page.
   An SVG drawing is text too, so EiN treats it as a document, not as a picture.
-- **Word and OpenDocument.** A `.docx` or `.odt` file.
+- **Word, RTF and OpenDocument.** A `.docx`, `.doc`, `.rtf` or `.odt` file. An old Word or RTF file
+  is read from a PDF made of it, as the viewer's is, and a page of it that is only a picture is read
+  as a scanned PDF page is.
 
 A document's text is read once the file is in an album or elsewhere in the library, not while it
 waits in staging. Files in folders whose name starts with a dot, such as the trash, are not read.
@@ -184,9 +186,7 @@ as text ([Read a document](viewer.md#read-a-document)). A document EiN cannot op
 tile; use **Download** to open it on your device.
 
 The **Documents** choice on the [Media page](media.md#show-one-kind-of-file) also lists Markdown and
-HTML files, which the viewer shows as text. EiN does not read the text of RTF files and old Word
-(`.doc`) files: search finds them by their file name only. To have their text read, save them as PDF
-or `.docx` first.
+HTML files, which the viewer shows as text.
 
 ## Sidecar files
 

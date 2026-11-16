@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 455 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 456 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -261,7 +261,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Archive
 
-[All 145 in full](../archive/commands.md).
+[All 146 in full](../archive/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -297,6 +297,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [camera-set-owner](../archive/commands.md#camera-set-owner) | Link a person as owner of a camera (dated relation pair) |
 | [camera-timeline](../archive/commands.md#camera-timeline) | One camera's history as a chronological feed: owners getting and giving it up, its events and the albums with photos it took. |
 | [camera-update](../archive/commands.md#camera-update) | Change a camera's settings. |
+| [camera-usage](../archive/commands.md#camera-usage) | What a camera's pictures' maker notes say about it: its shutter count over time, the firmware it ran and the lenses used on it. |
 | [cluster-faces](../archive/commands.md#cluster-faces) | Recognize untagged faces as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [cluster-voices](../archive/commands.md#cluster-voices) | Recognize untagged speech turns as existing people (label propagation) + optionally create unnamed people for leftover clusters. |
 | [dayinhistory](../archive/commands.md#dayinhistory) | List media taken on a given day (MM-DD, default today) in past years. |

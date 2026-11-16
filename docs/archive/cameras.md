@@ -199,7 +199,7 @@ phone they are all under ⋮.
 
 | Tab       | What it shows                                                                                                                                                                                         |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Info**  | The page opens here: the camera's timeline, and beside it its settings, owners, device and description (see below).                                                                                   |
+| **Info**  | The page opens here: the camera's timeline, and beside it its settings, owners, device, what its pictures say about it and its description (see below).                                               |
 | **Media** | Every file linked to the camera, by date. Select pictures to act on them from the selection bar, for example **Add to album** or **Set time** (see [The selection bar](albums.md#the-selection-bar)). |
 
 On the **Info** tab, the **timeline** on the left is the camera's history: when each owner started
@@ -217,6 +217,10 @@ took, appear on its timeline." On the right, and above the timeline on a phone:
 - **Device** links to the device the camera is part of, such as the phone, or says "It is part of
   no device." (see [A phone that records where it was](#a-phone-that-records-where-it-was)). It is
   left out for those who may not change the camera when there is no device.
+- **Shutter count**, **Firmware** and **Lenses** are what the camera's own pictures say about it,
+  read from the maker notes the camera writes into each one (see
+  [What a camera's pictures say about it](#what-a-cameras-pictures-say-about-it)). Each is left out
+  when none of its pictures carry it.
 - **About** shows the description, when there is one.
 
 A camera whose clock was wrong by the same amount for all its pictures, or from some date on, is
@@ -226,6 +230,27 @@ For a few pictures, the **Media** tab is the place: select them and use **Set ti
 
 **Move to trash** sends the camera to your trash, and the message's **Undo** brings it back (see
 [Your profile, favourites and trash](../guide/profile.md)).
+
+### What a camera's pictures say about it
+
+Most cameras write more into a picture than its date: how many pictures they have taken, the
+firmware they run and the lens they took it with. EiN reads these from the pictures linked to the
+camera, so they appear without anything being typed in, and they grow as more pictures are linked.
+
+- **Shutter count** is how many pictures the camera had taken, as the latest picture says, with
+  the day under it, and a line of how it grew from the first picture that says so to the latest.
+  Point at the line to read the count on another day. It shows how worn the camera is. Most Nikon, Pentax and Ricoh bodies write it,
+  and Fujifilm's count of pictures taken is read too; Canon and Sony bodies rarely do.
+- **Firmware** lists each firmware version the camera ran, with how many pictures it took with
+  it and the first and last day it was seen. A version the camera wrote into the picture's
+  `Software` tag counts too, such as **Ver 1.12**. A program name there, from editing the picture
+  later, does not.
+- **Lenses** lists each lens used on the camera, most used first, with how many pictures and
+  when. A lens the camera names appears by name, such as **XF16-55mmF2.8 R LM WR**. One known only
+  by its focal lengths appears as them, such as **18–55mm f/3.5–5.6**. A lens the camera records
+  only as a number, as Pentax bodies do, is left out.
+
+A picture edited and saved by a program that drops the maker notes adds nothing to these.
 
 ## Link the files a camera missed
 
@@ -433,6 +458,7 @@ link to the device a camera is part of is its child `device`. The commands below
 | Record a clip of a security camera now                           | [`camera-clip`](commands.md#camera-clip) `<device>`, with `--post <seconds>`                                                                                  |
 | Show a camera and its owners                                     | [`camera-info`](commands.md#camera-info) `<camera>`                                                                                                           |
 | A camera's history                                               | [`camera-timeline`](commands.md#camera-timeline) `<camera>`                                                                                                   |
+| What its pictures say: shutter count, firmware and lenses        | [`camera-usage`](commands.md#camera-usage) `<camera>`                                                                                                         |
 | Link the files a camera's fingerprint matches                    | [`camera-relink`](commands.md#camera-relink) `<camera>`; `--dry-run` reports first, `--force` takes files from another camera, `--all` does every camera      |
 | Date a camera's files again by its settings, linking nothing     | `camera-relink <camera> --reapply`                                                                                                                            |
 | Link files to a camera by hand                                   | [`camera-link`](commands.md#camera-link) `--camera <camera> <file or folder>…`                                                                                |
