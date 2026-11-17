@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html" aria-current="page">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html" aria-current="page">Updating</a></li><li><a href="supervisor.html">The supervisor</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -98,10 +99,10 @@ what to do when an update goes differently.</p>
 <h2 id="how-updates-work">How updates work<a class="anchor" href="#how-updates-work" aria-label="Link to this section"></a></h2>
 <p>EiN has no releases and no version numbers to choose between. An update downloads the images
 GitHub builds each night from the newest commit of each repository, and starts them in place of
-what ran before; a change made today reaches an update tomorrow. The media service&#39;s changes reach
-GitHub only once it has been run over a set of real photos, videos, recordings and documents and
-answered as it did before (the internal regression suite): one that reads some of them worse waits
-on Forgejo until it is fixed. The engine downloads only the
+what ran before; a change made today reaches an update tomorrow. The media service is run each
+night over a set of real photos, videos, recordings and documents, to see that it answers as it did
+before (the internal regression suite); while it changes several times a day, its changes reach
+GitHub whether or not that run has passed. The engine downloads only the
 layers of an image that changed, so an update of the media service is usually far smaller than its
 30 GB. What it updates depends on what is installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -135,13 +136,25 @@ layers of an image that changed, so an update of the media service is usually fa
 <td>ems</td>
 <td>the media service, which the Archive needs</td>
 <td>with the media service</td>
-<td>the image <code>ghcr.io/einhq/ems:main</code></td>
+<td>the image <code>ghcr.io/einhq/ems:&lt;line&gt;</code></td>
+</tr>
+<tr>
+<td>devices</td>
+<td>the Devices module&#39;s sidecar</td>
+<td>with the sidecar</td>
+<td>the image <code>ghcr.io/einhq/devices:&lt;line&gt;</code></td>
 </tr>
 <tr>
 <td>llm</td>
 <td>the language model&#39;s chat template, for the Assistant</td>
 <td>with the language model</td>
 <td>its source, fetched into <code>~/ein/src</code></td>
+</tr>
+<tr>
+<td>deploy</td>
+<td>the <a href="supervisor.html">supervisor</a></td>
+<td>with the supervisor</td>
+<td>the image <code>ghcr.io/einhq/supervisor:main</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -152,9 +165,27 @@ machine, the media service&#39;s in about an hour (<a href="install.html#where-t
 <p>The language model&#39;s server is not built: it is llama.cpp&#39;s ready-made image, named by a fixed
 digest in <code>compose.llm.yaml</code>. It changes only when that file does, which is when the deploy
 repository is updated.</p>
+<p>With the <a href="supervisor.html">supervisor</a>, which an installation from GitHub has, you need not run
+anything: it updates every service each night at 04:00 (<code>EIN_UPDATE_AT</code> in <code>~/ein/.env</code>), and
+<strong>Update</strong> and <strong>Update all</strong> on <strong>Settings → Modules</strong> update them at once. Its update leaves a
+service that runs its newest image as it is, and puts one whose new image does not come up back on
+the one it ran. The rest of this page holds for it too: each of its updates is a run of <code>setup.sh</code>.</p>
 <p>Modules are not part of this. They live in the data folder and are updated separately, on
 <strong>Settings → Modules</strong>; see <a href="modules.html#update-a-module">Update a module</a>. Only a module the new
 EiN cannot run is replaced, at its start (<a href="#what-happens-when-the-new-ein-starts">below</a>).</p>
+<h3 id="the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules<a class="anchor" href="#the-media-service-and-the-sidecar-follow-their-modules" aria-label="Link to this section"></a></h3>
+<p>The media service and the Devices module&#39;s sidecar each have a version of what they offer EiN,
+and the modules that talk to them, <code>ems</code> and <code>devices</code>, say in their manifest which versions
+they speak, as in <code>&quot;services&quot;: { &quot;ems&quot;: &quot;^0.4.4&quot; }</code>. An update downloads each at the line its
+module asks for: <code>ghcr.io/einhq/ems:0.4</code> is the newest media service of the 0.4 versions, which
+the <code>ems</code> module asking for <code>^0.4.4</code> speaks. <code>.env</code> keeps the line it runs as <code>EIN_EMS_TAG</code> and
+<code>EIN_DEVICES_TAG</code>; before any module asks, it is <code>main</code>.</p>
+<p>So after you update a module on <strong>Settings → Modules</strong> to a release that needs a newer media
+service, the <strong>Status</strong> page says so, as <code>ems api</code>: <code>EMS speaks API 0.4.4, older than the ^0.5.0 this module needs: update the media service</code>. Run <code>~/ein/setup.sh --only ems</code> (or <code>--only devices</code> for <code>devices sidecar</code>), and it downloads the line the module asks for and restarts
+the service alone. With the <a href="supervisor.html">supervisor</a> there is nothing to run: it does the same
+within a minute of the module&#39;s update. A line not published yet, as for a few hours after a module&#39;s release, leaves
+the service as it is, and says <code>The modules here ask for ems 0.5, which is not published yet: it stays at 0.4</code>. Installed from another source, the service is built from its newest source, and
+<code>setup.sh</code> only says when that is not the line the modules ask for.</p>
 <h2 id="before-you-update">Before you update<a class="anchor" href="#before-you-update" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Back up. An update cannot be undone: there is no command to go back to the previous version,
@@ -220,8 +251,12 @@ brought a new commit, it says <code>Updated /home/anna/ein to …; running its s
 new one:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
 ~/ein/setup.sh</code></pre></div>
-<p><code>./setup.sh --only core</code> updates one service, <code>core</code>, <code>ems</code>, <code>db</code> or <code>llm</code>, and restarts only that
-one, leaving the others running.</p>
+<p><code>./setup.sh --only core</code> updates one service, <code>core</code>, <code>ems</code>, <code>db</code>, <code>llm</code>, <code>devices</code> or
+<code>supervisor</code>, and restarts only that one, leaving the others running; <code>--only core,db</code> updates
+several, one after another. A service whose new image does not come up, EiN that does not answer
+within 10 minutes or a service that stops, is put back on the image it ran before, and <code>setup.sh</code>
+stops with <code>setup.sh: core did not come up on its new image, and runs on the one it ran before</code>
+under the service&#39;s last log lines.</p>
 <p>Every run of <code>setup.sh</code> is an update, also one that only adds or removes an option, such as
 <code>./setup.sh --ems</code>. To apply a changed line of <code>.env</code> without updating, run <code>podman compose up -d</code>
 in <code>~/ein</code> instead; <a href="configuration.html#set-a-value-in-the-deployment">Configuration</a> explains it.</p>
@@ -365,6 +400,10 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>It runs on an empty database, such as one under the other container engine. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</td>
 </tr>
 <tr>
+<td><code>setup.sh: core did not come up on its new image, and runs on the one it ran before</code></td>
+<td>EiN runs as it did before the update. The log lines above the message say why the new image did not start; <a href="troubleshooting.html">Troubleshooting</a> covers what they may say. A later update tries the newest image again.</td>
+</tr>
+<tr>
 <td>A module is still the old version</td>
 <td><code>setup.sh</code> does not update modules, and EiN&#39;s start replaces only one it cannot run. Use <strong>Update</strong> on <strong>Settings → Modules</strong>.</td>
 </tr>
@@ -385,6 +424,7 @@ restore it as <a href="data.html">Your data</a> describes.</p>
 <li><a href="install.html">Installing in detail</a>: the installer, <code>setup.sh</code>, the files in <code>~/ein</code> and running
 compose day to day.</li>
 <li><a href="modules.html">Modules</a>: updating, pinning and removing modules.</li>
+<li><a href="supervisor.html">The supervisor</a>: the services installed and updated from EiN.</li>
 <li><a href="data.html">Your data</a>: what to back up before an update, and how to restore it.</li>
 <li><a href="services-logs.html">Services and logs</a> and <a href="troubleshooting.html">Troubleshooting</a>: when something is
 wrong after an update.</li>
@@ -392,11 +432,11 @@ wrong after an update.</li>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="performance.html" rel="prev"><span>Previous</span>Performance and sizing</a><a class="next" href="data.html" rel="next"><span>Next</span>Your data: backup, moving and removing</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="performance.html" rel="prev"><span>Previous</span>Performance and sizing</a><a class="next" href="supervisor.html" rel="next"><span>Next</span>The supervisor</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/updating.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-updates-work">How updates work</a></li><li><a href="#before-you-update">Before you update</a></li><li><a href="#update-ein">Update EiN</a></li><li class="nested"><a href="#update-with-setupsh-alone">Update with setup.sh alone</a></li><li><a href="#what-an-update-changes-and-what-it-keeps">What an update changes and what it keeps</a></li><li class="nested"><a href="#what-happens-when-the-new-ein-starts">What happens when the new EiN starts</a></li><li><a href="#see-which-version-runs">See which version runs</a></li><li><a href="#check-that-all-is-well-after-an-update">Check that all is well after an update</a></li><li><a href="#free-the-space-old-images-take">Free the space old images take</a></li><li><a href="#when-an-update-goes-differently">When an update goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-updates-work">How updates work</a></li><li class="nested"><a href="#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a></li><li><a href="#before-you-update">Before you update</a></li><li><a href="#update-ein">Update EiN</a></li><li class="nested"><a href="#update-with-setupsh-alone">Update with setup.sh alone</a></li><li><a href="#what-an-update-changes-and-what-it-keeps">What an update changes and what it keeps</a></li><li class="nested"><a href="#what-happens-when-the-new-ein-starts">What happens when the new EiN starts</a></li><li><a href="#see-which-version-runs">See which version runs</a></li><li><a href="#check-that-all-is-well-after-an-update">Check that all is well after an update</a></li><li><a href="#free-the-space-old-images-take">Free the space old images take</a></li><li><a href="#when-an-update-goes-differently">When an update goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

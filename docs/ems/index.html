@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section class="here"><h2>Media service</h2><ul><li><a href="index.html" aria-current="page">The media service</a></li><li><a href="gpu.html">The graphics card</a></li><li><a href="instances.html">More than one media service</a></li><li><a href="commands.html">Media service commands</a></li></ul></section>
@@ -133,6 +134,14 @@ else.</p>
 <tr>
 <td>Video and audio renditions (AV1 video, AAC audio)</td>
 <td>Videos and recordings play in the browser</td>
+</tr>
+<tr>
+<td>H.264 streams of videos, made while they play</td>
+<td>Videos for screens that cannot play AV1 (<code>video-stream</code>)</td>
+</tr>
+<tr>
+<td>Pages of EiN rendered into live video</td>
+<td><a href="../dashboard/screens.html#on-a-tv">A dashboard on a TV</a> (<code>page-stream</code>)</td>
 </tr>
 <tr>
 <td>Faces, voices and who is speaking</td>
@@ -365,6 +374,12 @@ the scratch detector also when a scan arrives, to tell how dusty and scratched i
 <td><a href="https://www.mozilla.org/en-US/MPL/2.0/">MPL-2.0</a>; fonts <a href="https://openfontlicense.org/open-font-license-official-text/">OFL-1.1</a></td>
 <td>Runs as a program of its own</td>
 </tr>
+<tr>
+<td>Pages of EiN as live video for a TV</td>
+<td><a href="https://www.chromium.org/">Chromium</a>, Debian&#39;s <code>chromium</code>, on <a href="https://www.x.org/">Xvfb</a>, Debian&#39;s <code>xvfb</code>, with the <a href="https://dejavu-fonts.github.io/">DejaVu fonts</a></td>
+<td><a href="https://opensource.org/license/bsd-3-clause">BSD-3-Clause</a>; <a href="https://opensource.org/license/mit">MIT</a>; fonts <a href="https://dejavu-fonts.github.io/License.html">Bitstream Vera License</a></td>
+<td>Run as programs of their own, only while a page streams</td>
+</tr>
 </tbody></table>
 </div>
 <p>In the licence column, code comes before weights where a model has both; <code>—</code> means the media
@@ -383,12 +398,12 @@ from published ones: the Finnish handwriting recogniser&#39;s character list, an
 the format transformers reads. The image&#39;s <code>/usr/share/doc/ein-ems/NOTICE.md</code> points
 to this page, names the models under Creative Commons, Apache-2.0 and MIT, links the Creative
 Commons licences and holds the texts of Apache-2.0 and MIT.</p>
-<p>None of EMS&#39;s own tools is under the GPL: it encodes AV1 only, so its FFmpeg and its HEIC reader
-are builds without the GPL encoders x264 and x265. The image carries one FFmpeg, which also
-fingerprints recordings with the Chromaprint built into it, and faster-whisper is installed without
-PyAV, since the media service hands it audio FFmpeg has already decoded. The image&#39;s GPL code is
-Debian&#39;s, programs such as bash and coreutils among its packages. <code>NOTICE.md</code> names FFmpeg&#39;s build
-and where the source of it and of Debian&#39;s packages is.</p>
+<p>None of EMS&#39;s own tools is under the GPL: it encodes AV1, and H.264 with the card&#39;s encoder or
+OpenH264, so its FFmpeg and its HEIC reader are builds without the GPL encoders x264 and x265. The
+image carries one FFmpeg, which also fingerprints recordings with the Chromaprint built into it,
+and faster-whisper is installed without PyAV, since the media service hands it audio FFmpeg has
+already decoded. The image&#39;s GPL code is Debian&#39;s, programs such as bash and coreutils among its
+packages. <code>NOTICE.md</code> names FFmpeg&#39;s build and where the source of it and of Debian&#39;s packages is.</p>
 <h3 id="using-ein-commercially">Using EiN commercially<a class="anchor" href="#using-ein-commercially" aria-label="Link to this section"></a></h3>
 <p>The media service&#39;s own code is under the MIT licence, which allows any use, commercial use
 included. EiN may be used commercially too, but offering it to others as a hosted service needs a
@@ -564,7 +579,7 @@ had waiting. A model loaded again and again shows as a row that flickers. The <c
 service records what the media service holds once a minute, for a week.</li>
 <li><strong>Executing</strong>: the requests running or waiting now, and the four lanes they go through, <strong>models</strong>,
 <strong>tools</strong>, <strong>encodes</strong> and <strong>watches</strong> (a camera&#39;s frames on their way to the faces model, when
-<a href="../automation/index.html#a-camera">a camera is watched for faces</a>), each with how many run at once.
+<a href="../devices/index.html#a-camera">a camera is watched for faces</a>), each with how many run at once.
 When requests wait, a request a person is waiting on goes first. Then, when more than one system
 sends the media service work, the system that has used it the least; the tab then shows
 <strong>Callers</strong> too, each system with how much it has used and what it runs and waits for now. Of that system&#39;s requests, one for a model that is
@@ -849,6 +864,21 @@ the containers again with the limit.</p>
 <td>Cameras watched for faces at once: each holds a decode of its stream, and asks for faces a few times a second while it moves.</td>
 </tr>
 <tr>
+<td><code>EMS_STREAMS</code></td>
+<td><code>2</code></td>
+<td>Videos streamed as H.264 at once: each holds an encoder for as long as someone watches, and a card has few encoder sessions, shared with the transcodes.</td>
+</tr>
+<tr>
+<td><code>EMS_PAGES</code></td>
+<td><code>2</code></td>
+<td>Pages of EiN rendered into live video at once: each holds a browser, about two processor cores while the page moves, and an encoder session.</td>
+</tr>
+<tr>
+<td><code>EMS_PAGE_MEMORY_MB</code></td>
+<td><code>2048</code></td>
+<td>The most one page&#39;s browser may hold before its stream is stopped.</td>
+</tr>
+<tr>
 <td><code>EMS_AFFINITY_WAIT</code></td>
 <td><code>300</code></td>
 <td>Seconds a model request may wait while requests for a model already working go before it.</td>
@@ -934,6 +964,11 @@ with <code>CFG_MODEL_SLOTS</code>, the Media module&#39;s, in <strong>Processing
 <td><a href="../reference/settings.html#cfg_ems_files_tls"><code>CFG_EMS_FILES_TLS</code></a></td>
 <td><code>false</code></td>
 <td>Encrypt the media service&#39;s file connections with TLS</td>
+</tr>
+<tr>
+<td><a href="../reference/settings.html#cfg_ems_page_address"><code>CFG_EMS_PAGE_ADDRESS</code></a></td>
+<td>empty</td>
+<td>Where the media service reaches EiN&#39;s pages, as <code>host:port</code>, to render one for a TV; empty: the host of <code>CFG_EMS_FILES_ADDRESS</code> at EiN&#39;s own port</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_whisper_language"><code>CFG_WHISPER_LANGUAGE</code></a></td>

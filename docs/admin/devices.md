@@ -96,12 +96,14 @@ device-key ruby-phone --new --origin https://ein.wrenfield.example
 ```
 
 ```text
-https://ein.wrenfield.example/file/dev/ruby-phone?key=Zt2v…
+https://ein.wrenfield.example/file/dev/ruby-phone/position?key=Zt2v…
 ```
 
 - **What it opens.** Writes to `/file/dev/<device>` and `/file/dev/<device>/<endpoint>` of that one
-  device, and nothing else: no other device, no reading, no other address. A `GET` with the key on the
-  device is the device talking, for a tracker that sends only `GET`s, such as OsmAnd. A write with the
+  device, and nothing else: no other device, no reading, no other address. The address it is shown
+  with is the device's track, `position`, when it has one, which a phone posts to, else the device
+  itself, which a webhook device posts to. A `GET` with the key is the device talking, for a tracker
+  that sends only `GET`s, such as OsmAnd. A write with the
   key is made as the device's owner, the administrator, limited to the device's folder, and the
   device's driver is told it came from the device (`device:ruby-phone`).
 - **How it is sent.** As `Authorization: Bearer <key>`, or as `key=` in the address for a client that
@@ -126,13 +128,13 @@ A write without a key is a signed-in person's, as every `/file` write is, and ne
 
 ## What reaches EiN without signing in
 
-- **A device with its key**, writing to `/file/dev/<device>` as above. Any other write there needs a
+- **A device with its key**, writing to `/file/dev/<device>` and its endpoints as above. Any other write there needs a
   signed-in session.
 - **Nothing else of the devices.** A visitor reads no device, reading or track and switches nothing,
   even with **Visitors may browse** on
   ([Visitors and share links](permissions.md#visitors-and-share-links)): the devices are the `devices`
   group's.
-- **The MQTT broker**, with the [Automation](../automation/index.md) module's, is not EiN: the devices
+- **The MQTT broker**, with the [Devices](../devices/index.md) module's, is not EiN: the devices
   sign in to it with their own password, and whoever reaches it with that password switches them.
   Keep its port in your home network
   ([Before you open EiN to the internet](network.md#before-you-open-ein-to-the-internet)).

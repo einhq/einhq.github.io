@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Writing a driver – EiN documentation</title>
-    <meta name="description" content="A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under /dev/&lt;device&gt;, and sends the device what is written to its controls. Core has two drivers of its own, tracker, for phones and GPS loggers, and webhook, for anything that posts its readings; the Automation module brings three for MQTT devices. This page is for developers who write one in a module. It assumes Writing a module, and Devices, endpoints and drivers for what a device, an endpoint and a control are.">
+    <meta name="description" content="A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under /dev/&lt;device&gt;, and sends the device what is written to its controls. Core has two drivers of its own, tracker, for phones and GPS loggers, and webhook, for anything that posts its readings; the Devices module brings those for MQTT devices, the network and cameras, and the Automation module the virtual driver. This page is for developers who write one in a module. It assumes Writing a module, and Devices, endpoints and drivers for what a device, an endpoint and a control are.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/develop/drivers.html">
     <meta property="og:title" content="Writing a driver – EiN documentation">
-    <meta property="og:description" content="A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under /dev/&lt;device&gt;, and sends the device what is written to its controls. Core has two drivers of its own, tracker, for phones and GPS loggers, and webhook, for anything that posts its readings; the Automation module brings three for MQTT devices. This page is for developers who write one in a module. It assumes Writing a module, and Devices, endpoints and drivers for what a device, an endpoint and a control are.">
+    <meta property="og:description" content="A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under /dev/&lt;device&gt;, and sends the device what is written to its controls. Core has two drivers of its own, tracker, for phones and GPS loggers, and webhook, for anything that posts its readings; the Devices module brings those for MQTT devices, the network and cameras, and the Automation module the virtual driver. This page is for developers who write one in a module. It assumes Writing a module, and Devices, endpoints and drivers for what a device, an endpoint and a control are.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section class="here"><h2>Developing</h2><ul><li><a href="modules.html">Writing a module</a></li><li><a href="manifest.html">The module manifest</a></li><li><a href="drivers.html" aria-current="page">Writing a driver</a></li><li><a href="source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -94,8 +95,9 @@
         <article class="prose">
 <p>A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under
 <code>/dev/&lt;device&gt;</code>, and sends the device what is written to its controls. Core has two drivers of its
-own, <code>tracker</code>, for phones and GPS loggers, and <code>webhook</code>, for anything that posts its readings; the <a href="../automation/index.html">Automation</a> module brings
-three for MQTT devices. This page is for developers who write one in a module. It assumes
+own, <code>tracker</code>, for phones and GPS loggers, and <code>webhook</code>, for anything that posts its readings; the <a href="../devices/index.html">Devices</a> module brings
+those for MQTT devices, the network and cameras, and the <a href="../automation/index.html">Automation</a>
+module the <code>virtual</code> driver. This page is for developers who write one in a module. It assumes
 <a href="modules.html">Writing a module</a>, and <a href="../concepts/devices.html">Devices, endpoints and drivers</a> for what
 a device, an endpoint and a control are.</p>
 <h2 id="what-a-driver-does">What a driver does<a class="anchor" href="#what-a-driver-does" aria-label="Link to this section"></a></h2>
@@ -202,12 +204,12 @@ registration under the same name replaces the first.</p>
 <tr>
 <td><code>input(raw)</code></td>
 <td>no</td>
-<td>Raw input written to one of its devices; without it, its devices take none</td>
+<td>What a device posts to itself, as a webhook&#39;s does; without it, its devices take none</td>
 </tr>
 <tr>
 <td><code>write(cmd)</code></td>
 <td>no</td>
-<td>A value written to one of its devices&#39; controls, to send to the device</td>
+<td>A value written to one of its devices&#39; controls, to send to the device; it may answer <code>{ message }</code>, a word for the writer</td>
 </tr>
 <tr>
 <td><code>setup(name)</code></td>
@@ -226,8 +228,10 @@ it was taken. A hook refuses by throwing: the message reaches the writer, as <co
 terminal or as the body of a <code>400</code> over HTTP, after the device&#39;s name (and the control&#39;s, for a
 <code>write</code>).</p>
 <h3 id="input"><code>input</code><a class="anchor" href="#input" aria-label="Link to this section"></a></h3>
-<p>What is written to <code>/dev/&lt;device&gt;</code>, from the terminal (<code>cat ride.gpx &gt; /dev/old-logger</code>), over SFTP,
-or over HTTP to <code>/file/dev/&lt;device&gt;</code>, arrives whole, once the writer closes, as a <code>DriverInput</code>:</p>
+<p>What is written to <code>/dev/&lt;device&gt;</code> itself, from the terminal, over SFTP, or over HTTP to
+<code>/file/dev/&lt;device&gt;</code>, arrives whole, once the writer closes, as a <code>DriverInput</code>. It is for a device
+that posts what it reads in a shape of its own, as core&#39;s <code>webhook</code> takes; anything a person gives a
+device goes to one of its endpoints instead, a control&#39;s <code>write</code> or a track:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -270,10 +274,12 @@ were new, and a word for whoever sent them.</p>
 <h3 id="write"><code>write</code><a class="anchor" href="#write" aria-label="Link to this section"></a></h3>
 <p>A value written to a control arrives as a <code>DriverWrite</code> once core has checked it against the
 control&#39;s <code>schema</code>, so <code>value</code> is already what the control takes: <code>true</code> or <code>false</code> for <code>bool</code>, a
-number within its limits for <code>number</code>, one of its options for <code>enum</code>, a line for <code>text</code>, <code>press</code> for
-<code>momentary</code>, with <code>toggle</code> turned into the opposite of the state the device last reported. Its
-fields are <code>device</code>, <code>endpoint</code>, <code>path</code>, the device&#39;s <code>attrs</code>, the control&#39;s <code>endpointAttrs</code>,
-<code>value</code> and <code>by</code>.</p>
+number within its limits for <code>number</code>, one of its options for <code>enum</code>, a line for <code>text</code> (or several,
+joined by newlines, for one with <code>lines</code>, such as a screen&#39;s <code>show</code>), <code>press</code> for <code>momentary</code>, with
+<code>toggle</code> turned into the opposite of the state the device last reported. Its fields are <code>device</code>,
+<code>endpoint</code>, <code>path</code>, the device&#39;s <code>attrs</code>, the control&#39;s <code>endpointAttrs</code>, <code>value</code>, <code>by</code>, and
+<code>access</code>, the writer&#39;s, for what the driver reads on the writer&#39;s behalf, such as the files a
+screen is given. It may answer <code>{ message }</code>, which the writer gets back with the value.</p>
 <p>Send it, and return once the device or its broker has taken it. Do not append the new state here:
 append what the device reports back, which is what reading the control gives. Until then the
 control&#39;s <code>requested</code> attribute holds what was asked, by whom and when, and its page shows it as
@@ -433,7 +439,10 @@ A test of the driver can call its hooks directly, with a stub in place of <code>
 <p>A module that knows more about some devices adds a tab to their page with a panel in its
 <code>ui/nav.json</code>, in the slot <code>device.tabs</code>. The tab draws one of the module&#39;s routes, with
 <code>{path}</code> replaced by the device&#39;s path, <code>/dev/&lt;device&gt;</code>, URI-encoded. <code>when</code> keeps it to the devices
-that have an endpoint of a type; without it, every device gets the tab. This is the Archive&#39;s
+that have an endpoint of a type; without it, every device gets the tab. <code>&quot;live&quot;: true</code> beside <code>has</code>
+(core&#39;s contract 0.15.16) keeps it to the devices with a stream watched live now: one whose driver
+runs and has <code>live</code>. A driver that cannot watch a stream live, such as a camera driver without its
+restreamer, leaves <code>live</code> out, and <code>device-show</code> then lists its streams without <code>&quot;live&quot;: true</code>. This is the Archive&#39;s
 <strong>Trips</strong> tab:</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;panels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
@@ -499,7 +508,7 @@ rename, reorder or hide it like any panel
 <td><code>removeEndpoint</code> it first; its history goes with it</td>
 </tr>
 <tr>
-<td><code>&lt;device&gt; did not answer within 10 s</code></td>
+<td><code>&lt;device&gt; did not answer within 45 s</code></td>
 <td>The driver&#39;s <code>write</code> did not return in time</td>
 <td>Return once the message is sent, not once the device has switched</td>
 </tr>
@@ -516,7 +525,7 @@ rename, reorder or hide it like any panel
 <li><a href="modules.html">Writing a module</a>: services, <code>#!ts</code> commands and pages.</li>
 <li><a href="manifest.html">The module manifest</a>: <code>coreApi</code>, <code>ui.routes</code>.</li>
 <li><a href="../guide/customizing.html#change-the-panels-inside-pages">Your sidebar and top bar</a>: panels and their slots.</li>
-<li><a href="../automation/index.html">Automation</a>: three drivers at full size, in the <code>module-automation</code> repository.</li>
+<li><a href="../devices/index.html">Devices</a>: drivers at full size, in the <code>module-devices</code> repository.</li>
 </ul>
 
         </article>

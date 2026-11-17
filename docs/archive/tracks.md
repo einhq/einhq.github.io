@@ -15,7 +15,7 @@ driver keeps for a phone, a GPS tracker or a logger. Its positions come in two w
 - **Posted as the device moves.** A phone with Traccar Client, or a tracker on a boat or in a car,
   posts its position to EiN with the device's key (see
   [Report from a phone](../guide/devices.md#report-from-a-phone)).
-- **From GPX files** a logger or a tracking app saved: written to the device, uploaded on its
+- **From GPX files** a logger or a tracking app saved: written over the device's track, uploaded on its
   **Trips** tab, or dropped in staging (see [GPX files](#gpx-files)).
 
 A member of the `devices` group makes the device first, saying how it travels when it always travels
@@ -91,6 +91,14 @@ To change them:
 
 A changed **Travels as** or **Timezone** finds the track's trips again from the start, and so does a
 changed class of its device while **Travels as** is not set.
+
+Each trip travels as the track does. While neither **Travels as** nor the class says how, a phone
+running Traccar Client tells it trip by trip: its motion sensors say whether it is still, on foot,
+on a bicycle or in a vehicle, which the device keeps as its `activity` (see
+[Core's tracker driver](../concepts/devices.md#cores-tracker-driver)). A trip travels as what they
+said longest along the way, lying still aside: a walk on foot, a bike ride by bike, a drive by car,
+and its card says "(by its motion sensors)" after it. A trip they said nothing of but lying still
+has none.
 
 ## Home bases
 
@@ -235,8 +243,8 @@ points of the file, each with its time; points with a time the track already has
 twice, so bringing the same file in again changes nothing. A point without a time is left out, since
 EiN cannot tell when the track was there.
 
-A GPX file goes to a device: written to it, `cat summer.gpx > /dev/sailboat` in the terminal, the
-device's driver reads its points into the track (see [GPX files](../guide/devices.md#gpx-files) on
+A GPX file goes to a device's track: written over it, `cat summer.gpx > /dev/sailboat/position` in
+the terminal, its points join the track (see [GPX files](../guide/devices.md#gpx-files) on
 the Devices page). The Archive adds two ways, below, and keeps every GPX file it brings in in the
 track's `routes` folder, such as `/dev/sailboat/position/routes/`, linked from the track's own
 `sources` folder. The same file brought in twice, byte for byte, is kept once.
@@ -328,9 +336,10 @@ How near a place has to be to count as the same place depends on
 for a bike and 200 m on foot.
 
 Each trip's card shows its dates, an **Ongoing** badge while it has not ended and its last point
-is less than two days old, how many days it took, its length, how far from its start it got, and
-where it started and ended: the location of the stay, such as a harbour, an island or your home, or
-"a point on the way". The farthest place it stayed at is named too. Click a name to open its
+is less than two days old, how it travelled (see [How a device travels](#how-a-device-travels)),
+how many days it took, its length, how far from its start it got, and where it started and
+ended: the location of the stay, such as a harbour, an island or your home, or "a point on the
+way". The farthest place it stayed at is named too. Click a name to open its
 location. How stays get their locations and names is on
 [Places a track stayed at](places.md#places-a-track-stayed-at). A stay of two hours or more across
 midnight is an overnight stay; it does not end the trip. A trip that is an album names it under
@@ -438,29 +447,29 @@ files it was read from, its `homes` folder links its home bases, and its `.trips
 The commands below are in the [archive command reference](commands.md), and every one takes
 `--help`; the devices' own commands are on [Devices](../guide/devices.md#from-the-terminal).
 
-| Task                                                                | Command                                                                                                                                                                                                                                |
-| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| List the devices' tracks, with their name, kind, positions and span | [`track-list`](commands.md#track-list), or `track-list <folder>` for those under one folder                                                                                                                                            |
-| Find tracks by name or description                                  | [`search-track`](commands.md#search-track) `<words>`                                                                                                                                                                                   |
-| Change how a device travels                                         | [`track-update`](commands.md#track-update) `<track> --kind boat` (`car`, `bike`, `foot`), `--timezone <zone>` or `--description <text>`, or `--clear <field>`                                                                          |
-| List a track's home bases                                           | [`track-home`](commands.md#track-home) `<track>`; with none of its own, the homes of its cameras' owners and the years they count                                                                                                      |
-| Add or remove a home base                                           | [`track-home`](commands.md#track-home) `<track> --add <location>…` or `--remove <location>…`; a location is its path, or its folder name                                                                                               |
-| Read a track as the maps draw it                                    | [`track-read`](commands.md#track-read) `<track> --still`; without `--still` every recorded position, `--max-speed <m/s>` to change what is too fast                                                                                    |
-| Give a GPX file to a device                                         | `cat <gpx> > /dev/<device>`; [`track-stage`](commands.md#track-stage) `<gpx> --track <device>`, which moves the file to the track's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
-| Add a position by hand                                              | [`track-append`](commands.md#track-append) `<track> --lat=<lat> --lng=<lng> --ts <time>`                                                                                                                                               |
-| See what GPX files hold, without importing                          | [`gpx-info`](commands.md#gpx-info) `<gpx>…`: name, tracks, creator, points and their time span, size, and the devices each names                                                                                                       |
-| List the GPX files a track was read from                            | [`source-list`](commands.md#source-list) `/dev/sailboat/position`                                                                                                                                                                      |
-| Find a track's trips                                                | [`track-trips`](commands.md#track-trips) `<track>`, `--full` from the start, `--dry-run` to see them without keeping them                                                                                                              |
-| List a track's trips                                                | [`trip-list`](commands.md#trip-list) `<track>`                                                                                                                                                                                         |
-| Put a track's stays at locations, and name the new ones             | [`track-places`](commands.md#track-places) `<track>`; see [Places a track stayed at](places.md#places-a-track-stayed-at)                                                                                                               |
-| Give a track's trips and days their weather                         | [`track-weather`](commands.md#track-weather) `<track>`, `--full` to look every trip up again, `--dry-run` to see what it would look up                                                                                                 |
-| Join a trip to the one before, or part one                          | [`trip-edit`](commands.md#trip-edit) `<track> <trip> --merge`, or `<track> <day> --split`                                                                                                                                              |
-| Make a trip an album, or take it off                                | [`trip-album`](commands.md#trip-album) `<track> <trip> --new`, `--album=<album>`, or `--detach`                                                                                                                                        |
-| Reject or accept positions by hand, or hand them back to the rules  | [`track-mark`](commands.md#track-mark) `<track> --reject`, `--accept` or `--clear`, with `--from`, `--to`, `--near <lat,lng>` and `--marked reject`                                                                                    |
-| Move a stretch of a track to another device                         | [`track-move`](commands.md#track-move) `<track> <to-track> --from <time> --to <time>`                                                                                                                                                  |
-| Link a camera to the device it is part of                           | [`camera-device`](commands.md#camera-device) `<camera> <device>`, or `<camera> --off`                                                                                                                                                  |
-| Put a device on an album's map, or take it off                      | [`album-device-add`](commands.md#album-device-add) and [`album-device-rm`](commands.md#album-device-rm) `<album> <device>…`; see [Albums](albums.md#in-the-terminal)                                                                   |
-| Make a phone's or a tracker's key, or renew or take it away         | `device-key <device>`, with `--new` or `--off`; see [Report from a phone](../guide/devices.md#report-from-a-phone)                                                                                                                     |
+| Task                                                                | Command                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List the devices' tracks, with their name, kind, positions and span | [`track-list`](commands.md#track-list), or `track-list <folder>` for those under one folder                                                                                                                                                     |
+| Find tracks by name or description                                  | [`search-track`](commands.md#search-track) `<words>`                                                                                                                                                                                            |
+| Change how a device travels                                         | [`track-update`](commands.md#track-update) `<track> --kind boat` (`car`, `bike`, `foot`), `--timezone <zone>` or `--description <text>`, or `--clear <field>`                                                                                   |
+| List a track's home bases                                           | [`track-home`](commands.md#track-home) `<track>`; with none of its own, the homes of its cameras' owners and the years they count                                                                                                               |
+| Add or remove a home base                                           | [`track-home`](commands.md#track-home) `<track> --add <location>…` or `--remove <location>…`; a location is its path, or its folder name                                                                                                        |
+| Read a track as the maps draw it                                    | [`track-read`](commands.md#track-read) `<track> --still`; without `--still` every recorded position, `--max-speed <m/s>` to change what is too fast                                                                                             |
+| Give a GPX file to a device                                         | `cat <gpx> > /dev/<device>/position`; [`track-stage`](commands.md#track-stage) `<gpx> --track <device>`, which moves the file to the track's `routes`, or [`track-import`](commands.md#track-import) `<device> <gpx>`, which keeps a copy there |
+| Add a position by hand                                              | [`track-append`](commands.md#track-append) `<track> --lat=<lat> --lng=<lng> --ts <time>`                                                                                                                                                        |
+| See what GPX files hold, without importing                          | [`gpx-info`](commands.md#gpx-info) `<gpx>…`: name, tracks, creator, points and their time span, size, and the devices each names                                                                                                                |
+| List the GPX files a track was read from                            | [`source-list`](commands.md#source-list) `/dev/sailboat/position`                                                                                                                                                                               |
+| Find a track's trips                                                | [`track-trips`](commands.md#track-trips) `<track>`, `--full` from the start, `--dry-run` to see them without keeping them                                                                                                                       |
+| List a track's trips                                                | [`trip-list`](commands.md#trip-list) `<track>`                                                                                                                                                                                                  |
+| Put a track's stays at locations, and name the new ones             | [`track-places`](commands.md#track-places) `<track>`; see [Places a track stayed at](places.md#places-a-track-stayed-at)                                                                                                                        |
+| Give a track's trips and days their weather                         | [`track-weather`](commands.md#track-weather) `<track>`, `--full` to look every trip up again, `--dry-run` to see what it would look up                                                                                                          |
+| Join a trip to the one before, or part one                          | [`trip-edit`](commands.md#trip-edit) `<track> <trip> --merge`, or `<track> <day> --split`                                                                                                                                                       |
+| Make a trip an album, or take it off                                | [`trip-album`](commands.md#trip-album) `<track> <trip> --new`, `--album=<album>`, or `--detach`                                                                                                                                                 |
+| Reject or accept positions by hand, or hand them back to the rules  | [`track-mark`](commands.md#track-mark) `<track> --reject`, `--accept` or `--clear`, with `--from`, `--to`, `--near <lat,lng>` and `--marked reject`                                                                                             |
+| Move a stretch of a track to another device                         | [`track-move`](commands.md#track-move) `<track> <to-track> --from <time> --to <time>`                                                                                                                                                           |
+| Link a camera to the device it is part of                           | [`camera-device`](commands.md#camera-device) `<camera> <device>`, or `<camera> --off`                                                                                                                                                           |
+| Put a device on an album's map, or take it off                      | [`album-device-add`](commands.md#album-device-add) and [`album-device-rm`](commands.md#album-device-rm) `<album> <device>…`; see [Albums](albums.md#in-the-terminal)                                                                            |
+| Make a phone's or a tracker's key, or renew or take it away         | `device-key <device>`, with `--new` or `--off`; see [Report from a phone](../guide/devices.md#report-from-a-phone)                                                                                                                              |
 
 Making Jon's GPS logger, which he walks with, and adding a route copied into your home folder:
 

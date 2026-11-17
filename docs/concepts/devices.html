@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section class="here"><h2>Concepts</h2><ul><li><a href="nodes.html">Nodes and node types</a></li><li><a href="tree.html">The tree</a></li><li><a href="links.html">Links</a></li><li><a href="files.html">Files and storage</a></li><li><a href="pipelines.html">Changes and pipelines</a></li><li><a href="devices.html" aria-current="page">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -214,8 +215,9 @@ than a state, and the same press twice is two entries. Into any other log a driv
 when it differs from the one before (see <a href="#how-often-a-reading-is-kept">How often a reading is kept</a>).</p>
 <p>A stream keeps nothing. Each read is a new picture, which the device&#39;s driver takes from the camera
 then: <code>cat /dev/front-door/main &gt; door.jpg</code> saves one, and <code>/file/dev/front-door/main</code> is one in a
-browser. The device&#39;s page plays it live. Its attributes say what it is: <code>codec</code>, <code>width</code>, <code>height</code>,
-<code>fps</code> and <code>audio</code>, as far as the driver knows them.</p>
+browser. The device&#39;s page plays it live while its driver runs and can, which <code>device-show</code> says as
+<code>&quot;live&quot;: true</code>. Its attributes say what it is: <code>codec</code>, <code>width</code>, <code>height</code>, <code>fps</code> and <code>audio</code>, as far
+as the driver knows them.</p>
 <p>A control is not a store of what you wrote. Writing <code>on</code> to <code>/dev/hall-plug/switch-0</code> sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
 control remembers what was asked, who asked and when (its <code>requested</code> attribute), and the device&#39;s
@@ -282,7 +284,7 @@ device names its driver in its <code>driver</code> attribute.</p>
 <tbody><tr>
 <td><code>tracker</code></td>
 <td>EiN itself</td>
-<td>A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its <code>position</code> track</td>
+<td>A phone, a GPS tracker or a logger: its <code>position</code> track, which takes what it posts and a GPX file written over it</td>
 </tr>
 <tr>
 <td><code>webhook</code></td>
@@ -291,33 +293,33 @@ device names its driver in its <code>driver</code> attribute.</p>
 </tr>
 <tr>
 <td><code>ha-discovery</code></td>
-<td>the <a href="../automation/index.html">Automation</a> module</td>
+<td>the <a href="../devices/index.html">Devices</a> module</td>
 <td>Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others</td>
 </tr>
 <tr>
 <td><code>shelly</code></td>
-<td>the Automation module</td>
+<td>the Devices module</td>
 <td>Shelly&#39;s second generation and later, over MQTT</td>
 </tr>
 <tr>
 <td><code>shelly-gen1</code></td>
-<td>the Automation module</td>
+<td>the Devices module</td>
 <td>Shelly&#39;s first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT</td>
 </tr>
 <tr>
 <td><code>virtual</code></td>
-<td>the Automation module</td>
+<td>the <a href="../automation/index.html">Automation</a> module</td>
 <td>No hardware: readings worked out from other devices&#39; and controls that hold what is set; see <a href="../automation/virtual-devices.html">Virtual devices</a></td>
 </tr>
 <tr>
 <td><code>rtsp</code></td>
-<td>the Automation module</td>
-<td>A camera that sends its picture over RTSP: its streams; see <a href="../automation/index.html#a-camera">A camera</a></td>
+<td>the Devices module</td>
+<td>A camera that sends its picture over RTSP: its streams; see <a href="../devices/index.html#a-camera">A camera</a></td>
 </tr>
 <tr>
 <td><code>onvif</code></td>
-<td>the Automation module</td>
-<td>A camera that speaks ONVIF: its streams, its events (motion, people seen, tampering, sound, a line crossed and the like), its presets and moves; see <a href="../automation/index.html#an-onvif-camera">An ONVIF camera</a></td>
+<td>the Devices module</td>
+<td>A camera that speaks ONVIF: its streams, its events (motion, people seen, tampering, sound, a line crossed and the like), its presets and moves; see <a href="../devices/index.html#an-onvif-camera">An ONVIF camera</a></td>
 </tr>
 </tbody></table>
 </div>
@@ -379,7 +381,9 @@ more than 150 m off is <a href="../archive/tracks.html#the-route-on-the-map">lef
 </tbody></table>
 </div>
 <p>A device&#39;s battery, from any driver&#39;s reading of class <code>battery</code>, shows on its card on the
-<strong>Devices</strong> page, and <code>devices</code> answers it as <code>battery</code>.</p>
+<strong>Devices</strong> page, and <code>devices</code> answers it as <code>battery</code>. With the Archive module, a phone&#39;s
+<code>activity</code> says how each of its trips travelled while its track has no kind of its own
+(<a href="../archive/tracks.html#how-a-device-travels">How a device travels</a>).</p>
 <h3 id="cores-webhook-driver">Core&#39;s webhook driver<a class="anchor" href="#cores-webhook-driver" aria-label="Link to this section"></a></h3>
 <p><code>webhook</code> reads what a device or a script posts in the shapes webhooks take, and keeps each field as
 a reading on the endpoint of that name, a log made the first time the field comes. Each reading is
@@ -546,20 +550,25 @@ engine&#39;s to say (<code>podman ps</code>, <code>docker ps</code>), and EiN&#3
 <p>In an installation made with <code>setup.sh</code>, the machine&#39;s name is <code>EIN_HOSTNAME</code> in <code>.env</code>, which
 <code>setup.sh</code> writes (<a href="../admin/install.html#env">Installing in detail</a>).</p>
 <h2 id="writing-to-a-device">Writing to a device<a class="anchor" href="#writing-to-a-device" aria-label="Link to this section"></a></h2>
-<p>What is written to the device itself, <code>/dev/&lt;device&gt;</code>, is raw input for its driver: a GPX file, a
-tracker&#39;s post, whatever the driver reads. What is written to an endpoint is a value in EiN&#39;s own
-form. Both work the same from the terminal, over SFTP, and over HTTP:</p>
+<p>A device is written to at its endpoints: a value for a control or a log, the paths a screen is to
+show, the fixes for a track in whatever form a tracker sends them, a GPX file among them. What is
+written to the device itself, <code>/dev/&lt;device&gt;</code>, is a webhook device&#39;s post, which its driver turns
+into readings (<a href="#cores-webhook-driver">Core&#39;s webhook driver</a>). Each works the same from the
+terminal, over SFTP, and over HTTP:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">cat</span> ~/summer-walk.gpx &gt; /dev/old-logger                  <span class="hljs-comment"># raw input: the tracker driver reads the GPX</span>
+<span class="hljs-built_in">cat</span> ~/summer-walk.gpx &gt; /dev/old-logger/position         <span class="hljs-comment"># fixes for a track: a GPX file, read as a tracker&#x27;s</span>
 <span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0                        <span class="hljs-comment"># a value for a control, sent to the plug</span>
+<span class="hljs-built_in">echo</span> /archive/music/evening-song.mp3 &gt; /dev/kitchen-speaker/show   <span class="hljs-comment"># what a speaker is to play</span>
 <span class="hljs-built_in">echo</span> 41.5 &gt; /dev/garden-sensor/soil-moisture             <span class="hljs-comment"># a value appended to a log</span>
 <span class="hljs-built_in">cat</span> /dev/hall-plug/switch-0                              <span class="hljs-comment"># the states the plug reported</span>
 <span class="hljs-built_in">tail</span> -f /dev/hall-plug/switch-0-power                    <span class="hljs-comment"># each new reading, until Ctrl+C</span></code></pre></div>
 <p>A write to a device or a control is answered when its driver has taken it: <code>echo</code> fails at once when
 the value is refused or the driver is not running, and a control&#39;s write that the device has not
-taken within 10 seconds fails with <code>&lt;device&gt; did not answer within 10 s</code>.</p>
+taken within 45 seconds fails with <code>&lt;device&gt; did not answer within 45 s</code>.</p>
 <p>A write to a log or a track endpoint appends to it, with <code>&gt;</code> as with <code>&gt;&gt;</code>: an endpoint keeps its
-history, unlike a file or a log elsewhere in the tree, which <code>&gt;</code> empties first. A value written to a
+history, unlike a file or a log elsewhere in the tree, which <code>&gt;</code> empties first. A device&#39;s track
+reads what <code>&gt;</code> gives it as a tracker&#39;s (a GPX file, a phone&#39;s post) and what <code>&gt;&gt;</code> gives it as EiN&#39;s
+own fixes, a JSON object a line. A value written to a
 log endpoint by hand, a number, <code>true</code> or <code>false</code>, or a word, is kept as <code>{&quot;value&quot;: …}</code>, as a
 driver&#39;s readings are, so the device&#39;s page and <code>device-history</code> read it; a line that is a JSON
 object is kept as it is. Every log a driver makes has this from its <code>valueField</code> attribute, and a log
@@ -569,7 +578,7 @@ neither throttled nor published on the bus: only what a driver appends is. A con
 administrator may do.</p>
 <p>Over HTTP the device&#39;s file in the tree takes the same writes at <code>/file/dev/&lt;device&gt;</code> and
 <code>/file/dev/&lt;device&gt;/&lt;endpoint&gt;</code>, where a body of a bare value, such as <code>21.4</code>, is kept as
-<code>{&quot;value&quot;: 21.4}</code>. A device cannot sign in, so it sends its <strong>device key</strong> with them, which opens its
+<code>{&quot;value&quot;: 21.4}</code>, and a phone posts its position to its track, <code>/file/dev/&lt;phone&gt;/position</code>. A device cannot sign in, so it sends its <strong>device key</strong> with them, which opens its
 own folder for these writes and nothing else; see
 <a href="../admin/devices.html#device-keys">Devices and their keys</a>.</p>
 <h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
@@ -632,7 +641,7 @@ of a burst is never lost.</li>
 <li>On and off, words, positions and every press are kept as they come.</li>
 </ul>
 <p>A sensor that reports its power every second therefore costs a row every ten seconds or so while it
-changes, and none while it holds still. The <a href="../automation/index.html#settings">Automation</a> module
+changes, and none while it holds still. The <a href="../devices/index.html#settings">Devices</a> module
 gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds between readings</strong> setting.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
@@ -641,7 +650,8 @@ gives the endpoints it makes a <code>minInterval</code> from its <strong>Seconds
 <li><a href="../develop/drivers.html">Writing a driver</a>: the driver API, for module authors.</li>
 <li><a href="tree.html">The tree</a>: <code>/dev</code> among the other folders.</li>
 <li><a href="pipelines.html">Changes and pipelines</a>: routing keys, queues and logs in general.</li>
-<li><a href="../automation/index.html">Automation</a>: the MQTT drivers and automations.</li>
+<li><a href="../devices/index.html">Devices</a>: the drivers for MQTT devices, the network and cameras.</li>
+<li><a href="../automation/index.html">Automation</a>: automations, and virtual devices.</li>
 </ul>
 
         </article>

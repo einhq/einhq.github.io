@@ -58,8 +58,8 @@ to find copies; those are described in [Duplicates](duplicates.md).
 
 ## A security camera
 
-A camera on the network that the [Automation](../automation/index.md) module drives
-([A camera](../automation/index.md#a-camera)) is a device under **Devices**, and the archive makes it
+A camera on the network that the [Devices](../devices/index.md) module drives
+([A camera](../devices/index.md#a-camera)) is a device under **Devices**, and the archive makes it
 a camera here too, linked to the device, the first time it sees a face. Under it, in `faces/` with a
 folder a day, is the picture of each face the camera saw, as the face was clearest, named for the
 time it was seen. Those pictures are the archive's like any other: their faces join people or start
@@ -246,9 +246,13 @@ camera, so they appear without anything being typed in, and they grow as more pi
   `Software` tag counts too, such as **Ver 1.12**. A program name there, from editing the picture
   later, does not.
 - **Lenses** lists each lens used on the camera, most used first, with how many pictures and
-  when. A lens the camera names appears by name, such as **XF16-55mmF2.8 R LM WR**. One known only
-  by its focal lengths appears as them, such as **18–55mm f/3.5–5.6**. A lens the camera records
-  only as a number, as Pentax bodies do, is left out.
+  when. A lens the camera names appears by name, such as **XF16-55mmF2.8 R LM WR**. A lens the
+  camera records as a number instead, as Pentax, Ricoh and many Nikon bodies do, appears by the name
+  exiftool's lens table gives that number, such as **smc PENTAX-DA 18-135mm F3.5-5.6 ED AL [IF] DC
+  WR**; where the number fits more than one lens, the name lists them joined by "or". One known
+  only by its focal lengths appears as them, such as **18–55mm f/3.5–5.6**. A number the table does
+  not know is left out. Pictures read before EiN looked the number up show their lens once they
+  are read again.
 
 A picture edited and saved by a program that drops the maker notes adds nothing to these.
 

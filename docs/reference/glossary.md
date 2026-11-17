@@ -164,7 +164,7 @@ holding its endpoints, and has a page under **Devices**. A driver finds it, or a
 ### Device key
 
 The key a device carries to write to EiN without signing in, as a phone posting its position does:
-it opens `/file/dev/<device>` of that one device for writing, and nothing else. `device-key` and the
+it opens `/file/dev/<device>` and its endpoints, such as a phone's track `/file/dev/<phone>/position`, of that one device for writing, and nothing else. `device-key` and the
 device's **Info** tab make, show and take it away. See
 [Devices and their keys](../admin/devices.md#device-keys).
 

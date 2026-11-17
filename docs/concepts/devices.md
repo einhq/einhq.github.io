@@ -70,8 +70,9 @@ when it differs from the one before (see [How often a reading is kept](#how-ofte
 
 A stream keeps nothing. Each read is a new picture, which the device's driver takes from the camera
 then: `cat /dev/front-door/main > door.jpg` saves one, and `/file/dev/front-door/main` is one in a
-browser. The device's page plays it live. Its attributes say what it is: `codec`, `width`, `height`,
-`fps` and `audio`, as far as the driver knows them.
+browser. The device's page plays it live while its driver runs and can, which `device-show` says as
+`"live": true`. Its attributes say what it is: `codec`, `width`, `height`, `fps` and `audio`, as far
+as the driver knows them.
 
 A control is not a store of what you wrote. Writing `on` to `/dev/hall-plug/switch-0` sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
@@ -108,16 +109,16 @@ A driver is what turns a device's own language into endpoints and back: it reads
 sends and appends it to the endpoints, and it sends the device what is written to its controls. A
 device names its driver in its `driver` attribute.
 
-| Driver         | Comes with                                      | What it drives                                                                                                                                                                                                 |
-| -------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: what it posts, or a GPX file written to it, becomes its `position` track                                                                                                   |
-| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading                                                                                                                 |
-| `ha-discovery` | the [Automation](../automation/index.md) module | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others                                                                                                         |
-| `shelly`       | the Automation module                           | Shelly's second generation and later, over MQTT                                                                                                                                                                |
-| `shelly-gen1`  | the Automation module                           | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                                                                                                                            |
-| `virtual`      | the Automation module                           | No hardware: readings worked out from other devices' and controls that hold what is set; see [Virtual devices](../automation/virtual-devices.md)                                                               |
-| `rtsp`         | the Automation module                           | A camera that sends its picture over RTSP: its streams; see [A camera](../automation/index.md#a-camera)                                                                                                        |
-| `onvif`        | the Automation module                           | A camera that speaks ONVIF: its streams, its events (motion, people seen, tampering, sound, a line crossed and the like), its presets and moves; see [An ONVIF camera](../automation/index.md#an-onvif-camera) |
+| Driver         | Comes with                                      | What it drives                                                                                                                                                                                              |
+| -------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tracker`      | EiN itself                                      | A phone, a GPS tracker or a logger: its `position` track, which takes what it posts and a GPX file written over it                                                                                          |
+| `webhook`      | EiN itself                                      | A button, a sensor or a script that posts to an address: each field it sends becomes a reading                                                                                                              |
+| `ha-discovery` | the [Devices](../devices/index.md) module       | Anything that announces itself over MQTT the way Home Assistant reads: ESPHome, Zigbee2MQTT and others                                                                                                      |
+| `shelly`       | the Devices module                              | Shelly's second generation and later, over MQTT                                                                                                                                                             |
+| `shelly-gen1`  | the Devices module                              | Shelly's first generation (Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, RGBW2), over MQTT                                                                                                                         |
+| `virtual`      | the [Automation](../automation/index.md) module | No hardware: readings worked out from other devices' and controls that hold what is set; see [Virtual devices](../automation/virtual-devices.md)                                                            |
+| `rtsp`         | the Devices module                              | A camera that sends its picture over RTSP: its streams; see [A camera](../devices/index.md#a-camera)                                                                                                        |
+| `onvif`        | the Devices module                              | A camera that speaks ONVIF: its streams, its events (motion, people seen, tampering, sound, a line crossed and the like), its presets and moves; see [An ONVIF camera](../devices/index.md#an-onvif-camera) |
 
 `devices --drivers` lists the drivers running now, with the module each comes from and how many
 devices it drives. A module's drivers run while its service does: when the service is stopped, a
@@ -168,7 +169,9 @@ What the device says of itself goes to logs of its own, each made the first time
 | `activity` | What it is doing, as the phone's motion sensors tell: `still`, `on_foot`, `in_vehicle`, … | Traccar Client                    |
 
 A device's battery, from any driver's reading of class `battery`, shows on its card on the
-**Devices** page, and `devices` answers it as `battery`.
+**Devices** page, and `devices` answers it as `battery`. With the Archive module, a phone's
+`activity` says how each of its trips travelled while its track has no kind of its own
+([How a device travels](../archive/tracks.md#how-a-device-travels)).
 
 ### Core's webhook driver
 
@@ -246,14 +249,17 @@ In an installation made with `setup.sh`, the machine's name is `EIN_HOSTNAME` in
 
 ## Writing to a device
 
-What is written to the device itself, `/dev/<device>`, is raw input for its driver: a GPX file, a
-tracker's post, whatever the driver reads. What is written to an endpoint is a value in EiN's own
-form. Both work the same from the terminal, over SFTP, and over HTTP:
+A device is written to at its endpoints: a value for a control or a log, the paths a screen is to
+show, the fixes for a track in whatever form a tracker sends them, a GPX file among them. What is
+written to the device itself, `/dev/<device>`, is a webhook device's post, which its driver turns
+into readings ([Core's webhook driver](#cores-webhook-driver)). Each works the same from the
+terminal, over SFTP, and over HTTP:
 
 ```bash
 # in EiN's terminal
-cat ~/summer-walk.gpx > /dev/old-logger                  # raw input: the tracker driver reads the GPX
+cat ~/summer-walk.gpx > /dev/old-logger/position         # fixes for a track: a GPX file, read as a tracker's
 echo on > /dev/hall-plug/switch-0                        # a value for a control, sent to the plug
+echo /archive/music/evening-song.mp3 > /dev/kitchen-speaker/show   # what a speaker is to play
 echo 41.5 > /dev/garden-sensor/soil-moisture             # a value appended to a log
 cat /dev/hall-plug/switch-0                              # the states the plug reported
 tail -f /dev/hall-plug/switch-0-power                    # each new reading, until Ctrl+C
@@ -261,10 +267,12 @@ tail -f /dev/hall-plug/switch-0-power                    # each new reading, unt
 
 A write to a device or a control is answered when its driver has taken it: `echo` fails at once when
 the value is refused or the driver is not running, and a control's write that the device has not
-taken within 10 seconds fails with `<device> did not answer within 10 s`.
+taken within 45 seconds fails with `<device> did not answer within 45 s`.
 
 A write to a log or a track endpoint appends to it, with `>` as with `>>`: an endpoint keeps its
-history, unlike a file or a log elsewhere in the tree, which `>` empties first. A value written to a
+history, unlike a file or a log elsewhere in the tree, which `>` empties first. A device's track
+reads what `>` gives it as a tracker's (a GPX file, a phone's post) and what `>>` gives it as EiN's
+own fixes, a JSON object a line. A value written to a
 log endpoint by hand, a number, `true` or `false`, or a word, is kept as `{"value": …}`, as a
 driver's readings are, so the device's page and `device-history` read it; a line that is a JSON
 object is kept as it is. Every log a driver makes has this from its `valueField` attribute, and a log
@@ -275,7 +283,7 @@ administrator may do.
 
 Over HTTP the device's file in the tree takes the same writes at `/file/dev/<device>` and
 `/file/dev/<device>/<endpoint>`, where a body of a bare value, such as `21.4`, is kept as
-`{"value": 21.4}`. A device cannot sign in, so it sends its **device key** with them, which opens its
+`{"value": 21.4}`, and a phone posts its position to its track, `/file/dev/<phone>/position`. A device cannot sign in, so it sends its **device key** with them, which opens its
 own folder for these writes and nothing else; see
 [Devices and their keys](../admin/devices.md#device-keys).
 
@@ -347,7 +355,7 @@ A driver hands EiN every reading it hears, and EiN keeps and publishes it only w
 - On and off, words, positions and every press are kept as they come.
 
 A sensor that reports its power every second therefore costs a row every ten seconds or so while it
-changes, and none while it holds still. The [Automation](../automation/index.md#settings) module
+changes, and none while it holds still. The [Devices](../devices/index.md#settings) module
 gives the endpoints it makes a `minInterval` from its **Seconds between readings** setting.
 
 ## Related pages
@@ -357,4 +365,5 @@ gives the endpoints it makes a `minInterval` from its **Seconds between readings
 - [Writing a driver](../develop/drivers.md): the driver API, for module authors.
 - [The tree](tree.md): `/dev` among the other folders.
 - [Changes and pipelines](pipelines.md): routing keys, queues and logs in general.
-- [Automation](../automation/index.md): the MQTT drivers and automations.
+- [Devices](../devices/index.md): the drivers for MQTT devices, the network and cameras.
+- [Automation](../automation/index.md): automations, and virtual devices.

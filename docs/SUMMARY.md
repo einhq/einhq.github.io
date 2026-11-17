@@ -44,6 +44,7 @@
 - [Services and logs](admin/services-logs.md)
 - [Performance and sizing](admin/performance.md)
 - [Updating](admin/updating.md)
+- [The supervisor](admin/supervisor.md)
 - [Your data: backup, moving and removing](admin/data.md)
 - [Troubleshooting](admin/troubleshooting.md)
 
@@ -129,6 +130,11 @@
 - [Dashboards](dashboard/index.md)
 - [Show a dashboard on a screen](dashboard/screens.md)
 - [Dashboards commands](dashboard/commands.md)
+
+## Devices
+
+- [Devices](devices/index.md)
+- [Devices commands](devices/commands.md)
 
 ## Automation
 

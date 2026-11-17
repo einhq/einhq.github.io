@@ -56,11 +56,12 @@ On a computer:
     from its GPS position;
   - **Show text** / **Hide text** (<kbd>t</kbd>) when text was read from the photo, **Pin faces** /
     **Unpin faces** (<kbd>f</kbd>) on photos and videos with faces found, **Fullscreen**, **Show toolbar** /
-    **Hide toolbar** when you may change the file, and **Download**;
+    **Hide toolbar** when you may change the file, **Download**, and **Show on…** when you have a
+    speaker or screen to play it on;
   - **More** (⋮), only when some of these did not fit.
 
   The buttons stay in the bar as far as there is room without cutting the date or the place short.
-  In a narrower window they move into the More menu from the end: first **Download** and the
+  In a narrower window they move into the More menu from the end: first **Show on…**, **Download** and the
   toolbar, then the view buttons, and last the slideshow and the heart.
 
 ### The date under the picture
@@ -81,15 +82,16 @@ date a picture gets and how to change it.
 **More** (⋮) at the right end of the bar holds the bar's buttons it has no room for, in the bar's
 order:
 
-| Row                                            | What it does                                                                                          |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                    |
-| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                |
-| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                            |
-| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.          |
-| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                    |
-| **Show toolbar** / **Hide toolbar**            | On a phone, shows the [toolbar](#the-toolbar) at the top of the viewer. When you may change the file. |
-| **Download**                                   | Saves the original file to your device.                                                               |
+| Row                                            | What it does                                                                                                                                                                                                    |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                                                                                              |
+| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                                                                                          |
+| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                                                                                      |
+| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.                                                                                                                    |
+| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                                                                                              |
+| **Show toolbar** / **Hide toolbar**            | On a phone, shows the [toolbar](#the-toolbar) at the top of the viewer. When you may change the file.                                                                                                           |
+| **Download**                                   | Saves the original file to your device.                                                                                                                                                                         |
+| **Show on…**                                   | Plays the file on a speaker or screen in the house, or on a TV where your phone is; see [Play on a speaker or a screen](../devices/index.md#from-the-app). Only with the [Devices](../devices/index.md) module. |
 
 The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
 picture to picture and the next time you open it.
@@ -765,6 +767,27 @@ runs, the screen is kept from going to sleep.
 
 To stop the slideshow, press **Stop slideshow** in the bar, click the picture, press <kbd>Esc</kbd>,
 or leave fullscreen.
+
+### Start a slideshow from a link
+
+Add `slideshow` to the address of a page that lists pictures, and the slideshow starts as the page
+opens, from its first file. Open the album, the search on the **Media** page, a person's or a
+place's pictures or your **Favourites**, and add `?slideshow` to the end of the address in the
+browser, or `&slideshow` when it already has a `?` in it: `/media?q=sailboat&slideshow` shows every
+picture of a sailboat. Such an address can be kept as a bookmark, or sent to someone who may see
+the pictures.
+
+On a page with a file already open in the viewer, the slideshow starts from that file. The browser
+asks for a click before it goes fullscreen, so a slideshow started from a link runs in the window.
+Once it runs, `slideshow` leaves the address: stopping it is final, and going back or reloading the
+page does not start it again.
+
+`slideshow=screen` runs it for a screen that nobody touches, such as a TV in the hall. The bar
+keeps the counter, the date and the place, but leaves out **Stop slideshow** and the pointer, and
+the slideshow does not ask for fullscreen. A TV that plays video but runs no browser of its own
+shows it as live video the media service makes of the page, started in the terminal with
+`page-stream start '/media?q=sailboat&slideshow=screen'`; see
+[A dashboard on a TV](../dashboard/screens.md#on-a-tv).
 
 To change the timing or turn the pan and zoom off, open your picture at the top right, choose
 **Profile**, then the **Preferences** tab, and look under **Playback**:

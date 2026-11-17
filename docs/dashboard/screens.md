@@ -66,6 +66,80 @@ What the screen does by itself:
 How long a link's session lasts is the administrator's to change: **Share link session expiry** in
 **Settings**, `CFG_LINK_SESSION_EXPIRES_SEC`.
 
+## On a TV
+
+A TV that plays video but runs no browser of its own — a Google Cast TV or Chromecast, a TV that
+plays from the network (DLNA) — can still show a dashboard: the
+[media service](../ems/index.md) opens it in a browser of its own, as you see it and changing
+nothing, and makes live video of it. In EiN's terminal:
+
+```bash
+page-stream start /dashboard-wall/Kitchen
+```
+
+It answers the stream's id and where to play it: a path ending in `.mp4`, for a Cast device, the
+same ending in `.ts`, for a DLNA TV, one ending in `screen.mp4`, the same video saying it lasts a
+day, which Chrome hands a TV near it, and one ending in `index.m3u8`, a live HLS playlist, for a
+player that takes HLS (Safari, VLC, an Apple TV). Put EiN's address in front, such as
+`http://ein.local:8080/live/3f2a…9c.mp4`, and play it in anything that plays a stream from an
+address. Anyone with the address can watch it, without signing in, until the stream stops.
+
+- The video is a few seconds behind the dashboard, and a moving dashboard looks as it does in a
+  browser, at 30 frames a second, 1920×1080 unless you give `--width`, `--height` or `--fps`.
+- It stops by itself 20 seconds after the last one watching stops (`--idle` for longer), and
+  `page-stream stop <id>` stops it at once. `page-stream list` lists yours.
+- Each stream takes about two processor cores of the media service's machine while the page
+  moves, and an encoder of its graphics card when it has one. Two run at once unless the
+  administrator allows more (`EMS_PAGES`).
+
+With the [Devices](../devices/index.md#play-on-a-speaker-or-a-screen) module there is no need
+to: **Show on…** in the dashboard's **⋮** gives its wall to a Cast or DLNA screen, which streams it
+as above and plays it until it is stopped, and `echo /dashboard-wall/Kitchen > /dev/living-room-tv/show`
+does the same from the terminal.
+
+Any other page can be streamed the same way, such as an album's slideshow:
+`page-stream start '/media?q=sailboat&slideshow=screen'`.
+
+### On a TV where your phone is
+
+When you reach EiN over the internet, away from home, **Show on…** also offers **A screen near you**
+for a dashboard's wall, an album's slideshow, the slideshow of what the **Media** page found, and
+the file open in the [viewer](../archive/viewer.md). EiN cannot see the TV in the room you are in,
+but your browser can: EiN makes something the TV can fetch, and the browser hands its address to the
+TV you choose in its own list of screens. The TV then fetches it from EiN, over the internet.
+
+- A page goes as live video of it: the media service makes it as above. Chrome hands the TV the
+  video that says it lasts a day, since it offers a TV nothing shorter than 15 seconds and, on a
+  phone, no HLS; Safari hands it the HLS playlist.
+- A recording or a video from the viewer goes as itself, as a Cast screen in the house is given it
+  ([Play on a speaker or a screen](../devices/index.md#from-the-app)): a video that is not H.264
+  within 1080p is made into H.264 by the media service while the TV plays it, and one whose length
+  is not known cannot go. EiN keeps the address working while your browser keeps the page open,
+  and a few minutes after.
+- A picture from the viewer goes as the viewer showing it, as live video of that page.
+
+- Chrome offers the Google Cast screens on the network you are on, and Safari the AirPlay ones.
+  Firefox offers none, and the row is not there.
+- The browser takes a few seconds to find the TVs that can play it; then it wants another tap:
+  choose **Choose the screen**.
+- The TV reaches EiN at the address you opened it at, so EiN must be reachable from the internet
+  over HTTPS ([Reach EiN from outside your home](../admin/network.md#reach-ein-from-outside-your-home)),
+  and the video takes some of the upload of EiN's own connection while the TV plays it.
+- Chrome offers a screen nothing shorter than 15 seconds: for a shorter recording or video the row
+  says so.
+- Keep EiN open on the phone while the TV plays: Chrome on Android pauses the TV when you leave the
+  page or the screen locks, and it plays on when you come back. A page's stream waits five minutes
+  for that.
+- The square beside the row, the TV's own remote or the browser's list of screens stops it and lets
+  the TV go. A page's stream stops by itself five minutes after the TV stops reading it.
+
+For a page it is there when the [media service](../ems/index.md) is installed, which names
+`page-stream start` as the setting `CFG_PAGE_STREAMER`; `stream-page <route>` does the same from
+the terminal. For a recording or a video it is there when the [Devices](../devices/index.md) module
+is installed, which names `devices-nearby` as the setting `CFG_FILE_STREAMER`; `stream-file <path>`
+answers the address, `stream-file --renew <id>` keeps it five minutes more and `stream-file --stop
+<id>` lets go of it.
+
 ## Turn it off
 
 Choose **Delete link** in the dashboard's **Share** dialog. Every screen showing it goes to **This

@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 10 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-sampler](#ems-sampler) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-sampler](#ems-sampler) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed) · [page-stream](#page-stream)
 
 ## E
 
@@ -204,3 +204,36 @@ ems-text-embed --model
 ```
 
 With `JSON_OUTPUT=1`: model, the model that made them, and vectors, one per text in order.
+
+## P
+
+### `page-stream`
+
+Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by the media service.
+
+<small>reads only</small>
+
+```text
+page-stream [--width=<string>] [--height=<string>] [--fps=<string>] [--idle=<string>] <subcommand> <target>
+```
+
+| Argument       | What it is                                                                       |
+| -------------- | -------------------------------------------------------------------------------- |
+| `<subcommand>` | start \| list \| stop.                                                           |
+| `<target>`     | start: the page's route, such as /dashboard-wall/Kitchen; stop: the stream's id. |
+
+| Option              | What it does                                                             |
+| ------------------- | ------------------------------------------------------------------------ |
+| `--width=<string>`  | start: the picture and browser window width, 320 to 1920 (1920)          |
+| `--height=<string>` | start: the height, 240 to 1080 (1080)                                    |
+| `--fps=<string>`    | start: frames a second, 5 to 30 (30)                                     |
+| `--idle=<string>`   | start: seconds without a reader before it stops by itself, 5 to 600 (20) |
+
+```bash
+page-stream start /dashboard-wall/Kitchen
+page-stream start '/media?q=sailboat&slideshow=screen' --idle=60
+page-stream list
+page-stream stop page-3f2a9c41d07b5e18
+```
+
+With `JSON_OUTPUT=1`: start: id, path (read <path>.mp4 or <path>.ts), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers and encoder; stop: ok.

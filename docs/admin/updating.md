@@ -8,20 +8,22 @@ what to do when an update goes differently.
 
 EiN has no releases and no version numbers to choose between. An update downloads the images
 GitHub builds each night from the newest commit of each repository, and starts them in place of
-what ran before; a change made today reaches an update tomorrow. The media service's changes reach
-GitHub only once it has been run over a set of real photos, videos, recordings and documents and
-answered as it did before (the internal regression suite): one that reads some of them worse waits
-on Forgejo until it is fixed. The engine downloads only the
+what ran before; a change made today reaches an update tomorrow. The media service is run each
+night over a set of real photos, videos, recordings and documents, to see that it answers as it did
+before (the internal regression suite); while it changes several times a day, its changes reach
+GitHub whether or not that run has passed. The engine downloads only the
 layers of an image that changed, so an update of the media service is usually far smaller than its
 30 GB. What it updates depends on what is installed:
 
-| Repository | What it is                                            | Updated when            | As                                   |
-| ---------- | ----------------------------------------------------- | ----------------------- | ------------------------------------ |
-| deploy     | `~/ein` itself: `setup.sh` and the compose files      | always, first           | `git pull` of `~/ein`                |
-| core       | EiN: the tree, the shell, the Web UI                  | always                  | the image `ghcr.io/einhq/core:main`  |
-| db         | PostgreSQL with TimescaleDB, pgvector and PostGIS     | always                  | the image `ghcr.io/einhq/db:main`    |
-| ems        | the media service, which the Archive needs            | with the media service  | the image `ghcr.io/einhq/ems:main`   |
-| llm        | the language model's chat template, for the Assistant | with the language model | its source, fetched into `~/ein/src` |
+| Repository | What it is                                            | Updated when            | As                                        |
+| ---------- | ----------------------------------------------------- | ----------------------- | ----------------------------------------- |
+| deploy     | `~/ein` itself: `setup.sh` and the compose files      | always, first           | `git pull` of `~/ein`                     |
+| core       | EiN: the tree, the shell, the Web UI                  | always                  | the image `ghcr.io/einhq/core:main`       |
+| db         | PostgreSQL with TimescaleDB, pgvector and PostGIS     | always                  | the image `ghcr.io/einhq/db:main`         |
+| ems        | the media service, which the Archive needs            | with the media service  | the image `ghcr.io/einhq/ems:<line>`      |
+| devices    | the Devices module's sidecar                          | with the sidecar        | the image `ghcr.io/einhq/devices:<line>`  |
+| llm        | the language model's chat template, for the Assistant | with the language model | its source, fetched into `~/ein/src`      |
+| deploy     | the [supervisor](supervisor.md)                       | with the supervisor     | the image `ghcr.io/einhq/supervisor:main` |
 
 GitHub builds the database's image again every week too, so an update also brings PostgreSQL's and
 its extensions' minor releases. Installed from another organisation with `--source`, an update
@@ -32,9 +34,34 @@ The language model's server is not built: it is llama.cpp's ready-made image, na
 digest in `compose.llm.yaml`. It changes only when that file does, which is when the deploy
 repository is updated.
 
+With the [supervisor](supervisor.md), which an installation from GitHub has, you need not run
+anything: it updates every service each night at 04:00 (`EIN_UPDATE_AT` in `~/ein/.env`), and
+**Update** and **Update all** on **Settings → Modules** update them at once. Its update leaves a
+service that runs its newest image as it is, and puts one whose new image does not come up back on
+the one it ran. The rest of this page holds for it too: each of its updates is a run of `setup.sh`.
+
 Modules are not part of this. They live in the data folder and are updated separately, on
 **Settings → Modules**; see [Update a module](modules.md#update-a-module). Only a module the new
 EiN cannot run is replaced, at its start ([below](#what-happens-when-the-new-ein-starts)).
+
+### The media service and the sidecar follow their modules
+
+The media service and the Devices module's sidecar each have a version of what they offer EiN,
+and the modules that talk to them, `ems` and `devices`, say in their manifest which versions
+they speak, as in `"services": { "ems": "^0.4.4" }`. An update downloads each at the line its
+module asks for: `ghcr.io/einhq/ems:0.4` is the newest media service of the 0.4 versions, which
+the `ems` module asking for `^0.4.4` speaks. `.env` keeps the line it runs as `EIN_EMS_TAG` and
+`EIN_DEVICES_TAG`; before any module asks, it is `main`.
+
+So after you update a module on **Settings → Modules** to a release that needs a newer media
+service, the **Status** page says so, as `ems api`: `EMS speaks API 0.4.4, older than the ^0.5.0
+this module needs: update the media service`. Run `~/ein/setup.sh --only ems` (or `--only
+devices` for `devices sidecar`), and it downloads the line the module asks for and restarts
+the service alone. With the [supervisor](supervisor.md) there is nothing to run: it does the same
+within a minute of the module's update. A line not published yet, as for a few hours after a module's release, leaves
+the service as it is, and says `The modules here ask for ems 0.5, which is not published yet: it
+stays at 0.4`. Installed from another source, the service is built from its newest source, and
+`setup.sh` only says when that is not the line the modules ask for.
 
 ## Before you update
 
@@ -115,8 +142,12 @@ new one:
 ~/ein/setup.sh
 ```
 
-`./setup.sh --only core` updates one service, `core`, `ems`, `db` or `llm`, and restarts only that
-one, leaving the others running.
+`./setup.sh --only core` updates one service, `core`, `ems`, `db`, `llm`, `devices` or
+`supervisor`, and restarts only that one, leaving the others running; `--only core,db` updates
+several, one after another. A service whose new image does not come up, EiN that does not answer
+within 10 minutes or a service that stops, is put back on the image it ran before, and `setup.sh`
+stops with `setup.sh: core did not come up on its new image, and runs on the one it ran before`
+under the service's last log lines.
 
 Every run of `setup.sh` is an update, also one that only adds or removes an option, such as
 `./setup.sh --ems`. To apply a changed line of `.env` without updating, run `podman compose up -d`
@@ -235,6 +266,7 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | `setup.sh: the images did not build, so EiN runs on as it was; the build's output is above`                     | Nothing was changed. When the build's output shows a download that failed, run `setup.sh` again later; otherwise the output names what stopped the build.                                                                  |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs core`                | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
 | EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
+| `setup.sh: core did not come up on its new image, and runs on the one it ran before`                            | EiN runs as it did before the update. The log lines above the message say why the new image did not start; [Troubleshooting](troubleshooting.md) covers what they may say. A later update tries the newest image again.    |
 | A module is still the old version                                                                               | `setup.sh` does not update modules, and EiN's start replaces only one it cannot run. Use **Update** on **Settings → Modules**.                                                                                             |
 | A module's pages or commands are gone, and **Settings → Modules** shows a badge on it                           | It does not fit the new EiN, and EiN found no release of it that does. The lines at the end of `setup.sh`'s output say why; [When a module does not work](modules.md#when-a-module-does-not-work) explains each message.   |
 | With the `ems` module, the media service's tile in **About EiN** says **Not answering**                         | The media service is still starting or failed to. `podman compose logs ems`; [The media service](../ems/index.md) helps further.                                                                                           |
@@ -247,6 +279,7 @@ restore it as [Your data](data.md) describes.
 - [Installing in detail](install.md): the installer, `setup.sh`, the files in `~/ein` and running
   compose day to day.
 - [Modules](modules.md): updating, pinning and removing modules.
+- [The supervisor](supervisor.md): the services installed and updated from EiN.
 - [Your data](data.md): what to back up before an update, and how to restore it.
 - [Services and logs](services-logs.md) and [Troubleshooting](troubleshooting.md): when something is
   wrong after an update.

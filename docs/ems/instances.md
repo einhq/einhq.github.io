@@ -48,7 +48,7 @@ more slowly. Which operations are worth giving it is your choice, made with `EMS
 | Operations                                                                                                                                                     | On the processor alone                                                                                                                        |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `media.probe`, `image.renditions`, `image.decode`, `video.poster`, `video.frames`, `audio.*`, `fingerprint.compute`, `document.extract`, `document.renditions` | The tools: they run on the processor on any machine. A good share for a second machine.                                                       |
-| `video.transcode`, `video.storyboard`                                                                                                                          | Run, more slowly than on a card's video units; a long video beyond the machine's memory budget is refused and goes to the primary.            |
+| `video.transcode`, `video.storyboard`, `video.stream`                                                                                                          | Run, more slowly than on a card's video units; a long video beyond the machine's memory budget is refused and goes to the primary.            |
 | `vision.embed`, `text.embed`, `ocr.read`, `faces.detect`                                                                                                       | Run, several times slower than on a card. Worth it on a machine that is otherwise idle.                                                       |
 | `speech.transcribe`, `speech.voiceprint`, `speech.diarize`, `speech.active_speakers`, `faces.detect_video`, `video.shots`                                      | Run, many times slower. A transcript made on the processor is made in other settings than the primary's on a card, so EiN never gives it one. |
 
@@ -64,8 +64,11 @@ more slowly. Which operations are worth giving it is your choice, made with `EMS
      -e EMS_NAME=laptop \
      -e EMS_KEY=a-long-random-key \
      -e EMS_OPS='media.probe,image.*,video.poster,audio.*,fingerprint.compute,vision.embed' \
-     --memory 16g ghcr.io/einhq/ems:main
+     --memory 16g ghcr.io/einhq/ems:0.4
    ```
+
+   `0.4` is the line the `ems` module asks for (`EIN_EMS_TAG` in `~/ein/.env` on EiN's machine): an
+   instance of another line is named in the **Status** page's `ems laptop api` check.
 
    Add `--device nvidia.com/gpu=all` on a machine with an NVIDIA card set up as
    [The graphics card](gpu.md) says. `EMS_OPS` is a list of operations separated by commas, where

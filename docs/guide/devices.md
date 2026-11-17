@@ -9,18 +9,18 @@ are kept, and [Devices and their keys](../admin/devices.md) who may do what.
 
 ## Where devices come from
 
-- **A driver finds them.** With the [Automation](../automation/index.md) module, a sensor or a plug
+- **A driver finds them.** With the [Devices](../devices/index.md) module, a sensor or a plug
   that announces itself on the house's MQTT broker, such as one running ESPHome or a Shelly, is on
   the Devices page within seconds of connecting, with everything it reads and does. Nothing is
   entered in EiN. One that is on the network but not yet on the broker is counted in the header,
   such as **2 found**, and a Shelly is added from there
-  ([Add a device found on the network](../automation/index.md#add-a-device-found-on-the-network)).
+  ([Add a device found on the network](../devices/index.md#add-a-device-found-on-the-network)).
 - **Someone makes them.** A phone or a GPS logger announces nothing, so a member of the `devices`
   group makes it by hand (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). EiN's own
   `tracker` driver then reads what it sends. So is a button, a sensor or a script that posts to an
   address, read by EiN's `webhook` driver (see
-  [A device that posts to a webhook](#a-device-that-posts-to-a-webhook)), and, with the Automation
-  module, a camera ([A camera](../automation/index.md#a-camera)).
+  [A device that posts to a webhook](#a-device-that-posts-to-a-webhook)), and, with the Devices
+  module, a camera ([A camera](../devices/index.md#a-camera)).
 
 A device has a name, such as `hall-plug`, that commands and automations use, and a label, such as **Hall
 lamp**, that the pages show. Each thing it reports or takes is an **endpoint** with a name of its
@@ -61,7 +61,7 @@ long ago its last value came. Under it are three tabs, and any that modules add:
 | **History**  | How each endpoint went over a day, a week, a month or a year                                             |
 | **Info**     | What the device is, its driver, each endpoint and its key                                                |
 | **Trips**    | With the [Archive](../archive/index.md), on a device that has a track: [its trips](../archive/tracks.md) |
-| **Live**     | With the [Automation](../automation/index.md) module, on a camera: its picture as it comes               |
+| **Live**     | With the [Devices](../devices/index.md) module, on a camera watched live: its picture as it comes        |
 
 The header's corner has **Share**, which decides who sees the device ([Sharing](sharing.md)).
 Members of the `devices` group also have **Edit** beside it, and **Forget** under ⋮ (see
@@ -162,7 +162,7 @@ when the device's driver has taken it, or fails, saying why:
 
 - `hall-plug/switch-0 takes on, off or toggle, not '7'`: the value is not one the control takes.
 - `hall-plug's driver shelly is not running`: the module that drives it has its service stopped.
-- `hall-plug/switch-0: not connected to the broker, so nothing was sent`: with Automation, EiN does
+- `hall-plug/switch-0: not connected to the broker, so nothing was sent`: with Devices, EiN does
   not hear the MQTT broker just now.
 - `Access denied for operation 'w' on node: …`: the control is narrowed to others
   ([Devices and their keys](../admin/devices.md#keep-a-switch-to-some-people)).
@@ -170,9 +170,9 @@ when the device's driver has taken it, or fails, saying why:
 Nothing is kept to be sent later: a lamp switched on an hour after it was asked would surprise. Use
 `>` to switch, never `>>` (see [Writing to a device](../concepts/devices.md#writing-to-a-device)).
 
-With the [Assistant](../assistant/index.md) and the Automation module, asking the chat to "turn on the
+With the [Assistant](../assistant/index.md) and the Devices module, asking the chat to "turn on the
 hall lamp" gives a [proposal card](../assistant/chat.md#when-the-assistant-offers-to-make-a-change)
-with the `echo` line, which you run or decline. With Automation, [automations](../automation/automations.md)
+with the `echo` line, which you run or decline. With the [Automation](../automation/index.md) module, [automations](../automation/automations.md)
 switch things by themselves when a reading, a press or the clock says so.
 
 ## Read what a device reported
@@ -255,16 +255,16 @@ device-key ruby-phone --off
 
 ### GPX files
 
-A GPS logger, a watch or a tracking app saves its routes as GPX files. Write one to the device and
-its positions join the track; a position with a time the track already has is not added twice, and
-one without a time is left out:
+A GPS logger, a watch or a tracking app saves its routes as GPX files. Write one over the device's
+track, `position`, and its positions join it; a position with a time the track already has is not
+added twice, and one without a time is left out:
 
 ```bash
 # in EiN's terminal
-cat ~/tararua-walk.gpx > /dev/jon-s-etrex
+cat ~/tararua-walk.gpx > /dev/jon-s-etrex/position
 ```
 
-Over SFTP, copy the file onto the device's path, `/dev/jon-s-etrex`. With the Archive, a GPX file
+Over SFTP, copy the file onto the track's path, `/dev/jon-s-etrex/position`. With the Archive, a GPX file
 uploaded into staging finds its device by itself, and the device's **Trips** tab has **Upload GPX**;
 see [GPX files](../archive/tracks.md#gpx-files).
 
@@ -361,14 +361,14 @@ device a driver still hears comes back new.
 | What you see                                                                          | What it means                                                                                                            | What to do                                                                                                                            |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
 | **Devices** is not in the sidebar                                                     | You are not signed in                                                                                                    | Sign in                                                                                                                               |
-| **No devices yet**                                                                    | No driver has found one, and nobody has made one                                                                         | With Automation, see [Check that EiN hears them](../automation/index.md#check-that-ein-hears-them)                                    |
+| **No devices yet**                                                                    | No driver has found one, and nobody has made one                                                                         | With Devices, see [Check that EiN hears them](../devices/index.md#check-that-ein-hears-them)                                          |
 | A switch stays "waiting for the device"                                               | The device took the command but has not said it switched: it is off, or out of reach                                     | Check its power and its network; the switch shows what it reports once it does                                                        |
 | The driver reads **(not running)**                                                    | The service of the module that brings the driver is stopped                                                              | An administrator starts it on the Status page's **Services** tab, or with `service start`                                             |
 | `toggle needs the state the device last reported, and it has reported none`           | The control has never reported a state                                                                                   | Write `on` or `off` instead                                                                                                           |
 | `device-create` says `only the devices group's members make, name and forget devices` | You are not in the `devices` group, or were added since you signed in                                                    | Ask the administrator to add you, then sign in again                                                                                  |
 | **Edit** and **Forget** are missing                                                   | The same                                                                                                                 | The same                                                                                                                              |
 | `device-create` says `'null' is core's own in /dev, not a device's name`              | The name is one of EiN's own in `/dev`                                                                                   | Choose another name                                                                                                                   |
-| `cat ride.gpx > /dev/thermometer` says the device has no driver                       | Only a device with a driver that reads raw input takes a file                                                            | Write it to the tracker it was recorded on                                                                                            |
+| `cat ride.gpx > /dev/thermometer` says the device has no driver                       | A GPX file goes to a track, not to a device                                                                              | Write it to the track of the tracker it was recorded on, `/dev/<tracker>/position`                                                    |
 | The phone reports nothing                                                             | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client | See [Report from a phone](#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting) |
 
 ## Related pages
@@ -376,5 +376,6 @@ device a driver still hears comes back new.
 - [Devices, endpoints and drivers](../concepts/devices.md): how devices are kept, written to and
   published.
 - [Devices and their keys](../admin/devices.md): who may do what, and what a device key opens.
-- [Automation](../automation/index.md): sensors, plugs and buttons over MQTT, and automations.
+- [Devices](../devices/index.md): sensors, plugs and buttons over MQTT, printers, speakers, screens and cameras.
+- [Automation](../automation/index.md): automations, which switch devices by themselves.
 - [Trips](../archive/tracks.md): with the Archive, the trips a device's track is cut into.

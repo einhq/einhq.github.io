@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 108 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 114 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -206,99 +206,6 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 
 ## Automation
 
-### `CFG_AUTOMATION_DEVICE_BROKER`
-
-**Broker for devices**. The broker's address as the devices on the network reach it, host:port, which a device added from the network is given. setup.sh --automation runs a listener beside the broker that says it.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means the address the network listener says |
-| Kind | string |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_DEVICE_KEY`
-
-**Device MQTT password**. The password of the device user, given only to a device added from the network.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | none: a key is set by you, and never shown again |
-| Kind | a key: never readable, in no shell |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_DEVICE_USER`
-
-**Device MQTT user**. The account a device added from the network signs in to the broker with. setup.sh --automation sets it to device.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means devices sign in without an account |
-| Kind | string |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_SOURCES`
-
-**Device sources**. Which kinds of device the bridge listens for, and drives, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome), shelly (Shelly's second generation and later) and shelly-gen1 (Shelly's first generation: Plug S, 1, 1PM, 2.5, i3).
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | `ha-discovery shelly shelly-gen1` |
-| Kind | string |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_DISCOVERY_PREFIX`
-
-**Discovery prefix**. The topic devices announce themselves under, for ha-discovery.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | `homeassistant` |
-| Kind | string |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_MQTT_URL`
-
-**MQTT broker**. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --automation runs one beside EiN, in the automation sidecar, and sets this.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means no device is heard on a broker; those EiN asks over the network are still read |
-| Kind | string |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_MQTT_KEY`
-
-**MQTT password**. The password of the MQTT user, sent only to the broker above. No shell sees it, and nothing shows it once it is set.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | none: a key is set by you, and never shown again |
-| Kind | a key: never readable, in no shell |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
-
-### `CFG_AUTOMATION_MQTT_USER`
-
-**MQTT user**. The account EiN signs in to the broker with.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means EiN signs in without an account |
-| Kind | string |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
-
 ### `CFG_USER_AUTOMATION_NODE_DOCS`
 
 **Node docs in the editor**. Whether the panel of a node in the automation editor shows, at its foot, what the node does and what each of its settings means. Folding or opening them there sets this.
@@ -310,7 +217,133 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Kind | boolean |
 | From the module | Automation |
 
-### `CFG_AUTOMATION_HISTORY`
+## Devices
+
+### `CFG_DEVICES_DEVICE_BROKER`
+
+**Broker for devices**. The broker's address as the devices on the network reach it, host:port, which a device added from the network is given. setup.sh --devices runs a listener beside the broker that says it.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means the address the network listener says |
+| Kind | string |
+| From the module | Devices |
+
+### `CFG_DEVICES_DEVICE_KEY`
+
+**Device MQTT password**. The password of the device user, given only to a device added from the network.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | none: a key is set by you, and never shown again |
+| Kind | a key: never readable, in no shell |
+| From the module | Devices |
+
+### `CFG_DEVICES_DEVICE_USER`
+
+**Device MQTT user**. The account a device added from the network signs in to the broker with. setup.sh --devices sets it to device.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means devices sign in without an account |
+| Kind | string |
+| From the module | Devices |
+
+### `CFG_DEVICES_SOURCES`
+
+**Device sources**. Which kinds of device the bridge listens for, and drives, separated by spaces: ha-discovery (anything that announces itself the way Home Assistant reads, such as ESPHome), shelly (Shelly's second generation and later) and shelly-gen1 (Shelly's first generation: Plug S, 1, 1PM, 2.5, i3).
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `ha-discovery shelly shelly-gen1` |
+| Kind | string |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
+
+### `CFG_DEVICES_DISCOVERY_PREFIX`
+
+**Discovery prefix**. The topic devices announce themselves under, for ha-discovery.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `homeassistant` |
+| Kind | string |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
+
+### `CFG_DEVICES_MEDIA_URL`
+
+**EiN's address for speakers and screens**. EiN's web address as the speakers and screens on the network reach it, http://host:port, which a Cast device fetches what is written to it from. It must be plain HTTP on the network they are on.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means this machine's address the network listener says, on EiN's port (CFG_HTTP_PORT) |
+| Kind | string |
+| From the module | Devices |
+
+### `CFG_FILE_STREAMER`
+
+**File streamer**. The command that makes a recording or video into what a screen near the browser fetches from EiN's address, run with start <path>, renew <id> and stop <id>. Empty offers a screen near the browser for pages only. The devices module sets itself here when it is installed.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means no recording or video goes to a screen near the browser |
+| Kind | string |
+
+### `CFG_DEVICES_MQTT_URL`
+
+**MQTT broker**. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --devices runs one beside EiN, in the devices sidecar, and sets this.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means no device is heard on a broker; those EiN asks over the network are still read |
+| Kind | string |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
+
+### `CFG_DEVICES_MQTT_KEY`
+
+**MQTT password**. The password of the MQTT user, sent only to the broker above. No shell sees it, and nothing shows it once it is set.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | none: a key is set by you, and never shown again |
+| Kind | a key: never readable, in no shell |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
+
+### `CFG_DEVICES_MQTT_USER`
+
+**MQTT user**. The account EiN signs in to the broker with.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means EiN signs in without an account |
+| Kind | string |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
+
+### `CFG_PAGE_STREAMER`
+
+**Page streamer**. The command that renders a page of EiN as live video, which a screen near the browser — on the network of a phone that reaches EiN over the internet — plays from EiN's address. Empty offers no screen near the browser in Show on. The media service sets itself here when it is installed.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means no screen near the browser |
+| Kind | string |
+
+### `CFG_DEVICES_HISTORY`
 
 **Reading history**. How long an endpoint's values are kept. Applies to endpoints found from now on; one found before keeps its own (change it with attrs on the endpoint).
 
@@ -320,34 +353,34 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Default | `365 day` |
 | Choices | `30 day`, `90 day`, `365 day`, `forever` |
 | Kind | select |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
 
-### `CFG_AUTOMATION_STREAMS_URL`
+### `CFG_DEVICES_STREAMS_URL`
 
-**Restreamer**. The restreamer cameras are given to and their streams read from, go2rtc's API as http://host:1984. setup.sh --automation runs one beside EiN, in the automation sidecar, and sets this.
+**Restreamer**. The restreamer cameras are given to and their streams read from, go2rtc's API as http://host:1984. setup.sh --devices runs one beside EiN, in the devices sidecar, and sets this.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
 | Default | empty, which means a camera has no live view, and its picture is asked of the camera itself |
 | Kind | string |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
 
-### `CFG_AUTOMATION_STREAMS_RTSP`
+### `CFG_DEVICES_STREAMS_RTSP`
 
-**Restreamer for the media service**. The restreamer's RTSP as the media service reaches it, rtsp://host:8554, where it reads a camera's stream to watch it for faces. setup.sh --automation sets it.
+**Restreamer for the media service**. The restreamer's RTSP as the media service reaches it, rtsp://host:8554, where it reads a camera's stream to watch it for faces. setup.sh --devices sets it.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
 | Default | empty, which means no other service is told where a camera's stream is, so none is watched for faces |
 | Kind | string |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
 
-### `CFG_AUTOMATION_STREAMS_KEY`
+### `CFG_DEVICES_STREAMS_KEY`
 
 **Restreamer password**. The password of the restreamer's account ein, sent only to the restreamer above.
 
@@ -356,10 +389,10 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | none: a key is set by you, and never shown again |
 | Kind | a key: never readable, in no shell |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
 
-### `CFG_AUTOMATION_MIN_INTERVAL`
+### `CFG_DEVICES_MIN_INTERVAL`
 
 **Seconds between readings**. The shortest time between two numbers of one endpoint that are kept and published: a number that comes sooner waits, and only the newest of those is kept. On and off, words and presses are kept as they come. Given to endpoints found from now on, as their minInterval attr, which may be changed on each.
 
@@ -368,10 +401,10 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `10` |
 | Kind | number |
-| Restarts | `automation-bridge` |
-| From the module | Automation |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
 
-### `CFG_AUTOMATION_SNMP_COMMUNITY`
+### `CFG_DEVICES_SNMP_COMMUNITY`
 
 **SNMP community**. The read-only community EiN asks a device found on the network with when it adds it, and its snmp driver goes on asking it with: public unless the device was set to another.
 
@@ -380,7 +413,7 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `public` |
 | Kind | string |
-| From the module | Automation |
+| From the module | Devices |
 
 ## Faces
 
@@ -590,6 +623,17 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Restarts | `ems-link` |
 | From the module | Media service |
 
+### `CFG_EMS_PAGE_ADDRESS`
+
+**Media service page address**. Where the media service reaches EiN's web pages, as host:port, to render a page into live video for a screen (page-stream). It opens the page in a browser of its own, signed in once as whoever asked, read-only.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means the host of the media service file address, at EiN's HTTP port |
+| Kind | string |
+| From the module | Media service |
+
 ### `CFG_EMS_CONNECT_RETRY`
 
 **Media service restart patience (seconds)**. How long a batch request keeps retrying a refused connection before the step fails. EMS restarts refuse connections for tens of seconds; this is what keeps the steps in flight across one from failing for good. Interactive requests never wait.
@@ -635,6 +679,26 @@ Every setting of an EiN with all its modules: 108 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `https://github.com/einhq` |
 | Kind | string |
+
+### `CFG_SUPERVISOR_URL`
+
+**Supervisor**. The address of the supervisor beside EiN, which installs the services modules talk to — the media service, the language model, the devices sidecar — when the administrator asks, and updates them and EiN itself. setup.sh sets it in an installation from GitHub's einhq.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means none: the services are installed and updated on the machine, with setup.sh |
+| Kind | string |
+
+### `CFG_SUPERVISOR_KEY`
+
+**Supervisor key**. The key EiN asks the supervisor with, which setup.sh makes.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | none: a key is set by you, and never shown again |
+| Kind | a key: never readable, in no shell |
 
 ### `CFG_MODULE_SOURCES_KEY`
 

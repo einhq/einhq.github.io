@@ -2,9 +2,9 @@
 
 # Core commands
 
-The commands every EiN has, whatever modules it runs. 225 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
+The commands every EiN has, whatever modules it runs. 231 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
 
-[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
+[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
 
 ## A
 
@@ -724,7 +724,7 @@ With `JSON_OUTPUT=1`: DeviceHistory.
 
 ### `device-key`
 
-The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off)
+The key that lets a device write to /file/dev/<device> and its endpoints without signing in, and the URL a phone or tracker is given (its track's, /file/dev/<device>/position): shown, made new (--new) or taken away (--off)
 
 <small>changes things</small>
 
@@ -800,7 +800,7 @@ Every device under /dev you may see, or those a word names: its name, label, whe
 <small>reads only</small>
 
 ```text
-devices [--online] [--class=<string>] [--drivers] [<word>...]
+devices [--online] [--class=<string>] [--endpoint=<string>] [--drivers] [<word>...]
 ```
 
 | Argument | What it is |
@@ -811,6 +811,7 @@ devices [--online] [--class=<string>] [--drivers] [<word>...]
 | --- | --- |
 | `--online` | only the devices that answer now. |
 | `--class=<string>` | only the devices of these classes, separated by commas: host,storage. |
+| `--endpoint=<string>` | only the devices with this endpoint, which you may write and, for a control, whose driver runs now: show for the screens and speakers. |
 | `--drivers` | the drivers running now instead: core's, and those modules' services registered. |
 
 ```bash
@@ -818,6 +819,7 @@ devices
 devices lamp
 devices --online
 devices --class host,storage
+devices --endpoint show
 devices --drivers
 ```
 
@@ -1712,7 +1714,7 @@ login [--session] <username> [<password>]
 | Argument | What it is |
 | --- | --- |
 | `<username>` | user to login: a username, or the e-mail address of an account. |
-| `[<password>]` | password (optional, prompts if not provided) |
+| `[<password>]` | password, or - to read it from stdin; prompts if not given. |
 
 | Option | What it does |
 | --- | --- |
@@ -2801,7 +2803,7 @@ props [-L] <path>
 
 ### `ps`
 
-List the commands running now: pid, user, shell, how long, and the command line. Admin sees everyone's, anyone else their own.
+List the commands running now: pid, user, shell, how long, and the command line. Admin sees everyone's, a member their own, and a visitor only its own session's.
 
 <small>reads only</small>
 
@@ -3650,6 +3652,112 @@ Per-type archive growth: nodes and bytes added by year and month.
 stats-overview
 ```
 
+### `stream-file`
+
+A recording or video for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it.
+
+<small>reads only</small>
+
+```text
+stream-file [--renew=<string>] [--stop=<string>] [<path>]
+```
+
+| Argument | What it is |
+| --- | --- |
+| `[<path>]` | The recording or video. |
+
+| Option | What it does |
+| --- | --- |
+| `--renew=<string>` | keep what an earlier stream-file made, by its id, five minutes more. |
+| `--stop=<string>` | let go of what an earlier stream-file made, by its id. |
+
+```bash
+stream-file /media/2024/boat.mp4
+stream-file --renew near-3f2a9c0d1e4b5a6c
+```
+
+With `JSON_OUTPUT=1`: id (for --renew and --stop), url (a path read without signing in until it is let go of), type and title.
+
+### `stream-page`
+
+A page of EiN as live video, as the caller sees it, for a screen near the browser: by the command CFG_PAGE_STREAMER names.
+
+<small>reads only</small>
+
+```text
+stream-page <route>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<route>` | The page's route, such as /dashboard-wall/Kitchen. |
+
+```bash
+stream-page /dashboard-wall/Kitchen
+stream-page '/media?q=sailboat&slideshow=screen'
+```
+
+With `JSON_OUTPUT=1`: path: read <path>.mp4 or <path>.ts; hls: the live HLS playlist; both without signing in, until nobody has read it for a while.
+
+### `supervisor`
+
+The services beside EiN, which the supervisor installs and updates.
+
+```text
+supervisor <subcommand>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<subcommand>` | Subcommand to run. |
+
+### `supervisor-install`
+
+Have the supervisor install a service beside EiN: the media service, the language model or the devices sidecar.
+
+<small>administrators only · changes things</small>
+
+```text
+supervisor-install <service>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<service>` | ems, llm or devices. |
+
+```bash
+supervisor install ems
+```
+
+### `supervisor-status`
+
+The services beside EiN, as the supervisor that installs and updates them sees them.
+
+<small>administrators only · reads only</small>
+
+```text
+supervisor-status
+```
+
+### `supervisor-update`
+
+Have the supervisor update services beside EiN now, EiN among them; every installed one when none is named.
+
+<small>administrators only · changes things</small>
+
+```text
+supervisor-update <services>...
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<services>...` | core, db, ems, llm, devices or supervisor. |
+
+```bash
+supervisor update
+supervisor update core db
+```
+
 ### `system-info`
 
 Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, the PostgreSQL and Deno versions, and its time zone.
@@ -3875,7 +3983,7 @@ unrelate <a> <b> <label>
 
 ### `unzip`
 
-Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A file already there at its entry’s size is left as it is, so a run that stopped can be run again.
+Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A softlink below the directory is not followed: the entries through it fail. A file already there at its entry’s size is left as it is, so a run that stopped can be run again.
 
 <small>changes things</small>
 
@@ -3980,7 +4088,7 @@ user-elevate [--password=<string>] [--session] [--off]
 
 | Option | What it does |
 | --- | --- |
-| `--password=<string>` | your own password (prompts if not given); --password=<value> for one starting with a dash. |
+| `--password=<string>` | your own password, or - to read it from stdin; prompts if not given. |
 | `--session` | the session's sign-in, every page and terminal of it, not just this shell's. |
 | `--off` | make the shell, or with --session the sign-in, no longer an administrator's. |
 
@@ -4098,12 +4206,12 @@ user-invite-accept [--password=<string>] [--session] <token>
 
 | Option | What it does |
 | --- | --- |
-| `--password=<string>` | the account's new password; give it as --password=<p>. |
+| `--password=<string>` | the account's new password, as --password=<p>, or --password=- to read it from stdin. |
 | `--session` | sign in the whole session, not just this shell. |
 
 ```bash
 user-invite-accept AbCdEfGhIjKlMnOpQrStUv
-user-invite-accept AbCdEfGhIjKlMnOpQrStUv --password=correct-horse --session
+user-invite-accept AbCdEfGhIjKlMnOpQrStUv --password=- --session
 ```
 
 With `JSON_OUTPUT=1`: UserInviteAccepted.
@@ -4140,8 +4248,8 @@ user-passwd [--username=<user>] [--old-password=<string>] [--new-password=<strin
 | Option | What it does |
 | --- | --- |
 | `--username=<user>` | username (alternative to positional) |
-| `--old-password=<string>` | current password: required but for an administrator, and checked whenever given. |
-| `--new-password=<string>` | new password to set. |
+| `--old-password=<string>` | current password, or - to read it from stdin's first line: required but for an administrator, and checked whenever given. |
+| `--new-password=<string>` | new password to set, or - to read it from stdin's next line. |
 
 ### `user-resolve`
 
@@ -4243,7 +4351,7 @@ With `JSON_OUTPUT=1`: the counts asked for, then the file name; a total line whe
 
 ### `who`
 
-List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own.
+List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, a member their own, and a visitor only its own session's.
 
 <small>reads only</small>
 

@@ -8,8 +8,9 @@ into a folder and EiN's own events, logic that compares and combines, values wor
 readings, timers, and actions that switch controls, run command lines and raise events for
 pipelines. Each automation
 is a YAML file, written by members of the `automation` group, and runs with the rights of the person
-whose file it is. This page is for those members. [Automation](index.md) covers connecting the
-devices, and [Devices](../guide/devices.md) the devices themselves.
+whose file it is. This page is for those members. [Automation](index.md) covers installing the
+module, [Devices](../guide/devices.md) the devices themselves, and the
+[Devices module](../devices/index.md) connecting sensors, plugs, lights and cameras.
 
 ## The Automations page
 
@@ -612,9 +613,9 @@ of those that failed, what its `debug` nodes were sent, and its clock firings, o
 ```
 
 Only its owner and the administrator read it. `automation-status` sums the engine up in a line,
-`automations: 4 running, 41 actions`, with a `not run:` line under it for each automation the engine
-holds back, and the `automation-engine` service's line on the Status page's **Services** tab says the
-same.
+`4 running, 41 actions`, with a `not run:` line under it for each automation the engine holds back,
+and the `automation-engine` service's line on the Status page's **Services** tab says the same
+([Check that the engine runs](index.md#check-that-the-engine-runs)).
 
 ## When an automation does not run
 

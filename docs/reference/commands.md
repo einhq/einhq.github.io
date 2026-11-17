@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 456 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 465 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 225 in full](commands-core.md).
+[All 231 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -61,7 +61,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [device-create](commands-core.md#device-create) | Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something that posts its readings to a webhook (--driver webhook) |
 | [device-forget](commands-core.md#device-forget) | Remove a device and everything under it, its history included; for members of the devices group. |
 | [device-history](commands-core.md#device-history) | An endpoint's history, oldest first: a log's or control's values, or with --bucket summed up per interval; a track's fixes. |
-| [device-key](commands-core.md#device-key) | The key that lets a device write to /file/dev/<device> without signing in, and the URL a phone or tracker is given: shown, made new (--new) or taken away (--off) |
+| [device-key](commands-core.md#device-key) | The key that lets a device write to /file/dev/<device> and its endpoints without signing in, and the URL a phone or tracker is given (its track's, /file/dev/<device>/position): shown, made new (--new) or taken away (--off) |
 | [device-label](commands-core.md#device-label) | Name a device or one of its endpoints, as its page and cards show it; for members of the devices group. |
 | [device-show](commands-core.md#device-show) | A device and each of its endpoints: a log's or control's latest value, a track's fixes, a stream's size and codec, and whether you may write a control. |
 | [devices](commands-core.md#devices) | Every device under /dev you may see, or those a word names: its name, label, whether it answers and its main value; or the drivers. |
@@ -172,7 +172,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [position-get](commands-core.md#position-get) | Where nodes are: each path's name, type and the shape of its position (a location's, a picture's GPS) |
 | [position-set](commands-core.md#position-set) | Set the shape of a position node (point, circle or polygon), making the node when it is missing. |
 | [props](commands-core.md#props) | Display node properties. |
-| [ps](commands-core.md#ps) | List the commands running now: pid, user, shell, how long, and the command line. Admin sees everyone's, anyone else their own. |
+| [ps](commands-core.md#ps) | List the commands running now: pid, user, shell, how long, and the command line. Admin sees everyone's, a member their own, and a visitor only its own session's. |
 | [queue-dead](commands-core.md#queue-dead) | List the entries a queue set aside after their delivery attempts, or retry or drop them. |
 | [queue-peek](commands-core.md#queue-peek) | List the next entries of a queue without consuming them. |
 | [reach-check](commands-core.md#reach-check) | Check stored reach against a walk of each path, for a sample of nodes and every account. |
@@ -214,6 +214,12 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [star](commands-core.md#star) | Bookmark nodes as softlinks in $HOME/stars (star <path>..., star -d <path>..., star [list]) |
 | [stat](commands-core.md#stat) | Display file or node status. |
 | [stats-overview](commands-core.md#stats-overview) | Per-type archive growth: nodes and bytes added by year and month. |
+| [stream-file](commands-core.md#stream-file) | A recording or video for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it. |
+| [stream-page](commands-core.md#stream-page) | A page of EiN as live video, as the caller sees it, for a screen near the browser: by the command CFG_PAGE_STREAMER names. |
+| [supervisor](commands-core.md#supervisor) | The services beside EiN, which the supervisor installs and updates. |
+| [supervisor-install](commands-core.md#supervisor-install) | Have the supervisor install a service beside EiN: the media service, the language model or the devices sidecar. |
+| [supervisor-status](commands-core.md#supervisor-status) | The services beside EiN, as the supervisor that installs and updates them sees them. |
+| [supervisor-update](commands-core.md#supervisor-update) | Have the supervisor update services beside EiN now, EiN among them; every installed one when none is named. |
 | [system-info](commands-core.md#system-info) | Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, the PostgreSQL and Deno versions, and its time zone. |
 | [tail](commands-core.md#tail) | Output the last part of files, logs, or stdin (with -f to follow) |
 | [top](commands-core.md#top) | Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses. |
@@ -226,7 +232,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [uniq](commands-core.md#uniq) | Report or omit repeated lines. |
 | [unmount](commands-core.md#unmount) | Unmount a filesystem. |
 | [unrelate](commands-core.md#unrelate) | Remove a bidirectional relation (both sides) |
-| [unzip](commands-core.md#unzip) | Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A file already there at its entry’s size is left as it is, so a run that stopped can be run again. |
+| [unzip](commands-core.md#unzip) | Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A softlink below the directory is not followed: the entries through it fail. A file already there at its entry’s size is left as it is, so a run that stopped can be run again. |
 | [user](commands-core.md#user) | Manage users. |
 | [user-create](commands-core.md#user-create) | Create a user account and its home with its own group (an existing group of its name when that group's gid is free as a uid) and link it into its own and its other groups. |
 | [user-delete](commands-core.md#user-delete) | Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user. |
@@ -247,7 +253,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [user-whoami](commands-core.md#user-whoami) | Print the current username. |
 | [uuid](commands-core.md#uuid) | Generate a random UUID. |
 | [wc](commands-core.md#wc) | Print newline, word, and byte counts of files or stdin. |
-| [who](commands-core.md#who) | List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, anyone else their own. |
+| [who](commands-core.md#who) | List who is signed in: each SSH login, terminal and Web UI connection, the address it connects from, its idle time and what it runs. Admin sees everyone's, a member their own, and a visitor only its own session's. |
 | [www](commands-core.md#www) | Manage active Web UI. |
 | [xargs](commands-core.md#xargs) | Run a command with the items read from stdin as its arguments, as GNU xargs does: as many per run as fit, or -n per run, or one input line per run with -L, or once per line with -I replacing a string in the command. Items are separated by blanks and newlines, with quotes and backslashes as GNU has them; -0 and -d split on one character instead. The command reads an empty stdin, or the terminal with -o; with no command it is echo. -P runs several at once, -p asks before each run. Exits 123 when a run failed, 124 when one exited 255, 125 when one was killed, 126 or 127 when one could not run. |
 
@@ -427,23 +433,18 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Automation
 
-[All 15 in full](../automation/commands.md).
+[All 10 in full](../automation/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [automation-adopt](../automation/commands.md#automation-adopt) | Make something found on the network a device: a Shelly is pointed at the broker and restarted, a camera, a printer, a Cast speaker or anything else is added with a driver that asks it itself (for members of the devices group) |
-| [automation-bridge](../automation/commands.md#automation-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the automation-bridge service) |
 | [automation-check](../automation/commands.md#automation-check) | What is wrong with an automation, and what each of its nodes would say now, from the latest readings the caller may read; no action is run. |
 | [automation-disable](../automation/commands.md#automation-disable) | Turn an automation off: a person's by whoever may change its file, a module's by the administrator. |
 | [automation-enable](../automation/commands.md#automation-enable) | Turn an automation on: a person's by whoever may change its file, a module's by the administrator. |
 | [automation-engine](../automation/commands.md#automation-engine) | Run the automations under /etc/automations and /etc/automations.d when a reading, a press, a device coming or going or the clock says so, each as its owner (the automation-engine service) |
-| [automation-found](../automation/commands.md#automation-found) | The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
-| [automation-ignore](../automation/commands.md#automation-ignore) | Leave devices found on the network out of automation-found, or take them back with --undo (for members of the devices group) |
 | [automation-new](../automation/commands.md#automation-new) | Make an automation under /etc/automations, empty or from a starting point with its slots set to your devices; one with slots set is checked, and refused with problems (members of the automation group) |
 | [automation-set](../automation/commands.md#automation-set) | Write an automation's YAML, made when it is new; one with problems is refused unless --draft. |
 | [automation-show](../automation/commands.md#automation-show) | An automation's YAML, whose it is, whether it runs and what is wrong with it; in JSON mode also its graph with every node placed. |
-| [automation-snmp](../automation/commands.md#automation-snmp) | Walk a device's SNMP objects under an OID (the system group unless one is given), for members of the devices group. |
-| [automation-status](../automation/commands.md#automation-status) | Whether the automation bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and the automations; or, given one, what each of its nodes last did. |
+| [automation-status](../automation/commands.md#automation-status) | Whether the automation engine runs, how many automations it runs, the actions they took and the ones it holds back, and why; or, given one, what each of its nodes last did. |
 | [automation-trigger](../automation/commands.md#automation-trigger) | Press a button node of a running automation: what it is wired to runs now, as its owner. |
 | [automations](../automation/commands.md#automations) | The automations, whose each is, whether it runs, and what is wrong with those that do not. |
 
@@ -463,9 +464,22 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [dashboard-show](../dashboard/commands.md#dashboard-show) | Show one dashboard: its cards, each with the route it is drawn with. |
 | [dashboards](../dashboard/commands.md#dashboards) | List the dashboards you can see. |
 
+## Devices
+
+[All 6 in full](../devices/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [devices-adopt](../devices/commands.md#devices-adopt) | Make something found on the network a device: a Shelly is pointed at the broker and restarted, a camera, a printer, a Cast or DLNA speaker or TV or anything else is added with a driver that asks it itself (for members of the devices group) |
+| [devices-bridge](../devices/commands.md#devices-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the devices-bridge service) |
+| [devices-found](../devices/commands.md#devices-found) | The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
+| [devices-ignore](../devices/commands.md#devices-ignore) | Leave devices found on the network out of devices-found, or take them back with --undo (for members of the devices group) |
+| [devices-snmp](../devices/commands.md#devices-snmp) | Walk a device's SNMP objects under an OID (the system group unless one is given), for members of the devices group. |
+| [devices-status](../devices/commands.md#devices-status) | Whether the devices bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and whether the sidecar is one this module speaks; or whether the restreamer answers. |
+
 ## Media service
 
-[All 10 in full](../ems/commands.md).
+[All 11 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -479,10 +493,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-sampler](../ems/commands.md#ems-sampler) | Drive the machine each instance of the media service runs on as a device, and sample what it holds (the ems-sampler service) |
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
+| [page-stream](../ems/commands.md#page-stream) | Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by the media service. |
 
 ## Media
 
-[All 23 in full](../media/commands.md).
+[All 24 in full](../media/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -509,6 +524,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [renditions-scan](../media/commands.md#renditions-scan) | Announce every file whose renditions are not those the rendition table names now: its marker is missing or names another table, or a rendition was refused under a CPU budget EMS no longer runs. |
 | [text-scan](../media/commands.md#text-scan) | Announce every file whose text, transcript or text vectors are missing or not what EMS makes now, found by their markers. |
 | [transcribe-file](../media/commands.md#transcribe-file) | Transcribe audio or video into a timed WebVTT node with chunk embeddings. |
+| [video-stream](../media/commands.md#video-stream) | Write a video as H.264 and AAC in fragmented MP4, made by the media service while it is read. |
 
 ## Recipes
 

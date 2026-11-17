@@ -341,6 +341,12 @@ group-delete family --to=users       # --force when it is someone's primary grou
                                      # --remove-home when it has a shared home
 ```
 
+A password on the command line shows in `ps` while the command runs, to you and to the
+administrator, and can end up in the shell history. Give `-` in its place and the command reads it
+from stdin instead, a line for each: `login helen -`, `user-elevate --password=-`,
+`user-passwd helen --old-password=- --new-password=-` (the current password on the first line),
+`user-invite-accept <code> --password=-`. The browser's pages sign in and set passwords this way.
+
 To see who there is and who is signed in:
 
 ```bash

@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section class="here"><h2>Administration</h2><ul><li><a href="install.html" aria-current="page">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html" aria-current="page">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="supervisor.html">The supervisor</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -132,8 +133,12 @@
 <td><code>--llm --module assistant</code></td>
 </tr>
 <tr>
+<td><code>devices</code></td>
+<td><code>--devices --module devices</code></td>
+</tr>
+<tr>
 <td><code>automation</code></td>
-<td><code>--automation --module automation</code></td>
+<td><code>--module automation</code></td>
 </tr>
 <tr>
 <td><code>album-folders</code></td>
@@ -272,12 +277,20 @@ Install? [Y/n]</code></pre></div>
 <td>Takes the language model out again. Sets <code>EIN_LLM=0</code>. The downloaded model stays in the data folder.</td>
 </tr>
 <tr>
-<td><code>--automation</code></td>
-<td>Adds the Automation module&#39;s sidecar: an MQTT broker, Mosquitto, which the <a href="../automation/index.html">Automation</a> module&#39;s devices talk to, on port 1883 (<code>MQTT_PORT</code>); a listener for devices on the network; and a restreamer for cameras, go2rtc. Sets <code>EIN_AUTOMATION=1</code>, and gives EiN the broker&#39;s and the restreamer&#39;s addresses and accounts. See <a href="../automation/index.html#the-installers-sidecar">The installer&#39;s sidecar</a>.</td>
+<td><code>--devices</code></td>
+<td>Adds the Devices module&#39;s sidecar: an MQTT broker, Mosquitto, which the <a href="../devices/index.html">Devices</a> module&#39;s devices talk to, on port 1883 (<code>MQTT_PORT</code>); a listener for devices on the network; and a restreamer for cameras, go2rtc. Sets <code>EIN_DEVICES=1</code>, and gives EiN the broker&#39;s and the restreamer&#39;s addresses and accounts. See <a href="../devices/index.html#the-installers-sidecar">The installer&#39;s sidecar</a>.</td>
 </tr>
 <tr>
-<td><code>--no-automation</code></td>
-<td>Takes the sidecar out again. Sets <code>EIN_AUTOMATION=0</code>. What it kept stays in the data folder.</td>
+<td><code>--no-devices</code></td>
+<td>Takes the sidecar out again. Sets <code>EIN_DEVICES=0</code>. What it kept stays in the data folder.</td>
+</tr>
+<tr>
+<td><code>--supervisor</code></td>
+<td>Adds the <a href="supervisor.html">supervisor</a>, which installs the services and updates them when you ask in EiN, with their modules and each night. A new install from GitHub has it already. Sets <code>EIN_SUPERVISOR=1</code>.</td>
+</tr>
+<tr>
+<td><code>--no-supervisor</code></td>
+<td>Leaves the supervisor out, or takes it out again: <code>setup.sh</code> on the machine installs and updates the services. Sets <code>EIN_SUPERVISOR=0</code>.</td>
 </tr>
 <tr>
 <td><code>--module &lt;name&gt;</code></td>
@@ -305,7 +318,7 @@ Install? [Y/n]</code></pre></div>
 </tr>
 <tr>
 <td><code>--only &lt;service&gt;</code></td>
-<td>Updates one service, <code>core</code>, <code>ems</code>, <code>db</code>, <code>llm</code> or <code>automation</code>: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
+<td>Updates one service, <code>core</code>, <code>ems</code>, <code>db</code>, <code>llm</code>, <code>devices</code> or <code>supervisor</code>, or several separated by commas, such as <code>core,db</code>, one after another: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). A service whose new image does not come up is put back on the image it ran, and <code>setup.sh</code> fails, saying so. It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
 </tr>
 <tr>
 <td><code>--source &lt;address&gt;</code></td>
@@ -524,7 +537,7 @@ podman compose down
 ./setup.sh</code></pre></div>
 <p>If <code>EIN_DB_DIR</code> in <code>.env</code> is empty, the database is a volume of the engine instead, and podman made an empty one of its own: <code>podman compose down</code> keeps it. Remove it with <code>podman volume rm ein_db</code> once you are sure your EiN runs under Docker, as removing it under the engine your EiN actually uses deletes its database.</p>
 <h2 id="what-runs-where">What runs where<a class="anchor" href="#what-runs-where" aria-label="Link to this section"></a></h2>
-<p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>core</code> is reached from other machines, and with <code>--automation</code> the sidecar, which the devices on your network talk to and the cameras are watched through.</p>
+<p>compose runs EiN as the project <code>ein</code>, from the files in <code>~/ein</code>. Each service is a container of its own, and only <code>core</code> is reached from other machines, and with <code>--devices</code> the sidecar, which the devices on your network talk to and the cameras are watched through.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 548" role="img" aria-label="One machine running four containers on a private network: core with the Web UI, shell, SSH and SFTP, pipelines and modules; db, PostgreSQL; and the optional ems, the media service, and llm, the language model, sharing a graphics card. Only core's ports 8080 and 2222 reach the outside, and the data folder below holds the files">
   <title>What runs where</title>
   <defs>
@@ -652,11 +665,18 @@ podman compose down
 <td>with <code>--llm</code></td>
 </tr>
 <tr>
-<td><code>automation</code></td>
-<td><code>ghcr.io/einhq/automation</code>, the broker, the network listener and the restreamer, ready-made; built from module-automation&#39;s <code>sidecar/</code> as <code>localhost/ein-automation</code> from any other source</td>
+<td><code>devices</code></td>
+<td><code>ghcr.io/einhq/devices</code>, the broker, the network listener and the restreamer, ready-made; built from module-devices&#39; <code>sidecar/</code> as <code>localhost/ein-devices</code> from any other source</td>
 <td>the machine&#39;s own network: port 1883 (<code>MQTT_PORT</code>) for the devices; 1984 (<code>STREAMS_PORT</code>) and 8554 (<code>RTSP_PORT</code>) for the cameras&#39; streams</td>
 <td><code>512m</code></td>
-<td>with <code>--automation</code></td>
+<td>with <code>--devices</code></td>
+</tr>
+<tr>
+<td><code>supervisor</code></td>
+<td><code>ghcr.io/einhq/supervisor</code>, with the installation from GitHub only</td>
+<td><code>supervisor:8199</code>, on the compose network, for EiN alone</td>
+<td><code>256m</code></td>
+<td>unless <code>--no-supervisor</code></td>
 </tr>
 </tbody></table>
 </div>
@@ -691,8 +711,8 @@ podman compose down
 <td>ein/deploy</td>
 </tr>
 <tr>
-<td><code>compose.automation.yaml</code></td>
-<td>the Automation module&#39;s sidecar</td>
+<td><code>compose.devices.yaml</code></td>
+<td>the Devices module&#39;s sidecar</td>
 <td>ein/deploy</td>
 </tr>
 <tr>
@@ -707,7 +727,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>src/</code></td>
-<td>the sources: <code>llm</code> with its option, and <code>core</code>, <code>db</code>, <code>ems</code> and <code>module-automation</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
+<td>the sources: <code>llm</code> with its option, and <code>core</code>, <code>db</code>, <code>ems</code> and <code>module-devices</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
 <td>made by <code>setup.sh</code></td>
 </tr>
 <tr>
@@ -751,7 +771,7 @@ podman compose down
 <tr>
 <td><code>mqtt</code></td>
 <td><code>/data/mqtt</code> in the sidecar</td>
-<td>with <code>--automation</code>, the broker&#39;s two accounts, hashed, and what the devices announced</td>
+<td>with <code>--devices</code>, the broker&#39;s two accounts, hashed, and what the devices announced</td>
 </tr>
 <tr>
 <td><code>modules</code></td>
@@ -775,7 +795,7 @@ podman compose down
 <span class="hljs-attr">EIN_EMS</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_LLM</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">EIN_GPU</span>=<span class="hljs-number">1</span>
-<span class="hljs-attr">EIN_AUTOMATION</span>=<span class="hljs-number">0</span>
+<span class="hljs-attr">EIN_DEVICES</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">MQTT_PORT</span>=<span class="hljs-number">1883</span>
 <span class="hljs-attr">MQTT_EIN_PASSWORD</span>=<span class="hljs-number">9</span>d41c7e2a05b38f61e8d2c74b09a5f3e6c18d27b4a9e05c3
 <span class="hljs-attr">MQTT_DEVICE_PASSWORD</span>=<span class="hljs-number">4</span>e7a1c9d02b5f83e6a1d7c40
@@ -798,7 +818,7 @@ podman compose down
 <span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
 <span class="hljs-attr">EIN_SOURCE_KEY</span>=
 <span class="hljs-attr">EIN_DB_DIR</span>=/home/anna/ein/data/db</code></pre></div>
-<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_AUTOMATION</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or one of the sidecar&#39;s.</p>
+<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_DEVICES</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or one of the sidecar&#39;s.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -823,12 +843,12 @@ podman compose down
 <td><code>1</code> when the media service or the language model is installed; <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code> and <code>--no-llm</code> set them</td>
 </tr>
 <tr>
-<td><code>EIN_AUTOMATION</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code></td>
-<td><code>1</code> when the Automation module&#39;s sidecar is installed, which <code>--automation</code> and <code>--no-automation</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984) and RTSP (8554); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
+<td><code>EIN_DEVICES</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code></td>
+<td><code>1</code> when the Devices module&#39;s sidecar is installed, which <code>--devices</code> and <code>--no-devices</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984) and RTSP (8554); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
 </tr>
 <tr>
 <td><code>MQTT_EIN_PASSWORD</code>, <code>MQTT_DEVICE_PASSWORD</code>, <code>STREAMS_PASSWORD</code></td>
-<td>the passwords EiN (<code>ein</code>) and the devices (<code>device</code>) sign in to the broker with, and EiN&#39;s to the restreamer, random, made here. A change takes effect at the next <code>./setup.sh</code>; see <a href="../automation/index.html#the-installers-sidecar">The installer&#39;s sidecar</a></td>
+<td>the passwords EiN (<code>ein</code>) and the devices (<code>device</code>) sign in to the broker with, and EiN&#39;s to the restreamer, random, made here. A change takes effect at the next <code>./setup.sh</code>; see <a href="../devices/index.html#the-installers-sidecar">The installer&#39;s sidecar</a></td>
 </tr>
 <tr>
 <td><code>EIN_GPU</code></td>
@@ -878,6 +898,14 @@ podman compose down
 <td><code>EIN_DB_DIR</code></td>
 <td>the database&#39;s folder, <code>db</code> in the data folder; <code>--db-dir</code> sets another. Empty keeps it in the volume <code>ein_db</code></td>
 </tr>
+<tr>
+<td><code>EIN_SUPERVISOR</code>, <code>EIN_UPDATE_AT</code></td>
+<td><code>1</code> when the <a href="supervisor.html">supervisor</a> runs, which <code>--supervisor</code> and <code>--no-supervisor</code> set, and the time it updates every service each night, <code>04:00</code>, or <code>off</code></td>
+</tr>
+<tr>
+<td><code>SUPERVISOR_KEY</code>, <code>EIN_SOCKET</code>, <code>EIN_SUPERVISOR_USER</code>, <code>EIN_SOCKET_GID</code>, <code>EIN_DEPLOY</code></td>
+<td>with the supervisor: the key EiN asks it with, random, made here; the container engine&#39;s socket it is given; the user it runs as, and under Docker the socket&#39;s group; and the path of <code>~/ein</code>, which it mounts at the same path</td>
+</tr>
 </tbody></table>
 </div>
 <p>The database&#39;s password and the media service&#39;s key are kept nowhere else. Without them the database cannot be reached, so copy <code>.env</code> with every backup. <a href="../reference/config-files.html">Configuration files</a> has every file EiN reads.</p>
@@ -916,8 +944,8 @@ podman compose down
 <td><code>~/ein/setup.sh --ems</code>, <code>--no-ems</code>, <code>--llm</code> or <code>--no-llm</code>. This is also an update: see <a href="updating.html">Updating</a>.</td>
 </tr>
 <tr>
-<td>Add or remove the Automation module&#39;s sidecar</td>
-<td><code>~/ein/setup.sh --automation</code> or <code>--no-automation</code>; see <a href="../automation/index.html#install-it">Automation</a>.</td>
+<td>Add or remove the Devices module&#39;s sidecar</td>
+<td><code>~/ein/setup.sh --devices</code> or <code>--no-devices</code>; see <a href="../devices/index.html#install-it">Devices</a>.</td>
 </tr>
 <tr>
 <td>Add a module EiN installs at its start</td>
@@ -975,7 +1003,7 @@ EiN starts again when the machine does.</code></pre></div>
 Until then, start it after a reboot with: cd /home/anna/ein &amp;&amp; podman compose up -d</code></pre></div>
 <p>Run what it lists once. After the next restart of the machine, <code>podman compose ps</code> in <code>~/ein</code> shows the containers up.</p>
 <h2 id="update-and-remove">Update and remove<a class="anchor" href="#update-and-remove" aria-label="Link to this section"></a></h2>
-<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: <code>~/ein</code> itself and the newest images of everything installed, downloaded and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only core</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>, <code>automation</code>) updates one service and leaves the others running. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
+<p>Running the installer or <code>~/ein/setup.sh</code> again is the update: <code>~/ein</code> itself and the newest images of everything installed, downloaded and started again, every container made again from the new images, and a service you left out stopped and removed. <code>~/ein/setup.sh --only core</code> (or <code>ems</code>, <code>db</code>, <code>llm</code>, <code>devices</code>, <code>supervisor</code>) updates one service and leaves the others running. With the <a href="supervisor.html">supervisor</a>, <strong>Settings → Modules</strong> installs and updates the services too, and the supervisor updates them each night. <a href="updating.html">Updating</a> explains what it touches and what it keeps.</p>
 <p>There is no uninstall script. <a href="data.html">Your data</a> says how to move EiN to another machine and how to remove it with its data.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p>The commands are written for podman; with Docker, write <code>docker compose</code>. <a href="../start/install.html#when-something-goes-differently">Install EiN</a> covers the messages of a first install, and <a href="troubleshooting.html">Troubleshooting</a> everything after.</p>

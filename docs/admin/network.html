@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html" aria-current="page">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html" aria-current="page">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="supervisor.html">The supervisor</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -94,7 +95,7 @@
         <article class="prose">
 <p>This page is for whoever runs EiN: which ports it listens on and how to change them, how to put it behind an HTTPS proxy, and how to reach it from outside your home safely. It assumes an installation made with the installer, in <code>~/ein</code>; <a href="install.html">Installing in detail</a> explains that folder.</p>
 <h2 id="what-ein-listens-on">What EiN listens on<a class="anchor" href="#what-ein-listens-on" aria-label="Link to this section"></a></h2>
-<p>EiN publishes two ports, and more with the Automation module&#39;s sidecar, on every address of the machine it runs on:</p>
+<p>EiN publishes two ports, and more with the Devices module&#39;s sidecar, on every address of the machine it runs on:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -115,17 +116,17 @@
 </tr>
 <tr>
 <td><code>1883</code></td>
-<td>with <code>--automation</code>, the MQTT broker that the <a href="../automation/index.html">Automation</a> module&#39;s devices talk to</td>
+<td>with <code>--devices</code>, the MQTT broker that the <a href="../devices/index.html">Devices</a> module&#39;s devices talk to</td>
 <td>plain MQTT</td>
 </tr>
 <tr>
 <td><code>1984</code></td>
-<td>with <code>--automation</code>, the restreamer&#39;s API, which EiN gives the cameras to and watches them through, behind <code>STREAMS_PASSWORD</code></td>
+<td>with <code>--devices</code>, the restreamer&#39;s API, which EiN gives the cameras to and watches them through, behind <code>STREAMS_PASSWORD</code></td>
 <td>plain HTTP</td>
 </tr>
 <tr>
 <td><code>8554</code></td>
-<td>with <code>--automation</code>, the cameras&#39; streams served again over RTSP, behind <code>STREAMS_PASSWORD</code>, and to this machine without one</td>
+<td>with <code>--devices</code>, the cameras&#39; streams served again over RTSP, behind <code>STREAMS_PASSWORD</code>, and to this machine without one</td>
 <td>RTSP</td>
 </tr>
 </tbody></table>
@@ -214,7 +215,7 @@ podman compose up -d   <span class="hljs-comment"># or: docker compose up -d</sp
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, with firewalld (Fedora, RHEL)</span>
 <span class="hljs-built_in">sudo</span> firewall-cmd --permanent --add-port=8080/tcp --add-port=2222/tcp
 <span class="hljs-built_in">sudo</span> firewall-cmd --reload</code></pre></div>
-<p>With the <a href="../automation/index.html">Automation</a> module&#39;s broker, open 1883 too, to your home network only, such as <code>sudo ufw allow from 192.168.1.0/24 to any port 1883 proto tcp</code>. Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy&#39;s port (443) instead, and not 8080.</p>
+<p>With the <a href="../devices/index.html">Devices</a> module&#39;s broker, open 1883 too, to your home network only, such as <code>sudo ufw allow from 192.168.1.0/24 to any port 1883 proto tcp</code>. Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy&#39;s port (443) instead, and not 8080.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>Docker opens the ports it publishes in the machine&#39;s packet filter itself, past rules set with ufw. A closed port in ufw does not keep EiN&#39;s ports off the network under Docker; <code>EIN_BIND=127.0.0.1</code> does.</p>
 </aside>
@@ -253,6 +254,10 @@ podman compose up -d   <span class="hljs-comment"># or: docker compose up -d</sp
 <tr>
 <td>Allows long requests and idle connections</td>
 <td>Uploads and downloads of large files take time, and the WebSocket can be quiet for minutes. When the proxy closes it, the interface reconnects after two seconds.</td>
+</tr>
+<tr>
+<td>Sends a response on as it comes, unbuffered</td>
+<td>A <a href="../dashboard/screens.html#on-a-tv-where-your-phone-is">screen near your phone</a> plays a page as a live video that never ends; held back, it never starts.</td>
 </tr>
 </tbody></table>
 </div>
@@ -347,7 +352,7 @@ server {
 <p>A phone or a GPS tracker that reports its position to its device (see
 <a href="../guide/devices.html#report-from-a-phone">Report from a phone</a>) posts to EiN from wherever it is,
 without signing in, so it needs the public HTTPS proxy: over a VPN it reports only while the VPN is
-up, and an SSH tunnel does not reach it at all. It posts to <code>/file/dev/&lt;device&gt;</code> with the device&#39;s
+up, and an SSH tunnel does not reach it at all. It posts to its track, <code>/file/dev/&lt;device&gt;/position</code>, with the device&#39;s
 key, in the address or as <code>Authorization: Bearer</code>, which the proxy passes on like any other request;
 the key is all that lets it in, and it opens that device for writing and nothing else. A request
 with a wrong key is refused with <code>Forbidden</code> and logged as &quot;device write refused&quot;, with the client&#39;s
@@ -412,7 +417,7 @@ sftp -P 2222 helen@ein.wrenfield.example</code></pre></div>
 </tr>
 <tr>
 <td>A device on the network cannot reach the MQTT broker</td>
-<td>Open port 1883 in the machine&#39;s firewall, to your home network, and check that <code>EIN_BIND</code> is not <code>127.0.0.1</code>. <code>podman compose ps</code> in <code>~/ein</code> shows whether <code>automation</code> runs; <a href="../automation/index.html#check-that-ein-hears-them">Automation</a> has more.</td>
+<td>Open port 1883 in the machine&#39;s firewall, to your home network, and check that <code>EIN_BIND</code> is not <code>127.0.0.1</code>. <code>podman compose ps</code> in <code>~/ein</code> shows whether <code>devices</code> runs; <a href="../devices/index.html#check-that-ein-hears-them">Devices</a> has more.</td>
 </tr>
 <tr>
 <td>Signing in works, but the next page asks you to sign in again</td>

@@ -22,11 +22,11 @@ Faces are found in the pictures waiting in your [staging area](staging.md) too, 
 
 ## Faces a camera sees
 
-With the [Automation](../automation/index.md) module's cameras, the media service watches every
+With the [Devices](../devices/index.md) module's cameras, the media service watches every
 camera as it sends its picture, and the faces it sees go through the same decision as a photo's.
 Within a second or so of someone coming into view, the face is compared with every face that
 belongs to someone, and the camera's **Faces** log says who it is, or `unknown`; an
-[automation](../automation/automations.md) can take that, such as an unknown face at the front door
+[automation](../automation/automations.md) of the [Automation](../automation/index.md) module can take that, such as an unknown face at the front door
 at night. Once the person has gone, the clearest picture of their face is filed under the camera,
 on its page in [Cameras](cameras.md#a-security-camera), where it joins a person, starts an
 unidentified one, or stays unknown, as any photo's face does, beside a video clip of the visit. So someone the camera keeps seeing is

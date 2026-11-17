@@ -35,9 +35,10 @@ proposes adding, ticking off and moving their items.
 With [Dashboards](../dashboard/index.md) installed, it reads your dashboards and proposes making
 them, putting cards on them and changing them.
 
-With [Automation](../automation/index.md) installed, it reads the house's devices, such as how warm
-it is in the hall and which devices are offline, charts how a reading went, and proposes switching
-them.
+With [Devices](../devices/index.md) installed, it reads the house's devices, such as how warm
+it is in the hall and which devices are offline, charts how a reading went, proposes switching
+them, and finds and adds what is on the network. With [Automation](../automation/index.md)
+installed, it makes automations.
 
 ## What it needs
 

@@ -58,7 +58,8 @@ The admin account's password, 8 characters or more [Enter: one is made for you]:
 EiN's official modules: y installs one, Enter leaves it out. Any can be added later.
   archive        photos, videos and documents, people and places; with the media service, ~30 GB [y/N] y
   assistant      a chat that answers questions; with a language model here, about 6 GB [y/N] y
-  automation     sensors, plugs and lights, and automations; with an MQTT broker [y/N]
+  devices        sensors, plugs, lights, printers, speakers, screens and cameras; with an MQTT broker and a restreamer [y/N]
+  automation     automations, which switch devices and run commands by themselves [y/N]
   album-folders  the Archive's albums as folders on disk; brings the Archive [y/N]
   recipes        recipes with ingredients, steps and pictures; with the media service [y/N]
   todo           todo lists, personal or shared within a group [y/N]
@@ -104,14 +105,15 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --yes archive assistant
 
 A module's name brings the services it needs:
 
-| Name            | What it installs                                                                                                              |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `archive`       | The [Archive](../archive/index.md), with the media service (`--ems`): every media tool and model, in an image of about 30 GB. |
-| `assistant`     | The [assistant](../assistant/index.md), with the language model it answers with (`--llm`), Qwen3.5-4B in llama.cpp.           |
-| `automation`    | [Automation](../automation/index.md), with an MQTT broker for its devices (`--mqtt`), on port 1883 of the machine.            |
-| `album-folders` | [Album folders](../album-folders/index.md), with the Archive it needs and the media service.                                  |
-| `recipes`       | [Recipes](../recipes/index.md), with the media service, which makes the pictures' thumbnails.                                 |
-| `todo`          | [Todo](../todo/index.md) lists.                                                                                               |
+| Name            | What it installs                                                                                                                                           |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `archive`       | The [Archive](../archive/index.md), with the media service (`--ems`): every media tool and model, in an image of about 30 GB.                              |
+| `assistant`     | The [assistant](../assistant/index.md), with the language model it answers with (`--llm`), Qwen3.5-4B in llama.cpp.                                        |
+| `devices`       | [Devices](../devices/index.md), with its sidecar (`--devices`): an MQTT broker for its devices, on port 1883 of the machine, and a restreamer for cameras. |
+| `automation`    | [Automation](../automation/index.md): automations, which act on the devices of EiN and of the Devices module.                                              |
+| `album-folders` | [Album folders](../album-folders/index.md), with the Archive it needs and the media service.                                                               |
+| `recipes`       | [Recipes](../recipes/index.md), with the media service, which makes the pictures' thumbnails.                                                              |
+| `todo`          | [Todo](../todo/index.md) lists.                                                                                                                            |
 
 Run again where EiN is installed, the installer asks nothing: it updates EiN with the settings it has ([Updating](../admin/updating.md)).
 
@@ -129,13 +131,13 @@ The admin password is not an option, so that it stays off the command line: the 
 
 Everything after `bash -s --` other than a module's name and `--home`, `--yes` and `--check` is passed on to `~/ein/setup.sh`, EiN's own setup script, and the names become its options: `archive` is `--ems --module archive`. Its options can be given the same way:
 
-| Option                 | What it adds                                                                                                                                                        |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--ems`                | The media service: every media tool and model, in an image of about 30 GB. It uses the graphics card when the first install found one ready for containers.         |
-| `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                                                             |
-| `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs, without the services it needs. Give it once for each module. |
-| `--mqtt`               | An MQTT broker for the [Automation](../automation/index.md) module's devices, on port 1883 of the machine.                                                          |
-| `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                                                      |
+| Option                 | What it adds                                                                                                                                                                                  |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--ems`                | The media service: every media tool and model, in an image of about 30 GB. It uses the graphics card when the first install found one ready for containers.                                   |
+| `--llm`                | The language model the assistant answers with, Qwen3.5-4B in llama.cpp.                                                                                                                       |
+| `--module <name>`      | A module, such as `archive` or `assistant`, which EiN installs at its start with the modules it needs, without the services it needs. Give it once for each module.                           |
+| `--devices`            | The [Devices](../devices/index.md) module's sidecar: an MQTT broker for its devices, on port 1883 of the machine, a listener that finds devices on the network, and a restreamer for cameras. |
+| `--no-ems`, `--no-llm` | Leave the media service or the model out again on a later run. Its data stays.                                                                                                                |
 
 > [!NOTE]
 > The Archive module needs the media service. Installed with `--module archive` but without `--ems`, it still installs: the installer's `archive` line says `low`, and `setup.sh` ends with `The Archive module needs the media service, which is not installed here: ./setup.sh --ems adds it.` Nothing you upload then gets thumbnails, dates, faces or searchable text: that work waits until the media service is there. [Modules](../admin/modules.md) lists what each module needs.
@@ -322,14 +324,14 @@ Everything the Archive command installs can be added to EiN Core afterwards. Run
 # on the machine EiN runs on
 ~/ein/setup.sh --ems              # the media service
 ~/ein/setup.sh --llm              # the assistant's language model
-~/ein/setup.sh --mqtt             # an MQTT broker, for the Automation module's devices
+~/ein/setup.sh --devices          # the Devices module's broker and restreamer
 ~/ein/setup.sh --module archive   # a module, with the modules it needs
 ```
 
 - An option is kept in `.env` once given, so a later run without it keeps it. Give each option only when you add it.
 - Every run of `setup.sh` is also an update: it brings `~/ein` itself up to date, fetches the newest sources of what is installed, builds again and restarts EiN, which is down while it starts. [Updating](../admin/updating.md) has the details.
 - A module given with `--module` is installed by EiN at its next start, which that same run brings about.
-- `--no-ems`, `--no-llm` and `--no-mqtt` take the media service, the model or the broker out again. Their data stays.
+- `--no-ems`, `--no-llm` and `--no-devices` take the media service, the model or the Devices module's sidecar out again. Their data stays.
 
 Modules can also be installed without a restart. In the Web UI, open **Settings → Modules**, click **Install** beside the filter, and click **Install** on the module. In the terminal, `mod install archive` does the same ([reference](../reference/commands-core.md#mod-install)). [Modules](../admin/modules.md) covers updating and removing them, and why a module you remove in **Settings → Modules** comes back at the next start while `EIN_MODULES` in `.env` still names it.
 

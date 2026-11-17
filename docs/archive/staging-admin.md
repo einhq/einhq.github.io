@@ -93,7 +93,7 @@ engine, which [Processing and pipelines](../admin/processing.md) covers.
 
 | Pipeline or service                                  | Starts when                                                                                                       | What it does                                                                                                                                                                                                                                                                                                    |
 | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `staging-unzip`                                      | A zip anywhere in a category has finished uploading                                                               | Expands it into the folder it lies in (`unzip -n --as-upload`, which freezes what `/etc/frozen-uploads` lists, as an upload), then removes it. One zip at a time.                                                                                                                                               |
+| `staging-unzip`                                      | A zip anywhere in a category has finished uploading                                                               | Expands it into the folder it lies in, as the zip's owner (`unzip -n --as-upload`, which freezes what `/etc/frozen-uploads` lists, as an upload), then removes it. One zip at a time.                                                                                                                           |
 | `staging-sidecars`                                   | A Google Takeout JSON or an XMP file lands in a category that pairs sidecars, about 30 seconds after the last one | Pairs each sidecar with its photo or video (`media-sidecars`), which gives the picture its date, place and caption. One run at a time.                                                                                                                                                                          |
 | `media-ingest`, `media-interpret` and the media work | A file lands                                                                                                      | Checks whether it is an exact copy, which then waits unread; reads its metadata, then dates and places it by the category's time rules; then the thumbnails, faces, fingerprints and the rest, through the [media service](../ems/index.md).                                                                    |
 | `staging-retime`                                     | Files move into a category with other time rules, about 10 seconds after the last one                             | Dates them again by the rules of the category they are in now (`staging retime`).                                                                                                                                                                                                                               |
@@ -330,10 +330,12 @@ dedupe` for someone else answers `staging dedupe: staging dedupe moves copies to
 **A zip is still a zip.** Look at the failed `staging-unzip` runs with
 `pipeline-instances -s failed staging-unzip` and `pipeline-status <id>`. The step's error says why:
 `not enough space: …` when the disk lacks room for what it holds and a tenth more, `refusing entry
-'…': it would land outside …` for an unsafe archive, or `a file of another size is there` when a
-file of that name is in the folder already. Free space or move the clashing file, then expand it
-by hand: `unzip --as-upload -d <folder> <zip>` goes on where the last run stopped, freezing what
-the run would have, and `-o` writes over the files there.
+'…': it would land outside …` for an unsafe archive, `… is a softlink, which unzip does not follow`
+when a folder the zip fills is a softlink, or `a file of another size is there` when a file of
+that name is in the folder already. Free space or move the clashing file, then expand it
+by hand as its owner, as the pipeline does: `runas <name> unzip --as-upload -d <folder> <zip>` goes
+on where the last run stopped, freezing what the run would have, and `-o` writes over the files
+there.
 
 **Files stay "being prepared" for hours.** A large import takes hours, and a bulk-lane category
 waits behind all other work. If `staging status` shows the `indexing` count not going down at all,

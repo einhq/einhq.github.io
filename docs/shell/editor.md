@@ -331,6 +331,9 @@ takes you back, **Discard** closes without saving. <kbd>Esc</kbd> closes the dia
 is nothing unsaved. **Raw**, at the left under the editor, opens the file itself in a new browser
 tab.
 
+Nothing in a file opened in a browser tab runs. An HTML or XML file shows as its source text, and a
+script in an SVG drawing does not run, so a page someone uploaded cannot act as whoever opens it.
+
 The code editor has line numbers, <kbd>Ctrl</kbd>+<kbd>F</kbd> to find, <kbd>Ctrl</kbd>+<kbd>Z</kbd>
 to undo and <kbd>Tab</kbd> to indent. It colours JSON, JavaScript, TypeScript, YAML, Markdown,
 HTML, CSS, XML and shell scripts, by the file's type first and then its extension.

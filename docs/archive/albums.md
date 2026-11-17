@@ -100,7 +100,8 @@ The header holds, from the top:
 If you may change the album, the header also has **Upload**, **Share** and **Edit**, and under
 **⋮** the items **Add event** and **Move to trash**, and **Hide RAW files** while the album has
 camera RAW files that a picture of the same name can take ([Hide RAW files](#hide-raw-files)). On a phone they are all under **⋮**. If you may
-only look at the album, none of them is there. With the default sharing, everyone with an account
+only look at the album, none of them is there. **Show on…**, under **⋮** for anyone with a speaker or
+screen to write to, gives the album's slideshow to one ([From the app](../devices/index.md#from-the-app)). With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else's album you usually have none of
 these buttons.
 

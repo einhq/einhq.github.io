@@ -2,9 +2,9 @@
 
 # Media commands
 
-The commands the media module adds. They are there once the module is installed. 23 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media module adds. They are there once the module is installed. 24 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-crop](#file-crop) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [find-damage](#find-damage) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file)
+[compute-fingerprint](#compute-fingerprint) · [detect-chapters](#detect-chapters) · [embed-picture](#embed-picture) · [exif-extract](#exif-extract) · [file-crop](#file-crop) · [file-restore](#file-restore) · [file-set-text](#file-set-text) · [file-set-text-language](#file-set-text-language) · [file-set-transcript](#file-set-transcript) · [find-damage](#find-damage) · [fingerprints-scan](#fingerprints-scan) · [generate-derivatives](#generate-derivatives) · [index-document](#index-document) · [media-bridge](#media-bridge) · [media-pool-kinds](#media-pool-kinds) · [media-reembed](#media-reembed) · [pictures-scan](#pictures-scan) · [promote-exif-attrs](#promote-exif-attrs) · [read-text](#read-text) · [regenerate](#regenerate) · [renditions-scan](#renditions-scan) · [text-scan](#text-scan) · [transcribe-file](#transcribe-file) · [video-stream](#video-stream)
 
 ## C
 
@@ -617,3 +617,32 @@ transcribe-file /archive/albums/Exempelalbum_2019/files/MVI_0042.MOV
 ```
 
 With `JSON_OUTPUT=1`: the transcript written, or the one kept; a timed WebVTT transcript with chunk embeddings is written under the file.
+
+## V
+
+### `video-stream`
+
+Write a video as H.264 and AAC in fragmented MP4, made by the media service while it is read.
+
+<small>reads only</small>
+
+```text
+video-stream [--start=<string>] [--fps=<string>] [--muted] <file>
+```
+
+| Argument | What it is           |
+| -------- | -------------------- |
+| `<file>` | VFS path to a video. |
+
+| Option             | What it does                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| `--start=<string>` | Where in the video to begin, in seconds (the stream starts its own clock at 0 there) |
+| `--fps=<string>`   | The most frames a second, 1 to 60 (30 by default)                                    |
+| `--muted`          | Leave the sound out.                                                                 |
+
+```bash
+video-stream /archive/albums/Exempelalbum_2019/files/segling.mov > /tmp/segling.mp4
+video-stream /archive/albums/Exempelalbum_2019/files/segling.mov --start=95 --muted > /tmp/segling-slut.mp4
+```
+
+With `JSON_OUTPUT=1`: the MP4 on stdout, a header at once and a fragment at least every second.

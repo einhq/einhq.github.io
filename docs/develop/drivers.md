@@ -2,8 +2,9 @@
 
 A driver teaches EiN a kind of device: it turns what such a device sends into endpoints under
 `/dev/<device>`, and sends the device what is written to its controls. Core has two drivers of its
-own, `tracker`, for phones and GPS loggers, and `webhook`, for anything that posts its readings; the [Automation](../automation/index.md) module brings
-three for MQTT devices. This page is for developers who write one in a module. It assumes
+own, `tracker`, for phones and GPS loggers, and `webhook`, for anything that posts its readings; the [Devices](../devices/index.md) module brings
+those for MQTT devices, the network and cameras, and the [Automation](../automation/index.md)
+module the `virtual` driver. This page is for developers who write one in a module. It assumes
 [Writing a module](modules.md), and [Devices, endpoints and drivers](../concepts/devices.md) for what
 a device, an endpoint and a control are.
 
@@ -84,8 +85,8 @@ registration under the same name replaces the first.
 | `description`  | yes    | One line for `devices --drivers`                                                                                                                        |
 | `module`       | no     | The module that brings it, for `devices --drivers`                                                                                                      |
 | `config`       | no     | What a person gives when making a device with it: `{ name, label, type, required? }`, `type` being `string`, `number` or `url`                          |
-| `input(raw)`   | no     | Raw input written to one of its devices; without it, its devices take none                                                                              |
-| `write(cmd)`   | no     | A value written to one of its devices' controls, to send to the device                                                                                  |
+| `input(raw)`   | no     | What a device posts to itself, as a webhook's does; without it, its devices take none                                                                   |
+| `write(cmd)`   | no     | A value written to one of its devices' controls, to send to the device; it may answer `{ message }`, a word for the writer                              |
 | `setup(name)`  | no     | A person made one of its devices with `device-create --driver`: give it the endpoints it has from the start                                             |
 | `forget(name)` | no     | One of its devices is being forgotten: let go of whatever would make it again, such as a retained announcement on a broker. Called before it is removed |
 
@@ -96,8 +97,10 @@ terminal or as the body of a `400` over HTTP, after the device's name (and the c
 
 ### `input`
 
-What is written to `/dev/<device>`, from the terminal (`cat ride.gpx > /dev/old-logger`), over SFTP,
-or over HTTP to `/file/dev/<device>`, arrives whole, once the writer closes, as a `DriverInput`:
+What is written to `/dev/<device>` itself, from the terminal, over SFTP, or over HTTP to
+`/file/dev/<device>`, arrives whole, once the writer closes, as a `DriverInput`. It is for a device
+that posts what it reads in a shape of its own, as core's `webhook` takes; anything a person gives a
+device goes to one of its endpoints instead, a control's `write` or a track:
 
 | Field         | What it holds                                                                                            |
 | ------------- | -------------------------------------------------------------------------------------------------------- |
@@ -116,10 +119,12 @@ were new, and a word for whoever sent them.
 
 A value written to a control arrives as a `DriverWrite` once core has checked it against the
 control's `schema`, so `value` is already what the control takes: `true` or `false` for `bool`, a
-number within its limits for `number`, one of its options for `enum`, a line for `text`, `press` for
-`momentary`, with `toggle` turned into the opposite of the state the device last reported. Its
-fields are `device`, `endpoint`, `path`, the device's `attrs`, the control's `endpointAttrs`,
-`value` and `by`.
+number within its limits for `number`, one of its options for `enum`, a line for `text` (or several,
+joined by newlines, for one with `lines`, such as a screen's `show`), `press` for `momentary`, with
+`toggle` turned into the opposite of the state the device last reported. Its fields are `device`,
+`endpoint`, `path`, the device's `attrs`, the control's `endpointAttrs`, `value`, `by`, and
+`access`, the writer's, for what the driver reads on the writer's behalf, such as the files a
+screen is given. It may answer `{ message }`, which the writer gets back with the value.
 
 Send it, and return once the device or its broker has taken it. Do not append the new state here:
 append what the device reports back, which is what reading the control gives. Until then the
@@ -234,7 +239,10 @@ A test of the driver can call its hooks directly, with a stub in place of `Modul
 A module that knows more about some devices adds a tab to their page with a panel in its
 `ui/nav.json`, in the slot `device.tabs`. The tab draws one of the module's routes, with
 `{path}` replaced by the device's path, `/dev/<device>`, URI-encoded. `when` keeps it to the devices
-that have an endpoint of a type; without it, every device gets the tab. This is the Archive's
+that have an endpoint of a type; without it, every device gets the tab. `"live": true` beside `has`
+(core's contract 0.15.16) keeps it to the devices with a stream watched live now: one whose driver
+runs and has `live`. A driver that cannot watch a stream live, such as a camera driver without its
+restreamer, leaves `live` out, and `device-show` then lists its streams without `"live": true`. This is the Archive's
 **Trips** tab:
 
 ```json
@@ -270,7 +278,7 @@ Drivers came with core's module contract 0.14.0: give the module `"coreApi": "^0
 | `<device>'s driver <name> takes nothing written to the device`                 | The driver has no `input`                                                         | Write to the device's endpoints, or give the driver an `input`                       |
 | `<device> has no driver to read what is written to it: write to its endpoints` | The device was made without `--driver`                                            | Make it again with `--driver`, or set it with `attrs -s driver=<name> /dev/<device>` |
 | `<path> is a log, not a control: remove it first`                              | `ensureEndpoint` was asked for another type than the endpoint has                 | `removeEndpoint` it first; its history goes with it                                  |
-| `<device> did not answer within 10 s`                                          | The driver's `write` did not return in time                                       | Return once the message is sent, not once the device has switched                    |
+| `<device> did not answer within 45 s`                                          | The driver's `write` did not return in time                                       | Return once the message is sent, not once the device has switched                    |
 | A reading never shows, though `append` is called                               | It repeats the last one, or waits for its `minInterval`; `append` answers `false` | Nothing, for a repeat; a lower `minInterval` for a faster endpoint                   |
 
 ## Related pages
@@ -279,4 +287,4 @@ Drivers came with core's module contract 0.14.0: give the module `"coreApi": "^0
 - [Writing a module](modules.md): services, `#!ts` commands and pages.
 - [The module manifest](manifest.md): `coreApi`, `ui.routes`.
 - [Your sidebar and top bar](../guide/customizing.md#change-the-panels-inside-pages): panels and their slots.
-- [Automation](../automation/index.md): three drivers at full size, in the `module-automation` repository.
+- [Devices](../devices/index.md): drivers at full size, in the `module-devices` repository.

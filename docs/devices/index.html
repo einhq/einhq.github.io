@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Devices – EiN documentation</title>
+    <meta name="description" content="The Devices module brings the things in the house and on its network into EiN: sensors, plugs, switches, lights and buttons that talk MQTT, such as those running ESPHome and Shelly's; printers, NAS boxes, speakers and screens asked over the network; web APIs; and cameras whose picture you watch live. Its drivers make each one a device under /dev, with its readings, presses and switches, and what is on the network but not yet a device is found and added with a button. The devices, their pages and their commands are EiN's own, the same for a plug as for a phone: Devices. Rules that switch them by themselves, when a reading, a press or the clock says so, are the Automation module's.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/devices/">
+    <meta property="og:title" content="Devices – EiN documentation">
+    <meta property="og:description" content="The Devices module brings the things in the house and on its network into EiN: sensors, plugs, switches, lights and buttons that talk MQTT, such as those running ESPHome and Shelly's; printers, NAS boxes, speakers and screens asked over the network; web APIs; and cameras whose picture you watch live. Its drivers make each one a device under /dev, with its readings, presses and switches, and what is on the network but not yet a device is found and added with a button. The devices, their pages and their commands are EiN's own, the same for a plug as for a phone: Devices. Rules that switch them by themselves, when a reading, a press or the clock says so, are the Automation module's.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/devices/">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section class="here"><h2>Devices</h2><ul><li><a href="index.html" aria-current="page">Devices</a></li><li><a href="commands.html">Devices commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">Devices</span></button>
+        <header class="docs-head">
+          <p class="crumb">Devices</p>
+          <h1>Devices</h1>
+        </header>
+        <article class="prose">
+<p>The Devices module brings the things in the house and on its network into EiN: sensors, plugs,
+switches, lights and buttons that talk MQTT, such as those running ESPHome and Shelly&#39;s; printers,
+NAS boxes, speakers and screens asked over the network; web APIs; and <a href="#a-camera">cameras</a> whose
+picture you watch live. Its drivers make each one a device under <code>/dev</code>, with its readings, presses
+and switches, and what is on the network but not yet a device is found and added with a button.
+The devices, their pages and their commands are EiN&#39;s own, the same for a plug as for a phone:
+<a href="../guide/devices.html">Devices</a>. Rules that switch them by themselves, when a reading, a press or the
+clock says so, are the <a href="../automation/index.html">Automation</a> module&#39;s.</p>
+<p>This page is for the administrator who installs the module and connects the devices, and for the
+household that uses them.</p>
+<h2 id="what-it-adds">What it adds<a class="anchor" href="#what-it-adds" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The <code>ha-discovery</code> driver</td>
+<td>Anything that announces itself over MQTT the way Home Assistant reads it: ESPHome, and Zigbee2MQTT as far as it keeps to that; lights with their brightness and colour</td>
+</tr>
+<tr>
+<td>The <code>shelly</code> driver</td>
+<td>Shelly&#39;s second generation and later: Plus, Pro, Gen3 and Gen4; relays, lights with their brightness and colour, and covers</td>
+</tr>
+<tr>
+<td>The <code>shelly-gen1</code> driver</td>
+<td>Shelly&#39;s first generation: Plug S, 1, 1PM, 2.5, i3, Dimmer, Bulb, Duo, RGBW2</td>
+</tr>
+<tr>
+<td>The <code>ipp</code> driver</td>
+<td>A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left</td>
+</tr>
+<tr>
+<td>The <code>cast</code> driver</td>
+<td>A Google Cast speaker or screen: what it plays, its volume and mute, play, pause, stop and seek, and the recordings, videos, pictures and pages whose paths are written to its <code>show</code> played on it; see <a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></td>
+</tr>
+<tr>
+<td>The <code>dlna</code> driver</td>
+<td>A DLNA renderer, a TV&#39;s or a speaker&#39;s, without Cast: the same as <code>cast</code>&#39;s, over UPnP AV; see <a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></td>
+</tr>
+<tr>
+<td>The <code>snmp</code> driver</td>
+<td>A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume&#39;s use and its temperatures</td>
+</tr>
+<tr>
+<td>The <code>network</code> driver</td>
+<td>Anything else on the network: whether it answers, and how fast</td>
+</tr>
+<tr>
+<td>The <code>http</code> driver</td>
+<td>A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see <a href="#a-web-api">A web API</a></td>
+</tr>
+<tr>
+<td>The <code>rtsp</code> driver</td>
+<td>A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see <a href="#a-camera">A camera</a></td>
+</tr>
+<tr>
+<td>The <code>onvif</code> driver</td>
+<td>A camera that speaks ONVIF, found on the network: its streams as <code>rtsp</code>&#39;s, its events (motion, the people it sees, tampering, a line crossed and the like), and its presets and moves where it turns; see <a href="#an-onvif-camera">An ONVIF camera</a></td>
+</tr>
+<tr>
+<td>The <strong>Live</strong> tab</td>
+<td>A camera&#39;s picture as it comes, on its device page</td>
+</tr>
+<tr>
+<td><strong>Found on the network</strong></td>
+<td>The devices on the network that are not devices yet, with a button on the <strong>Devices</strong> page; see <a href="#add-a-device-found-on-the-network">Add a device found on the network</a></td>
+</tr>
+<tr>
+<td>The <strong>Camera</strong> and <strong>Button</strong> cards</td>
+<td>For <a href="../dashboard/index.html">dashboards</a>: a camera&#39;s picture, and one large button for a control; see <a href="#on-a-dashboard">On a dashboard</a></td>
+</tr>
+<tr>
+<td><strong>MQTT broker</strong> and <strong>Restreamer</strong></td>
+<td>Two pages under <strong>Set up</strong> on <strong>Settings → System</strong>, for a <a href="#a-broker-you-already-run">broker</a> and a restreamer of your own</td>
+</tr>
+<tr>
+<td>The <code>devices-bridge</code> service</td>
+<td>Hears the broker and runs the drivers</td>
+</tr>
+<tr>
+<td><code>devices-status</code></td>
+<td>Whether the broker is heard, the drivers and the devices they drive, and whether the restreamer answers</td>
+</tr>
+<tr>
+<td><code>devices-found</code>, <code>devices-adopt</code>, <code>devices-ignore</code>, <code>devices-snmp</code></td>
+<td>What is on the network and all it said, adding it as a device, leaving something out, and what a device answers over SNMP</td>
+</tr>
+</tbody></table>
+</div>
+<p>With the <a href="../assistant/index.html">Assistant</a>, it also teaches the chat to read the devices, to
+propose switching them, and to find and add what is on the network.</p>
+<h2 id="what-it-needs">What it needs<a class="anchor" href="#what-it-needs" aria-label="Link to this section"></a></h2>
+<ul>
+<li><strong>An MQTT broker</strong>, the server the devices and EiN exchange their messages through, for the
+devices that speak MQTT: those running ESPHome, and Shelly&#39;s of every generation. The installer
+runs one beside EiN with <code>--devices</code>, in the <a href="#the-installers-sidecar">devices sidecar</a>; a
+broker you already run works as well.</li>
+<li><strong>A restreamer</strong> for cameras, which the sidecar has too: it keeps one connection to each camera,
+and EiN&#39;s pages and commands watch the camera through it. Without it a camera gives only its
+still picture, when it has one.</li>
+<li>No broker for the rest: printers, Google Cast speakers, NAS boxes, <a href="#a-web-api">web APIs</a> and
+anything else on the network are asked by EiN directly, once added, with or without one. Without
+the installer&#39;s broker nothing is found on the network, though, so add them by hand with
+<code>device-create</code>.</li>
+<li><strong>The <code>ems</code> module</strong>, which EiN installs along with it, to ask the
+<a href="../ems/index.html">media service</a> for the videos and pages a screen cannot play as they are
+(<a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a>). Without the media service
+itself, a screen is still given recordings, pictures and the videos it plays as they are, and the
+rest of the module works as well.</li>
+<li>Nothing else: not the Archive, and not the <a href="../automation/index.html">Automation</a> module, which
+adds rules on top of the devices.</li>
+</ul>
+<h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
+<p>With the installer&#39;s broker, add the broker and the module in one run:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+./setup.sh --devices --module devices</code></pre></div>
+<p>On a new machine, name the module to the installer, which makes it the same options:
+<code>curl -fsSL https://einhq.eu/install.sh | bash -s -- devices</code>. With a broker of
+your own, install the module alone, from <strong>Settings → Modules</strong> or in EiN&#39;s terminal, and then give
+it the broker (<a href="#a-broker-you-already-run">A broker you already run</a>):</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mod install devices</code></pre></div>
+<p>The module runs one service, <code>devices-bridge</code>, which hears the broker and drives the devices.
+<a href="../admin/modules.html">Modules</a> covers installing and removing modules.</p>
+<h3 id="the-installers-sidecar">The installer&#39;s sidecar<a class="anchor" href="#the-installers-sidecar" aria-label="Link to this section"></a></h3>
+<p><code>--devices</code> runs the devices sidecar, one container beside EiN on the machine&#39;s own network,
+<code>devices</code>, with three services in it:</p>
+<ul>
+<li><strong>The MQTT broker</strong>, Mosquitto. It takes no anonymous clients. EiN signs in as <code>ein</code> and the
+devices as <code>device</code>, with passwords <code>setup.sh</code> made at the install and keeps in <code>~/ein/.env</code>:
+<code>MQTT_EIN_PASSWORD</code> and <code>MQTT_DEVICE_PASSWORD</code>. A password changed there takes effect at the next
+<code>./setup.sh</code>. The devices reach it on port 1883 of the machine (<code>MQTT_PORT</code> in <code>.env</code>), on the
+address <code>EIN_BIND</code> names. It keeps what the devices announce in the data folder&#39;s <code>mqtt</code> folder,
+so it is all there again after a restart.</li>
+<li><strong>A listener</strong> on the machine&#39;s own network, which finds the devices that are not on the broker
+yet: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
+<li><strong>A restreamer</strong>, go2rtc, which keeps one connection to each <a href="#a-camera">camera</a> EiN has and
+serves it again, to EiN on port 1984 (<code>STREAMS_PORT</code>) and over RTSP on 8554 (<code>RTSP_PORT</code>), behind the account <code>ein</code> and <code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN
+gives it the cameras itself.</li>
+</ul>
+<p><code>setup.sh</code> gives EiN the broker&#39;s and the restreamer&#39;s addresses and passwords itself, and the
+<code>device</code> account a device added from the network is given: those settings say <strong>From deployment</strong>
+on the Settings page and need nothing from you. <code>./setup.sh --no-devices</code> takes the sidecar out
+again, and <code>./setup.sh --only devices</code> updates it alone.</p>
+<p>A restreamer of your own is set on <strong>Settings → System → Restreamer</strong>, under <strong>Set up</strong>: its address,
+its RTSP as the media service reaches it, and the password of its account <code>ein</code>, saved together so
+<code>devices-bridge</code> restarts once. Under <strong>Now</strong> the page says whether the restreamer answers that
+account, with how many streams it has, or why not, such as &quot;the restreamer answered 401&quot; for a wrong
+password. <code>devices-status --streams</code> says the same in the terminal.</p>
+<p>Under Docker, and podman run as root, EiN reaches the sidecar at the machine&#39;s address on its
+container network, so the sidecar needs <code>EIN_BIND</code> to be <code>0.0.0.0</code>: <code>setup.sh</code> says so when it is
+not.</p>
+<p>The devices need the device password. Read it on the machine:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
+grep MQTT_DEVICE_PASSWORD .<span class="hljs-built_in">env</span></code></pre></div>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>The broker speaks plain MQTT, without TLS. Whoever reaches port 1883 with the device password can
+switch the house&#39;s devices and read what they say, and whoever reaches 1984 or 8554 with the
+restreamer&#39;s password watches the cameras. Keep the ports on your home network and never forward
+them on your router; <a href="../admin/network.html#what-ein-listens-on">Ports, HTTPS and remote access</a>
+lists it with EiN&#39;s other ports.</p>
+</aside>
+<h3 id="a-broker-you-already-run">A broker you already run<a class="anchor" href="#a-broker-you-already-run" aria-label="Link to this section"></a></h3>
+<p>Give EiN the broker&#39;s address and an account on it:</p>
+<ol>
+<li>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>MQTT broker</strong> under
+<strong>Set up</strong>.</li>
+<li>Fill in <strong>Broker</strong>, <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS, and
+the <strong>User</strong> and <strong>Password</strong> EiN signs in with.</li>
+<li>Choose <strong>Save</strong>. The three are saved together and <code>devices-bridge</code> restarts once. Under
+<strong>Now</strong> the page says whether EiN is connected to the broker, with how many devices and messages
+it has heard, or why it is not, such as &quot;Connection refused&quot;.</li>
+</ol>
+<p>Or with <code>config set</code>, the three in one call:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator; the leading space keeps the password out of your history</span>
+ config <span class="hljs-built_in">set</span> CFG_DEVICES_MQTT_URL=mqtt://192.0.2.20:1883 CFG_DEVICES_MQTT_USER=ein <span class="hljs-string">&#x27;CFG_DEVICES_MQTT_KEY=the password&#x27;</span></code></pre></div>
+<p>The same three are in the <strong>Devices</strong> category of <strong>Settings → System</strong>, as <strong>MQTT broker</strong>,
+<strong>MQTT user</strong> and <strong>MQTT password</strong>. The password is a key: nobody can read it back, and EiN sends
+it only to that broker (<a href="../admin/configuration.html#give-a-key-to-another-service">Give a key to another service</a>).
+Giving the <strong>MQTT broker</strong> page a broker on another host without a password removes the one saved
+here, so it is not sent to the new broker. While the broker is empty no device is heard on a
+broker, and only the devices EiN asks over the network itself are read.</p>
+<h2 id="connect-a-device">Connect a device<a class="anchor" href="#connect-a-device" aria-label="Link to this section"></a></h2>
+<p>A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
+within seconds of the device connecting it is on the <strong>Devices</strong> page with all it reads and does.
+Nothing is entered in EiN.</p>
+<p>A device that is on the network but not yet on the broker is found too, and a Shelly is added from
+EiN without opening its own web page: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.
+The sections after it say how to point each kind at the broker by hand.</p>
+<h3 id="add-a-device-found-on-the-network">Add a device found on the network<a class="anchor" href="#add-a-device-found-on-the-network" aria-label="Link to this section"></a></h3>
+<p>With the installer&#39;s broker, its listener <code>discovery</code> asks the network every two minutes what is
+there, over mDNS (Bonjour) and SSDP (UPnP), the way phones and computers find printers and speakers,
+and over WS-Discovery, the way cameras that speak ONVIF are found, and hears what announces itself
+over mDNS in between. It does not scan addresses: it hears only what
+announces itself. Each thing that answered is named
+by what it said, such as a Shelly Plus 1PM, an ESPHome board, a HomeKit or Matter accessory, a Hue
+bridge, a camera, a speaker, a TV or a printer, and is matched to the devices EiN has already, by its name and
+its hardware address.</p>
+<p>When something found can become a device and is none yet, the <strong>Devices</strong> page&#39;s header has a
+button that says how many, such as <strong>2 found</strong>. It opens <strong>Found on the network</strong>, a card for each,
+and <strong>Add</strong> on a card makes it a device:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What was found</th>
+<th>What <strong>Add</strong> does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A Shelly, of any generation</td>
+<td>EiN sets its MQTT to the broker, with the <code>device</code> account, and restarts it. It is under <strong>Devices</strong> when it is back, within a minute, with all it reads and switches.</td>
+</tr>
+<tr>
+<td>A camera that speaks ONVIF</td>
+<td><strong>Add</strong> asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the <code>onvif</code> driver at once, with its streams, its events, and its presets and moves where it turns (<a href="#an-onvif-camera">An ONVIF camera</a>).</td>
+</tr>
+<tr>
+<td>A printer</td>
+<td>A device of the <code>ipp</code> driver at once: its <code>state</code> (idle, printing, stopped), its <code>warnings</code> (such as <code>marker-supply-low-warning</code>) and a level in % for each ink or toner it reports.</td>
+</tr>
+<tr>
+<td>A Google Cast speaker or screen</td>
+<td>A device of the <code>cast</code> driver: <code>player</code> says whether it plays (<code>idle</code>, <code>playing</code>, <code>paused</code>) and <code>playing</code> what, as title – artist (app); <code>volume</code> and <code>muted</code> can be set, <code>play</code>, <code>pause</code> and <code>stop</code> pressed, and <code>seek</code> given a second. What is written to its <code>show</code> is played (<a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a>).</td>
+</tr>
+<tr>
+<td>A DLNA renderer: a TV or a speaker</td>
+<td>A device of the <code>dlna</code> driver, with the same endpoints as a Cast device&#39;s. A TV that has Cast as well is one device of the <code>cast</code> driver, which uses its DLNA renderer when Cast does not answer.</td>
+</tr>
+<tr>
+<td>Anything that answers SNMP: a NAS, a router …</td>
+<td>A device of the <code>snmp</code> driver: <code>uptime</code>, <code>load</code>, <code>memory-used</code>, for each volume <code>&lt;volume&gt;-used</code> (%) and <code>&lt;volume&gt;-free</code> (GB), and a <code>&lt;sensor&gt;-temperature</code> for each temperature its agent reports. EiN asks with the community <strong>SNMP community</strong> in the <strong>Devices</strong> settings, <code>public</code> unless you change it.</td>
+</tr>
+<tr>
+<td>Anything else: a NAS without SNMP …</td>
+<td>A device of the <code>network</code> driver, online while it answers, with its <code>response-time</code>. EiN does not speak its own protocol yet.</td>
+</tr>
+<tr>
+<td>ESPHome or Tasmota</td>
+<td>No <strong>Add</strong>: the line under it says how to point it at the broker, and the sections below say more.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A device added from the network follows it to a new address: EiN knows it by its hardware address,
+and a Cast device or a DLNA renderer by the id it gives itself, so a TV that has used both its cable
+and its Wi-Fi is one device, asked at the address it announced itself at last.
+A printer is asked every two minutes, a Cast device or DLNA renderer every 15 seconds and the rest
+every minute.</p>
+<p>SNMP is often off on a NAS or a router until it is turned on in its own settings, usually read-only
+with the community <code>public</code>; a NETGEAR ReadyNAS has it under <strong>System → SNMP</strong>. One added before
+SNMP was on is a <code>network</code> device: forget it and add it again. To see what a device&#39;s agent answers
+beyond what the driver reads, walk it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+devices-snmp 192.0.2.40                      <span class="hljs-comment"># its name, description and uptime</span>
+devices-snmp 192.0.2.40 1.3.6.1.2.1.25.2.3   <span class="hljs-comment"># its volumes</span>
+devices-snmp 192.0.2.40 1.3.6.1.4.1          <span class="hljs-comment"># what its maker adds</span></code></pre></div>
+<p>Choose a card to see all the listener heard of it: what EiN makes of it, each mDNS service with its
+records, each SSDP answer with what the device&#39;s own description says, and the raw message, as it came.
+For something EiN does not support, it is what there is to go on. <strong>Ignore</strong> leaves one out of the
+count and the list; <strong>Show</strong> <strong>Everything</strong> finds it again, with <strong>Take back</strong>. <strong>Open</strong> opens one
+that is a device already.</p>
+<p><strong>Show</strong> chooses <strong>Can be added</strong> (the default), <strong>Not a device yet</strong>, or <strong>Everything</strong> the
+listener heard, devices included. What the listener has not heard for a day leaves the page, also
+when it last heard it before EiN was restarted. The page and the button are for members of the
+<code>devices</code> group, who make devices; the button stays away for everyone else.</p>
+<aside class="callout callout-note"><p class="callout-title">Note</p>
+<p>A Shelly with a password of its own refuses EiN; turn the password off on its web page, or set
+its MQTT there as below. A first-generation Shelly does not use Shelly&#39;s cloud while MQTT is on.</p>
+</aside>
+<p>The same from the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+devices-found                <span class="hljs-comment"># what can become a device, and is none yet</span>
+devices-found --all          <span class="hljs-comment"># everything the listener heard</span>
+devices-found 7c2ebd614055   <span class="hljs-comment"># one, with all the listener heard of it</span>
+devices-adopt a8032ab12345   <span class="hljs-comment"># add the Shelly with this id, as devices-found says it</span>
+devices-adopt 7c2ebd614055   <span class="hljs-comment"># add the Cast speaker</span>
+ devices-adopt ec71db0a1b2c --user admin --password <span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># add the camera; the leading space keeps it out of your history</span>
+<span class="hljs-built_in">echo</span> 30 &gt; /dev/kitchen-speaker/volume
+<span class="hljs-built_in">echo</span> press &gt; /dev/kitchen-speaker/pause
+devices-ignore d0ad08c5e709  <span class="hljs-comment"># leave the printer out</span></code></pre></div>
+<p>The listener needs the machine EiN runs on to be on the same network as the devices: mDNS, SSDP and
+WS-Discovery stay on the network they are sent on. A device on another network, or another VLAN, is not found,
+and is connected by hand as below. <strong>Broker for devices</strong> in the <strong>Devices</strong> settings is the
+address a device added from the network is given; empty, it is the address the listener says the
+machine has on the devices&#39; network. With a broker of your own there is no listener: the page says
+so, and devices are connected by hand.</p>
+<p>A device is named in EiN as it names itself, in lower case with hyphens, such as <code>hall-sensor</code>, and
+each of its endpoints by its own name within it, such as <code>hall-sensor/temperature</code>. Commands,
+routing keys and rules use these names. <strong>Edit</strong> on a device&#39;s page gives it and its endpoints
+friendlier labels on the pages and leaves the names as they are.</p>
+<h3 id="esphome">ESPHome<a class="anchor" href="#esphome" aria-label="Link to this section"></a></h3>
+<p>Add an <code>mqtt:</code> block to the device&#39;s configuration, with the machine EiN runs on as the broker, and
+install the configuration on the device as usual:</p>
+<div class="code" data-lang="yaml"><pre tabindex="0"><code><span class="hljs-comment"># hall-sensor.yaml, the device&#x27;s ESPHome configuration</span>
+<span class="hljs-attr">esphome:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">hall-sensor</span>
+
+<span class="hljs-attr">mqtt:</span>
+  <span class="hljs-attr">broker:</span> <span class="hljs-number">192.0</span><span class="hljs-number">.2</span><span class="hljs-number">.10</span> <span class="hljs-comment"># the machine EiN runs on</span>
+  <span class="hljs-attr">username:</span> <span class="hljs-string">device</span>
+  <span class="hljs-attr">password:</span> <span class="hljs-type">!secret</span> <span class="hljs-string">mqtt_password</span> <span class="hljs-comment"># in secrets.yaml: MQTT_DEVICE_PASSWORD from ~/ein/.env</span></code></pre></div>
+<p>With an <code>mqtt:</code> block ESPHome announces each of its entities the way Home Assistant&#39;s MQTT discovery
+reads them, which is on unless you turn it off. Leave its prefix as it is, <code>homeassistant</code>
+(<strong>Discovery prefix</strong> in the settings). The device is named by its <code>name:</code>, and an endpoint by its
+entity&#39;s own name: a sensor called Temperature on the device above is <code>hall-sensor/temperature</code>.</p>
+<p>A light is on or off, and has its brightness and its colour beside it when it has them, each to
+be set: <code>&lt;light&gt;-brightness</code>, 0–100 % whatever scale the light counts in, and <code>&lt;light&gt;-color</code>, as
+<code>#rrggbb</code>, such as <code>#ff8000</code>; <code>255,128,0</code> is taken too. A light that takes its colour as hue and
+saturation, or as x and y, as many Zigbee lights do, is read and set in them.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+<span class="hljs-built_in">echo</span> on &gt; /dev/living-room/ceiling
+<span class="hljs-built_in">echo</span> 40 &gt; /dev/living-room/ceiling-brightness
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;#ff8000&#x27;</span> &gt; /dev/living-room/ceiling-color</code></pre></div>
+<p>Other software that announces devices the same way, such as Zigbee2MQTT, is read as far as it keeps
+to what ESPHome sends; <code>devices-status</code> names what it could not read.</p>
+<h3 id="shelly-second-generation-and-later">Shelly, second generation and later<a class="anchor" href="#shelly-second-generation-and-later" aria-label="Link to this section"></a></h3>
+<p>Shelly&#39;s Plus, Pro, Gen3 and Gen4 devices are read by the <code>shelly</code> driver.</p>
+<ol>
+<li>Open the Shelly&#39;s own web page, at its address on your network, and go to <strong>Settings → MQTT</strong>.</li>
+<li>Turn MQTT on. Set the server to the machine EiN runs on with the port, such as
+<code>192.0.2.10:1883</code>, the user to <code>device</code>, and the password to the device password.</li>
+<li>Turn on <strong>Generic status update over MQTT</strong> and <strong>RPC status notifications over MQTT</strong>.</li>
+<li>Save. The Shelly restarts and connects.</li>
+</ol>
+<p>The topic prefix may stay as it is, the Shelly&#39;s id, such as <code>shellyplus1pm-a8032ab12345</code>. It is the
+device&#39;s name in EiN, so a short one of your own, such as <code>hall-plug</code>, makes commands and rules
+easier to read. Choose it before the Shelly is first heard: a new prefix is a new device.</p>
+<p>Its endpoints are named after its parts: <code>switch-0</code> is its first relay, <code>switch-0-power</code>,
+<code>switch-0-energy</code>, <code>switch-0-voltage</code> and <code>switch-0-current</code> what the relay measures, and <code>input-0</code>
+its first input. An input set to button mode gives presses, <code>single</code>, <code>double</code>, <code>triple</code> or <code>long</code>,
+rather than on and off.</p>
+<p>A light is <code>light-0</code>, or <code>rgb-0</code>, <code>rgbw-0</code> or <code>cct-0</code> for a colour or white-tone one such as the
+Plus RGBW PM, and each can be set:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>light-0</code></td>
+<td>On or off</td>
+</tr>
+<tr>
+<td><code>light-0-brightness</code></td>
+<td>Its brightness, 0–100 %</td>
+</tr>
+<tr>
+<td><code>rgb-0-color</code></td>
+<td>Its colour, as <code>#rrggbb</code>, such as <code>#ff8000</code>; <code>255,128,0</code> is taken too</td>
+</tr>
+<tr>
+<td><code>rgbw-0-white</code></td>
+<td>Its white channel, 0–255</td>
+</tr>
+<tr>
+<td><code>cct-0-color-temperature</code></td>
+<td>Its white&#39;s colour temperature, in K</td>
+</tr>
+</tbody></table>
+</div>
+<p>A cover, such as a Plus 2PM in cover mode, has <code>cover-0-position</code> (0–100 %, set to move it there),
+<code>cover-0-state</code> (<code>open</code>, <code>closed</code>, <code>opening</code>, <code>closing</code> or <code>stopped</code>), and <code>cover-0-open</code>,
+<code>cover-0-close</code> and <code>cover-0-stop</code> to press:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> 40 &gt; /dev/desk-lamp/rgbw-0-brightness
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;#ff8000&#x27;</span> &gt; /dev/desk-lamp/rgbw-0-color
+<span class="hljs-built_in">echo</span> 30 &gt; /dev/kitchen-blind/cover-0-position
+<span class="hljs-built_in">echo</span> press &gt; /dev/kitchen-blind/cover-0-stop</code></pre></div>
+<h3 id="shelly-first-generation">Shelly, first generation<a class="anchor" href="#shelly-first-generation" aria-label="Link to this section"></a></h3>
+<p>The first generation, such as the Plug S, the 1, the 1PM, the 2.5, the i3, the Dimmer, the Bulb,
+the Duo and the RGBW2, is read by the <code>shelly-gen1</code> driver.</p>
+<ol>
+<li>Open the Shelly&#39;s own web page, at its address on your network, and go to <strong>Internet &amp; Security →
+Advanced – Developer Settings</strong>.</li>
+<li>Turn MQTT on. Set the server to the machine EiN runs on with the port, such as <code>192.0.2.10:1883</code>,
+the user to <code>device</code>, and the password to the device password. Leave its custom MQTT prefix off:
+the driver listens under <code>shellies/</code>.</li>
+<li>Save, and restart the Shelly: a first-generation Shelly takes its MQTT settings when it starts.
+With MQTT on it does not use Shelly&#39;s cloud.</li>
+</ol>
+<p>It is named by its own id, such as <code>shellyplug-s-c8c9a3</code>, which cannot be changed; give it a label
+with <strong>Rename</strong>. Its endpoints are <code>relay-0</code> for its first relay, <code>relay-0-power</code> and <code>relay-0-energy</code>
+(the energy since it last started, in Wh) for what the relay measures, <code>temperature</code> for its own, and
+<code>input-0</code> for a button&#39;s presses: <code>single</code>, <code>double</code>, <code>triple</code>, <code>long</code>, <code>single-long</code> or
+<code>long-single</code>. A Shelly the bridge has not heard announce itself, because it connected before the
+bridge started, is asked to.</p>
+<p>A light is <code>light-0</code>, and an RGBW2 in white mode has <code>light-0</code> to <code>light-3</code>, one for each channel. A
+light has as many of these as it reports, each of which can be set: <code>light-0-brightness</code> (0–100 %),
+<code>light-0-color</code> (<code>#rrggbb</code>), <code>light-0-white</code> (an RGBW2&#39;s white channel, 0–255) and
+<code>light-0-color-temperature</code> (in K). A light that has both modes, such as a Color Bulb, turns to
+colour mode when set to a colour, and to white when set to a colour temperature; its brightness is
+that of the mode it is in. For white light from a Color Bulb, set its colour temperature: it has no
+white channel to mix with a colour. <code>light-0-power</code> and <code>light-0-energy</code> are what a light that
+measures it draws, as for a relay. A 2.5 in roller mode has <code>roller-0-state</code> (<code>open</code>, <code>close</code> or <code>stop</code>, the way it
+last moved), <code>roller-0-position</code> (0–100 %, empty until the roller is calibrated), and
+<code>roller-0-open</code>, <code>roller-0-close</code> and <code>roller-0-stop</code> to press.</p>
+<h3 id="a-web-api">A web API<a class="anchor" href="#a-web-api" aria-label="Link to this section"></a></h3>
+<p>The <code>http</code> driver asks an address that answers JSON, as often as you say, and keeps the readings you
+name in its answer: today&#39;s weather, the price of electricity this hour, or a device on your network
+that answers on a web API of its own, and can be switched there. Nothing announces such a device; a
+member of <code>devices</code> makes it in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+device-create Weather --driver http \
+  --config <span class="hljs-string">&#x27;url=https://api.open-meteo.com/v1/forecast?latitude=57.7&amp;longitude=11.97&amp;current=temperature_2m,wind_speed_10m&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=temperature=current.temperature_2m °C; wind=current.wind_speed_10m m/s&#x27;</span> \
+  --config interval=15m</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Config</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td>The address to ask. <code>{date}</code> (2026-11-09), <code>{year}</code>, <code>{month}</code>, <code>{day}</code> and <code>{hour}</code> in it become the day and hour it is asked at, in EiN&#39;s time zone. A user and password in it, <code>http://admin:secret@192.0.2.20/status</code>, are sent as the device&#39;s sign-in.</td>
+</tr>
+<tr>
+<td><code>read</code></td>
+<td>The readings, <code>name=path unit</code>, separated by <code>;</code>. Each becomes an endpoint of that name; the unit may be left out.</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>How often it is asked: seconds, or <code>30s</code>, <code>15m</code>, <code>1h</code>. Five minutes unless given, and ten seconds at the least.</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>The controls, <code>name=address on/off</code>, separated by <code>;</code>; see <a href="#switching-it">Switching it</a>. May be left out.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A path walks the answer from the top:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Reads</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>current.temperature_2m</code></td>
+<td>a field of a field</td>
+</tr>
+<tr>
+<td><code>relay:0.power</code></td>
+<td>a field whose name has a colon in it</td>
+</tr>
+<tr>
+<td><code>energy[&#39;total today&#39;]</code></td>
+<td>a field whose name has a space in it</td>
+</tr>
+<tr>
+<td><code>meters[0].power</code>, <code>items[-1].value</code></td>
+<td>the first item of a list, the last</td>
+</tr>
+<tr>
+<td><code>[time_start..time_end].SEK_per_kWh</code></td>
+<td>the item of a list whose <code>time_start</code> has come and whose <code>time_end</code> has not: this hour&#39;s price</td>
+</tr>
+<tr>
+<td><code>[from..].price</code></td>
+<td>the last item whose <code>from</code> has come, for a list that gives only when each starts</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>the whole answer, for an address that answers a number or a word as plain text</td>
+</tr>
+</tbody></table>
+</div>
+<p>A number written as text, <code>&quot;0.42&quot;</code>, is kept as a number; a list or an object is not kept. A device
+whose answer has none of its readings, or that does not answer, is offline until it does, and the
+bridge&#39;s log says why once. A reading&#39;s unit says what it is: <code>°C</code> is a temperature, <code>W</code> power and
+<code>kWh</code> energy, so the device&#39;s card shows it first.</p>
+<p>Another:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># the price of electricity this hour, in Swedish price area SE3, from elprisetjustnu.se</span>
+device-create Electricity price --driver http \
+  --config <span class="hljs-string">&#x27;url=https://www.elprisetjustnu.se/api/v1/prices/{year}/{month}-{day}_SE3.json&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span> --config interval=5m</code></pre></div>
+<p>A config <code>device-create</code> does not understand is refused with what is wrong, such as <code>a reading is name=path [unit], not &#39;price&#39;</code>; the device is made all the same, so change its config, on its
+<strong>Info</strong> tab or with <code>device-config</code>, or forget it and make it again:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-config electricity-price <span class="hljs-string">&#x27;read=price=[time_start..time_end].SEK_per_kWh SEK/kWh&#x27;</span></code></pre></div>
+<h4 id="switching-it">Switching it<a class="anchor" href="#switching-it" aria-label="Link to this section"></a></h4>
+<p>A device whose web API also takes commands is switched at an address of its own, which <code>set</code> names
+for each control: <code>name=address on/off</code>. <code>{value}</code> in the address becomes the value, spelled as the
+device spells on and off, which is what <code>on/off</code> says: <code>ON/OFF</code>, <code>on/off</code>, <code>1/0</code> or <code>true/false</code>. An
+address without <code>http://</code> is taken from <code>url</code>&#39;s, sign-in included. A control whose name is also a
+reading&#39;s is a switch that shows that reading as its state, read as on or off however the device
+spells them; EiN asks the device again a second after it is switched. A control with no <code>{value}</code> and
+no <code>on/off</code> is a button that asks its address when pressed, such as a restart.</p>
+<p>Say a garden pump&#39;s controller on your network answers <code>{&quot;pump&quot;: {&quot;running&quot;: true, &quot;power&quot;: 420}}</code> at
+<code>/api/status</code>, runs or stops the pump at <code>/api/pump?run=1</code> and <code>/api/pump?run=0</code>, and restarts at
+<code>/api/restart</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-create Garden pump --driver http --config <span class="hljs-string">&#x27;url=http://admin:secret@192.0.2.40/api/status&#x27;</span> \
+  --config <span class="hljs-string">&#x27;read=pump=pump.running; power=pump.power W&#x27;</span> \
+  --config <span class="hljs-string">&#x27;set=pump=api/pump?run={value} 1/0; restart=api/restart&#x27;</span> --config interval=30s</code></pre></div>
+<p><code>pump</code> is then a switch, on while the answer says <code>running</code> is true, and <code>restart</code> a button; both
+are asked with the sign-in in <code>url</code>.</p>
+<p>The address, with a password in it, is the device&#39;s config, which every member of <code>devices</code> sees.
+EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
+<h3 id="a-camera">A camera<a class="anchor" href="#a-camera" aria-label="Link to this section"></a></h3>
+<p>The <code>rtsp</code> driver takes a camera on your network that sends its picture over RTSP, as most cameras
+that work without a cloud do (Reolink, Hikvision, Dahua, Amcrest, Axis, Tapo, …). The camera&#39;s
+manual, or its own web page, names its stream&#39;s address; many send a second, smaller stream beside
+the main one, which costs less to watch and to take a picture of. A member of <code>devices</code> makes the
+camera in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+ device-create <span class="hljs-string">&#x27;Front door&#x27;</span> --driver rtsp \
+  --config url=rtsp://192.0.2.30:554/h264Preview_01_main \
+  --config sub=rtsp://192.0.2.30:554/h264Preview_01_sub \
+  --config user=viewer --config password=<span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Config</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>url</code></td>
+<td>The main stream&#39;s address, <code>rtsp://…</code></td>
+</tr>
+<tr>
+<td><code>sub</code></td>
+<td>A second, smaller stream&#39;s address. May be left out</td>
+</tr>
+<tr>
+<td><code>snapshot</code></td>
+<td>The address of the camera&#39;s still picture, <code>http://…</code>, which a picture is taken from when there is no restreamer. May be left out</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>The camera&#39;s account</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>That account&#39;s password. It is kept in the device&#39;s <code>.secret</code>, which the administrator alone reads, and goes only to the sidecar</td>
+</tr>
+</tbody></table>
+</div>
+<p>A password or an address that changed is given again on the camera&#39;s <strong>Info</strong> tab, with <strong>Change</strong>,
+or in the terminal, and the camera is reached with it at once:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-config front-door password=<span class="hljs-string">&#x27;the new password&#x27;</span></code></pre></div>
+<p>The camera becomes a device of class <code>camera</code>, with a <code>stream</code> endpoint for each stream: <code>main</code>, and
+<code>sub</code> with a second one. EiN gives the streams to the <a href="#the-installers-sidecar">sidecar&#39;s restreamer</a>,
+which keeps one connection to the camera however many watch it, and says within a minute how large
+each picture is and which codec it is sent in. Its page shows a picture of each stream now, taken
+again every ten seconds while the page is open, and the <strong>Live</strong> tab plays the picture as it comes:
+the main stream, or the smaller one, a button away. The <strong>Devices</strong> page shows a picture of the
+smaller stream on the camera&#39;s card. Without a restreamer (<strong>Restreamer</strong> empty) nothing is watched
+live, so the camera&#39;s page has no <strong>Live</strong> tab, and a picture is the camera&#39;s still picture, from
+its <code>snapshot</code> address.</p>
+<p>A picture is a file too, a JPEG of the stream now, taken each time it is read:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">cat</span> /dev/front-door/main &gt; ~/front-door.jpg</code></pre></div>
+<p>With the <a href="../archive/index.html">Archive</a>, the media service also watches each camera&#39;s smaller
+stream for faces: the camera gets a <strong>Faces</strong> log, which says who each face that came into view
+was, or <code>unknown</code>, within a second or so, as <code>dev.&lt;camera&gt;.faces</code> for automations, and the faces&#39;
+pictures are filed under the camera in the archive, where they are named as photos&#39; faces are
+(<a href="../archive/people.html#faces-a-camera-sees">Faces a camera sees</a>). The media service records the
+camera&#39;s largest stream as well, and a clip of each visit, from a little before the face until a
+little after, is filed beside them as a video (<a href="../archive/cameras.html#a-security-camera">A security camera</a>).</p>
+<p>The camera is <strong>online</strong> while it gives a picture, asked every other minute. Who may see the
+pictures is who may read the stream: the household, as for every device
+(<a href="#who-may-do-what">Who may do what</a>). EiN&#39;s pages reach the camera only through EiN, signed in, so
+neither its address nor its password reaches a browser.</p>
+<h3 id="an-onvif-camera">An ONVIF camera<a class="anchor" href="#an-onvif-camera" aria-label="Link to this section"></a></h3>
+<p>Most cameras that work without a cloud also speak ONVIF, a standard for asking a camera what it
+sends, what it sees and how it turns. Such a camera needs no stream address: EiN asks the camera
+for it. It is found on the network, where <strong>Add</strong> on its card asks for the account EiN signs in to
+it with (<a href="#add-a-device-found-on-the-network">Add a device found on the network</a>). Many cameras
+have ONVIF off, or want an account of its own for it, until it is set on their web page, among the
+advanced network settings: on a Hikvision under <strong>Network → Advanced Settings → Integration
+Protocol</strong>. A camera on another network is made in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
+ device-create <span class="hljs-string">&#x27;Back yard&#x27;</span> --driver onvif \
+  --config address=192.0.2.31 \
+  --config user=admin --config password=<span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Config</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>address</code></td>
+<td>The camera&#39;s address, <code>192.0.2.31</code> or <code>192.0.2.31:8000</code>, or its ONVIF service&#39;s whole address, <code>http://192.0.2.31/onvif/device_service</code></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>The camera&#39;s account</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>That account&#39;s password, kept in the device&#39;s <code>.secret</code> as <code>rtsp</code>&#39;s is. The camera is sent a digest of it, never the password itself</td>
+</tr>
+</tbody></table>
+</div>
+<p>The camera&#39;s largest picture becomes its <code>main</code> stream and its smallest its <code>sub</code>, with the codec,
+size and frame rate the camera says, and everything else about them is as for <a href="#a-camera">A camera</a>.
+EiN asks the camera again every hour, and whenever it is not reached, so a stream the camera moved
+is followed. One added from the network is asked at the address the listener last heard it at, so
+it is followed to a new address too.</p>
+<p>Beside its streams, a camera has what it tells and what it turns:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>motion</code></td>
+<td>On while the camera sees motion, off when it stops, as the camera itself detects it</td>
+</tr>
+<tr>
+<td><code>person</code>, <code>vehicle</code>, <code>animal</code></td>
+<td>On while the camera sees a person, a vehicle or an animal, for a camera that tells them from the rest</td>
+</tr>
+<tr>
+<td><code>tamper</code></td>
+<td>On while the camera is covered, turned away or its picture changed all at once</td>
+</tr>
+<tr>
+<td><code>sound</code></td>
+<td>On while the camera hears a sound over the level set on it</td>
+</tr>
+<tr>
+<td><code>line-crossing</code></td>
+<td>An event, <code>crossed</code>, each time something crosses a line drawn on the camera&#39;s picture</td>
+</tr>
+<tr>
+<td><code>intrusion</code></td>
+<td>On while something is inside a field drawn on the camera&#39;s picture</td>
+</tr>
+<tr>
+<td><code>storage-failure</code></td>
+<td>On while the camera&#39;s memory card fails; a diagnostic</td>
+</tr>
+<tr>
+<td><code>ptz-preset</code></td>
+<td>One of the positions saved on the camera: setting it turns the camera there. For a camera that turns and has positions saved</td>
+</tr>
+<tr>
+<td><code>ptz-left</code>, <code>ptz-right</code>, <code>ptz-up</code>, <code>ptz-down</code>, <code>ptz-zoom-in</code>, <code>ptz-zoom-out</code></td>
+<td>A button each: a press turns or zooms the camera a short step. For a camera that turns, and zooms</td>
+</tr>
+</tbody></table>
+</div>
+<p>A camera has those it lists among its events, and only where it is set to detect them: lines,
+fields and the sound level are drawn and set on the camera&#39;s own web page. They are readings like
+any other, so an <a href="../automation/automations.html">automation</a> takes them: a person in the back yard at night can
+turn on its light, or turn the camera to the gate, and a line crossed at the gate can ring the
+hall.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> Gate &gt; /dev/back-yard/ptz-preset    <span class="hljs-comment"># turn to the position saved as Gate</span>
+<span class="hljs-built_in">echo</span> press &gt; /dev/back-yard/ptz-left     <span class="hljs-comment"># a step to the left</span></code></pre></div>
+<h3 id="check-that-ein-hears-them">Check that EiN hears them<a class="anchor" href="#check-that-ein-hears-them" aria-label="Link to this section"></a></h3>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+devices-status</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What it says</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>5 devices, 31 endpoints, 18420 messages</code></td>
+<td>The bridge is connected: the devices its drivers drive, their endpoints, and the messages it has had since it started.</td>
+</tr>
+<tr>
+<td><code>drivers: ha-discovery, shelly, shelly-gen1</code></td>
+<td>The drivers it runs, as <strong>Device sources</strong> names them.</td>
+</tr>
+<tr>
+<td><code>not read: &lt;device&gt;/&lt;endpoint&gt;: &lt;why&gt;</code></td>
+<td>An endpoint whose values the bridge cannot read, such as one announced with a template it does not understand. Nothing of it is kept.</td>
+</tr>
+<tr>
+<td><code>…; no broker set, so only …</code></td>
+<td><strong>MQTT broker</strong> is empty: the devices EiN asks over the network are read, and none on a broker. <a href="#install-it">Install the broker</a> or <a href="#a-broker-you-already-run">give EiN yours</a> for those.</td>
+</tr>
+<tr>
+<td><code>cannot reach mqtt://…: &lt;why&gt;</code></td>
+<td>The broker does not answer, or refuses EiN&#39;s account. The bridge tries again by itself, waiting a second, then twice as long each time, up to a minute.</td>
+</tr>
+<tr>
+<td><code>not running</code></td>
+<td>The <code>devices-bridge</code> service is stopped: <code>service start devices-bridge</code>, as the administrator.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The Status page says the same: its <code>devices bridge</code> check is fine while the bridge is connected, or runs without a broker,
+a warning while it cannot reach the broker, and failed while its service is stopped
+(<a href="../admin/monitoring.html#read-the-checks">Health and status</a>). Its <code>devices sidecar</code> check fails
+when the installer&#39;s sidecar is a version the module does not speak, such as <code>the devices sidecar reports no version, older than the ^0.1.0 this module needs: update the sidecar</code>, which <code>./setup.sh --only devices</code> does (<a href="../admin/updating.html#the-media-service-and-the-sidecar-follow-their-modules">Updating</a>).
+<code>devices --drivers</code> lists the drivers with their devices while the bridge runs.</p>
+<h2 id="what-a-device-becomes">What a device becomes<a class="anchor" href="#what-a-device-becomes" aria-label="Link to this section"></a></h2>
+<p>Each thing a device announces becomes an endpoint of the device under <code>/dev</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>The device announces</th>
+<th>Endpoint</th>
+<th>Takes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A reading: a temperature, power, humidity, a word</td>
+<td>a log</td>
+<td></td>
+</tr>
+<tr>
+<td>Something on or off it only reads: a door, motion, input</td>
+<td>a log</td>
+<td></td>
+</tr>
+<tr>
+<td>A button</td>
+<td>a log of events, its presses</td>
+<td></td>
+</tr>
+<tr>
+<td>A switch, a relay, a light</td>
+<td>a control, on or off</td>
+<td><code>on</code>, <code>off</code> or <code>toggle</code></td>
+</tr>
+<tr>
+<td>A number it takes, such as a thermostat&#39;s target</td>
+<td>a control, a number</td>
+<td>a number within its limits and steps</td>
+</tr>
+<tr>
+<td>A choice it takes, such as a mode</td>
+<td>a control, one of its options</td>
+<td>one of its options</td>
+</tr>
+<tr>
+<td>Something it does when asked, such as a restart</td>
+<td>a control, pressed</td>
+<td><code>press</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>The device&#39;s class comes from the endpoint that says the most of what it is, whichever is heard
+first: what it switches says the most (<code>plug</code> for an outlet, <code>light</code>), then what it senses or a
+button (<code>sensor</code>, <code>button</code>), and a bare relay least (<code>switch</code>); its power, energy, voltage or current
+says nothing. A class the device has is replaced only by one that says more, and one that is none of
+these, such as <code>heater</code> set by a person, stays. What tells of the device itself, such as its own temperature
+or its Wi-Fi signal, is marked <code>diagnostic</code> and kept apart on its page. An endpoint the device no
+longer announces is marked retired, and its history stays. <a href="../guide/devices.html#a-devices-page">Devices</a>
+shows how the page draws each.</p>
+<h2 id="switch-things">Switch things<a class="anchor" href="#switch-things" aria-label="Link to this section"></a></h2>
+<p>The toggles on a device&#39;s <strong>Overview</strong> switch it, and so does writing to the control in the
+terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> on &gt; /dev/hall-plug/switch-0
+<span class="hljs-built_in">echo</span> toggle &gt; /dev/hall-plug/switch-0
+<span class="hljs-built_in">echo</span> 21 &gt; /dev/heater/target</code></pre></div>
+<p>The command goes to the device through the broker at once, and the switch shows the new state once
+the device reports it. When the bridge is not connected, the write is refused with
+<code>hall-plug/switch-0: not connected to the broker, so nothing was sent</code>, and while its service is
+stopped with <code>hall-plug&#39;s driver shelly is not running</code>: a command is never kept for later, since a
+lamp switched on an hour after it was asked would surprise.
+<a href="../guide/devices.html#switch-something">Switch something</a> has the rest.</p>
+<h2 id="play-on-a-speaker-or-a-screen">Play on a speaker or a screen<a class="anchor" href="#play-on-a-speaker-or-a-screen" aria-label="Link to this section"></a></h2>
+<p>Write the paths of what to play to the <code>show</code> of a speaker or screen of the <code>cast</code> or <code>dlna</code> driver,
+one per line, and it plays them in order: recordings, videos and pictures, and on the last line a
+page of EiN. <code>show</code> then says the line it is on.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<span class="hljs-built_in">echo</span> /archive/music/Wrenfield-choir/evening-song.mp3 &gt; /dev/kitchen-speaker/show
+find /archive/music/Wrenfield-choir -name <span class="hljs-string">&#x27;*.flac&#x27;</span> | <span class="hljs-built_in">sort</span> &gt; /dev/kitchen-speaker/show
+find /archive/albums/Summer-2025 -<span class="hljs-built_in">type</span> f | <span class="hljs-built_in">sort</span> &gt; /dev/living-room-tv/show
+<span class="hljs-built_in">echo</span> /dashboard-wall/Kitchen &gt; /dev/living-room-tv/show
+<span class="hljs-built_in">echo</span> 90 &gt; /dev/living-room-tv/seek
+<span class="hljs-built_in">echo</span> press &gt; /dev/living-room-tv/stop</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>A line names</th>
+<th>What the speaker or screen is given</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A recording</td>
+<td>Its playback copy (AAC) when one was made, else the original.</td>
+</tr>
+<tr>
+<td>A video</td>
+<td>What its <code>video</code> setting says (below). By default an original that is H.264, up to 1080p, in MP4 or MOV goes as it is, and any other video as H.264 the <a href="../ems/index.html">media service</a> makes while it plays.</td>
+</tr>
+<tr>
+<td>A picture</td>
+<td>Its largest picture copy (AVIF), else the original when it is a JPEG, PNG, AVIF, WebP or GIF. It shows for 10 seconds (its <code>picture</code> setting) before the next; the last one stays until it is stopped.</td>
+</tr>
+<tr>
+<td>Any other path, such as <code>/dashboard-wall/Kitchen</code> or <code>/albums/Summer-2025?slideshow=screen</code></td>
+<td>That page of EiN as you see it, which the media service renders into live video, a few seconds behind (<a href="../dashboard/screens.html#on-a-tv">On a TV</a>). It plays until it is stopped, so it can only be the last line.</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>find … -type f</code> lists the copies EiN made under each file too; they are left out when the list
+names the files themselves. A path is written from <code>/</code>, and a path under one of EiN&#39;s folders that
+is not there, or a file of another kind, is refused. Writing again plays the new list in place of
+the old.</p>
+<p>A video the media service makes while it plays starts within about 10 seconds, and the screen&#39;s own
+timeline works: seeking with its remote, from a phone or with <code>seek</code> plays again within a few
+seconds. A screen of the <code>dlna</code> driver, or a video whose length EiN does not know, is given one
+stream instead, which cannot be sought in. Each video being made holds one of the media service&#39;s
+encoders, two at once unless the administrator allows more (<code>EMS_STREAMS</code>).</p>
+<p>Without the media service, or while it does not answer, a speaker or screen is still given
+recordings, pictures, and a video it plays as it is, as its <code>video</code> setting says; EiN asks the
+media service each time a list is written, so it is used again as soon as it answers. A video that
+would have to be made is refused, as in <code>/archive/films/sea.mov: a device is given it as H.264 by the media service, which is not there; set video=original for a device that plays the original</code>, and a
+page with <code>/dashboard-wall/Kitchen: no such file, and pages are rendered by the media service, which is not there</code>.</p>
+<p>Each screen has two settings, set with <code>device-config</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>video</code></td>
+<td><code>h264</code>, the default, as above; <code>av1</code> gives EiN&#39;s own copy of a video (AV1, up to 1080p) for a screen that plays AV1, such as a recent Google TV; <code>original</code> gives the original, for a screen that plays it.</td>
+</tr>
+<tr>
+<td><code>picture</code></td>
+<td>How many seconds a picture shows before the next, 10 unless set.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of the devices group</span>
+device-config living-room-tv video=av1 picture=8</code></pre></div>
+<p>The speaker or screen fetches each thing from EiN itself, in the media player every Cast device has,
+or in its DLNA renderer. A Cast device refuses an original it cannot play when it comes to it. A DLNA
+renderer says which formats it plays, so it is given what it plays, and a list with something it
+plays none of is refused at once, as in <code>/archive/music/a.flac: it plays none of audio/mp4, audio/flac</code>. It fetches a file with a link for that one file, made as you and good only while it
+plays, and a video or page made for it at an address of its own, so only what you may read is
+played.</p>
+<p>A TV that has both Cast and a DLNA renderer is one device. EiN plays on it over Cast, and over its
+renderer when Cast does not answer, and then asks and tells it over the one it played on until the
+list is done. A DLNA renderer plays one thing at a time, so EiN gives it the next as the one before
+ends. On many TVs the renderer has to be switched on in the TV&#39;s own settings first, under a name
+such as <strong>DLNA</strong>, <strong>DMR</strong> or <strong>Media sharing</strong>.</p>
+<h3 id="from-the-app">From the app<a class="anchor" href="#from-the-app" aria-label="Link to this section"></a></h3>
+<p><strong>Show on…</strong> gives what is open to a speaker or screen, without the terminal. It is there when you
+have one whose <code>show</code> you may write to and whose driver runs, so none while the <code>devices-bridge</code>
+service is stopped (<code>devices --endpoint show</code> lists them in the terminal):</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What the speaker or screen is given</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The <a href="../archive/viewer.html#the-more-menu">viewer</a>&#39;s bar</td>
+<td>The file shown, such as <code>/archive/music/Wrenfield-choir/evening-song.mp3</code>.</td>
+</tr>
+<tr>
+<td>An album&#39;s <strong>⋮</strong></td>
+<td>The album&#39;s slideshow for a screen, narrowed as the album is: <code>/albums/…?slideshow=screen</code>.</td>
+</tr>
+<tr>
+<td>The <strong>Media</strong> page&#39;s <strong>⋮</strong></td>
+<td>The slideshow of what is found: <code>/media?q=sailboat&amp;slideshow=screen</code>.</td>
+</tr>
+<tr>
+<td>A <a href="../dashboard/index.html">dashboard</a>&#39;s <strong>⋮</strong></td>
+<td>Its wall: <code>/dashboard-wall/Kitchen</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>It lists the speakers and screens. One that does not answer is greyed and marked <strong>offline</strong>, and
+cannot be chosen until it answers again. Choose one to give it what is open, and a note at the foot
+of the screen says what it answered, such as <strong>Kitchen speaker: playing evening-song</strong>, or why it
+refused. The square beside each stops what it plays.</p>
+<p>It also lists <strong>A screen near you</strong> when you reach EiN from another network: a TV where your phone
+is, which EiN does not reach itself, given a page, or the recording, video or picture open in the
+viewer (<a href="../dashboard/screens.html#on-a-tv-where-your-phone-is">On a TV where your phone is</a>).</p>
+<p><code>player</code> and <code>playing</code> say what it plays, <code>pause</code>, <code>play</code> and <code>stop</code> act on it, and a number of
+seconds written to <code>seek</code> goes there. A Cast speaker or screen that lets go of the list on its own
+while it plays, as some do after a while, is given it again from where it was; one that lets go
+again within five minutes, as when someone stops it from their phone, is left. A DLNA renderer
+stopped before a recording ends is left. When the list is done, stopped or taken over, what was made
+for it stops.</p>
+<p>The speaker reaches EiN at <strong>EiN&#39;s address for speakers and screens</strong> in the <strong>Devices</strong>
+settings, plain HTTP on the speaker&#39;s network, such as <code>http://192.0.2.10:8080</code>. Empty, it is the
+address the <a href="#add-a-device-found-on-the-network">listener</a> says the machine has, on port 8080: set it
+when the installer publishes EiN on another port (<code>EIN_HTTP_PORT</code>), or when there is no listener,
+where a write is refused with <code>EiN does not know its address on the network to give it: set CFG_DEVICES_MEDIA_URL</code>.</p>
+<h2 id="on-a-dashboard">On a dashboard<a class="anchor" href="#on-a-dashboard" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../dashboard/index.html">Dashboards</a> module, Devices offers two cards beside the
+dashboard&#39;s own <strong>Device</strong> and <strong>Reading</strong>:</p>
+<ul>
+<li><strong>Camera</strong>: a camera&#39;s picture filling the card, a new one every 10 seconds (<strong>Seconds between
+pictures</strong>), with the camera&#39;s name and the time the picture is from at its foot. Tap it to watch
+it live, as on the <strong>Live</strong> tab, for five minutes; tap again to go back to pictures. <strong>Always
+live</strong> plays it live all the time. <strong>Stream</strong> picks the smaller of its streams, which costs
+less to send, and <strong>Picture</strong> whether it fills the card or shows all of it. A camera that cannot
+be played live (no restreamer, or a codec the browser does not play) shows its pictures, and says
+why at the top.</li>
+<li><strong>Button</strong>: one large button for a device&#39;s control, lit while the control is what the button
+sets. Without <strong>Sets it to</strong>, it presses a button, such as a <a href="../automation/virtual-devices.html">virtual device</a>&#39;s
+<code>momentary</code> control an automation starts on, and switches something on and off to the other.
+With it, it sets the control to that value, such as <code>eco</code> for a mode or <code>21</code> for a heater, as a
+scene button does. <strong>Ask first</strong> makes the first press only ask for a second, for a door or a
+gate. <strong>Icon</strong> takes a <a href="https://tabler.io/icons">Tabler icon</a>&#39;s name, such as <code>bell</code> or <code>garage</code>.</li>
+</ul>
+<p>Who may press a button is who may write its control
+(<a href="#who-may-do-what">Who may do what</a>). On a screen opened from a
+<a href="../dashboard/screens.html">display link</a>, which changes nothing, a button shows its state and does
+nothing when pressed, and a camera shows its pictures if the screen&#39;s account may read the camera.</p>
+<h2 id="readings-on-the-bus">Readings on the bus<a class="anchor" href="#readings-on-the-bus" aria-label="Link to this section"></a></h2>
+<p>Every reading, press and change of state is kept in its endpoint and published on the routing key
+<code>dev.&lt;device&gt;.&lt;endpoint&gt;</code>, and a device coming or going on <code>dev.&lt;device&gt;</code>, where the
+<a href="../automation/index.html">Automation</a> module&#39;s engine reads them and a queue or a log the
+administrator binds can take them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+mkqueue -k <span class="hljs-string">&#x27;dev.porch-button.#&#x27;</span> ~/presses
+mklog -k <span class="hljs-string">&#x27;dev.*.temperature&#x27;</span> -r <span class="hljs-string">&#x27;90 day&#x27;</span> ~/temperatures</code></pre></div>
+<p>A number is kept and published at most once every 10 seconds for each endpoint (<strong>Seconds between
+readings</strong>); <a href="../concepts/devices.html#readings-on-the-bus">Readings on the bus</a> shows the messages,
+and <a href="../concepts/devices.html#how-often-a-reading-is-kept">How often a reading is kept</a> the rest.</p>
+<h2 id="who-may-do-what">Who may do what<a class="anchor" href="#who-may-do-what" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Who</th>
+<th>What they may do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Members of the <code>devices</code> group</td>
+<td>See every device, its readings and its history; switch and set devices; share, rename and forget them</td>
+</tr>
+<tr>
+<td>Someone a device is shared with</td>
+<td>See that device, and switch it when it is shared to edit</td>
+</tr>
+<tr>
+<td>Members of the <code>automation</code> group</td>
+<td>With the <a href="../automation/index.html">Automation</a> module, also make <a href="../automation/automations.html">automations</a>, which act with their own rights</td>
+</tr>
+<tr>
+<td>The administrator</td>
+<td>Everything: add people to either group, and bind queues and logs to the devices&#39; keys</td>
+</tr>
+</tbody></table>
+</div>
+<p>The devices the drivers find belong to the administrator and the <code>devices</code> group, and nobody else
+reads them, a door or motion sensor included, until a member shares one.
+<a href="../admin/devices.html">Devices and their keys</a> shows how to share a device and keep a switch to some
+people.</p>
+<h2 id="ask-the-assistant">Ask the assistant<a class="anchor" href="#ask-the-assistant" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../assistant/index.html">Assistant</a> installed, the chat reads the devices: ask &quot;how warm is
+it in the hall?&quot;, &quot;which devices are offline?&quot; or &quot;how much did the heater draw yesterday?&quot;, and it
+answers at once, with a chart of a reading&#39;s history when you ask how it went. Asking it to switch
+something, &quot;turn on the hall lamp&quot;, gives a
+<a href="../assistant/chat.html#when-the-assistant-offers-to-make-a-change">proposal card</a> with the <code>echo</code>
+line, which you run or decline.</p>
+<p>It finds what is on the network too: ask &quot;is the new plug found?&quot;, and it answers with what
+<code>devices-found</code> says. Asking it to add one, &quot;add the kitchen speaker&quot;, gives a proposal card with
+the <code>devices-adopt</code> line, and so does asking it to read a web API as a device, with the
+<code>device-create</code> line (<a href="#a-web-api">A web API</a>). With the <a href="../automation/index.html">Automation</a>
+module, it also makes automations (<a href="../automation/index.html#ask-the-assistant">Ask the assistant</a>).</p>
+<h2 id="from-the-terminal">From the terminal<a class="anchor" href="#from-the-terminal" aria-label="Link to this section"></a></h2>
+<p>The devices&#39; own commands, <code>devices</code>, <code>device-show</code>, <code>device-history</code>, <code>device-label</code> and
+<code>device-forget</code>, are EiN&#39;s; <a href="../guide/devices.html#from-the-terminal">Devices</a> lists them. The module
+adds:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+devices-status                     <span class="hljs-comment"># the broker, the drivers and the devices they drive</span>
+devices-status --streams           <span class="hljs-comment"># whether the restreamer answers, and how many streams it has</span>
+devices-found                      <span class="hljs-comment"># what is on the network and not a device yet</span>
+devices-snmp 192.0.2.40            <span class="hljs-comment"># what a NAS answers over SNMP</span></code></pre></div>
+<p><a href="commands.html">Devices commands</a> lists every option.</p>
+<h2 id="settings">Settings<a class="anchor" href="#settings" aria-label="Link to this section"></a></h2>
+<p>The module&#39;s settings are in the <strong>Devices</strong> group of <strong>Settings → System</strong>, and each restarts
+<code>devices-bridge</code> when saved:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>On the Settings page</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CFG_DEVICES_MQTT_URL</code></td>
+<td><strong>MQTT broker</strong></td>
+<td>empty; <code>--devices</code> sets it</td>
+<td>The broker, as <code>mqtt://host:1883</code> or <code>mqtts://host:8883</code>. Empty, only the devices EiN asks over the network are read</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_MQTT_USER</code></td>
+<td><strong>MQTT user</strong></td>
+<td>empty; <code>--devices</code> sets <code>ein</code></td>
+<td>The account EiN signs in to the broker with. Empty, it signs in without one</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_MQTT_KEY</code></td>
+<td><strong>MQTT password</strong></td>
+<td>none; <code>--devices</code> sets it</td>
+<td>That account&#39;s password, a key nobody can read back</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_STREAMS_URL</code></td>
+<td><strong>Restreamer</strong></td>
+<td>empty; <code>--devices</code> sets it</td>
+<td>The restreamer cameras are given to, go2rtc&#39;s API as <code>http://host:1984</code>. Empty, a camera has no live view, and its picture is asked of the camera itself</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_STREAMS_KEY</code></td>
+<td><strong>Restreamer password</strong></td>
+<td>none; <code>--devices</code> sets it</td>
+<td>The password of the restreamer&#39;s account <code>ein</code>, a key nobody can read back</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_STREAMS_RTSP</code></td>
+<td><strong>Restreamer for the media service</strong></td>
+<td>empty; <code>--devices</code> sets it</td>
+<td>The restreamer&#39;s RTSP as the media service reaches it, <code>rtsp://host:8554</code>. Empty, no camera is watched for faces</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_SOURCES</code></td>
+<td><strong>Device sources</strong></td>
+<td><code>ha-discovery shelly shelly-gen1</code></td>
+<td>Which drivers the bridge runs, separated by spaces: <code>ha-discovery</code> for ESPHome and whatever announces itself as it does, <code>shelly</code> for Shelly&#39;s second generation and later, and <code>shelly-gen1</code> for the first</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_DISCOVERY_PREFIX</code></td>
+<td><strong>Discovery prefix</strong></td>
+<td><code>homeassistant</code></td>
+<td>The topic <code>ha-discovery</code> devices announce themselves under</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_HISTORY</code></td>
+<td><strong>Reading history</strong></td>
+<td><code>365 day</code></td>
+<td>How long an endpoint&#39;s values are kept: <code>30 day</code>, <code>90 day</code>, <code>365 day</code> or <code>forever</code>. It applies to endpoints found from then on; one found before keeps its own, which <code>attrs</code> on the endpoint changes (below)</td>
+</tr>
+<tr>
+<td><code>CFG_DEVICES_MIN_INTERVAL</code></td>
+<td><strong>Seconds between readings</strong></td>
+<td><code>10</code></td>
+<td>The shortest time between two kept readings of one number, given to endpoints found from then on as their <code>minInterval</code>, which may be changed on each</td>
+</tr>
+</tbody></table>
+</div>
+<p>An endpoint found before keeps its retention, and each endpoint can take its own interval, which
+counts within a minute:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+attrs -s <span class="hljs-string">&#x27;retention=90 day&#x27;</span> /dev/hall-sensor/temperature
+attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
+<h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What it means</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>No devices yet</strong> on the Devices page</td>
+<td>No device has announced itself, or EiN does not hear the broker</td>
+<td>Run <code>devices-status</code>, and check the device&#39;s own broker settings</td>
+</tr>
+<tr>
+<td>A device never shows up, while others do</td>
+<td>It cannot reach the broker, or the broker refuses its account</td>
+<td>Check its server, user and password. ESPHome&#39;s log says whether MQTT connected. Open port 1883 in the machine&#39;s firewall (<a href="../admin/network.html#open-the-ports-in-the-firewall">network</a>)</td>
+</tr>
+<tr>
+<td>A Shelly shows up without readings</td>
+<td>Its status updates are off</td>
+<td>On a second-generation Shelly, turn on <strong>Generic status update over MQTT</strong> and <strong>RPC status notifications over MQTT</strong></td>
+</tr>
+<tr>
+<td>A first-generation Shelly never shows up</td>
+<td>It has not restarted since MQTT was turned on, or uses a custom prefix</td>
+<td>Restart it, and turn its custom MQTT prefix off</td>
+</tr>
+<tr>
+<td>A Shelly is there twice, under two names</td>
+<td>Its topic prefix changed, and a new prefix is a new device</td>
+<td><strong>Forget</strong> the old one</td>
+</tr>
+<tr>
+<td>An endpoint is marked <strong>not read</strong></td>
+<td>The device announced it in a way the bridge does not understand</td>
+<td><code>devices-status</code> says why. Its readings are not kept</td>
+</tr>
+<tr>
+<td><code>… takes on, off or toggle, not …</code> when switching</td>
+<td>The value is not one the control takes</td>
+<td>See <a href="#what-a-device-becomes">What a device becomes</a></td>
+</tr>
+<tr>
+<td><code>… not connected to the broker, so nothing was sent</code></td>
+<td>EiN does not hear the broker just now</td>
+<td>Run <code>devices-status</code></td>
+</tr>
+<tr>
+<td><code>&lt;device&gt;&#39;s driver shelly is not running</code></td>
+<td>The <code>devices-bridge</code> service is stopped</td>
+<td><code>service start devices-bridge</code>, as the administrator</td>
+</tr>
+<tr>
+<td><code>Access denied for operation &#39;w&#39; on node: …</code> when switching</td>
+<td>The control is narrowed to others</td>
+<td>Ask the administrator</td>
+</tr>
+<tr>
+<td>A device stays <strong>offline</strong></td>
+<td>It said it was going, or the broker said so for it when it disappeared</td>
+<td>Check its power and its Wi-Fi</td>
+</tr>
+<tr>
+<td>A camera shows <strong>No picture</strong>, and stays offline</td>
+<td>The restreamer cannot reach the camera, or the camera refuses it</td>
+<td>Check <code>url</code>, <code>user</code> and the password, and change them on its <strong>Info</strong> tab or with <code>device-config</code>. <code>service logs devices-bridge</code> says what the camera answered</td>
+</tr>
+<tr>
+<td>Adding a camera says <code>the camera refused admin&#39;s password</code></td>
+<td>The account is not the camera&#39;s ONVIF account, or ONVIF is off on the camera</td>
+<td>Turn ONVIF on in the camera&#39;s web page and give it an account there; some cameras keep ONVIF&#39;s accounts apart from the web page&#39;s</td>
+</tr>
+<tr>
+<td>A camera is not found on the network</td>
+<td>ONVIF is off on the camera, or it is on another network</td>
+<td>Turn ONVIF on in its web page, or make it in the terminal (<a href="#an-onvif-camera">An ONVIF camera</a>)</td>
+</tr>
+<tr>
+<td>A camera&#39;s page has no <strong>Live</strong> tab</td>
+<td>No restreamer is set, or <code>devices-bridge</code> is stopped</td>
+<td>Set the <strong>Restreamer</strong> (<a href="#the-installers-sidecar">The installer&#39;s sidecar</a>), or <code>service start devices-bridge</code></td>
+</tr>
+<tr>
+<td><code>… which is not there</code> when showing a video or a page</td>
+<td>The <a href="../ems/index.html">media service</a> is not installed, or does not answer</td>
+<td>Set <code>video=original</code> for a screen that plays the original, or see <a href="../ems/index.html#check-that-it-is-running">Check that it is running</a></td>
+</tr>
+<tr>
+<td>A screen is greyed in <strong>Show on…</strong></td>
+<td>It does not answer: it is off, or off the network</td>
+<td>Turn it on; it can be chosen once EiN hears it again</td>
+</tr>
+<tr>
+<td>The <strong>Live</strong> tab says the stream could not be reached</td>
+<td>As above, or the sidecar is not running</td>
+<td><code>podman compose ps</code> on the machine; <code>./setup.sh --only devices</code> starts it again</td>
+</tr>
+<tr>
+<td><strong>Live</strong> plays nothing in a browser on a phone</td>
+<td>The browser does not play the camera&#39;s codec, often H.265</td>
+<td>Watch the smaller stream, which is often H.264, or set the camera to send H.264</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="../guide/devices.html">Devices</a>: the device pages, switching and history.</li>
+<li><a href="../concepts/devices.html">Devices, endpoints and drivers</a>: endpoints, controls and the routing keys.</li>
+<li><a href="../automation/index.html">Automation</a>: rules that switch the devices and run commands by themselves.</li>
+<li><a href="../automation/virtual-devices.html">Virtual devices</a>: readings worked out from other devices&#39;, and switches with no hardware behind them.</li>
+<li><a href="../admin/devices.html">Devices and their keys</a>: who may do what with the devices.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../dashboard/commands.html" rel="prev"><span>Previous</span>Dashboards commands</a><a class="next" href="commands.html" rel="next"><span>Next</span>Devices commands</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/devices/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></li><li class="nested"><a href="#from-the-app">From the app</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

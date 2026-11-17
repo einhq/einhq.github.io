@@ -63,7 +63,7 @@ The cards that come with Dashboards:
 
 Other modules add their own: the Archive the **Picture of the day**, **Birthdays** and
 [**Weather**](../archive/home.md#on-a-dashboard), Todo a
-**Todo list**, and [Automation](../automation/index.md#on-a-dashboard) a **Camera** and a
+**Todo list**, and [Devices](../devices/index.md#on-a-dashboard) a **Camera** and a
 **Button**. A card whose module is removed later says so on the dashboard until you take it off.
 
 A card holding more than its tile has room for, such as a long **Coming up** list or a device with

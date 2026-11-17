@@ -26,8 +26,8 @@ The **System** tab of Settings starts with **Set up**: pages that each set up on
 | **Language and time** | EiN                                    | The archive's language, how dates and times are written, chosen by name with how each writes today's date, and which time zone EiN is in                                |
 | **Sign-in**           | EiN                                    | How long a browser stays signed in unused, how long its session lasts, and how long a browser that opened a share link keeps it, each as a length of time               |
 | **Language model**    | The [Assistant](../assistant/index.md) | Who answers the chat: the model on this machine, Anthropic, OpenAI or Mistral AI with your key, or another service                                                      |
-| **MQTT broker**       | [Automation](../automation/index.md)   | The broker devices are heard on, and the account EiN signs in with                                                                                                      |
-| **Restreamer**        | [Automation](../automation/index.md)   | Where cameras' live views and pictures come from, its RTSP for the media service, and its password                                                                      |
+| **MQTT broker**       | [Devices](../devices/index.md)         | The broker devices are heard on, and the account EiN signs in with                                                                                                      |
+| **Restreamer**        | [Devices](../devices/index.md)         | Where cameras' live views and pictures come from, its RTSP for the media service, and its password                                                                      |
 | **Media service**     | The [media service](../ems/index.md)   | Where the media service answers, its key, and how much of the graphics card its models may hold                                                                         |
 | **Transcription**     | The [media service](../ems/index.md)   | The language spoken in recordings or that it is detected, the pause that ends a line, word or line timings, and whether recordings are transcribed again after a change |
 | **Processing**        | [Media](../media/index.md)             | How much media work runs at once, as a level: **Standard**, **More** or **Full** for the machine's cores                                                                |
@@ -120,6 +120,7 @@ config unset CFG_LANGUAGE CFG_TIME_LOCALE
 CFG_EMS_KEY	(set) (environment)
 CFG_COMMAND_FINDER	assistant-commands (module assistant)
 CFG_LANGUAGE_MODEL	llm-chat (module assistant)
+CFG_PAGE_STREAMER	page-stream start --idle=60 (module ems)
 CFG_SEARCH_PARSER	archive-parse (module archive)
 CFG_TEXT_EMBEDDER	ems-text-embed (module ems)
 CFG_SESSION_REAP_INTERVAL	3600
@@ -193,7 +194,7 @@ Running `./setup.sh` applies `.env` too, but it also downloads the newest images
 A value in `.env` does not always win:
 
 - **A value set here wins over it.** If the setting shows **Set here**, the line in `.env` has no visible effect. Choose **Restore inherited value**, or run `config unset`, to let it through.
-- **A module's choice wins over it.** An installed module may name commands for the **Search** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, and the `ems` module `CFG_TEXT_EMBEDDER`. To use another one, set it on the Settings page.
+- **A module's choice wins over it.** An installed module may name commands for the **Search** and **Devices** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, the `ems` module `CFG_TEXT_EMBEDDER` and `CFG_PAGE_STREAMER`, and the Devices module `CFG_FILE_STREAMER`. To use another one, set it on the Settings page.
 - **Some variables are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT` and `CFG_SSH_PORT`, the ports EiN listens on inside its container, which are not settings, and the `ems` module's settings `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 

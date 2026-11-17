@@ -68,7 +68,7 @@
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
 <section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
-<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html" aria-current="page">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html" aria-current="page">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="supervisor.html">The supervisor</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
 <section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
 <section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
 <section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
@@ -206,11 +207,13 @@ modes.</p>
 instead, made with the device&#39;s <strong>Info</strong> tab or <code>device-key</code>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 device-key ruby-phone --new --origin https://ein.wrenfield.example</code></pre></div>
-<div class="code"><pre tabindex="0"><code>https://ein.wrenfield.example/file/dev/ruby-phone?key=Zt2v…</code></pre></div>
+<div class="code"><pre tabindex="0"><code>https://ein.wrenfield.example/file/dev/ruby-phone/position?key=Zt2v…</code></pre></div>
 <ul>
 <li><strong>What it opens.</strong> Writes to <code>/file/dev/&lt;device&gt;</code> and <code>/file/dev/&lt;device&gt;/&lt;endpoint&gt;</code> of that one
-device, and nothing else: no other device, no reading, no other address. A <code>GET</code> with the key on the
-device is the device talking, for a tracker that sends only <code>GET</code>s, such as OsmAnd. A write with the
+device, and nothing else: no other device, no reading, no other address. The address it is shown
+with is the device&#39;s track, <code>position</code>, when it has one, which a phone posts to, else the device
+itself, which a webhook device posts to. A <code>GET</code> with the key is the device talking, for a tracker
+that sends only <code>GET</code>s, such as OsmAnd. A write with the
 key is made as the device&#39;s owner, the administrator, limited to the device&#39;s folder, and the
 device&#39;s driver is told it came from the device (<code>device:ruby-phone</code>).</li>
 <li><strong>How it is sent.</strong> As <code>Authorization: Bearer &lt;key&gt;</code>, or as <code>key=</code> in the address for a client that
@@ -230,13 +233,13 @@ dmesg | grep <span class="hljs-string">&#x27;device write refused&#x27;</span></
 <p>A write without a key is a signed-in person&#39;s, as every <code>/file</code> write is, and needs their session.</p>
 <h2 id="what-reaches-ein-without-signing-in">What reaches EiN without signing in<a class="anchor" href="#what-reaches-ein-without-signing-in" aria-label="Link to this section"></a></h2>
 <ul>
-<li><strong>A device with its key</strong>, writing to <code>/file/dev/&lt;device&gt;</code> as above. Any other write there needs a
+<li><strong>A device with its key</strong>, writing to <code>/file/dev/&lt;device&gt;</code> and its endpoints as above. Any other write there needs a
 signed-in session.</li>
 <li><strong>Nothing else of the devices.</strong> A visitor reads no device, reading or track and switches nothing,
 even with <strong>Visitors may browse</strong> on
 (<a href="permissions.html#visitors-and-share-links">Visitors and share links</a>): the devices are the <code>devices</code>
 group&#39;s.</li>
-<li><strong>The MQTT broker</strong>, with the <a href="../automation/index.html">Automation</a> module&#39;s, is not EiN: the devices
+<li><strong>The MQTT broker</strong>, with the <a href="../devices/index.html">Devices</a> module&#39;s, is not EiN: the devices
 sign in to it with their own password, and whoever reaches it with that password switches them.
 Keep its port in your home network
 (<a href="network.html#before-you-open-ein-to-the-internet">Before you open EiN to the internet</a>).</li>

@@ -4,15 +4,15 @@ This page is for whoever runs EiN: which ports it listens on and how to change t
 
 ## What EiN listens on
 
-EiN publishes two ports, and more with the Automation module's sidecar, on every address of the machine it runs on:
+EiN publishes two ports, and more with the Devices module's sidecar, on every address of the machine it runs on:
 
-| Port   | What answers                                                                                                                  | Protocol   |
-| ------ | ----------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `8080` | the Web UI, its files and its WebSocket                                                                                       | plain HTTP |
-| `2222` | the SSH and SFTP server                                                                                                       | SSH        |
-| `1883` | with `--automation`, the MQTT broker that the [Automation](../automation/index.md) module's devices talk to                   | plain MQTT |
-| `1984` | with `--automation`, the restreamer's API, which EiN gives the cameras to and watches them through, behind `STREAMS_PASSWORD` | plain HTTP |
-| `8554` | with `--automation`, the cameras' streams served again over RTSP, behind `STREAMS_PASSWORD`, and to this machine without one  | RTSP       |
+| Port   | What answers                                                                                                               | Protocol   |
+| ------ | -------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `8080` | the Web UI, its files and its WebSocket                                                                                    | plain HTTP |
+| `2222` | the SSH and SFTP server                                                                                                    | SSH        |
+| `1883` | with `--devices`, the MQTT broker that the [Devices](../devices/index.md) module's devices talk to                         | plain MQTT |
+| `1984` | with `--devices`, the restreamer's API, which EiN gives the cameras to and watches them through, behind `STREAMS_PASSWORD` | plain HTTP |
+| `8554` | with `--devices`, the cameras' streams served again over RTSP, behind `STREAMS_PASSWORD`, and to this machine without one  | RTSP       |
 
 These are the ports `setup.sh` picks; `MQTT_PORT`, `STREAMS_PORT` and `RTSP_PORT` in `.env` are the sidecar's, which it listens on itself, on the machine's own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
@@ -84,7 +84,7 @@ sudo firewall-cmd --permanent --add-port=8080/tcp --add-port=2222/tcp
 sudo firewall-cmd --reload
 ```
 
-With the [Automation](../automation/index.md) module's broker, open 1883 too, to your home network only, such as `sudo ufw allow from 192.168.1.0/24 to any port 1883 proto tcp`. Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy's port (443) instead, and not 8080.
+With the [Devices](../devices/index.md) module's broker, open 1883 too, to your home network only, such as `sudo ufw allow from 192.168.1.0/24 to any port 1883 proto tcp`. Use your own port numbers if you changed them. Behind an HTTPS proxy on the same machine, open the proxy's port (443) instead, and not 8080.
 
 > [!NOTE]
 > Docker opens the ports it publishes in the machine's packet filter itself, past rules set with ufw. A closed port in ufw does not keep EiN's ports off the network under Docker; `EIN_BIND=127.0.0.1` does.
@@ -108,6 +108,7 @@ Any proxy works, such as Caddy, nginx or Traefik, when it does the following:
 | Sends `X-Forwarded-Proto: https` (or `Forwarded: proto=https`) | EiN then marks its sign-in cookie `Secure`, so the browser sends it only over HTTPS. Over plain HTTP the cookie is not marked, so the same EiN keeps working on the home network. |
 | Has no limit on the size of a request                          | A file is uploaded in one request, whole: a long video is several gigabytes.                                                                                                      |
 | Allows long requests and idle connections                      | Uploads and downloads of large files take time, and the WebSocket can be quiet for minutes. When the proxy closes it, the interface reconnects after two seconds.                 |
+| Sends a response on as it comes, unbuffered                    | A [screen near your phone](../dashboard/screens.md#on-a-tv-where-your-phone-is) plays a page as a live video that never ends; held back, it never starts.                         |
 
 The proxy keeps the `Host` header as the browser sent it; EiN uses whatever address the browser shows.
 
@@ -204,7 +205,7 @@ Only the public proxy makes [share links](../guide/sharing.md#share-an-album-wit
 A phone or a GPS tracker that reports its position to its device (see
 [Report from a phone](../guide/devices.md#report-from-a-phone)) posts to EiN from wherever it is,
 without signing in, so it needs the public HTTPS proxy: over a VPN it reports only while the VPN is
-up, and an SSH tunnel does not reach it at all. It posts to `/file/dev/<device>` with the device's
+up, and an SSH tunnel does not reach it at all. It posts to its track, `/file/dev/<device>/position`, with the device's
 key, in the address or as `Authorization: Bearer`, which the proxy passes on like any other request;
 the key is all that lets it in, and it opens that device for writing and nothing else. A request
 with a wrong key is refused with `Forbidden` and logged as "device write refused", with the client's
@@ -265,7 +266,7 @@ The server's host key is made at EiN's first start and kept in the tree as `/etc
 | Behind the proxy, the page frame loads but stays empty, and the terminal does not connect | The proxy does not pass WebSocket connections. Add the `Upgrade` and `Connection` headers (nginx) or check the proxy's WebSocket support.                                                                                                                   |
 | Uploads of large files fail behind the proxy, often with 413                              | The proxy limits the size of a request. In nginx, set `client_max_body_size 0;`.                                                                                                                                                                            |
 | The terminal or the interface reconnects every minute behind the proxy                    | The proxy closes idle connections. Raise its read timeout, such as `proxy_read_timeout 1h;` in nginx.                                                                                                                                                       |
-| A device on the network cannot reach the MQTT broker                                      | Open port 1883 in the machine's firewall, to your home network, and check that `EIN_BIND` is not `127.0.0.1`. `podman compose ps` in `~/ein` shows whether `automation` runs; [Automation](../automation/index.md#check-that-ein-hears-them) has more.      |
+| A device on the network cannot reach the MQTT broker                                      | Open port 1883 in the machine's firewall, to your home network, and check that `EIN_BIND` is not `127.0.0.1`. `podman compose ps` in `~/ein` shows whether `devices` runs; [Devices](../devices/index.md#check-that-ein-hears-them) has more.               |
 | Signing in works, but the next page asks you to sign in again                             | The browser uses plain `http://` while something in front of EiN sends `X-Forwarded-Proto: https`, so the cookie is marked `Secure` and the browser does not send it back. Open the `https://` address, or have the proxy send the scheme the browser used. |
 | Signing in says "too many failed sign-ins"                                                | Wait the seconds it names. When it keeps happening to everyone behind your proxy, EiN sees all of them as one address: see [How EiN slows down password guessing](#how-ein-slows-down-password-guessing).                                                   |
 | A share link does not open for the person you sent it to                                  | It begins with the address you had open. Open EiN at its public address and make the link again; see [Sharing](../guide/sharing.md).                                                                                                                        |
