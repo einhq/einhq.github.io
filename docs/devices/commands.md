@@ -2,9 +2,9 @@
 
 # Devices commands
 
-The commands the devices module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the devices module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[devices-adopt](#devices-adopt) · [devices-bridge](#devices-bridge) · [devices-found](#devices-found) · [devices-ignore](#devices-ignore) · [devices-snmp](#devices-snmp) · [devices-status](#devices-status)
+[devices-adopt](#devices-adopt) · [devices-bridge](#devices-bridge) · [devices-found](#devices-found) · [devices-ignore](#devices-ignore) · [devices-nearby](#devices-nearby) · [devices-snmp](#devices-snmp) · [devices-status](#devices-status)
 
 ## D
 
@@ -99,6 +99,28 @@ devices-ignore [--undo] <id>
 devices-ignore d0ad08c5e709
 devices-ignore d0ad08c5e709 --undo
 ```
+
+### `devices-nearby`
+
+A recording, video or picture for a screen near the browser to fetch, as the caller: start makes it, renew keeps it five minutes more, stop lets go of it.
+
+<small>reads only</small>
+
+```text
+devices-nearby <action> <target>
+```
+
+| Argument   | What it is                                                     |
+| ---------- | -------------------------------------------------------------- |
+| `<action>` | start, renew or stop.                                          |
+| `<target>` | start: the file's path; renew and stop: the id start answered. |
+
+```bash
+devices-nearby start /media/2024/boat.mp4
+devices-nearby renew near-3f2a9c0d1e4b5a6c
+```
+
+With `JSON_OUTPUT=1`: start: id, url (a path read without signing in), type, title, and captions (the transcript, read the same way) when there is one.
 
 ### `devices-snmp`
 

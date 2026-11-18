@@ -6,14 +6,18 @@ what to do when an update goes differently.
 
 ## How updates work
 
-EiN has no releases and no version numbers to choose between. An update downloads the images
-GitHub builds each night from the newest commit of each repository, and starts them in place of
-what ran before; a change made today reaches an update tomorrow. The media service is run each
-night over a set of real photos, videos, recordings and documents, to see that it answers as it did
-before (the internal regression suite); while it changes several times a day, its changes reach
-GitHub whether or not that run has passed. The engine downloads only the
-layers of an image that changed, so an update of the media service is usually far smaller than its
-30 GB. What it updates depends on what is installed:
+Core, its database, the deploy repository with the supervisor, and the language model have versions,
+as modules do. Each morning what changed in them is released (a fix as the next patch, a new feature
+or a breaking change as the next minor while they are below 1.0.0), and GitHub builds their images
+from it. The images carry the version as a tag beside `:main`: `ghcr.io/einhq/core:0.1.0`, and
+`ghcr.io/einhq/core:0.1` for the newest of the 0.1 versions. An update downloads `:main`, the newest
+release, and starts it in place of what ran before, so there is no version to choose between, and a
+change made today reaches an update tomorrow. The media service is run each night over a set of real
+photos, videos, recordings and documents, to see that it answers as it did before (the internal
+regression suite); while it changes several times a day, its changes reach GitHub whether or not
+that run has passed. The engine downloads only the layers of an image that changed, so an update of
+the media service is usually far smaller than its 30 GB. What it updates depends on what is
+installed:
 
 | Repository | What it is                                            | Updated when            | As                                        |
 | ---------- | ----------------------------------------------------- | ----------------------- | ----------------------------------------- |

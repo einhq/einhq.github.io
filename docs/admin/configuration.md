@@ -194,7 +194,7 @@ Running `./setup.sh` applies `.env` too, but it also downloads the newest images
 A value in `.env` does not always win:
 
 - **A value set here wins over it.** If the setting shows **Set here**, the line in `.env` has no visible effect. Choose **Restore inherited value**, or run `config unset`, to let it through.
-- **A module's choice wins over it.** An installed module may name commands for the **Search** and **Devices** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, the `ems` module `CFG_TEXT_EMBEDDER` and `CFG_PAGE_STREAMER`, and the Devices module `CFG_FILE_STREAMER`. To use another one, set it on the Settings page.
+- **A module's choice wins over it.** An installed module may name commands for the **Search** and **Devices** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, the `ems` module `CFG_TEXT_EMBEDDER`, `CFG_PAGE_STREAMER` and `CFG_PAGE_CONTROL`, and the Devices module `CFG_FILE_STREAMER`. To use another one, set it on the Settings page.
 - **Some variables are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT` and `CFG_SSH_PORT`, the ports EiN listens on inside its container, which are not settings, and the `ems` module's settings `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 

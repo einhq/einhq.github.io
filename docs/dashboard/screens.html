@@ -174,54 +174,101 @@ moves, and an encoder of its graphics card when it has one. Two run at once unle
 administrator allows more (<code>EMS_PAGES</code>).</li>
 </ul>
 <p>With the <a href="../devices/index.html#play-on-a-speaker-or-a-screen">Devices</a> module there is no need
-to: <strong>Show on…</strong> in the dashboard&#39;s <strong>⋮</strong> gives its wall to a Cast or DLNA screen, which streams it
+to: <strong>Show on…</strong> under the dashboard&#39;s <strong>⋮</strong> gives its wall to a Cast or DLNA screen, which streams it
 as above and plays it until it is stopped, and <code>echo /dashboard-wall/Kitchen &gt; /dev/living-room-tv/show</code>
 does the same from the terminal.</p>
-<p>Any other page can be streamed the same way, such as an album&#39;s slideshow:
-<code>page-stream start &#39;/media?q=sailboat&amp;slideshow=screen&#39;</code>.</p>
+<p>Any other page can be streamed the same way, such as the slideshow of what a search finds:
+<code>page-stream start &#39;/slideshow?q=sailboat&amp;slideshow=screen&#39;</code>, the
+<a href="../archive/viewer.html#start-a-slideshow-from-a-link">slideshow page</a>, which shows the slideshow
+alone. The video carries the page&#39;s sound, such as a video&#39;s in the slideshow, and
+<code>page-stream press &lt;id&gt; ArrowRight</code> presses a key in the page, as someone at it would: the slideshow
+moves on. <code>page-stream state &lt;id&gt;</code> says what the page shows, where it says so, and <code>page-stream message &lt;id&gt; &#39;{&quot;seek&quot;:80}&#39;</code> moves the slideshow&#39;s video to 1:20.</p>
 <h3 id="on-a-tv-where-your-phone-is">On a TV where your phone is<a class="anchor" href="#on-a-tv-where-your-phone-is" aria-label="Link to this section"></a></h3>
-<p>When you reach EiN over the internet, away from home, <strong>Show on…</strong> also offers <strong>A screen near you</strong>
-for a dashboard&#39;s wall, an album&#39;s slideshow, the slideshow of what the <strong>Media</strong> page found, and
-the file open in the <a href="../archive/viewer.html">viewer</a>. EiN cannot see the TV in the room you are in,
-but your browser can: EiN makes something the TV can fetch, and the browser hands its address to the
-TV you choose in its own list of screens. The TV then fetches it from EiN, over the internet.</p>
+<p>When you reach EiN over the internet, away from home, the cast icon, <strong>Show on a screen near you</strong>,
+gives a TV where you are a dashboard&#39;s wall, an album&#39;s slideshow or the slideshow of what the
+<strong>Media</strong> page found, from the header&#39;s corner after <strong>Share</strong> and <strong>Edit</strong> (beside <strong>⋮</strong> on a
+phone), and the file open in the <a href="../archive/viewer.html">viewer</a>, from the bar under the picture, or
+on a phone from the viewer&#39;s top right corner. EiN cannot see the TV in the room you are in, but
+your browser can: EiN makes something the TV can fetch, and the browser hands its address to the TV
+you choose in its own list of screens. The TV then fetches it from EiN, over the internet.</p>
 <ul>
-<li><p>A page goes as live video of it: the media service makes it as above. Chrome hands the TV the
+<li><p>A page goes as live video of it, with its sound: the media service makes it as above. An album&#39;s
+slideshow, or the <strong>Media</strong> page&#39;s, goes as the slideshow page, which starts at the first
+picture with nothing of the album&#39;s page before it. Chrome hands the TV the
 video that says it lasts a day, since it offers a TV nothing shorter than 15 seconds and, on a
 phone, no HLS; Safari hands it the HLS playlist.</p>
 </li>
 <li><p>A recording or a video from the viewer goes as itself, as a Cast screen in the house is given it
 (<a href="../devices/index.html#from-the-app">Play on a speaker or a screen</a>): a video that is not H.264
 within 1080p is made into H.264 by the media service while the TV plays it, and one whose length
-is not known cannot go. EiN keeps the address working while your browser keeps the page open,
-and a few minutes after.</p>
+is not known cannot go. Its transcript goes with it, and the TV shows it as subtitles while the
+viewer&#39;s subtitles are on. EiN keeps the addresses working while your browser keeps the page
+open, and a few minutes after.</p>
 </li>
-<li><p>A picture from the viewer goes as the viewer showing it, as live video of that page.</p>
+<li><p>A picture from the viewer goes as itself in Chrome; in Safari as the viewer showing it, as live
+video of that page.</p>
 </li>
 <li><p>Chrome offers the Google Cast screens on the network you are on, and Safari the AirPlay ones.
-Firefox offers none, and the row is not there.</p>
+Firefox offers none, and the icon is not there.</p>
 </li>
-<li><p>The browser takes a few seconds to find the TVs that can play it; then it wants another tap:
-choose <strong>Choose the screen</strong>.</p>
+<li><p>In Chrome, a tap on the icon opens Chrome&#39;s list of screens at once, and what you sent plays on
+the TV you choose a few seconds later. For this Chrome loads Google&#39;s Cast script, from Google,
+the first time you tap the icon, and then each time EiN opens in that browser, so that a page
+opened again finds the TV that plays and its controls. The TV stays connected until you stop it:
+whatever you send next goes to it without the list again. Chrome casts only from an address
+reached over HTTPS; elsewhere it works as Safari does.</p>
+</li>
+<li><p>In Safari, a tap on the icon makes the video, the icon spinning meanwhile, and opens the browser&#39;s
+own list of screens as soon as the browser has found the TVs that can play it, which takes a few
+seconds at most; the list cannot open sooner, since before then the browser offers no TV. When
+that has not happened within five seconds of the tap, after which the browser no longer counts
+it, a dialog opens instead: <strong>Choose the screen</strong> there opens the list, saying <strong>Looking for
+screens near you…</strong> while the browser looks. If no TV takes it, the dialog says why.</p>
+</li>
+<li><p>While a TV plays something, or Chrome is connected to one, a blue cast icon stands in the top bar,
+also after the page is opened again. It opens <strong>Casting</strong>, headed by what you sent and its name,
+such as <strong>Album:</strong> and the album&#39;s name, which takes you back to it. Below are the controls: for
+a recording or a video play and pause, <strong>Back 10 seconds</strong>, <strong>Forward 30 seconds</strong> and how far it
+has come; for a slideshow a card with what it shows now, the picture or video with its name and
+where it is (<strong>3 of 31</strong>), and <strong>Previous</strong>, <strong>Pause or play</strong> and <strong>Next</strong>, which move and hold
+the slideshow itself, as its keys do, and show on the TV a few seconds later; while the slideshow
+plays a video or a recording, a slider of its length with where it is, and <strong>Back 10 seconds</strong>
+and <strong>Forward 10 seconds</strong>, which a picture has not. <strong>Stop casting</strong>, at the bottom, stops the TV.
+Close them and the TV plays on. Opened from something else, such as the next picture in the
+viewer, they offer to show that instead. While Chrome holds a TV that plays nothing from here,
+they offer <strong>Disconnect</strong>.</p>
+</li>
+<li><p>In the <a href="../archive/viewer.html">viewer</a>, the cast icon is blue while a TV plays or is connected. A
+recording or a video the TV plays plays on the phone too, in step with the TV and without sound, with the
+faces and subtitles over it as you have them; its controls play, pause and move the TV&#39;s, and it shows the TV loading while the TV loads after a move. In
+Chrome, while it is connected to a TV, the recording, video or picture the viewer opens on or
+moves to goes to the TV and starts at once, unless the TV shows a page, such as a dashboard&#39;s
+wall. In Safari, nothing in the viewer
+starts by itself while the TV plays anything, and play on another recording or video gives the
+TV that one instead; where the browser lets the TV go with the old one, its list of screens
+opens to choose it again.</p>
+</li>
+<li><p>A video no TV has taken is let go a minute after you close the dialog.</p>
 </li>
 <li><p>The TV reaches EiN at the address you opened it at, so EiN must be reachable from the internet
 over HTTPS (<a href="../admin/network.html#reach-ein-from-outside-your-home">Reach EiN from outside your home</a>),
 and the video takes some of the upload of EiN&#39;s own connection while the TV plays it.</p>
 </li>
-<li><p>Chrome offers a screen nothing shorter than 15 seconds: for a shorter recording or video the row
-says so.</p>
+<li><p>Chrome offers a screen nothing shorter than 15 seconds: for a shorter recording or video the
+dialog says so.</p>
 </li>
 <li><p>Keep EiN open on the phone while the TV plays: Chrome on Android pauses the TV when you leave the
 page or the screen locks, and it plays on when you come back. A page&#39;s stream waits five minutes
 for that.</p>
 </li>
-<li><p>The square beside the row, the TV&#39;s own remote or the browser&#39;s list of screens stops it and lets
-the TV go. A page&#39;s stream stops by itself five minutes after the TV stops reading it.</p>
+<li><p><strong>Stop</strong> in the dialog, the TV&#39;s own remote or the browser&#39;s list of screens stops it and lets the
+TV go. A page&#39;s stream stops by itself five minutes after the TV stops reading it.</p>
 </li>
 </ul>
 <p>For a page it is there when the <a href="../ems/index.html">media service</a> is installed, which names
 <code>page-stream start</code> as the setting <code>CFG_PAGE_STREAMER</code>; <code>stream-page &lt;route&gt;</code> does the same from
-the terminal. For a recording or a video it is there when the <a href="../devices/index.html">Devices</a> module
+the terminal. The slideshow&#39;s controls press keys in the page, ask it what it shows and move its
+video, by the command the setting <code>CFG_PAGE_CONTROL</code> names, <code>page-stream</code>; <code>stream-page --press &lt;id&gt; &lt;key&gt;</code>, <code>--state &lt;id&gt;</code> and <code>--message &lt;id&gt; &lt;json&gt;</code> do the same. For a recording or a video it is there when the <a href="../devices/index.html">Devices</a> module
 is installed, which names <code>devices-nearby</code> as the setting <code>CFG_FILE_STREAMER</code>; <code>stream-file &lt;path&gt;</code>
 answers the address, <code>stream-file --renew &lt;id&gt;</code> keeps it five minutes more and <code>stream-file --stop &lt;id&gt;</code> lets go of it.</p>
 <h2 id="turn-it-off">Turn it off<a class="anchor" href="#turn-it-off" aria-label="Link to this section"></a></h2>

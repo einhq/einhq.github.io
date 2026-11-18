@@ -207,6 +207,8 @@ Run these in the core checkout before you send a change:
 | `deno task lint`            | `deno lint` over `src/` and `modules/`.                                                                                                                                      |
 | `deno fmt`                  | Formats the code as `deno.jsonc` says: 175 columns, two spaces, single quotes. `deno fmt --check` reports what it would change.                                              |
 
+Each push and pull request runs checks of its own. Core's run `deno fmt --check`, `deno task lint`, `deno task check` and `deno task test`. A module's run in a checkout of core's `main` with the module in `modules/<name>`: `deno fmt --check modules/<name>` and `deno lint modules/<name>`, under core's settings. Run them there before you send a change to a module.
+
 The module contract is what modules may import from core: `@ein/client`, `@ein/api`, `@ein/paths` and the Web UI's kit, `@ein/ui/*`. Its surface is kept as a snapshot in `src/client/contract.snapshot`, and a test fails when the surface changes. After a deliberate change, raise `MODULE_API_VERSION` in `src/modules/types.ts` and run `deno task contract:snapshot` to write the snapshot again.
 
 The commit history follows Conventional Commits, such as `fix(shell): …` or `feat(archive): …`. Write yours the same way.

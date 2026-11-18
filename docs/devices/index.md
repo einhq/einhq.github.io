@@ -638,12 +638,12 @@ echo 90 > /dev/living-room-tv/seek
 echo press > /dev/living-room-tv/stop
 ```
 
-| A line names                                                                                | What the speaker or screen is given                                                                                                                                                                                |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| A recording                                                                                 | Its playback copy (AAC) when one was made, else the original.                                                                                                                                                      |
-| A video                                                                                     | What its `video` setting says (below). By default an original that is H.264, up to 1080p, in MP4 or MOV goes as it is, and any other video as H.264 the [media service](../ems/index.md) makes while it plays.     |
-| A picture                                                                                   | Its largest picture copy (AVIF), else the original when it is a JPEG, PNG, AVIF, WebP or GIF. It shows for 10 seconds (its `picture` setting) before the next; the last one stays until it is stopped.             |
-| Any other path, such as `/dashboard-wall/Kitchen` or `/albums/Summer-2025?slideshow=screen` | That page of EiN as you see it, which the media service renders into live video, a few seconds behind ([On a TV](../dashboard/screens.md#on-a-tv)). It plays until it is stopped, so it can only be the last line. |
+| A line names                                                                                                         | What the speaker or screen is given                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A recording                                                                                                          | Its playback copy (AAC) when one was made, else the original.                                                                                                                                                                      |
+| A video                                                                                                              | What its `video` setting says (below). By default an original that is H.264, up to 1080p, in MP4 or MOV goes as it is, and any other video as H.264 the [media service](../ems/index.md) makes while it plays.                     |
+| A picture                                                                                                            | Its largest picture copy (AVIF), else the original when it is a JPEG, PNG, AVIF, WebP or GIF. It shows for 10 seconds (its `picture` setting) before the next; the last one stays until it is stopped.                             |
+| Any other path, such as `/dashboard-wall/Kitchen` or `/slideshow?under=/archive/albums/Summer-2025&slideshow=screen` | That page of EiN as you see it, with its sound, which the media service renders into live video, a few seconds behind ([On a TV](../dashboard/screens.md#on-a-tv)). It plays until it is stopped, so it can only be the last line. |
 
 `find … -type f` lists the copies EiN made under each file too; they are left out when the list
 names the files themselves. A path is written from `/`, and a path under one of EiN's folders that
@@ -696,21 +696,21 @@ such as **DLNA**, **DMR** or **Media sharing**.
 have one whose `show` you may write to and whose driver runs, so none while the `devices-bridge`
 service is stopped (`devices --endpoint show` lists them in the terminal):
 
-| Where                                                  | What the speaker or screen is given                                                         |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| The [viewer](../archive/viewer.md#the-more-menu)'s bar | The file shown, such as `/archive/music/Wrenfield-choir/evening-song.mp3`.                  |
-| An album's **⋮**                                       | The album's slideshow for a screen, narrowed as the album is: `/albums/…?slideshow=screen`. |
-| The **Media** page's **⋮**                             | The slideshow of what is found: `/media?q=sailboat&slideshow=screen`.                       |
-| A [dashboard](../dashboard/index.md)'s **⋮**           | Its wall: `/dashboard-wall/Kitchen`.                                                        |
+| Where                                                | What the speaker or screen is given                                                                                              |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| The [viewer](../archive/viewer.md#the-more-menu)'s ⋮ | The file shown, such as `/archive/music/Wrenfield-choir/evening-song.mp3`.                                                       |
+| An album's **⋮**                                     | The album's slideshow for a screen, narrowed and ordered as the album is: `/slideshow?under=/archive/albums/…&slideshow=screen`. |
+| The **Media** page's **⋮**                           | The slideshow of what is found: `/slideshow?q=sailboat&slideshow=screen`.                                                        |
+| A [dashboard](../dashboard/index.md)'s **⋮**         | Its wall: `/dashboard-wall/Kitchen`.                                                                                             |
 
 It lists the speakers and screens. One that does not answer is greyed and marked **offline**, and
 cannot be chosen until it answers again. Choose one to give it what is open, and a note at the foot
 of the screen says what it answered, such as **Kitchen speaker: playing evening-song**, or why it
 refused. The square beside each stops what it plays.
 
-It also lists **A screen near you** when you reach EiN from another network: a TV where your phone
-is, which EiN does not reach itself, given a page, or the recording, video or picture open in the
-viewer ([On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is)).
+A TV where your phone is, which EiN does not reach itself, has a button of its own, the cast icon
+**Show on a screen near you**, beside **Share** and **Edit**, and in the viewer under the picture
+or, on a phone, in its top right corner ([On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is)).
 
 `player` and `playing` say what it plays, `pause`, `play` and `stop` act on it, and a number of
 seconds written to `seek` goes there. A Cast speaker or screen that lets go of the list on its own

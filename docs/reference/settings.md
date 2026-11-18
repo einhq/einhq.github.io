@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 114 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 115 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -333,9 +333,19 @@ Every setting of an EiN with all its modules: 114 of them, in the groups the Set
 | Restarts | `devices-bridge` |
 | From the module | Devices |
 
+### `CFG_PAGE_CONTROL`
+
+**Page control**. The command that controls a page the page streamer renders: `press <id> <key>...` presses keys in it, `state <id>` says what it shows, `message <id> <json>` hands it a message. A screen's controls step through a slideshow with it, say what it shows and move in its video. Empty gives a page on a screen near the browser no controls. The media service sets itself here when it is installed.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means no controls for a page on a screen |
+| Kind | string |
+
 ### `CFG_PAGE_STREAMER`
 
-**Page streamer**. The command that renders a page of EiN as live video, which a screen near the browser — on the network of a phone that reaches EiN over the internet — plays from EiN's address. Empty offers no screen near the browser in Show on. The media service sets itself here when it is installed.
+**Page streamer**. The command that renders a page of EiN as live video, which a screen near the browser — on the network of a phone that reaches EiN over the internet — plays from EiN's address. Empty offers no screen near the browser for a page. The media service sets itself here when it is installed.
 
 | | |
 | --- | --- |

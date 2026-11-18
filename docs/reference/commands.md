@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 465 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 466 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -214,7 +214,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [star](commands-core.md#star) | Bookmark nodes as softlinks in $HOME/stars (star <path>..., star -d <path>..., star [list]) |
 | [stat](commands-core.md#stat) | Display file or node status. |
 | [stats-overview](commands-core.md#stats-overview) | Per-type archive growth: nodes and bytes added by year and month. |
-| [stream-file](commands-core.md#stream-file) | A recording or video for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it. |
+| [stream-file](commands-core.md#stream-file) | A recording, video or picture for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it. |
 | [stream-page](commands-core.md#stream-page) | A page of EiN as live video, as the caller sees it, for a screen near the browser: by the command CFG_PAGE_STREAMER names. |
 | [supervisor](commands-core.md#supervisor) | The services beside EiN, which the supervisor installs and updates. |
 | [supervisor-install](commands-core.md#supervisor-install) | Have the supervisor install a service beside EiN: the media service, the language model or the devices sidecar. |
@@ -466,7 +466,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Devices
 
-[All 6 in full](../devices/commands.md).
+[All 7 in full](../devices/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -474,6 +474,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [devices-bridge](../devices/commands.md#devices-bridge) | Hear devices on the MQTT broker and drive them as devices under /dev (the ha-discovery and shelly drivers), sending them what is written to their controls (the devices-bridge service) |
 | [devices-found](../devices/commands.md#devices-found) | The devices on the network the network listener heard over mDNS, SSDP and WS-Discovery: what each is, whether it can become a device and whether it is one already (for members of the devices group) |
 | [devices-ignore](../devices/commands.md#devices-ignore) | Leave devices found on the network out of devices-found, or take them back with --undo (for members of the devices group) |
+| [devices-nearby](../devices/commands.md#devices-nearby) | A recording, video or picture for a screen near the browser to fetch, as the caller: start makes it, renew keeps it five minutes more, stop lets go of it. |
 | [devices-snmp](../devices/commands.md#devices-snmp) | Walk a device's SNMP objects under an OID (the system group unless one is given), for members of the devices group. |
 | [devices-status](../devices/commands.md#devices-status) | Whether the devices bridge hears the MQTT broker, which drivers it registered, how many devices under /dev they drive, what they cannot read, and whether the sidecar is one this module speaks; or whether the restreamer answers. |
 

@@ -3654,7 +3654,7 @@ stats-overview
 
 ### `stream-file`
 
-A recording or video for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it.
+A recording, video or picture for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it.
 
 <small>reads only</small>
 
@@ -3664,7 +3664,7 @@ stream-file [--renew=<string>] [--stop=<string>] [<path>]
 
 | Argument | What it is |
 | --- | --- |
-| `[<path>]` | The recording or video. |
+| `[<path>]` | The recording, video or picture. |
 
 | Option | What it does |
 | --- | --- |
@@ -3676,7 +3676,7 @@ stream-file /media/2024/boat.mp4
 stream-file --renew near-3f2a9c0d1e4b5a6c
 ```
 
-With `JSON_OUTPUT=1`: id (for --renew and --stop), url (a path read without signing in until it is let go of), type and title.
+With `JSON_OUTPUT=1`: id (for --renew and --stop), url (a path read without signing in until it is let go of), type, title, and captions (its transcript, read the same way) when there is one.
 
 ### `stream-page`
 
@@ -3685,19 +3685,28 @@ A page of EiN as live video, as the caller sees it, for a screen near the browse
 <small>reads only</small>
 
 ```text
-stream-page <route>
+stream-page [--press] [--state] [--message] <route>
 ```
 
 | Argument | What it is |
 | --- | --- |
-| `<route>` | The page's route, such as /dashboard-wall/Kitchen. |
+| `<route>` | The page's route, such as /dashboard-wall/Kitchen; with --press, --state or --message, the stream's id and what follows. |
+
+| Option | What it does |
+| --- | --- |
+| `--press` | press keys in a page streamed so: --press <id> <key>..., by the command CFG_PAGE_CONTROL names. |
+| `--state` | what a page streamed so says it shows: --state <id>. |
+| `--message` | hand a page streamed so a message: --message <id> '{"seek":80}'. |
 
 ```bash
 stream-page /dashboard-wall/Kitchen
-stream-page '/media?q=sailboat&slideshow=screen'
+stream-page '/slideshow?q=sailboat&slideshow=screen'
+stream-page --press page-3f2a9c41d07b5e18 ArrowRight
+stream-page --state page-3f2a9c41d07b5e18
+stream-page --message page-3f2a9c41d07b5e18 '{"seek":80}'
 ```
 
-With `JSON_OUTPUT=1`: path: read <path>.mp4 or <path>.ts; hls: the live HLS playlist; both without signing in, until nobody has read it for a while.
+With `JSON_OUTPUT=1`: id: the stream's, for --press, --state and --message; path: read <path>.mp4 or <path>.ts; remote: the MP4 for a screen near a browser; hls: the live HLS playlist; all without signing in, until nobody has read it for a while. --press, --message: ok. --state: what the page says it shows (title, path, kind, position, media with time, duration and paused), or null.
 
 ### `supervisor`
 

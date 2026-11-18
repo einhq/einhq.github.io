@@ -214,13 +214,14 @@ Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by
 <small>reads only</small>
 
 ```text
-page-stream [--width=<string>] [--height=<string>] [--fps=<string>] [--idle=<string>] <subcommand> <target>
+page-stream [--width=<string>] [--height=<string>] [--fps=<string>] [--idle=<string>] <subcommand> <target> <what>
 ```
 
-| Argument       | What it is                                                                       |
-| -------------- | -------------------------------------------------------------------------------- |
-| `<subcommand>` | start \| list \| stop.                                                           |
-| `<target>`     | start: the page's route, such as /dashboard-wall/Kitchen; stop: the stream's id. |
+| Argument       | What it is                                                                                                                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `<subcommand>` | start \| list \| stop \| press \| state \| message.                                                                                                                                                                |
+| `<target>`     | start: the page's route, such as /dashboard-wall/Kitchen; stop, press, state, message: the stream's id.                                                                                                            |
+| `<what>`       | press: the keys to press, in turn: ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Space, Enter, Escape, Tab, Backspace, Home, End, PageUp, PageDown, a letter or a digit; message: a JSON object, such as {"seek":80}. |
 
 | Option              | What it does                                                             |
 | ------------------- | ------------------------------------------------------------------------ |
@@ -231,9 +232,12 @@ page-stream [--width=<string>] [--height=<string>] [--fps=<string>] [--idle=<str
 
 ```bash
 page-stream start /dashboard-wall/Kitchen
-page-stream start '/media?q=sailboat&slideshow=screen' --idle=60
+page-stream start '/slideshow?q=sailboat&slideshow=screen' --idle=60
 page-stream list
 page-stream stop page-3f2a9c41d07b5e18
+page-stream press page-3f2a9c41d07b5e18 ArrowRight
+page-stream state page-3f2a9c41d07b5e18
+page-stream message page-3f2a9c41d07b5e18 '{"seek":80}'
 ```
 
-With `JSON_OUTPUT=1`: start: id, path (read <path>.mp4 or <path>.ts), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers and encoder; stop: ok.
+With `JSON_OUTPUT=1`: start: id, path (read <path>.mp4 or <path>.ts), remote (the MP4 for a screen near a browser), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers and encoder; stop, press: ok; state: what the page says it shows, or null; message: ok and whether the page took it.

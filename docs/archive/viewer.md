@@ -56,13 +56,15 @@ On a computer:
     from its GPS position;
   - **Show text** / **Hide text** (<kbd>t</kbd>) when text was read from the photo, **Pin faces** /
     **Unpin faces** (<kbd>f</kbd>) on photos and videos with faces found, **Fullscreen**, **Show toolbar** /
-    **Hide toolbar** when you may change the file, **Download**, and **Show on…** when you have a
-    speaker or screen to play it on;
-  - **More** (⋮), only when some of these did not fit.
+    **Hide toolbar** when you may change the file, **Download**, and the cast icon, **Show on a
+    screen near you**, when the file can go to a TV where you are
+    ([On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is));
+  - **More** (⋮), when some of these did not fit, or you have a speaker or screen in the house to
+    play it on (**Show on…**).
 
   The buttons stay in the bar as far as there is room without cutting the date or the place short.
-  In a narrower window they move into the More menu from the end: first **Show on…**, **Download** and the
-  toolbar, then the view buttons, and last the slideshow and the heart.
+  In a narrower window they move into the More menu from the end: first the cast icon, **Download**
+  and the toolbar, then the view buttons, and last the slideshow and the heart.
 
 ### The date under the picture
 
@@ -80,18 +82,19 @@ date a picture gets and how to change it.
 ### The More menu
 
 **More** (⋮) at the right end of the bar holds the bar's buttons it has no room for, in the bar's
-order:
+order, and **Show on…**:
 
-| Row                                            | What it does                                                                                                                                                                                                    |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                                                                                              |
-| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                                                                                          |
-| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                                                                                      |
-| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.                                                                                                                    |
-| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                                                                                              |
-| **Show toolbar** / **Hide toolbar**            | On a phone, shows the [toolbar](#the-toolbar) at the top of the viewer. When you may change the file.                                                                                                           |
-| **Download**                                   | Saves the original file to your device.                                                                                                                                                                         |
-| **Show on…**                                   | Plays the file on a speaker or screen in the house, or on a TV where your phone is; see [Play on a speaker or a screen](../devices/index.md#from-the-app). Only with the [Devices](../devices/index.md) module. |
+| Row                                            | What it does                                                                                                                                                                    |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Favourite** / **Unfavourite** (<kbd>s</kbd>) | Adds the file to your favourites, or takes it out.                                                                                                                              |
+| **Start slideshow**                            | Shows the list one picture after another; see [Watch a slideshow](#watch-a-slideshow).                                                                                          |
+| **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                                                      |
+| **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.                                                                                    |
+| **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                                                              |
+| **Show toolbar** / **Hide toolbar**            | On a phone, shows the [toolbar](#the-toolbar) at the top of the viewer. When you may change the file.                                                                           |
+| **Download**                                   | Saves the original file to your device.                                                                                                                                         |
+| **Show on a screen near you**                  | Plays the file on a TV where you are, chosen in your browser's own list of screens; see [On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is).     |
+| **Show on…**                                   | Plays the file on a speaker or screen in the house; see [Play on a speaker or a screen](../devices/index.md#from-the-app). Only with the [Devices](../devices/index.md) module. |
 
 The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
 picture to picture and the next time you open it.
@@ -183,13 +186,22 @@ narrower.
 - The date sits in a dark pill centred over the top of the picture, with the time beneath it.
 - The bar under the picture keeps the position in the list and the place, and the text, faces and
   fullscreen buttons as far as there is room.
-- ⋮ in the top right corner holds **Favourite**, **Start slideshow**, the text, faces and
-  fullscreen buttons the bar has no room for, **Show toolbar**, **Download** and **Chat**.
+- The top right corner has the cast icon, **Show on a screen near you**, when the file can go to a
+  TV where you are, blue while a TV plays or is connected; and ⋮, which holds **Favourite**,
+  **Start slideshow**, the buttons the bar has no room for, **Show toolbar**, **Download**,
+  **Show on…** and **Chat**.
 - The details panel is closed when the viewer opens. Held upright, swipe up on the picture to pull
   up the details sheet over the bottom half, and swipe down on it to put it away. Held sideways,
   the details open as a panel on the right: press **Show details** beside ⋮, or swipe up, and swipe
   the panel to the right to close it.
 - **Edit faces** is not offered on a phone held upright.
+- **Fullscreen** on the bar gives the file the whole screen alone: a video goes fullscreen in its
+  player, with its controls and subtitles, and a photo with nothing over it, no bar, details or
+  buttons. Tap the photo to show its date and **Exit fullscreen**, and tap again to hide them.
+  Swiping left and right, zooming and double-tapping still work on a photo; swiping up or down is
+  left to the phone, so its own buttons come up from the bottom edge. A video in fullscreen stays
+  on that video. The phone's own Back gesture also leaves fullscreen. An iPhone has no fullscreen
+  for a photo, so the button is only there for a video.
 
 | Gesture                                | What it does                                                 |
 | -------------------------------------- | ------------------------------------------------------------ |
@@ -203,8 +215,9 @@ narrower.
 A swipe that starts at the very edge of the screen is left to the phone itself, so its own Back
 gesture closes the viewer.
 
-Turning the phone sideways makes the viewer fullscreen, and turning it upright again leaves
-fullscreen. An iPhone has no fullscreen for web pages, so there the viewer stays as it is.
+Turning the phone sideways gives the file the whole screen, as **Fullscreen** does, and turning it
+upright again leaves fullscreen. An iPhone has no fullscreen for web pages, so there the viewer stays
+as it is.
 [EiN on a phone](../guide/phone.md) covers the rest of the interface on a small screen.
 
 ## The details panel
@@ -602,7 +615,6 @@ and come back when you move the mouse.
 | The clock                              |                                                              | Where you are and how long the video is, such as `0:42 / 2:11`, and **Chapter 2 of 5** when it has chapters.           |
 | **Subtitles** (CC)                     | <kbd>c</kbd>                                                 | Shows or hides subtitles, when the video has a transcript. The tooltip names the language: **Subtitles: English (c)**. |
 | **Picture-in-picture**                 | <kbd>p</kbd>                                                 | Plays the video in a small window that stays on top, where the browser offers it.                                      |
-| **Cast to a screen**                   |                                                              | Sends the video to a television or other screen. Shown only while your browser finds one.                              |
 | **Fullscreen**                         |                                                              | Gives the player alone the whole screen, with its controls and subtitles.                                              |
 
 The volume you set is remembered in this browser for the next video or recording. There is no
@@ -610,11 +622,18 @@ control for the playback speed.
 
 On a phone, tap the picture to show or hide the controls. Three buttons sit over the middle of the
 picture: back ten seconds, play or pause, and forward ten seconds, or previous and next chapter
-when the video has chapters. **More** (⋮) on the bar holds **Picture-in-picture** and
-**Cast to a screen…**, where the browser offers them. There is no mute button: use the phone's own volume buttons. On an
-iPhone, **Fullscreen** opens Safari's own player, which shows the subtitles when they are
-on. Elsewhere, a wide video put fullscreen with the player's button turns the screen sideways
-where the browser allows it.
+when the video has chapters. **More** (⋮) on the bar holds **Picture-in-picture**, where the
+browser offers it. There is no mute button: use the phone's own volume buttons. **Fullscreen** is
+not on the player's bar but on the viewer's, under the picture; in fullscreen the player's bar has
+**Exit fullscreen**. On an iPhone, **Fullscreen** opens Safari's own player, which shows the
+subtitles when they are on. Elsewhere, a wide video put fullscreen turns the screen sideways where
+the browser allows it.
+
+While a TV near you plays a recording or a video sent with the cast icon, the cast icon is blue,
+and the player plays in step with
+the TV without sound, its controls playing, pausing and moving the TV's; the subtitles button shows
+or hides them on the TV too. In Chrome, while it is connected to a TV, the file you open or move on to goes to the TV. See
+[On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is).
 
 ### The timeline and chapters
 
@@ -762,8 +781,10 @@ and says so. Use **Download** in the More menu to open it on your device.
    skipped after one slide's time.
 
 The slideshow follows the list's order and goes round from the last file to the first, until you
-stop it. There is no shuffle. <kbd>←</kbd> and <kbd>→</kbd> still step back and forward. While it
-runs, the screen is kept from going to sleep.
+stop it. There is no shuffle. <kbd>←</kbd> and <kbd>→</kbd> still step back and forward.
+<kbd>Space</kbd> pauses it: the bar says **Paused**, a photo stays, and a video or recording stops
+where it is, and one you step to waits to be played; <kbd>Space</kbd> again goes on. While it runs,
+the screen is kept from going to sleep.
 
 To stop the slideshow, press **Stop slideshow** in the bar, click the picture, press <kbd>Esc</kbd>,
 or leave fullscreen.
@@ -784,9 +805,16 @@ page does not start it again.
 
 `slideshow=screen` runs it for a screen that nobody touches, such as a TV in the hall. The bar
 keeps the counter, the date and the place, but leaves out **Stop slideshow** and the pointer, and
-the slideshow does not ask for fullscreen. A TV that plays video but runs no browser of its own
-shows it as live video the media service makes of the page, started in the terminal with
-`page-stream start '/media?q=sailboat&slideshow=screen'`; see
+the slideshow does not ask for fullscreen.
+
+For a screen, the slideshow page shows the slideshow alone, over the whole window, with nothing of
+the page that lists the pictures: `/slideshow` with what to show as a search's address has it,
+`under` an album, the words and the filters. `/slideshow?under=/archive/albums/Summer&slideshow=screen`
+shows an album from its newest picture, with `&order=oldest` from its oldest, and
+`/slideshow?q=sailboat&slideshow=screen` every picture of a sailboat. The cast icon of an album
+and of the **Media** page gives a screen this page. A TV that plays video but runs no browser of its own
+shows it as live video the media service makes of the page, with its sound, started in the
+terminal with `page-stream start '/slideshow?q=sailboat&slideshow=screen'`; see
 [A dashboard on a TV](../dashboard/screens.md#on-a-tv).
 
 To change the timing or turn the pan and zoom off, open your picture at the top right, choose

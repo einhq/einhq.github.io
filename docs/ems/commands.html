@@ -332,7 +332,7 @@ ems-text-embed --model</code></pre></div>
 <h3 id="page-stream"><code>page-stream</code><a class="anchor" href="#page-stream" aria-label="Link to this section"></a></h3>
 <p>Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by the media service.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>page-stream [--width=&lt;string&gt;] [--height=&lt;string&gt;] [--fps=&lt;string&gt;] [--idle=&lt;string&gt;] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>page-stream [--width=&lt;string&gt;] [--height=&lt;string&gt;] [--fps=&lt;string&gt;] [--idle=&lt;string&gt;] &lt;subcommand&gt; &lt;target&gt; &lt;what&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -342,11 +342,15 @@ ems-text-embed --model</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>&lt;subcommand&gt;</code></td>
-<td>start | list | stop.</td>
+<td>start | list | stop | press | state | message.</td>
 </tr>
 <tr>
 <td><code>&lt;target&gt;</code></td>
-<td>start: the page&#39;s route, such as /dashboard-wall/Kitchen; stop: the stream&#39;s id.</td>
+<td>start: the page&#39;s route, such as /dashboard-wall/Kitchen; stop, press, state, message: the stream&#39;s id.</td>
+</tr>
+<tr>
+<td><code>&lt;what&gt;</code></td>
+<td>press: the keys to press, in turn: ArrowLeft, ArrowRight, ArrowUp, ArrowDown, Space, Enter, Escape, Tab, Backspace, Home, End, PageUp, PageDown, a letter or a digit; message: a JSON object, such as {&quot;seek&quot;:80}.</td>
 </tr>
 </tbody></table>
 </div>
@@ -376,10 +380,13 @@ ems-text-embed --model</code></pre></div>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>page-stream start /dashboard-wall/Kitchen
-page-stream start <span class="hljs-string">&#x27;/media?q=sailboat&amp;slideshow=screen&#x27;</span> --idle=60
+page-stream start <span class="hljs-string">&#x27;/slideshow?q=sailboat&amp;slideshow=screen&#x27;</span> --idle=60
 page-stream list
-page-stream stop page-3f2a9c41d07b5e18</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: start: id, path (read <path>.mp4 or <path>.ts), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers and encoder; stop: ok.</p>
+page-stream stop page-3f2a9c41d07b5e18
+page-stream press page-3f2a9c41d07b5e18 ArrowRight
+page-stream state page-3f2a9c41d07b5e18
+page-stream message page-3f2a9c41d07b5e18 <span class="hljs-string">&#x27;{&quot;seek&quot;:80}&#x27;</span></code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: start: id, path (read <path>.mp4 or <path>.ts), remote (the MP4 for a screen near a browser), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers and encoder; stop, press: ok; state: what the page says it shows, or null; message: ok and whether the page took it.</p>
 
         </article>
         <footer class="docs-foot">

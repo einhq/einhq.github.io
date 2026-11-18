@@ -99,9 +99,14 @@ The header holds, from the top:
 
 If you may change the album, the header also has **Upload**, **Share** and **Edit**, and under
 **⋮** the items **Add event** and **Move to trash**, and **Hide RAW files** while the album has
-camera RAW files that a picture of the same name can take ([Hide RAW files](#hide-raw-files)). On a phone they are all under **⋮**. If you may
-only look at the album, none of them is there. **Show on…**, under **⋮** for anyone with a speaker or
-screen to write to, gives the album's slideshow to one ([From the app](../devices/index.md#from-the-app)). With the default sharing, everyone with an account
+camera RAW files that a picture of the same name can take ([Hide RAW files](#hide-raw-files)). On a phone they are all under **⋮**, but for the cast icon, which stays beside it. If you may
+only look at the album, none of them is there. Anyone may give the album's slideshow to a TV where
+they are with the cast icon after them, **Show on a screen near you**
+([On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is)), as the album
+is narrowed and ordered, with the sound of its videos, and step through it or pause it from the
+cast icon's controls; and to a
+speaker or screen in the house with **Show on…** under **⋮**
+([From the app](../devices/index.md#from-the-app)). With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else's album you usually have none of
 these buttons.
 

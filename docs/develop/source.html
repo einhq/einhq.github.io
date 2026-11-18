@@ -363,6 +363,7 @@ make health</code></pre></div>
 </tr>
 </tbody></table>
 </div>
+<p>Each push and pull request runs checks of its own. Core&#39;s run <code>deno fmt --check</code>, <code>deno task lint</code>, <code>deno task check</code> and <code>deno task test</code>. A module&#39;s run in a checkout of core&#39;s <code>main</code> with the module in <code>modules/&lt;name&gt;</code>: <code>deno fmt --check modules/&lt;name&gt;</code> and <code>deno lint modules/&lt;name&gt;</code>, under core&#39;s settings. Run them there before you send a change to a module.</p>
 <p>The module contract is what modules may import from core: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and the Web UI&#39;s kit, <code>@ein/ui/*</code>. Its surface is kept as a snapshot in <code>src/client/contract.snapshot</code>, and a test fails when the surface changes. After a deliberate change, raise <code>MODULE_API_VERSION</code> in <code>src/modules/types.ts</code> and run <code>deno task contract:snapshot</code> to write the snapshot again.</p>
 <p>The commit history follows Conventional Commits, such as <code>fix(shell): …</code> or <code>feat(archive): …</code>. Write yours the same way.</p>
 <h2 id="build-and-run-the-image">Build and run the image<a class="anchor" href="#build-and-run-the-image" aria-label="Link to this section"></a></h2>

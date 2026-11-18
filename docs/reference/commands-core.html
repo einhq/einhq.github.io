@@ -5604,7 +5604,7 @@ ssh-keygen -R nas.local</code></pre></div>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>stats-overview</code></pre></div>
 <h3 id="stream-file"><code>stream-file</code><a class="anchor" href="#stream-file" aria-label="Link to this section"></a></h3>
-<p>A recording or video for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it.</p>
+<p>A recording, video or picture for a screen near the browser to fetch, as the caller: by the command CFG_FILE_STREAMER names; renew it to keep it.</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>stream-file [--renew=&lt;string&gt;] [--stop=&lt;string&gt;] [&lt;path&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -5616,7 +5616,7 @@ ssh-keygen -R nas.local</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>[&lt;path&gt;]</code></td>
-<td>The recording or video.</td>
+<td>The recording, video or picture.</td>
 </tr>
 </tbody></table>
 </div>
@@ -5639,11 +5639,11 @@ ssh-keygen -R nas.local</code></pre></div>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>stream-file /media/2024/boat.mp4
 stream-file --renew near-3f2a9c0d1e4b5a6c</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: id (for --renew and --stop), url (a path read without signing in until it is let go of), type and title.</p>
+<p>With <code>JSON_OUTPUT=1</code>: id (for --renew and --stop), url (a path read without signing in until it is let go of), type, title, and captions (its transcript, read the same way) when there is one.</p>
 <h3 id="stream-page"><code>stream-page</code><a class="anchor" href="#stream-page" aria-label="Link to this section"></a></h3>
 <p>A page of EiN as live video, as the caller sees it, for a screen near the browser: by the command CFG_PAGE_STREAMER names.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>stream-page &lt;route&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>stream-page [--press] [--state] [--message] &lt;route&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -5653,13 +5653,37 @@ stream-file --renew near-3f2a9c0d1e4b5a6c</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>&lt;route&gt;</code></td>
-<td>The page&#39;s route, such as /dashboard-wall/Kitchen.</td>
+<td>The page&#39;s route, such as /dashboard-wall/Kitchen; with --press, --state or --message, the stream&#39;s id and what follows.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--press</code></td>
+<td>press keys in a page streamed so: --press <id> <key>..., by the command CFG_PAGE_CONTROL names.</td>
+</tr>
+<tr>
+<td><code>--state</code></td>
+<td>what a page streamed so says it shows: --state <id>.</td>
+</tr>
+<tr>
+<td><code>--message</code></td>
+<td>hand a page streamed so a message: --message <id> &#39;{&quot;seek&quot;:80}&#39;.</td>
 </tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>stream-page /dashboard-wall/Kitchen
-stream-page <span class="hljs-string">&#x27;/media?q=sailboat&amp;slideshow=screen&#x27;</span></code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: path: read <path>.mp4 or <path>.ts; hls: the live HLS playlist; both without signing in, until nobody has read it for a while.</p>
+stream-page <span class="hljs-string">&#x27;/slideshow?q=sailboat&amp;slideshow=screen&#x27;</span>
+stream-page --press page-3f2a9c41d07b5e18 ArrowRight
+stream-page --state page-3f2a9c41d07b5e18
+stream-page --message page-3f2a9c41d07b5e18 <span class="hljs-string">&#x27;{&quot;seek&quot;:80}&#x27;</span></code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: id: the stream&#39;s, for --press, --state and --message; path: read <path>.mp4 or <path>.ts; remote: the MP4 for a screen near a browser; hls: the live HLS playlist; all without signing in, until nobody has read it for a while. --press, --message: ok. --state: what the page says it shows (title, path, kind, position, media with time, duration and paused), or null.</p>
 <h3 id="supervisor"><code>supervisor</code><a class="anchor" href="#supervisor" aria-label="Link to this section"></a></h3>
 <p>The services beside EiN, which the supervisor installs and updates.</p>
 <div class="code"><pre tabindex="0"><code>supervisor &lt;subcommand&gt;</code></pre></div>

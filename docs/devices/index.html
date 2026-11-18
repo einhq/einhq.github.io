@@ -894,8 +894,8 @@ find /archive/albums/Summer-2025 -<span class="hljs-built_in">type</span> f | <s
 <td>Its largest picture copy (AVIF), else the original when it is a JPEG, PNG, AVIF, WebP or GIF. It shows for 10 seconds (its <code>picture</code> setting) before the next; the last one stays until it is stopped.</td>
 </tr>
 <tr>
-<td>Any other path, such as <code>/dashboard-wall/Kitchen</code> or <code>/albums/Summer-2025?slideshow=screen</code></td>
-<td>That page of EiN as you see it, which the media service renders into live video, a few seconds behind (<a href="../dashboard/screens.html#on-a-tv">On a TV</a>). It plays until it is stopped, so it can only be the last line.</td>
+<td>Any other path, such as <code>/dashboard-wall/Kitchen</code> or <code>/slideshow?under=/archive/albums/Summer-2025&amp;slideshow=screen</code></td>
+<td>That page of EiN as you see it, with its sound, which the media service renders into live video, a few seconds behind (<a href="../dashboard/screens.html#on-a-tv">On a TV</a>). It plays until it is stopped, so it can only be the last line.</td>
 </tr>
 </tbody></table>
 </div>
@@ -956,16 +956,16 @@ service is stopped (<code>devices --endpoint show</code> lists them in the termi
 </tr>
 </thead>
 <tbody><tr>
-<td>The <a href="../archive/viewer.html#the-more-menu">viewer</a>&#39;s bar</td>
+<td>The <a href="../archive/viewer.html#the-more-menu">viewer</a>&#39;s ⋮</td>
 <td>The file shown, such as <code>/archive/music/Wrenfield-choir/evening-song.mp3</code>.</td>
 </tr>
 <tr>
 <td>An album&#39;s <strong>⋮</strong></td>
-<td>The album&#39;s slideshow for a screen, narrowed as the album is: <code>/albums/…?slideshow=screen</code>.</td>
+<td>The album&#39;s slideshow for a screen, narrowed and ordered as the album is: <code>/slideshow?under=/archive/albums/…&amp;slideshow=screen</code>.</td>
 </tr>
 <tr>
 <td>The <strong>Media</strong> page&#39;s <strong>⋮</strong></td>
-<td>The slideshow of what is found: <code>/media?q=sailboat&amp;slideshow=screen</code>.</td>
+<td>The slideshow of what is found: <code>/slideshow?q=sailboat&amp;slideshow=screen</code>.</td>
 </tr>
 <tr>
 <td>A <a href="../dashboard/index.html">dashboard</a>&#39;s <strong>⋮</strong></td>
@@ -977,9 +977,9 @@ service is stopped (<code>devices --endpoint show</code> lists them in the termi
 cannot be chosen until it answers again. Choose one to give it what is open, and a note at the foot
 of the screen says what it answered, such as <strong>Kitchen speaker: playing evening-song</strong>, or why it
 refused. The square beside each stops what it plays.</p>
-<p>It also lists <strong>A screen near you</strong> when you reach EiN from another network: a TV where your phone
-is, which EiN does not reach itself, given a page, or the recording, video or picture open in the
-viewer (<a href="../dashboard/screens.html#on-a-tv-where-your-phone-is">On a TV where your phone is</a>).</p>
+<p>A TV where your phone is, which EiN does not reach itself, has a button of its own, the cast icon
+<strong>Show on a screen near you</strong>, beside <strong>Share</strong> and <strong>Edit</strong>, and in the viewer under the picture
+or, on a phone, in its top right corner (<a href="../dashboard/screens.html#on-a-tv-where-your-phone-is">On a TV where your phone is</a>).</p>
 <p><code>player</code> and <code>playing</code> say what it plays, <code>pause</code>, <code>play</code> and <code>stop</code> act on it, and a number of
 seconds written to <code>seek</code> goes there. A Cast speaker or screen that lets go of the list on its own
 while it plays, as some do after a while, is given it again from where it was; one that lets go
