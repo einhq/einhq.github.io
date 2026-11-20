@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -131,13 +132,16 @@ nor in a development checkout run with <code>deno task dev</code>.</p>
 <p>With the supervisor, every run of <code>setup.sh</code> runs in the supervisor&#39;s image too, whoever starts
 it: the installer, you on the machine, or the supervisor. The compose that runs the services is then
 the one in that image, so the machine needs the container engine alone. Under podman, <code>setup.sh</code>
-turns on podman&#39;s socket for it (<code>systemctl --user enable --now podman.socket</code>).</p>
+turns on podman&#39;s socket for it (<code>systemctl --user enable --now podman.socket</code>) whenever the socket
+does not answer, as when a stopped service left its file behind.</p>
 <h2 id="the-services-on-settings--modules">The services on Settings → Modules<a class="anchor" href="#the-services-on-settings--modules" aria-label="Link to this section"></a></h2>
 <p>On <strong>Settings → Modules</strong>, the button with the server beside <strong>Install</strong> opens <strong>Services beside
-EiN</strong>, for the administrator. It lists each service with its state, the image it runs, the version
-of what it offers EiN and when that image was built, and which installed modules ask for it and
-which versions they take. <strong>Install</strong> installs a service that is not installed, <strong>Update</strong> updates
-one, and <strong>Update all</strong> every service installed.</p>
+EiN</strong>, for the administrator. It lists each service with its state, the release it runs and when
+that image was built, and which installed modules ask for it and which versions they take.
+<strong>Install</strong> installs a service that is not installed. As for a module, a service with a newer
+release has <strong>Update to</strong> that version beside it, <code>Update to 0.4.9</code>, and <strong>Update all</strong> at the top
+updates every one that has; a service that runs its newest release has no button, and the foot of
+the list says when the releases were last checked.</p>
 <p>A module&#39;s panel shows the services it talks to under <strong>Services beside EiN</strong> on its <strong>Overview</strong>,
 each with the versions it takes and whether it is installed, with <strong>Install</strong> beside one that is
 not. When an installed module talks to a service that is not installed, the top of the tab says so,
@@ -162,7 +166,7 @@ container, such as:</p>
 </tr>
 <tr>
 <td>the devices sidecar</td>
-<td>the machine&#39;s own network, which it listens on for devices, and the ports 1883, 1984 and 8554 for the devices&#39; MQTT broker and the cameras&#39; streams</td>
+<td>the machine&#39;s own network, which it listens on for devices, and the ports 1883 and 1984 for the devices&#39; MQTT broker and the cameras&#39; streams</td>
 </tr>
 </tbody></table>
 </div>
@@ -172,39 +176,45 @@ again, as <code>setup.sh --ems</code> does, so EiN is away for a minute or two, 
 it. An update of EiN does the same; an update of another service leaves EiN running.</p>
 <h2 id="updates">Updates<a class="anchor" href="#updates" aria-label="Link to this section"></a></h2>
 <p>The supervisor updates the services by itself in two ways:</p>
+<p>Once an hour it reads which releases GitHub has of each service, and a service with a newer
+release than the one it runs has an update: the newest release of the line its modules ask for for
+the media service and the sidecar, the newest of all for EiN and the database, and deploy&#39;s newest
+release for the supervisor. The language model has one when <code>compose.llm.yaml</code> names another image
+than it runs, as after an update of deploy. It updates them by itself in two ways:</p>
 <ul>
 <li><strong>With their modules.</strong> When an installed module asks for another line of the media service or
 the sidecar than the one that runs, as after you update the <code>ems</code> module to a release that needs
-a newer media service, the supervisor downloads that line within a minute and makes the service
-again (<a href="updating.html#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a>).
-A line not published yet is tried again a day later.</li>
+a newer media service, the supervisor installs the newest release of that line within a minute
+and makes the service again (<a href="updating.html#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a>).
+A line not published yet waits until it is; a release that did not come up is tried again a day
+later.</li>
 <li><strong>Each night</strong>, at <code>EIN_UPDATE_AT</code> in <code>~/ein/.env</code>, 04:00 by default in the machine&#39;s time zone,
-it updates every service installed. <code>off</code> turns this off; the services are then updated when you
-ask.</li>
+it updates every service that has an update. <code>off</code> turns this off; the services are then updated
+when you ask.</li>
 </ul>
-<p>An update downloads each service&#39;s image and leaves a service that already runs the newest one as
-it is. A service whose new image does not come up — EiN does not answer within 10 minutes, the
-database or the media service does not report itself healthy, or another service stops or restarts
-again and again — is put back on the image it ran before, and the job fails with the service&#39;s last
+<p>An update leaves a service that already runs its newest release as it is. A service whose new
+release does not come up — EiN does not answer within 10 minutes, the database, the media service
+or the language model does not report itself healthy, or another service stops or restarts again
+and again — is put back on the release it ran before, and the job fails with the service&#39;s last
 log lines and <code>setup.sh: core did not come up on its new image, and runs on the one it ran before</code>.
-The next night&#39;s update tries the newest image again.</p>
+The next night&#39;s update tries the newest release again.</p>
 <p>Modules are not part of this: they are updated on <strong>Settings → Modules</strong>, as <a href="modules.html#update-a-module">Modules</a>
 describes.</p>
 <h2 id="from-eins-terminal">From EiN&#39;s terminal<a class="anchor" href="#from-eins-terminal" aria-label="Link to this section"></a></h2>
 <p>The same, as the administrator:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
-supervisor status            <span class="hljs-comment"># each service, and the job that runs or ran last</span>
+supervisor status            <span class="hljs-comment"># each service, the newer release it has, and the job that runs or ran last</span>
 supervisor install ems       <span class="hljs-comment"># install the media service; llm and devices the same way</span>
-supervisor update            <span class="hljs-comment"># update every service installed now</span>
+supervisor update            <span class="hljs-comment"># update every service that has a newer release now</span>
 supervisor update core db    <span class="hljs-comment"># update these</span></code></pre></div>
-<div class="code"><pre tabindex="0"><code>db          running, healthy · ghcr.io/einhq/db:main
-core        running · ghcr.io/einhq/core:main
+<div class="code"><pre tabindex="0"><code>db          running, healthy · ghcr.io/einhq/db:0.1.0
+core        running · ghcr.io/einhq/core:0.1.1 · update to 0.1.2
 ems         not installed · asked for by ems ^0.4.4
-devices     running · ghcr.io/einhq/devices:main
+devices     running · ghcr.io/einhq/devices:0.1.1 · asked for by devices ^0.1.0
 llm         not installed
-supervisor  running · ghcr.io/einhq/supervisor:main
-Every service is updated each night at 04:00.
-Last: setup.sh --only db,core,devices,supervisor, asked by admin at 2026-11-16T15:08:00+0100: done</code></pre></div>
+supervisor  running · ghcr.io/einhq/supervisor:0.1.2
+Every service with an update is updated each night at 04:00.
+Last: setup.sh --only core, asked by the supervisor: the nightly update at 2026-11-16T04:00:12+0100: done</code></pre></div>
 <p>In an installation without a supervisor, <code>supervisor status</code> says so. The
 <a href="../reference/commands-core.html">reference</a> has the commands.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
@@ -216,11 +226,11 @@ Last: setup.sh --only db,core,devices,supervisor, asked by admin at 2026-11-16T1
 </tr>
 </thead>
 <tbody><tr>
-<td><code>The supervisor&#39;s image, ghcr.io/einhq/supervisor:main, could not be pulled</code></td>
+<td><code>The supervisor&#39;s image, ghcr.io/einhq/supervisor:0.1.2, could not be pulled</code></td>
 <td><code>setup.sh</code> goes on without it and sets <code>EIN_SUPERVISOR=0</code>. Check the machine reaches <code>ghcr.io</code>, and run <code>~/ein/setup.sh --supervisor</code> again.</td>
 </tr>
 <tr>
-<td><code>The supervisor needs podman&#39;s socket, which is not at …</code></td>
+<td><code>The supervisor needs podman&#39;s socket, which does not answer at …</code></td>
 <td>Turn it on with <code>systemctl --user enable --now podman.socket</code>, then <code>~/ein/setup.sh --supervisor</code>.</td>
 </tr>
 <tr>

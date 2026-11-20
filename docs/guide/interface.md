@@ -326,6 +326,12 @@ knows, by area, is in [Keyboard shortcuts](../reference/shortcuts.md).
 - **Messages at the foot of the screen** say what has happened, often with **Undo**. They leave
   by themselves after 4 seconds, or 8 seconds when they offer an action. EiN has no list of past
   messages.
+- **EiN has been updated. This page reloads in 60 s.** appears when EiN or one of its modules was
+  updated, installed or removed while the page was open: the page still runs the code it loaded,
+  which may no longer work with what EiN now runs. The page reloads by itself when the count runs
+  out, and another update meanwhile, such as the next of several modules, starts the count again.
+  **Reload now** does not wait; closing the message puts the reload off until you next come back to
+  the tab. A tab that was not in view reloads at once when you come back to it.
 - **Back to top**, a round button at the lower right, appears once you have scrolled a screen's
   height down a page.
 
@@ -336,7 +342,7 @@ knows, by area, is in [Keyboard shortcuts](../reference/shortcuts.md).
 | **Disconnected** in the top bar                                                                  | The connection to EiN dropped: your network, or EiN restarting.                                                                                          | Wait; EiN reconnects by itself within a second or two. If it stays, ask your administrator whether EiN is running. |
 | The sign-in page appears while you were working                                                  | Your sign-in ended — the tab sat unused longer than your administrator allows, a day unless they changed it — or an administrator disabled your account. | Sign in again. EiN takes you back to the page you were on.                                                         |
 | **Nothing here**: "There is no page at … The link may be mistyped, or what it led to has moved." | The address leads to no page.                                                                                                                            | **Go back** or **Go home**.                                                                                        |
-| **This page did not load**                                                                       | Its code could not be fetched, usually because EiN was updated while the tab was open.                                                                   | **Reload**.                                                                                                        |
+| **This page did not load**                                                                       | Its code could not be fetched, usually because EiN was updated while the tab was open and the page has not reloaded yet.                                 | **Reload**.                                                                                                        |
 | **Something broke on this page**: "The rest of EiN still works."                                 | An error while drawing the page; the error text is shown under it, and below that where it happened.                                                     | **Reload**. If it keeps happening, choose **Copy details** and send what it copies to your administrator.          |
 | An entry you expect is not in the sidebar                                                        | It is for administrators, its module is not installed, or someone hid it.                                                                                | See the sidebar table above, [Modules](../admin/modules.md) and [Your sidebar and top bar](customizing.md).        |
 

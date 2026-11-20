@@ -61,9 +61,11 @@ since they hold the content.
 So an instance without the Archive has `/archive/tags` and nothing else under `/archive`. A folder
 that already exists is left as it is, whoever owns it.
 
-`/archive` itself has the mode `0771`: everyone may pass through, but only the `users` group, which
-every account belongs to, may list it. The folders a module makes are `0775`, owned by `admin` with
-the group `users`, so everyone with an account may add content there. What each album, person or
+`/archive` itself has the mode `1771`: everyone may pass through, but only the `users` group, which
+every account belongs to, may list it. The folders a module makes are `1771` too, owned by `admin`
+with the group `users`, so everyone with an account may add content there. Both have
+[the sticky bit](../admin/permissions.md#the-sticky-bit): what someone keeps private there, nobody
+else can delete. What each album, person or
 location then shows to whom is its own sharing; see [Sharing](../guide/sharing.md).
 
 With the Archive, a photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
@@ -205,8 +207,9 @@ engine announces its own progress on `/dev/pipeline-events`; see [Changes and pi
 Both are the administrator's alone, with the mode `0700`.
 `/dev/null` works as on Linux: reading it gives nothing, and what is written to it is thrown away.
 
-`/tmp` is open to everyone, with the mode `0777`, and is kept in memory: what you put there is gone
-when EiN restarts. A file directly in `/tmp` that has not changed for a day is removed before that;
+`/tmp` is open to everyone, with the mode `1777`, and is kept in memory: what you put there is gone
+when EiN restarts. Like `/tmp` on Linux it has [the sticky bit](../admin/permissions.md#the-sticky-bit):
+what you put there is yours alone to read and to remove, until you share it. A file directly in `/tmp` that has not changed for a day is removed before that;
 **Hours in /tmp**, `CFG_TMP_RETENTION_HOURS`, sets how long. Use it for files you need only for a
 moment.
 

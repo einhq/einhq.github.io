@@ -371,7 +371,9 @@ A page writes a date or a time with `formatDateTime`, `formatDate` or `formatTim
 which take the options `toLocaleString` takes, or with `dateTimeFormat` where it needs an
 `Intl.DateTimeFormat`. They follow the reader's **Date and time format**; `toLocaleString` and a
 bare `Intl.DateTimeFormat` follow the browser's language instead, which gives an English browser a
-12-hour clock.
+12-hour clock. `deno lint` refuses those in a page (the rule `ein/ui-date-locale`): `toLocaleDateString`,
+`toLocaleTimeString`, `toLocaleString` on what reads as a date, and an `Intl.DateTimeFormat` without
+a locale. A number's `toLocaleString()` stays allowed.
 
 ### Where an entry opens a route
 
@@ -619,7 +621,9 @@ the form runs `command` as the person editing, with `JSON_OUTPUT=1`, and takes `
 from each entry of its answer, or of the list at the key path `items` when the answer is not a list;
 `{other}` in `command` is another parameter's value, so `"command": "device-show {device}",
 "items": "endpointList"` lists a chosen device's endpoints. `where` keeps the entries whose fields
-have one of the given values: `"where": { "type": "control" }` lists only its controls. `dashboard-card-add` checks a card's
+have one of the given values: `"where": { "type": "control" }` lists only its controls. The
+form shows a hundred choices at a time and narrows them as the person types, so a command may list
+thousands, as the Västtrafik module's `vt-stops` does. `dashboard-card-add` checks a card's
 values against its `params` before it puts it on.
 
 The route is drawn with the values in its query, `/cards/todo/list?list=%2Fgroups%2F…&who=true`,

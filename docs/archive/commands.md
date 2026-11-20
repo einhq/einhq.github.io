@@ -73,7 +73,7 @@ album-cover /archive/albums/Exempelalbum_2019
 album-cover --all --stale --limit 50
 ```
 
-With `JSON_OUTPUT=1`: nothing; a coverPhoto softlink is written for each album that had none.
+With `JSON_OUTPUT=1`: how many albums were scanned, covered and passed over, the albums that failed, and each album covered with its new cover.
 
 ### `album-device-add`
 
@@ -202,7 +202,7 @@ album-span --all --stale
 album-span --dry-run /archive/albums/Exempelalbum_2019
 ```
 
-With `JSON_OUTPUT=1`: how many albums were scanned and updated, and each written album (each scanned one with --dry-run): its span, media count, first and last capture, and the hand-set ends still in force.
+With `JSON_OUTPUT=1`: how many albums were scanned and updated, the albums that failed, and each written album (each scanned one with --dry-run): its span, media count, first and last capture, and the hand-set ends still in force.
 
 ### `album-stack`
 
@@ -234,7 +234,7 @@ album-stack refresh /archive/albums/Exempelalbum_2019 --dry-run -v
 album-stack front /archive/albums/Exempelalbum_2019 /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg
 ```
 
-With `JSON_OUTPUT=1`: refresh: how many albums were scanned and changed, stacks and stacked photos, and per album its manifest; the others: the album and member acted on.
+With `JSON_OUTPUT=1`: refresh: how many albums were scanned and changed, stacks and stacked photos, the albums that failed, and per album its manifest; the others: the album and member acted on.
 
 ### `anniversaries`
 

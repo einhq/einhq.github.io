@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 466 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 473 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 466 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 473 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -95,7 +96,7 @@
         <article class="prose">
 <!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. -->
 
-<p>Every command an EiN with all its modules has: 466 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<p>Every command an EiN with all its modules has: 473 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -153,7 +154,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#cat">cat</a></td>
-<td>Print nodes&#39; contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a camera&#39;s stream (a JPEG of it now)</td>
+<td>Print nodes&#39; contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a stream (its bytes from now on, to a file); a picture, video or recording is a preview on a terminal and its bytes to a file or a pipe.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#chmod">chmod</a></td>
@@ -893,7 +894,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#supervisor-update">supervisor-update</a></td>
-<td>Have the supervisor update services beside EiN now, EiN among them; every installed one when none is named.</td>
+<td>Have the supervisor update services beside EiN now, EiN among them; every one with a newer release when none is named.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#system-info">system-info</a></td>
@@ -1824,7 +1825,7 @@
 </tbody></table>
 </div>
 <h2 id="media-service">Media service<a class="anchor" href="#media-service" aria-label="Link to this section"></a></h2>
-<p><a href="../ems/commands.html">All 11 in full</a>.</p>
+<p><a href="../ems/commands.html">All 12 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1875,6 +1876,10 @@
 <tr>
 <td><a href="../ems/commands.html#page-stream">page-stream</a></td>
 <td>Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by the media service.</td>
+</tr>
+<tr>
+<td><a href="../ems/commands.html#stream-transcode">stream-transcode</a></td>
+<td>Transcode a live stream (a camera) into another as H.264, by the media service, for a browser or a screen that cannot play it as it comes.</td>
 </tr>
 </tbody></table>
 </div>
@@ -2091,6 +2096,41 @@
 </tr>
 </tbody></table>
 </div>
+<h2 id="västtrafik">Västtrafik<a class="anchor" href="#västtrafik" aria-label="Link to this section"></a></h2>
+<p><a href="../vasttrafik/commands.html">All 6 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../vasttrafik/commands.html#vt-departures">vt-departures</a></td>
+<td>Show the next departures from Västtrafik stops, at the time Västtrafik now expects each, refreshed at most every 20 seconds.</td>
+</tr>
+<tr>
+<td><a href="../vasttrafik/commands.html#vt-disruptions">vt-disruptions</a></td>
+<td>List Västtrafik&#39;s disruptions in effect at stops or on lines — moved platforms, diversions, lines not running — the worst first, from a copy refreshed at most every five minutes.</td>
+</tr>
+<tr>
+<td><a href="../vasttrafik/commands.html#vt-lines">vt-lines</a></td>
+<td>List the lines that leave Västtrafik stops within twelve hours, with their directions, and the platforms they leave from.</td>
+</tr>
+<tr>
+<td><a href="../vasttrafik/commands.html#vt-positions">vt-positions</a></td>
+<td>Show where Västtrafik&#39;s vehicles are now, around stops or in a box, refreshed at most every 5 seconds.</td>
+</tr>
+<tr>
+<td><a href="../vasttrafik/commands.html#vt-stops">vt-stops</a></td>
+<td>List Västtrafik&#39;s stop areas, every one or those whose name has the words given, from a copy refreshed each day.</td>
+</tr>
+<tr>
+<td><a href="../vasttrafik/commands.html#vt-tracks">vt-tracks</a></td>
+<td>Show where the lines through a box, around stops or given, run, each line and direction as one of its journeys runs, clipped to the box: the lines with a vehicle in it now, and those whose path crosses it with a vehicle seen within the day; each path kept a day.</td>
+</tr>
+</tbody></table>
+</div>
 
         </article>
         <footer class="docs-foot">
@@ -2098,7 +2138,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#automation">Automation</a></li><li><a href="#dashboards">Dashboards</a></li><li><a href="#devices">Devices</a></li><li><a href="#media-service">Media service</a></li><li><a href="#media">Media</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#todo">Todo</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#automation">Automation</a></li><li><a href="#dashboards">Dashboards</a></li><li><a href="#devices">Devices</a></li><li><a href="#media-service">Media service</a></li><li><a href="#media">Media</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#todo">Todo</a></li><li><a href="#västtrafik">Västtrafik</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -288,7 +288,7 @@ The folders directly under `/archive` that the module's content lives in. The Ar
 "roots": ["/archive/people", "/archive/locations", "/archive/cameras", "/archive/albums", "/archive/sources"]
 ```
 
-Each must be `/archive/` followed by one name of lower case letters, digits, `_` and `-`, starting with a letter. `mod setup` creates a missing one, owned by the administrator and the users group, with mode 771: anyone else, someone holding a link included, reaches what is shared with them under it but cannot list it. Nothing removes one, so removing a module does not delete its content. Name the roots in your module's own code too, so its dependents can use them: the Archive exports them as `@archive/paths`.
+Each must be `/archive/` followed by one name of lower case letters, digits, `_` and `-`, starting with a letter. `mod setup` creates a missing one, owned by the administrator and the users group, with mode 1771: anyone else, someone holding a link included, reaches what is shared with them under it but cannot list it, and its sticky bit keeps a member from removing what they may not change. Nothing removes one, so removing a module does not delete its content. Name the roots in your module's own code too, so its dependents can use them: the Archive exports them as `@archive/paths`.
 
 ### `indexes`
 

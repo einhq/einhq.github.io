@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -224,9 +225,10 @@ podman run -d --name ems --restart always -p 8181:8181 \
   -e EMS_NAME=laptop \
   -e EMS_KEY=a-long-random-key \
   -e EMS_OPS=<span class="hljs-string">&#x27;media.probe,image.*,video.poster,audio.*,fingerprint.compute,vision.embed&#x27;</span> \
-  --memory 16g ghcr.io/einhq/ems:0.4</code></pre></div>
-<p><code>0.4</code> is the line the <code>ems</code> module asks for (<code>EIN_EMS_TAG</code> in <code>~/ein/.env</code> on EiN&#39;s machine): an
-instance of another line is named in the <strong>Status</strong> page&#39;s <code>ems laptop api</code> check.</p>
+  --memory 16g ghcr.io/einhq/ems:0.4.9</code></pre></div>
+<p><code>0.4.9</code> is the release EiN&#39;s own media service runs (<code>EIN_EMS_VERSION</code> in <code>~/ein/.env</code> on EiN&#39;s
+machine), the newest of the line the <code>ems</code> module asks for: an instance of another line is named
+in the <strong>Status</strong> page&#39;s <code>ems laptop api</code> check.</p>
 <p>Add <code>--device nvidia.com/gpu=all</code> on a machine with an NVIDIA card set up as
 <a href="gpu.html">The graphics card</a> says. <code>EMS_OPS</code> is a list of operations separated by commas, where
 <code>*</code> stands for any part of a name; without it the instance serves everything. An operation it

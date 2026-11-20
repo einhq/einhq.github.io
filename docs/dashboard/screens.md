@@ -77,17 +77,22 @@ nothing, and makes live video of it. In EiN's terminal:
 page-stream start /dashboard-wall/Kitchen
 ```
 
-It answers the stream's id and where to play it: a path ending in `.mp4`, for a Cast device, the
-same ending in `.ts`, for a DLNA TV, one ending in `screen.mp4`, the same video saying it lasts a
-day, which Chrome hands a TV near it, and one ending in `index.m3u8`, a live HLS playlist, for a
-player that takes HLS (Safari, VLC, an Apple TV). Put EiN's address in front, such as
-`http://ein.local:8080/live/3f2a…9c.mp4`, and play it in anything that plays a stream from an
-address. Anyone with the address can watch it, without signing in, until the stream stops.
+It answers the stream's id and where to play it. The media service writes the video into two
+streams in EiN's tree, yours alone: `/tmp/page-streams/<id>.mp4`, for a Cast device, and the same
+ending in `.ts`, for a DLNA TV, which you read signed in, such as
+`http://ein.local:8080/file/tmp/page-streams/page-3f2a….mp4` in a browser, and a TV given the page
+with **Show on…** reads with a ticket of its own. Whoever starts reading one starts at its latest
+keyframe. Two more addresses, one ending in `screen.mp4`, the video saying it lasts a day, which
+Chrome hands a TV near it, and one ending in `index.m3u8`, a live HLS playlist, for a player that
+takes HLS (Safari, VLC, an Apple TV), anyone with the address can watch without signing in: put
+EiN's address in front, such as `http://ein.local:8080/live/3f2a…9c/index.m3u8`, and play it in
+anything that plays a stream from an address, until the stream stops.
 
 - The video is a few seconds behind the dashboard, and a moving dashboard looks as it does in a
   browser, at 30 frames a second, 1920×1080 unless you give `--width`, `--height` or `--fps`.
 - It stops by itself 20 seconds after the last one watching stops (`--idle` for longer), and
-  `page-stream stop <id>` stops it at once. `page-stream list` lists yours.
+  `page-stream stop <id>` stops it at once; its two streams go with it. `page-stream list` lists
+  yours, with how many watch each.
 - Each stream takes about two processor cores of the media service's machine while the page
   moves, and an encoder of its graphics card when it has one. Two run at once unless the
   administrator allows more (`EMS_PAGES`).
@@ -117,9 +122,10 @@ you choose in its own list of screens. The TV then fetches it from EiN, over the
 
 - A page goes as live video of it, with its sound: the media service makes it as above. An album's
   slideshow, or the **Media** page's, goes as the slideshow page, which starts at the first
-  picture with nothing of the album's page before it. Chrome hands the TV the
-  video that says it lasts a day, since it offers a TV nothing shorter than 15 seconds and, on a
-  phone, no HLS; Safari hands it the HLS playlist.
+  picture with nothing of the album's page before it. The TV plays it as live, with no length,
+  for as long as it is left on, a few seconds behind the page: Chrome gives it the video as a live
+  stream, and Safari the HLS playlist. Chrome without Google's Cast script cannot hand a TV a live
+  stream, and gives it the video saying it lasts a day instead.
 - A recording or a video from the viewer goes as itself, as a Cast screen in the house is given it
   ([Play on a speaker or a screen](../devices/index.md#from-the-app)): a video that is not H.264
   within 1080p is made into H.264 by the media service while the TV plays it, and one whose length
@@ -148,7 +154,7 @@ you choose in its own list of screens. The TV then fetches it from EiN, over the
   such as **Album:** and the album's name, which takes you back to it. Below are the controls: for
   a recording or a video play and pause, **Back 10 seconds**, **Forward 30 seconds** and how far it
   has come; for a slideshow a card with what it shows now, the picture or video with its name and
-  where it is (**3 of 31**), and **Previous**, **Pause or play** and **Next**, which move and hold
+  where it is (**3 of 31**), and **Previous**, **Pause** (**Play** while it is held) and **Next**, which move and hold
   the slideshow itself, as its keys do, and show on the TV a few seconds later; while the slideshow
   plays a video or a recording, a slider of its length with where it is, and **Back 10 seconds**
   and **Forward 10 seconds**, which a picture has not. **Stop casting**, at the bottom, stops the TV.
@@ -168,11 +174,10 @@ you choose in its own list of screens. The TV then fetches it from EiN, over the
 - The TV reaches EiN at the address you opened it at, so EiN must be reachable from the internet
   over HTTPS ([Reach EiN from outside your home](../admin/network.md#reach-ein-from-outside-your-home)),
   and the video takes some of the upload of EiN's own connection while the TV plays it.
-- Chrome offers a screen nothing shorter than 15 seconds: for a shorter recording or video the
-  dialog says so.
-- Keep EiN open on the phone while the TV plays: Chrome on Android pauses the TV when you leave the
-  page or the screen locks, and it plays on when you come back. A page's stream waits five minutes
-  for that.
+- Chrome without Google's Cast script, over plain HTTP or with the script blocked, offers a screen
+  nothing shorter than 15 seconds, for which the dialog says so, and on a phone pauses the TV when
+  you leave the page or the screen locks; it plays on when you come back, and a page's stream waits
+  five minutes for that. With the script the TV plays on whatever the phone does.
 - **Stop** in the dialog, the TV's own remote or the browser's list of screens stops it and lets the
   TV go. A page's stream stops by itself five minutes after the TV stops reading it.
 

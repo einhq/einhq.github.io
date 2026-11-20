@@ -139,16 +139,16 @@ What a driver hears it writes through the same `ModuleDevices`:
 | Call                                                          | What it does                                                                                                                                                                                    |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ensureDevice(access, name, attrs)`                           | Makes `/dev/<name>` when it is missing, else sets the attributes given where they differ. A label is set only when the device is made, so a person's `device-label` is kept. Answers the path   |
-| `ensureEndpoint(access, device, name, type, attrs, mode?)`    | Makes the endpoint `log`, `track` or `control` when it is missing, else sets the attributes given where they differ; refuses one of another type. Answers the path                              |
+| `ensureEndpoint(access, device, name, type, attrs, mode?)`    | Makes the endpoint `log`, `track`, `control` or `stream` when it is missing, else sets the attributes given where they differ; refuses one of another type. Answers the path                    |
 | `removeEndpoint(access, device, endpoint)`                    | Removes an endpoint and its history: one the device no longer has, or one that changed type                                                                                                     |
 | `append(access, device, endpoint, value, { at?, retained? })` | A reading for a log or a control, or a position `{ lat, lng, alt?, speed?, course?, accuracy? }` for a track: kept, and published on `dev.<device>.<endpoint>`. Answers whether it was kept now |
 | `appendFixes(access, device, endpoint, fixes)`                | Many positions for a track at once, each with its `ts`, such as a file's. Answers how many were new; publishes the newest                                                                       |
 | `online(access, device, up)`                                  | The device came or went: sets its `online` attribute when it changed, and publishes `{ device, online }` on `dev.<device>`                                                                      |
 | `forget(access, device)`                                      | Removes the device and everything under it, after calling the driver's own `forget`                                                                                                             |
 
-A device's name, and an endpoint's, is lower-case letters, digits, `-` and `_`, at most 63 long;
-`deviceName(text)` from `@ein/api` makes one from what a device calls itself. EiN's own names in `/dev`
-are refused.
+A device's name, and an endpoint's, is lower-case letters, digits, `-` and `_`, at most 63 long; a
+stream's may end in an extension saying what its bytes are, such as `main.ts`. `deviceName(text)`
+from `@ein/api` makes one from what a device calls itself. EiN's own names in `/dev` are refused.
 
 `append` does the throttling, so a driver hands it every reading: a value the same as the endpoint's
 last is dropped, a number that comes sooner than the endpoint's `minInterval` waits for the end of
@@ -178,7 +178,27 @@ is made with its device's owner, group and access list, a reading or a control `
 ([Devices and their keys](../admin/devices.md#who-may-do-what)): the members of `devices` read it,
 switch a control and share it, and whoever the device is shared with gets the endpoint too. A device
 `ensureDevice` makes is `0770`, the administrator's and the `devices` group's. A log endpoint keeps a bare
-value written to it by hand as `{ value }` (its `valueField`), as `append` keeps a driver's.
+value written to it by hand as `{ value }` (its `valueField`), as `append` keeps a driver's. A
+stream is `0640`: the members of `devices` read it, and its driver alone writes it.
+
+### Writing a stream
+
+A `stream` endpoint is live bytes, such as a camera's video, which EiN keeps nothing of: whoever reads
+it gets the bytes from that moment on, as many readers as there are, and the media service reads it
+through a name it is granted, as it reads a file. The driver writes it: it opens the node to write
+with `cmd.sys.vfs.open(access, path, { mode: 'w' })`, which gives a `StreamWriter`
+(`isStreamWriter` says so) while nobody else holds it, and keeps it open for as long as it runs.
+
+| Member                 | What it is                                                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `write(bytes)`         | Bytes for every reader there now. Never waits for a reader: one that falls 8 MiB behind is let go, and reads to its end         |
+| `writeHeader(bytes)`   | Bytes every reader who joins later is given first, as fragmented MP4's initialization segment, and those there now as any write |
+| `wanted`, `onWanted()` | Whether anyone reads it, staying true 10 seconds after the last one stopped: read the camera only while it is `true`            |
+| `close()`              | Ends the stream for its readers, who open it again to read on; a node removed, or its device forgotten, closes it too           |
+
+Give the endpoint a `mimetype` (`video/mp2t`), and write it in pieces a reader can start at, such as
+whole 188-byte MPEG-TS packets. The camera drivers of the [Devices module](../devices/index.md#a-camera)
+write `main.ts` and `sub.ts` this way, from their restreamer.
 
 ## An example: a weather station that posts JSON
 
@@ -266,7 +286,7 @@ Drivers came with core's module contract 0.14.0: give the module `"coreApi": "^0
 
 | Import        | What it gives                                                                                                                                                       |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@ein/client` | `ModuleDevices`, `Driver`, `DriverInput`, `DriverWrite`, `DriverAnswer`, `AppendOptions`                                                                            |
+| `@ein/client` | `ModuleDevices`, `Driver`, `DriverInput`, `DriverWrite`, `DriverAnswer`, `AppendOptions`; `StreamWriter` and `isStreamWriter` since 0.15.35                         |
 | `@ein/api`    | `DeviceAttrs`, `EndpointAttrs`, `EndpointType`, `ControlSchema`, `DeviceValue`, `DeviceFix`, `DeviceMessage`, `deviceName`, `deviceRoutingKey`, `DEVICES_GROUPNAME` |
 | `@ein/paths`  | `DEV_PATH` and `devicePath(name)`                                                                                                                                   |
 

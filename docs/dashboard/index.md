@@ -63,8 +63,9 @@ The cards that come with Dashboards:
 
 Other modules add their own: the Archive the **Picture of the day**, **Birthdays** and
 [**Weather**](../archive/home.md#on-a-dashboard), Todo a
-**Todo list**, and [Devices](../devices/index.md#on-a-dashboard) a **Camera** and a
-**Button**. A card whose module is removed later says so on the dashboard until you take it off.
+**Todo list**, [Devices](../devices/index.md#on-a-dashboard) a **Camera** and a
+**Button**, and [Västtrafik](../vasttrafik/index.md#on-a-dashboard) **Departures**,
+**Vehicles on the map** and **Disruptions**. A card whose module is removed later says so on the dashboard until you take it off.
 
 A card holding more than its tile has room for, such as a long **Coming up** list or a device with
 many readings, shows it all in turn rather than scrolling: after a few seconds the next row glides

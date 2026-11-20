@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -241,7 +242,8 @@ in with <code>source</code>. See <a href="#write-a-script">Write a script</a>.</
 <p><strong><kbd>Ctrl</kbd>+<kbd>Z</kbd> does not pause a command.</strong> Start a long one with <code>&amp;</code> instead; see
 <a href="#run-a-long-job-in-the-background">Run a long job in the background</a>.</p>
 <p><strong>Process substitution waits for the end.</strong> <code>&lt;(cmd)</code> writes the command&#39;s whole output to a
-temporary node under <code>/tmp</code> before the reading command opens it, so it is not streamed.</p>
+temporary node under <code>/tmp</code> before the reading command opens it, so it is not streamed. The node is
+yours alone, as everything you make in <code>/tmp</code> is.</p>
 <p><strong>Many Unix programs are missing.</strong> <code>tar</code>, <code>curl</code>, <code>diff</code>, <code>less</code> and others have no EiN command.
 <a href="commands.html#unix-commands-ein-does-not-have">Commands by task</a> lists what to use instead.</p>
 <p><strong>Permissions are EiN&#39;s.</strong> A command you may not run is refused the same way in the shell, the Web

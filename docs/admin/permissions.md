@@ -150,13 +150,31 @@ chmod -r o-rw /archive                 # the whole subtree; each node keeps its 
 | Form               | Meaning                                                                 |
 | ------------------ | ----------------------------------------------------------------------- |
 | `0750`, `750`      | Set all nine bits. The same mode on every node of a recursive change.   |
+| `1777`             | A leading `1` sets the sticky bit too; see below.                       |
 | `u`, `g`, `o`, `a` | Owner, group, everyone else, all three. No letter means all three.      |
 | `+`, `-`, `=`      | Add these bits, take them away, or set exactly these; `o=` clears them. |
-| `r`, `w`, `x`      | The bits. Clauses are joined with commas.                               |
+| `r`, `w`, `x`, `t` | The bits, `t` the sticky bit. Clauses are joined with commas.           |
 
 A symbolic mode is worked out from each node's own mode, as coreutils' `chmod -R` does, so
 `chmod -r o-rw` clears only those bits and leaves every node's other bits as they were. EiN has no
-setuid, setgid or sticky bit and no `X`.
+setuid or setgid bit and no `X`.
+
+### The sticky bit
+
+A folder with the sticky bit is one people may add to without being able to remove what others
+keep private there, like `/tmp` on Linux. Writing the folder is not enough to remove a node in it,
+move it away or replace it by a move: only the node's owner, the folder's owner, an administrator
+or someone who may change the node itself may. So a shared album that every member may change, any
+of them may also delete, and one its owner keeps to themselves, only its owner. (On Linux, being
+able to change the node is not enough; here it already lets you rename it and change everything in
+it.) A folder that is itself sticky, such as each folder directly under `/archive`, only its owner,
+the folder's owner or an administrator may remove: members change it to add to it.
+
+In a sticky folder everyone may write, such as `/tmp`, what is created is its creator's alone:
+mode `0700`, in their own group, with no access list, until they change it. `ls -l` shows the bit
+as a `t` in the last place (`rwxrwxrwt`), or a `T` when everyone else has no `x`. `/tmp`,
+`/archive` and the folders directly under `/archive` have it; `chmod +t <folder>` gives it to
+another.
 
 `-r` applies the change to the whole subtree (see
 [What a recursive change does](#what-a-recursive-change-does)); `-L` changes a softlink itself
@@ -294,6 +312,9 @@ When a node is created and nothing names its access:
 | Mode        | Everything for the owner; read and pass-through for the group, plus write where the group could write the parent; for everyone else, only the read and pass-through the parent gives them. Others' write is never inherited. |
 | Access list | Its parent's, as a Linux default ACL carries down.                                                                                                                                                                           |
 
+A node created in a folder everyone may write that has [the sticky bit](#the-sticky-bit), such as
+`/tmp`, is the exception: it is its creator's alone, in their own group.
+
 So, with the Archive, a family album's new uploads, and the thumbnails, faces and metadata processing adds under them,
 take the album's group and grants whoever created them: a person or group granted an album sees
 what is added to it later. What is made under `/home/<user>` stays in that user's group, and the
@@ -379,8 +400,8 @@ share:
 
 | Path                          | Owner and group            | Mode   | Why                                                                                                                                                                                                                                                                     |
 | ----------------------------- | -------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/archive`                    | `admin`, `users`           | `0771` | Everyone may pass through; nobody but the group reads it.                                                                                                                                                                                                               |
-| `/archive/tags`               | `admin`, `users`           | `0771` | The same.                                                                                                                                                                                                                                                               |
+| `/archive`                    | `admin`, `users`           | `1771` | Everyone may pass through; nobody but the group reads it. Sticky: a member removes only what they own or may change.                                                                                                                                                    |
+| `/archive/tags`               | `admin`, `users`           | `1771` | The same, as every folder directly under `/archive`.                                                                                                                                                                                                                    |
 | `/dev`                        | `admin`                    | `0755` | Everyone passes through; only the administrator adds to it, and members of `devices` make devices with `device-create` ([Devices and their keys](devices.md)). A device is `0770` with the group `devices`, so only its members and whoever they share it with read it. |
 | `/home/<user>`                | the account, its own group | `0751` | Others may pass through to what the owner grants, and read nothing else.                                                                                                                                                                                                |
 | `/home/<user>/staging`        | the account                | `0700` | With the Archive. Nobody else, not even through search.                                                                                                                                                                                                                 |
@@ -436,6 +457,13 @@ Commands that only an administrator may run refuse everyone else before they sta
 ```text
 user-create: permission denied: only an administrator may run it
 ```
+
+The administrator writes through no softlink someone else made. A write as the administrator,
+whether a command or a pipeline step working on a member's files, stops at such a link with
+`Access denied for operation 'write through a softlink owned by uid <n>'`. Reading through the link
+still works, and removing it with `rm` removes the link. Write to the target by its own path. A link
+gives nobody more than its owner has, so a member's link cannot lead EiN's steps to write where the
+member could not.
 
 Only an administrator creates or hard-links an account, group or session node, and nobody,
 the administrator included, changes an account's uid or a group's gid once it exists, since

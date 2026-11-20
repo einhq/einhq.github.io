@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -204,20 +205,24 @@ device with each of its endpoints.</p>
 </tr>
 <tr>
 <td><code>stream</code></td>
-<td>A live picture, a camera&#39;s</td>
-<td>A JPEG of it now, from its driver</td>
-<td>Refused: nothing of a stream is kept</td>
+<td>Live bytes, a camera&#39;s video</td>
+<td>Its bytes as its driver writes them</td>
+<td>Its driver&#39;s alone: nothing of a stream is kept</td>
 </tr>
 </tbody></table>
 </div>
 <p>A log of events is a button&#39;s: each entry is a press, such as <code>single</code>, <code>double</code> or <code>long</code>, rather
 than a state, and the same press twice is two entries. Into any other log a driver puts a value only
 when it differs from the one before (see <a href="#how-often-a-reading-is-kept">How often a reading is kept</a>).</p>
-<p>A stream keeps nothing. Each read is a new picture, which the device&#39;s driver takes from the camera
-then: <code>cat /dev/front-door/main &gt; door.jpg</code> saves one, and <code>/file/dev/front-door/main</code> is one in a
-browser. The device&#39;s page plays it live while its driver runs and can, which <code>device-show</code> says as
-<code>&quot;live&quot;: true</code>. Its attributes say what it is: <code>codec</code>, <code>width</code>, <code>height</code>, <code>fps</code> and <code>audio</code>, as far
-as the driver knows them.</p>
+<p>A stream keeps nothing. Reading one gives its bytes from that moment, as its driver writes them,
+or, when its writer marks where a reader may start (the media service marks each keyframe of the
+video it writes), from the latest such point, so a player starts with a whole picture; then until
+you stop: <code>cat /dev/front-door/main.ts &gt; door.ts</code> records a camera, and its name&#39;s extension
+says what the bytes are (<code>.ts</code>, MPEG-TS). The driver writes it only while someone reads it. A picture
+of it now is <code>/stream/dev/front-door/main.ts</code> in a browser, which the device&#39;s driver takes from the
+camera then. A stream of fragmented MP4 (<code>.mp4</code>) the device&#39;s page plays live while its driver
+runs, reading it as any file, which <code>device-show</code> says as <code>&quot;live&quot;: true</code>. Its attributes say what it is: <code>mimetype</code>, <code>codec</code>, <code>width</code>, <code>height</code>, <code>fps</code>
+and <code>audio</code>, as far as the driver knows them.</p>
 <p>A control is not a store of what you wrote. Writing <code>on</code> to <code>/dev/hall-plug/switch-0</code> sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the
 control remembers what was asked, who asked and when (its <code>requested</code> attribute), and the device&#39;s

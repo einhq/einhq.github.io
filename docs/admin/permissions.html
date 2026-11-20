@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -297,6 +298,10 @@ an administrator, everyone who has access and through what.</p>
 <td>Set all nine bits. The same mode on every node of a recursive change.</td>
 </tr>
 <tr>
+<td><code>1777</code></td>
+<td>A leading <code>1</code> sets the sticky bit too; see below.</td>
+</tr>
+<tr>
 <td><code>u</code>, <code>g</code>, <code>o</code>, <code>a</code></td>
 <td>Owner, group, everyone else, all three. No letter means all three.</td>
 </tr>
@@ -305,14 +310,28 @@ an administrator, everyone who has access and through what.</p>
 <td>Add these bits, take them away, or set exactly these; <code>o=</code> clears them.</td>
 </tr>
 <tr>
-<td><code>r</code>, <code>w</code>, <code>x</code></td>
-<td>The bits. Clauses are joined with commas.</td>
+<td><code>r</code>, <code>w</code>, <code>x</code>, <code>t</code></td>
+<td>The bits, <code>t</code> the sticky bit. Clauses are joined with commas.</td>
 </tr>
 </tbody></table>
 </div>
 <p>A symbolic mode is worked out from each node&#39;s own mode, as coreutils&#39; <code>chmod -R</code> does, so
 <code>chmod -r o-rw</code> clears only those bits and leaves every node&#39;s other bits as they were. EiN has no
-setuid, setgid or sticky bit and no <code>X</code>.</p>
+setuid or setgid bit and no <code>X</code>.</p>
+<h3 id="the-sticky-bit">The sticky bit<a class="anchor" href="#the-sticky-bit" aria-label="Link to this section"></a></h3>
+<p>A folder with the sticky bit is one people may add to without being able to remove what others
+keep private there, like <code>/tmp</code> on Linux. Writing the folder is not enough to remove a node in it,
+move it away or replace it by a move: only the node&#39;s owner, the folder&#39;s owner, an administrator
+or someone who may change the node itself may. So a shared album that every member may change, any
+of them may also delete, and one its owner keeps to themselves, only its owner. (On Linux, being
+able to change the node is not enough; here it already lets you rename it and change everything in
+it.) A folder that is itself sticky, such as each folder directly under <code>/archive</code>, only its owner,
+the folder&#39;s owner or an administrator may remove: members change it to add to it.</p>
+<p>In a sticky folder everyone may write, such as <code>/tmp</code>, what is created is its creator&#39;s alone:
+mode <code>0700</code>, in their own group, with no access list, until they change it. <code>ls -l</code> shows the bit
+as a <code>t</code> in the last place (<code>rwxrwxrwt</code>), or a <code>T</code> when everyone else has no <code>x</code>. <code>/tmp</code>,
+<code>/archive</code> and the folders directly under <code>/archive</code> have it; <code>chmod +t &lt;folder&gt;</code> gives it to
+another.</p>
 <p><code>-r</code> applies the change to the whole subtree (see
 <a href="#what-a-recursive-change-does">What a recursive change does</a>); <code>-L</code> changes a softlink itself
 rather than what it points to.</p>
@@ -476,6 +495,8 @@ while on an album of thousands of photos.</p>
 </tr>
 </tbody></table>
 </div>
+<p>A node created in a folder everyone may write that has <a href="#the-sticky-bit">the sticky bit</a>, such as
+<code>/tmp</code>, is the exception: it is its creator&#39;s alone, in their own group.</p>
 <p>So, with the Archive, a family album&#39;s new uploads, and the thumbnails, faces and metadata processing adds under them,
 take the album&#39;s group and grants whoever created them: a person or group granted an album sees
 what is added to it later. What is made under <code>/home/&lt;user&gt;</code> stays in that user&#39;s group, and the
@@ -567,14 +588,14 @@ share:</p>
 <tbody><tr>
 <td><code>/archive</code></td>
 <td><code>admin</code>, <code>users</code></td>
-<td><code>0771</code></td>
-<td>Everyone may pass through; nobody but the group reads it.</td>
+<td><code>1771</code></td>
+<td>Everyone may pass through; nobody but the group reads it. Sticky: a member removes only what they own or may change.</td>
 </tr>
 <tr>
 <td><code>/archive/tags</code></td>
 <td><code>admin</code>, <code>users</code></td>
-<td><code>0771</code></td>
-<td>The same.</td>
+<td><code>1771</code></td>
+<td>The same, as every folder directly under <code>/archive</code>.</td>
 </tr>
 <tr>
 <td><code>/dev</code></td>
@@ -654,6 +675,12 @@ terminal) and end with <strong>Leave admin mode</strong> (or <code>admin --off</
 administrator ends its prompt in <code>#</code>. <a href="accounts.html">Accounts and groups</a> covers who may do this.</p>
 <p>Commands that only an administrator may run refuse everyone else before they start:</p>
 <div class="code"><pre tabindex="0"><code>user-create: permission denied: only an administrator may run it</code></pre></div>
+<p>The administrator writes through no softlink someone else made. A write as the administrator,
+whether a command or a pipeline step working on a member&#39;s files, stops at such a link with
+<code>Access denied for operation &#39;write through a softlink owned by uid &lt;n&gt;&#39;</code>. Reading through the link
+still works, and removing it with <code>rm</code> removes the link. Write to the target by its own path. A link
+gives nobody more than its owner has, so a member&#39;s link cannot lead EiN&#39;s steps to write where the
+member could not.</p>
 <p>Only an administrator creates or hard-links an account, group or session node, and nobody,
 the administrator included, changes an account&#39;s uid or a group&#39;s gid once it exists, since
 ownership and access lists name the number. When an account or group is deleted, its number is
@@ -709,7 +736,7 @@ soft links.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/permissions.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-four-parts-of-a-nodes-access">The four parts of a node's access</a></li><li class="nested"><a href="#how-ein-decides">How EiN decides</a></li><li><a href="#who-you-are-to-ein">Who you are to EiN</a></li><li><a href="#see-a-nodes-permissions">See a node's permissions</a></li><li class="nested"><a href="#in-the-web-ui">In the Web UI</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li><a href="#change-the-mode">Change the mode</a></li><li><a href="#change-the-owner-and-the-group">Change the owner and the group</a></li><li><a href="#grant-more-people-with-an-access-list">Grant more people with an access list</a></li><li><a href="#set-it-all-at-once-with-share-set">Set it all at once with share-set</a></li><li class="nested"><a href="#keep-one-photos-own-sharing">Keep one photo's own sharing</a></li><li><a href="#what-a-recursive-change-does">What a recursive change does</a></li><li><a href="#what-a-new-node-starts-with">What a new node starts with</a></li><li class="nested"><a href="#the-default-sharing">The default sharing</a></li><li><a href="#a-folder-governs-what-is-under-it">A folder governs what is under it</a></li><li><a href="#the-other-bits-are-the-systems">The other bits are the system's</a></li><li><a href="#visitors-and-share-links">Visitors and share links</a></li><li><a href="#administrators">Administrators</a></li><li><a href="#over-ssh-sftp-and-the-web">Over SSH, SFTP and the web</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-four-parts-of-a-nodes-access">The four parts of a node's access</a></li><li class="nested"><a href="#how-ein-decides">How EiN decides</a></li><li><a href="#who-you-are-to-ein">Who you are to EiN</a></li><li><a href="#see-a-nodes-permissions">See a node's permissions</a></li><li class="nested"><a href="#in-the-web-ui">In the Web UI</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li><a href="#change-the-mode">Change the mode</a></li><li class="nested"><a href="#the-sticky-bit">The sticky bit</a></li><li><a href="#change-the-owner-and-the-group">Change the owner and the group</a></li><li><a href="#grant-more-people-with-an-access-list">Grant more people with an access list</a></li><li><a href="#set-it-all-at-once-with-share-set">Set it all at once with share-set</a></li><li class="nested"><a href="#keep-one-photos-own-sharing">Keep one photo's own sharing</a></li><li><a href="#what-a-recursive-change-does">What a recursive change does</a></li><li><a href="#what-a-new-node-starts-with">What a new node starts with</a></li><li class="nested"><a href="#the-default-sharing">The default sharing</a></li><li><a href="#a-folder-governs-what-is-under-it">A folder governs what is under it</a></li><li><a href="#the-other-bits-are-the-systems">The other bits are the system's</a></li><li><a href="#visitors-and-share-links">Visitors and share links</a></li><li><a href="#administrators">Administrators</a></li><li><a href="#over-ssh-sftp-and-the-web">Over SSH, SFTP and the web</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

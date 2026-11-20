@@ -2,9 +2,9 @@
 
 # Media service commands
 
-The commands the media service module adds. They are there once the module is installed. 11 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the media service module adds. They are there once the module is installed. 12 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-sampler](#ems-sampler) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed) · [page-stream](#page-stream)
+[ems-files](#ems-files) · [ems-files-grant](#ems-files-grant) · [ems-gpu](#ems-gpu) · [ems-instance](#ems-instance) · [ems-link](#ems-link) · [ems-memory](#ems-memory) · [ems-models](#ems-models) · [ems-sampler](#ems-sampler) · [ems-status](#ems-status) · [ems-text-embed](#ems-text-embed) · [page-stream](#page-stream) · [stream-transcode](#stream-transcode)
 
 ## E
 
@@ -240,4 +240,37 @@ page-stream state page-3f2a9c41d07b5e18
 page-stream message page-3f2a9c41d07b5e18 '{"seek":80}'
 ```
 
-With `JSON_OUTPUT=1`: start: id, path (read <path>.mp4 or <path>.ts), remote (the MP4 for a screen near a browser), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers and encoder; stop, press: ok; state: what the page says it shows, or null; message: ok and whether the page took it.
+With `JSON_OUTPUT=1`: start: id, path (its stream nodes <path>.mp4 and <path>.ts), remote (the MP4 for a screen near a browser), hls (the live HLS playlist), route, uid and startedAt; list: those with state, readers (of its stream nodes) and encoder; stop, press: ok; state: what the page says it shows, or null; message: ok and whether the page took it.
+
+## S
+
+### `stream-transcode`
+
+Transcode a live stream (a camera) into another as H.264, by the media service, for a browser or a screen that cannot play it as it comes.
+
+<small>reads only</small>
+
+```text
+stream-transcode [--height=<string>] [--idle=<string>] <subcommand> <target> <output>
+```
+
+| Argument       | What it is                                                                                                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<subcommand>` | start \| list \| stop.                                                                                                                                                                            |
+| `<target>`     | start: the stream read, such as /dev/front-door/main.ts; stop: the transcode's id.                                                                                                                |
+| `<output>`     | start: the stream written, made when it is not there, such as /dev/front-door/main.h264.ts; fragmented MP4 when it is video/mp4 (.mp4). Without it, one made for it under /tmp/stream-transcodes. |
+
+| Option              | What it does                                                                 |
+| ------------------- | ---------------------------------------------------------------------------- |
+| `--height=<string>` | start: the picture at most this many pixels high, 144 to 2160 (as it comes)  |
+| `--idle=<string>`   | start: seconds without a reader of the output before it stops by itself (60) |
+
+```bash
+stream-transcode start /dev/front-door/main.ts /dev/front-door/main.h264.ts
+stream-transcode start /dev/porch/sub.ts /tmp/porch.ts --height=720 --idle=120
+stream-transcode start /dev/porch/main.ts --idle=15
+stream-transcode list
+stream-transcode stop transcode-3f2a9c41d07b5e18
+```
+
+With `JSON_OUTPUT=1`: start: id, source, output (the one made for it, when none was named), uid and startedAt; list: those with state, readers (of the output), bytes and error; stop: ok.

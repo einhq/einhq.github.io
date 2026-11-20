@@ -28,19 +28,20 @@ request naming the file, and the media service answers or writes the result wher
 keeps no data of its own and knows nothing of the tree: it reads the files EiN stores, and nothing
 else.
 
-| Work                                                | What you see in EiN                                                    |
-| --------------------------------------------------- | ---------------------------------------------------------------------- |
-| Reading dates, places, cameras and codecs           | Dates and places on pictures; staging can group files                  |
-| Thumbnails, picture sizes, posters and waveforms    | Pictures, videos and recordings show in the grids and the viewer       |
-| Video and audio renditions (AV1 video, AAC audio)   | Videos and recordings play in the browser                              |
-| H.264 streams of videos, made while they play       | Videos for screens that cannot play AV1 (`video-stream`)               |
-| Pages of EiN rendered into live video               | [A dashboard on a TV](../dashboard/screens.md#on-a-tv) (`page-stream`) |
-| Faces, voices and who is speaking                   | [People and faces](../archive/people.md)                               |
-| Transcripts and language detection                  | What is said in videos and recordings, searchable                      |
-| Text in pictures and handwriting, text in documents | Text found in photographed pages, letters and PDFs, searchable         |
-| Picture and text vectors                            | Finding pictures by what they show, and text by meaning                |
-| Fingerprints and copy detection                     | [Duplicates](../archive/duplicates.md)                                 |
-| Shot boundaries                                     | Chapters in a video                                                    |
+| Work                                                  | What you see in EiN                                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Reading dates, places, cameras and codecs             | Dates and places on pictures; staging can group files                                       |
+| Thumbnails, picture sizes, posters and waveforms      | Pictures, videos and recordings show in the grids and the viewer                            |
+| Video and audio renditions (AV1 video, AAC audio)     | Videos and recordings play in the browser                                                   |
+| H.264 streams of videos, made while they play         | Videos for screens that cannot play AV1 (`video-stream`)                                    |
+| Pages of EiN rendered into live video                 | [A dashboard on a TV](../dashboard/screens.md#on-a-tv) (`page-stream`)                      |
+| H.264 of a camera's live video, made while it is read | [A camera's codec](../devices/index.md#a-camera-a-browser-cannot-play) (`stream-transcode`) |
+| Faces, voices and who is speaking                     | [People and faces](../archive/people.md)                                                    |
+| Transcripts and language detection                    | What is said in videos and recordings, searchable                                           |
+| Text in pictures and handwriting, text in documents   | Text found in photographed pages, letters and PDFs, searchable                              |
+| Picture and text vectors                              | Finding pictures by what they show, and text by meaning                                     |
+| Fingerprints and copy detection                       | [Duplicates](../archive/duplicates.md)                                                      |
+| Shot boundaries                                       | Chapters in a video                                                                         |
 
 The media service generates no text. The chat belongs to the assistant's
 [language model](../assistant/language-model.md), and no processing step depends on it.

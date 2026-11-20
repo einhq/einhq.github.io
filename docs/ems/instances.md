@@ -64,11 +64,12 @@ more slowly. Which operations are worth giving it is your choice, made with `EMS
      -e EMS_NAME=laptop \
      -e EMS_KEY=a-long-random-key \
      -e EMS_OPS='media.probe,image.*,video.poster,audio.*,fingerprint.compute,vision.embed' \
-     --memory 16g ghcr.io/einhq/ems:0.4
+     --memory 16g ghcr.io/einhq/ems:0.4.9
    ```
 
-   `0.4` is the line the `ems` module asks for (`EIN_EMS_TAG` in `~/ein/.env` on EiN's machine): an
-   instance of another line is named in the **Status** page's `ems laptop api` check.
+   `0.4.9` is the release EiN's own media service runs (`EIN_EMS_VERSION` in `~/ein/.env` on EiN's
+   machine), the newest of the line the `ems` module asks for: an instance of another line is named
+   in the **Status** page's `ems laptop api` check.
 
    Add `--device nvidia.com/gpu=all` on a machine with an NVIDIA card set up as
    [The graphics card](gpu.md) says. `EMS_OPS` is a list of operations separated by commas, where

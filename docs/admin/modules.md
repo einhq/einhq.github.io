@@ -140,7 +140,9 @@ the module.
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the
-page.
+page. Every page open in a browser, this one included, then says **EiN has been updated. This page
+reloads in 60 s.** and reloads, so it runs the module's pages as installed; each install, update or
+removal in a row starts the 60 seconds again, so updating several modules reloads the page once.
 
 The install runs on its own: closing the page, or signing out, does not stop it. While it runs, the
 top of **Settings → Modules** says so to everyone who opens the tab, with who started it, how many of
@@ -547,7 +549,8 @@ place without setup. `mod setup <name>` sets it up.
 **Active, but something is missing.** Check its **Services** tab: a service that shows
 `failed` or `disabled` can be started again on the **Status**'s services tab, and
 [Services and logs](services-logs.md) explains how to read its log. A module installed from the
-terminal shows its pages in a browser tab that was already open once that page is reloaded.
+terminal shows its pages in a browser tab that was already open once that page has reloaded, which
+it does by itself a minute after the install.
 
 **Install or update refused.** The message says why, in words like these:
 

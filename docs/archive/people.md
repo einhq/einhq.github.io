@@ -37,7 +37,7 @@ looked for. The pictures stay on your machine, as everything the media service d
 
 When an update of the media service brings other face models, EiN looks for the faces in every picture and video again by itself, after the new pictures waiting for theirs. Each face it finds again keeps the person it had, and a face a person named that the new models no longer find stays as a box with its name. Until a picture has had its turn, its faces keep their names but are not compared with any others, since two models' fingerprints of a face cannot be compared.
 
-Voices are the same: when an update of the media service brings other models for who speaks when, EiN finds the voices in every recording again by itself, after the new recordings waiting for theirs. A voice someone named, or took off a person, passes that on to the new voice it shares the most speech with, and recognition decides the others again.
+Voices are the same: when an update of the media service brings other models for who speaks when, EiN finds the voices in every recording again by itself, after the new recordings waiting for theirs. A voice someone named, or took off a person, passes that on to the new voice it shares the most speech with, and recognition decides the others again. One the new models hear nobody in, or hear together with a voice named for someone else, stays as a voice of its own with its name and the times it spoke, as a face does.
 
 ## The People page
 

@@ -51,6 +51,6 @@ How EiN runs: its commands, logs, queues and the other parts of the system that 
 | `router` Router | A live broadcast channel: what is written reaches every current reader and nothing is kept. /dev/events is one. |  | Core |
 | `session` Session | A signed-in connection — a browser, an SSH login, a service — under /var/sessions. Removed when it ends. |  | Core |
 | `share-link` Share link | A link that opens an album, and what it holds, to whoever has it, without signing in; under /var/links, with when it expires and how often it was opened. `share-link` makes, lists and turns them off. |  | Core |
-| `stream` Stream | An endpoint of a device that is a live picture, a camera's. Nothing is kept of it: reading it gives a JPEG of it now from the device's driver (`cat /dev/front-door/main > door.jpg`), and the device's page plays it live. |  | Core |
+| `stream` Stream | Live bytes from one writer to whoever reads, such as a camera's video under its device, which its driver writes. Nothing is kept: a reader gets the bytes from the moment it opens it (`cat /dev/front-door/main.ts > door.ts` records the camera until stopped). |  | Core |
 | `tty` Terminal | An interactive terminal belonging to a session, with its size and working directory. |  | Core |
 | `user-invite` Sign-in link | A link an administrator makes for an account, with which its person chooses their own password once at /invite/<token> before it expires: the account's child .invite, readable by the administrator alone. `user-invite` makes, shows and takes it away. |  | Core |

@@ -49,15 +49,18 @@ nor in a development checkout run with `deno task dev`.
 With the supervisor, every run of `setup.sh` runs in the supervisor's image too, whoever starts
 it: the installer, you on the machine, or the supervisor. The compose that runs the services is then
 the one in that image, so the machine needs the container engine alone. Under podman, `setup.sh`
-turns on podman's socket for it (`systemctl --user enable --now podman.socket`).
+turns on podman's socket for it (`systemctl --user enable --now podman.socket`) whenever the socket
+does not answer, as when a stopped service left its file behind.
 
 ## The services on Settings → Modules
 
 On **Settings → Modules**, the button with the server beside **Install** opens **Services beside
-EiN**, for the administrator. It lists each service with its state, the image it runs, the version
-of what it offers EiN and when that image was built, and which installed modules ask for it and
-which versions they take. **Install** installs a service that is not installed, **Update** updates
-one, and **Update all** every service installed.
+EiN**, for the administrator. It lists each service with its state, the release it runs and when
+that image was built, and which installed modules ask for it and which versions they take.
+**Install** installs a service that is not installed. As for a module, a service with a newer
+release has **Update to** that version beside it, `Update to 0.4.9`, and **Update all** at the top
+updates every one that has; a service that runs its newest release has no button, and the foot of
+the list says when the releases were last checked.
 
 A module's panel shows the services it talks to under **Services beside EiN** on its **Overview**,
 each with the versions it takes and whether it is installed, with **Install** beside one that is
@@ -72,7 +75,7 @@ container, such as:
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | the media service   | the graphics card, when the machine has one; `/dev/fuse` and the `SYS_ADMIN` capability without an AppArmor profile, to mount the files of each request from EiN; up to 16 GB of memory |
 | the language model  | the graphics card, when the machine has one; up to 10 GB of memory                                                                                                                      |
-| the devices sidecar | the machine's own network, which it listens on for devices, and the ports 1883, 1984 and 8554 for the devices' MQTT broker and the cameras' streams                                     |
+| the devices sidecar | the machine's own network, which it listens on for devices, and the ports 1883 and 1984 for the devices' MQTT broker and the cameras' streams                                           |
 
 While a job runs, the top of the tab says what it does, who asked and its last line; when it ends,
 whether it did, with its last lines when it failed. Installing a service makes every container
@@ -83,21 +86,28 @@ it. An update of EiN does the same; an update of another service leaves EiN runn
 
 The supervisor updates the services by itself in two ways:
 
+Once an hour it reads which releases GitHub has of each service, and a service with a newer
+release than the one it runs has an update: the newest release of the line its modules ask for for
+the media service and the sidecar, the newest of all for EiN and the database, and deploy's newest
+release for the supervisor. The language model has one when `compose.llm.yaml` names another image
+than it runs, as after an update of deploy. It updates them by itself in two ways:
+
 - **With their modules.** When an installed module asks for another line of the media service or
   the sidecar than the one that runs, as after you update the `ems` module to a release that needs
-  a newer media service, the supervisor downloads that line within a minute and makes the service
-  again ([The media service and the sidecar follow their modules](updating.md#the-media-service-and-the-sidecar-follow-their-modules)).
-  A line not published yet is tried again a day later.
+  a newer media service, the supervisor installs the newest release of that line within a minute
+  and makes the service again ([The media service and the sidecar follow their modules](updating.md#the-media-service-and-the-sidecar-follow-their-modules)).
+  A line not published yet waits until it is; a release that did not come up is tried again a day
+  later.
 - **Each night**, at `EIN_UPDATE_AT` in `~/ein/.env`, 04:00 by default in the machine's time zone,
-  it updates every service installed. `off` turns this off; the services are then updated when you
-  ask.
+  it updates every service that has an update. `off` turns this off; the services are then updated
+  when you ask.
 
-An update downloads each service's image and leaves a service that already runs the newest one as
-it is. A service whose new image does not come up — EiN does not answer within 10 minutes, the
-database or the media service does not report itself healthy, or another service stops or restarts
-again and again — is put back on the image it ran before, and the job fails with the service's last
+An update leaves a service that already runs its newest release as it is. A service whose new
+release does not come up — EiN does not answer within 10 minutes, the database, the media service
+or the language model does not report itself healthy, or another service stops or restarts again
+and again — is put back on the release it ran before, and the job fails with the service's last
 log lines and `setup.sh: core did not come up on its new image, and runs on the one it ran before`.
-The next night's update tries the newest image again.
+The next night's update tries the newest release again.
 
 Modules are not part of this: they are updated on **Settings → Modules**, as [Modules](modules.md#update-a-module)
 describes.
@@ -108,21 +118,21 @@ The same, as the administrator:
 
 ```bash
 # in EiN's terminal, as the administrator
-supervisor status            # each service, and the job that runs or ran last
+supervisor status            # each service, the newer release it has, and the job that runs or ran last
 supervisor install ems       # install the media service; llm and devices the same way
-supervisor update            # update every service installed now
+supervisor update            # update every service that has a newer release now
 supervisor update core db    # update these
 ```
 
 ```text
-db          running, healthy · ghcr.io/einhq/db:main
-core        running · ghcr.io/einhq/core:main
+db          running, healthy · ghcr.io/einhq/db:0.1.0
+core        running · ghcr.io/einhq/core:0.1.1 · update to 0.1.2
 ems         not installed · asked for by ems ^0.4.4
-devices     running · ghcr.io/einhq/devices:main
+devices     running · ghcr.io/einhq/devices:0.1.1 · asked for by devices ^0.1.0
 llm         not installed
-supervisor  running · ghcr.io/einhq/supervisor:main
-Every service is updated each night at 04:00.
-Last: setup.sh --only db,core,devices,supervisor, asked by admin at 2026-11-16T15:08:00+0100: done
+supervisor  running · ghcr.io/einhq/supervisor:0.1.2
+Every service with an update is updated each night at 04:00.
+Last: setup.sh --only core, asked by the supervisor: the nightly update at 2026-11-16T04:00:12+0100: done
 ```
 
 In an installation without a supervisor, `supervisor status` says so. The
@@ -130,13 +140,13 @@ In an installation without a supervisor, `supervisor status` says so. The
 
 ## When something goes differently
 
-| What you see                                                                 | What to do                                                                                                                                                |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `The supervisor's image, ghcr.io/einhq/supervisor:main, could not be pulled` | `setup.sh` goes on without it and sets `EIN_SUPERVISOR=0`. Check the machine reaches `ghcr.io`, and run `~/ein/setup.sh --supervisor` again.              |
-| `The supervisor needs podman's socket, which is not at …`                    | Turn it on with `systemctl --user enable --now podman.socket`, then `~/ein/setup.sh --supervisor`.                                                        |
-| **The supervisor does not answer** on **Services beside EiN**                | On the machine, `podman compose ps supervisor` and `podman compose logs supervisor` in `~/ein`. `~/ein/setup.sh --only supervisor` makes it again.        |
-| `an install or update is running`                                            | One job runs at a time, and a `setup.sh` run on the machine counts as one. Wait for it to end.                                                            |
-| A job failed                                                                 | Its last lines are on the tab; the whole output is `supervisor/job.log` in the data folder. A failed update has put the service back on the image it ran. |
+| What you see                                                                  | What to do                                                                                                                                                |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `The supervisor's image, ghcr.io/einhq/supervisor:0.1.2, could not be pulled` | `setup.sh` goes on without it and sets `EIN_SUPERVISOR=0`. Check the machine reaches `ghcr.io`, and run `~/ein/setup.sh --supervisor` again.              |
+| `The supervisor needs podman's socket, which does not answer at …`            | Turn it on with `systemctl --user enable --now podman.socket`, then `~/ein/setup.sh --supervisor`.                                                        |
+| **The supervisor does not answer** on **Services beside EiN**                 | On the machine, `podman compose ps supervisor` and `podman compose logs supervisor` in `~/ein`. `~/ein/setup.sh --only supervisor` makes it again.        |
+| `an install or update is running`                                             | One job runs at a time, and a `setup.sh` run on the machine counts as one. Wait for it to end.                                                            |
+| A job failed                                                                  | Its last lines are on the tab; the whole output is `supervisor/job.log` in the data folder. A failed update has put the service back on the image it ran. |
 
 With Docker, write `docker compose` for `podman compose`.
 

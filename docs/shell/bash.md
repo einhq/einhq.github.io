@@ -127,7 +127,8 @@ in with `source`. See [Write a script](#write-a-script).
 [Run a long job in the background](#run-a-long-job-in-the-background).
 
 **Process substitution waits for the end.** `<(cmd)` writes the command's whole output to a
-temporary node under `/tmp` before the reading command opens it, so it is not streamed.
+temporary node under `/tmp` before the reading command opens it, so it is not streamed. The node is
+yours alone, as everything you make in `/tmp` is.
 
 **Many Unix programs are missing.** `tar`, `curl`, `diff`, `less` and others have no EiN command.
 [Commands by task](commands.md#unix-commands-ein-does-not-have) lists what to use instead.

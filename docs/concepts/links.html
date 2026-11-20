@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -303,7 +304,11 @@ and the path.</p>
 <p>A hard link gives a node a second name. Both names are the same node: the same id, the same
 owner and mode, the same content and children. Nothing marks one name as the original.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">ln</span> /archive/albums/christmas-2019/20191225_155434.jpg /home/helen/20191225_155434.jpg</code></pre></div>
+<span class="hljs-built_in">ln</span> /home/helen/recipes/scones.txt /home/helen/baking/scones.txt</code></pre></div>
+<p>You may hard-link a node you own, or one you may both read and write; the administrator may
+hard-link any. Anything else stops with <code>Access denied for operation &#39;link&#39;</code>: a second name in a
+folder of yours would otherwise let what writes there on your behalf write someone else&#39;s node.
+Make a softlink with <code>ln -s</code> instead.</p>
 <p>Each node counts its names. The count is the third column of <code>ls -l</code>, and <strong>Links</strong> in the
 <strong>Nodes</strong> explorer&#39;s <strong>Properties</strong>; a node with one name shows <code>1</code>. Removing a name with <code>rm</code>
 lowers the count, and the node itself is deleted only when its last name goes. <code>rm -r</code> on a folder
@@ -501,6 +506,16 @@ reachable by its other name.</p>
 <td><code>ln: failed to access &#39;&lt;target&gt;&#39;: No such file or directory</code></td>
 <td>A hard link needs an existing target</td>
 <td>Check the path, or make a softlink with <code>-s</code></td>
+</tr>
+<tr>
+<td><code>Access denied for operation &#39;link&#39;</code> from <code>ln</code></td>
+<td>You may hard-link only a node you own or may read and write</td>
+<td>Make a softlink with <code>-s</code></td>
+</tr>
+<tr>
+<td><code>write through a softlink owned by uid</code> and a number</td>
+<td>The administrator writes through no softlink someone else made</td>
+<td>Write to the target by its own path, or remove the link with <code>rm</code> and make it again as the administrator</td>
 </tr>
 <tr>
 <td><code>Access denied for operation</code> when you follow a link</td>

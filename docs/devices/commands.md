@@ -173,4 +173,4 @@ devices-status --brief
 devices-status --streams
 ```
 
-With `JSON_OUTPUT=1`: DevicesStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, sidecar {version, problem}; with --streams, RestreamerStatus: configured, url, rtsp, answering, streams, error.
+With `JSON_OUTPUT=1`: DevicesStatus: configured, url, running, connected, since, drivers, devices, endpoints, messages, unsupported, lastError, sidecar {version, problem}; with --streams, RestreamerStatus: configured, url, answering, streams, error.

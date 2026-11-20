@@ -131,6 +131,11 @@
 - [Show a dashboard on a screen](dashboard/screens.md)
 - [Dashboards commands](dashboard/commands.md)
 
+## Västtrafik
+
+- [Västtrafik](vasttrafik/index.md)
+- [Västtrafik commands](vasttrafik/commands.md)
+
 ## Devices
 
 - [Devices](devices/index.md)

@@ -33,7 +33,7 @@ The model EiN runs itself is Qwen3.5-4B in llama.cpp's server. The prompts, the 
    ~/ein/setup.sh --llm
    ```
 
-   `setup.sh` keeps `EIN_LLM=1` in `~/ein/.env`, fetches the model's sources into `~/ein/src/llm`, adds an `llm` container, and restarts EiN. When the first install found an NVIDIA card (`EIN_GPU=1` in `.env`), the container gets the card. The installer takes the same option: `curl -fsSL https://einhq.eu/install.sh | bash -s -- --llm`.
+   `setup.sh` keeps `EIN_LLM=1` in `~/ein/.env`, adds an `llm` container, and restarts EiN. When the first install found an NVIDIA card (`EIN_GPU=1` in `.env`), the container gets the card. The installer takes the same option: `curl -fsSL https://einhq.eu/install.sh | bash -s -- --llm`.
 
 2. Wait for the model to download. On its first start the container fetches the model file from Hugging Face into the `llm` folder of your data folder (`~/ein/data/llm` unless you chose another), a download of several gigabytes. Follow it with:
 

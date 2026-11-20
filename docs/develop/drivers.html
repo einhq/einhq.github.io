@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -300,7 +301,7 @@ waiting for the device. A <code>write</code> that has not returned after 10 seco
 </tr>
 <tr>
 <td><code>ensureEndpoint(access, device, name, type, attrs, mode?)</code></td>
-<td>Makes the endpoint <code>log</code>, <code>track</code> or <code>control</code> when it is missing, else sets the attributes given where they differ; refuses one of another type. Answers the path</td>
+<td>Makes the endpoint <code>log</code>, <code>track</code>, <code>control</code> or <code>stream</code> when it is missing, else sets the attributes given where they differ; refuses one of another type. Answers the path</td>
 </tr>
 <tr>
 <td><code>removeEndpoint(access, device, endpoint)</code></td>
@@ -324,9 +325,9 @@ waiting for the device. A <code>write</code> that has not returned after 10 seco
 </tr>
 </tbody></table>
 </div>
-<p>A device&#39;s name, and an endpoint&#39;s, is lower-case letters, digits, <code>-</code> and <code>_</code>, at most 63 long;
-<code>deviceName(text)</code> from <code>@ein/api</code> makes one from what a device calls itself. EiN&#39;s own names in <code>/dev</code>
-are refused.</p>
+<p>A device&#39;s name, and an endpoint&#39;s, is lower-case letters, digits, <code>-</code> and <code>_</code>, at most 63 long; a
+stream&#39;s may end in an extension saying what its bytes are, such as <code>main.ts</code>. <code>deviceName(text)</code>
+from <code>@ein/api</code> makes one from what a device calls itself. EiN&#39;s own names in <code>/dev</code> are refused.</p>
 <p><code>append</code> does the throttling, so a driver hands it every reading: a value the same as the endpoint&#39;s
 last is dropped, a number that comes sooner than the endpoint&#39;s <code>minInterval</code> waits for the end of
 it and is replaced by any later one, and an event endpoint keeps every press. Pass <code>retained: true</code>
@@ -389,7 +390,42 @@ is made with its device&#39;s owner, group and access list, a reading or a contr
 (<a href="../admin/devices.html#who-may-do-what">Devices and their keys</a>): the members of <code>devices</code> read it,
 switch a control and share it, and whoever the device is shared with gets the endpoint too. A device
 <code>ensureDevice</code> makes is <code>0770</code>, the administrator&#39;s and the <code>devices</code> group&#39;s. A log endpoint keeps a bare
-value written to it by hand as <code>{ value }</code> (its <code>valueField</code>), as <code>append</code> keeps a driver&#39;s.</p>
+value written to it by hand as <code>{ value }</code> (its <code>valueField</code>), as <code>append</code> keeps a driver&#39;s. A
+stream is <code>0640</code>: the members of <code>devices</code> read it, and its driver alone writes it.</p>
+<h3 id="writing-a-stream">Writing a stream<a class="anchor" href="#writing-a-stream" aria-label="Link to this section"></a></h3>
+<p>A <code>stream</code> endpoint is live bytes, such as a camera&#39;s video, which EiN keeps nothing of: whoever reads
+it gets the bytes from that moment on, as many readers as there are, and the media service reads it
+through a name it is granted, as it reads a file. The driver writes it: it opens the node to write
+with <code>cmd.sys.vfs.open(access, path, { mode: &#39;w&#39; })</code>, which gives a <code>StreamWriter</code>
+(<code>isStreamWriter</code> says so) while nobody else holds it, and keeps it open for as long as it runs.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>write(bytes)</code></td>
+<td>Bytes for every reader there now. Never waits for a reader: one that falls 8 MiB behind is let go, and reads to its end</td>
+</tr>
+<tr>
+<td><code>writeHeader(bytes)</code></td>
+<td>Bytes every reader who joins later is given first, as fragmented MP4&#39;s initialization segment, and those there now as any write</td>
+</tr>
+<tr>
+<td><code>wanted</code>, <code>onWanted()</code></td>
+<td>Whether anyone reads it, staying true 10 seconds after the last one stopped: read the camera only while it is <code>true</code></td>
+</tr>
+<tr>
+<td><code>close()</code></td>
+<td>Ends the stream for its readers, who open it again to read on; a node removed, or its device forgotten, closes it too</td>
+</tr>
+</tbody></table>
+</div>
+<p>Give the endpoint a <code>mimetype</code> (<code>video/mp2t</code>), and write it in pieces a reader can start at, such as
+whole 188-byte MPEG-TS packets. The camera drivers of the <a href="../devices/index.html#a-camera">Devices module</a>
+write <code>main.ts</code> and <code>sub.ts</code> this way, from their restreamer.</p>
 <h2 id="an-example-a-weather-station-that-posts-json">An example: a weather station that posts JSON<a class="anchor" href="#an-example-a-weather-station-that-posts-json" aria-label="Link to this section"></a></h2>
 <p>A weather station posts <code>{&quot;temperature&quot;: 4.2, &quot;humidity&quot;: 81, &quot;wind&quot;: 5.5}</code> to EiN every minute. A
 member of <code>devices</code> makes the station and gives it its key; the station posts to
@@ -466,7 +502,7 @@ rename, reorder or hide it like any panel
 </thead>
 <tbody><tr>
 <td><code>@ein/client</code></td>
-<td><code>ModuleDevices</code>, <code>Driver</code>, <code>DriverInput</code>, <code>DriverWrite</code>, <code>DriverAnswer</code>, <code>AppendOptions</code></td>
+<td><code>ModuleDevices</code>, <code>Driver</code>, <code>DriverInput</code>, <code>DriverWrite</code>, <code>DriverAnswer</code>, <code>AppendOptions</code>; <code>StreamWriter</code> and <code>isStreamWriter</code> since 0.15.35</td>
 </tr>
 <tr>
 <td><code>@ein/api</code></td>
@@ -534,7 +570,7 @@ rename, reorder or hide it like any panel
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/drivers.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-driver-does">What a driver does</a></li><li><a href="#where-a-driver-runs">Where a driver runs</a></li><li><a href="#the-driver">The driver</a></li><li class="nested"><a href="#input">input</a></li><li class="nested"><a href="#write">write</a></li><li><a href="#writing-devices-and-endpoints">Writing devices and endpoints</a></li><li><a href="#an-example-a-weather-station-that-posts-json">An example: a weather station that posts JSON</a></li><li><a href="#a-tab-on-the-device-page">A tab on the device page</a></li><li><a href="#the-contract">The contract</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-driver-does">What a driver does</a></li><li><a href="#where-a-driver-runs">Where a driver runs</a></li><li><a href="#the-driver">The driver</a></li><li class="nested"><a href="#input">input</a></li><li class="nested"><a href="#write">write</a></li><li><a href="#writing-devices-and-endpoints">Writing devices and endpoints</a></li><li class="nested"><a href="#writing-a-stream">Writing a stream</a></li><li><a href="#an-example-a-weather-station-that-posts-json">An example: a weather station that posts JSON</a></li><li><a href="#a-tab-on-the-device-page">A tab on the device page</a></li><li><a href="#the-contract">The contract</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

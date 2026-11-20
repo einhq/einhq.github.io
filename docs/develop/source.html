@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -138,11 +139,6 @@
 <td><a href="https://github.com/einhq/db">db</a></td>
 <td>The PostgreSQL image (TimescaleDB, pgvector, PostGIS, pg_trgm) and its run script</td>
 <td>Containerfile, bash</td>
-</tr>
-<tr>
-<td><a href="https://github.com/einhq/llm">llm</a></td>
-<td>The local language model the Assistant uses: llama.cpp&#39;s server in a container</td>
-<td>bash</td>
 </tr>
 <tr>
 <td><a href="https://github.com/einhq/deploy">deploy</a></td>
@@ -323,7 +319,11 @@ make health</code></pre></div>
 <p>EiN looks for it at <code>http://127.0.0.1:8181</code>, the default of <a href="../reference/settings.html#cfg_ems_url"><code>CFG_EMS_URL</code></a>. Give EiN the key with <a href="../reference/settings.html#cfg_ems_key"><code>CFG_EMS_KEY</code></a>, in the settings file you pass to <code>make container-run</code> as <code>ENV_FILE</code>:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ems.env, in the core checkout</span>
 <span class="hljs-attr">CFG_EMS_KEY</span>=let-me-in</code></pre></div>
-<p>For the assistant&#39;s model, clone <a href="https://github.com/einhq/llm">llm</a> and run <code>bash run.sh</code> in it. It fetches the model on its first start and answers at <code>http://127.0.0.1:8190</code>, the default of <a href="../reference/settings.html#cfg_llm_url"><code>CFG_LLM_URL</code></a>, so EiN finds it without a setting. A hosted provider works as well; <a href="../assistant/language-model.html">The language model</a> explains both.</p>
+<p>For the assistant&#39;s model, run any server that speaks OpenAI&#39;s chat API at <code>http://127.0.0.1:8190</code>, the default of <a href="../reference/settings.html#cfg_llm_url"><code>CFG_LLM_URL</code></a>, so EiN finds it without a setting. llama.cpp&#39;s server with the model an install runs is one; it fetches the model on its first start:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">mkdir</span> -p ~/services/llm
+podman run -d --name llm -p 127.0.0.1:8190:8080 -v ~/services/llm:/models:z -e LLAMA_CACHE=/models \
+  ghcr.io/ggml-org/llama.cpp:server -hf unsloth/Qwen3.5-4B-GGUF:Q8_0 -c 32768 --jinja --reasoning off</code></pre></div>
+<p>Add <code>--device nvidia.com/gpu=all</code> and take the <code>server-cuda</code> image to run it on the card. A hosted provider works as well; <a href="../assistant/language-model.html">The language model</a> explains both.</p>
 <h2 id="test-check-and-lint">Test, check and lint<a class="anchor" href="#test-check-and-lint" aria-label="Link to this section"></a></h2>
 <p>Run these in the core checkout before you send a change:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -355,7 +355,7 @@ make health</code></pre></div>
 </tr>
 <tr>
 <td><code>deno task lint</code></td>
-<td><code>deno lint</code> over <code>src/</code> and <code>modules/</code>.</td>
+<td><code>deno lint</code> over <code>src/</code> and <code>modules/</code>, with EiN&#39;s own rules from <code>scripts/lint-plugin.ts</code>.</td>
 </tr>
 <tr>
 <td><code>deno fmt</code></td>
@@ -363,7 +363,7 @@ make health</code></pre></div>
 </tr>
 </tbody></table>
 </div>
-<p>Each push and pull request runs checks of its own. Core&#39;s run <code>deno fmt --check</code>, <code>deno task lint</code>, <code>deno task check</code> and <code>deno task test</code>. A module&#39;s run in a checkout of core&#39;s <code>main</code> with the module in <code>modules/&lt;name&gt;</code>: <code>deno fmt --check modules/&lt;name&gt;</code> and <code>deno lint modules/&lt;name&gt;</code>, under core&#39;s settings. Run them there before you send a change to a module.</p>
+<p>Each push and pull request runs checks of its own. Core&#39;s run <code>deno fmt --check</code>, <code>deno task lint</code>, <code>deno task check</code> and <code>deno task test</code>. A module&#39;s run in a checkout of core&#39;s <code>main</code> with the module in <code>modules/&lt;name&gt;</code>, under core&#39;s settings: <code>deno fmt --check modules/&lt;name&gt;</code> and <code>deno lint modules/&lt;name&gt;</code>; then <code>deno run -A scripts/module-deps.ts modules/&lt;name&gt;</code> clones the modules it depends on beside it, at their <code>main</code>, since its files import theirs; <code>deno run -A scripts/check-module.ts modules/&lt;name&gt;</code> type-checks it; and <code>deno test --allow-all --parallel modules/&lt;name&gt;</code> runs its own fast tests, not theirs. Run them there before you send a change to a module.</p>
 <p>The module contract is what modules may import from core: <code>@ein/client</code>, <code>@ein/api</code>, <code>@ein/paths</code> and the Web UI&#39;s kit, <code>@ein/ui/*</code>. Its surface is kept as a snapshot in <code>src/client/contract.snapshot</code>, and a test fails when the surface changes. After a deliberate change, raise <code>MODULE_API_VERSION</code> in <code>src/modules/types.ts</code> and run <code>deno task contract:snapshot</code> to write the snapshot again.</p>
 <p>The commit history follows Conventional Commits, such as <code>fix(shell): …</code> or <code>feat(archive): …</code>. Write yours the same way.</p>
 <h2 id="build-and-run-the-image">Build and run the image<a class="anchor" href="#build-and-run-the-image" aria-label="Link to this section"></a></h2>
@@ -445,7 +445,7 @@ make container-logs</code></pre></div>
 <p>The administrator&#39;s password is in <code>make container-logs</code> on the first start. <code>make container-stop</code> stops the container and <code>make container-shell</code> opens bash inside it.</p>
 <h2 id="run-your-own-build-in-an-installation">Run your own build in an installation<a class="anchor" href="#run-your-own-build-in-an-installation" aria-label="Link to this section"></a></h2>
 <p>An installation made with the installer runs what the organisation that <code>--source</code> names holds, <code>https://github.com/einhq</code> unless you give it, and keeps it in <code>.env</code> as <code>EIN_SOURCE</code>. To run your own changes there, push them to an organisation of your own on GitHub, Forgejo or Gitea that holds <code>deploy</code>, <code>core</code> and <code>db</code> (and <code>ems</code> and <code>llm</code> when you use those options), and install, or run <code>setup.sh</code> again, with <code>--source</code> and its address. <a href="../admin/install.html#where-the-sources-come-from">Where the sources come from</a> explains the option, and <a href="../admin/updating.html">Updating</a> how <code>setup.sh</code> fetches the newest commits and builds them.</p>
-<p>From <code>https://github.com/einhq</code>, <code>setup.sh</code> pulls the images <code>ghcr.io/einhq/core:main</code> and <code>ghcr.io/einhq/db:main</code>, which GitHub builds once a day from the <code>main</code> of core and db, when it has moved since the last build, and <code>ghcr.io/einhq/ems:&lt;line&gt;</code>, built the same way from ems&#39;s <code>main</code> and tagged with its API version and line, at the line the <code>ems</code> module asks for in its <code>services</code> (<a href="../admin/updating.html#the-media-service-and-the-sidecar-follow-their-modules">Updating</a>). From any other source it builds them itself, as <code>localhost/ein-core</code> from <code>src/core/src/Containerfile</code>, which also runs <code>deno task bundle-ui</code>, <code>localhost/ein-db</code> from <code>src/db</code> and <code>localhost/ein-ems</code> from <code>src/ems</code>. EiN installs modules from the places <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names; with a Forgejo or Gitea source, <code>setup.sh</code> sets it to the same organisation, while a GitHub source leaves it at <code>https://github.com/einhq</code>.</p>
+<p>From <code>https://github.com/einhq</code>, <code>setup.sh</code> pulls the releases of core, db and ems, <code>ghcr.io/einhq/core:&lt;version&gt;</code> and the like, which GitHub builds once each from the release tag the daily publish pushes, and pins them in <code>.env</code>: core and db at their newest release, ems at the newest of the line the <code>ems</code> module asks for in its <code>services</code> (<a href="../admin/updating.html#the-media-service-and-the-sidecar-follow-their-modules">Updating</a>). From any other source it builds them itself, as <code>localhost/ein-core</code> from <code>src/core/src/Containerfile</code>, which also runs <code>deno task bundle-ui</code>, <code>localhost/ein-db</code> from <code>src/db</code> and <code>localhost/ein-ems</code> from <code>src/ems</code>. EiN installs modules from the places <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names; with a Forgejo or Gitea source, <code>setup.sh</code> sets it to the same organisation, while a GitHub source leaves it at <code>https://github.com/einhq</code>.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong><code>deno task dev</code> stops at <code>Connecting to database...</code>.</strong> PostgreSQL is not answering at <code>POSTGRES_URL</code>. Check that the container runs with <code>podman ps</code>, and run <code>bash ein-db/run.sh</code> again; it reports <code>postgres did not answer on port 5432</code> when the server does not come up.</li>

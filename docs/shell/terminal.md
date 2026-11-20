@@ -178,6 +178,9 @@ cd /archive/albums/christmas-2019 && cat 20191225_155434.jpg
 Only the terminal in the browser draws pictures. Over SSH, `cat` prints marker lines starting
 `__IMG:` instead.
 
+To a file or a pipe, `cat` writes the picture's, video's or recording's own bytes, as it does a
+text file's: `cat clip.mp4 > copy.mp4` makes a copy, and `cat clip.mp4 | wc -c` counts its bytes.
+
 > [!NOTE]
 > A picture whose path holds a space or a colon, such as one in `/archive/albums/Summer 2020`, is
 > not drawn: the terminal shows its `__IMG:` lines instead. Open it in the Web UI.

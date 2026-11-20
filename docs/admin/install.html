@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -363,7 +364,7 @@ Install? [Y/n]</code></pre></div>
 <span class="hljs-built_in">read</span> -rsp <span class="hljs-string">&#x27;Password: &#x27;</span> INITIAL_ADMIN_PASSWORD &amp;&amp; <span class="hljs-built_in">export</span> INITIAL_ADMIN_PASSWORD
 curl -fsSL https://einhq.eu/install.sh | bash -s -- --<span class="hljs-built_in">yes</span> archive</code></pre></div>
 <h3 id="where-the-sources-come-from">Where the sources come from<a class="anchor" href="#where-the-sources-come-from" aria-label="Link to this section"></a></h3>
-<p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> and <code>llm</code> when you use those options, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. EiN&#39;s, the database&#39;s and the media service&#39;s images are downloaded ready-made only from <code>https://github.com/einhq</code>, which publishes them; from any other organisation <code>setup.sh</code> builds them on the machine from its <code>core</code>, <code>db</code> and <code>ems</code>, since the published images have none of its own commits, and the media service&#39;s build takes about an hour. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
+<p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> when you use that option, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. EiN&#39;s, the database&#39;s and the media service&#39;s images are downloaded ready-made only from <code>https://github.com/einhq</code>, which publishes them; from any other organisation <code>setup.sh</code> builds them on the machine from its <code>core</code>, <code>db</code> and <code>ems</code>, since the published images have none of its own commits, and the media service&#39;s build takes about an hour. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
 <h2 id="what-the-checks-measure">What the checks measure<a class="anchor" href="#what-the-checks-measure" aria-label="Link to this section"></a></h2>
 <p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or a module that brings it, named or chosen at the questions, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install and <code>--no-ems</code> is not given; the same goes for <code>--llm</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -461,7 +462,7 @@ curl -fsSL https://einhq.eu/install.sh | bash -s -- --<span class="hljs-built_in
 <li><strong>Cores</strong> are physical cores, counted with <code>lscpu</code> across every socket, not threads. When <code>lscpu</code> gives nothing, the thread count stands in.</li>
 <li><strong>Memory</strong> is the machine&#39;s total, rounded to whole GB. That is why the full threshold is 30 GB: a machine sold with 32 GB reports a little less.</li>
 <li><strong>Disk</strong> is measured where your files go: on a later run the data folder <code>.env</code> names, which <code>setup.sh</code> keeps to, else the folder you chose or gave with <code>--data</code>. When that folder does not exist yet, the check measures the nearest folder above it that does, and says so: <code>(not made yet; measured on /home/anna)</code>.</li>
-<li><strong>The container engine</strong> is checked podman first. With both installed, the report shows podman&#39;s lines even when you give <code>--engine docker</code> or <code>.env</code> keeps Docker: only <code>setup.sh</code> reads them.</li>
+<li><strong>The container engine</strong> is the one <code>setup.sh</code> will use: the one <code>--engine</code> names, or on a later run the one <code>.env</code> keeps in <code>EIN_ENGINE</code>, else podman when it is installed and Docker otherwise. An engine named that is not installed is a <code>missing</code> line.</li>
 </ul>
 <p>The images and a download&#39;s or build&#39;s scratch files live in the container engine&#39;s own storage, not in the data folder. For rootless podman that is usually <code>~/.local/share/containers</code>, for Docker <code>/var/lib/docker</code>. When that is another disk than your data folder, it needs room too: the disk check does not measure it.</p>
 <p>To run only the checks:</p>
@@ -667,7 +668,7 @@ podman compose down
 <tr>
 <td><code>devices</code></td>
 <td><code>ghcr.io/einhq/devices</code>, the broker, the network listener and the restreamer, ready-made; built from module-devices&#39; <code>sidecar/</code> as <code>localhost/ein-devices</code> from any other source</td>
-<td>the machine&#39;s own network: port 1883 (<code>MQTT_PORT</code>) for the devices; 1984 (<code>STREAMS_PORT</code>) and 8554 (<code>RTSP_PORT</code>) for the cameras&#39; streams</td>
+<td>the machine&#39;s own network: port 1883 (<code>MQTT_PORT</code>) for the devices; 1984 (<code>STREAMS_PORT</code>) for the cameras&#39; streams</td>
 <td><code>512m</code></td>
 <td>with <code>--devices</code></td>
 </tr>
@@ -716,6 +717,11 @@ podman compose down
 <td>ein/deploy</td>
 </tr>
 <tr>
+<td><code>llm/</code></td>
+<td>the language model&#39;s chat template</td>
+<td>ein/deploy</td>
+</tr>
+<tr>
 <td><code>.env</code></td>
 <td>your options, settings and the passwords made at the install</td>
 <td>made by <code>setup.sh</code></td>
@@ -727,7 +733,7 @@ podman compose down
 </tr>
 <tr>
 <td><code>src/</code></td>
-<td>the sources: <code>llm</code> with its option, and <code>core</code>, <code>db</code>, <code>ems</code> and <code>module-devices</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
+<td>the sources: <code>ems</code> with its option, and <code>core</code>, <code>db</code> and <code>module-devices</code> from any source but GitHub&#39;s <code>einhq</code>, which are built</td>
 <td>made by <code>setup.sh</code></td>
 </tr>
 <tr>
@@ -800,7 +806,6 @@ podman compose down
 <span class="hljs-attr">MQTT_EIN_PASSWORD</span>=<span class="hljs-number">9</span>d41c7e2a05b38f61e8d2c74b09a5f3e6c18d27b4a9e05c3
 <span class="hljs-attr">MQTT_DEVICE_PASSWORD</span>=<span class="hljs-number">4</span>e7a1c9d02b5f83e6a1d7c40
 <span class="hljs-attr">STREAMS_PORT</span>=<span class="hljs-number">1984</span>
-<span class="hljs-attr">RTSP_PORT</span>=<span class="hljs-number">8554</span>
 <span class="hljs-attr">STREAMS_PASSWORD</span>=<span class="hljs-number">0</span>b7e3d91c46a28f5e1d09c7b3a6f2e84d5c1a9073b6e2f48
 <span class="hljs-attr">EIN_MODULES</span>=<span class="hljs-string">&quot;&quot;</span>
 <span class="hljs-attr">EIN_DATA</span>=/home/anna/ein/data
@@ -843,8 +848,8 @@ podman compose down
 <td><code>1</code> when the media service or the language model is installed; <code>--ems</code>, <code>--no-ems</code>, <code>--llm</code> and <code>--no-llm</code> set them</td>
 </tr>
 <tr>
-<td><code>EIN_DEVICES</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code>, <code>RTSP_PORT</code></td>
-<td><code>1</code> when the Devices module&#39;s sidecar is installed, which <code>--devices</code> and <code>--no-devices</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984) and RTSP (8554); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
+<td><code>EIN_DEVICES</code>, <code>MQTT_PORT</code>, <code>STREAMS_PORT</code></td>
+<td><code>1</code> when the Devices module&#39;s sidecar is installed, which <code>--devices</code> and <code>--no-devices</code> set, and its ports: the broker&#39;s, 1883, which the devices reach, and the restreamer&#39;s API (1984); <code>setup.sh</code> moves one to the next free port when something else uses it</td>
 </tr>
 <tr>
 <td><code>MQTT_EIN_PASSWORD</code>, <code>MQTT_DEVICE_PASSWORD</code>, <code>STREAMS_PASSWORD</code></td>
@@ -900,7 +905,11 @@ podman compose down
 </tr>
 <tr>
 <td><code>EIN_SUPERVISOR</code>, <code>EIN_UPDATE_AT</code></td>
-<td><code>1</code> when the <a href="supervisor.html">supervisor</a> runs, which <code>--supervisor</code> and <code>--no-supervisor</code> set, and the time it updates every service each night, <code>04:00</code>, or <code>off</code></td>
+<td><code>1</code> when the <a href="supervisor.html">supervisor</a> runs, which <code>--supervisor</code> and <code>--no-supervisor</code> set, and the time it updates each night every service that has a newer release, <code>04:00</code>, or <code>off</code></td>
+</tr>
+<tr>
+<td><code>EIN_CORE_VERSION</code>, <code>EIN_DB_VERSION</code>, <code>EIN_EMS_VERSION</code>, <code>EIN_DEVICES_VERSION</code>, <code>EIN_SUPERVISOR_VERSION</code></td>
+<td>the release each service runs, which every run of <code>setup.sh</code> moves to the newest one GitHub has (<a href="updating.html#how-updates-work">Updating</a>); the compose files name the images by them. Not written in an installation from another source, whose images are built here</td>
 </tr>
 <tr>
 <td><code>SUPERVISOR_KEY</code>, <code>EIN_SOCKET</code>, <code>EIN_SUPERVISOR_USER</code>, <code>EIN_SOCKET_GID</code>, <code>EIN_DEPLOY</code></td>

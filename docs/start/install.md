@@ -36,7 +36,7 @@ sudo apt install podman podman-compose git curl
 ```
 
 > [!NOTE]
-> When both podman and Docker are installed, EiN uses podman. To use Docker, add `--engine docker` after `bash -s --` in the install command, as in `curl -fsSL https://einhq.eu/install.sh | bash -s -- --engine docker`. `setup.sh` keeps the engine in `.env`, and every later run uses it. The installer's own checks still look at podman when it is there. [Installing in detail](../admin/install.md) explains what happens when the two are mixed.
+> When both podman and Docker are installed, EiN uses podman. To use Docker, add `--engine docker` after `bash -s --` in the install command, as in `curl -fsSL https://einhq.eu/install.sh | bash -s -- --engine docker`. `setup.sh` keeps the engine in `.env`, and every later run uses it. The installer's checks look at the engine it names. [Installing in detail](../admin/install.md) explains what happens when the two are mixed.
 
 ## Choose what to install
 

@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 115 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 116 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -368,24 +368,12 @@ Every setting of an EiN with all its modules: 115 of them, in the groups the Set
 
 ### `CFG_DEVICES_STREAMS_URL`
 
-**Restreamer**. The restreamer cameras are given to and their streams read from, go2rtc's API as http://host:1984. setup.sh --devices runs one beside EiN, in the devices sidecar, and sets this.
+**Restreamer**. The restreamer cameras are given to and their streams read from, go2rtc's API as http://host:1984: their live view, their pictures, and the video EiN writes into their stream nodes for the media service to watch. setup.sh --devices runs one beside EiN, in the devices sidecar, and sets this.
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means a camera has no live view, and its picture is asked of the camera itself |
-| Kind | string |
-| Restarts | `devices-bridge` |
-| From the module | Devices |
-
-### `CFG_DEVICES_STREAMS_RTSP`
-
-**Restreamer for the media service**. The restreamer's RTSP as the media service reaches it, rtsp://host:8554, where it reads a camera's stream to watch it for faces. setup.sh --devices sets it.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means no other service is told where a camera's stream is, so none is watched for faces |
+| Default | empty, which means a camera has no live view and no video in its stream nodes, and its picture is asked of the camera itself |
 | Kind | string |
 | Restarts | `devices-bridge` |
 | From the module | Devices |
@@ -1232,6 +1220,30 @@ Every setting of an EiN with all its modules: 115 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `false` |
 | Kind | boolean |
+
+## Västtrafik
+
+### `CFG_VASTTRAFIK_KEY`
+
+**Västtrafik key**. The authentication key of an application of yours at developer.vasttrafik.se that subscribes to Planera Resa v4, Geografi v3 and Störning v1. Without it the Västtrafik cards and commands have nothing to show.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | none: a key is set by you, and never shown again |
+| Kind | a key: never readable, in no shell |
+| From the module | Västtrafik |
+
+### `CFG_VASTTRAFIK_URL`
+
+**Västtrafik's address**. Where Västtrafik's open API answers. The key is sent only here.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `https://ext-api.vasttrafik.se` |
+| Kind | string |
+| From the module | Västtrafik |
 
 ## Voices
 

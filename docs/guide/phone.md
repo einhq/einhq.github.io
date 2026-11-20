@@ -30,6 +30,9 @@ screen.
 
 On any touch screen, whatever its width, the Archive's viewer uses its touch layout and pressing
 and holding a picture selects it. So a tablet has the computer's frame with the phone's viewer.
+A page's filter box, such as an album's, waits for a tap there too: on a computer it has the
+keyboard as soon as the page opens, but on a phone or tablet that would raise the on-screen keyboard
+over the page.
 
 ![Home on a phone: the EiN mark at the left of the top bar, the search box reading Search, the Random album, chat and plus buttons and the account picture, over the Welcome header and the News timeline](../../assets/shots/phone-home.webp "Home on a phone. The menu is out of sight until you tap the EiN mark or swipe right.")
 

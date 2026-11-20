@@ -58,7 +58,7 @@ main() {
   local home= yes=0 check=0 interactive=0 pass=() installed= installed_key=
   key=${EIN_SOURCE_KEY:-}
   source= data= data_given=0 http_port= ssh_port= bind= modules= named=0 ems=0 llm=0
-  container= container_version=
+  container= container_version= engine_choice=
   # install.sh's own options taken out; the rest are setup.sh's, passed on.
   while [ $# -gt 0 ]; do
     case $1 in
@@ -106,6 +106,7 @@ main() {
     data=$(sed -n 's/^EIN_DATA=//p' "$home/.env")
     installed=$(sed -n 's/^EIN_SOURCE=//p' "$home/.env")
     installed_key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$home/.env")
+    engine_choice=$(sed -n 's/^EIN_ENGINE=//p' "$home/.env")
     [ "$interactive" = 0 ] || echo "EiN is installed in $home: updating it, with the settings it has."
   fi
   expanded=()
@@ -210,9 +211,9 @@ main() {
 
   echo
   if [ -d "$home/.git" ]; then
+    # setup.sh brings the folder up to date itself, from GitHub's einhq to deploy's newest release.
     echo "Updating $home from $source/deploy"
-    git -C "$home" remote set-url origin "$source/deploy.git" &&
-      git_source -C "$home" pull --ff-only --quiet || return 1
+    git -C "$home" remote set-url origin "$source/deploy.git" || return 1
   else
     echo "Fetching $source/deploy into $home"
     git_source clone --quiet "$source/deploy.git" "$home" || return 1
@@ -232,6 +233,7 @@ options() {
       http-port) http_port=$arg ;;
       ssh-port) ssh_port=$arg ;;
       bind) bind=$arg ;;
+      engine) engine_choice=$arg ;;
     esac
     if [ -n "$next" ]; then
       next=
@@ -242,8 +244,8 @@ options() {
       --no-ems) ems=0 ;;
       --llm) llm=1 ;;
       --no-llm) llm=0 ;;
-      --module | --source | --data | --http-port | --ssh-port | --bind) next=${arg#--} ;;
-      --db-dir | --only | --engine) next=value ;;
+      --module | --source | --data | --http-port | --ssh-port | --bind | --engine) next=${arg#--} ;;
+      --db-dir | --only) next=value ;;
     esac
   done
   # setup.sh would take the folder as given, relative to ~/ein: it gets it whole.
@@ -433,8 +435,14 @@ git_source() {
 }
 
 # --- the container engine: rootless podman, or Docker, each with its compose ---
+# The one --engine names or the installation keeps in .env, else podman when it is installed, as
+# setup.sh picks.
 engine() {
-  if command -v podman >/dev/null; then
+  if [ "$engine_choice" = docker ] && ! command -v docker >/dev/null; then
+    need docker "install Docker with its compose plugin, which --engine docker asks for"
+  elif [ "$engine_choice" = podman ] && ! command -v podman >/dev/null; then
+    need podman "install podman and podman-compose, which --engine podman asks for"
+  elif [ "$engine_choice" != docker ] && command -v podman >/dev/null; then
     local version rootless
     version=$(podman --version | awk '{print $3}')
     container=podman container_version=$version

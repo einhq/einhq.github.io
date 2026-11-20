@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -290,7 +291,9 @@ the module&#39;s name.</li>
 <figure class="shot"><a href="../../assets/shots/modules-published@2x.webp"><img src="../../assets/shots/modules-published.webp" srcset="../../assets/shots/modules-published.webp 1x, ../../assets/shots/modules-published@2x.webp 2x" alt="The Install a module panel on Settings → Modules: its Refresh button, then the group Installed with album-folders, archive and assistant from github.com/einhq, a row each marked The deployment's, and at the foot the From a repository's address box with its Install button" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The published modules and what is installed of each; these came with the deployment, so none offers Install.</figcaption></figure>
 <p>EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the
-page.</p>
+page. Every page open in a browser, this one included, then says <strong>EiN has been updated. This page
+reloads in 60 s.</strong> and reloads, so it runs the module&#39;s pages as installed; each install, update or
+removal in a row starts the 60 seconds again, so updating several modules reloads the page once.</p>
 <p>The install runs on its own: closing the page, or signing out, does not stop it. While it runs, the
 top of <strong>Settings → Modules</strong> says so to everyone who opens the tab, with who started it, how many of
 the module&#39;s files are in place and the last thing it did, and <strong>Install</strong> and <strong>Update</strong> wait for
@@ -637,7 +640,8 @@ place without setup. <code>mod setup &lt;name&gt;</code> sets it up.</p>
 <p><strong>Active, but something is missing.</strong> Check its <strong>Services</strong> tab: a service that shows
 <code>failed</code> or <code>disabled</code> can be started again on the <strong>Status</strong>&#39;s services tab, and
 <a href="services-logs.html">Services and logs</a> explains how to read its log. A module installed from the
-terminal shows its pages in a browser tab that was already open once that page is reloaded.</p>
+terminal shows its pages in a browser tab that was already open once that page has reloaded, which
+it does by itself a minute after the install.</p>
 <p><strong>Install or update refused.</strong> The message says why, in words like these:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>

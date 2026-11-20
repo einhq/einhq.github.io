@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section class="here"><h2>Devices</h2><ul><li><a href="index.html" aria-current="page">Devices</a></li><li><a href="commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -194,8 +195,8 @@ devices that speak MQTT: those running ESPHome, and Shelly&#39;s of every genera
 runs one beside EiN with <code>--devices</code>, in the <a href="#the-installers-sidecar">devices sidecar</a>; a
 broker you already run works as well.</li>
 <li><strong>A restreamer</strong> for cameras, which the sidecar has too: it keeps one connection to each camera,
-and EiN&#39;s pages and commands watch the camera through it. Without it a camera gives only its
-still picture, when it has one.</li>
+and EiN&#39;s pages, its commands and the media service watch the camera through it. Without it a
+camera gives only its still picture, when it has one.</li>
 <li>No broker for the rest: printers, Google Cast speakers, NAS boxes, <a href="#a-web-api">web APIs</a> and
 anything else on the network are asked by EiN directly, once added, with or without one. Without
 the installer&#39;s broker nothing is found on the network, though, so add them by hand with
@@ -233,16 +234,15 @@ so it is all there again after a restart.</li>
 <li><strong>A listener</strong> on the machine&#39;s own network, which finds the devices that are not on the broker
 yet: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
 <li><strong>A restreamer</strong>, go2rtc, which keeps one connection to each <a href="#a-camera">camera</a> EiN has and
-serves it again, to EiN on port 1984 (<code>STREAMS_PORT</code>) and over RTSP on 8554 (<code>RTSP_PORT</code>), behind the account <code>ein</code> and <code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN
-gives it the cameras itself.</li>
+serves it again to EiN on port 1984 (<code>STREAMS_PORT</code>), behind the account <code>ein</code> and
+<code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN gives it the cameras itself.</li>
 </ul>
 <p><code>setup.sh</code> gives EiN the broker&#39;s and the restreamer&#39;s addresses and passwords itself, and the
 <code>device</code> account a device added from the network is given: those settings say <strong>From deployment</strong>
 on the Settings page and need nothing from you. <code>./setup.sh --no-devices</code> takes the sidecar out
 again, and <code>./setup.sh --only devices</code> updates it alone.</p>
-<p>A restreamer of your own is set on <strong>Settings → System → Restreamer</strong>, under <strong>Set up</strong>: its address,
-its RTSP as the media service reaches it, and the password of its account <code>ein</code>, saved together so
-<code>devices-bridge</code> restarts once. Under <strong>Now</strong> the page says whether the restreamer answers that
+<p>A restreamer of your own is set on <strong>Settings → System → Restreamer</strong>, under <strong>Set up</strong>: its address
+and the password of its account <code>ein</code>, saved together so <code>devices-bridge</code> restarts once. Under <strong>Now</strong> the page says whether the restreamer answers that
 account, with how many streams it has, or why not, such as &quot;the restreamer answered 401&quot; for a wrong
 password. <code>devices-status --streams</code> says the same in the terminal.</p>
 <p>Under Docker, and podman run as root, EiN reaches the sidecar at the machine&#39;s address on its
@@ -253,7 +253,7 @@ not.</p>
 grep MQTT_DEVICE_PASSWORD .<span class="hljs-built_in">env</span></code></pre></div>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>The broker speaks plain MQTT, without TLS. Whoever reaches port 1883 with the device password can
-switch the house&#39;s devices and read what they say, and whoever reaches 1984 or 8554 with the
+switch the house&#39;s devices and read what they say, and whoever reaches 1984 with the
 restreamer&#39;s password watches the cameras. Keep the ports on your home network and never forward
 them on your router; <a href="../admin/network.html#what-ein-listens-on">Ports, HTTPS and remote access</a>
 lists it with EiN&#39;s other ports.</p>
@@ -639,26 +639,58 @@ camera in the terminal:</p>
 <p>A password or an address that changed is given again on the camera&#39;s <strong>Info</strong> tab, with <strong>Change</strong>,
 or in the terminal, and the camera is reached with it at once:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>device-config front-door password=<span class="hljs-string">&#x27;the new password&#x27;</span></code></pre></div>
-<p>The camera becomes a device of class <code>camera</code>, with a <code>stream</code> endpoint for each stream: <code>main</code>, and
-<code>sub</code> with a second one. EiN gives the streams to the <a href="#the-installers-sidecar">sidecar&#39;s restreamer</a>,
+<p>The camera becomes a device of class <code>camera</code>, with two <code>stream</code> endpoints for each stream: <code>main.ts</code>
+and <code>main.mp4</code>, and <code>sub.ts</code> and <code>sub.mp4</code> with a second one, and beside them its pictures, <code>main.jpg</code>
+and <code>sub.jpg</code>. EiN gives the streams to the <a href="#the-installers-sidecar">sidecar&#39;s restreamer</a>,
 which keeps one connection to the camera however many watch it, and says within a minute how large
 each picture is and which codec it is sent in. Its page shows a picture of each stream now, taken
 again every ten seconds while the page is open, and the <strong>Live</strong> tab plays the picture as it comes:
 the main stream, or the smaller one, a button away. The <strong>Devices</strong> page shows a picture of the
-smaller stream on the camera&#39;s card. Without a restreamer (<strong>Restreamer</strong> empty) nothing is watched
-live, so the camera&#39;s page has no <strong>Live</strong> tab, and a picture is the camera&#39;s still picture, from
-its <code>snapshot</code> address.</p>
-<p>A picture is a file too, a JPEG of the stream now, taken each time it is read:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
-<span class="hljs-built_in">cat</span> /dev/front-door/main &gt; ~/front-door.jpg</code></pre></div>
+smaller stream on the camera&#39;s card. Without a restreamer (<strong>Restreamer</strong> empty) nothing is written
+to the streams and the camera has no <code>.mp4</code> ones, so its page has no <strong>Live</strong> tab, and a picture is
+the camera&#39;s still picture, from its <code>snapshot</code> address.</p>
+<p>Each stream endpoint is the camera&#39;s video as it comes, H.264 or H.265 with its sound: <code>.ts</code> is
+MPEG-TS, with the camera&#39;s sound when it sends AAC (other sound is left out), and <code>.mp4</code> fragmented
+MP4, with the sound as AAC or, from a camera that sends G.711, as FLAC. EiN reads it from the
+restreamer while someone reads the endpoint, and lets it go a few seconds after the last one
+stopped; whoever reads it starts at its latest keyframe. The <strong>Live</strong> tab reads the <code>.mp4</code> one, in
+the browser as any file is read, so it needs nothing beyond what EiN&#39;s pages do. Reading it records
+the camera until you stop it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal; Ctrl-C stops it</span>
+<span class="hljs-built_in">cat</span> /dev/front-door/main.ts &gt; ~/front-door.ts</code></pre></div>
+<p>Reading a picture endpoint gives one picture, the camera as it is now:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-built_in">cat</span> /dev/front-door/sub.jpg &gt; ~/front-door.jpg</code></pre></div>
+<p>In a browser signed in to EiN it is at <code>/file/dev/front-door/sub.jpg</code>. A picture is made only when
+someone asks for one, and none while nobody does: the <a href="../ems/index.html">media service</a> takes the
+first keyframe of the stream that comes, or without a restreamer EiN asks the camera
+for its still picture. Whoever asks within two seconds of the last picture is given that one. With a
+restreamer and no media service there are no pictures, and a camera with neither a restreamer nor
+a <code>snapshot</code> address has no picture endpoints.</p>
+<h4 id="a-camera-a-browser-cannot-play">A camera a browser cannot play<a class="anchor" href="#a-camera-a-browser-cannot-play" aria-label="Link to this section"></a></h4>
+<p>A camera that sends H.265 (HEVC) plays in few browsers and on few TVs. With the
+<a href="../ems/index.html">media service</a>, its stream can be made H.264 while it is read, into a stream of
+its own that anything plays. The <strong>Live</strong> tab does it by itself in a browser that does not play the
+camera&#39;s codec, while the tab is open. In the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>stream-transcode start /dev/front-door/main.ts /tmp/front-door.ts</code></pre></div>
+<p>The media service reads the camera&#39;s stream as it reads any, and writes H.264 with the camera&#39;s
+sound as AAC, a keyframe every second, into <code>/tmp/front-door.ts</code>, which is made yours when it is
+not there; whoever reads it starts at its latest keyframe. A stream named <code>.mp4</code> is written as
+fragmented MP4, and without one it writes fragmented MP4 into a stream made for it,
+<code>/tmp/stream-transcodes/&lt;id&gt;.mp4</code>, which only you read and which goes when it stops. <code>--height=720</code> makes the picture
+smaller. It stops by itself a minute after the last one reading it stops (<code>--idle</code> for longer, and
+it waits that long for a first one), and <code>stream-transcode stop &lt;id&gt;</code> stops it at once;
+<code>stream-transcode list</code> lists yours. Each takes a processor core or more of the media service&#39;s
+machine to decode and an encoder of its graphics card when it has one; two run at once unless the
+administrator allows more (<code>EMS_TRANSCODES</code>).</p>
 <p>With the <a href="../archive/index.html">Archive</a>, the media service also watches each camera&#39;s smaller
-stream for faces: the camera gets a <strong>Faces</strong> log, which says who each face that came into view
+stream for faces, reading it from EiN as it reads any file, on this machine or another: the camera gets a <strong>Faces</strong> log, which says who each face that came into view
 was, or <code>unknown</code>, within a second or so, as <code>dev.&lt;camera&gt;.faces</code> for automations, and the faces&#39;
 pictures are filed under the camera in the archive, where they are named as photos&#39; faces are
 (<a href="../archive/people.html#faces-a-camera-sees">Faces a camera sees</a>). The media service records the
 camera&#39;s largest stream as well, and a clip of each visit, from a little before the face until a
 little after, is filed beside them as a video (<a href="../archive/cameras.html#a-security-camera">A security camera</a>).</p>
-<p>The camera is <strong>online</strong> while it gives a picture, asked every other minute. Who may see the
+<p>The camera is <strong>online</strong> while it answers the restreamer, asked every other minute, or without a
+restreamer while it gives its still picture. Who may see the
 pictures is who may read the stream: the household, as for every device
 (<a href="#who-may-do-what">Who may do what</a>). EiN&#39;s pages reach the camera only through EiN, signed in, so
 neither its address nor its password reaches a browser.</p>
@@ -1000,7 +1032,8 @@ pictures</strong>), with the camera&#39;s name and the time the picture is from 
 it live, as on the <strong>Live</strong> tab, for five minutes; tap again to go back to pictures. <strong>Always
 live</strong> plays it live all the time. <strong>Stream</strong> picks the smaller of its streams, which costs
 less to send, and <strong>Picture</strong> whether it fills the card or shows all of it. A camera that cannot
-be played live (no restreamer, or a codec the browser does not play) shows its pictures, and says
+be played live (no restreamer, or a codec the browser does not play that the media service cannot
+make H.264) shows its pictures, and says
 why at the top.</li>
 <li><strong>Button</strong>: one large button for a device&#39;s control, lit while the control is what the button
 sets. Without <strong>Sets it to</strong>, it presses a button, such as a <a href="../automation/virtual-devices.html">virtual device</a>&#39;s
@@ -1250,14 +1283,14 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <td>Turn it on; it can be chosen once EiN hears it again</td>
 </tr>
 <tr>
-<td>The <strong>Live</strong> tab says the stream could not be reached</td>
-<td>As above, or the sidecar is not running</td>
-<td><code>podman compose ps</code> on the machine; <code>./setup.sh --only devices</code> starts it again</td>
+<td>The <strong>Live</strong> tab stays at <strong>Connecting…</strong>, or says the stream ended</td>
+<td>As above, the sidecar is not running, or the camera does not answer</td>
+<td><code>podman compose ps</code> on the machine; <code>./setup.sh --only devices</code> starts it again. <code>service logs devices-bridge</code> says what the restreamer answered</td>
 </tr>
 <tr>
-<td><strong>Live</strong> plays nothing in a browser on a phone</td>
-<td>The browser does not play the camera&#39;s codec, often H.265</td>
-<td>Watch the smaller stream, which is often H.264, or set the camera to send H.264</td>
+<td>The <strong>Live</strong> tab says the browser does not play the camera&#39;s video</td>
+<td>The browser does not play its codec, often H.265, and the media service could not make it H.264</td>
+<td>Check the <a href="../ems/index.html#check-that-it-is-running">media service</a>, watch the smaller stream, which is often H.264, or set the camera to send H.264</td>
 </tr>
 </tbody></table>
 </div>
@@ -1272,7 +1305,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../dashboard/commands.html" rel="prev"><span>Previous</span>Dashboards commands</a><a class="next" href="commands.html" rel="next"><span>Next</span>Devices commands</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../vasttrafik/commands.html" rel="prev"><span>Previous</span>Västtrafik commands</a><a class="next" href="commands.html" rel="next"><span>Next</span>Devices commands</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/devices/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>

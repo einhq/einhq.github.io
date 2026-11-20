@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section class="here"><h2>Dashboards</h2><ul><li><a href="index.html">Dashboards</a></li><li><a href="screens.html" aria-current="page">Show a dashboard on a screen</a></li><li><a href="commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -158,17 +159,22 @@ plays from the network (DLNA) — can still show a dashboard: the
 <a href="../ems/index.html">media service</a> opens it in a browser of its own, as you see it and changing
 nothing, and makes live video of it. In EiN&#39;s terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>page-stream start /dashboard-wall/Kitchen</code></pre></div>
-<p>It answers the stream&#39;s id and where to play it: a path ending in <code>.mp4</code>, for a Cast device, the
-same ending in <code>.ts</code>, for a DLNA TV, one ending in <code>screen.mp4</code>, the same video saying it lasts a
-day, which Chrome hands a TV near it, and one ending in <code>index.m3u8</code>, a live HLS playlist, for a
-player that takes HLS (Safari, VLC, an Apple TV). Put EiN&#39;s address in front, such as
-<code>http://ein.local:8080/live/3f2a…9c.mp4</code>, and play it in anything that plays a stream from an
-address. Anyone with the address can watch it, without signing in, until the stream stops.</p>
+<p>It answers the stream&#39;s id and where to play it. The media service writes the video into two
+streams in EiN&#39;s tree, yours alone: <code>/tmp/page-streams/&lt;id&gt;.mp4</code>, for a Cast device, and the same
+ending in <code>.ts</code>, for a DLNA TV, which you read signed in, such as
+<code>http://ein.local:8080/file/tmp/page-streams/page-3f2a….mp4</code> in a browser, and a TV given the page
+with <strong>Show on…</strong> reads with a ticket of its own. Whoever starts reading one starts at its latest
+keyframe. Two more addresses, one ending in <code>screen.mp4</code>, the video saying it lasts a day, which
+Chrome hands a TV near it, and one ending in <code>index.m3u8</code>, a live HLS playlist, for a player that
+takes HLS (Safari, VLC, an Apple TV), anyone with the address can watch without signing in: put
+EiN&#39;s address in front, such as <code>http://ein.local:8080/live/3f2a…9c/index.m3u8</code>, and play it in
+anything that plays a stream from an address, until the stream stops.</p>
 <ul>
 <li>The video is a few seconds behind the dashboard, and a moving dashboard looks as it does in a
 browser, at 30 frames a second, 1920×1080 unless you give <code>--width</code>, <code>--height</code> or <code>--fps</code>.</li>
 <li>It stops by itself 20 seconds after the last one watching stops (<code>--idle</code> for longer), and
-<code>page-stream stop &lt;id&gt;</code> stops it at once. <code>page-stream list</code> lists yours.</li>
+<code>page-stream stop &lt;id&gt;</code> stops it at once; its two streams go with it. <code>page-stream list</code> lists
+yours, with how many watch each.</li>
 <li>Each stream takes about two processor cores of the media service&#39;s machine while the page
 moves, and an encoder of its graphics card when it has one. Two run at once unless the
 administrator allows more (<code>EMS_PAGES</code>).</li>
@@ -194,9 +200,10 @@ you choose in its own list of screens. The TV then fetches it from EiN, over the
 <ul>
 <li><p>A page goes as live video of it, with its sound: the media service makes it as above. An album&#39;s
 slideshow, or the <strong>Media</strong> page&#39;s, goes as the slideshow page, which starts at the first
-picture with nothing of the album&#39;s page before it. Chrome hands the TV the
-video that says it lasts a day, since it offers a TV nothing shorter than 15 seconds and, on a
-phone, no HLS; Safari hands it the HLS playlist.</p>
+picture with nothing of the album&#39;s page before it. The TV plays it as live, with no length,
+for as long as it is left on, a few seconds behind the page: Chrome gives it the video as a live
+stream, and Safari the HLS playlist. Chrome without Google&#39;s Cast script cannot hand a TV a live
+stream, and gives it the video saying it lasts a day instead.</p>
 </li>
 <li><p>A recording or a video from the viewer goes as itself, as a Cast screen in the house is given it
 (<a href="../devices/index.html#from-the-app">Play on a speaker or a screen</a>): a video that is not H.264
@@ -230,7 +237,7 @@ also after the page is opened again. It opens <strong>Casting</strong>, headed b
 such as <strong>Album:</strong> and the album&#39;s name, which takes you back to it. Below are the controls: for
 a recording or a video play and pause, <strong>Back 10 seconds</strong>, <strong>Forward 30 seconds</strong> and how far it
 has come; for a slideshow a card with what it shows now, the picture or video with its name and
-where it is (<strong>3 of 31</strong>), and <strong>Previous</strong>, <strong>Pause or play</strong> and <strong>Next</strong>, which move and hold
+where it is (<strong>3 of 31</strong>), and <strong>Previous</strong>, <strong>Pause</strong> (<strong>Play</strong> while it is held) and <strong>Next</strong>, which move and hold
 the slideshow itself, as its keys do, and show on the TV a few seconds later; while the slideshow
 plays a video or a recording, a slider of its length with where it is, and <strong>Back 10 seconds</strong>
 and <strong>Forward 10 seconds</strong>, which a picture has not. <strong>Stop casting</strong>, at the bottom, stops the TV.
@@ -254,12 +261,10 @@ opens to choose it again.</p>
 over HTTPS (<a href="../admin/network.html#reach-ein-from-outside-your-home">Reach EiN from outside your home</a>),
 and the video takes some of the upload of EiN&#39;s own connection while the TV plays it.</p>
 </li>
-<li><p>Chrome offers a screen nothing shorter than 15 seconds: for a shorter recording or video the
-dialog says so.</p>
-</li>
-<li><p>Keep EiN open on the phone while the TV plays: Chrome on Android pauses the TV when you leave the
-page or the screen locks, and it plays on when you come back. A page&#39;s stream waits five minutes
-for that.</p>
+<li><p>Chrome without Google&#39;s Cast script, over plain HTTP or with the script blocked, offers a screen
+nothing shorter than 15 seconds, for which the dialog says so, and on a phone pauses the TV when
+you leave the page or the screen locks; it plays on when you come back, and a page&#39;s stream waits
+five minutes for that. With the script the TV plays on whatever the phone does.</p>
 </li>
 <li><p><strong>Stop</strong> in the dialog, the TV&#39;s own remote or the browser&#39;s list of screens stops it and lets the
 TV go. A page&#39;s stream stops by itself five minutes after the TV stops reading it.</p>

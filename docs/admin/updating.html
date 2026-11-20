@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -97,18 +98,19 @@
 services up to date, what an update touches and what it keeps, how to see which version runs, and
 what to do when an update goes differently.</p>
 <h2 id="how-updates-work">How updates work<a class="anchor" href="#how-updates-work" aria-label="Link to this section"></a></h2>
-<p>Core, its database, the deploy repository with the supervisor, and the language model have versions,
-as modules do. Each morning what changed in them is released (a fix as the next patch, a new feature
-or a breaking change as the next minor while they are below 1.0.0), and GitHub builds their images
-from it. The images carry the version as a tag beside <code>:main</code>: <code>ghcr.io/einhq/core:0.1.0</code>, and
-<code>ghcr.io/einhq/core:0.1</code> for the newest of the 0.1 versions. An update downloads <code>:main</code>, the newest
-release, and starts it in place of what ran before, so there is no version to choose between, and a
-change made today reaches an update tomorrow. The media service is run each night over a set of real
-photos, videos, recordings and documents, to see that it answers as it did before (the internal
-regression suite); while it changes several times a day, its changes reach GitHub whether or not
-that run has passed. The engine downloads only the layers of an image that changed, so an update of
-the media service is usually far smaller than its 30 GB. What it updates depends on what is
-installed:</p>
+<p>Core, its database, the media service, the Devices module&#39;s sidecar and the deploy repository with
+the supervisor have versions, as modules do. Each morning what changed in them is released (a fix as
+the next patch, a new feature as the next patch too and a breaking change as the next minor while
+they are below 1.0.0), and GitHub builds one image of each release, tagged with its version:
+<code>ghcr.io/einhq/core:0.1.1</code>. A release is never built again, so a version names one image, and
+there is no <code>:main</code>. <code>~/ein/.env</code> names the release each service runs, as <code>EIN_CORE_VERSION=0.1.1</code>
+and the like; an update moves each to the newest release and starts it in place of what ran
+before, so a change made today reaches an update tomorrow. A day with nothing to release brings
+nothing to update. The media service is run each night over a set of real photos, videos,
+recordings and documents, to see that it answers as it did before (the internal regression suite);
+its releases reach GitHub whether or not that run has passed. The engine downloads only the layers
+of an image that changed, so an update of the media service is usually far smaller than its 30 GB.
+What it updates depends on what is installed:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -122,70 +124,72 @@ installed:</p>
 <td>deploy</td>
 <td><code>~/ein</code> itself: <code>setup.sh</code> and the compose files</td>
 <td>always, first</td>
-<td><code>git pull</code> of <code>~/ein</code></td>
+<td><code>~/ein</code> moved to its newest release tag</td>
 </tr>
 <tr>
 <td>core</td>
 <td>EiN: the tree, the shell, the Web UI</td>
 <td>always</td>
-<td>the image <code>ghcr.io/einhq/core:main</code></td>
+<td>the image <code>ghcr.io/einhq/core:&lt;version&gt;</code></td>
 </tr>
 <tr>
 <td>db</td>
 <td>PostgreSQL with TimescaleDB, pgvector and PostGIS</td>
 <td>always</td>
-<td>the image <code>ghcr.io/einhq/db:main</code></td>
+<td>the image <code>ghcr.io/einhq/db:&lt;version&gt;</code></td>
 </tr>
 <tr>
 <td>ems</td>
 <td>the media service, which the Archive needs</td>
 <td>with the media service</td>
-<td>the image <code>ghcr.io/einhq/ems:&lt;line&gt;</code></td>
+<td>the image <code>ghcr.io/einhq/ems:&lt;version&gt;</code></td>
 </tr>
 <tr>
 <td>devices</td>
 <td>the Devices module&#39;s sidecar</td>
 <td>with the sidecar</td>
-<td>the image <code>ghcr.io/einhq/devices:&lt;line&gt;</code></td>
+<td>the image <code>ghcr.io/einhq/devices:&lt;version&gt;</code></td>
 </tr>
 <tr>
 <td>llm</td>
-<td>the language model&#39;s chat template, for the Assistant</td>
+<td>the language model&#39;s server and chat template</td>
 <td>with the language model</td>
-<td>its source, fetched into <code>~/ein/src</code></td>
+<td>the image <code>compose.llm.yaml</code> names</td>
 </tr>
 <tr>
 <td>deploy</td>
 <td>the <a href="supervisor.html">supervisor</a></td>
 <td>with the supervisor</td>
-<td>the image <code>ghcr.io/einhq/supervisor:main</code></td>
+<td>the image <code>ghcr.io/einhq/supervisor:&lt;version&gt;</code></td>
 </tr>
 </tbody></table>
 </div>
-<p>GitHub builds the database&#39;s image again every week too, so an update also brings PostgreSQL&#39;s and
-its extensions&#39; minor releases. Installed from another organisation with <code>--source</code>, an update
+<p>The database&#39;s image takes PostgreSQL&#39;s and its extensions&#39; newest minor releases when its release
+is built. Installed from another organisation with <code>--source</code>, an update
 fetches the sources of core, db and ems into <code>~/ein/src</code> instead and builds the images on your
 machine, the media service&#39;s in about an hour (<a href="install.html#where-the-sources-come-from">Where the sources come from</a>).</p>
 <p>The language model&#39;s server is not built: it is llama.cpp&#39;s ready-made image, named by a fixed
 digest in <code>compose.llm.yaml</code>. It changes only when that file does, which is when the deploy
 repository is updated.</p>
 <p>With the <a href="supervisor.html">supervisor</a>, which an installation from GitHub has, you need not run
-anything: it updates every service each night at 04:00 (<code>EIN_UPDATE_AT</code> in <code>~/ein/.env</code>), and
-<strong>Update</strong> and <strong>Update all</strong> on <strong>Settings → Modules</strong> update them at once. Its update leaves a
-service that runs its newest image as it is, and puts one whose new image does not come up back on
-the one it ran. The rest of this page holds for it too: each of its updates is a run of <code>setup.sh</code>.</p>
+anything: each night at 04:00 (<code>EIN_UPDATE_AT</code> in <code>~/ein/.env</code>) it updates every service that has a
+newer release, and <strong>Settings → Modules</strong> shows <strong>Update to</strong> that release beside such a service,
+and <strong>Update all</strong> when any has one. Its update leaves a service that runs its newest release as it
+is, and puts one whose new release does not come up back on the one it ran. The rest of this page
+holds for it too: each of its updates is a run of <code>setup.sh</code>.</p>
 <p>Modules are not part of this. They live in the data folder and are updated separately, on
 <strong>Settings → Modules</strong>; see <a href="modules.html#update-a-module">Update a module</a>. Only a module the new
 EiN cannot run is replaced, at its start (<a href="#what-happens-when-the-new-ein-starts">below</a>).</p>
 <h3 id="the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules<a class="anchor" href="#the-media-service-and-the-sidecar-follow-their-modules" aria-label="Link to this section"></a></h3>
 <p>The media service and the Devices module&#39;s sidecar each have a version of what they offer EiN,
 and the modules that talk to them, <code>ems</code> and <code>devices</code>, say in their manifest which versions
-they speak, as in <code>&quot;services&quot;: { &quot;ems&quot;: &quot;^0.4.4&quot; }</code>. An update downloads each at the line its
-module asks for: <code>ghcr.io/einhq/ems:0.4</code> is the newest media service of the 0.4 versions, which
-the <code>ems</code> module asking for <code>^0.4.4</code> speaks. <code>.env</code> keeps the line it runs as <code>EIN_EMS_TAG</code> and
-<code>EIN_DEVICES_TAG</code>; before any module asks, it is <code>main</code>.</p>
+they speak, as in <code>&quot;services&quot;: { &quot;ems&quot;: &quot;^0.4.4&quot; }</code>. An update moves each to the newest release of
+the line its module asks for: the <code>ems</code> module asking for <code>^0.4.4</code> speaks every 0.4 release, so
+the media service runs the newest 0.4, say <code>ghcr.io/einhq/ems:0.4.9</code>, and <code>.env</code> says
+<code>EIN_EMS_VERSION=0.4.9</code> (and <code>EIN_DEVICES_VERSION</code> for the sidecar). Before any module asks, it
+runs the newest release of all.</p>
 <p>So after you update a module on <strong>Settings → Modules</strong> to a release that needs a newer media
-service, the <strong>Status</strong> page says so, as <code>ems api</code>: <code>EMS speaks API 0.4.4, older than the ^0.5.0 this module needs: update the media service</code>. Run <code>~/ein/setup.sh --only ems</code> (or <code>--only devices</code> for <code>devices sidecar</code>), and it downloads the line the module asks for and restarts
+service, the <strong>Status</strong> page says so, as <code>ems api</code>: <code>EMS speaks API 0.4.4, older than the ^0.5.0 this module needs: update the media service</code>. Run <code>~/ein/setup.sh --only ems</code> (or <code>--only devices</code> for <code>devices sidecar</code>), and it downloads the newest release of the line the module asks for and restarts
 the service alone. With the <a href="supervisor.html">supervisor</a> there is nothing to run: it does the same
 within a minute of the module&#39;s update. A line not published yet, as for a few hours after a module&#39;s release, leaves
 the service as it is, and says <code>The modules here ask for ems 0.5, which is not published yet: it stays at 0.4</code>. Installed from another source, the service is built from its newest source, and
@@ -217,11 +221,14 @@ and the language model counted when <code>.env</code> has them. When a check fai
 changes nothing; <a href="install.html#what-the-checks-measure">Installing in detail</a> explains each
 check.</p>
 </li>
-<li><p><code>Updating /home/anna/ein from https://github.com/einhq/deploy</code>: it runs <code>git pull --ff-only</code> on
-the folder, which brings the newest <code>setup.sh</code> and compose files.</p>
+<li><p><code>Updating /home/anna/ein from https://github.com/einhq/deploy</code>: <code>setup.sh</code> moves the folder to
+deploy&#39;s newest release, which brings the newest <code>setup.sh</code> and compose files, and says
+<code>Updated /home/anna/ein to v0.1.2; running its setup.sh</code> when that changed it.</p>
 </li>
 <li><p>It runs <code>~/ein/setup.sh</code>, which prints its steps:</p>
 <div class="code"><pre tabindex="0"><code>== Getting the images
+  core 0.1.2, after 0.1.1
+  ems 0.4.9, after 0.4.8
 
 == Starting EiN
 Waiting for EiN to answer at http://127.0.0.1:8080/; its first start takes a minute or more
@@ -248,6 +255,10 @@ then; when it fails again, <code>setup.sh</code> stops there and EiN goes on run
 again until the new one answers, which is usually a minute or two, and longer when modules have to
 be set up or their pages built again. <code>setup.sh</code> waits up to 10 minutes for EiN to answer on its
 port.</p>
+<p>Pages left open in a browser reconnect once EiN answers. When the update changed the interface, each
+says <strong>EiN has been updated. This page reloads in 60 s.</strong> and reloads by itself, so nobody goes on
+with the old pages against the new EiN; a tab that is not in view reloads when it is next shown.
+Installing, updating or removing a module does the same.</p>
 <h3 id="update-with-setupsh-alone">Update with <code>setup.sh</code> alone<a class="anchor" href="#update-with-setupsh-alone" aria-label="Link to this section"></a></h3>
 <p><code>~/ein/setup.sh</code> without the installer downloads and restarts in the same way, and skips the
 machine checks. It brings <code>~/ein</code> itself up to date first, with <code>git pull --ff-only</code>, and when that

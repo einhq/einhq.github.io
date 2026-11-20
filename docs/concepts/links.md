@@ -103,8 +103,13 @@ owner and mode, the same content and children. Nothing marks one name as the ori
 
 ```bash
 # in EiN's terminal
-ln /archive/albums/christmas-2019/20191225_155434.jpg /home/helen/20191225_155434.jpg
+ln /home/helen/recipes/scones.txt /home/helen/baking/scones.txt
 ```
+
+You may hard-link a node you own, or one you may both read and write; the administrator may
+hard-link any. Anything else stops with `Access denied for operation 'link'`: a second name in a
+folder of yours would otherwise let what writes there on your behalf write someone else's node.
+Make a softlink with `ln -s` instead.
 
 Each node counts its names. The count is the third column of `ls -l`, and **Links** in the
 **Nodes** explorer's **Properties**; a node with one name shows `1`. Removing a name with `rm`
@@ -220,15 +225,17 @@ reachable by its other name.
 
 ## When something goes differently
 
-| What you see                                                       | What it means                                                                                              | What to do                                                                                            |
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `Node not found:` and a path, when you open a link                 | The link points at nothing: its target was deleted, is in someone's trash, or was moved with `--no-relink` | Restore the target from the trash, point the link again with `ln -sf`, or remove it with `rm`         |
-| `too many levels of symbolic links`                                | Links point at each other in a loop, or a chain is longer than 40                                          | Look at the targets with `ls -l` and correct one                                                      |
-| A label is still listed with nothing behind it                     | A link in `/archive/tags/<label>/` points at something gone                                                | `label prune` removes every label link that points at nothing                                         |
-| The other half of a family tie is missing                          | One half was removed while `relations-guard` was not running                                               | With the Archive, `person-check /archive/people` reports broken ties; remove the tie and add it again |
-| Labels or relation halves stay after something is deleted for good | The `relations-guard` service is stopped                                                                   | An administrator checks it with `service-status`; see [Services and logs](../admin/services-logs.md)  |
-| `ln: failed to access '<target>': No such file or directory`       | A hard link needs an existing target                                                                       | Check the path, or make a softlink with `-s`                                                          |
-| `Access denied for operation` when you follow a link               | A softlink is not a way in: you need access along the target's own path                                    | Ask the target's owner to [share](../guide/sharing.md) it                                             |
+| What you see                                                       | What it means                                                                                              | What to do                                                                                               |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `Node not found:` and a path, when you open a link                 | The link points at nothing: its target was deleted, is in someone's trash, or was moved with `--no-relink` | Restore the target from the trash, point the link again with `ln -sf`, or remove it with `rm`            |
+| `too many levels of symbolic links`                                | Links point at each other in a loop, or a chain is longer than 40                                          | Look at the targets with `ls -l` and correct one                                                         |
+| A label is still listed with nothing behind it                     | A link in `/archive/tags/<label>/` points at something gone                                                | `label prune` removes every label link that points at nothing                                            |
+| The other half of a family tie is missing                          | One half was removed while `relations-guard` was not running                                               | With the Archive, `person-check /archive/people` reports broken ties; remove the tie and add it again    |
+| Labels or relation halves stay after something is deleted for good | The `relations-guard` service is stopped                                                                   | An administrator checks it with `service-status`; see [Services and logs](../admin/services-logs.md)     |
+| `ln: failed to access '<target>': No such file or directory`       | A hard link needs an existing target                                                                       | Check the path, or make a softlink with `-s`                                                             |
+| `Access denied for operation 'link'` from `ln`                     | You may hard-link only a node you own or may read and write                                                | Make a softlink with `-s`                                                                                |
+| `write through a softlink owned by uid` and a number               | The administrator writes through no softlink someone else made                                             | Write to the target by its own path, or remove the link with `rm` and make it again as the administrator |
+| `Access denied for operation` when you follow a link               | A softlink is not a way in: you need access along the target's own path                                    | Ask the target's owner to [share](../guide/sharing.md) it                                                |
 
 ## Related pages
 

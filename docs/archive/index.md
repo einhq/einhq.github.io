@@ -59,7 +59,8 @@ Installing takes an administrator. Any of these installs the Archive with the `e
   mod install archive
   ```
 
-Its pages appear in the sidebar without a reload. [Modules](../admin/modules.md) covers installing,
+Its pages appear in the sidebar of pages already open when they reload, which they do by themselves a
+minute after the install. [Modules](../admin/modules.md) covers installing,
 updating and removing modules, and [Installing in detail](../admin/install.md) the installer's
 options.
 

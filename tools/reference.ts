@@ -74,6 +74,7 @@ const MODULES: Record<string, string> = {
   todo: 'Todo',
   recipes: 'Recipes',
   dashboard: 'Dashboards',
+  vasttrafik: 'Västtrafik',
 };
 
 /** Modules that are not published, which the public documentation leaves out even when the EiN it is made from has them. */

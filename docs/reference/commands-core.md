@@ -219,7 +219,7 @@ basename [-s <string>] [-a] [-z] <NAME> [<SUFFIX>]
 
 ### `cat`
 
-Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a camera's stream (a JPEG of it now)
+Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a stream (its bytes from now on, to a file); a picture, video or recording is a preview on a terminal and its bytes to a file or a pipe.
 
 <small>reads only</small>
 
@@ -3706,7 +3706,7 @@ stream-page --state page-3f2a9c41d07b5e18
 stream-page --message page-3f2a9c41d07b5e18 '{"seek":80}'
 ```
 
-With `JSON_OUTPUT=1`: id: the stream's, for --press, --state and --message; path: read <path>.mp4 or <path>.ts; remote: the MP4 for a screen near a browser; hls: the live HLS playlist; all without signing in, until nobody has read it for a while. --press, --message: ok. --state: what the page says it shows (title, path, kind, position, media with time, duration and paused), or null.
+With `JSON_OUTPUT=1`: id: the stream's, for --press, --state and --message; path: its stream nodes <path>.mp4 and <path>.ts, the caller's; remote: the MP4 for a screen near a browser; hls: the live HLS playlist; those two without signing in, until nobody has read it for a while. --press, --message: ok. --state: what the page says it shows (title, path, kind, position, media with time, duration and paused), or null.
 
 ### `supervisor`
 
@@ -3750,7 +3750,7 @@ supervisor-status
 
 ### `supervisor-update`
 
-Have the supervisor update services beside EiN now, EiN among them; every installed one when none is named.
+Have the supervisor update services beside EiN now, EiN among them; every one with a newer release when none is named.
 
 <small>administrators only · changes things</small>
 

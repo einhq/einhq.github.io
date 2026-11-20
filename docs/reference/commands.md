@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 466 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 473 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -34,7 +34,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [audit](commands-core.md#audit) | Show who created, changed, moved, linked or removed which node, and when (administrators only). Reads the last 14 days unless given --all, a time range, or a record, node, session or cause to find. |
 | [awk](commands-core.md#awk) | Pattern scanning and text processing language (fields, patterns, arrays, printf) |
 | [basename](commands-core.md#basename) | Strip directory and suffix from filenames. |
-| [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a camera's stream (a JPEG of it now) |
+| [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a stream (its bytes from now on, to a file); a picture, video or recording is a preview on a terminal and its bytes to a file or a pipe. |
 | [chmod](commands-core.md#chmod) | Change file mode bits. |
 | [chown](commands-core.md#chown) | Change file owner and group. |
 | [clear](commands-core.md#clear) | Clear the terminal screen. |
@@ -219,7 +219,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [supervisor](commands-core.md#supervisor) | The services beside EiN, which the supervisor installs and updates. |
 | [supervisor-install](commands-core.md#supervisor-install) | Have the supervisor install a service beside EiN: the media service, the language model or the devices sidecar. |
 | [supervisor-status](commands-core.md#supervisor-status) | The services beside EiN, as the supervisor that installs and updates them sees them. |
-| [supervisor-update](commands-core.md#supervisor-update) | Have the supervisor update services beside EiN now, EiN among them; every installed one when none is named. |
+| [supervisor-update](commands-core.md#supervisor-update) | Have the supervisor update services beside EiN now, EiN among them; every one with a newer release when none is named. |
 | [system-info](commands-core.md#system-info) | Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, the PostgreSQL and Deno versions, and its time zone. |
 | [tail](commands-core.md#tail) | Output the last part of files, logs, or stdin (with -f to follow) |
 | [top](commands-core.md#top) | Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses. |
@@ -480,7 +480,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Media service
 
-[All 11 in full](../ems/commands.md).
+[All 12 in full](../ems/commands.md).
 
 | Command | What it does |
 | --- | --- |
@@ -495,6 +495,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-status](../ems/commands.md#ems-status) | Show media service health: version, every model and its state, what is executing, degradation, worker memory and queues. |
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
 | [page-stream](../ems/commands.md#page-stream) | Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by the media service. |
+| [stream-transcode](../ems/commands.md#stream-transcode) | Transcode a live stream (a camera) into another as H.264, by the media service, for a browser or a screen that cannot play it as it comes. |
 
 ## Media
 
@@ -561,3 +562,16 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [todo-mine](../todo/commands.md#todo-mine) | List what is left for you to do: items not done given to you on any list, and your own lists' items not done given to nobody, soonest due first, each with its column; with --done the done ones too. |
 | [todo-move](../todo/commands.md#todo-move) | Move a todo item to another column of its list's board, at its end, or put it just before or just after another item, numbering that column's items in their new order. Into done/ it is marked done, out of it not done. |
 | [todo-set](../todo/commands.md#todo-set) | Change a todo item's title, its description, the day it is due, or who is to do it. |
+
+## Västtrafik
+
+[All 6 in full](../vasttrafik/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [vt-departures](../vasttrafik/commands.md#vt-departures) | Show the next departures from Västtrafik stops, at the time Västtrafik now expects each, refreshed at most every 20 seconds. |
+| [vt-disruptions](../vasttrafik/commands.md#vt-disruptions) | List Västtrafik's disruptions in effect at stops or on lines — moved platforms, diversions, lines not running — the worst first, from a copy refreshed at most every five minutes. |
+| [vt-lines](../vasttrafik/commands.md#vt-lines) | List the lines that leave Västtrafik stops within twelve hours, with their directions, and the platforms they leave from. |
+| [vt-positions](../vasttrafik/commands.md#vt-positions) | Show where Västtrafik's vehicles are now, around stops or in a box, refreshed at most every 5 seconds. |
+| [vt-stops](../vasttrafik/commands.md#vt-stops) | List Västtrafik's stop areas, every one or those whose name has the words given, from a copy refreshed each day. |
+| [vt-tracks](../vasttrafik/commands.md#vt-tracks) | Show where the lines through a box, around stops or given, run, each line and direction as one of its journeys runs, clipped to the box: the lines with a vehicle in it now, and those whose path crosses it with a vehicle seen within the day; each path kept a day. |

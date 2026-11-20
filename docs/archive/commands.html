@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -213,7 +214,7 @@ album move /archive/albums/Sommar_2020 /archive/albums/Exempelalbum_2019/IMG_041
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>album-cover /archive/albums/Exempelalbum_2019
 album-cover --all --stale --<span class="hljs-built_in">limit</span> 50</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: nothing; a coverPhoto softlink is written for each album that had none.</p>
+<p>With <code>JSON_OUTPUT=1</code>: how many albums were scanned, covered and passed over, the albums that failed, and each album covered with its new cover.</p>
 <h3 id="album-device-add"><code>album-device-add</code><a class="anchor" href="#album-device-add" aria-label="Link to this section"></a></h3>
 <p>Put devices on an album&#39;s list, whose tracks its map draws.</p>
 <p><small>changes things</small></p>
@@ -375,7 +376,7 @@ album-profile --all --stale</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>album-span /archive/albums/Exempelalbum_2019
 album-span --all --stale
 album-span --dry-run /archive/albums/Exempelalbum_2019</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: how many albums were scanned and updated, and each written album (each scanned one with --dry-run): its span, media count, first and last capture, and the hand-set ends still in force.</p>
+<p>With <code>JSON_OUTPUT=1</code>: how many albums were scanned and updated, the albums that failed, and each written album (each scanned one with --dry-run): its span, media count, first and last capture, and the hand-set ends still in force.</p>
 <h3 id="album-stack"><code>album-stack</code><a class="anchor" href="#album-stack" aria-label="Link to this section"></a></h3>
 <p>Reconcile album-local stacks of consecutive, perceptually similar photos.</p>
 <p><small>changes things</small></p>
@@ -436,7 +437,7 @@ album-span --dry-run /archive/albums/Exempelalbum_2019</code></pre></div>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>album-stack refresh /archive/albums/Exempelalbum_2019 --dry-run -v
 album-stack front /archive/albums/Exempelalbum_2019 /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: refresh: how many albums were scanned and changed, stacks and stacked photos, and per album its manifest; the others: the album and member acted on.</p>
+<p>With <code>JSON_OUTPUT=1</code>: refresh: how many albums were scanned and changed, stacks and stacked photos, the albums that failed, and per album its manifest; the others: the album and member acted on.</p>
 <h3 id="anniversaries"><code>anniversaries</code><a class="anchor" href="#anniversaries" aria-label="Link to this section"></a></h3>
 <p>Birthdays, memorials and wedding anniversaries around a day, nearest first, with the age or years married.</p>
 <p><small>reads only</small></p>

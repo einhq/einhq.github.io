@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -346,9 +347,11 @@ since they hold the content.</p>
 </div>
 <p>So an instance without the Archive has <code>/archive/tags</code> and nothing else under <code>/archive</code>. A folder
 that already exists is left as it is, whoever owns it.</p>
-<p><code>/archive</code> itself has the mode <code>0771</code>: everyone may pass through, but only the <code>users</code> group, which
-every account belongs to, may list it. The folders a module makes are <code>0775</code>, owned by <code>admin</code> with
-the group <code>users</code>, so everyone with an account may add content there. What each album, person or
+<p><code>/archive</code> itself has the mode <code>1771</code>: everyone may pass through, but only the <code>users</code> group, which
+every account belongs to, may list it. The folders a module makes are <code>1771</code> too, owned by <code>admin</code>
+with the group <code>users</code>, so everyone with an account may add content there. Both have
+<a href="../admin/permissions.html#the-sticky-bit">the sticky bit</a>: what someone keeps private there, nobody
+else can delete. What each album, person or
 location then shows to whom is its own sharing; see <a href="../guide/sharing.html">Sharing</a>.</p>
 <p>With the Archive, a photo is a node with children of its own: what EiN works out about it, such as its EXIF, its
 thumbnails and the faces found on it, is kept beneath the photo and goes with it when it is moved
@@ -638,8 +641,9 @@ modules announce the facts they derive from changes to the tree on <code>/dev/ev
 engine announces its own progress on <code>/dev/pipeline-events</code>; see <a href="pipelines.html">Changes and pipelines</a>.
 Both are the administrator&#39;s alone, with the mode <code>0700</code>.
 <code>/dev/null</code> works as on Linux: reading it gives nothing, and what is written to it is thrown away.</p>
-<p><code>/tmp</code> is open to everyone, with the mode <code>0777</code>, and is kept in memory: what you put there is gone
-when EiN restarts. A file directly in <code>/tmp</code> that has not changed for a day is removed before that;
+<p><code>/tmp</code> is open to everyone, with the mode <code>1777</code>, and is kept in memory: what you put there is gone
+when EiN restarts. Like <code>/tmp</code> on Linux it has <a href="../admin/permissions.html#the-sticky-bit">the sticky bit</a>:
+what you put there is yours alone to read and to remove, until you share it. A file directly in <code>/tmp</code> that has not changed for a day is removed before that;
 <strong>Hours in /tmp</strong>, <code>CFG_TMP_RETENTION_HOURS</code>, sets how long. Use it for files you need only for a
 moment.</p>
 <h2 id="find-a-folder-by-its-variable">Find a folder by its variable<a class="anchor" href="#find-a-folder-by-its-variable" aria-label="Link to this section"></a></h2>

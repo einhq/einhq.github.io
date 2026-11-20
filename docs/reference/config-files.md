@@ -19,9 +19,10 @@ The installer fetches the deployment into `~/ein` and runs `setup.sh` there. Aft
 | `compose.yaml`          | the deployment            | EiN and its database, the base of every installation.                                                                                                                 |
 | `compose.ems.yaml`      | the deployment            | The media service, which the Archive needs, added with `--ems`.                                                                                                       |
 | `compose.llm.yaml`      | the deployment            | The language model the Assistant uses, added with `--llm`.                                                                                                            |
+| `llm/`                  | the deployment            | The language model's chat template.                                                                                                                                   |
 | `compose.override.yaml` | `setup.sh`, every run     | The options chosen in `.env`, as compose services. Written again on every run; do not edit it.                                                                        |
 | `setup.sh`              | the deployment            | Brings this folder up to date, fetches the sources, writes `.env` and `compose.override.yaml`, pulls the images or builds them from your own source, and starts them. |
-| `src/`                  | `setup.sh`                | The sources it fetches: `ems` and `llm` when those options are on, and `core` and `db` from any source but GitHub's `einhq`, which it builds with `ems`.              |
+| `src/`                  | `setup.sh`                | The sources it fetches: `ems` when that option is on, and `core` and `db` from any source but GitHub's `einhq`, which it builds with `ems`.                           |
 | `data/`                 | `setup.sh`                | Your files and the database, unless `EIN_DATA` named another folder at the install. See [The data folder](#the-data-folder).                                          |
 
 The files from the deployment are replaced when `setup.sh` brings the folder up to date at the start of every run, so changes belong in `.env`, not in `compose.yaml`. `setup.sh --help` lists its options, and [Installing in detail](../admin/install.md) explains each.

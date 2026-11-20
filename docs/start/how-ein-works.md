@@ -211,7 +211,7 @@ service and the language model.
 | `devices` | The Devices module's sidecar: Mosquitto, the MQTT broker the house's sensors, plugs and buttons talk to, and EiN through them; a listener that finds devices on the network; and go2rtc, which keeps one connection to each camera.                                                                                                                    | With [Devices](../devices/index.md): the installer's `--devices`, unless you have a broker |
 
 Only EiN is reachable from other machines: port 8080 for the Web UI and 2222 for SSH and
-SFTP, and with `--devices` the broker's 1883 and the restreamer's 1984 and 8554, for the devices on your network. The database, the media service and the language model answer only EiN, on the network
+SFTP, and with `--devices` the broker's 1883 and the restreamer's 1984, for the devices on your network. The database, the media service and the language model answer only EiN, on the network
 compose makes for them.
 
 Your files are on the machine's disk, in the data folder (`~/ein/data` unless you chose another):

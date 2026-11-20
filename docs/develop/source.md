@@ -15,7 +15,6 @@ EiN is several repositories in the [einhq](https://github.com/einhq) organisatio
 | [module-ems](https://github.com/einhq/module-ems)                                                            | EiN's client for the [media service](../ems/index.md)                                                                | TypeScript                               |
 | [ems](https://github.com/einhq/ems)                                                                          | The media service: every media tool and model behind one HTTP API                                                    | Python                                   |
 | [db](https://github.com/einhq/db)                                                                            | The PostgreSQL image (TimescaleDB, pgvector, PostGIS, pg_trgm) and its run script                                    | Containerfile, bash                      |
-| [llm](https://github.com/einhq/llm)                                                                          | The local language model the Assistant uses: llama.cpp's server in a container                                       | bash                                     |
 | [deploy](https://github.com/einhq/deploy)                                                                    | EiN on one machine with compose: what the installer runs                                                             | bash, compose                            |
 | [bash-parser](https://github.com/einhq/bash-parser), [bash-executor](https://github.com/einhq/bash-executor) | The parser and the executor EiN's shell is built on, published on JSR as `@ein/bash-parser` and `@ein/bash-executor` | TypeScript                               |
 | [ssh2](https://github.com/einhq/ssh2)                                                                        | The SSH and SFTP library, published on JSR as `@ein/ssh2-ts`                                                         | TypeScript                               |
@@ -191,7 +190,15 @@ EiN looks for it at `http://127.0.0.1:8181`, the default of [`CFG_EMS_URL`](../r
 CFG_EMS_KEY=let-me-in
 ```
 
-For the assistant's model, clone [llm](https://github.com/einhq/llm) and run `bash run.sh` in it. It fetches the model on its first start and answers at `http://127.0.0.1:8190`, the default of [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url), so EiN finds it without a setting. A hosted provider works as well; [The language model](../assistant/language-model.md) explains both.
+For the assistant's model, run any server that speaks OpenAI's chat API at `http://127.0.0.1:8190`, the default of [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url), so EiN finds it without a setting. llama.cpp's server with the model an install runs is one; it fetches the model on its first start:
+
+```bash
+mkdir -p ~/services/llm
+podman run -d --name llm -p 127.0.0.1:8190:8080 -v ~/services/llm:/models:z -e LLAMA_CACHE=/models \
+  ghcr.io/ggml-org/llama.cpp:server -hf unsloth/Qwen3.5-4B-GGUF:Q8_0 -c 32768 --jinja --reasoning off
+```
+
+Add `--device nvidia.com/gpu=all` and take the `server-cuda` image to run it on the card. A hosted provider works as well; [The language model](../assistant/language-model.md) explains both.
 
 ## Test, check and lint
 
@@ -204,10 +211,10 @@ Run these in the core checkout before you send a change:
 | `make container-test`       | Every module's end-to-end tests (`*.e2e.test.ts`) inside core's image, against the services the `ENV_FILE` points at. Build the image first.                                 |
 | `deno task test:one <file>` | One test file.                                                                                                                                                               |
 | `deno task check`           | Type-checks core, the module contract, the modules' commands and the Web UI's pages.                                                                                         |
-| `deno task lint`            | `deno lint` over `src/` and `modules/`.                                                                                                                                      |
+| `deno task lint`            | `deno lint` over `src/` and `modules/`, with EiN's own rules from `scripts/lint-plugin.ts`.                                                                                  |
 | `deno fmt`                  | Formats the code as `deno.jsonc` says: 175 columns, two spaces, single quotes. `deno fmt --check` reports what it would change.                                              |
 
-Each push and pull request runs checks of its own. Core's run `deno fmt --check`, `deno task lint`, `deno task check` and `deno task test`. A module's run in a checkout of core's `main` with the module in `modules/<name>`: `deno fmt --check modules/<name>` and `deno lint modules/<name>`, under core's settings. Run them there before you send a change to a module.
+Each push and pull request runs checks of its own. Core's run `deno fmt --check`, `deno task lint`, `deno task check` and `deno task test`. A module's run in a checkout of core's `main` with the module in `modules/<name>`, under core's settings: `deno fmt --check modules/<name>` and `deno lint modules/<name>`; then `deno run -A scripts/module-deps.ts modules/<name>` clones the modules it depends on beside it, at their `main`, since its files import theirs; `deno run -A scripts/check-module.ts modules/<name>` type-checks it; and `deno test --allow-all --parallel modules/<name>` runs its own fast tests, not theirs. Run them there before you send a change to a module.
 
 The module contract is what modules may import from core: `@ein/client`, `@ein/api`, `@ein/paths` and the Web UI's kit, `@ein/ui/*`. Its surface is kept as a snapshot in `src/client/contract.snapshot`, and a test fails when the surface changes. After a deliberate change, raise `MODULE_API_VERSION` in `src/modules/types.ts` and run `deno task contract:snapshot` to write the snapshot again.
 
@@ -254,7 +261,7 @@ The administrator's password is in `make container-logs` on the first start. `ma
 
 An installation made with the installer runs what the organisation that `--source` names holds, `https://github.com/einhq` unless you give it, and keeps it in `.env` as `EIN_SOURCE`. To run your own changes there, push them to an organisation of your own on GitHub, Forgejo or Gitea that holds `deploy`, `core` and `db` (and `ems` and `llm` when you use those options), and install, or run `setup.sh` again, with `--source` and its address. [Where the sources come from](../admin/install.md#where-the-sources-come-from) explains the option, and [Updating](../admin/updating.md) how `setup.sh` fetches the newest commits and builds them.
 
-From `https://github.com/einhq`, `setup.sh` pulls the images `ghcr.io/einhq/core:main` and `ghcr.io/einhq/db:main`, which GitHub builds once a day from the `main` of core and db, when it has moved since the last build, and `ghcr.io/einhq/ems:<line>`, built the same way from ems's `main` and tagged with its API version and line, at the line the `ems` module asks for in its `services` ([Updating](../admin/updating.md#the-media-service-and-the-sidecar-follow-their-modules)). From any other source it builds them itself, as `localhost/ein-core` from `src/core/src/Containerfile`, which also runs `deno task bundle-ui`, `localhost/ein-db` from `src/db` and `localhost/ein-ems` from `src/ems`. EiN installs modules from the places [`CFG_MODULE_SOURCES`](../reference/settings.md#cfg_module_sources) names; with a Forgejo or Gitea source, `setup.sh` sets it to the same organisation, while a GitHub source leaves it at `https://github.com/einhq`.
+From `https://github.com/einhq`, `setup.sh` pulls the releases of core, db and ems, `ghcr.io/einhq/core:<version>` and the like, which GitHub builds once each from the release tag the daily publish pushes, and pins them in `.env`: core and db at their newest release, ems at the newest of the line the `ems` module asks for in its `services` ([Updating](../admin/updating.md#the-media-service-and-the-sidecar-follow-their-modules)). From any other source it builds them itself, as `localhost/ein-core` from `src/core/src/Containerfile`, which also runs `deno task bundle-ui`, `localhost/ein-db` from `src/db` and `localhost/ein-ems` from `src/ems`. EiN installs modules from the places [`CFG_MODULE_SOURCES`](../reference/settings.md#cfg_module_sources) names; with a Forgejo or Gitea source, `setup.sh` sets it to the same organisation, while a GitHub source leaves it at `https://github.com/einhq`.
 
 ## When something goes differently
 

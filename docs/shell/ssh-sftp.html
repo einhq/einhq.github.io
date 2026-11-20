@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -215,6 +216,10 @@ stops instead with <code>&lt;name&gt;: no terminal to answer on</code>, followed
 answer: <code>mod remove --force</code>, <code>user-passwd --new-password</code>, <code>user-elevate --password</code>. Commands sent this way are not added to your history.</li>
 <li>What you pipe in reaches the command byte for byte and ends where your input ends, so
 <code>ssh -p 2222 helen@ein.local &#39;cat &gt; ~/photo.jpg&#39; &lt; photo.jpg</code> copies a photo in.</li>
+<li>When what you pipe the output into stops reading, as <code>| head -c 1000000</code> does, the command stops at
+its next write, as with a closed pipe (exit status 141), and <code>ssh</code> with it. When the connection
+drops or you stop <code>ssh</code>, the command stops too, a loop with it: a <code>cat</code> of a camera&#39;s stream does
+not keep the camera running.</li>
 <li>Errors arrive on their own stream, as with any SSH server, so <code>2&gt;/dev/null</code> on your side drops them
 and <code>2&gt;errors.txt</code> keeps them apart from the output.
 Use the exit status to tell success from failure.</li>
@@ -328,6 +333,16 @@ agent.</p>
 <td><code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></td>
 <td>EiN&#39;s server key is not the one your computer remembers, as after EiN was installed again from scratch.</td>
 <td>Ask your administrator whether that happened. If so, forget the old key with <code>ssh-keygen -R &quot;[ein.local]:2222&quot;</code> and connect again.</td>
+</tr>
+<tr>
+<td><code>no matching key exchange method found</code></td>
+<td>Your client offers only Diffie-Hellman key exchange; EiN&#39;s server speaks curve25519 and ECDH.</td>
+<td>Update the client (OpenSSH since 5.7, PuTTY since 0.68 and WinSCP speak them), or turn on <code>curve25519-sha256</code> in its settings.</td>
+</tr>
+<tr>
+<td><code>Connection closed</code> before or at the password prompt</td>
+<td>You did not sign in within two minutes, or more than ten connections from your address were signing in at once.</td>
+<td>Connect again. A script that opens many connections at once can share one with OpenSSH&#39;s <code>ControlMaster</code>, or open them in turn.</td>
 </tr>
 <tr>
 <td><code>ssh-copy-id</code> fails without <code>-s</code></td>

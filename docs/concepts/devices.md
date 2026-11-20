@@ -62,17 +62,21 @@ An endpoint is one thing a device reports or is told. There are four types:
 | `log`     | A series of values, or of events               | Each value with its time                 | A value, kept as the next entry                            |
 | `track`   | A series of positions                          | Each position with its time              | A position, kept as the next one                           |
 | `control` | A value written to change the device, a switch | The states the device reported, in order | A value, checked and sent to the device through its driver |
-| `stream`  | A live picture, a camera's                     | A JPEG of it now, from its driver        | Refused: nothing of a stream is kept                       |
+| `stream`  | Live bytes, a camera's video                   | Its bytes as its driver writes them      | Its driver's alone: nothing of a stream is kept            |
 
 A log of events is a button's: each entry is a press, such as `single`, `double` or `long`, rather
 than a state, and the same press twice is two entries. Into any other log a driver puts a value only
 when it differs from the one before (see [How often a reading is kept](#how-often-a-reading-is-kept)).
 
-A stream keeps nothing. Each read is a new picture, which the device's driver takes from the camera
-then: `cat /dev/front-door/main > door.jpg` saves one, and `/file/dev/front-door/main` is one in a
-browser. The device's page plays it live while its driver runs and can, which `device-show` says as
-`"live": true`. Its attributes say what it is: `codec`, `width`, `height`, `fps` and `audio`, as far
-as the driver knows them.
+A stream keeps nothing. Reading one gives its bytes from that moment, as its driver writes them,
+or, when its writer marks where a reader may start (the media service marks each keyframe of the
+video it writes), from the latest such point, so a player starts with a whole picture; then until
+you stop: `cat /dev/front-door/main.ts > door.ts` records a camera, and its name's extension
+says what the bytes are (`.ts`, MPEG-TS). The driver writes it only while someone reads it. A picture
+of it now is `/stream/dev/front-door/main.ts` in a browser, which the device's driver takes from the
+camera then. A stream of fragmented MP4 (`.mp4`) the device's page plays live while its driver
+runs, reading it as any file, which `device-show` says as `"live": true`. Its attributes say what it is: `mimetype`, `codec`, `width`, `height`, `fps`
+and `audio`, as far as the driver knows them.
 
 A control is not a store of what you wrote. Writing `on` to `/dev/hall-plug/switch-0` sends it to the
 plug; what reading the control gives is what the plug then reported it was. Until it reports, the

@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -666,7 +667,9 @@ section.</p>
 which take the options <code>toLocaleString</code> takes, or with <code>dateTimeFormat</code> where it needs an
 <code>Intl.DateTimeFormat</code>. They follow the reader&#39;s <strong>Date and time format</strong>; <code>toLocaleString</code> and a
 bare <code>Intl.DateTimeFormat</code> follow the browser&#39;s language instead, which gives an English browser a
-12-hour clock.</p>
+12-hour clock. <code>deno lint</code> refuses those in a page (the rule <code>ein/ui-date-locale</code>): <code>toLocaleDateString</code>,
+<code>toLocaleTimeString</code>, <code>toLocaleString</code> on what reads as a date, and an <code>Intl.DateTimeFormat</code> without
+a locale. A number&#39;s <code>toLocaleString()</code> stays allowed.</p>
 <h3 id="where-an-entry-opens-a-route">Where an entry opens a route<a class="anchor" href="#where-an-entry-opens-a-route" aria-label="Link to this section"></a></h3>
 <p>A module gives the Web UI entries and routes, nothing more. Each entry says where its route
 opens:</p>
@@ -987,7 +990,9 @@ node, <code>markdown</code>, <code>timezone</code>, <code>date</code> or <code>t
 the form runs <code>command</code> as the person editing, with <code>JSON_OUTPUT=1</code>, and takes <code>value</code> and <code>label</code>
 from each entry of its answer, or of the list at the key path <code>items</code> when the answer is not a list;
 <code>{other}</code> in <code>command</code> is another parameter&#39;s value, so <code>&quot;command&quot;: &quot;device-show {device}&quot;, &quot;items&quot;: &quot;endpointList&quot;</code> lists a chosen device&#39;s endpoints. <code>where</code> keeps the entries whose fields
-have one of the given values: <code>&quot;where&quot;: { &quot;type&quot;: &quot;control&quot; }</code> lists only its controls. <code>dashboard-card-add</code> checks a card&#39;s
+have one of the given values: <code>&quot;where&quot;: { &quot;type&quot;: &quot;control&quot; }</code> lists only its controls. The
+form shows a hundred choices at a time and narrows them as the person types, so a command may list
+thousands, as the Västtrafik module&#39;s <code>vt-stops</code> does. <code>dashboard-card-add</code> checks a card&#39;s
 values against its <code>params</code> before it puts it on.</p>
 <p>The route is drawn with the values in its query, <code>/cards/todo/list?list=%2Fgroups%2F…&amp;who=true</code>,
 a list as the key repeated. Keep card routes under <code>/cards/&lt;module&gt;/</code>, a first segment none of your

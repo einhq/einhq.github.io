@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -272,6 +273,8 @@ starts playing.</li>
 </ul>
 <p>Only the terminal in the browser draws pictures. Over SSH, <code>cat</code> prints marker lines starting
 <code>__IMG:</code> instead.</p>
+<p>To a file or a pipe, <code>cat</code> writes the picture&#39;s, video&#39;s or recording&#39;s own bytes, as it does a
+text file&#39;s: <code>cat clip.mp4 &gt; copy.mp4</code> makes a copy, and <code>cat clip.mp4 | wc -c</code> counts its bytes.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>A picture whose path holds a space or a colon, such as one in <code>/archive/albums/Summer 2020</code>, is
 not drawn: the terminal shows its <code>__IMG:</code> lines instead. Open it in the Web UI.</p>

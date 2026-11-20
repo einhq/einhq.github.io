@@ -78,6 +78,7 @@
 <section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -131,6 +132,11 @@
 <td>The language model the Assistant uses, added with <code>--llm</code>.</td>
 </tr>
 <tr>
+<td><code>llm/</code></td>
+<td>the deployment</td>
+<td>The language model&#39;s chat template.</td>
+</tr>
+<tr>
 <td><code>compose.override.yaml</code></td>
 <td><code>setup.sh</code>, every run</td>
 <td>The options chosen in <code>.env</code>, as compose services. Written again on every run; do not edit it.</td>
@@ -143,7 +149,7 @@
 <tr>
 <td><code>src/</code></td>
 <td><code>setup.sh</code></td>
-<td>The sources it fetches: <code>ems</code> and <code>llm</code> when those options are on, and <code>core</code> and <code>db</code> from any source but GitHub&#39;s <code>einhq</code>, which it builds with <code>ems</code>.</td>
+<td>The sources it fetches: <code>ems</code> when that option is on, and <code>core</code> and <code>db</code> from any source but GitHub&#39;s <code>einhq</code>, which it builds with <code>ems</code>.</td>
 </tr>
 <tr>
 <td><code>data/</code></td>

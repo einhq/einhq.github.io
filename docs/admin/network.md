@@ -12,9 +12,8 @@ EiN publishes two ports, and more with the Devices module's sidecar, on every ad
 | `2222` | the SSH and SFTP server                                                                                                    | SSH        |
 | `1883` | with `--devices`, the MQTT broker that the [Devices](../devices/index.md) module's devices talk to                         | plain MQTT |
 | `1984` | with `--devices`, the restreamer's API, which EiN gives the cameras to and watches them through, behind `STREAMS_PASSWORD` | plain HTTP |
-| `8554` | with `--devices`, the cameras' streams served again over RTSP, behind `STREAMS_PASSWORD`, and to this machine without one  | RTSP       |
 
-These are the ports `setup.sh` picks; `MQTT_PORT`, `STREAMS_PORT` and `RTSP_PORT` in `.env` are the sidecar's, which it listens on itself, on the machine's own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
+These are the ports `setup.sh` picks; `MQTT_PORT` and `STREAMS_PORT` in `.env` are the sidecar's, which it listens on itself, on the machine's own network. When another program on the machine already listens on one, it takes the next free port instead, writes it to `.env` and says so ("Port 8080 is taken on this machine: EiN uses 8081 instead").
 
 Nothing else is reachable from outside. The database, and the media service and the language model when they are installed, answer only EiN, on the containers' own network: no port of theirs is published on the machine's network, unless `.env` sets `EIN_EMS_BIND` for callers of the media service on other machines ([Callers on other machines](../ems/index.md#callers-on-other-machines)).
 
@@ -110,7 +109,7 @@ Any proxy works, such as Caddy, nginx or Traefik, when it does the following:
 | Allows long requests and idle connections                      | Uploads and downloads of large files take time, and the WebSocket can be quiet for minutes. When the proxy closes it, the interface reconnects after two seconds.                 |
 | Sends a response on as it comes, unbuffered                    | A [screen near your phone](../dashboard/screens.md#on-a-tv-where-your-phone-is) plays a page as a live video that never ends; held back, it never starts.                         |
 
-The proxy keeps the `Host` header as the browser sent it; EiN uses whatever address the browser shows.
+The proxy keeps the `Host` header as the browser sent it; EiN uses whatever address the browser shows. EiN also refuses the WebSocket and every upload or change from a page at another address than its own, such as another program on the same machine, so a page there cannot act as whoever is signed in. Over plain HTTP the browser names that address only by its host and port, which EiN compares with `Host`: a proxy that sets `Host` to EiN's own address (`127.0.0.1:8080`) breaks the interface, while over HTTPS the browser says outright whether a request comes from EiN's own pages.
 
 ### Caddy
 
@@ -216,7 +215,7 @@ address. [Devices and their keys](devices.md#device-keys) says more.
 - **Change the admin password** if you have not: [Install EiN](../start/install.md#change-the-admin-password-straight-away) shows how. Give every account a password of its own; [Accounts and groups](accounts.md) covers them.
 - **Leave visitors out.** The setting **Visitors may browse** (`CFG_GUEST_BROWSING`, under **Settings → System**) is off after an install. Keep it off: on, anyone who reaches EiN can browse what is shared with visitors without signing in.
 - **Publish HTTPS only.** Forward only the proxy's ports, never 8080, which is plain HTTP.
-- **Keep the sidecar in.** Never forward ports 1883, 1984 or 8554. The broker speaks plain MQTT without TLS, and whoever reaches it with the device password can switch the house's devices; whoever reaches the restreamer with its password watches the cameras. A phone away from home needs only the HTTPS proxy, which shows the cameras too.
+- **Keep the sidecar in.** Never forward ports 1883 or 1984. The broker speaks plain MQTT without TLS, and whoever reaches it with the device password can switch the house's devices; whoever reaches the restreamer with its password watches the cameras. A phone away from home needs only the HTTPS proxy, which shows the cameras too.
 - **Decide about SSH.** Port 2222 is not needed for the Web UI. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see [SSH and SFTP](../shell/ssh-sftp.md).
 
 ### How EiN slows down password guessing
