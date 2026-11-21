@@ -2,8 +2,8 @@
 
 From EiN's shell you can log in to another machine, run a command there, copy files in and out, and
 put your key on it, with `ssh`, `scp`, `ssh-copy-id` and `ssh-keygen`. An administrator can also
-mount a folder of another machine into the tree over SFTP. This page is for members of the group
-`ssh` and for the administrator who lets them in.
+mount a folder of another machine into the tree over SFTP, and download a file from the web with
+`curl`. This page is for members of the group `ssh` and for the administrator who lets them in.
 
 Everything here goes out from EiN to another machine. To come in to EiN from your own computer, see
 [SSH and SFTP](ssh-sftp.md).
@@ -384,6 +384,45 @@ unmount --save /mnt/nas
 and unmount; everyone can list mounts with `mount`. See
 [mount](../reference/commands-core.md#mount) and [unmount](../reference/commands-core.md#unmount).
 
+## Download a file from the web
+
+The administrator can fetch a file from a web address straight into the tree with `curl`. It works
+like curl elsewhere, for a plain download:
+
+```bash
+# in EiN's terminal, as the administrator
+cd /home/admin
+curl -fLO https://example.com/files/sailboat-plans.zip
+```
+
+`-O` saves the file under the last part of the address (`sailboat-plans.zip`) in the current folder;
+`-o` names it yourself, anywhere in the tree:
+
+```bash
+# in EiN's terminal, as the administrator
+curl -fL -o /home/admin/plans.zip https://example.com/download?id=7
+```
+
+Without `-o` or `-O` what comes back is written to the terminal, or to the next command:
+`curl -s https://example.com/status.json | jq .version`.
+
+| Option | What it does                                                                                                     |
+| ------ | ---------------------------------------------------------------------------------------------------------------- |
+| `-L`   | Follow redirects. Download links on GitHub and most other sites redirect, so use it unless you know they do not. |
+| `-f`   | When the server answers with an error (404 and the like), save nothing and end with `22`.                        |
+| `-O`   | Save as the last part of the address, in the current folder.                                                     |
+| `-o`   | Save as this path. An existing file is replaced.                                                                 |
+| `-s`   | No progress meter. The meter shows only in a terminal.                                                           |
+| `-H`   | Send a header, `-H "Accept: application/json"`; repeat it for more.                                              |
+
+A file saved is recorded the way an upload is, so the installed modules' pipelines take it in. A
+downloaded `.zip` unpacks with `unzip` in the same folder. `curl` only fetches (no uploads, forms or
+cookies) and only `http://` and `https://` addresses.
+
+> [!WARNING]
+> The download starts on the machine EiN runs on, which can reach addresses on your own network that
+> the internet cannot, such as your router. That is why only the administrator may run `curl`.
+
 ## What is not there
 
 The commands cover logging in, running commands, copying and keys. There is no port forwarding
@@ -406,6 +445,8 @@ command; use `scp`, or a mount. `ssh` refuses flags it does not have with `unkno
 | `ssh-copy-id: no public key found in ~/.ssh; make one with ssh-keygen`                                | Run `ssh-keygen` first.                                                                                                                                                                |
 | `ssh-copy-id: WARNING: All keys were skipped because they already exist on the remote system.`        | Nothing to do: the key is installed. `-f` adds it again.                                                                                                                               |
 | `mount: permission denied, only admin is allowed to mount`                                            | Mounting is for the administrator.                                                                                                                                                     |
+| `curl: permission denied, only the administrator may fetch URLs`                                      | Downloading with `curl` is for the administrator.                                                                                                                                      |
+| `curl: (22) The requested URL returned error: 404`                                                    | With `-f`, the server had no file at that address. Check it in a browser; nothing was saved.                                                                                           |
 
 ## Related pages
 

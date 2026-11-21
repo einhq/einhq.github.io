@@ -50,13 +50,14 @@ The sign-in page says what went wrong in a red box above the fields:
 | `login: authentication failed`                      | The username or e-mail, or the password, is wrong. EiN does not say which, so that nobody can find out which accounts exist. | Check both and try again. If you have forgotten your password, ask an administrator for a sign-in link. |
 | `login: account disabled`                           | Your password is right, but an administrator has turned off sign-in for your account.                                        | Ask an administrator.                                                                                   |
 | `login: password reset required`                    | Your password is right, but your account is waiting for an administrator to set a password.                                  | Ask an administrator for a [sign-in link](#sign-in-with-a-link).                                        |
-| `login: too many failed sign-ins; try again in N s` | There have been too many wrong passwords from your network address.                                                          | Wait the number of seconds it gives, then try again.                                                    |
+| `login: too many failed sign-ins; try again in N s` | There have been too many wrong passwords from your network address, or at your account from elsewhere.                       | Wait the number of seconds it gives, then try again.                                                    |
 
 A wrong password takes about a second to be answered. After five failed sign-ins from one network
 address, EiN makes that address wait before it checks another password: one second at first,
-doubling with each further failure, up to 15 minutes. After five failures on one account, each
-attempt on that account is slowed by up to 10 seconds, but the account is never locked, so someone
-guessing at your password cannot lock you out. Failures are forgotten an hour after the last one.
+doubling with each further failure, up to 15 minutes. After five failures on one account, attempts
+on that account take turns, each up to 10 seconds after the one before. Where you have signed in
+before, you skip that queue, so someone guessing at your password from elsewhere cannot lock you
+out. Failures are forgotten an hour after the last one.
 Administrators find the rest in [Accounts and groups](../admin/accounts.md).
 
 ## Browse without signing in
@@ -181,9 +182,8 @@ Choose your picture at the right end of the top bar. The menu is headed **Accoun
 **Trash**.
 
 With the Archive, your picture is the cover photo of the person your account is linked to. Without
-a linked person it shows the first letters of your username, as an image drawn by the outside
-service `ui-avatars.com`; without a connection to the internet, the first letter of your name shows
-instead.
+a linked person it shows the initials of your name in a colour of your account's own, drawn by EiN
+itself, as on the accounts in **Settings**.
 
 ### Admin mode
 

@@ -168,12 +168,12 @@ With `JSON_OUTPUT=1`: The new dashboard, as dashboards lists it.
 
 ### `dashboard-set`
 
-Change a dashboard's title, colour, description, columns or wall.
+Change a dashboard's title, colour, description, columns, look or wall.
 
 <small>changes things</small>
 
 ```text
-dashboard-set [--title=<string>] [--color=<string>] [--description=<string>] [--columns=<string>] [--effects=<string>] [--dim=<string>] [--no-dim] <dashboard>
+dashboard-set [--title=<string>] [--color=<string>] [--description=<string>] [--columns=<string>] [--look=<string>] [--effects=<string>] [--dim=<string>] [--no-dim] <dashboard>
 ```
 
 | Argument      | What it is                                        |
@@ -186,12 +186,14 @@ dashboard-set [--title=<string>] [--color=<string>] [--description=<string>] [--
 | `--color=<string>`       | its colour: mixed, album, person, location, track, camera, device, label, media, staging, system. |
 | `--description=<string>` | a line about it; empty takes it away.                                                             |
 | `--columns=<string>`     | cells across: 6, 8, 12.                                                                           |
+| `--look=<string>`        | cards, each apart with rounded corners, or hats: pieces of the hat tiling, edge to edge.          |
 | `--effects=<string>`     | full, or light: no blur behind the tiles on its wall, for a slow screen.                          |
 | `--dim=<string>`         | dim its wall between two times, to a level: 22:30-06:30@0.3.                                      |
 | `--no-dim`               | never dim its wall.                                                                               |
 
 ```bash
 dashboard-set Kitchen --color device
+dashboard-set Kitchen --look hats
 dashboard-set Kitchen --title 'Kitchen wall' --dim 22:30-06:30@0.3
 ```
 

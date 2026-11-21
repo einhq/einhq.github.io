@@ -158,7 +158,7 @@ EiN writes to four places. Three are logs in the tree, which you read in EiN's t
 | `/var/logs/services/<name>/stderr.log` | What a service's script prints as errors                                                                                             | Emptied each time the service starts                                                                   |
 | The `core` container's log             | The same messages as `/var/logs/system`, with the details behind them, such as an error's stack, and what EiN prints while it starts | Until the container is removed or made again, by `podman compose down` or by an `up -d` after a change |
 
-A service's own output goes only to its pair of logs under `/var/logs/services`, never to the container's log. Two other folders hold logs of other kinds: `/var/logs/metrics`, the figures the Status page draws, and `/var/logs/jobs/<pid>`, the output of a command started with [`nohup`](../reference/commands-core.md#nohup) or kept running with [`detach`](../reference/commands-core.md#detach).
+A service's own output goes only to its pair of logs under `/var/logs/services`, never to the container's log. The system log and the services' logs name everyone's files and sign-ins, so only the administrator and the `admin` group may read them; `dmesg` and `tail` on them say `permission denied` to anyone else. Two other folders hold logs of other kinds: `/var/logs/metrics`, the figures the Status page draws, and `/var/logs/jobs/<pid>`, the output of a command started with [`nohup`](../reference/commands-core.md#nohup) or kept running with [`detach`](../reference/commands-core.md#detach), which only the job's owner and the administrator may read.
 
 ## Read the system log on the Status page
 

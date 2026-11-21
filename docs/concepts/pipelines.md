@@ -433,11 +433,12 @@ priority, and its instances, with tabs **All**, **Running**, **Completed**, **Fa
 **Remove**, or remove finished ones with **Prune**. Choose an instance to see each step, its status,
 how long it took and, for a failed step, its error; **Retry** runs a failed or skipped step again.
 
-The same is in the terminal. The commands that only read can be run by anyone; those that change something are for
-administrators:
+The same is in the terminal. A run names its subject's path and holds its steps' output, so
+`/var/pipelines/instances` is the administrator's and the `admin` group's: the commands that read
+the runs are for them, and those that change something for administrators:
 
 ```bash
-# in EiN's terminal
+# in EiN's terminal, as an administrator or a member of admin
 pipeline overview                          # counts, queues and what is running
 pipeline instances -s failed media-faces   # failed runs of one pipeline, newest first
 pipeline status media-faces/<id>           # one run: its subject, its steps and their state

@@ -629,7 +629,12 @@ values against its `params` before it puts it on.
 The route is drawn with the values in its query, `/cards/todo/list?list=%2Fgroups%2F…&who=true`,
 a list as the key repeated. Keep card routes under `/cards/<module>/`, a first segment none of your
 pages use, and draw them to fill the tile: the tile is a size container, so `cqmin` units and
-`clamp()` scale text with it. A card reads its own data as whoever looks at the dashboard and keeps
+`clamp()` scale text with it. On a dashboard whose cards are pieces of the hat tiling, a `plain`
+card is given the whole piece, jagged edge and all, and the tile says in `--dash-inset-top`,
+`--dash-inset-right`, `--dash-inset-bottom` and `--dash-inset-left` how far in its words keep clear
+of that edge: fill the piece with a picture or a colour, and pad the words with, say,
+`padding: var(--dash-inset-top, 0.8em) var(--dash-inset-right, 1em) var(--dash-inset-bottom, 0.8em)
+var(--dash-inset-left, 1em)`, which keeps your own padding on rounded cards. A card reads its own data as whoever looks at the dashboard and keeps
 itself current, with `useNodeEvents` for what changes by events or `usePolledCommand` for what
 changes on a clock. On a screen opened from a [display link](../dashboard/screens.md) nobody is
 signed in (`isAuthenticated` is false): draw no controls there and link nowhere, since every write

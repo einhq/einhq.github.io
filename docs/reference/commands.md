@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 473 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 474 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -460,7 +460,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [dashboard-cards](../dashboard/commands.md#dashboard-cards) | List the cards the installed modules offer for dashboards. |
 | [dashboard-copy](../dashboard/commands.md#dashboard-copy) | Make a new dashboard laid out as another one. |
 | [dashboard-create](../dashboard/commands.md#dashboard-create) | Make a new, empty dashboard. |
-| [dashboard-set](../dashboard/commands.md#dashboard-set) | Change a dashboard's title, colour, description, columns or wall. |
+| [dashboard-set](../dashboard/commands.md#dashboard-set) | Change a dashboard's title, colour, description, columns, look or wall. |
 | [dashboard-show](../dashboard/commands.md#dashboard-show) | Show one dashboard: its cards, each with the route it is drawn with. |
 | [dashboards](../dashboard/commands.md#dashboards) | List the dashboards you can see. |
 
@@ -565,13 +565,14 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Västtrafik
 
-[All 6 in full](../vasttrafik/commands.md).
+[All 7 in full](../vasttrafik/commands.md).
 
 | Command | What it does |
 | --- | --- |
-| [vt-departures](../vasttrafik/commands.md#vt-departures) | Show the next departures from Västtrafik stops, at the time Västtrafik now expects each, refreshed at most every 20 seconds. |
-| [vt-disruptions](../vasttrafik/commands.md#vt-disruptions) | List Västtrafik's disruptions in effect at stops or on lines — moved platforms, diversions, lines not running — the worst first, from a copy refreshed at most every five minutes. |
+| [vt-departures](../vasttrafik/commands.md#vt-departures) | Show the next departures from Västtrafik stops, at the time Västtrafik now expects each, asked of Västtrafik anew once the copy is as old as its setting says, 20 seconds unless set. |
+| [vt-disruptions](../vasttrafik/commands.md#vt-disruptions) | List Västtrafik's disruptions in effect at stops or on lines — moved platforms, diversions, lines not running — the worst first, from a copy asked of Västtrafik anew once it is as old as its setting says, five minutes unless set. |
 | [vt-lines](../vasttrafik/commands.md#vt-lines) | List the lines that leave Västtrafik stops within twelve hours, with their directions, and the platforms they leave from. |
-| [vt-positions](../vasttrafik/commands.md#vt-positions) | Show where Västtrafik's vehicles are now, around stops or in a box, refreshed at most every 5 seconds. |
+| [vt-positions](../vasttrafik/commands.md#vt-positions) | Show where Västtrafik's vehicles are now, around stops or in a box, asked of Västtrafik anew once the copy is as old as its setting says, 5 seconds unless set. |
+| [vt-status](../vasttrafik/commands.md#vt-status) | Check that Västtrafik takes the key and that the application subscribes to each API the Västtrafik commands use, asking each anew. |
 | [vt-stops](../vasttrafik/commands.md#vt-stops) | List Västtrafik's stop areas, every one or those whose name has the words given, from a copy refreshed each day. |
 | [vt-tracks](../vasttrafik/commands.md#vt-tracks) | Show where the lines through a box, around stops or given, run, each line and direction as one of its journeys runs, clipped to the box: the lines with a vehicle in it now, and those whose path crosses it with a vehicle seen within the day; each path kept a day. |

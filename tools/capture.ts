@@ -366,14 +366,18 @@ const SHOTS: Shot[] = [
   },
 ];
 
-/** The demo administrator's avatar in the top bar, in place of whatever picture this instance's has. */
+/**
+ * The demo administrator's initials in the top bar, in place of whatever picture this instance's
+ * has: a picture that fails to load gives way to the initials the avatar draws without one.
+ */
 async function demoAvatar(page: Page) {
-  await page.evaluate(async () => {
-    const img = document.querySelector<HTMLImageElement>('header button[aria-label="Administrator"] img');
-    if (!img) return;
-    img.src = 'https://ui-avatars.com/api/?name=admin&background=0d9488&color=fff';
-    await img.decode();
-  });
+  const button = 'header button[aria-label="Administrator"]';
+  const swapped = await page.evaluate((button) => {
+    const img = document.querySelector<HTMLImageElement>(`${button} img`);
+    if (img) img.src = 'data:,';
+    return img !== null;
+  }, button);
+  if (swapped) await page.waitForSelector(`${button} img`, { state: 'detached' });
 }
 
 /** Playwright's chromium, the newest revision installed. */

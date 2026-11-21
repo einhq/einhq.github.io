@@ -136,6 +136,17 @@ yours alone, as everything you make in `/tmp` is.
 **Permissions are EiN's.** A command you may not run is refused the same way in the shell, the Web
 UI and over SSH. [Permissions in depth](../admin/permissions.md) explains who may do what.
 
+**Memory and time are bounded.** EiN is one process for everyone, so a script cannot use all of
+it:
+
+- A variable holds at most 16 Mi characters, an array all its elements together. An assignment
+  past that stops its line with `value too large`, where bash would run until memory ran out.
+- A word splits into at most a million words (`expands to more than 1000000 words`).
+- A brace expansion makes at most 100 000 words, all the braces of one command together
+  (`brace expansion: …`). Loop with `for ((i = 1; i <= n; i++))` over a longer range.
+- A visitor who has not signed in waits for a turn when several visitors' commands are already
+  running, and each command of theirs stops after a minute. Signing in never waits.
+
 ## One shell per terminal tab
 
 Each terminal tab, and each SSH login, is one shell that lasts until you close it. A `cd`, an

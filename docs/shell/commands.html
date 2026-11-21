@@ -761,13 +761,13 @@
 <td><a href="../reference/commands-core.html#detach">detach</a></td>
 </tr>
 <tr>
-<td>List the detached jobs and how they ended</td>
+<td>List your detached jobs and how they ended</td>
 <td><code>detach --list</code></td>
 <td><a href="../reference/commands-core.html#detach">detach</a></td>
 </tr>
 </tbody></table>
 </div>
-<p>A detached job writes its output to <code>/var/logs/jobs/&lt;pid&gt;/stdout.log</code> and <code>stderr.log</code>. In EiN a pid is a name, such as <code>sleep-</code> followed by a unique id, not a number. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not suspend a command; start it with <code>&amp;</code> instead.</p>
+<p>A detached job writes its output to <code>/var/logs/jobs/&lt;pid&gt;/stdout.log</code> and <code>stderr.log</code>, which only you and the administrator can read; <code>detach --list</code> likewise lists only your own jobs, and the administrator&#39;s lists everyone&#39;s. In EiN a pid is a name, such as <code>sleep-</code> followed by a unique id, not a number. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not suspend a command; start it with <code>&amp;</code> instead.</p>
 <h3 id="work-pipelines-and-services">Work, pipelines and services<a class="anchor" href="#work-pipelines-and-services" aria-label="Link to this section"></a></h3>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -959,6 +959,11 @@
 <td>Mount a folder of another machine (administrators)</td>
 <td><code>mount --save /mnt/nas sftp &quot;host=nas.local,user=anna,path=/srv/photos&quot;</code></td>
 <td><a href="../reference/commands-core.html#mount">mount</a></td>
+</tr>
+<tr>
+<td>Download a file from the web (administrators)</td>
+<td><code>curl -fLO https://example.com/files/sailboat-plans.zip</code></td>
+<td><a href="remote.html#download-a-file-from-the-web">curl</a></td>
 </tr>
 </tbody></table>
 </div>

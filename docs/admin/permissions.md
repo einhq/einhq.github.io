@@ -396,19 +396,26 @@ and the uids or gids the stored answers name that no account, group or link hold
 
 The bits for everyone else give every visitor and every account the parts of EiN they all need to
 run: `/`, `/etc`, the commands, the Web UI, the modules' files. Content does not use them to
-share:
+share. The accounts and groups, and what EiN runs and logs, are for those signed in instead: they
+belong to the `users` group, so neither the guest nor a share link lists or reads them. EiN sets
+those on every start, whatever they were changed to.
 
 | Path                          | Owner and group            | Mode   | Why                                                                                                                                                                                                                                                                     |
 | ----------------------------- | -------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/archive`                    | `admin`, `users`           | `1771` | Everyone may pass through; nobody but the group reads it. Sticky: a member removes only what they own or may change.                                                                                                                                                    |
 | `/archive/tags`               | `admin`, `users`           | `1771` | The same, as every folder directly under `/archive`.                                                                                                                                                                                                                    |
 | `/dev`                        | `admin`                    | `0755` | Everyone passes through; only the administrator adds to it, and members of `devices` make devices with `device-create` ([Devices and their keys](devices.md)). A device is `0770` with the group `devices`, so only its members and whoever they share it with read it. |
+| `/home`, `/groups`            | `admin`, `users`           | `0751` | Everyone passes through to their own home; only those signed in list the homes, and with them the account names.                                                                                                                                                        |
 | `/home/<user>`                | the account, its own group | `0751` | Others may pass through to what the owner grants, and read nothing else.                                                                                                                                                                                                |
 | `/home/<user>/staging`        | the account                | `0700` | With the Archive. Nobody else, not even through search.                                                                                                                                                                                                                 |
+| `/etc/users`, `/etc/groups`   | `admin`, `users`           | `0750` | The accounts and groups: their names, full names and e-mail addresses are for those signed in.                                                                                                                                                                          |
 | `/etc/users/<name>`           | `admin`                    | `0755` | The account itself; only the administrator changes it.                                                                                                                                                                                                                  |
 | `/etc/users/<name>/.password` | `admin`                    | `0600` | Its user can neither read nor replace it.                                                                                                                                                                                                                               |
 | `/etc/groups/<group>/users`   | its creator, the group     | `0750` | Members may see who else is in the group, not add anyone.                                                                                                                                                                                                               |
 | `/var/links/<id>`             | `admin`                    | `0600` | A share link's record, holding its token.                                                                                                                                                                                                                               |
+| `/var/logs`                   | `admin`, `users`           | `0750` | What EiN logs. The system log and the service logs in it are the `admin` group's alone.                                                                                                                                                                                 |
+| `/var/queues`, `/var/pools`   | `admin`, `users`           | `0750` | The work EiN has in hand, which the **System** page shows.                                                                                                                                                                                                              |
+| `/var/pipelines`              | `admin`, `users`           | `0750` | The pipelines; the runs, under `instances`, are the `admin` group's alone.                                                                                                                                                                                              |
 
 Content reaches every account through the `users` group, and visitors who are not signed in through
 an access-list entry for the `guest` group, `g:guest:rx`, which the **Share** dialog shows as
@@ -433,6 +440,10 @@ Someone who opens EiN without signing in acts as the guest. Whether they see any
   `login`, `logout`, `user-whoami`, `share-link`, `config` and `config-list`; anything else answers
   `sign in first`.
 - **On**: the guest sees what is granted to the `guest` group, and what the other bits give.
+
+Neither the guest nor a share link lists the accounts, the groups or the homes, or reads EiN's
+logs: those are for those signed in (see the table above). A visitor still sees who wrote the
+comments on what is shared with them, and `ls -l` shows them owners as numbers.
 
 The guest never writes, whatever a mode or an access list says, its own `/home/guest` included.
 

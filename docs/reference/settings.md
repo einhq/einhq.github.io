@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 116 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 119 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -1223,9 +1223,31 @@ Every setting of an EiN with all its modules: 116 of them, in the groups the Set
 
 ## Västtrafik
 
+### `CFG_VASTTRAFIK_DEPARTURES_SECONDS`
+
+**Departures kept (seconds)**. How long EiN keeps a stop's departures before it asks Västtrafik again, 10 to 600. Each stop on a screen costs one call to Västtrafik this often, however many screens show it; the departures cards ask again as soon as it is due.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `20` |
+| Kind | number |
+| From the module | Västtrafik |
+
+### `CFG_VASTTRAFIK_DISRUPTIONS_SECONDS`
+
+**Disruptions kept (seconds)**. How long EiN keeps the region's disruptions before it asks Västtrafik again, 60 to 3600. One call covers every card.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `300` |
+| Kind | number |
+| From the module | Västtrafik |
+
 ### `CFG_VASTTRAFIK_KEY`
 
-**Västtrafik key**. The authentication key of an application of yours at developer.vasttrafik.se that subscribes to Planera Resa v4, Geografi v3 and Störning v1. Without it the Västtrafik cards and commands have nothing to show.
+**Västtrafik key**. The authentication key of an application of yours at developer.vasttrafik.se that subscribes to Planera Resa v4, Geografi v3 and Störning v1. Without it the Västtrafik cards and commands have nothing to show. Set it under Settings → System → Västtrafik, which checks it.
 
 | | |
 | --- | --- |
@@ -1243,6 +1265,17 @@ Every setting of an EiN with all its modules: 116 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | `https://ext-api.vasttrafik.se` |
 | Kind | string |
+| From the module | Västtrafik |
+
+### `CFG_VASTTRAFIK_POSITIONS_SECONDS`
+
+**Vehicles kept (seconds)**. How long EiN keeps where the vehicles in a map card's box are before it asks Västtrafik again, 2 to 300. Vehicles report where they are every two or three seconds; each map on a screen costs one call this often, and its vehicles drive smoothly between answers.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `5` |
+| Kind | number |
 | From the module | Västtrafik |
 
 ## Voices

@@ -224,7 +224,9 @@ You meet them in links to files, in scripts, and in a reverse proxy's configurat
 
 Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
-gets `sign in first` from `/file/` and `/archive/`.
+gets `sign in first` from `/file/` and `/archive/`. A write to `/file/dev/` takes a body of at most 4 MB, 64 MB for a
+track's fixes, and `/archive` one of at most 2 MB; a larger one is answered `413`, and one that may
+not be written is refused before it is sent in full.
 
 ## The Archive's pages
 

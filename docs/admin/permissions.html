@@ -575,7 +575,9 @@ and the uids or gids the stored answers name that no account, group or link hold
 <h2 id="the-other-bits-are-the-systems">The other bits are the system&#39;s<a class="anchor" href="#the-other-bits-are-the-systems" aria-label="Link to this section"></a></h2>
 <p>The bits for everyone else give every visitor and every account the parts of EiN they all need to
 run: <code>/</code>, <code>/etc</code>, the commands, the Web UI, the modules&#39; files. Content does not use them to
-share:</p>
+share. The accounts and groups, and what EiN runs and logs, are for those signed in instead: they
+belong to the <code>users</code> group, so neither the guest nor a share link lists or reads them. EiN sets
+those on every start, whatever they were changed to.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -604,6 +606,12 @@ share:</p>
 <td>Everyone passes through; only the administrator adds to it, and members of <code>devices</code> make devices with <code>device-create</code> (<a href="devices.html">Devices and their keys</a>). A device is <code>0770</code> with the group <code>devices</code>, so only its members and whoever they share it with read it.</td>
 </tr>
 <tr>
+<td><code>/home</code>, <code>/groups</code></td>
+<td><code>admin</code>, <code>users</code></td>
+<td><code>0751</code></td>
+<td>Everyone passes through to their own home; only those signed in list the homes, and with them the account names.</td>
+</tr>
+<tr>
 <td><code>/home/&lt;user&gt;</code></td>
 <td>the account, its own group</td>
 <td><code>0751</code></td>
@@ -614,6 +622,12 @@ share:</p>
 <td>the account</td>
 <td><code>0700</code></td>
 <td>With the Archive. Nobody else, not even through search.</td>
+</tr>
+<tr>
+<td><code>/etc/users</code>, <code>/etc/groups</code></td>
+<td><code>admin</code>, <code>users</code></td>
+<td><code>0750</code></td>
+<td>The accounts and groups: their names, full names and e-mail addresses are for those signed in.</td>
 </tr>
 <tr>
 <td><code>/etc/users/&lt;name&gt;</code></td>
@@ -639,6 +653,24 @@ share:</p>
 <td><code>0600</code></td>
 <td>A share link&#39;s record, holding its token.</td>
 </tr>
+<tr>
+<td><code>/var/logs</code></td>
+<td><code>admin</code>, <code>users</code></td>
+<td><code>0750</code></td>
+<td>What EiN logs. The system log and the service logs in it are the <code>admin</code> group&#39;s alone.</td>
+</tr>
+<tr>
+<td><code>/var/queues</code>, <code>/var/pools</code></td>
+<td><code>admin</code>, <code>users</code></td>
+<td><code>0750</code></td>
+<td>The work EiN has in hand, which the <strong>System</strong> page shows.</td>
+</tr>
+<tr>
+<td><code>/var/pipelines</code></td>
+<td><code>admin</code>, <code>users</code></td>
+<td><code>0750</code></td>
+<td>The pipelines; the runs, under <code>instances</code>, are the <code>admin</code> group&#39;s alone.</td>
+</tr>
 </tbody></table>
 </div>
 <p>Content reaches every account through the <code>users</code> group, and visitors who are not signed in through
@@ -659,6 +691,9 @@ everyone-else bits still read it, the dialog shows them as <strong>Everyone with
 <code>sign in first</code>.</li>
 <li><strong>On</strong>: the guest sees what is granted to the <code>guest</code> group, and what the other bits give.</li>
 </ul>
+<p>Neither the guest nor a share link lists the accounts, the groups or the homes, or reads EiN&#39;s
+logs: those are for those signed in (see the table above). A visitor still sees who wrote the
+comments on what is shared with them, and <code>ls -l</code> shows them owners as numbers.</p>
 <p>The guest never writes, whatever a mode or an access list says, its own <code>/home/guest</code> included.</p>
 <p>A share link is a principal of its own: a uid nobody else holds, in no group. Making a link adds an
 entry <code>rx</code> for it on the node and on everything below it that its creator may change, passing over

@@ -582,7 +582,9 @@ You meet them in links to files, in scripts, and in a reverse proxy&#39;s config
 </div>
 <p>Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or <strong>Nothing here</strong>. A visitor who is not signed in where visitors may not browse
-gets <code>sign in first</code> from <code>/file/</code> and <code>/archive/</code>.</p>
+gets <code>sign in first</code> from <code>/file/</code> and <code>/archive/</code>. A write to <code>/file/dev/</code> takes a body of at most 4 MB, 64 MB for a
+track&#39;s fixes, and <code>/archive</code> one of at most 2 MB; a larger one is answered <code>413</code>, and one that may
+not be written is refused before it is sent in full.</p>
 <h2 id="the-archives-pages">The Archive&#39;s pages<a class="anchor" href="#the-archives-pages" aria-label="Link to this section"></a></h2>
 <p>These addresses exist with the <a href="../archive/index.html">Archive</a> installed.</p>
 <p>Addresses with <code>&lt;name&gt;</code> take the name of the node in the tree. A person&#39;s or a place&#39;s is its name

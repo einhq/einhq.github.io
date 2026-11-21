@@ -335,7 +335,8 @@ group-home family                    # give an existing group its shared home
 group-home family --off              # move it to your trash
 group-add-member family helen
 group-remove-member family helen
-group-remove-member users kitchen    # out of what is shared with every account; add-member puts it back
+group-remove-member users kitchen    # out of what is shared with every account, the accounts, logs and
+                                     # System page included; add-member puts it back
 group-update family --description='The Wrenfield household'
 group-delete family --to=users       # --force when it is someone's primary group,
                                      # --remove-home when it has a shared home

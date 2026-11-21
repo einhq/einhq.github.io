@@ -26,12 +26,18 @@ Västtrafik answers only an application it knows. Make one, once:
    **Geografi v3**, for the list of stops, and **Störning v1**, for disruptions.
 3. Copy the application's **authentication key**: the key and secret written together as one
    string.
-4. In EiN, open **Settings → System → Västtrafik** and paste it into **Västtrafik key**, or, in
-   EiN's terminal:
+4. In EiN, open **Settings → System → Västtrafik**, paste it into **Key** and save. Under **Now**
+   the page asks Västtrafik whether it takes the key and whether the application subscribes to
+   each of the three APIs; **Check again** asks anew. In EiN's terminal, the same is:
 
    ```bash
    # in EiN's terminal, as the administrator
    config set CFG_VASTTRAFIK_KEY '<the authentication key>'
+   vt-status
+   # ok   Västtrafik at ext-api.vasttrafik.se takes the key.
+   # ok   Planera Resa v4 answers: departures, vehicles and their tracks.
+   # ok   Geografi v3 answers: the stops.
+   # ok   Störning v1 answers: disruptions.
    ```
 
 The key is a secret: no shell sees it, the Settings page says only whether it is set, and EiN sends
@@ -42,11 +48,11 @@ application that lacks a subscription, they name the API it lacks.
 
 The module offers three cards to [Dashboards](../dashboard/index.md):
 
-| Card                    | What it shows                                                                                                                                                                                                                                                                              |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Departures**          | The next departures from one stop: each line's badge in its own colours, where it is going, its platform, and the minutes until it leaves as Västtrafik now expects it. A cancelled one is struck out in red, and a line Västtrafik reports a disruption on has a warning mark.            |
-| **Vehicles on the map** | The trams, buses and boats around one or more stops on a map, where they are now: each a dot under its line's badge in its own colours, as on **Departures**, gliding on to the next place, on its line's faint track with the stretch it just drove marked behind it; the stops are pins. |
-| **Disruptions**         | What Västtrafik says disrupts some stops, and some lines anywhere along them: each with its lines' badges, its title, what Västtrafik says further, and until when it lasts. The worst first, marked red, then orange, then yellow.                                                        |
+| Card                    | What it shows                                                                                                                                                                                                                                                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Departures**          | The next departures from one stop: each line's badge in its own colours, where it is going, its platform, and the minutes until it leaves as Västtrafik now expects it. A cancelled one is struck out in red, and a line Västtrafik reports a disruption on has a warning mark.                                              |
+| **Vehicles on the map** | The trams, buses and boats around one or more stops on a map, where they are now: each a dot under its line's badge in its own colours, as on **Departures**, driving along its line's track to the next place, with a short trail behind it. Each stop is a dot under a white tag with its name, short, under the vehicles. |
+| **Disruptions**         | What Västtrafik says disrupts some stops, and some lines anywhere along them: each with its lines' badges, its title, what Västtrafik says further, and until when it lasts. The worst first, marked red, then orange, then yellow.                                                                                          |
 
 Their settings:
 
@@ -69,53 +75,67 @@ Their settings:
 - **What Västtrafik says further**, on **Disruptions**: the description below each title, such as
   the reason and the hours it applies. On unless you turn it off.
 - **Metres around the stops**, on the map: how much of the map the card shows, as how far it reaches
-  beyond the stops, from 100 to 5,000 metres. The vehicles and tracks are those of the whole card,
+  beyond the stops, from 100 to 5,000 metres. The vehicles are those of the whole card,
   however large it is, and a little beyond its edges, so that a vehicle drives in from the edge
   rather than appearing on the map. Västtrafik gives at most 200 vehicles at a time, which a large
   map of the city centre can hold.
-- **The lines' tracks**, on the map: where each line runs, drawn faintly under its vehicles in the
-  darker of its colours. A line is drawn once one of its vehicles has been on the map, in each
-  direction one was going, as Västtrafik gives that vehicle's journey, and stays drawn for a day
-  after, between its vehicles. Behind each vehicle, the stretch it drove in the last ten minutes is
-  drawn strongly, fading as it ages, up to where the next vehicle of its line and direction is: at a
-  glance, a strong stretch was passed a minute ago, a faint one ten or more. On unless you turn it
-  off.
+- **Trails**, on the map: behind each vehicle, the stretch of its line's track it drove in the last
+  minute, in the darker of its line's colours, and ahead of it, dimmed, the next 200 metres it will
+  drive; both fade out away from the vehicle, which draws its trail as it drives. On unless you turn
+  it off.
 
 On **Departures**, a warning mark before a departure's direction says that Västtrafik reports a
 disruption on its line, wherever along the line it is; one after the stop's name, a disruption at
 the stop itself, such as a platform moved. Hover over the mark to read what it is; the
 **Disruptions** card gives the whole text.
 
-The departures are asked for again as soon as EiN's answer is 20 seconds old, and the minutes count
-down in between. The map is asked for again as soon as its answer is five seconds old, and each
-vehicle glides from where it was to where it is; the vehicles themselves move every two or three
-seconds. The tracks are asked for every minute, so a line coming onto the map is drawn within one.
+The departures are asked for again as soon as EiN's answer is due, 20 seconds old unless
+[set otherwise](#how-often-it-asks-västtrafik), and the minutes count down in between. The map is
+asked for again as soon as its answer is due, five seconds old unless set otherwise, and each
+vehicle drives from where it is drawn to where the answer puts it, along its line's track and round
+its curves, or straight when it is off the track; it takes a second longer than the time between
+answers, so it never stops to wait for the next. Västtrafik moves its vehicles on between their own
+position reports, and when a report comes a vehicle may be put 50 to 200 metres back: on the map it
+drives on to where it was going and waits there instead, until it has passed that spot, so it never drives backwards. That needs
+its line's track, as Västtrafik gives the journey of a vehicle on it; the tracks are asked for every
+minute, so a line coming onto the map has one within a minute.
 
 ## How often it asks Västtrafik
 
 EiN asks Västtrafik only while a card or a command wants an answer, and keeps each answer for a
 while, so that every screen showing the same stop costs a single call:
 
-| What                  | Kept for |
-| --------------------- | -------- |
-| The list of stops     | a day    |
-| The lines at a stop   | 6 hours  |
-| A stop's departures   | 20 s     |
-| The disruptions       | 5 min    |
-| The vehicles in a box | 5 s      |
-| A line's track        | a day    |
-| Where a vehicle was   | 10 min   |
+| What                  | Kept for                                |
+| --------------------- | --------------------------------------- |
+| The list of stops     | a day                                   |
+| The lines at a stop   | 6 hours                                 |
+| A stop's departures   | 20 s, or **Departures**: 10 s–10 min    |
+| The disruptions       | 5 min, or **Disruptions**: 1 min–1 hour |
+| The vehicles in a box | 5 s, or **Vehicles**: 2 s–5 min         |
+| A line's track        | a day                                   |
+| Where a vehicle was   | 10 min                                  |
 
-Each is kept from when Västtrafik was asked. A departures or map card asks again just as its answer
-is due, so the first screen to ask brings the new one and every other screen on the same stop has it
-at once: what a screen shows is never older than the time above.
+Each is kept from when Västtrafik was asked. A card asks again just as its answer is due, so the
+first screen to ask brings the new one and every other screen on the same stop has it at once: what
+a screen shows is never older than the time above.
+
+The three that change by the minute are set under **How often Västtrafik is asked** on
+**Settings → System → Västtrafik**, in seconds, or with `config set` as
+`CFG_VASTTRAFIK_DEPARTURES_SECONDS`, `CFG_VASTTRAFIK_POSITIONS_SECONDS` and
+`CFG_VASTTRAFIK_DISRUPTIONS_SECONDS`. A change holds from the next answer, with no restart. Shorter
+is fresher and costs more calls: each stop on a screen is a call to Västtrafik this often, and each
+map one more, however many screens show them. Longer suits an application whose calls Västtrafik
+limits, or a screen that need not be up to the second; the vehicles then drive on along their
+tracks for longer between answers.
 
 When Västtrafik does not answer, which it does now and then for vehicles, the last answer is given
-for a while longer: up to two minutes for departures, 30 seconds for vehicles, half an hour for disruptions.
+for a while longer: up to six times as long as it is kept, so two minutes for departures, 30 seconds
+for vehicles and half an hour for disruptions unless set otherwise.
 
 ## In the terminal
 
-The cards draw what six commands answer, which you can run yourself:
+The cards draw what six commands answer, which you can run yourself; a seventh, `vt-status`, checks
+the key:
 
 ```bash
 # in EiN's terminal

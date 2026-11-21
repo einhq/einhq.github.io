@@ -242,6 +242,10 @@ When a link has expired or been deleted, or the address is mistyped, the page sa
 **This link no longer works**: "It may have expired, or the person who shared it has turned it off.
 Ask them to send you a new link." with a **Sign in** button for someone who has an account.
 
+A link made in a terminal can open any node, a plain folder say, which no page of EiN shows. The
+page then says **No page here shows this**: "The link opens “\<name\>”, which EiN has no page to
+show." with the same **Sign in** button.
+
 ### When a link expires
 
 An expired link opens nothing. The dialog shows it marked **Expired** until EiN clears expired

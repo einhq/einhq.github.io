@@ -161,7 +161,7 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection $connection_upgrade;
         proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_read_timeout 1h;
         proxy_send_timeout 1h;
@@ -220,10 +220,13 @@ address. [Devices and their keys](devices.md#device-keys) says more.
 
 ### How EiN slows down password guessing
 
-EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address and per account:
+EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address, per account and across all of them. An IPv6 address counts as its whole /64, which one household or one server holds, so changing addresses within it gains nothing:
 
 - After five failures from one address, that address is refused without its password being checked, with "too many failed sign-ins; try again in" and the number of seconds. The wait starts at a second and doubles with each further failure, up to 15 minutes.
-- After five failures at one account, each attempt at it waits, up to 10 seconds, but the account is never locked: someone guessing a password cannot lock its owner out.
+- After five failures at one account, each attempt at it begins only once the one before has waited its turn: a second at first, doubling up to 10 seconds. Attempts made at the same time queue one behind the other rather than waiting together.
+- Across all accounts and addresses, a burst of 30 attempts goes straight through, and after it one a second, so guessing from many addresses at once is no faster either.
+- An attempt that would wait more than a minute for its turn is refused with the same message.
+- An address that has signed in to an account in the last 30 days skips that account's queue and the one across all accounts, so someone guessing a password cannot lock its owner out where the owner has signed in before; only failures from that address itself hold it back. EiN remembers those addresses until it restarts.
 - A failed attempt is answered no sooner than a second after it was made.
 - A successful sign-in is not counted: once an address's wait has passed, it may sign in with the right password as often as it likes, and its next failure waits as long as it would have without them.
 - Failures are forgotten an hour after the last one.
@@ -237,7 +240,7 @@ EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connectio
 TRUSTED_PROXIES=192.0.2.10
 ```
 
-Name only your proxy's address: a client that reaches EiN from an address in the list can make `who`, the access log and the sign-in throttle show any address it likes. Under rootless podman with a `podman-compose` older than 1.1, as on Ubuntu 24.04, a proxy on the same machine reaches EiN from `10.0.2.2` rather than from the loopback address; `setup.sh` adds `10.0.2.2` to the list there itself, so such a proxy needs no line.
+Of the addresses in `X-Forwarded-For` or `Forwarded`, EiN takes the last one that is not a proxy it believes: a proxy adds the address it was reached from after whatever the client sent, so what the client wrote before it counts for nothing. Name only your proxy's address: a client that reaches EiN from an address in the list can make `who`, the access log and the sign-in throttle show any address it likes. Under rootless podman with a `podman-compose` older than 1.1, as on Ubuntu 24.04, a proxy on the same machine reaches EiN from `10.0.2.2` rather than from the loopback address; `setup.sh` adds `10.0.2.2` to the list there itself, so such a proxy needs no line.
 
 ```bash
 # in EiN's terminal, as an administrator

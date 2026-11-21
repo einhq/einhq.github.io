@@ -248,6 +248,17 @@ yours alone, as everything you make in <code>/tmp</code> is.</p>
 <a href="commands.html#unix-commands-ein-does-not-have">Commands by task</a> lists what to use instead.</p>
 <p><strong>Permissions are EiN&#39;s.</strong> A command you may not run is refused the same way in the shell, the Web
 UI and over SSH. <a href="../admin/permissions.html">Permissions in depth</a> explains who may do what.</p>
+<p><strong>Memory and time are bounded.</strong> EiN is one process for everyone, so a script cannot use all of
+it:</p>
+<ul>
+<li>A variable holds at most 16 Mi characters, an array all its elements together. An assignment
+past that stops its line with <code>value too large</code>, where bash would run until memory ran out.</li>
+<li>A word splits into at most a million words (<code>expands to more than 1000000 words</code>).</li>
+<li>A brace expansion makes at most 100 000 words, all the braces of one command together
+(<code>brace expansion: …</code>). Loop with <code>for ((i = 1; i &lt;= n; i++))</code> over a longer range.</li>
+<li>A visitor who has not signed in waits for a turn when several visitors&#39; commands are already
+running, and each command of theirs stops after a minute. Signing in never waits.</li>
+</ul>
 <h2 id="one-shell-per-terminal-tab">One shell per terminal tab<a class="anchor" href="#one-shell-per-terminal-tab" aria-label="Link to this section"></a></h2>
 <p>Each terminal tab, and each SSH login, is one shell that lasts until you close it. A <code>cd</code>, an
 <code>export</code>, an alias or a function you define stays for the next command in that tab, and survives a

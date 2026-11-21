@@ -64,9 +64,8 @@ linked to her page among the **People**, and then:
 - staging uses her homes to tell a trip from days at home when it suggests albums; see
   [Sorting in staging](../archive/staging.md).
 
-Without a link, your picture is an image of your username's first letters, which the browser
-fetches from the outside service `ui-avatars.com`. Where the browser cannot reach the internet, the
-first letter of your name shows instead.
+Without a link, your picture is the initials of your name in a colour of your account's own, drawn
+by EiN itself.
 
 There is no button to link an account to a person. An administrator makes the link in the terminal:
 it is a softlink named `person` in the account's folder under `/etc/users`. For the account `helen`

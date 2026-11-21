@@ -96,7 +96,8 @@ The module runs one service, `devices-bridge`, which hears the broker and drives
   yet: [Add a device found on the network](#add-a-device-found-on-the-network).
 - **A restreamer**, go2rtc, which keeps one connection to each [camera](#a-camera) EiN has and
   serves it again to EiN on port 1984 (`STREAMS_PORT`), behind the account `ein` and
-  `STREAMS_PASSWORD` from `.env`. EiN gives it the cameras itself.
+  `STREAMS_PASSWORD` from `.env`. EiN gives it the cameras itself. Of go2rtc's API it answers only
+  what EiN uses, so the password cannot change its config, and it runs as a user of its own.
 
 `setup.sh` gives EiN the broker's and the restreamer's addresses and passwords itself, and the
 `device` account a device added from the network is given: those settings say **From deployment**
@@ -106,7 +107,9 @@ again, and `./setup.sh --only devices` updates it alone.
 A restreamer of your own is set on **Settings → System → Restreamer**, under **Set up**: its address
 and the password of its account `ein`, saved together so `devices-bridge` restarts once. Under **Now** the page says whether the restreamer answers that
 account, with how many streams it has, or why not, such as "the restreamer answered 401" for a wrong
-password. `devices-status --streams` says the same in the terminal.
+password. `devices-status --streams` says the same in the terminal. EiN uses `/api/streams`,
+`/api/stream.ts` and `/api/stream.mp4` of a go2rtc of your own; give it those alone with
+`api: allow_paths`, as the sidecar does.
 
 Under Docker, and podman run as root, EiN reaches the sidecar at the machine's address on its
 container network, so the sidecar needs `EIN_BIND` to be `0.0.0.0`: `setup.sh` says so when it is
@@ -781,12 +784,14 @@ dashboard's own **Device** and **Reading**:
   be played live (no restreamer, or a codec the browser does not play that the media service cannot
   make H.264) shows its pictures, and says
   why at the top.
-- **Button**: one large button for a device's control, lit while the control is what the button
-  sets. Without **Sets it to**, it presses a button, such as a [virtual device](../automation/virtual-devices.md)'s
-  `momentary` control an automation starts on, and switches something on and off to the other.
-  With it, it sets the control to that value, such as `eco` for a mode or `21` for a heater, as a
-  scene button does. **Ask first** makes the first press only ask for a second, for a door or a
-  gate. **Icon** takes a [Tabler icon](https://tabler.io/icons)'s name, such as `bell` or `garage`.
+- **Button**: one large button for a device's control: a round knob with its name and state under
+  it, or beside it in a wide card. The knob is dark, ringed in the card's colour, and glows in that
+  colour while the control is what the button sets. Without **Sets it to**, it presses a button,
+  such as a [virtual device](../automation/virtual-devices.md)'s `momentary` control an automation
+  starts on, and switches something on and off to the other. With it, it sets the control to that
+  value, such as `eco` for a mode or `21` for a heater, as a scene button does. **Ask first** makes
+  the first press only ask for a second, the knob ringed in yellow until then, for a door or a gate.
+  **Icon** takes a [Tabler icon](https://tabler.io/icons)'s name, such as `bell` or `garage`.
 
 Who may press a button is who may write its control
 ([Who may do what](#who-may-do-what)). On a screen opened from a

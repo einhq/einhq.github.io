@@ -997,7 +997,11 @@ values against its <code>params</code> before it puts it on.</p>
 <p>The route is drawn with the values in its query, <code>/cards/todo/list?list=%2Fgroups%2F…&amp;who=true</code>,
 a list as the key repeated. Keep card routes under <code>/cards/&lt;module&gt;/</code>, a first segment none of your
 pages use, and draw them to fill the tile: the tile is a size container, so <code>cqmin</code> units and
-<code>clamp()</code> scale text with it. A card reads its own data as whoever looks at the dashboard and keeps
+<code>clamp()</code> scale text with it. On a dashboard whose cards are pieces of the hat tiling, a <code>plain</code>
+card is given the whole piece, jagged edge and all, and the tile says in <code>--dash-inset-top</code>,
+<code>--dash-inset-right</code>, <code>--dash-inset-bottom</code> and <code>--dash-inset-left</code> how far in its words keep clear
+of that edge: fill the piece with a picture or a colour, and pad the words with, say,
+<code>padding: var(--dash-inset-top, 0.8em) var(--dash-inset-right, 1em) var(--dash-inset-bottom, 0.8em) var(--dash-inset-left, 1em)</code>, which keeps your own padding on rounded cards. A card reads its own data as whoever looks at the dashboard and keeps
 itself current, with <code>useNodeEvents</code> for what changes by events or <code>usePolledCommand</code> for what
 changes on a clock. On a screen opened from a <a href="../dashboard/screens.html">display link</a> nobody is
 signed in (<code>isAuthenticated</code> is false): draw no controls there and link nowhere, since every write

@@ -339,9 +339,9 @@ dashboard-cards dashboard.coming-up</code></pre></div>
 dashboard-create <span class="hljs-string">&#x27;Living room&#x27;</span> --color device --share private</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The new dashboard, as dashboards lists it.</p>
 <h3 id="dashboard-set"><code>dashboard-set</code><a class="anchor" href="#dashboard-set" aria-label="Link to this section"></a></h3>
-<p>Change a dashboard&#39;s title, colour, description, columns or wall.</p>
+<p>Change a dashboard&#39;s title, colour, description, columns, look or wall.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>dashboard-set [--title=&lt;string&gt;] [--color=&lt;string&gt;] [--description=&lt;string&gt;] [--columns=&lt;string&gt;] [--effects=&lt;string&gt;] [--dim=&lt;string&gt;] [--no-dim] &lt;dashboard&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>dashboard-set [--title=&lt;string&gt;] [--color=&lt;string&gt;] [--description=&lt;string&gt;] [--columns=&lt;string&gt;] [--look=&lt;string&gt;] [--effects=&lt;string&gt;] [--dim=&lt;string&gt;] [--no-dim] &lt;dashboard&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -379,6 +379,10 @@ dashboard-create <span class="hljs-string">&#x27;Living room&#x27;</span> --colo
 <td>cells across: 6, 8, 12.</td>
 </tr>
 <tr>
+<td><code>--look=&lt;string&gt;</code></td>
+<td>cards, each apart with rounded corners, or hats: pieces of the hat tiling, edge to edge.</td>
+</tr>
+<tr>
 <td><code>--effects=&lt;string&gt;</code></td>
 <td>full, or light: no blur behind the tiles on its wall, for a slow screen.</td>
 </tr>
@@ -393,6 +397,7 @@ dashboard-create <span class="hljs-string">&#x27;Living room&#x27;</span> --colo
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>dashboard-set Kitchen --color device
+dashboard-set Kitchen --look hats
 dashboard-set Kitchen --title <span class="hljs-string">&#x27;Kitchen wall&#x27;</span> --dim 22:30-06:30@0.3</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: The dashboard, as dashboard-show answers.</p>
 <h3 id="dashboard-show"><code>dashboard-show</code><a class="anchor" href="#dashboard-show" aria-label="Link to this section"></a></h3>

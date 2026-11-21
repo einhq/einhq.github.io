@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reaching other machines – EiN documentation</title>
-    <meta name="description" content="From EiN's shell you can log in to another machine, run a command there, copy files in and out, and put your key on it, with ssh, scp, ssh-copy-id and ssh-keygen. An administrator can also mount a folder of another machine into the tree over SFTP. This page is for members of the group ssh and for the administrator who lets them in.">
+    <meta name="description" content="From EiN's shell you can log in to another machine, run a command there, copy files in and out, and put your key on it, with ssh, scp, ssh-copy-id and ssh-keygen. An administrator can also mount a folder of another machine into the tree over SFTP, and download a file from the web with curl. This page is for members of the group ssh and for the administrator who lets them in.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/shell/remote.html">
     <meta property="og:title" content="Reaching other machines – EiN documentation">
-    <meta property="og:description" content="From EiN's shell you can log in to another machine, run a command there, copy files in and out, and put your key on it, with ssh, scp, ssh-copy-id and ssh-keygen. An administrator can also mount a folder of another machine into the tree over SFTP. This page is for members of the group ssh and for the administrator who lets them in.">
+    <meta property="og:description" content="From EiN's shell you can log in to another machine, run a command there, copy files in and out, and put your key on it, with ssh, scp, ssh-copy-id and ssh-keygen. An administrator can also mount a folder of another machine into the tree over SFTP, and download a file from the web with curl. This page is for members of the group ssh and for the administrator who lets them in.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -96,8 +96,8 @@
         <article class="prose">
 <p>From EiN&#39;s shell you can log in to another machine, run a command there, copy files in and out, and
 put your key on it, with <code>ssh</code>, <code>scp</code>, <code>ssh-copy-id</code> and <code>ssh-keygen</code>. An administrator can also
-mount a folder of another machine into the tree over SFTP. This page is for members of the group
-<code>ssh</code> and for the administrator who lets them in.</p>
+mount a folder of another machine into the tree over SFTP, and download a file from the web with
+<code>curl</code>. This page is for members of the group <code>ssh</code> and for the administrator who lets them in.</p>
 <p>Everything here goes out from EiN to another machine. To come in to EiN from your own computer, see
 <a href="ssh-sftp.html">SSH and SFTP</a>.</p>
 <h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
@@ -524,6 +524,58 @@ unmount --save /mnt/nas</code></pre></div>
 <p><code>mount -a</code> makes every <code>/etc/fstab</code> entry that is not mounted yet. Only the administrator can mount
 and unmount; everyone can list mounts with <code>mount</code>. See
 <a href="../reference/commands-core.html#mount">mount</a> and <a href="../reference/commands-core.html#unmount">unmount</a>.</p>
+<h2 id="download-a-file-from-the-web">Download a file from the web<a class="anchor" href="#download-a-file-from-the-web" aria-label="Link to this section"></a></h2>
+<p>The administrator can fetch a file from a web address straight into the tree with <code>curl</code>. It works
+like curl elsewhere, for a plain download:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+<span class="hljs-built_in">cd</span> /home/admin
+curl -fLO https://example.com/files/sailboat-plans.zip</code></pre></div>
+<p><code>-O</code> saves the file under the last part of the address (<code>sailboat-plans.zip</code>) in the current folder;
+<code>-o</code> names it yourself, anywhere in the tree:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
+curl -fL -o /home/admin/plans.zip https://example.com/download?<span class="hljs-built_in">id</span>=7</code></pre></div>
+<p>Without <code>-o</code> or <code>-O</code> what comes back is written to the terminal, or to the next command:
+<code>curl -s https://example.com/status.json | jq .version</code>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-L</code></td>
+<td>Follow redirects. Download links on GitHub and most other sites redirect, so use it unless you know they do not.</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>When the server answers with an error (404 and the like), save nothing and end with <code>22</code>.</td>
+</tr>
+<tr>
+<td><code>-O</code></td>
+<td>Save as the last part of the address, in the current folder.</td>
+</tr>
+<tr>
+<td><code>-o</code></td>
+<td>Save as this path. An existing file is replaced.</td>
+</tr>
+<tr>
+<td><code>-s</code></td>
+<td>No progress meter. The meter shows only in a terminal.</td>
+</tr>
+<tr>
+<td><code>-H</code></td>
+<td>Send a header, <code>-H &quot;Accept: application/json&quot;</code>; repeat it for more.</td>
+</tr>
+</tbody></table>
+</div>
+<p>A file saved is recorded the way an upload is, so the installed modules&#39; pipelines take it in. A
+downloaded <code>.zip</code> unpacks with <code>unzip</code> in the same folder. <code>curl</code> only fetches (no uploads, forms or
+cookies) and only <code>http://</code> and <code>https://</code> addresses.</p>
+<aside class="callout callout-warning"><p class="callout-title">Warning</p>
+<p>The download starts on the machine EiN runs on, which can reach addresses on your own network that
+the internet cannot, such as your router. That is why only the administrator may run <code>curl</code>.</p>
+</aside>
 <h2 id="what-is-not-there">What is not there<a class="anchor" href="#what-is-not-there" aria-label="Link to this section"></a></h2>
 <p>The commands cover logging in, running commands, copying and keys. There is no port forwarding
 (<code>-L</code>, <code>-R</code>, <code>-D</code>), no agent and no agent forwarding, no jump hosts, and no <code>sftp</code> or <code>rsync</code>
@@ -584,6 +636,14 @@ command; use <code>scp</code>, or a mount. <code>ssh</code> refuses flags it doe
 <td><code>mount: permission denied, only admin is allowed to mount</code></td>
 <td>Mounting is for the administrator.</td>
 </tr>
+<tr>
+<td><code>curl: permission denied, only the administrator may fetch URLs</code></td>
+<td>Downloading with <code>curl</code> is for the administrator.</td>
+</tr>
+<tr>
+<td><code>curl: (22) The requested URL returned error: 404</code></td>
+<td>With <code>-f</code>, the server had no file at that address. Check it in a browser; nothing was saved.</td>
+</tr>
 </tbody></table>
 </div>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
@@ -602,7 +662,7 @@ command; use <code>scp</code>, or a mount. <code>ssh</code> refuses flags it doe
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/remote.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-you-need">What you need</a></li><li><a href="#let-someone-use-ssh">Let someone use ssh</a></li><li><a href="#log-in-to-another-machine">Log in to another machine</a></li><li><a href="#run-one-command-on-another-machine">Run one command on another machine</a></li><li><a href="#log-in-with-a-key-instead-of-a-password">Log in with a key instead of a password</a></li><li><a href="#copy-files-in-and-out">Copy files in and out</a></li><li><a href="#keep-settings-per-machine-in-sshconfig">Keep settings per machine in ~/.ssh/config</a></li><li><a href="#host-keys">Host keys</a></li><li><a href="#mount-a-folder-of-another-machine">Mount a folder of another machine</a></li><li><a href="#what-is-not-there">What is not there</a></li><li><a href="#when-something-goes-wrong">When something goes wrong</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-you-need">What you need</a></li><li><a href="#let-someone-use-ssh">Let someone use ssh</a></li><li><a href="#log-in-to-another-machine">Log in to another machine</a></li><li><a href="#run-one-command-on-another-machine">Run one command on another machine</a></li><li><a href="#log-in-with-a-key-instead-of-a-password">Log in with a key instead of a password</a></li><li><a href="#copy-files-in-and-out">Copy files in and out</a></li><li><a href="#keep-settings-per-machine-in-sshconfig">Keep settings per machine in ~/.ssh/config</a></li><li><a href="#host-keys">Host keys</a></li><li><a href="#mount-a-folder-of-another-machine">Mount a folder of another machine</a></li><li><a href="#download-a-file-from-the-web">Download a file from the web</a></li><li><a href="#what-is-not-there">What is not there</a></li><li><a href="#when-something-goes-wrong">When something goes wrong</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -160,16 +160,17 @@ one.</p>
 </tr>
 <tr>
 <td><code>login: too many failed sign-ins; try again in N s</code></td>
-<td>There have been too many wrong passwords from your network address.</td>
+<td>There have been too many wrong passwords from your network address, or at your account from elsewhere.</td>
 <td>Wait the number of seconds it gives, then try again.</td>
 </tr>
 </tbody></table>
 </div>
 <p>A wrong password takes about a second to be answered. After five failed sign-ins from one network
 address, EiN makes that address wait before it checks another password: one second at first,
-doubling with each further failure, up to 15 minutes. After five failures on one account, each
-attempt on that account is slowed by up to 10 seconds, but the account is never locked, so someone
-guessing at your password cannot lock you out. Failures are forgotten an hour after the last one.
+doubling with each further failure, up to 15 minutes. After five failures on one account, attempts
+on that account take turns, each up to 10 seconds after the one before. Where you have signed in
+before, you skip that queue, so someone guessing at your password from elsewhere cannot lock you
+out. Failures are forgotten an hour after the last one.
 Administrators find the rest in <a href="../admin/accounts.html">Accounts and groups</a>.</p>
 <h2 id="browse-without-signing-in">Browse without signing in<a class="anchor" href="#browse-without-signing-in" aria-label="Link to this section"></a></h2>
 <p>An administrator can let people look around without an account, with <strong>Visitors may browse</strong> under
@@ -506,9 +507,8 @@ Dashboards installed, the menu has these rows:</p>
 <p><a href="profile.html">Your profile, favourites and trash</a> covers <strong>Me</strong>, <strong>Favourites</strong>, <strong>Profile</strong> and
 <strong>Trash</strong>.</p>
 <p>With the Archive, your picture is the cover photo of the person your account is linked to. Without
-a linked person it shows the first letters of your username, as an image drawn by the outside
-service <code>ui-avatars.com</code>; without a connection to the internet, the first letter of your name shows
-instead.</p>
+a linked person it shows the initials of your name in a colour of your account&#39;s own, drawn by EiN
+itself, as on the accounts in <strong>Settings</strong>.</p>
 <h3 id="admin-mode">Admin mode<a class="anchor" href="#admin-mode" aria-label="Link to this section"></a></h3>
 <p>A member of the <code>sudo</code> group can act as the administrator for a while, the way <code>sudo</code> works on
 other systems, without signing in as <code>admin</code>:</p>

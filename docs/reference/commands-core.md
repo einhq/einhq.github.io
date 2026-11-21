@@ -616,7 +616,7 @@ detach [--list] <job>
 
 | Option | What it does |
 | --- | --- |
-| `--list` | list detached jobs system-wide instead, from their records under /var/logs/jobs. |
+| `--list` | list your detached jobs instead (an administrator's lists everyone's), from their records under /var/logs/jobs. |
 
 ### `device-config`
 

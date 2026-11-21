@@ -973,9 +973,10 @@ priority, and its instances, with tabs <strong>All</strong>, <strong>Running</st
 <strong>Cancelled</strong>. An administrator can select instances and choose <strong>Rerun</strong>, <strong>Cancel</strong> or
 <strong>Remove</strong>, or remove finished ones with <strong>Prune</strong>. Choose an instance to see each step, its status,
 how long it took and, for a failed step, its error; <strong>Retry</strong> runs a failed or skipped step again.</p>
-<p>The same is in the terminal. The commands that only read can be run by anyone; those that change something are for
-administrators:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+<p>The same is in the terminal. A run names its subject&#39;s path and holds its steps&#39; output, so
+<code>/var/pipelines/instances</code> is the administrator&#39;s and the <code>admin</code> group&#39;s: the commands that read
+the runs are for them, and those that change something for administrators:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator or a member of admin</span>
 pipeline overview                          <span class="hljs-comment"># counts, queues and what is running</span>
 pipeline instances -s failed media-faces   <span class="hljs-comment"># failed runs of one pipeline, newest first</span>
 pipeline status media-faces/&lt;<span class="hljs-built_in">id</span>&gt;           <span class="hljs-comment"># one run: its subject, its steps and their state</span></code></pre></div>

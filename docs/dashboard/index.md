@@ -96,15 +96,24 @@ left, each in the first place it fits, so a small card fills the gap a large one
 the cards stand in two columns.
 
 **⋮ → Settings** changes its title, description, colour, how many **Columns** wide it is (6, 8 or
-12; more columns size the cards more finely) and how its wall looks. **⋮ → Make a copy** makes
-another dashboard laid out the same, and **⋮ → Move to trash** removes it.
+12; more columns size the cards more finely), how its **Cards** look and how its wall looks. **⋮ →
+Make a copy** makes another dashboard laid out the same, and **⋮ → Move to trash** removes it.
+
+**Cards** is **Apart, with rounded corners**, as above, or **Pieces of the hat tiling, edge to
+edge**: each card is cut along the hats of EiN's pattern, the same size as those behind the page's
+title, so two cards that meet share one jagged line, a thin line of each card's colour. The
+dashboard then fills the page below its title, and the wall, to their edges, with the hats faint
+inside each card. Each dashboard keeps its own cut, the same every time. While you arrange it, its
+cards stand apart with rounded corners, so the buttons and corners are easy to reach; **Done** cuts
+them again where they now are.
 
 Everything changes at once for everyone looking at the dashboard, a screen on the wall included.
 
 ## Show it full screen
 
 Choose **Full screen** on the dashboard's page. Its cards fill the screen as glass tiles over the
-pattern in its colour, as large as the screen allows; the pattern lights a tile now and then. The
+pattern in its colour, as large as the screen allows; the pattern lights a tile now and then. Cut as
+pieces of the hat tiling, they fill it from edge to edge, glass over the pattern blurred. The
 address in the browser now opens it full screen, so you can bookmark it.
 
 ![The Kitchen dashboard full screen: its seven cards as glass tiles over the coloured pattern, the clock, the weather with the hours and days ahead, the picture, Birthdays, the Todo list, Coming up, and the Device card with Erik's iPhone's position and when it was taken](../../assets/shots/dashboard-wall.webp "Full screen, the cards fill the screen as glass tiles, each as large as it allows.")

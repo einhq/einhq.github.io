@@ -2,15 +2,15 @@
 
 # Västtrafik commands
 
-The commands the västtrafik module adds. They are there once the module is installed. 6 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the västtrafik module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[vt-departures](#vt-departures) · [vt-disruptions](#vt-disruptions) · [vt-lines](#vt-lines) · [vt-positions](#vt-positions) · [vt-stops](#vt-stops) · [vt-tracks](#vt-tracks)
+[vt-departures](#vt-departures) · [vt-disruptions](#vt-disruptions) · [vt-lines](#vt-lines) · [vt-positions](#vt-positions) · [vt-status](#vt-status) · [vt-stops](#vt-stops) · [vt-tracks](#vt-tracks)
 
 ## V
 
 ### `vt-departures`
 
-Show the next departures from Västtrafik stops, at the time Västtrafik now expects each, refreshed at most every 20 seconds.
+Show the next departures from Västtrafik stops, at the time Västtrafik now expects each, asked of Västtrafik anew once the copy is as old as its setting says, 20 seconds unless set.
 
 <small>reads only</small>
 
@@ -37,7 +37,7 @@ With `JSON_OUTPUT=1`: One entry per stop: stop (gid, name), at, freshMs (the mil
 
 ### `vt-disruptions`
 
-List Västtrafik's disruptions in effect at stops or on lines — moved platforms, diversions, lines not running — the worst first, from a copy refreshed at most every five minutes.
+List Västtrafik's disruptions in effect at stops or on lines — moved platforms, diversions, lines not running — the worst first, from a copy asked of Västtrafik anew once it is as old as its setting says, five minutes unless set.
 
 <small>reads only</small>
 
@@ -57,7 +57,7 @@ vt-disruptions --line 6 --ahead 24
 vt-disruptions
 ```
 
-With `JSON_OUTPUT=1`: at, and disruptions that name any of the stops or lines given (every one when none is), the worst first: id, title, description, severity (slight, normal, severe), start, end, stops (gid, name) and lines (gid, designation, name, background, foreground, mode).
+With `JSON_OUTPUT=1`: at, freshMs (the milliseconds before Västtrafik is asked anew), and disruptions that name any of the stops or lines given (every one when none is), the worst first: id, title, description, severity (slight, normal, severe), start, end, stops (gid, name) and lines (gid, designation, name, background, foreground, mode).
 
 ### `vt-lines`
 
@@ -81,7 +81,7 @@ With `JSON_OUTPUT=1`: The stops, the lines (designation, name, background, foreg
 
 ### `vt-positions`
 
-Show where Västtrafik's vehicles are now, around stops or in a box, refreshed at most every 5 seconds.
+Show where Västtrafik's vehicles are now, around stops or in a box, asked of Västtrafik anew once the copy is as old as its setting says, 5 seconds unless set.
 
 <small>reads only</small>
 
@@ -103,6 +103,22 @@ vt-positions --around 9021014001760000 --margin 500 --bbox=57.69,11.94,57.72,11.
 ```
 
 With `JSON_OUTPUT=1`: box (south, west, north, east), stops (as vt-stops), around (the box of --around and --margin, when given), at, freshMs (the milliseconds before Västtrafik is asked anew), and vehicles, each with ref, line (designation, name, background, foreground, border, mode), direction, lat, lng and trail (where it was over the last ten minutes, oldest first, a point every half minute, as [lat, lng, seconds before at]).
+
+### `vt-status`
+
+Check that Västtrafik takes the key and that the application subscribes to each API the Västtrafik commands use, asking each anew.
+
+<small>reads only</small>
+
+```text
+vt-status
+```
+
+```bash
+vt-status
+```
+
+With `JSON_OUTPUT=1`: One check for the key, then one for each API (Planera Resa v4, Geografi v3, Störning v1) once the key is taken: name, state (ok or fail) and reason.
 
 ### `vt-stops`
 

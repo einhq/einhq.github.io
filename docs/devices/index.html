@@ -235,7 +235,8 @@ so it is all there again after a restart.</li>
 yet: <a href="#add-a-device-found-on-the-network">Add a device found on the network</a>.</li>
 <li><strong>A restreamer</strong>, go2rtc, which keeps one connection to each <a href="#a-camera">camera</a> EiN has and
 serves it again to EiN on port 1984 (<code>STREAMS_PORT</code>), behind the account <code>ein</code> and
-<code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN gives it the cameras itself.</li>
+<code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN gives it the cameras itself. Of go2rtc&#39;s API it answers only
+what EiN uses, so the password cannot change its config, and it runs as a user of its own.</li>
 </ul>
 <p><code>setup.sh</code> gives EiN the broker&#39;s and the restreamer&#39;s addresses and passwords itself, and the
 <code>device</code> account a device added from the network is given: those settings say <strong>From deployment</strong>
@@ -244,7 +245,9 @@ again, and <code>./setup.sh --only devices</code> updates it alone.</p>
 <p>A restreamer of your own is set on <strong>Settings → System → Restreamer</strong>, under <strong>Set up</strong>: its address
 and the password of its account <code>ein</code>, saved together so <code>devices-bridge</code> restarts once. Under <strong>Now</strong> the page says whether the restreamer answers that
 account, with how many streams it has, or why not, such as &quot;the restreamer answered 401&quot; for a wrong
-password. <code>devices-status --streams</code> says the same in the terminal.</p>
+password. <code>devices-status --streams</code> says the same in the terminal. EiN uses <code>/api/streams</code>,
+<code>/api/stream.ts</code> and <code>/api/stream.mp4</code> of a go2rtc of your own; give it those alone with
+<code>api: allow_paths</code>, as the sidecar does.</p>
 <p>Under Docker, and podman run as root, EiN reaches the sidecar at the machine&#39;s address on its
 container network, so the sidecar needs <code>EIN_BIND</code> to be <code>0.0.0.0</code>: <code>setup.sh</code> says so when it is
 not.</p>
@@ -1035,12 +1038,14 @@ less to send, and <strong>Picture</strong> whether it fills the card or shows al
 be played live (no restreamer, or a codec the browser does not play that the media service cannot
 make H.264) shows its pictures, and says
 why at the top.</li>
-<li><strong>Button</strong>: one large button for a device&#39;s control, lit while the control is what the button
-sets. Without <strong>Sets it to</strong>, it presses a button, such as a <a href="../automation/virtual-devices.html">virtual device</a>&#39;s
-<code>momentary</code> control an automation starts on, and switches something on and off to the other.
-With it, it sets the control to that value, such as <code>eco</code> for a mode or <code>21</code> for a heater, as a
-scene button does. <strong>Ask first</strong> makes the first press only ask for a second, for a door or a
-gate. <strong>Icon</strong> takes a <a href="https://tabler.io/icons">Tabler icon</a>&#39;s name, such as <code>bell</code> or <code>garage</code>.</li>
+<li><strong>Button</strong>: one large button for a device&#39;s control: a round knob with its name and state under
+it, or beside it in a wide card. The knob is dark, ringed in the card&#39;s colour, and glows in that
+colour while the control is what the button sets. Without <strong>Sets it to</strong>, it presses a button,
+such as a <a href="../automation/virtual-devices.html">virtual device</a>&#39;s <code>momentary</code> control an automation
+starts on, and switches something on and off to the other. With it, it sets the control to that
+value, such as <code>eco</code> for a mode or <code>21</code> for a heater, as a scene button does. <strong>Ask first</strong> makes
+the first press only ask for a second, the knob ringed in yellow until then, for a door or a gate.
+<strong>Icon</strong> takes a <a href="https://tabler.io/icons">Tabler icon</a>&#39;s name, such as <code>bell</code> or <code>garage</code>.</li>
 </ul>
 <p>Who may press a button is who may write its control
 (<a href="#who-may-do-what">Who may do what</a>). On a screen opened from a

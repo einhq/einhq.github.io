@@ -197,9 +197,9 @@ A write to a device's log or track appends to it, with `>` as with `>>`, and a b
 | Stop a command                                                  | `kill <pid>`, with the pid from `ps` | [bash builtins](bash.md)                       |
 | Start a command that keeps running after you close the terminal | `nohup album-span --all --stale`     | [nohup](../reference/commands-core.md#nohup)   |
 | Keep a running job going after you leave                        | `detach %1`                          | [detach](../reference/commands-core.md#detach) |
-| List the detached jobs and how they ended                       | `detach --list`                      | [detach](../reference/commands-core.md#detach) |
+| List your detached jobs and how they ended                      | `detach --list`                      | [detach](../reference/commands-core.md#detach) |
 
-A detached job writes its output to `/var/logs/jobs/<pid>/stdout.log` and `stderr.log`. In EiN a pid is a name, such as `sleep-` followed by a unique id, not a number. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not suspend a command; start it with `&` instead.
+A detached job writes its output to `/var/logs/jobs/<pid>/stdout.log` and `stderr.log`, which only you and the administrator can read; `detach --list` likewise lists only your own jobs, and the administrator's lists everyone's. In EiN a pid is a name, such as `sleep-` followed by a unique id, not a number. <kbd>Ctrl</kbd>+<kbd>Z</kbd> does not suspend a command; start it with `&` instead.
 
 ### Work, pipelines and services
 
@@ -255,6 +255,7 @@ The system log starts empty at every start of EiN, and a service's two log files
 | Copy files in from another machine                  | `scp -r anna@nas.local:photos/1968 /home/anna/staging/files/inbox/`      | [scp](../reference/commands-core.md#scp)                 |
 | List what is mounted                                | `mount`                                                                  | [mount](../reference/commands-core.md#mount)             |
 | Mount a folder of another machine (administrators)  | `mount --save /mnt/nas sftp "host=nas.local,user=anna,path=/srv/photos"` | [mount](../reference/commands-core.md#mount)             |
+| Download a file from the web (administrators)       | `curl -fLO https://example.com/files/sailboat-plans.zip`                 | [curl](remote.md#download-a-file-from-the-web)           |
 
 Connecting to EiN from your own computer is described in [SSH and SFTP](ssh-sftp.md).
 
