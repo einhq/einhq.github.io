@@ -158,7 +158,11 @@ the device's `position` track:
   older Traccar Client versions and many hardware trackers;
 - a GPRMC sentence, `?gprmc=$GPRMC,…`;
 - a GPX file, as a logger or a tracking app saves it;
-- EiN's own positions, a line of JSON each: `{"lat": 59.32, "lng": 18.07, "ts": "2026-11-08T09:00:00Z"}`.
+- EiN's own positions, a line of JSON each or a JSON list of them, as the
+  [EiN app](../guide/phone.md#report-where-your-phone-is) sends them:
+  `{"lat": 59.32, "lng": 18.07, "ts": "2026-11-08T09:00:00Z"}`, with `alt`, `speed` (m/s), `course`
+  and `accuracy` (m) when they are known, and `battery`, `charging` and `activity` for what the
+  device said of itself then.
 
 A position at a time the track already has is not added twice, so sending the same file again adds
 nothing. How far off a position may be, when the phone or tracker says it, is kept with it, and one
@@ -166,11 +170,11 @@ more than 150 m off is [left out of the track](../archive/tracks.md#the-route-on
 
 What the device says of itself goes to logs of its own, each made the first time it comes:
 
-| Log        | What it holds                                                                             | Sent by                           |
-| ---------- | ----------------------------------------------------------------------------------------- | --------------------------------- |
-| `battery`  | The battery's charge in percent, about the device itself, kept at most every 5 min        | Traccar Client, OsmAnd (`batt`)   |
-| `charging` | Whether it is charging, about the device itself                                           | Traccar Client, OsmAnd (`charge`) |
-| `activity` | What it is doing, as the phone's motion sensors tell: `still`, `on_foot`, `in_vehicle`, … | Traccar Client                    |
+| Log        | What it holds                                                                             | Sent by                                        |
+| ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| `battery`  | The battery's charge in percent, about the device itself, kept at most every 5 min        | the EiN app, Traccar Client, OsmAnd (`batt`)   |
+| `charging` | Whether it is charging, about the device itself                                           | the EiN app, Traccar Client, OsmAnd (`charge`) |
+| `activity` | What it is doing, as the phone's motion sensors tell: `still`, `on_foot`, `in_vehicle`, … | the EiN app, Traccar Client                    |
 
 A device's battery, from any driver's reading of class `battery`, shows on its card on the
 **Devices** page, and `devices` answers it as `battery`. With the Archive module, a phone's

@@ -380,7 +380,7 @@ You get the same shell as in a terminal tab: the same prompt, your history, your
 completion and the same keys. Two things belong to the browser alone: pictures and videos drawn by
 `cat`, and dropping files to upload them. Over SSH, copy files with SFTP or `scp` instead.
 
-![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly](../diagrams/interfaces.svg "Whichever interface you use, the same commands run as you, with the same permissions.")
+![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP and WebDAV reaching the tree's files directly](../diagrams/interfaces.svg "Whichever interface you use, the same commands run as you, with the same permissions.")
 
 The web pages run these same commands for you, and so does the assistant, always as the person
 signed in. A command you may not run in the terminal is refused through every other interface too.

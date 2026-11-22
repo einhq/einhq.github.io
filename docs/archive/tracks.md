@@ -12,9 +12,9 @@ routes in, correct trips and make albums of them. The devices themselves are EiN
 A track is a device's endpoint of the type `track` under `/dev`: the `position` that EiN's `tracker`
 driver keeps for a phone, a GPS tracker or a logger. Its positions come in two ways:
 
-- **Posted as the device moves.** A phone with Traccar Client, or a tracker on a boat or in a car,
-  posts its position to EiN with the device's key (see
-  [Report from a phone](../guide/devices.md#report-from-a-phone)).
+- **Posted as the device moves.** A phone with the EiN app or Traccar Client, or a tracker on a
+  boat or in a car, posts its position to EiN, the EiN app as the account it is paired as and the
+  others with the device's key (see [Report from a phone](../guide/devices.md#report-from-a-phone)).
 - **From GPX files** a logger or a tracking app saved: written over the device's track, uploaded on its
   **Trips** tab, or dropped in staging (see [GPX files](#gpx-files)).
 
@@ -93,7 +93,7 @@ A changed **Travels as** or **Timezone** finds the track's trips again from the 
 changed class of its device while **Travels as** is not set.
 
 Each trip travels as the track does. While neither **Travels as** nor the class says how, a phone
-running Traccar Client tells it trip by trip: its motion sensors say whether it is still, on foot,
+running the EiN app or Traccar Client tells it trip by trip: its motion sensors say whether it is still, on foot,
 on a bicycle or in a vehicle, which the device keeps as its `activity` (see
 [Core's tracker driver](../concepts/devices.md#cores-tracker-driver)). A trip travels as what they
 said longest along the way, lying still aside: a walk on foot, a bike ride by bike, a drive by car,
@@ -166,7 +166,7 @@ over. EiN keeps every position it is given, and as it adds them to a track it re
 - a position it jumps back onto exactly, to the last decimal, after being away from it longer than
   it was there;
 - a position the phone or tracker itself said may be more than 150 m off, as a guess from a cell
-  tower is. Traccar Client and OsmAnd send how far off each position may be.
+  tower is. The EiN app, Traccar Client and OsmAnd send how far off each position may be.
 
 A rejected position is not drawn, counted in **Points** or used for trips. A jump that does not come
 back, as when a logger starts again somewhere else, keeps its positions, and the line is broken
@@ -425,19 +425,19 @@ see the albums the trip may belong to under **Maybe in**.
 
 ## If something goes differently
 
-| What you see                                                                      | Why                                                                                                                       | What to do                                                                                                                                                |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A device has no **Trips** tab.                                                    | It has no track: it is a sensor or a plug, or a tracker made without `--driver tracker` that has had no position yet.     | Make a phone or a logger with `device-create <name> --driver tracker`; see [Where tracks come from](#where-tracks-come-from).                             |
-| The **Trips** view says **No trips** though the track has positions.              | Its trips have not been found yet, or no part of the track went 500 m or more from where it started.                      | Click **Find trips**, or **Find trips again**.                                                                                                            |
-| A trip ends at home in the middle of a holiday, or two trips should be one.       | Arriving at a home base, or staying somewhere longer than three days, ends a trip.                                        | Click **Join to the trip before** on the second trip's card.                                                                                              |
-| A trip's days end at the wrong hour.                                              | The track's **Timezone** is not set, so its days are cut in UTC, or it is set to another zone.                            | Click **How it travels** and choose the **Timezone** its days belong in.                                                                                  |
-| A trip is listed under the wrong device.                                          | The phone or tracker that recorded it posted to another device, or its GPX file was given to the wrong device.            | Click **Move to another device…** on the trip's card; see [Move a trip to another device](#move-a-trip-to-another-device).                                |
-| **How it travels**, **Upload GPX** or **Add home base** is missing.               | You may not change this track: it is the device's owner's.                                                                | Ask whoever made the device, or an administrator.                                                                                                         |
-| **Upload GPX** gives a message ending in "no track points found".                 | The file holds no recorded track points, only a planned route or waypoints.                                               | Use the file that was recorded while it moved.                                                                                                            |
-| **Upload GPX** gives a message ending in "none of its N track points has a time". | The file's points carry no times: a route drawn on a map, or a file the program saved without them.                       | Use the file that was recorded while it moved, or export it again with times.                                                                             |
-| A GPX file dropped in staging waits, though its device exists.                    | The file names neither the device nor a camera linked to it, or it names more than one device.                            | Click **Choose device** under **Needs you** on the Staging page; see [GPX files in staging](#gpx-files-in-staging).                                       |
-| The phone reports nothing to the track.                                           | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client. | See [Report from a phone](../guide/devices.md#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting). |
-| A GPX file sits in an album as an ordinary file.                                  | It was uploaded straight into the album, where GPX files are not read as routes.                                          | Upload it on the device's **Trips** tab, then delete the file from the album.                                                                             |
+| What you see                                                                      | Why                                                                                                                                      | What to do                                                                                                                                                |
+| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A device has no **Trips** tab.                                                    | It has no track: it is a sensor or a plug, or a tracker made without `--driver tracker` that has had no position yet.                    | Make a phone or a logger with `device-create <name> --driver tracker`; see [Where tracks come from](#where-tracks-come-from).                             |
+| The **Trips** view says **No trips** though the track has positions.              | Its trips have not been found yet, or no part of the track went 500 m or more from where it started.                                     | Click **Find trips**, or **Find trips again**.                                                                                                            |
+| A trip ends at home in the middle of a holiday, or two trips should be one.       | Arriving at a home base, or staying somewhere longer than three days, ends a trip.                                                       | Click **Join to the trip before** on the second trip's card.                                                                                              |
+| A trip's days end at the wrong hour.                                              | The track's **Timezone** is not set, so its days are cut in UTC, or it is set to another zone.                                           | Click **How it travels** and choose the **Timezone** its days belong in.                                                                                  |
+| A trip is listed under the wrong device.                                          | The phone or tracker that recorded it posted to another device, or its GPX file was given to the wrong device.                           | Click **Move to another device…** on the trip's card; see [Move a trip to another device](#move-a-trip-to-another-device).                                |
+| **How it travels**, **Upload GPX** or **Add home base** is missing.               | You may not change this track: it is the device's owner's.                                                                               | Ask whoever made the device, or an administrator.                                                                                                         |
+| **Upload GPX** gives a message ending in "no track points found".                 | The file holds no recorded track points, only a planned route or waypoints.                                                              | Use the file that was recorded while it moved.                                                                                                            |
+| **Upload GPX** gives a message ending in "none of its N track points has a time". | The file's points carry no times: a route drawn on a map, or a file the program saved without them.                                      | Use the file that was recorded while it moved, or export it again with times.                                                                             |
+| A GPX file dropped in staging waits, though its device exists.                    | The file names neither the device nor a camera linked to it, or it names more than one device.                                           | Click **Choose device** under **Needs you** on the Staging page; see [GPX files in staging](#gpx-files-in-staging).                                       |
+| The phone reports nothing to the track.                                           | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client or the EiN app. | See [Report from a phone](../guide/devices.md#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting). |
+| A GPX file sits in an album as an ordinary file.                                  | It was uploaded straight into the album, where GPX files are not read as routes.                                                         | Upload it on the device's **Trips** tab, then delete the file from the album.                                                                             |
 
 ## From the terminal
 

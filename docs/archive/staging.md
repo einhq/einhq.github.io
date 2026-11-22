@@ -10,8 +10,8 @@ suggestions, and how to undo any of it.
 Pictures, videos and recordings you bring in do not go straight into the family's shared
 library. They land in your **staging area**, a private inbox that only you can see. The page says
 so under its title: "New media to sort before it joins the shared library. Only you can see it."
-How files get there (**Import media**, dragging files onto a page, the Media page's upload, SFTP)
-is on [Getting your photos in](importing.md).
+How files get there (**Import media**, dragging files onto a page, the Media page's upload, SFTP,
+a phone's backup app over WebDAV) is on [Getting your photos in](importing.md).
 
 While the files wait, EiN reads each one: its date, its place, the faces in it and its
 thumbnails. It also checks whether you already have a copy. Then the **organizer** sorts them into
@@ -25,7 +25,7 @@ year of everyday pictures. You go through the groups and decide for each one:
 
 Only filing makes the files visible to anyone else. Every decision can be undone.
 
-![Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "A file's way through staging: nothing reaches the shared library until you file it")
+![Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "A file's way through staging: nothing reaches the shared library until you file it")
 
 Until a file is filed, the views of the whole library leave it out: the Media page and its
 counts, the map, On this day, search, and the number on a person's card on the People page. The
@@ -560,7 +560,9 @@ page. Undo, here or on the Done tab, puts them back where they were." Choose **D
 message has **Undo**.
 
 An empty category says "Nothing in Box 3 yet" (with its own name) and offers **Import media**, and the folder to copy
-into over SFTP.
+into over SFTP. A category of the **Phone**, **Screenshots** or **Messaging** kind shows instead the
+address and folder a phone's backup app sends into, and in the EiN app **Back up this phone here**,
+which has the app's photo backup send into it; see [Back up your phone automatically](../guide/phone.md#back-up-your-phone-automatically).
 
 ## Done: what you decided, and Undo
 

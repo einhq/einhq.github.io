@@ -209,24 +209,50 @@ Besides the pages, EiN's web server answers a few addresses that programs use ra
 You meet them in links to files, in scripts, and in a reverse proxy's configuration
 ([Ports, HTTPS and remote access](../admin/network.md)).
 
-| Address                                  | Method        | What it does                                                                                                                                                                    |
-| ---------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/file/<path>`                           | `GET`, `HEAD` | The bytes of a file in the tree, read with the permissions of whoever asks                                                                                                      |
-| `/file/<path>`                           | `PUT`         | Stores the body at exactly that path, creating or replacing the file                                                                                                            |
-| `/file/<directory>/?name=<name>`         | `POST`        | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                                                   |
-| `/archive`                               | `POST`        | Collects a selection of files for a download as one zip                                                                                                                         |
-| `/archive/<token>`                       | `GET`         | Downloads that zip                                                                                                                                                              |
-| `/file/dev/<device>`                     | `PUT`, `POST` | Raw input for the device's driver: a webhook's post, signed in or with the device's key; see [Devices and their keys](../admin/devices.md#device-keys)                          |
-| `/file/dev/<device>?key=<key>&…`         | `GET`         | The same from a device that sends only `GET`s, such as a button calling an address: its query is the input                                                                      |
-| `/file/dev/<device>/<endpoint>`          | `PUT`, `POST` | A value appended to a log or written to a control, such as a screen's `show`; fixes for a track in whatever form a tracker sends them, such as a phone's position or a GPX file |
-| `/file/dev/<device>/<track>?key=<key>&…` | `GET`         | Fixes from a tracker that sends only `GET`s, such as OsmAnd: its query is the fix                                                                                               |
-| `/__shell`                               |               | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                                             |
+| Address                                  | Method                    | What it does                                                                                                                                                                    |
+| ---------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/file/<path>`                           | `GET`, `HEAD`             | The bytes of a file in the tree, read with the permissions of whoever asks                                                                                                      |
+| `/file/<path>`                           | `PUT`                     | Stores the body at exactly that path, creating or replacing the file                                                                                                            |
+| `/file/<directory>/?name=<name>`         | `POST`                    | Stores an upload under a name nothing in the directory has yet: `name`, else `name (2)`, `name (3)` and so on                                                                   |
+| `/upload/`                               | `POST`                    | Begins an upload sent in pieces that resume; see [Uploads in pieces](#uploads-in-pieces)                                                                                        |
+| `/upload/<id>`                           | `HEAD`, `PATCH`, `DELETE` | How much of that upload has arrived, a piece of it, or giving it up                                                                                                             |
+| `/archive`                               | `POST`                    | Collects a selection of files for a download as one zip                                                                                                                         |
+| `/archive/<token>`                       | `GET`                     | Downloads that zip                                                                                                                                                              |
+| `/file/dev/<device>`                     | `PUT`, `POST`             | Raw input for the device's driver: a webhook's post, signed in or with the device's key; see [Devices and their keys](../admin/devices.md#device-keys)                          |
+| `/file/dev/<device>?key=<key>&…`         | `GET`                     | The same from a device that sends only `GET`s, such as a button calling an address: its query is the input                                                                      |
+| `/file/dev/<device>/<endpoint>`          | `PUT`, `POST`             | A value appended to a log or written to a control, such as a screen's `show`; fixes for a track in whatever form a tracker sends them, such as a phone's position or a GPX file |
+| `/file/dev/<device>/<track>?key=<key>&…` | `GET`                     | Fixes from a tracker that sends only `GET`s, such as OsmAnd: its query is the fix                                                                                               |
+| `/__shell`                               |                           | The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket                                                                                             |
+| `/dav/<path>`                            | WebDAV's                  | The tree over WebDAV, for programs that sign in with a username and password; see [WebDAV](../guide/webdav.md)                                                                  |
 
 Any other path that is not a file of the Web UI returns the interface itself, which then
 shows the page or **Nothing here**. A visitor who is not signed in where visitors may not browse
 gets `sign in first` from `/file/` and `/archive/`. A write to `/file/dev/` takes a body of at most 4 MB, 64 MB for a
 track's fixes, and `/archive` one of at most 2 MB; a larger one is answered `413`, and one that may
 not be written is refused before it is sent in full.
+
+### Uploads in pieces
+
+`/upload/` takes a file in pieces, so a long video over a slow or patchy connection still arrives:
+when a piece breaks off, the sender asks how much arrived and goes on from there instead of starting
+again. It speaks the [tus protocol](https://tus.io/protocols/resumable-upload) 1.0, with its
+creation, expiration and termination extensions, which client libraries for browsers, Android and
+most languages speak. The Web UI sends its uploads this way.
+
+- **Signing in:** the Web UI's sign-in, or the EiN app's token as `Authorization: Bearer <token>`,
+  which uploads as whoever paired the phone. A visitor who is not signed in is answered `401`.
+- **Beginning:** a `POST` gives the file's size in `Upload-Length`, and in `Upload-Metadata` the
+  folder it goes into (`dir`, from the root), its name (`filename`) and, if you like, its own time
+  (`mtime`, seconds since 1970). The folder must exist and be yours to write in; otherwise the upload
+  is refused before any of it is sent.
+- **The file:** once its last byte is in, it is stored as the `POST` to `/file/` stores an upload,
+  under a free name, `IMG_0001 (2).jpg` beside a taken one, and the pipelines start on it as on any
+  upload. The answer to the last piece, and to any later `HEAD`, names it in `Content-Location`.
+- **Limits:** an account's uploads that have begun and not arrived whole may come to at most
+  [`CFG_UPLOAD_SPOOL_GB`](settings.md#cfg_upload_spool_gb) together, 20 GB unless the administrator
+  changes it. An upload no piece has reached for
+  [`CFG_UPLOAD_EXPIRES_HOURS`](settings.md#cfg_upload_expires_hours), 24 hours, is removed, and
+  `Upload-Expires` says when that is.
 
 ## The Archive's pages
 

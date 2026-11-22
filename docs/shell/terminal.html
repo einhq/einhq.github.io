@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html" aria-current="page">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -506,7 +506,7 @@ ssh -p 2222 helen@ein.local</code></pre></div>
 <p>You get the same shell as in a terminal tab: the same prompt, your history, your <code>~/.bashrc</code>, Tab
 completion and the same keys. Two things belong to the browser alone: pictures and videos drawn by
 <code>cat</code>, and dropping files to upload them. Over SSH, copy files with SFTP or <code>scp</code> instead.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP reaching the tree's files directly">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 468" role="img" aria-label="Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, with SFTP and WebDAV reaching the tree's files directly">
   <title>One shell, several interfaces</title>
   <defs>
     <marker id="shell-terminal-md-1-interfaces-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -543,7 +543,8 @@ completion and the same keys. Two things belong to the browser alone: pictures a
 
   
   <rect x="650" y="40" width="126" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
+  <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">SFTP, WebDAV</text>
   <text x="713" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">files only</text>
   <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#shell-terminal-md-1-interfaces-arrow)" />
   <text x="701" y="204" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">no commands</text>
@@ -740,7 +741,7 @@ again: you get new terminals, and the old shells end after five minutes.</p>
 
         </article>
         <footer class="docs-foot">
-          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../guide/phone.html" rel="prev"><span>Previous</span>EiN on a phone</a><a class="next" href="bash.html" rel="next"><span>Next</span>The shell language</a></nav>
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="../guide/webdav.html" rel="prev"><span>Previous</span>WebDAV</a><a class="next" href="bash.html" rel="next"><span>Next</span>The shell language</a></nav>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/shell/terminal.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>

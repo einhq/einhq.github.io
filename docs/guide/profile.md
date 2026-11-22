@@ -263,8 +263,9 @@ lists the files.
 The eye at the right of each field shows what you typed. EiN has no rules for passwords: it takes
 any password that is not empty, so how strong yours is is up to you.
 
-The new password is the one you sign in with from then on, in the browser and over SSH and SFTP. A
-key you added for SSH keeps working; see [SSH and SFTP](../shell/ssh-sftp.md).
+The new password is the one you sign in with from then on, in the browser, over SSH and SFTP and
+over [WebDAV](webdav.md), where a program such as a phone's backup app needs it at its next request.
+A key you added for SSH keeps working; see [SSH and SFTP](../shell/ssh-sftp.md).
 
 Changing your password does not sign out the browsers and terminals where you are signed in
 already. If you change it because someone else may know it, ask an administrator to choose
@@ -340,7 +341,7 @@ Only you see your trash, apart from an administrator, who can see everyone's.
 
 ### What goes to the trash
 
-Every row but the last is on the Archive's pages; `trash put` works in any EiN.
+Every row but the last two is on the Archive's pages; WebDAV and `trash put` work in any EiN.
 
 | What you do                                                       | What goes                                                                                                    |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -349,6 +350,7 @@ Every row but the last is on the Archive's pages; `trash put` works in any EiN.
 | **Delete** in **Edit event**                                      | That event or note.                                                                                          |
 | **Discard** in staging                                            | The files, kept together as one entry; see [Sorting in staging](../archive/staging.md).                      |
 | Removing copies in staging's **Duplicates**                       | The copies, kept together as one entry; see [Duplicates](../archive/duplicates.md).                          |
+| Deleting over [WebDAV](webdav.md)                                 | What the program deletes, each as an entry of its own.                                                       |
 | `trash put` in the terminal                                       | What you name, if you may change it.                                                                         |
 
 Each of these in the browser says what it did in a message at the foot of the screen, with **Undo**. **Undo** is

@@ -2,7 +2,7 @@
 
 # Node types
 
-Every node has a type, which decides what it holds and how it behaves. These are the 32 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
+Every node has a type, which decides what it holds and how it behaves. These are the 33 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
 
 ## Content
 
@@ -42,6 +42,7 @@ How EiN runs: its commands, logs, queues and the other parts of the system that 
 | `command` Command | A built-in shell command, carrying its own description, arguments and flags. Commands a module adds are files in the module's bin directory instead. |  | Core |
 | `control` Control | An endpoint of a device that is written to change it: a switch, a dimmer, a setpoint. What is written goes to the device's driver; what is read are the states the device reported. |  | Core |
 | `device` Device | Something that reports or can be switched, under /dev: a phone, a sensor, a plug, a camera. Its endpoints are its children, logs, tracks, controls and streams, and what is written to the device itself goes to its driver, which reads it into them. |  | Core |
+| `device-app` App pairing | The EiN app's pairing with a phone: a one-time pairing code waiting for the app and the token the app was given, each kept as its SHA-256, in the phone's child .app, readable by the administrator alone. `device-app` pairs the app and takes it away. |  | Core |
 | `device-key` Device key | The key a device carries to write to /file/dev/<device> without signing in, as a phone posting its position does: the device's child .key, readable by the administrator alone. `device-key` makes, shows and takes it away. |  | Core |
 | `embedding` Embedding | A numeric fingerprint of an image, a face or a text, kept for similarity search: what finds photos by what they show and faces of the same person. |  | Core |
 | `log` Log | An append-only record of entries kept for a retention period, such as the system log under /var/logs. A device's readings and events are logs under it, one an endpoint. |  | Core |

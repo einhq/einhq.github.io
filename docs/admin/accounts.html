@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section class="here"><h2>Administration</h2><ul><li><a href="install.html">Installing in detail</a></li><li><a href="network.html">Ports, HTTPS and remote access</a></li><li><a href="configuration.html">Configuration</a></li><li><a href="modules.html">Modules</a></li><li><a href="accounts.html" aria-current="page">Accounts and groups</a></li><li><a href="permissions.html">Permissions in depth</a></li><li><a href="devices.html">Devices and their keys</a></li><li><a href="monitoring.html">Health and status</a></li><li><a href="processing.html">Processing and pipelines</a></li><li><a href="services-logs.html">Services and logs</a></li><li><a href="performance.html">Performance and sizing</a></li><li><a href="updating.html">Updating</a></li><li><a href="supervisor.html">The supervisor</a></li><li><a href="data.html">Your data: backup, moving and removing</a></li><li><a href="troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -235,8 +235,10 @@ once, sign them out everywhere with <strong>Disable sign-in</strong> and then <s
 </aside>
 <h3 id="password">Password<a class="anchor" href="#password" aria-label="Link to this section"></a></h3>
 <p>Type a <strong>New password</strong>, <strong>Repeat</strong> it, and choose <strong>Set password</strong>. <strong>Password set</strong> appears
-beside it. Their current password stops working at once, in the browser and over SSH and SFTP,
-but browsers and terminals where they are signed in stay signed in.</p>
+beside it. Their current password stops working at once, in the browser, over SSH and SFTP and
+over WebDAV, but browsers and terminals where they are signed in stay signed in. A program using
+<a href="../guide/webdav.html">WebDAV</a>, such as a phone&#39;s backup app, sends the password with every request,
+so it needs the new one at once.</p>
 <p>EiN has no rules for passwords: it takes any password that is not empty. It sends no e-mail, so it
 has no &quot;forgot password&quot; of its own, and cannot make someone choose a new password at their next
 sign-in. When someone has forgotten theirs, or has never had one, send them a
@@ -267,7 +269,7 @@ disabled works again once it is enabled, if it has not expired. In the terminal,
 terminal</strong>, each with the address it comes from and since when. Earlier sign-ins, failed ones
 included, are on the Status page&#39;s <a href="monitoring.html#the-activity-tab">Activity tab</a>.</p>
 <p><strong>Disable sign-in</strong> signs them out everywhere at once, ends what they have running, and keeps them
-out of the browser, SSH and SFTP alike. Nothing they own is changed. The button then reads
+out of the browser, SSH, SFTP and WebDAV alike. Nothing they own is changed. The button then reads
 <strong>Enable sign-in</strong>, which lets them sign in again with their password. A disabled account is
 hidden from the Users list until you switch on <strong>Show disabled users</strong> at the foot of the list,
 which is there only while some account is disabled.</p>
@@ -408,8 +410,9 @@ person can also set a new password for <code>admin</code> if it is lost, so keep
 trust in <code>sudo</code>.</p>
 <h2 id="signing-in-and-why-it-fails">Signing in and why it fails<a class="anchor" href="#signing-in-and-why-it-fails" aria-label="Link to this section"></a></h2>
 <p>People sign in with their username or their e-mail address, in the browser under <strong>Username or
-e-mail</strong>, and over SSH and SFTP (see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>). Their groups are read
-at that moment.</p>
+e-mail</strong>, over SSH and SFTP (see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>), and over WebDAV (see
+<a href="../guide/webdav.html">WebDAV</a>). Their groups are read at that moment; a WebDAV program&#39;s are read
+again within the hour.</p>
 <p>A wrong password, an unknown username and an account without a password all fail the same way, so
 the answer does not tell anyone which accounts exist. Only with the right password does EiN say
 that an account is disabled.</p>

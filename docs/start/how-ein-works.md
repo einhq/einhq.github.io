@@ -94,7 +94,7 @@ trash do to them.
 ## One set of commands
 
 At the heart of EiN is a shell that speaks bash. Core brings more than 200 commands, and each module adds its own. All data access, from the web or over SSH, runs these
-commands, except SFTP, which moves files and nothing else:
+commands, except SFTP and WebDAV, which move files and nothing else:
 
 | Interface     | How you get there                                                                          | What happens                                                                                        |
 | ------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
@@ -102,9 +102,10 @@ commands, except SFTP, which moves files and nothing else:
 | The terminal  | The terminal button in the top bar, or <kbd>Alt</kbd>+<kbd>T</kbd>, once you are signed in | A shell of your own in each tab                                                                     |
 | SSH           | `ssh -p 2222 helen@ein.local` from your own computer, with your EiN username and password  | The same shell, or one command at a time                                                            |
 | SFTP          | `sftp -P 2222 helen@ein.local`, sshfs, or a file manager that speaks SFTP                  | Files and folders without a shell, with the same permissions                                        |
+| WebDAV        | `https://ein.wrenfield.example/dav/` in a phone's backup app or a file manager             | Files and folders over the web, with the same permissions; see [WebDAV](../guide/webdav.md)         |
 | The assistant | **Chat** in the sidebar, with the [assistant module](../assistant/index.md)                | It runs commands as tools, as you; a command that would change something waits for you to accept it |
 
-![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP reaching the tree's files directly](../diagrams/interfaces.svg "Every interface upholds the same permission checks, and all but SFTP go through the same commands.")
+![Four interfaces, the web UI, the terminal, an SSH login and the assistant, leading into one shell that runs commands as the signed-in person over the tree of nodes, and SFTP and WebDAV reaching the tree's files directly](../diagrams/interfaces.svg "Every interface upholds the same permission checks, and all but SFTP and WebDAV go through the same commands.")
 
 The Web UI is no exception. Each page gets what it shows by running commands over one
 connection to the server, as you, with `JSON_OUTPUT=1` so that they answer in JSON; renaming a
@@ -119,7 +120,7 @@ JSON_OUTPUT=1 ls -l / | jq '.[].name'
 ```
 
 Because every interface acts as the same person under the same check, the rules are the same everywhere.
-What you cannot see in the browser you cannot see in the shell, over SFTP or through the assistant
+What you cannot see in the browser you cannot see in the shell, over SFTP or WebDAV, or through the assistant
 either, and a command only an administrator may run is refused to anyone else whichever interface they
 use.
 

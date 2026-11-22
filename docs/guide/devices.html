@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html" aria-current="page">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html" aria-current="page">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -240,6 +240,8 @@ a secret field left empty keeps what it had. The driver takes the change at once
 <li><strong>Device key</strong>, for a device whose driver reads what is posted to it, such as a phone: the address
 it posts to (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). Only those who may change
 the device see it.</li>
+<li><strong>EiN app</strong>, for a device of the class <code>phone</code>: whether the EiN app on the phone is paired, as whom,
+and when it was last used (see <a href="#pair-the-ein-app">Pair the EiN app</a>).</li>
 </ul>
 <h2 id="switch-something">Switch something<a class="anchor" href="#switch-something" aria-label="Link to this section"></a></h2>
 <p>The toggles, sliders, colour pickers and <strong>Press</strong> buttons on a device&#39;s <strong>Overview</strong> switch it. In the terminal, write
@@ -300,8 +302,11 @@ device-create <span class="hljs-string">&quot;Jon&#x27;s eTrex&quot;</span> --dr
 <code>foot</code>, which the Archive takes as <a href="../archive/tracks.html#how-a-device-travels">how its trips travel</a>.
 <code>--manufacturer</code> and <code>--model</code> say more about it, and let a GPX file that names them find it.</p>
 <h3 id="report-from-a-phone">Report from a phone<a class="anchor" href="#report-from-a-phone" aria-label="Link to this section"></a></h3>
-<p>A phone with the free <a href="https://www.traccar.org/client/">Traccar Client</a> app adds its position to the
-device&#39;s track as it moves:</p>
+<p>An Android phone with the <a href="phone.html#the-ein-app">EiN app</a> reports with it: pair the app (see
+<a href="#pair-the-ein-app">Pair the EiN app</a>) and turn its position reports on, as
+<a href="phone.html#report-where-your-phone-is">Report where your phone is</a> says. It needs no key of its own.</p>
+<p>Any other phone, an iPhone too, uses the free <a href="https://www.traccar.org/client/">Traccar Client</a> app,
+which adds its position to the device&#39;s track as it moves:</p>
 <ol>
 <li>Open the device&#39;s page at the address the phone will reach EiN at, such as
 <code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
@@ -329,6 +334,30 @@ and keeps the track. In the terminal:</p>
 device-key ruby-phone --new --origin https://ein.wrenfield.example   <span class="hljs-comment"># a new key, and the address</span>
 device-key ruby-phone --origin https://ein.wrenfield.example         <span class="hljs-comment"># the address, while it has one</span>
 device-key ruby-phone --off</code></pre></div>
+<h3 id="pair-the-ein-app">Pair the EiN app<a class="anchor" href="#pair-the-ein-app" aria-label="Link to this section"></a></h3>
+<p>The EiN app for Android signs in with a key of its own, made for one phone, instead of your password.
+How to install the app, and what it does, is in <a href="phone.html#the-ein-app">The EiN app</a>.</p>
+<ol>
+<li>Make the phone a device of the class <code>phone</code>, and open its page at the address the phone will
+reach EiN at, such as <code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
+<li>Under <strong>EiN app</strong>, choose <strong>Pair the app</strong>. A QR code appears.</li>
+<li>Scan it with the EiN app, or with the phone&#39;s camera where the app is installed. The code works
+once, for 15 minutes; the page says when the app has taken it.</li>
+</ol>
+<p>The app then acts as you, whoever chose <strong>Pair the app</strong>, and nothing more: it opens EiN&#39;s pages as
+you without asking for your password, adds the phone&#39;s positions to its track with its
+<a href="phone.html#report-where-your-phone-is">position reports</a> on, and, with its
+<a href="phone.html#back-up-your-phone-automatically">photo backup</a> on, sends the phone&#39;s photos into your
+staging area. The administrator&#39;s
+account pairs no app; sign in as the phone&#39;s person to pair it. <strong>EiN app</strong> on the <strong>Info</strong> tab says
+when it was last used and from which address.</p>
+<p><strong>Unpair</strong> takes the pairing away: the app is signed out at once and its key stops working, on a lost
+phone too. <strong>Pair again</strong> shows a new code; the app paired before is signed out when the new code is
+used. Forgetting the device unpairs it. In the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
+device-app ruby-phone --pair --origin https://ein.wrenfield.example   <span class="hljs-comment"># a new code, as a QR code&#x27;s text</span>
+device-app ruby-phone                                                  <span class="hljs-comment"># whether it is paired, and its last use</span>
+device-app ruby-phone --off</code></pre></div>
 <h3 id="gpx-files">GPX files<a class="anchor" href="#gpx-files" aria-label="Link to this section"></a></h3>
 <p>A GPS logger, a watch or a tracking app saves its routes as GPX files. Write one over the device&#39;s
 track, <code>position</code>, and its positions join it; a position with a time the track already has is not
@@ -501,7 +530,7 @@ device a driver still hears comes back new.</p>
 </tr>
 <tr>
 <td>The phone reports nothing</td>
-<td>It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client</td>
+<td>It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client or the EiN app</td>
 <td>See <a href="#report-from-a-phone">Report from a phone</a> and <a href="../admin/network.html#phones-and-trackers-posting">Ports, HTTPS and remote access</a></td>
 </tr>
 </tbody></table>
@@ -522,7 +551,7 @@ published.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/devices.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-devices-come-from">Where devices come from</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#a-devices-page">A device's page</a></li><li class="nested"><a href="#overview">Overview</a></li><li class="nested"><a href="#history">History</a></li><li class="nested"><a href="#info">Info</a></li><li><a href="#switch-something">Switch something</a></li><li><a href="#read-what-a-device-reported">Read what a device reported</a></li><li><a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a></li><li class="nested"><a href="#report-from-a-phone">Report from a phone</a></li><li class="nested"><a href="#gpx-files">GPX files</a></li><li><a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a></li><li class="nested"><a href="#values-written-to-an-endpoint">Values written to an endpoint</a></li><li><a href="#rename-or-forget-a-device">Rename or forget a device</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-devices-come-from">Where devices come from</a></li><li><a href="#the-devices-page">The Devices page</a></li><li><a href="#a-devices-page">A device's page</a></li><li class="nested"><a href="#overview">Overview</a></li><li class="nested"><a href="#history">History</a></li><li class="nested"><a href="#info">Info</a></li><li><a href="#switch-something">Switch something</a></li><li><a href="#read-what-a-device-reported">Read what a device reported</a></li><li><a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a></li><li class="nested"><a href="#report-from-a-phone">Report from a phone</a></li><li class="nested"><a href="#pair-the-ein-app">Pair the EiN app</a></li><li class="nested"><a href="#gpx-files">GPX files</a></li><li><a href="#a-device-that-posts-to-a-webhook">A device that posts to a webhook</a></li><li class="nested"><a href="#values-written-to-an-endpoint">Values written to an endpoint</a></li><li><a href="#rename-or-forget-a-device">Rename or forget a device</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

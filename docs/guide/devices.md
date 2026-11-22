@@ -139,6 +139,8 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
 - **Device key**, for a device whose driver reads what is posted to it, such as a phone: the address
   it posts to (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). Only those who may change
   the device see it.
+- **EiN app**, for a device of the class `phone`: whether the EiN app on the phone is paired, as whom,
+  and when it was last used (see [Pair the EiN app](#pair-the-ein-app)).
 
 ## Switch something
 
@@ -218,8 +220,12 @@ device-create "Jon's eTrex" --driver tracker --class foot --manufacturer Garmin 
 
 ### Report from a phone
 
-A phone with the free [Traccar Client](https://www.traccar.org/client/) app adds its position to the
-device's track as it moves:
+An Android phone with the [EiN app](phone.md#the-ein-app) reports with it: pair the app (see
+[Pair the EiN app](#pair-the-ein-app)) and turn its position reports on, as
+[Report where your phone is](phone.md#report-where-your-phone-is) says. It needs no key of its own.
+
+Any other phone, an iPhone too, uses the free [Traccar Client](https://www.traccar.org/client/) app,
+which adds its position to the device's track as it moves:
 
 1. Open the device's page at the address the phone will reach EiN at, such as
    `https://ein.wrenfield.example`, and its **Info** tab.
@@ -251,6 +257,36 @@ and keeps the track. In the terminal:
 device-key ruby-phone --new --origin https://ein.wrenfield.example   # a new key, and the address
 device-key ruby-phone --origin https://ein.wrenfield.example         # the address, while it has one
 device-key ruby-phone --off
+```
+
+### Pair the EiN app
+
+The EiN app for Android signs in with a key of its own, made for one phone, instead of your password.
+How to install the app, and what it does, is in [The EiN app](phone.md#the-ein-app).
+
+1. Make the phone a device of the class `phone`, and open its page at the address the phone will
+   reach EiN at, such as `https://ein.wrenfield.example`, and its **Info** tab.
+2. Under **EiN app**, choose **Pair the app**. A QR code appears.
+3. Scan it with the EiN app, or with the phone's camera where the app is installed. The code works
+   once, for 15 minutes; the page says when the app has taken it.
+
+The app then acts as you, whoever chose **Pair the app**, and nothing more: it opens EiN's pages as
+you without asking for your password, adds the phone's positions to its track with its
+[position reports](phone.md#report-where-your-phone-is) on, and, with its
+[photo backup](phone.md#back-up-your-phone-automatically) on, sends the phone's photos into your
+staging area. The administrator's
+account pairs no app; sign in as the phone's person to pair it. **EiN app** on the **Info** tab says
+when it was last used and from which address.
+
+**Unpair** takes the pairing away: the app is signed out at once and its key stops working, on a lost
+phone too. **Pair again** shows a new code; the app paired before is signed out when the new code is
+used. Forgetting the device unpairs it. In the terminal:
+
+```bash
+# in EiN's terminal
+device-app ruby-phone --pair --origin https://ein.wrenfield.example   # a new code, as a QR code's text
+device-app ruby-phone                                                  # whether it is paired, and its last use
+device-app ruby-phone --off
 ```
 
 ### GPX files
@@ -358,18 +394,18 @@ device a driver still hears comes back new.
 
 ## When something goes differently
 
-| What you see                                                                          | What it means                                                                                                            | What to do                                                                                                                            |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **Devices** is not in the sidebar                                                     | You are not signed in                                                                                                    | Sign in                                                                                                                               |
-| **No devices yet**                                                                    | No driver has found one, and nobody has made one                                                                         | With Devices, see [Check that EiN hears them](../devices/index.md#check-that-ein-hears-them)                                          |
-| A switch stays "waiting for the device"                                               | The device took the command but has not said it switched: it is off, or out of reach                                     | Check its power and its network; the switch shows what it reports once it does                                                        |
-| The driver reads **(not running)**                                                    | The service of the module that brings the driver is stopped                                                              | An administrator starts it on the Status page's **Services** tab, or with `service start`                                             |
-| `toggle needs the state the device last reported, and it has reported none`           | The control has never reported a state                                                                                   | Write `on` or `off` instead                                                                                                           |
-| `device-create` says `only the devices group's members make, name and forget devices` | You are not in the `devices` group, or were added since you signed in                                                    | Ask the administrator to add you, then sign in again                                                                                  |
-| **Edit** and **Forget** are missing                                                   | The same                                                                                                                 | The same                                                                                                                              |
-| `device-create` says `'null' is core's own in /dev, not a device's name`              | The name is one of EiN's own in `/dev`                                                                                   | Choose another name                                                                                                                   |
-| `cat ride.gpx > /dev/thermometer` says the device has no driver                       | A GPX file goes to a track, not to a device                                                                              | Write it to the track of the tracker it was recorded on, `/dev/<tracker>/position`                                                    |
-| The phone reports nothing                                                             | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client | See [Report from a phone](#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting) |
+| What you see                                                                          | What it means                                                                                                                           | What to do                                                                                                                            |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Devices** is not in the sidebar                                                     | You are not signed in                                                                                                                   | Sign in                                                                                                                               |
+| **No devices yet**                                                                    | No driver has found one, and nobody has made one                                                                                        | With Devices, see [Check that EiN hears them](../devices/index.md#check-that-ein-hears-them)                                          |
+| A switch stays "waiting for the device"                                               | The device took the command but has not said it switched: it is off, or out of reach                                                    | Check its power and its network; the switch shows what it reports once it does                                                        |
+| The driver reads **(not running)**                                                    | The service of the module that brings the driver is stopped                                                                             | An administrator starts it on the Status page's **Services** tab, or with `service start`                                             |
+| `toggle needs the state the device last reported, and it has reported none`           | The control has never reported a state                                                                                                  | Write `on` or `off` instead                                                                                                           |
+| `device-create` says `only the devices group's members make, name and forget devices` | You are not in the `devices` group, or were added since you signed in                                                                   | Ask the administrator to add you, then sign in again                                                                                  |
+| **Edit** and **Forget** are missing                                                   | The same                                                                                                                                | The same                                                                                                                              |
+| `device-create` says `'null' is core's own in /dev, not a device's name`              | The name is one of EiN's own in `/dev`                                                                                                  | Choose another name                                                                                                                   |
+| `cat ride.gpx > /dev/thermometer` says the device has no driver                       | A GPX file goes to a track, not to a device                                                                                             | Write it to the track of the tracker it was recorded on, `/dev/<tracker>/position`                                                    |
+| The phone reports nothing                                                             | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client or the EiN app | See [Report from a phone](#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting) |
 
 ## Related pages
 

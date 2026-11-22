@@ -20,6 +20,7 @@
 - [Your profile, favourites and trash](guide/profile.md)
 - [Your sidebar and top bar](guide/customizing.md)
 - [EiN on a phone](guide/phone.md)
+- [WebDAV](guide/webdav.md)
 
 ## The shell and SSH
 

@@ -121,8 +121,10 @@ the personal group. You can pick any shared group instead.
 ### Password
 
 Type a **New password**, **Repeat** it, and choose **Set password**. **Password set** appears
-beside it. Their current password stops working at once, in the browser and over SSH and SFTP,
-but browsers and terminals where they are signed in stay signed in.
+beside it. Their current password stops working at once, in the browser, over SSH and SFTP and
+over WebDAV, but browsers and terminals where they are signed in stay signed in. A program using
+[WebDAV](../guide/webdav.md), such as a phone's backup app, sends the password with every request,
+so it needs the new one at once.
 
 EiN has no rules for passwords: it takes any password that is not empty. It sends no e-mail, so it
 has no "forgot password" of its own, and cannot make someone choose a new password at their next
@@ -160,7 +162,7 @@ terminal**, each with the address it comes from and since when. Earlier sign-ins
 included, are on the Status page's [Activity tab](monitoring.md#the-activity-tab).
 
 **Disable sign-in** signs them out everywhere at once, ends what they have running, and keeps them
-out of the browser, SSH and SFTP alike. Nothing they own is changed. The button then reads
+out of the browser, SSH, SFTP and WebDAV alike. Nothing they own is changed. The button then reads
 **Enable sign-in**, which lets them sign in again with their password. A disabled account is
 hidden from the Users list until you switch on **Show disabled users** at the foot of the list,
 which is there only while some account is disabled.
@@ -301,8 +303,9 @@ trust in `sudo`.
 ## Signing in and why it fails
 
 People sign in with their username or their e-mail address, in the browser under **Username or
-e-mail**, and over SSH and SFTP (see [SSH and SFTP](../shell/ssh-sftp.md)). Their groups are read
-at that moment.
+e-mail**, over SSH and SFTP (see [SSH and SFTP](../shell/ssh-sftp.md)), and over WebDAV (see
+[WebDAV](../guide/webdav.md)). Their groups are read at that moment; a WebDAV program's are read
+again within the hour.
 
 A wrong password, an unknown username and an account without a password all fail the same way, so
 the answer does not tell anyone which accounts exist. Only with the right password does EiN say

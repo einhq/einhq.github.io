@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html" aria-current="page">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html" aria-current="page">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -279,6 +279,7 @@ panels
   search.explore   Years            /explore/years           archive.explore-years
   search.explore   Labels           /explore/labels          archive.explore-labels
   device.tabs      Trips            /trips?device={path}     archive.trips
+  app.backup       Back up into     /staging/app-backup      archive.app-backup
   nodes.tools      Duplicates       /duplicates?path={path}  archive.duplicates
   stats.sections   Events           /stats/life-events       archive.life-events
   home.start       Import media     /start/upload            archive.start-upload
@@ -687,6 +688,11 @@ like any entry. This puts <strong>Years</strong> first on the <strong>Search</st
 <td><code>archive.trips</code> (<strong>Trips</strong>, on a device with a track)</td>
 </tr>
 <tr>
+<td><code>app.backup</code></td>
+<td>The photo backup on the EiN app&#39;s <strong>App</strong> page, where it sends to</td>
+<td><code>archive.app-backup</code> (<strong>Back up into</strong>, signed in only)</td>
+</tr>
+<tr>
 <td><code>system.overview</code></td>
 <td>Gauges beside the computer&#39;s own on the <strong>Status</strong>&#39;s overview</td>
 <td><code>ems.gpu</code> (<strong>GPU</strong>)</td>
@@ -716,7 +722,7 @@ same kind of file to <code>/etc/ui/nav.json</code>. It applies to every account 
 person&#39;s own file is laid over it.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
 edit /etc/ui/nav.json</code></pre></div>
-<p>Three fields show an entry to some people only. They work in any file, but the file for everyone is
+<p>Four fields show an entry to some people only. They work in any file, but the file for everyone is
 where they matter:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -737,10 +743,14 @@ where they matter:</p>
 <td><code>&quot;group&quot;: &quot;devices&quot;</code></td>
 <td>Only to the members of that group, and to administrators.</td>
 </tr>
+<tr>
+<td><code>&quot;app&quot;: true</code></td>
+<td>Only in the <a href="phone.html#the-ein-app">EiN app</a>, never in a browser.</td>
+</tr>
 </tbody></table>
 </div>
 <p>EiN uses them itself: <strong>Nodes</strong> and <strong>Status</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
-and the account menu are <code>signedIn</code>; <strong>Device</strong> under <strong>Create</strong> is the <code>devices</code> group&#39;s.</p>
+and the account menu are <code>signedIn</code>; <strong>Device</strong> under <strong>Create</strong> is the <code>devices</code> group&#39;s; <strong>App</strong> is the EiN app&#39;s.</p>
 <p>This file, for a family with no cameras to register and no devices, hides <strong>Cameras</strong> and
 <strong>Devices</strong> in the sidebar and <strong>Camera</strong> in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a
 button that reruns failed work with
@@ -783,7 +793,7 @@ visitors browsing without signing in, give it <code>&quot;signedIn&quot;: true</
 and they count as modules&#39; entries, under everything else, for the group&#39;s members alone and for
 the administrator.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p><code>hide</code>, <code>admin</code> and <code>signedIn</code> decide only what the sidebar and top bar show. A page still opens
+<p><code>hide</code>, <code>admin</code>, <code>signedIn</code> and <code>app</code> decide only what the sidebar and top bar show. A page still opens
 by its address for anyone whose permissions allow it, and anyone can add an entry of their own
 that leads to it. To keep people away from something, set its permissions; see
 <a href="../admin/permissions.html">Permissions in depth</a>.</p>
@@ -900,6 +910,11 @@ entries can be dropped in it.</p>
 <td><code>true</code>: never shown to a visitor.</td>
 </tr>
 <tr>
+<td><code>app</code></td>
+<td>no</td>
+<td><code>true</code>: shown only in the EiN app.</td>
+</tr>
+<tr>
 <td><code>shortcut</code></td>
 <td>no</td>
 <td>A key that opens the page, such as <code>alt+U</code>; see <a href="#give-an-entry-a-key">Give an entry a key</a>. <code>null</code> takes a key away.</td>
@@ -1000,6 +1015,11 @@ entries can be dropped in it.</p>
 <td>no</td>
 <td><code>true</code>: never shown to a visitor.</td>
 </tr>
+<tr>
+<td><code>app</code></td>
+<td>no</td>
+<td><code>true</code>: shown only in the EiN app.</td>
+</tr>
 </tbody></table>
 </div>
 <p>The terminal button and your picture are EiN&#39;s own, always at the right end, and cannot be moved
@@ -1092,6 +1112,11 @@ or hidden; neither can the search box.</p>
 <td><code>signedIn</code></td>
 <td>no</td>
 <td><code>true</code>: never shown to a visitor.</td>
+</tr>
+<tr>
+<td><code>app</code></td>
+<td>no</td>
+<td><code>true</code>: shown only in the EiN app.</td>
 </tr>
 </tbody></table>
 </div>

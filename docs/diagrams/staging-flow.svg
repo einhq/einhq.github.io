@@ -15,7 +15,8 @@
   <text x="303" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Drag and drop</text>
   <rect x="412" y="24" width="170" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="497" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
+  <text x="497" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">SFTP or WebDAV</text>
   <rect x="606" y="24" width="170" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="691" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">A zip or Takeout</text>

@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -544,6 +544,16 @@ You meet them in links to files, in scripts, and in a reverse proxy&#39;s config
 <td>Stores an upload under a name nothing in the directory has yet: <code>name</code>, else <code>name (2)</code>, <code>name (3)</code> and so on</td>
 </tr>
 <tr>
+<td><code>/upload/</code></td>
+<td><code>POST</code></td>
+<td>Begins an upload sent in pieces that resume; see <a href="#uploads-in-pieces">Uploads in pieces</a></td>
+</tr>
+<tr>
+<td><code>/upload/&lt;id&gt;</code></td>
+<td><code>HEAD</code>, <code>PATCH</code>, <code>DELETE</code></td>
+<td>How much of that upload has arrived, a piece of it, or giving it up</td>
+</tr>
+<tr>
 <td><code>/archive</code></td>
 <td><code>POST</code></td>
 <td>Collects a selection of files for a download as one zip</td>
@@ -578,6 +588,11 @@ You meet them in links to files, in scripts, and in a reverse proxy&#39;s config
 <td></td>
 <td>The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket</td>
 </tr>
+<tr>
+<td><code>/dav/&lt;path&gt;</code></td>
+<td>WebDAV&#39;s</td>
+<td>The tree over WebDAV, for programs that sign in with a username and password; see <a href="../guide/webdav.html">WebDAV</a></td>
+</tr>
 </tbody></table>
 </div>
 <p>Any other path that is not a file of the Web UI returns the interface itself, which then
@@ -585,6 +600,28 @@ shows the page or <strong>Nothing here</strong>. A visitor who is not signed in 
 gets <code>sign in first</code> from <code>/file/</code> and <code>/archive/</code>. A write to <code>/file/dev/</code> takes a body of at most 4 MB, 64 MB for a
 track&#39;s fixes, and <code>/archive</code> one of at most 2 MB; a larger one is answered <code>413</code>, and one that may
 not be written is refused before it is sent in full.</p>
+<h3 id="uploads-in-pieces">Uploads in pieces<a class="anchor" href="#uploads-in-pieces" aria-label="Link to this section"></a></h3>
+<p><code>/upload/</code> takes a file in pieces, so a long video over a slow or patchy connection still arrives:
+when a piece breaks off, the sender asks how much arrived and goes on from there instead of starting
+again. It speaks the <a href="https://tus.io/protocols/resumable-upload">tus protocol</a> 1.0, with its
+creation, expiration and termination extensions, which client libraries for browsers, Android and
+most languages speak. The Web UI sends its uploads this way.</p>
+<ul>
+<li><strong>Signing in:</strong> the Web UI&#39;s sign-in, or the EiN app&#39;s token as <code>Authorization: Bearer &lt;token&gt;</code>,
+which uploads as whoever paired the phone. A visitor who is not signed in is answered <code>401</code>.</li>
+<li><strong>Beginning:</strong> a <code>POST</code> gives the file&#39;s size in <code>Upload-Length</code>, and in <code>Upload-Metadata</code> the
+folder it goes into (<code>dir</code>, from the root), its name (<code>filename</code>) and, if you like, its own time
+(<code>mtime</code>, seconds since 1970). The folder must exist and be yours to write in; otherwise the upload
+is refused before any of it is sent.</li>
+<li><strong>The file:</strong> once its last byte is in, it is stored as the <code>POST</code> to <code>/file/</code> stores an upload,
+under a free name, <code>IMG_0001 (2).jpg</code> beside a taken one, and the pipelines start on it as on any
+upload. The answer to the last piece, and to any later <code>HEAD</code>, names it in <code>Content-Location</code>.</li>
+<li><strong>Limits:</strong> an account&#39;s uploads that have begun and not arrived whole may come to at most
+<a href="settings.html#cfg_upload_spool_gb"><code>CFG_UPLOAD_SPOOL_GB</code></a> together, 20 GB unless the administrator
+changes it. An upload no piece has reached for
+<a href="settings.html#cfg_upload_expires_hours"><code>CFG_UPLOAD_EXPIRES_HOURS</code></a>, 24 hours, is removed, and
+<code>Upload-Expires</code> says when that is.</li>
+</ul>
 <h2 id="the-archives-pages">The Archive&#39;s pages<a class="anchor" href="#the-archives-pages" aria-label="Link to this section"></a></h2>
 <p>These addresses exist with the <a href="../archive/index.html">Archive</a> installed.</p>
 <p>Addresses with <code>&lt;name&gt;</code> take the name of the node in the tree. A person&#39;s or a place&#39;s is its name
@@ -1034,7 +1071,7 @@ addresses open.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/routes.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-an-address-is-made">How an address is made</a></li><li><a href="#pages-dialogs-the-side-panel-and-full-screen">Pages, dialogs, the side panel and full screen</a></li><li><a href="#eins-own-pages">EiN's own pages</a></li><li><a href="#parameters">Parameters</a></li><li class="nested"><a href="#tabs">Tabs</a></li><li class="nested"><a href="#search">Search</a></li><li class="nested"><a href="#other-pages">Other pages</a></li><li><a href="#links-into-the-documentation">Links into the documentation</a></li><li><a href="#signing-in-and-share-links">Signing in and share links</a></li><li class="nested"><a href="#the-return-after-signing-in">The return after signing in</a></li><li class="nested"><a href="#share-links">Share links</a></li><li><a href="#other-addresses-the-server-answers">Other addresses the server answers</a></li><li><a href="#the-archives-pages">The Archive's pages</a></li><li class="nested"><a href="#browsing">Browsing</a></li><li class="nested"><a href="#creating">Creating</a></li><li class="nested"><a href="#staging-and-importing">Staging and importing</a></li><li class="nested"><a href="#parts-of-other-pages">Parts of other pages</a></li><li class="nested"><a href="#parameters-of-the-archives-pages">Parameters of the Archive's pages</a></li><li><a href="#the-assistants-pages">The Assistant's pages</a></li><li><a href="#the-media-services-pages">The media service's pages</a></li><li><a href="#when-an-address-does-not-open">When an address does not open</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-an-address-is-made">How an address is made</a></li><li><a href="#pages-dialogs-the-side-panel-and-full-screen">Pages, dialogs, the side panel and full screen</a></li><li><a href="#eins-own-pages">EiN's own pages</a></li><li><a href="#parameters">Parameters</a></li><li class="nested"><a href="#tabs">Tabs</a></li><li class="nested"><a href="#search">Search</a></li><li class="nested"><a href="#other-pages">Other pages</a></li><li><a href="#links-into-the-documentation">Links into the documentation</a></li><li><a href="#signing-in-and-share-links">Signing in and share links</a></li><li class="nested"><a href="#the-return-after-signing-in">The return after signing in</a></li><li class="nested"><a href="#share-links">Share links</a></li><li><a href="#other-addresses-the-server-answers">Other addresses the server answers</a></li><li class="nested"><a href="#uploads-in-pieces">Uploads in pieces</a></li><li><a href="#the-archives-pages">The Archive's pages</a></li><li class="nested"><a href="#browsing">Browsing</a></li><li class="nested"><a href="#creating">Creating</a></li><li class="nested"><a href="#staging-and-importing">Staging and importing</a></li><li class="nested"><a href="#parts-of-other-pages">Parts of other pages</a></li><li class="nested"><a href="#parameters-of-the-archives-pages">Parameters of the Archive's pages</a></li><li><a href="#the-assistants-pages">The Assistant's pages</a></li><li><a href="#the-media-services-pages">The media service's pages</a></li><li><a href="#when-an-address-does-not-open">When an address does not open</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

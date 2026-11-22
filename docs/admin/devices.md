@@ -126,10 +126,37 @@ dmesg | grep 'device write refused'
 
 A write without a key is a signed-in person's, as every `/file` write is, and needs their session.
 
+## The EiN app's key
+
+A phone paired with the EiN app (`device-app`, or **Pair the app** on the phone's **Info** tab; see
+[Pair the EiN app](../guide/devices.md#pair-the-ein-app)) holds a key of its own instead of an
+account's password.
+
+- **Whose it is.** It acts as the account that paired it, never as the administrator, whose account
+  pairs no app. Only whoever may change the phone pairs it.
+- **What it opens.** Writes to the phone's own `/file/dev/<phone>` and its endpoints, sent as a device
+  key is, made as that account; Web UI sessions for the app, as that account and never as the
+  administrator, at `/__app/session` with `Authorization: Bearer <key>`; and, the same way, what the
+  app's photo backup asks for: which photos the account has already (`POST /checksums`, which
+  answers known or not and never where) and [uploads in pieces](../reference/routes.md#uploads-in-pieces)
+  into the account's folders.
+- **How it is made.** `device-app <phone> --pair --origin <address>` shows a QR code with a code that
+  works once, for 15 minutes; the app trades it for the key at `/__app/pair`. Both go through the
+  same limit on failed tries as passwords, and show on the **Activity** tab as signed in or failed,
+  the way in `app` ([Monitoring](monitoring.md#the-activity-tab)).
+- **Where it is kept.** In the phone's `.app`, mode `0600` and the administrator's, as a hash: the
+  code and the key are never shown again.
+- **Taking it away.** `device-app <phone> --off`, or **Unpair**, removes it and ends the app's
+  sessions at once. So do pairing the phone again, once the new code is used, and forgetting it.
+  The app takes its own away with the key, at `/__app/unpair`, when **Unpair** is chosen on its
+  **App** page, and is then signed out and asks for a new code; this too shows as signing out on
+  the **Activity** tab.
+
 ## What reaches EiN without signing in
 
 - **A device with its key**, writing to `/file/dev/<device>` and its endpoints as above. Any other write there needs a
   signed-in session.
+- **The EiN app with its key**, as the account that paired it, as above.
 - **Nothing else of the devices.** A visitor reads no device, reading or track and switches nothing,
   even with **Visitors may browse** on
   ([Visitors and share links](permissions.md#visitors-and-share-links)): the devices are the `devices`
@@ -144,14 +171,16 @@ A phone away from home reaches EiN only when EiN is reachable from the internet 
 
 ## When something goes differently
 
-| What you see                                                              | What it means                                                          | What to do                                                            |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `only the devices group's members make, name and forget devices`          | The person is not in `devices`, or was added since they signed in      | Add them, and have them sign in again                                 |
-| `device-key: only whoever may change <device> sees or changes its key`    | The person may not change the device                                   | A member of `devices` makes the key, or shares the device to edit     |
-| `devices` lists nothing, or `Access denied` on a device                   | The person is not in `devices` and the device is not shared with them  | Share the device with them, or add them to `devices`                  |
-| A phone's posts are refused with `403 Forbidden`                          | Its key was renewed or taken away, or its owner's account was disabled | Give the phone the address `device-key` shows now, or a new one       |
-| `device write refused` in the system log, from an address you do not know | Something tries keys, or holds an old address                          | Renew the key with `device-key <device> --new` if it may have got out |
-| `Access denied for operation 'w' on node: /dev/…` when switching          | The control is narrowed to others                                      | Widen it, or leave it                                                 |
+| What you see                                                                   | What it means                                                          | What to do                                                            |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `only the devices group's members make, name and forget devices`               | The person is not in `devices`, or was added since they signed in      | Add them, and have them sign in again                                 |
+| `device-key: only whoever may change <device> sees or changes its key`         | The person may not change the device                                   | A member of `devices` makes the key, or shares the device to edit     |
+| `device-app: the app acts as whoever pairs it, and never as the administrator` | The administrator's account asked for the code                         | Pair the app signed in as the phone's person                          |
+| The app is signed out, or `not the token of a paired phone`                    | The phone was unpaired, paired again or forgotten                      | Pair the app again                                                    |
+| `devices` lists nothing, or `Access denied` on a device                        | The person is not in `devices` and the device is not shared with them  | Share the device with them, or add them to `devices`                  |
+| A phone's posts are refused with `403 Forbidden`                               | Its key was renewed or taken away, or its owner's account was disabled | Give the phone the address `device-key` shows now, or a new one       |
+| `device write refused` in the system log, from an address you do not know      | Something tries keys, or holds an old address                          | Renew the key with `device-key <device> --new` if it may have got out |
+| `Access denied for operation 'w' on node: /dev/…` when switching               | The control is narrowed to others                                      | Widen it, or leave it                                                 |
 
 ## Related pages
 

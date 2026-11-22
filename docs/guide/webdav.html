@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebDAV – EiN documentation</title>
+    <meta name="description" content="EiN serves its tree over WebDAV, at /dav/ on the address you open the Web UI at, so programs that sync or browse files over the web can reach your files without SSH. Above all that is a phone's backup app, which sends each new photo into your staging area by itself (see Back up your phone automatically), but a file manager that connects to WebDAV works too. This page is for anyone with an EiN account who sets up such a program.">
+    <meta name="theme-color" content="#12151c">
+    <meta name="color-scheme" content="dark">
+    <link rel="canonical" href="https://einhq.eu/docs/guide/webdav.html">
+    <meta property="og:title" content="WebDAV – EiN documentation">
+    <meta property="og:description" content="EiN serves its tree over WebDAV, at /dav/ on the address you open the Web UI at, so programs that sync or browse files over the web can reach your files without SSH. Above all that is a phone's backup app, which sends each new photo into your staging area by itself (see Back up your phone automatically), but a file manager that connects to WebDAV works too. This page is for anyone with an EiN account who sets up such a program.">
+    <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="EiN">
+    <meta property="og:url" content="https://einhq.eu/docs/guide/webdav.html">
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../../assets/icon-180.png">
+    <link rel="preload" href="../../assets/fonts/familjen-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../assets/site.css">
+    <link rel="stylesheet" href="../../assets/docs.css">
+    <script type="module" src="../../assets/docs.js"></script>
+  </head>
+  <body class="docs" data-search="../../docs/search.json">
+    <a class="skip" href="#main">Skip to the content</a>
+
+    <p class="notice">
+      <strong>Work in progress</strong>
+      <span class="notice-long">EiN runs, but nothing is released yet, and what these pages describe may change.</span>
+      <span class="notice-short">Nothing is released yet.</span>
+    </p>
+
+    <header class="bar" data-strip>
+      <div class="bar-hats" aria-hidden="true"></div>
+      <a class="brand" href="../../" aria-label="EiN, the presentation page">
+        <img src="../../assets/favicon.svg" alt="" width="26" height="26">
+        <span>EiN</span>
+      </a>
+      <nav id="chapters" aria-label="Chapters">
+        <a class="ch-core" href="../../#top">Core</a>
+        <a class="ch-assistant" href="../../#assistant">Assistant</a>
+        <a class="ch-archive" href="../../#archive">Archive</a>
+        <a class="ch-screenshots" href="../../#screenshots">Screenshots</a>
+        <a class="ch-start" href="../../#start">Getting started</a>
+        <a class="ch-docs" href="../../docs/" aria-current="true">Docs</a>
+      </nav>
+      <a class="bar-source" href="https://github.com/einhq">
+        <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+        </svg>
+        <span class="bar-source-label">GitHub</span>
+      </a>
+      <button class="bar-menu" type="button" aria-label="Chapters" aria-controls="chapters" aria-expanded="false" hidden><span></span></button>
+    </header>
+
+    <div class="docs-layout">
+      <div class="docs-band" data-band="mixed" data-jagged aria-hidden="true"></div>
+      <aside class="docs-side" id="docs-side" aria-label="Documentation">
+        <form class="docs-search" role="search" action="https://duckduckgo.com/" method="get">
+          <label class="visually-hidden" for="docs-q">Search the documentation</label>
+          <input id="docs-q" name="q" type="search" placeholder="Search the docs" autocomplete="off" spellcheck="false">
+          <input type="hidden" name="sites" value="einhq.eu">
+          <kbd aria-hidden="true">/</kbd>
+          <div class="docs-results" role="listbox" aria-label="Results" hidden></div>
+        </form>
+        <nav class="docs-nav" aria-label="Pages">
+<ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
+<p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="webdav.html" aria-current="page">WebDAV</a></li></ul></section>
+<section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
+<section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
+<section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
+<section><h2>Reference</h2><ul><li><a href="../reference/commands.html">Commands</a></li><li class="nested"><a href="../reference/commands-core.html">Core commands</a></li><li><a href="../reference/settings.html">Settings</a></li><li><a href="../reference/environment.html">Environment variables</a></li><li><a href="../reference/node-types.html">Node types</a></li><li><a href="../reference/config-files.html">Configuration files</a></li><li><a href="../reference/shortcuts.html">Keyboard shortcuts</a></li><li><a href="../reference/routes.html">Addresses in the Web UI</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section>
+<section><h2>Developing</h2><ul><li><a href="../develop/modules.html">Writing a module</a></li><li><a href="../develop/manifest.html">The module manifest</a></li><li><a href="../develop/drivers.html">Writing a driver</a></li><li><a href="../develop/source.html">Building from source</a></li></ul></section>
+<p class="docs-part">Modules</p><section><h2>Archive</h2><ul><li><a href="../archive/index.html">The Archive</a></li><li><a href="../archive/importing.html">Getting your photos in</a></li><li><a href="../archive/staging.html">Sorting in staging</a></li><li><a href="../archive/duplicates.html">Duplicates</a></li><li><a href="../archive/dates-places.html">Dates and places of pictures</a></li><li><a href="../archive/albums.html">Albums</a></li><li><a href="../archive/viewer.html">Viewing photos, videos and recordings</a></li><li><a href="../archive/media.html">Media, Year and labels</a></li><li><a href="../archive/search.html">Searching your pictures</a></li><li><a href="../archive/people.html">People and faces</a></li><li><a href="../archive/family.html">Family tree, events and homes</a></li><li><a href="../archive/places.html">Locations and the map</a></li><li><a href="../archive/cameras.html">Cameras</a></li><li><a href="../archive/tracks.html">Trips</a></li><li><a href="../archive/home.html">Memories, news and events on Home</a></li><li><a href="../archive/file-types.html">Supported files</a></li><li><a href="../archive/processing.html">Processing pictures</a></li><li><a href="../archive/staging-admin.html">Staging for administrators</a></li><li><a href="../archive/tasks.html">Archive commands by task</a></li><li><a href="../archive/commands.html">Archive commands</a></li></ul></section>
+<section><h2>Assistant</h2><ul><li><a href="../assistant/index.html">The Assistant</a></li><li><a href="../assistant/chat.html">Chatting with the assistant</a></li><li><a href="../assistant/language-model.html">The language model</a></li><li><a href="../assistant/teaching.html">Teaching the assistant</a></li><li><a href="../assistant/tasks.html">Assistant commands by task</a></li><li><a href="../assistant/commands.html">Assistant commands</a></li></ul></section>
+<section><h2>Album folders</h2><ul><li><a href="../album-folders/index.html">Album folders</a></li><li><a href="../album-folders/commands.html">Album folders commands</a></li></ul></section>
+<section><h2>Todo</h2><ul><li><a href="../todo/index.html">Todo lists</a></li><li><a href="../todo/commands.html">Todo commands</a></li></ul></section>
+<section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
+<section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
+<section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
+<section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
+<section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
+<section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
+<section><h2>Media service</h2><ul><li><a href="../ems/index.html">The media service</a></li><li><a href="../ems/gpu.html">The graphics card</a></li><li><a href="../ems/instances.html">More than one media service</a></li><li><a href="../ems/commands.html">Media service commands</a></li></ul></section>
+<p class="side-foot"><a href="../../">einhq.eu</a> · <a href="https://github.com/einhq">GitHub</a></p>
+        </nav>
+      </aside>
+
+      <main id="main" class="docs-main">
+        <button class="docs-menu" type="button" aria-controls="docs-side" aria-expanded="false" hidden>Contents<span class="docs-menu-page">WebDAV</span></button>
+        <header class="docs-head">
+          <p class="crumb">Using EiN</p>
+          <h1>WebDAV</h1>
+        </header>
+        <article class="prose">
+<p>EiN serves its tree over WebDAV, at <code>/dav/</code> on the address you open the Web UI at, so programs that
+sync or browse files over the web can reach your files without SSH. Above all that is a phone&#39;s
+backup app, which sends each new photo into your staging area by itself (see
+<a href="phone.html#back-up-your-phone-automatically">Back up your phone automatically</a>), but a file manager
+that connects to WebDAV works too. This page is for anyone with an EiN account who sets up such a
+program.</p>
+<h2 id="what-you-need">What you need<a class="anchor" href="#what-you-need" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What</th>
+<th>Example</th>
+<th>Where it comes from</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The address</td>
+<td><code>https://ein.wrenfield.example/dav/</code></td>
+<td>The address you open EiN at, with <code>/dav/</code> after it. Most apps take only one that begins with <code>https://</code>; see <a href="../admin/network.html#put-ein-behind-https">Ports, HTTPS and remote access</a>.</td>
+</tr>
+<tr>
+<td>Your account</td>
+<td><code>helen</code></td>
+<td>Your EiN username. Your e-mail address works too, where your account has one.</td>
+</tr>
+<tr>
+<td>Your secret</td>
+<td>your password</td>
+<td>The password you sign in to the Web UI with.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The program sends your password with every request it makes. Over an <code>https://</code> address that is
+encrypted on its way; over a plain <code>http://</code> one, on your home network, anyone on that network who
+listens can read it, as with the Web UI&#39;s sign-in there.</p>
+<p>The examples below use Helen Okafor&#39;s account <code>helen</code> and the address <code>https://ein.wrenfield.example</code>.
+Use your own.</p>
+<h2 id="what-the-tree-looks-like-over-webdav">What the tree looks like over WebDAV<a class="anchor" href="#what-the-tree-looks-like-over-webdav" aria-label="Link to this section"></a></h2>
+<p><code>/dav/</code> is the root of EiN&#39;s tree, so <code>/dav/home/helen/</code> is Helen&#39;s home and
+<code>/dav/home/helen/staging/files/</code> her staging area, with the Archive installed. What you may see and
+change is decided by the same <a href="../admin/permissions.html">permissions</a> as in the Web UI and over SFTP:
+a folder you cannot open in the browser cannot be opened over WebDAV either.</p>
+<p>A few things differ from the Web UI:</p>
+<ul>
+<li><strong>A file is a file.</strong> What EiN keeps about a photo, such as its EXIF data, its faces and its
+thumbnails, is not shown; <a href="../shell/ssh-sftp.html#what-the-tree-looks-like-over-sftp">SFTP</a> shows it.</li>
+<li><strong>A link is shown as what it points to</strong>: a favourite folder as that folder, a picture added to an
+album as the picture. A link that leads to nothing you may open is left out. A program that copies a
+folder therefore copies what its links point to; SFTP copies the links themselves.</li>
+<li><strong>A file&#39;s date</strong> is when its content last changed, not when EiN last learned something about it.
+A sync program that compares dates does not send a photo again because its faces were found.</li>
+</ul>
+<h2 id="what-a-program-can-do">What a program can do<a class="anchor" href="#what-a-program-can-do" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>To</th>
+<th>Over WebDAV</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>List folders and read files</td>
+<td>Yes.</td>
+</tr>
+<tr>
+<td>Send a file</td>
+<td>Yes. It is taken in as an upload in the browser is: into a staging category, a photo waits there to be sorted.</td>
+</tr>
+<tr>
+<td>Make a folder, rename and move</td>
+<td>Yes.</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Yes, into your trash, as <strong>Move to trash</strong> in the Web UI does; see <a href="profile.html">Your profile, favourites and trash</a>. Over SFTP a delete is for good.</td>
+</tr>
+<tr>
+<td>Set a file&#39;s date</td>
+<td>Yes, as sync programs do after sending a file.</td>
+</tr>
+<tr>
+<td>Copy a file within EiN</td>
+<td>No. A program that asks EiN to make the copy is refused; one that copies by reading and sending again works.</td>
+</tr>
+<tr>
+<td>Lock a file while it is being changed</td>
+<td>No. So macOS Finder and Windows&#39; <strong>Map network drive</strong> show EiN, but read-only.</td>
+</tr>
+</tbody></table>
+</div>
+<p>What lies in a trash can be read over WebDAV but not changed: restore it from your trash in the Web
+UI.</p>
+<h3 id="photos-you-send-are-frozen">Photos you send are frozen<a class="anchor" href="#photos-you-send-are-frozen" aria-label="Link to this section"></a></h3>
+<p>A picture, video or recording you send is <a href="../concepts/files.html#frozen-files">frozen</a> once the
+whole of it has arrived, as an upload in the browser is: sending another file under its name is
+refused with <code>403 Forbidden</code>, while renaming, moving and deleting it work. Which types are frozen is
+up to your administrator, in <code>/etc/frozen-uploads</code>.</p>
+<p>A file whose sending breaks off part-way, as when the phone loses its connection, is not kept: the
+program sends it again from the start next time.</p>
+<h2 id="signing-in">Signing in<a class="anchor" href="#signing-in" aria-label="Link to this section"></a></h2>
+<p>A program signs in with your username and password on each request, so there is nothing to sign
+out of. EiN remembers a password that was right for up to an hour, so a program sending thousands
+of files is not slowed down by checking it each time, but it notices at once when the password is
+changed or the account disabled: the next request is refused.</p>
+<p>Wrong passwords count as failed sign-ins, in the Web UI, over SSH and over WebDAV alike, and many of
+them hold back the address they come from for a while; <a href="../admin/network.html#how-ein-slows-down-password-guessing">How EiN slows down password guessing</a> has the rules. Sign-ins over
+WebDAV are recorded in the access log with the way in <code>dav</code>.</p>
+<h2 id="when-something-goes-wrong">When something goes wrong<a class="anchor" href="#when-something-goes-wrong" aria-label="Link to this section"></a></h2>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>Why</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>The program cannot connect, or wants an <code>https://</code> address</td>
+<td>EiN is reached over plain <code>http://</code>, which most apps refuse for WebDAV.</td>
+<td>Ask your administrator for an <code>https://</code> address; see <a href="../admin/network.html#put-ein-behind-https">Ports, HTTPS and remote access</a>.</td>
+</tr>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>The username or password is wrong, the account is disabled, or there were too many failed sign-ins from your address.</td>
+<td>Check the username and password. After many failures, wait: the message says how long (&quot;too many failed sign-ins; try again in …&quot;).</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code> when sending a file</td>
+<td>A frozen photo is already there under that name, or you may not write in that folder.</td>
+<td>Send it under another name, or into a folder of yours, such as a staging category.</td>
+</tr>
+<tr>
+<td><code>403 Forbidden</code> from a web page</td>
+<td>WebDAV refuses requests a browser says come from a page, so no page can act as you through it.</td>
+<td>Use a WebDAV program, not a page in a browser.</td>
+</tr>
+<tr>
+<td><code>409 Conflict</code></td>
+<td>The folder the file should go into does not exist.</td>
+<td>Make the folder first.</td>
+</tr>
+<tr>
+<td>Sending a long video stops after about a minute</td>
+<td>The HTTPS proxy in front of EiN ends requests that take longer than it allows.</td>
+<td>Ask your administrator; <a href="../admin/network.html#what-ein-needs-from-the-proxy">Ports, HTTPS and remote access</a> has the setting.</td>
+</tr>
+</tbody></table>
+</div>
+<h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
+<ul>
+<li><a href="phone.html">EiN on a phone</a>: backing up a phone&#39;s photos with an app.</li>
+<li><a href="../shell/ssh-sftp.html">SSH and SFTP</a>: the shell and file transfers over SSH, with what WebDAV leaves out.</li>
+<li><a href="../archive/importing.html">Getting your photos in</a>: every way files get into EiN.</li>
+<li><a href="../admin/network.html">Ports, HTTPS and remote access</a>: HTTPS and reaching EiN from outside the home, for administrators.</li>
+</ul>
+
+        </article>
+        <footer class="docs-foot">
+          <nav class="pager" aria-label="Previous and next page"><a class="prev" href="phone.html" rel="prev"><span>Previous</span>EiN on a phone</a><a class="next" href="../shell/terminal.html" rel="next"><span>Next</span>The terminal</a></nav>
+          <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/webdav.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
+        </footer>
+      </main>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-you-need">What you need</a></li><li><a href="#what-the-tree-looks-like-over-webdav">What the tree looks like over WebDAV</a></li><li><a href="#what-a-program-can-do">What a program can do</a></li><li class="nested"><a href="#photos-you-send-are-frozen">Photos you send are frozen</a></li><li><a href="#signing-in">Signing in</a></li><li><a href="#when-something-goes-wrong">When something goes wrong</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+    </div>
+  </body>
+</html>

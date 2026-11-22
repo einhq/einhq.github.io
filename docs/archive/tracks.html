@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -104,9 +104,9 @@ routes in, correct trips and make albums of them. The devices themselves are EiN
 <p>A track is a device&#39;s endpoint of the type <code>track</code> under <code>/dev</code>: the <code>position</code> that EiN&#39;s <code>tracker</code>
 driver keeps for a phone, a GPS tracker or a logger. Its positions come in two ways:</p>
 <ul>
-<li><strong>Posted as the device moves.</strong> A phone with Traccar Client, or a tracker on a boat or in a car,
-posts its position to EiN with the device&#39;s key (see
-<a href="../guide/devices.html#report-from-a-phone">Report from a phone</a>).</li>
+<li><strong>Posted as the device moves.</strong> A phone with the EiN app or Traccar Client, or a tracker on a
+boat or in a car, posts its position to EiN, the EiN app as the account it is paired as and the
+others with the device&#39;s key (see <a href="../guide/devices.html#report-from-a-phone">Report from a phone</a>).</li>
 <li><strong>From GPX files</strong> a logger or a tracking app saved: written over the device&#39;s track, uploaded on its
 <strong>Trips</strong> tab, or dropped in staging (see <a href="#gpx-files">GPX files</a>).</li>
 </ul>
@@ -185,7 +185,7 @@ can type in, such as <code>Europe/Stockholm</code>. Clear it for UTC.</li>
 <p>A changed <strong>Travels as</strong> or <strong>Timezone</strong> finds the track&#39;s trips again from the start, and so does a
 changed class of its device while <strong>Travels as</strong> is not set.</p>
 <p>Each trip travels as the track does. While neither <strong>Travels as</strong> nor the class says how, a phone
-running Traccar Client tells it trip by trip: its motion sensors say whether it is still, on foot,
+running the EiN app or Traccar Client tells it trip by trip: its motion sensors say whether it is still, on foot,
 on a bicycle or in a vehicle, which the device keeps as its <code>activity</code> (see
 <a href="../concepts/devices.html#cores-tracker-driver">Core&#39;s tracker driver</a>). A trip travels as what they
 said longest along the way, lying still aside: a walk on foot, a bike ride by bike, a drive by car,
@@ -271,7 +271,7 @@ goes (over 600 km/h for more than a kilometre), within two hours;</li>
 <li>a position it jumps back onto exactly, to the last decimal, after being away from it longer than
 it was there;</li>
 <li>a position the phone or tracker itself said may be more than 150 m off, as a guess from a cell
-tower is. Traccar Client and OsmAnd send how far off each position may be.</li>
+tower is. The EiN app, Traccar Client and OsmAnd send how far off each position may be.</li>
 </ul>
 <p>A rejected position is not drawn, counted in <strong>Points</strong> or used for trips. A jump that does not come
 back, as when a logger starts again somewhere else, keeps its positions, and the line is broken
@@ -536,7 +536,7 @@ see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 </tr>
 <tr>
 <td>The phone reports nothing to the track.</td>
-<td>It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client.</td>
+<td>It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client or the EiN app.</td>
 <td>See <a href="../guide/devices.html#report-from-a-phone">Report from a phone</a> and <a href="../admin/network.html#phones-and-trackers-posting">Ports, HTTPS and remote access</a>.</td>
 </tr>
 <tr>

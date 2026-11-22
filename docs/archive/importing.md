@@ -11,13 +11,15 @@ can see. EiN reads each file there, checks whether you have it already and sugge
 Nobody else sees the files, and they stay out of the shared library, until you file them into an
 album. The usual way past staging is to upload straight into an album that already exists.
 
-| Way in                                               | Where the files go                                    | Folders kept |
-| ---------------------------------------------------- | ----------------------------------------------------- | ------------ |
-| **Create → Import media**                            | the staging category you choose                       | yes          |
-| Dropping files on the **Staging** page               | the category you drop them on                         | yes          |
-| **Upload**, or dropping files, on the **Media** page | your **Inbox** in staging                             | yes          |
-| **Upload**, or dropping files, on an album's page    | that album, in the library                            | no           |
-| Copying over SFTP or `scp`                           | the folder you copy into, normally a staging category | yes          |
+| Way in                                               | Where the files go                                      | Folders kept |
+| ---------------------------------------------------- | ------------------------------------------------------- | ------------ |
+| **Create → Import media**                            | the staging category you choose                         | yes          |
+| Dropping files on the **Staging** page               | the category you drop them on                           | yes          |
+| **Upload**, or dropping files, on the **Media** page | your **Inbox** in staging                               | yes          |
+| **Upload**, or dropping files, on an album's page    | that album, in the library                              | no           |
+| Copying over SFTP or `scp`                           | the folder you copy into, normally a staging category   | yes          |
+| The EiN app's photo backup                           | the category chosen for it, normally a **Phone** one    | no           |
+| A phone's backup app, over WebDAV                    | the folder it sends into, normally a **Phone** category | yes          |
 
 Your staging area is divided into **categories**. The **Inbox** is always there and takes
 everything you do not put elsewhere; you can add others, one per source: a Google Photos export, a
@@ -172,7 +174,7 @@ scp -P 2222 -r "From the old laptop" anna@ein.local:/home/anna/staging/files/inb
 
 Mind the capital `-P` for the port in `scp` and `sftp`. Files copied over SFTP are taken in exactly
 as a browser upload is; on the Staging page they show as "being prepared" (the "arriving" stage
-counts uploads from your browser only).
+counts uploads from your browser only). The same goes for files a program sends over WebDAV.
 
 ### Keep folder names for the grouping
 
@@ -199,6 +201,18 @@ changed on for six hours, so a copy still being written is left alone.
 > [!WARNING]
 > A file you delete over SFTP is gone for good; it does not go to the trash. To get rid of staged
 > files, use **Discard…** on the category's **Files** tab, which puts them in your trash with Undo.
+
+## Let a phone send its photos by itself
+
+The EiN app on an Android phone sends every new photo and video into a staging category by itself:
+choose the category on its **App** page, or make a **Phone** category called after the phone there,
+or choose **Back up this phone here** on a phone category's empty **Files** tab in the app. It sends
+only what you do not have yet. Another app can do the same over [WebDAV](../guide/webdav.md),
+through your EiN's `https://` address: while a **Phone** category is empty, its **Files** tab shows
+the address and folder to give it, and so does **Import media** when you choose it.
+[Back up your phone automatically](../guide/phone.md#back-up-your-phone-automatically) has the
+steps for both. What a phone sends is taken in exactly as a browser upload is, and like a copy over
+SFTP skips the "arriving" stage.
 
 ## Zips and Google Takeout exports
 
@@ -281,7 +295,7 @@ from a messenger and screenshots.
 
 ## What happens after the upload
 
-![Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
+![Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
 
 Each category's card on the Staging page, and the strip above a category's tabs, show where your
 newest files are. Each stage shows while it holds files:
@@ -392,8 +406,8 @@ three pictures, or has a name a camera or an export gives.
 **New pictures are not on the Media page, the map or in search.** That is how staging works: they
 appear there once you file them. Look for them on the **Staging** page.
 
-**Over SFTP, `/home/<you>/staging` does not exist.** Open **Staging** in the Web UI once, then
-copy again.
+**Over SFTP or WebDAV, `/home/<you>/staging` does not exist.** Open **Staging** in the Web UI
+once, then copy or send again.
 
 **The dates are wrong, or scans have none.** A scan is undated until you give it a date; see
 [Dates and places of pictures](dates-places.md).

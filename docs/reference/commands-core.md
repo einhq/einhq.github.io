@@ -2,9 +2,9 @@
 
 # Core commands
 
-The commands every EiN has, whatever modules it runs. 231 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
+The commands every EiN has, whatever modules it runs. 233 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
 
-[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
+[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [curl](#curl) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-app](#device-app) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
 
 ## A
 
@@ -556,6 +556,37 @@ cp -r /archive/albums/Exempelalbum_A /archive/albums/Exempelalbum_B
 
 With `JSON_OUTPUT=1`: nothing.
 
+### `curl`
+
+Fetch a URL over HTTP or HTTPS, to stdout or into a file (administrator only)
+
+<small>changes things</small>
+
+```text
+curl [-o <path>] [-O] [-L] [-f] [-s] [-H <string>] <url>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<url>` | an http:// or https:// URL. |
+
+| Option | What it does |
+| --- | --- |
+| `-o <path>` | write the body to this file instead of stdout. |
+| `-O` | write the body to a file named as the URL's last part, in the current directory. |
+| `-L` | follow redirects. |
+| `-f` | fail with status 22, writing nothing, when the server answers with an error (400 or above) |
+| `-s` | no progress meter. |
+| `-H <string>` | a request header, "Name: value". |
+
+```bash
+curl -fLO https://example.com/files/sailboat.jpg
+curl -fL -o /home/anna/report.pdf https://example.com/download?id=7
+curl -s https://example.com/status.json | jq .version
+```
+
+With `JSON_OUTPUT=1`: the body on stdout, or nothing with -o or -O; 22 for an HTTP error with -f, 1 when the request failed.
+
 ### `cut`
 
 Remove sections from each line of files.
@@ -617,6 +648,34 @@ detach [--list] <job>
 | Option | What it does |
 | --- | --- |
 | `--list` | list your detached jobs instead (an administrator's lists everyone's), from their records under /var/logs/jobs. |
+
+### `device-app`
+
+The EiN app's pairing with a phone: shown, a one-time pairing code as a QR code for the app to scan (--pair), or taken away (--off), which signs the app out at once. The app acts as whoever paired it.
+
+<small>changes things</small>
+
+```text
+device-app [--pair] [--off] [--origin=<string>] <device>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<device>` | the phone's name. |
+
+| Option | What it does |
+| --- | --- |
+| `--pair` | a new pairing code, which works once for 15 minutes; the app paired before keeps working until it is used. |
+| `--off` | take the pairing away: the app is signed out and its token stops working. |
+| `--origin=<string>` | this EiN's address as the app reaches it (https://ein.example), for the QR code. |
+
+```bash
+device-app ruby-phone
+device-app ruby-phone --pair --origin https://ein.example
+device-app ruby-phone --off
+```
+
+With `JSON_OUTPUT=1`: DeviceAppAnswer.
 
 ### `device-config`
 

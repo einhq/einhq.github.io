@@ -179,6 +179,9 @@ album is taken in as an upload is. [Copy files in over SFTP](../archive/importin
 gives the folder to copy into and how to keep folder names for the grouping, and
 [Zips](../archive/importing.md#zips) what happens to a zip you copy in.
 
+A phone that should send its new photos by itself does not need SSH: its backup app sends over
+[WebDAV](../guide/webdav.md), through the same `https://` address as the Web UI; see [Back up your phone automatically](../guide/phone.md#back-up-your-phone-automatically).
+
 ## What the tree looks like over SFTP
 
 EiN's tree holds more than an ordinary file system can show, so a few things look different.

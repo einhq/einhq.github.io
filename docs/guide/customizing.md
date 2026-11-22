@@ -94,6 +94,7 @@ panels
   search.explore   Years            /explore/years           archive.explore-years
   search.explore   Labels           /explore/labels          archive.explore-labels
   device.tabs      Trips            /trips?device={path}     archive.trips
+  app.backup       Back up into     /staging/app-backup      archive.app-backup
   nodes.tools      Duplicates       /duplicates?path={path}  archive.duplicates
   stats.sections   Events           /stats/life-events       archive.life-events
   home.start       Import media     /start/upload            archive.start-upload
@@ -518,6 +519,7 @@ Each panel has a slot, the place in a page where it is drawn:
 | `nodes.tools`     | A tool in the **Nodes** explorer's tool pane                                           | `archive.duplicates` (**Duplicates**)                                                                                                              |
 | `system.tabs`     | A tab of the **Status**                                                                | `ems.media-service` (**Media service**)                                                                                                            |
 | `device.tabs`     | A tab of a device's page, after **Info**                                               | `archive.trips` (**Trips**, on a device with a track)                                                                                              |
+| `app.backup`      | The photo backup on the EiN app's **App** page, where it sends to                      | `archive.app-backup` (**Back up into**, signed in only)                                                                                            |
 | `system.overview` | Gauges beside the computer's own on the **Status**'s overview                          | `ems.gpu` (**GPU**)                                                                                                                                |
 | `about.services`  | A tile in **About EiN**                                                                | `assistant.about` (**Language model**), `ems.about` (**Media service**)                                                                            |
 | `shell.float`     | Floating over every page and the lightbox, under dialogs                               | `todo.widget` (**Todo widget**, signed in only)                                                                                                    |
@@ -537,7 +539,7 @@ person's own file is laid over it.
 edit /etc/ui/nav.json
 ```
 
-Three fields show an entry to some people only. They work in any file, but the file for everyone is
+Four fields show an entry to some people only. They work in any file, but the file for everyone is
 where they matter:
 
 | Field                | The entry is shown                                                                                                                                             |
@@ -545,9 +547,10 @@ where they matter:
 | `"admin": true`      | Only to administrators: the `admin` account and anyone in admin mode. In your own file, it shows the entry only while you are in admin mode.                   |
 | `"signedIn": true`   | Only to someone signed in, never to a visitor browsing without signing in, where [**Visitors may browse**](../reference/settings.md#cfg_guest_browsing) is on. |
 | `"group": "devices"` | Only to the members of that group, and to administrators.                                                                                                      |
+| `"app": true`        | Only in the [EiN app](phone.md#the-ein-app), never in a browser.                                                                                               |
 
 EiN uses them itself: **Nodes** and **Status** are `admin`; **Staging**, **Settings**, **Create**
-and the account menu are `signedIn`; **Device** under **Create** is the `devices` group's.
+and the account menu are `signedIn`; **Device** under **Create** is the `devices` group's; **App** is the EiN app's.
 
 This file, for a family with no cameras to register and no devices, hides **Cameras** and
 **Devices** in the sidebar and **Camera** in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
@@ -607,7 +610,7 @@ and they count as modules' entries, under everything else, for the group's membe
 the administrator.
 
 > [!WARNING]
-> `hide`, `admin` and `signedIn` decide only what the sidebar and top bar show. A page still opens
+> `hide`, `admin`, `signedIn` and `app` decide only what the sidebar and top bar show. A page still opens
 > by its address for anyone whose permissions allow it, and anyone can add an entry of their own
 > that leads to it. To keep people away from something, set its permissions; see
 > [Permissions in depth](../admin/permissions.md).
@@ -652,6 +655,7 @@ entries can be dropped in it.
 | `order`    | no       | Its place in the section, lowest first. Without it, 1000; entries with the same number keep the order the files give them.              |
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                   |
 | `signedIn` | no       | `true`: never shown to a visitor.                                                                                                       |
+| `app`      | no       | `true`: shown only in the EiN app.                                                                                                      |
 | `shortcut` | no       | A key that opens the page, such as `alt+U`; see [Give an entry a key](#give-an-entry-a-key). `null` takes a key away.                   |
 | `action`   | no       | What choosing it does away from its page, instead of opening `to`; see [`action`](#action). A button moved here keeps its own.          |
 | `place`    | no       | `"topbar"` or `"search"`: shown as a button in the top bar, at the right or beside the search box, that opens the page.                 |
@@ -675,6 +679,7 @@ entries can be dropped in it.
 | `shortcut` | no       | A key, such as `alt+R` or `mod+shift+K`; see [Give an entry a key](#give-an-entry-a-key). `null` takes a key away. Not on a dropdown.                 |
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                                 |
 | `signedIn` | no       | `true`: never shown to a visitor.                                                                                                                     |
+| `app`      | no       | `true`: shown only in the EiN app.                                                                                                                    |
 
 The terminal button and your picture are EiN's own, always at the right end, and cannot be moved
 or hidden; neither can the search box.
@@ -705,6 +710,7 @@ Give one of these:
 | `when`     | no       | In `device.tabs`, `{ "has": "<node type>" }`: shown only on a device with an endpoint of that type, such as `track`; with `"live": true` too, only on a device with a stream watched live now. |
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                                                                          |
 | `signedIn` | no       | `true`: never shown to a visitor.                                                                                                                                                              |
+| `app`      | no       | `true`: shown only in the EiN app.                                                                                                                                                             |
 
 ## When something goes differently
 

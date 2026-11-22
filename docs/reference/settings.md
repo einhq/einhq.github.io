@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 119 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -1096,6 +1096,17 @@ Every setting of an EiN with all its modules: 119 of them, in the groups the Set
 
 ## Storage
 
+### `CFG_UPLOAD_EXPIRES_HOURS`
+
+**Hours an upload waits for its next piece**. How long an upload sent in pieces is kept after its last piece arrived. Past it the pieces are removed, and the upload starts again from its first byte.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `24` |
+| Kind | number |
+| Restarts | `upload-reaper` |
+
 ### `CFG_TMP_RETENTION_HOURS`
 
 **Hours in /tmp**. How long a file left in /tmp, such as a picture sent to search with, is kept before it is removed.
@@ -1106,6 +1117,16 @@ Every setting of an EiN with all its modules: 119 of them, in the groups the Set
 | Default | `24` |
 | Kind | number |
 | Restarts | `tmp-sweeper` |
+
+### `CFG_UPLOAD_SPOOL_GB`
+
+**Unfinished uploads per account (GB)**. How much an account may have on its way in pieces at once: the sizes of its uploads that have begun and not yet arrived whole. An upload that would go past it is refused before it starts.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `20` |
+| Kind | number |
 
 ## Todo
 

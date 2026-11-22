@@ -33,9 +33,10 @@
   <line x1="387" y1="112" x2="387" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#interfaces-arrow)" />
   <line x1="535" y1="112" x2="535" y2="158" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#interfaces-arrow)" />
 
-  <!-- SFTP, the interface without a shell -->
+  <!-- SFTP and WebDAV, the interfaces without a shell -->
   <rect x="650" y="40" width="126" height="72" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
+  <text x="713" y="70" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">SFTP, WebDAV</text>
   <text x="713" y="94" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">files only</text>
   <line x1="713" y1="112" x2="713" y2="286" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#interfaces-arrow)" />
   <text x="701" y="204" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">no commands</text>

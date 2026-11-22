@@ -94,20 +94,22 @@ An HTTPS proxy is a web server that holds the certificate, answers browsers over
 
 - EiN is reached from outside your home, so that passwords and pictures do not cross the internet unencrypted;
 - a phone should add EiN to its home screen as an app, which needs an address beginning with `https://` (see [EiN on a phone](../guide/phone.md#put-ein-on-your-home-screen));
+- a phone should back up its photos by itself: backup apps send to EiN's [WebDAV](../guide/webdav.md) address only over HTTPS (see [Back up your phone automatically](../guide/phone.md#back-up-your-phone-automatically)), so SSH need not be open to the internet for it;
 - you want the browser's clipboard to work everywhere: over plain HTTP, copying a share link falls back to selecting the text.
 
 ### What EiN needs from the proxy
 
 Any proxy works, such as Caddy, nginx or Traefik, when it does the following:
 
-| Requirement                                                    | Why                                                                                                                                                                               |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Serves EiN at the root of its own host name                    | The interface asks for `/file/…`, `/s/…` and `/__shell` from the root. EiN cannot be served under a path such as `https://example.org/ein/`.                                      |
-| Passes WebSocket connections                                   | The whole interface talks to EiN over a WebSocket at `/__shell`, not only the terminal. Without it, pages do not load their contents.                                             |
-| Sends `X-Forwarded-Proto: https` (or `Forwarded: proto=https`) | EiN then marks its sign-in cookie `Secure`, so the browser sends it only over HTTPS. Over plain HTTP the cookie is not marked, so the same EiN keeps working on the home network. |
-| Has no limit on the size of a request                          | A file is uploaded in one request, whole: a long video is several gigabytes.                                                                                                      |
-| Allows long requests and idle connections                      | Uploads and downloads of large files take time, and the WebSocket can be quiet for minutes. When the proxy closes it, the interface reconnects after two seconds.                 |
-| Sends a response on as it comes, unbuffered                    | A [screen near your phone](../dashboard/screens.md#on-a-tv-where-your-phone-is) plays a page as a live video that never ends; held back, it never starts.                         |
+| Requirement                                                    | Why                                                                                                                                                                                                                                                                                                                                                                                 |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Serves EiN at the root of its own host name                    | The interface asks for `/file/…`, `/s/…` and `/__shell` from the root. EiN cannot be served under a path such as `https://example.org/ein/`.                                                                                                                                                                                                                                        |
+| Passes WebSocket connections                                   | The whole interface talks to EiN over a WebSocket at `/__shell`, not only the terminal. Without it, pages do not load their contents.                                                                                                                                                                                                                                               |
+| Sends `X-Forwarded-Proto: https` (or `Forwarded: proto=https`) | EiN then marks its sign-in cookie `Secure`, so the browser sends it only over HTTPS. Over plain HTTP the cookie is not marked, so the same EiN keeps working on the home network.                                                                                                                                                                                                   |
+| Passes every method and header as the client sent it           | [WebDAV](../guide/webdav.md) at `/dav/` uses methods besides GET and POST, such as PROPFIND, PUT, MKCOL and MOVE, and the headers `Authorization`, `Depth`, `Destination` and `Overwrite`. [Uploads in pieces](../reference/routes.md#uploads-in-pieces) at `/upload/` use `PATCH` and `HEAD` and the `Upload-…` and `Tus-…` headers. A proxy passes them unless it is told not to. |
+| Has no limit on the size of a request                          | The Web UI sends an upload in pieces of 8 MB, but a program over WebDAV sends a file in one request, whole: a long video is several gigabytes.                                                                                                                                                                                                                                      |
+| Allows long requests and idle connections                      | Downloads of large files take time, and the WebSocket can be quiet for minutes. When the proxy closes it, the interface reconnects after two seconds. A phone's backup app sending a long video over WebDAV on a slow connection takes many minutes for one request. A piece of an upload from the Web UI that the proxy cuts is sent again from where it stopped.                  |
+| Sends a response on as it comes, unbuffered                    | A [screen near your phone](../dashboard/screens.md#on-a-tv-where-your-phone-is) plays a page as a live video that never ends; held back, it never starts.                                                                                                                                                                                                                           |
 
 The proxy keeps the `Host` header as the browser sent it; EiN uses whatever address the browser shows. EiN also refuses the WebSocket and every upload or change from a page at another address than its own, such as another program on the same machine, so a page there cannot act as whoever is signed in. Over plain HTTP the browser names that address only by its host and port, which EiN compares with `Host`: a proxy that sets `Host` to EiN's own address (`127.0.0.1:8080`) breaks the interface, while over HTTPS the browser says outright whether a request comes from EiN's own pages.
 
@@ -171,6 +173,27 @@ server {
 
 Check it with `sudo nginx -t` and reload with `sudo systemctl reload nginx`.
 
+### Traefik
+
+Traefik passes the WebSocket, every method and requests of any size by itself, but since version
+2.11.2 it ends a request whose body takes longer than a minute to arrive: an upload of a long video,
+from the Web UI or from a phone's backup app, then fails part-way. Lift that limit on the entry point
+that answers HTTPS, here `websecure`:
+
+```yaml
+# Traefik's static configuration, on the machine Traefik runs on
+entryPoints:
+  websecure:
+    transport:
+      respondingTimeouts:
+        readTimeout: 0s
+```
+
+On the command line the same is `--entryPoints.websecure.transport.respondingTimeouts.readTimeout=0s`.
+Traefik's other limits, such as on a connection that sends nothing, still apply. When Traefik runs on
+another machine than EiN, or in a container network EiN sees as another address, name that address
+in `TRUSTED_PROXIES`; see [How EiN slows down password guessing](#how-ein-slows-down-password-guessing).
+
 ### Keep EiN's own port to the machine
 
 With the proxy on the same machine, nothing else needs to reach port 8080. Close it to the network:
@@ -216,11 +239,11 @@ address. [Devices and their keys](devices.md#device-keys) says more.
 - **Leave visitors out.** The setting **Visitors may browse** (`CFG_GUEST_BROWSING`, under **Settings → System**) is off after an install. Keep it off: on, anyone who reaches EiN can browse what is shared with visitors without signing in.
 - **Publish HTTPS only.** Forward only the proxy's ports, never 8080, which is plain HTTP.
 - **Keep the sidecar in.** Never forward ports 1883 or 1984. The broker speaks plain MQTT without TLS, and whoever reaches it with the device password can switch the house's devices; whoever reaches the restreamer with its password watches the cameras. A phone away from home needs only the HTTPS proxy, which shows the cameras too.
-- **Decide about SSH.** Port 2222 is not needed for the Web UI. Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see [SSH and SFTP](../shell/ssh-sftp.md).
+- **Decide about SSH.** Port 2222 is not needed for the Web UI, nor for a phone backing up its photos, which goes through the HTTPS proxy ([WebDAV](../guide/webdav.md)). Leave it closed to the internet and use SSH and SFTP over the VPN, or forward it on your router and have people sign in with keys; see [SSH and SFTP](../shell/ssh-sftp.md).
 
 ### How EiN slows down password guessing
 
-EiN counts failed sign-ins, in the Web UI and over SSH alike, per client address, per account and across all of them. An IPv6 address counts as its whole /64, which one household or one server holds, so changing addresses within it gains nothing:
+EiN counts failed sign-ins, in the Web UI, over SSH and over WebDAV alike, per client address, per account and across all of them. An IPv6 address counts as its whole /64, which one household or one server holds, so changing addresses within it gains nothing:
 
 - After five failures from one address, that address is refused without its password being checked, with "too many failed sign-ins; try again in" and the number of seconds. The wait starts at a second and doubles with each further failure, up to 15 minutes.
 - After five failures at one account, each attempt at it begins only once the one before has waited its turn: a second at first, doubling up to 10 seconds. Attempts made at the same time queue one behind the other rather than waiting together.
@@ -248,6 +271,8 @@ who
 ```
 
 ## SSH and SFTP from another network
+
+For files alone, nothing more needs opening: [WebDAV](../guide/webdav.md), at `/dav/`, goes through the HTTPS proxy with the Web UI.
 
 SSH does not go through an HTTPS proxy. To reach EiN's SSH server from outside, forward a TCP port on your router to the machine's `EIN_SSH_PORT`, or connect over a VPN. Then connect with the host name and the port:
 

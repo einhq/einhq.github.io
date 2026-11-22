@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 474 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 476 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 231 in full](commands-core.md).
+[All 233 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -54,9 +54,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [config-set](commands-core.md#config-set) | Change a setting, or several at once, and restart the services that read them only at start. |
 | [config-unset](commands-core.md#config-unset) | Reset settings to what the deployment or the default says. |
 | [cp](commands-core.md#cp) | Copy files and directories. |
+| [curl](commands-core.md#curl) | Fetch a URL over HTTP or HTTPS, to stdout or into a file (administrator only) |
 | [cut](commands-core.md#cut) | Remove sections from each line of files. |
 | [date](commands-core.md#date) | Print or set the system date and time. |
 | [detach](commands-core.md#detach) | detach a job so it keeps running after the shell closes. |
+| [device-app](commands-core.md#device-app) | The EiN app's pairing with a phone: shown, a one-time pairing code as a QR code for the app to scan (--pair), or taken away (--off), which signs the app out at once. The app acts as whoever paired it. |
 | [device-config](commands-core.md#device-config) | Show what a device's driver was given, or change it (name=value, name= to take one away) and have the driver take it up; changing is for members of the devices group. |
 | [device-create](commands-core.md#device-create) | Make a device by hand, which no driver announces: a phone or GPS logger (--driver tracker), something that posts its readings to a webhook (--driver webhook) |
 | [device-forget](commands-core.md#device-forget) | Remove a device and everything under it, its history included; for members of the devices group. |

@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -102,8 +102,8 @@ suggestions, and how to undo any of it.</p>
 <p>Pictures, videos and recordings you bring in do not go straight into the family&#39;s shared
 library. They land in your <strong>staging area</strong>, a private inbox that only you can see. The page says
 so under its title: &quot;New media to sort before it joins the shared library. Only you can see it.&quot;
-How files get there (<strong>Import media</strong>, dragging files onto a page, the Media page&#39;s upload, SFTP)
-is on <a href="importing.html">Getting your photos in</a>.</p>
+How files get there (<strong>Import media</strong>, dragging files onto a page, the Media page&#39;s upload, SFTP,
+a phone&#39;s backup app over WebDAV) is on <a href="importing.html">Getting your photos in</a>.</p>
 <p>While the files wait, EiN reads each one: its date, its place, the faces in it and its
 thumbnails. It also checks whether you already have a copy. Then the <strong>organizer</strong> sorts them into
 <strong>suggested albums</strong>, called groups on these pages: a birthday, a trip, a folder you named, a
@@ -115,7 +115,7 @@ year of everyday pictures. You go through the groups and decide for each one:</p
 <li><strong>discard</strong> it to your trash.</li>
 </ul>
 <p>Only filing makes the files visible to anyone else. Every decision can be undone.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 516" role="img" aria-label="Four ways in (Import media, drag and drop, SFTP, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 516" role="img" aria-label="Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash">
   <title>A file's way through staging</title>
   <defs>
     <marker id="archive-staging-md-1-staging-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -132,7 +132,8 @@ year of everyday pictures. You go through the groups and decide for each one:</p
   <text x="303" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Drag and drop</text>
   <rect x="412" y="24" width="170" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="497" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">SFTP</text>
+  <text x="497" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">SFTP or WebDAV</text>
   <rect x="606" y="24" width="170" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="691" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">A zip or Takeout</text>
@@ -1092,7 +1093,9 @@ to them, in albums and suggested groups, follow them.&quot; Choose <strong>Move 
 page. Undo, here or on the Done tab, puts them back where they were.&quot; Choose <strong>Discard</strong>; the
 message has <strong>Undo</strong>.</p>
 <p>An empty category says &quot;Nothing in Box 3 yet&quot; (with its own name) and offers <strong>Import media</strong>, and the folder to copy
-into over SFTP.</p>
+into over SFTP. A category of the <strong>Phone</strong>, <strong>Screenshots</strong> or <strong>Messaging</strong> kind shows instead the
+address and folder a phone&#39;s backup app sends into, and in the EiN app <strong>Back up this phone here</strong>,
+which has the app&#39;s photo backup send into it; see <a href="../guide/phone.html#back-up-your-phone-automatically">Back up your phone automatically</a>.</p>
 <h2 id="done-what-you-decided-and-undo">Done: what you decided, and Undo<a class="anchor" href="#done-what-you-decided-and-undo" aria-label="Link to this section"></a></h2>
 <p>The <strong>Done</strong> tab lists what was decided in the category, newest first, 50 at a time (<strong>Show
 older</strong> for more). At the top: &quot;N filed · M discarded&quot;. <strong>Everything</strong> shows every decision;

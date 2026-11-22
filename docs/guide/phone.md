@@ -1,8 +1,8 @@
 # EiN on a phone
 
 This page covers what is different when you use EiN on a phone or a tablet: the menu behind the EiN
-mark, the gestures in grids and in the viewer, uploading from the phone, and putting EiN on your
-home screen. It is for everyone in the family who opens EiN away from a computer. The grids, the
+mark, the gestures in grids and in the viewer, uploading from the phone, backing it up by itself,
+reporting where it is, the EiN app for Android, and putting EiN on your home screen. It is for everyone in the family who opens EiN away from a computer. The grids, the
 viewer and the uploads are the [Archive](../archive/index.md)'s, and the sections on them apply once
 it is installed.
 
@@ -166,14 +166,192 @@ folder, which a phone's browser may not offer.
 > [!WARNING]
 > An upload runs in the open page. Keep EiN on screen until the upload has finished: a phone may
 > pause a browser that is in the background or behind a locked screen, and closing or reloading the
-> page stops the files not sent yet. The files already sent stay.
+> page stops the files not sent yet. The files already sent stay. A file is sent in pieces, so when
+> the connection drops, or the phone moves from Wi-Fi to mobile data, it goes on where it stopped
+> once the connection is back.
 
 For a whole camera roll, thousands of files, copying from a computer is steadier than uploading
-from the phone. The **Import media** dialog itself suggests copying over SFTP for more than about
+from the page, and the EiN app can keep sending the new ones by itself; see [Back up your phone automatically](#back-up-your-phone-automatically). The **Import media** dialog itself suggests copying over SFTP for more than about
 10,000 files; see [Copy files in over SFTP](../archive/importing.md#copy-files-in-over-sftp).
 
 On the Media page, **Search with a picture** can take a photo with the camera and find what looks
 like it; see [Search with a picture](../archive/search.md#search-with-a-picture).
+
+## Back up your phone automatically
+
+With the Archive installed, the [EiN app](#the-ein-app) on an Android phone sends every new photo
+and video into your staging area by itself, the way Google Photos backs up a phone, at home or away.
+It needs no password and no address of its own: it sends as you, to the EiN it is paired with.
+
+1. **Install the app and pair it**; see [The EiN app](#the-ein-app).
+2. **Open App** under **System** in the app's menu. **Photo backup** is at its foot.
+3. **Choose where the photos go**, under **Back up into**: a staging category of yours, or **New
+   category:** with the phone's name, which makes a [**Phone** category](../archive/staging.md#the-kinds-of-category)
+   called after the phone. On the **Staging** page in the app, a phone category's empty **Files**
+   tab has **Back up this phone here**, which does the same and turns the backup on.
+4. **Turn Back up photos and videos on.** The phone asks whether the app may see your photos and
+   videos: choose **Allow all**. With **Allow limited access** the app sees, and sends, only the
+   ones you pick. Where a photo was taken is asked for with them; without it the phone takes the place
+   out of every photo the app reads.
+5. **Choose the folders.** **Camera** is chosen at first. Tick others the phone lists, such as
+   **Screenshots** or **WhatsApp Images**, to send theirs too; each shows how many photos and videos
+   it holds.
+6. **Choose when it sends.** **Only on Wi-Fi** is on at first, to spare mobile data; **Only while
+   charging** waits for the charger as well.
+
+What the backup then does:
+
+- **It sends what is new soon after.** A photo you take is sent within a few minutes, once the
+  conditions you chose are met. It also looks for anything missed every hour, and **Back up now**
+  looks at once.
+- **It sends only what EiN lacks.** Before sending, it asks EiN which of the photos you already
+  have, anywhere you can see them, your staging area included, and sends only the others. Photos you
+  filed into albums are not sent again, nor is a camera roll you uploaded another way.
+- **A file goes in pieces.** When the connection drops, or the phone moves from Wi-Fi to mobile data,
+  a long video goes on where it stopped, now or at the next backup.
+- **Names, times and places are kept.** A photo arrives under the name the phone gave it, with its
+  own time, and with where it was taken.
+- **Nothing is ever deleted**, on EiN when you delete a photo on the phone, or on the phone once it
+  is sent. A photo you edit on the phone is sent again as a new photo.
+- **A notification** shows what is being sent while a backup runs. The **App** page shows the same,
+  how many photos are sent and how many are still to go, when the last backup was, and why it
+  stopped if it did.
+
+The first backup sends every photo in the chosen folders that EiN does not have, which can take
+hours for a full camera roll: leave the phone on Wi-Fi and charging. The photos arrive in the
+category as an upload does: they are prepared, frozen and grouped, and wait in **Sort** until you
+file them; see [Sorting in staging](../archive/staging.md).
+
+### With another backup app
+
+A phone without the EiN app can send its photos with an app that copies a folder one way to EiN's
+[WebDAV](webdav.md) address, which needs EiN at an address that begins with `https://`. The steps
+below use FolderSync, which is free, with ads, on Google Play; another app that copies a folder one
+way to a WebDAV server, and never deletes there, can do the same. The names of its settings differ
+between versions; what each is for is said with it.
+
+1. **Make a category for the phone.** On the Staging page choose **Phone** on the dashed **New
+   category** card, call it after the phone, for example `Helen's phone`, and choose **Create**; see
+   [The kinds of category](../archive/staging.md#the-kinds-of-category). Its **Files** tab, while it
+   is empty, shows the address and the folder to give the app, each with a button that copies it.
+2. **Add an account in the app.** In FolderSync, add a **WebDAV** account with EiN's address and
+   `/dav` after it, for example `https://ein.wrenfield.example/dav`, and your EiN username and
+   password.
+3. **Add a folder pair** from the phone to EiN, one way:
+   - the phone's folder: the camera's, `/DCIM/Camera`, not all of `/DCIM`, which also holds the
+     thumbnails the phone makes;
+   - EiN's folder: the category's, for example `/home/helen/staging/files/helens-phone`;
+   - the direction: to EiN only (in FolderSync, **To right folder**, with the phone's folder on the
+     left).
+4. **Choose the pair's settings:**
+
+   | Setting                                  | Choose      | Why                                                                                                                                                             |
+   | ---------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Only resync source files if modified** | On          | A photo you file into an album, or discard, leaves the category's folder. Without this the app sends it again, because EiN's folder no longer has it.           |
+   | **Sync deletions**                       | Off         | Deleting a photo on the phone leaves EiN's copy alone.                                                                                                          |
+   | **Move files to target**                 | Off         | The photos stay on the phone.                                                                                                                                   |
+   | **Overwrite old files**                  | Off         | A photo EiN has is [frozen](webdav.md#photos-you-send-are-frozen) and is not written over.                                                                      |
+   | **Use temp-file scheme**                 | Off         | EiN keeps nothing of a photo whose sending broke off, so the app gains nothing by it, and a photo renamed once it is sent can wait hours before it is prepared. |
+   | Hidden files                             | Leave out   | The phone keeps the pictures you delete for a while as hidden `.trashed-…` files.                                                                               |
+   | **Instant sync**                         | On          | A new photo is sent soon after you take it. A schedule as well catches what the phone held back.                                                                |
+   | Wi-Fi only                               | As you like | To spare mobile data, let the app send only on Wi-Fi, or only while the phone charges.                                                                          |
+
+5. **Send once by hand.** The first time, the app sends every photo the folder holds, which can be
+   thousands: start it on Wi-Fi with the phone charging, and let Android run the app in the
+   background, without battery optimisation, so it is not stopped half-way.
+
+The photos then arrive in the category as the app's do. Photos
+you already have in the library arrive as exact copies and wait on the category's **Duplicates**
+tab, where you take them away in one go; see [Duplicates](../archive/duplicates.md). A photo you
+edit on the phone after it was sent is refused while the old one is still in the category, as it is
+frozen; once you have filed or discarded the old one, the app sends the edited one as a new
+photo.
+
+## Report where your phone is
+
+The [EiN app](#the-ein-app) on an Android phone adds where the phone is to its device's track as it
+moves, at home or away, the way [Traccar Client](devices.md#report-from-a-phone) does, but with no
+second app and no key of its own: it reports as you, to the EiN it is paired with. The track is the
+phone's `position`, which a device of the class `phone` reporting its position has (**Reports by**:
+its position; see [A phone or a GPS tracker](devices.md#a-phone-or-a-gps-tracker)).
+
+1. **Install the app and pair it**; see [The EiN app](#the-ein-app).
+2. **Open App** under **System** in the app's menu. **Position reports** is below the photo backup.
+3. **Turn Report this phone's position on.** The phone asks whether the app may know where it is:
+   choose **While using the app**, with **Precise** on, and allow its **Physical activity**. The
+   app then says why it needs the position all the time, and opens the page in the phone's settings
+   where you choose **Allow all the time**. Without it the reports go on once you close the app,
+   but stop when the phone restarts.
+4. **Choose Precise position** for a better track. It uses the phone's GPS, and the battery with it;
+   without it the phone mostly places itself by the Wi-Fi and the cell towers around it, which spares
+   the battery but gives a coarser track.
+
+What the reports then do:
+
+- **They follow the phone as it moves.** A position is taken every 15 seconds at most, and only
+  once the phone has gone 20 m further, so a walk gives fewer positions than a drive.
+- **They pause while the phone lies still**, as its motion sensors tell, and take a position only
+  now and then until it moves again.
+- **A position more than about 100 m off is left out**, as a guess from the cell towers is.
+- **Nothing is lost offline.** The phone keeps the positions and sends them together, about a
+  minute after it takes them, or once it has a connection again.
+- **The battery and what the phone is doing go along**, as Traccar Client sends them: its charge,
+  whether it charges, and whether it is still, walking, cycling or in a vehicle, which the device
+  keeps as its `battery`, `charging` and `activity`
+  ([Core's tracker driver](../concepts/devices.md#cores-tracker-driver)).
+- **A notification** stays while the reports are on, saying whether the app follows the phone or
+  pauses: Android shows one for as long as an app may know where the phone is in the background.
+- **They go on after the phone restarts**, when the app may know the position all the time.
+
+The **App** page shows what the phone was last doing, when the last position was taken and how far
+off it may be, when positions last reached EiN, how many wait to be sent, and why they were not when
+they were not; **Send now** sends the waiting ones at once. Unpairing the app stops the reports and
+forgets the positions not yet sent.
+
+In the app, an EiN page that asks where the phone is, such as the button that takes this device's
+position beside a place in an automation, is told once the app may know it.
+
+## The EiN app
+
+On an Android phone, the EiN app shows EiN in an app of its own, and can
+[back up the phone's photos](#back-up-your-phone-automatically) and
+[report where it is](#report-where-your-phone-is) by itself. It is the same EiN, with the same
+pages and your account, but the app is never given your password: it is paired with your EiN for
+this one phone, signs in as you by itself, and stays signed in until the phone is unpaired. It needs
+Android 10 or newer.
+
+Install it from its [releases on GitHub](https://github.com/einhq/android/releases): open the newest
+release on the phone, download its `.apk` file and open it, and allow your browser to install apps
+when the phone asks. It is not on Google Play yet.
+
+To pair it:
+
+1. In EiN on a computer, open **Devices** and the phone's page, or add the phone with **Create** →
+   **Device** as a device of the class `phone`. Open it at the address the phone reaches EiN at,
+   such as `https://ein.wrenfield.example`.
+2. On its **Info** tab, under **EiN app**, choose **Pair the app**. A QR code appears.
+3. On the phone, open the EiN app and choose **Scan QR code**, or scan the code with the phone's
+   camera. The app opens EiN, signed in as you.
+
+[Pair the EiN app](devices.md#pair-the-ein-app) says what the pairing lets the app do, and how to
+take it away from a lost phone.
+
+In the app:
+
+- the phone's Back goes back through EiN's pages, and closes the viewer and a dialog as the
+  browser's Back does;
+- a link to another site opens in the phone's browser;
+- choosing files to upload offers the phone's camera beside its files;
+- a download is saved in the phone's **Downloads**;
+- **App**, under **System** in the menu, shows the EiN and the phone the app is paired with, the
+  account it signs in as and the app's version, and has **Unpair**, after which the app asks for a
+  new QR code; below them are the phone's [photo backup](#back-up-your-phone-automatically) and
+  [position reports](#report-where-your-phone-is);
+- the account menu has no **Logout**, since the app would sign in again by itself: unpair it
+  instead.
+
+The app goes to the address the QR code was made for, over `http://` as well as `https://`. Away from
+home it reaches EiN only if that address works there too.
 
 ## Put EiN on your home screen
 
@@ -206,7 +384,7 @@ sign in once more.
 
 ## No offline mode
 
-EiN has no offline mode. Nothing is kept on the phone for use without a connection: every page,
+EiN has no offline mode, in the browser or in the app. Nothing is kept on the phone for use without a connection: every page,
 picture and search comes from your EiN as you open it, so you need a connection to it, at home or
 wherever your administrator has made it reachable.
 
@@ -226,15 +404,28 @@ seconds by itself. On a phone a red crossed-out plug in the top bar tells you, i
 
 ## When something goes differently
 
-| What you see                                                                                                   | Why                                                                                                                                        | What to do                                                                                                                                                                                                                                                                         |
-| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The address does not open on the phone                                                                         | The phone is not on the network EiN is on, or it does not understand a name ending in `.local`.                                            | Join the same network, or use the address with the machine's IP number that your administrator gives you. Away from home, see [Ports, HTTPS and remote access](../admin/network.md).                                                                                               |
-| No **Add to Home Screen** or **Install app**, or EiN opens with the browser's address bar from the home screen | EiN is reached over plain `http://`.                                                                                                       | Ask your administrator for an `https://` address.                                                                                                                                                                                                                                  |
-| Swiping does not bring the menu out                                                                            | The swipe was too slow or too slanted, began at the screen's edge, or landed on the map, a slider, a field or a row that scrolls sideways. | Tap the EiN mark instead.                                                                                                                                                                                                                                                          |
-| Pinching does not change the grid                                                                              | The grid has square tiles (**Days** or **Months**), or the screen is wide enough for the grid to fill its rows by itself.                  | Choose the **Default** layout on the Media page.                                                                                                                                                                                                                                   |
-| The upload stopped                                                                                             | The phone paused the browser, or the page was closed or reloaded.                                                                          | If **Uploads** in the top bar lists failed files, choose **Retry failed**. After a reload the list is gone: choose the files that did not arrive and upload them again. An exact copy of a file already sent is recognised in staging; see [Duplicates](../archive/duplicates.md). |
-| You cannot find **Upload**, **Share** or **Edit**                                                              | On a phone they are under ⋮ at the top right of the header.                                                                                | Tap ⋮.                                                                                                                                                                                                                                                                             |
-| You cannot find the viewer's close button                                                                      | The touch layout has none.                                                                                                                 | Swipe down on the picture, or use the phone's Back.                                                                                                                                                                                                                                |
+| What you see                                                                                                        | Why                                                                                                                                        | What to do                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The address does not open on the phone                                                                              | The phone is not on the network EiN is on, or it does not understand a name ending in `.local`.                                            | Join the same network, or use the address with the machine's IP number that your administrator gives you. Away from home, see [Ports, HTTPS and remote access](../admin/network.md).                                                                                                                           |
+| No **Add to Home Screen** or **Install app**, or EiN opens with the browser's address bar from the home screen      | EiN is reached over plain `http://`.                                                                                                       | Ask your administrator for an `https://` address.                                                                                                                                                                                                                                                              |
+| Swiping does not bring the menu out                                                                                 | The swipe was too slow or too slanted, began at the screen's edge, or landed on the map, a slider, a field or a row that scrolls sideways. | Tap the EiN mark instead.                                                                                                                                                                                                                                                                                      |
+| Pinching does not change the grid                                                                                   | The grid has square tiles (**Days** or **Months**), or the screen is wide enough for the grid to fill its rows by itself.                  | Choose the **Default** layout on the Media page.                                                                                                                                                                                                                                                               |
+| The upload stopped                                                                                                  | The phone paused the browser, or the page was closed or reloaded.                                                                          | If **Uploads** in the top bar lists failed files, choose **Retry failed**. After a reload the list is gone: choose the files that did not arrive and upload them again. An exact copy of a file already sent is recognised in staging; see [Duplicates](../archive/duplicates.md).                             |
+| The backup app cannot connect, or asks for an `https://` address                                                    | EiN is reached over plain `http://`, which such apps refuse for WebDAV.                                                                    | Ask your administrator for an `https://` address; see [Ports, HTTPS and remote access](../admin/network.md#put-ein-behind-https).                                                                                                                                                                              |
+| Photos you filed into albums are sent again                                                                         | The app sends whatever EiN's folder lacks.                                                                                                 | Turn **Only resync source files if modified** on, and discard the copies on the category's **Duplicates** tab.                                                                                                                                                                                                 |
+| The backup app reports `403 Forbidden` for a photo                                                                  | A photo of that name is already in the category, and frozen: an edited photo, or one sent again.                                           | File or discard the one in the category; the app sends the other next time.                                                                                                                                                                                                                                    |
+| A long video is never sent, stopping after about a minute                                                           | The HTTPS proxy in front of EiN ends requests that take longer than it allows.                                                             | Ask your administrator; see [Ports, HTTPS and remote access](../admin/network.md#what-ein-needs-from-the-proxy).                                                                                                                                                                                               |
+| You cannot find **Upload**, **Share** or **Edit**                                                                   | On a phone they are under ⋮ at the top right of the header.                                                                                | Tap ⋮.                                                                                                                                                                                                                                                                                                         |
+| **Photo backup** says **The app may not see your photos**                                                           | The phone was told not to let the app see them.                                                                                            | Choose **Allow access**. Once you have said no twice the phone no longer asks, and the button opens the app's page in the phone's settings instead: there, under **Permissions**, set **Photos and videos** to **Allow all**.                                                                                  |
+| Backed-up photos have no place on the map                                                                           | The app may not read where photos were taken, so the phone took the place out.                                                             | On the **App** page, choose **Allow** where it says so. The photos already sent stay without a place; set it on them in EiN.                                                                                                                                                                                   |
+| **Photo backup** says **Waiting for Wi-Fi** or **Waiting until the phone charges**                                  | **Only on Wi-Fi** or **Only while charging** is on.                                                                                        | Wait, or turn the condition off on the **App** page.                                                                                                                                                                                                                                                           |
+| **Photo backup** says EiN would not take files into the category                                                    | The category was removed, or is not yours to write in.                                                                                     | Choose another under **Back up into**.                                                                                                                                                                                                                                                                         |
+| **Position reports** says **The app may not know where the phone is**, or the reports stop after the phone restarts | The phone was told not to let the app know its position, or only while the app is in use.                                                  | Choose **Allow location** or **Allow all the time** on the **App** page. Once you have said no twice the phone no longer asks, and the button opens the app's page in the phone's settings instead: there, under **Permissions**, set **Location** to **Allow all the time** with **Use precise location** on. |
+| **Position reports** says the phone's position is too rough to report                                               | The phone gives the app only its approximate position.                                                                                     | Choose **Allow precise location**, or turn **Use precise location** on in the app's **Location** permission.                                                                                                                                                                                                   |
+| **Position reports** says EiN refused the positions                                                                 | The phone was unpaired, or its device has no `position` track: it does not report its position.                                            | Pair the app again, or make the phone a device that reports its position; see [A phone or a GPS tracker](devices.md#a-phone-or-a-gps-tracker). The positions wait on the phone meanwhile.                                                                                                                      |
+| The EiN app says **EiN does not answer**                                                                            | The phone cannot reach the address it was paired with: it is away from home, or EiN is down.                                               | Join the network EiN is on and choose **Try again**. Away from home, see [Ports, HTTPS and remote access](../admin/network.md).                                                                                                                                                                                |
+| The EiN app says **EiN refused this phone**                                                                         | The phone was unpaired, or paired again with another code.                                                                                 | Choose **Pair again**, and scan a new code from the phone's **Info** tab.                                                                                                                                                                                                                                      |
+| You cannot find the viewer's close button                                                                           | The touch layout has none.                                                                                                                 | Swipe down on the picture, or use the phone's Back.                                                                                                                                                                                                                                                            |
 
 ## Related pages
 
@@ -242,6 +433,7 @@ seconds by itself. On a phone a red crossed-out plug in the top bar tells you, i
   screen open and close.
 - [Viewing photos, videos and recordings](../archive/viewer.md): the viewer, its details and its gestures.
 - [Getting your photos in](../archive/importing.md): every way files get into EiN.
+- [WebDAV](webdav.md): the address a backup app sends to, and what it can do there.
 - [Albums](../archive/albums.md): selecting pictures and the selection bar.
 - [Ports, HTTPS and remote access](../admin/network.md): HTTPS and reaching EiN from outside the
   home, for administrators.
