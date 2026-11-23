@@ -24,11 +24,11 @@
     "@std/cli": "jsr:@std/cli@^1.0.24",
     "@std/path": "jsr:@std/path@^1.1.2",
     // The documentation's Markdown, and its code blocks coloured as the page is built.
-    "marked": "npm:marked@^16.4.2",
+    "marked": "npm:marked@^18.2.1",
     "highlight.js/": "npm:/highlight.js@^11.11.1/",
     // The browser comes from ~/.cache/ms-playwright (`npx playwright install chromium`) and is passed as an
     // explicit executablePath, so this version need not match an installed browser revision.
-    "playwright": "npm:playwright@1.49.1"
+    "playwright": "npm:playwright@1.65.1"
   },
   "tasks": {
     "capture": "deno run -A --node-modules-dir=auto tools/capture.ts",

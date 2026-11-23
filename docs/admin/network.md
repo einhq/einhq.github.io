@@ -94,6 +94,7 @@ An HTTPS proxy is a web server that holds the certificate, answers browsers over
 
 - EiN is reached from outside your home, so that passwords and pictures do not cross the internet unencrypted;
 - a phone should add EiN to its home screen as an app, which needs an address beginning with `https://` (see [EiN on a phone](../guide/phone.md#put-ein-on-your-home-screen));
+- a phone uses the EiN app for Android, which reaches EiN over HTTPS only (see [The EiN app](../guide/phone.md#the-ein-app));
 - a phone should back up its photos by itself: backup apps send to EiN's [WebDAV](../guide/webdav.md) address only over HTTPS (see [Back up your phone automatically](../guide/phone.md#back-up-your-phone-automatically)), so SSH need not be open to the internet for it;
 - you want the browser's clipboard to work everywhere: over plain HTTP, copying a share link falls back to selecting the text.
 
@@ -112,6 +113,8 @@ Any proxy works, such as Caddy, nginx or Traefik, when it does the following:
 | Sends a response on as it comes, unbuffered                    | A [screen near your phone](../dashboard/screens.md#on-a-tv-where-your-phone-is) plays a page as a live video that never ends; held back, it never starts.                                                                                                                                                                                                                           |
 
 The proxy keeps the `Host` header as the browser sent it; EiN uses whatever address the browser shows. EiN also refuses the WebSocket and every upload or change from a page at another address than its own, such as another program on the same machine, so a page there cannot act as whoever is signed in. Over plain HTTP the browser names that address only by its host and port, which EiN compares with `Host`: a proxy that sets `Host` to EiN's own address (`127.0.0.1:8080`) breaks the interface, while over HTTPS the browser says outright whether a request comes from EiN's own pages.
+
+EiN sends its own security headers, so the proxy needs to add none. Its pages load scripts only from EiN itself and from Google for casting to a TV, and they show in a frame only on EiN's own pages: a dashboard of another program at another address cannot show EiN inside it. Links from EiN tell other sites only EiN's address, never the path or the query of the page they were on. A proxy that adds a `Content-Security-Policy` of its own must allow what EiN's allows, or pages stop loading.
 
 ### Caddy
 
@@ -256,7 +259,7 @@ EiN counts failed sign-ins, in the Web UI, over SSH and over WebDAV alike, per c
 
 Repeated failures are logged as "repeated failed sign-ins", with the address or account; [Services and logs](services-logs.md) shows where to read them.
 
-EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connections reach it from the loopback address, or from an address named in `TRUSTED_PROXIES` in `~/ein/.env`. When the proxy's connections reach EiN from another address, as can happen with the container's network in between, EiN sees every visitor as the proxy: `who` in EiN's terminal then shows the proxy's address for every web connection, and failures from one visitor hold back everyone who comes through the proxy. Run `who` once after setting up the proxy to see which you have. If it shows the proxy's address, put that address in `.env` and run `~/ein/setup.sh` again:
+EiN believes `X-Forwarded-For` and `Forwarded` only from a proxy whose connections reach it from the loopback address, or from an address named in `TRUSTED_PROXIES` in `~/ein/.env`. When the proxy's connections reach EiN from another address, as can happen with the container's network in between, EiN sees every visitor as the proxy: `who` in EiN's terminal then shows the proxy's address for every web connection, failures from one visitor hold back everyone who comes through the proxy, and everyone not signed in shares the 32 connections EiN keeps open for one address. Run `who` once after setting up the proxy to see which you have. If it shows the proxy's address, put that address in `.env` and run `~/ein/setup.sh` again:
 
 ```bash
 # in ~/ein/.env on the machine that runs EiN; several addresses are separated by commas

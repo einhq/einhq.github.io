@@ -91,7 +91,8 @@ anything that plays a stream from an address, until the stream stops.
 - The media service's browser reads what your account reads, so the administrator's account, or
   one in the **admin** group, cannot stream a page and is told
   `a page is never shown as the administrator; show it as a member`. Stream it signed in as a
-  member, such as yourself or [an account for screens](#an-account-for-screens).
+  member, such as yourself or [an account for screens](#an-account-for-screens). It is signed in,
+  read-only, only while the stream runs: when the stream stops, or EiN restarts, its sign-in ends.
 - The video is a few seconds behind the dashboard, and a moving dashboard looks as it does in a
   browser, at 30 frames a second, 1920×1080 unless you give `--width`, `--height` or `--fps`.
 - It stops by itself 20 seconds after the last one watching stops (`--idle` for longer), and

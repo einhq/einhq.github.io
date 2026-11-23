@@ -432,8 +432,10 @@ The map draws three things:
 - **Locations** that have a place, as pins.
 - **GPS tracks**, the routes of the devices' [tracks](tracks.md).
 
-Opened from the sidebar, the map starts over Gothenburg in Sweden, whatever your pictures show.
-Zoom out to find them, or keep a bookmark of the view you use; see
+Opened from the sidebar, the map starts where **Where maps open** says, whatever your pictures show:
+over London unless an administrator chose another place under **Settings → System → Maps**, or you
+chose your own under **Preferences** (see [Your profile](../guide/profile.md#where-maps-open)).
+Zoom out to find your pictures, or keep a bookmark of the view you use; see
 [Share or bookmark a view](#share-or-bookmark-a-view).
 
 ### Move around the map
@@ -646,7 +648,8 @@ link one picture to a location by hand is in [Dates and places of pictures](date
 - **The map is grey, with thumbnails and pins but no streets.** Your browser cannot reach the tile
   servers: you are offline, or a network filter blocks `tile.openstreetmap.org` or
   `server.arcgisonline.com`.
-- **The Map page shows no pictures.** It opens over Gothenburg; zoom out. Check that **Show** is on
+- **The Map page shows no pictures.** It opens where **Where maps open** says, London unless it
+  was changed; zoom out, or set it to where your pictures are. Check that **Show** is on
   **All** or **Media**, that the year slider's handles are at the ends, and that the search box is
   empty.
 - **The location pins are gone from the map.** The search box narrows the map, or **Show** is on

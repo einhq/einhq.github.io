@@ -77,8 +77,9 @@ every photo, video and recording that was uploaded or copied in over SFTP is fro
 A program can still write to a file that is not frozen, such as one taken out of a zip, and a
 program that may change permissions can make a frozen one writable again.
 
-Under podman, which the installer uses unless told otherwise, the files belong to your own user,
-who can write to every file that is not frozen. Two ways to give the folders read-only:
+The files belong to your own user, who can write to every file that is not frozen, and the data
+folder is yours alone (mode 700), so no other user on the machine reaches them through it. Two ways
+to give the folders read-only:
 
 - **A shared folder** in Samba, with `read only = yes`:
 
@@ -86,7 +87,10 @@ who can write to every file that is not frozen. Two ways to give the folders rea
   [albums]
   path = /home/helen/ein/data/files/albums
   read only = yes
+  force user = helen
   ```
+
+  `force user` reads them as the data folder's owner, whoever signs in to the share.
 
 - **A read-only view** of the folders elsewhere on the machine, for a program of your own:
 
@@ -97,7 +101,8 @@ who can write to every file that is not frozen. Two ways to give the folders rea
   sudo mount -o remount,bind,ro /srv/albums
   ```
 
-Under Docker the files belong to root, and other users can read but not change them.
+Other users read the folders through the view, which does not pass through the data folder, but
+cannot change them.
 
 Who can see an album in EiN does not carry over: everyone who can read the folders sees every album.
 

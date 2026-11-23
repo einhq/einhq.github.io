@@ -765,7 +765,8 @@ left alone keeps its source. The page and the categories read the same settings,
 through either is seen by the other at once.</p>
 <h2 id="run-something-in-the-background">Run something in the background<a class="anchor" href="#run-something-in-the-background" aria-label="Link to this section"></a></h2>
 <p>A service is a script EiN keeps running: a folder <code>services/&lt;name&gt;/</code> with a <code>start.sh</code> and a
-<code>config.json</code>. Setup registers and enables it; EiN starts the enabled services when it starts, and
+<code>config.json</code>. Setup registers it, and enables it the first time it does: an administrator who
+disables it keeps it disabled. EiN starts the enabled services when it starts, and
 <code>service start &lt;name&gt;</code> starts one now.</p>
 <div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Checks the recipes every hour&quot;</span><span class="hljs-punctuation">,</span>

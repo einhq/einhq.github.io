@@ -206,7 +206,7 @@ podman compose start core</code></pre></div>
 <p>Never start a dump just before an update or a restart. EiN changes its database tables when it starts, and a dump in progress holds them, so EiN waits for the dump and the update looks as if EiN does not come up. Take the dump while EiN is stopped, as above, or while it is already running.</p>
 </aside>
 <h3 id="under-docker">Under Docker<a class="anchor" href="#under-docker" aria-label="Link to this section"></a></h3>
-<p>Docker runs the containers as root, so the files in the data folder belong to root on the machine. Run the <code>rsync</code> of step 4, and of a restore, with <code>sudo</code>. Under rootless podman they belong to your own user, and no <code>sudo</code> is needed.</p>
+<p>EiN runs as the user who ran <code>setup.sh</code>, so the files in the data folder are yours and the <code>rsync</code> of step 4, and of a restore, needs no <code>sudo</code>, as under rootless podman. Only the database&#39;s folder, <code>db</code>, belongs to the database&#39;s own user, and the <code>rsync</code> leaves it out. When root ran <code>setup.sh</code>, the files belong to the user 65532 of EiN&#39;s images: run the <code>rsync</code> with <code>sudo</code>, which keeps their owner.</p>
 <h2 id="restore-a-backup">Restore a backup<a class="anchor" href="#restore-a-backup" aria-label="Link to this section"></a></h2>
 <p>A restore loads the dump into an empty database and puts the files back beside it. On the machine the backup came from, start at step 3. On a new machine, or after reinstalling, start at step 1.</p>
 <ol>

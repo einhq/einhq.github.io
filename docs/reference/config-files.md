@@ -31,7 +31,7 @@ The database is in `data/db`, or in the folder `setup.sh --db-dir` named. [Your 
 
 ### .env
 
-`.env` is read in two ways. Compose reads it to fill in `compose.yaml`, EiN's container gets every line of it as its environment, and the media service's its `EMS_` lines and `TZ` alone, which `setup.sh` names to it in `compose.override.yaml`. `setup.sh` writes it once, with mode `0600`, and from then on changes only the lines its options set: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY` and `EIN_DB_DIR`, and adds `EIN_ENGINE` to a `.env` written before it had that line. It also moves `EIN_HTTP_PORT` or `EIN_SSH_PORT` to the next free port when another program holds it, and with a Forgejo or Gitea source keeps `CFG_MODULE_SOURCES` and `CFG_MODULE_SOURCES_KEY` in step with `EIN_SOURCE`.
+`.env` is read in two ways. Compose reads it to fill in `compose.yaml`, EiN's container gets every line of it as its environment, and the media service's its `EMS_` lines and `TZ` alone, which `setup.sh` names to it in `compose.override.yaml`. `setup.sh` writes it once, with mode `0600`, and from then on changes only the lines its options set: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_SOURCE_INSECURE` and `EIN_DB_DIR`, and adds `EIN_ENGINE` to a `.env` written before it had that line. It also moves `EIN_HTTP_PORT` or `EIN_SSH_PORT` to the next free port when another program holds it, and with a Forgejo or Gitea source keeps `CFG_MODULE_SOURCES`, `CFG_MODULE_SOURCES_KEY` and, for a plain HTTP source, `CFG_MODULE_SOURCES_INSECURE` in step with `EIN_SOURCE`.
 
 The file the installer writes looks like this, with your own values:
 
@@ -344,7 +344,7 @@ When a module is set up, at every start and after `mod install`, `mod setup` put
 | `ui/nav.json`         | `/etc/ui/nav.d/<module>.json`        | Linked, and removed with the module.                |
 | any other `etc/` file | `/etc/<file>`                        | Copied once. A file already there is left as it is. |
 | `bin/`                | a `PATH` line in `/etc/bashrc`       | Added once.                                         |
-| `services/`           | `/etc/services/available`, `enabled` | Registered and enabled.                             |
+| `services/`           | `/etc/services/available`, `enabled` | Registered; enabled when new.                       |
 
 The linked files always show the module's current version. A copied file is yours after the first setup, which is why `mod setup` prints `etc/<file> already exists, skipping` for it later. [The module manifest](../develop/manifest.md) and [Writing a module](../develop/modules.md) describe a module's folders.
 

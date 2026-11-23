@@ -27,7 +27,7 @@
 #                       alone, behind an HTTPS proxy of your own
 #
 # Every other option is setup.sh's, passed on as it is (`--help` there lists them): --ems, --llm,
-# --devices, --module NAME, --db-dir DIR, --engine, --source URL. The checks follow them: the media
+# --devices, --module NAME, --db-dir DIR, --engine, --source URL, --insecure-source. The checks follow them: the media
 # service needs the most of the machine, the card only matters with it or the model. The secrets
 # come in the environment, kept off the command line:
 #
@@ -38,8 +38,11 @@
 # or a Gitea with EiN's repositories under the same names, deploy among them; with private ones, this
 # script is fetched from there with the token too:
 #
-#   curl -fsSL -H "Authorization: token $K" 'http://forge.example:3000/api/v1/repos/ein/einhq.github.io/raw/install.sh?ref=main' \
-#     | EIN_SOURCE_KEY=$K bash -s -- --source http://forge.example:3000/ein archive
+#   curl -fsSL -H "Authorization: token $K" 'https://forge.example:3000/api/v1/repos/ein/einhq.github.io/raw/install.sh?ref=main' \
+#     | EIN_SOURCE_KEY=$K bash -s -- --source https://forge.example:3000/ein archive
+#
+# An http:// source, over which anyone on the network between could read the token and send code of
+# their own, is refused but on this machine, unless --insecure-source says the network is yours alone.
 set -uo pipefail
 
 # The official modules: each a name, the setup.sh options for the services it needs, and what it is.
@@ -57,7 +60,7 @@ MODULES=(
 main() {
   local home= yes=0 check=0 interactive=0 pass=() installed= installed_key=
   key=${EIN_SOURCE_KEY:-}
-  source= data= data_given=0 http_port= ssh_port= bind= modules= named=0 ems=0 llm=0
+  source= insecure=0 data= data_given=0 http_port= ssh_port= bind= modules= named=0 ems=0 llm=0
   container= container_version= engine_choice=
   # install.sh's own options taken out; the rest are setup.sh's, passed on.
   while [ $# -gt 0 ]; do
@@ -125,6 +128,12 @@ main() {
   fi
   source=${source:-${installed:-https://github.com/einhq}}
   [ -n "$key" ] || [ "$(host_of "$source")" != "$(host_of "$installed")" ] || key=$installed_key
+  # An installation's setup.sh checks its source itself, with the leave its .env keeps.
+  if [ ! -d "$home/.git" ] && [[ $source == http://* ]] && [ "$insecure" = 0 ] &&
+    ! [[ $(host_of "$source") =~ ^(localhost|127(\.[0-9]+){3})(:[0-9]+)?$ ]]; then
+    echo "The source $source is plain http, over which anyone on the network between could read its token and send code of their own for this machine to run: give its https address with --source, or add --insecure-source if the network is yours alone." >&2
+    return 1
+  fi
   failed=0
   warned=0
 
@@ -244,6 +253,7 @@ options() {
       --no-ems) ems=0 ;;
       --llm) llm=1 ;;
       --no-llm) llm=0 ;;
+      --insecure-source) insecure=1 ;;
       --module | --source | --data | --http-port | --ssh-port | --bind | --engine) next=${arg#--} ;;
       --db-dir | --only) next=value ;;
     esac

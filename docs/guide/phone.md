@@ -246,16 +246,16 @@ between versions; what each is for is said with it.
      left).
 4. **Choose the pair's settings:**
 
-   | Setting                                  | Choose      | Why                                                                                                                                                             |
-   | ---------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Only resync source files if modified** | On          | A photo you file into an album, or discard, leaves the category's folder. Without this the app sends it again, because EiN's folder no longer has it.           |
-   | **Sync deletions**                       | Off         | Deleting a photo on the phone leaves EiN's copy alone.                                                                                                          |
-   | **Move files to target**                 | Off         | The photos stay on the phone.                                                                                                                                   |
-   | **Overwrite old files**                  | Off         | A photo EiN has is [frozen](webdav.md#photos-you-send-are-frozen) and is not written over.                                                                      |
-   | **Use temp-file scheme**                 | Off         | EiN keeps nothing of a photo whose sending broke off, so the app gains nothing by it, and a photo renamed once it is sent can wait hours before it is prepared. |
-   | Hidden files                             | Leave out   | The phone keeps the pictures you delete for a while as hidden `.trashed-…` files.                                                                               |
-   | **Instant sync**                         | On          | A new photo is sent soon after you take it. A schedule as well catches what the phone held back.                                                                |
-   | Wi-Fi only                               | As you like | To spare mobile data, let the app send only on Wi-Fi, or only while the phone charges.                                                                          |
+   | Setting                                  | Choose      | Why                                                                                                                                                   |
+   | ---------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Only resync source files if modified** | On          | A photo you file into an album, or discard, leaves the category's folder. Without this the app sends it again, because EiN's folder no longer has it. |
+   | **Sync deletions**                       | Off         | Deleting a photo on the phone leaves EiN's copy alone.                                                                                                |
+   | **Move files to target**                 | Off         | The photos stay on the phone.                                                                                                                         |
+   | **Overwrite old files**                  | Off         | A photo EiN has is [frozen](webdav.md#photos-you-send-are-frozen) and is not written over.                                                            |
+   | **Use temp-file scheme**                 | Off         | EiN keeps nothing of a photo whose sending broke off, so the app gains nothing by it.                                                                 |
+   | Hidden files                             | Leave out   | The phone keeps the pictures you delete for a while as hidden `.trashed-…` files.                                                                     |
+   | **Instant sync**                         | On          | A new photo is sent soon after you take it. A schedule as well catches what the phone held back.                                                      |
+   | Wi-Fi only                               | As you like | To spare mobile data, let the app send only on Wi-Fi, or only while the phone charges.                                                                |
 
 5. **Send once by hand.** The first time, the app sends every photo the folder holds, which can be
    thousands: start it on Wi-Fi with the phone charging, and let Android run the app in the
@@ -278,11 +278,11 @@ its position; see [A phone or a GPS tracker](devices.md#a-phone-or-a-gps-tracker
 
 1. **Install the app and pair it**; see [The EiN app](#the-ein-app).
 2. **Open App** under **System** in the app's menu. **Position reports** is below the photo backup.
-3. **Turn Report this phone's position on.** The phone asks whether the app may know where it is:
-   choose **While using the app**, with **Precise** on, and allow its **Physical activity**. The
-   app then says why it needs the position all the time, and opens the page in the phone's settings
-   where you choose **Allow all the time**. Without it the reports go on once you close the app,
-   but stop when the phone restarts.
+3. **Turn Report this phone's position on.** The app first says why it needs the position all the
+   time; choose **Continue**. The phone then asks whether the app may know where it is: choose
+   **While using the app**, with **Precise** on, and allow its **Physical activity**. Then it opens
+   the page in the phone's settings where you choose **Allow all the time**. Without it the reports
+   go on once you close the app, but stop when the phone restarts.
 4. **Choose Precise position** for a better track. It uses the phone's GPS, and the battery with it;
    without it the phone mostly places itself by the Wi-Fi and the cell towers around it, which spares
    the battery but gives a coarser track.
@@ -319,7 +319,9 @@ On an Android phone, the EiN app shows EiN in an app of its own, and can
 [report where it is](#report-where-your-phone-is) by itself. It is the same EiN, with the same
 pages and your account, but the app keeps no password: it is paired with your EiN for this one
 phone, signs in as you by itself, and stays signed in until the phone is unpaired. It needs
-Android 10 or newer.
+Android 10 or newer, and EiN at an address that begins with `https://`: the app reaches EiN over
+HTTPS only, so EiN must be behind an HTTPS proxy, as [Put EiN behind HTTPS](../admin/network.md#put-ein-behind-https)
+explains.
 
 Install it from its [releases on GitHub](https://github.com/einhq/android/releases): open the newest
 release on the phone, download its `.apk` file and open it, and allow your browser to install apps
@@ -328,9 +330,8 @@ when the phone asks. It is not on Google Play yet.
 To pair it with your password, on the phone alone:
 
 1. Open the EiN app and choose **Sign in with a password**.
-2. Type your EiN's address, such as `ein.wrenfield.example` (the app adds `https://`; type
-   `http://` yourself for an EiN that has no certificate), your username or e-mail address, and
-   your password, and choose **Sign in**.
+2. Type your EiN's address, such as `ein.wrenfield.example` (the app adds `https://`), your
+   username or e-mail address, and your password, and choose **Sign in**.
 3. The app is paired as this phone and opens EiN, signed in as you. The first time, EiN asks
    **Which phone is this?**: one of the phones you may change, or **A new phone**, named as the
    phone is in its settings. Signing in again from the same app later finds the same phone by
@@ -338,14 +339,14 @@ To pair it with your password, on the phone alone:
 
 The password is sent to EiN once, to pair the phone, and is not kept on the phone. Only members of
 the `devices` group add a new phone this way; anyone else picks one they have been given, or asks
-for one to be added. Over `http://`, the password crosses the network as it is typed: use `https://`
-away from home.
+for one to be added.
 
 Or pair it with a QR code, with EiN open on a computer:
 
 1. In EiN on a computer, open **Devices** and the phone's page, or add the phone with **Create** →
-   **Device** as a device of the class `phone`. Open it at the address the phone reaches EiN at,
-   such as `https://ein.wrenfield.example`.
+   **Device** as a device of the class `phone`. Open it at the `https://` address the phone
+   reaches EiN at, such as `https://ein.wrenfield.example`: the app refuses a code made at an
+   `http://` address.
 2. On its **Info** tab, under **EiN app**, choose **Pair the app**. A QR code appears.
 3. On the phone, open the EiN app and choose **Scan QR code**, or scan the code with the phone's
    camera. The app opens EiN, signed in as you.
@@ -369,8 +370,9 @@ In the app:
 - the account menu has no **Logout**, since the app would sign in again by itself: unpair it
   instead.
 
-The app goes to the address it signed in at, or the QR code was made for, over `http://` as well as `https://`. Away from
-home it reaches EiN only if that address works there too.
+The app goes to the address it signed in at, or the QR code was made for, and over `https://` only,
+so nothing it sends crosses the network unencrypted. Away from home it reaches EiN only if that
+address works there too.
 
 What the app reads, where it sends it and what Google's services on the phone see is in
 [The EiN app's privacy policy](app-privacy.md).
@@ -485,6 +487,7 @@ position reports waiting on the phone until it has one; see [The EiN app](#the-e
 | **EiN is out of reach**, with nothing else on the page                                                              | There is no connection to your EiN, and nothing was saved on this device yet.                                                                                                                          | Wait for a connection: the page opens EiN by itself once it answers. See [Without a connection](#without-a-connection).                                                                                                                                                                                        |
 | **This page is not on this device**                                                                                 | There is no connection, and the page was never opened on this device while there was.                                                                                                                  | Open it once you have a connection again.                                                                                                                                                                                                                                                                      |
 | The EiN app says **EiN does not answer**                                                                            | The phone cannot reach the address it was paired with: it is away from home, or EiN is down. Without a connection the app opens what it saved instead, once EiN has been opened in it over `https://`. | Join the network EiN is on and choose **Try again**. Away from home, see [Ports, HTTPS and remote access](../admin/network.md); without a connection, see [Without a connection](#without-a-connection).                                                                                                       |
+| The EiN app says it reaches EiN over https:// only                                                                  | The address typed, or the one the QR code was made at, begins with `http://`.                                                                                                                          | Use EiN's `https://` address, and make the QR code with EiN opened at it. If EiN has none, ask your administrator; see [Put EiN behind HTTPS](../admin/network.md#put-ein-behind-https).                                                                                                                       |
 | The EiN app says **EiN refused this phone**                                                                         | The phone was unpaired, or paired again with another code.                                                                                                                                             | Choose **Pair again**, and scan a new code from the phone's **Info** tab.                                                                                                                                                                                                                                      |
 | You cannot find the viewer's close button                                                                           | The touch layout has none.                                                                                                                                                                             | Swipe down on the picture, or use the phone's Back.                                                                                                                                                                                                                                                            |
 

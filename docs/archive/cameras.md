@@ -69,7 +69,8 @@ search.
 Beside them, in `clips/` with a folder a day, is a video of each visit: the camera's sharpest
 stream from five seconds before a face came into view until ten seconds after the last face was
 gone, named for the time it starts. Someone who stays is one clip, up to two minutes. The video is
-the camera's own picture and sound, not made again, and it is the archive's like any other: it gets
+the camera's own picture, not made again, with its sound as AAC, whatever the camera sends it as
+(G.711 too), and it is the archive's like any other: it gets
 its stills, a version the browser plays, the faces in it and a place on the timeline at the time it
 was recorded. Nothing is recorded between visits.
 

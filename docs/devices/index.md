@@ -97,7 +97,10 @@ The module runs one service, `devices-bridge`, which hears the broker and drives
 - **A restreamer**, go2rtc, which keeps one connection to each [camera](#a-camera) EiN has and
   serves it again to EiN on port 1984 (`STREAMS_PORT`), behind the account `ein` and
   `STREAMS_PASSWORD` from `.env`. EiN gives it the cameras itself. Of go2rtc's API it answers only
-  what EiN uses, so the password cannot change its config, and it runs as a user of its own.
+  what EiN uses, so the password cannot change its config.
+
+All three run as EiN does, as the user `EIN_USER` in `.env` names, with no capabilities
+([The data folder](../admin/install.md#the-data-folder)).
 
 `setup.sh` gives EiN the broker's and the restreamer's addresses and passwords itself, and the
 `device` account a device added from the network is given: those settings say **From deployment**
@@ -396,12 +399,18 @@ device-create Weather --driver http \
   --config interval=15m
 ```
 
-| Config     | What it is                                                                                                                                                                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `url`      | The address to ask. `{date}` (2026-11-09), `{year}`, `{month}`, `{day}` and `{hour}` in it become the day and hour it is asked at, in EiN's time zone. A user and password in it, `http://admin:secret@192.0.2.20/status`, are sent as the device's sign-in. |
-| `read`     | The readings, `name=path unit`, separated by `;`. Each becomes an endpoint of that name; the unit may be left out.                                                                                                                                           |
-| `interval` | How often it is asked: seconds, or `30s`, `15m`, `1h`. Five minutes unless given, and ten seconds at the least.                                                                                                                                              |
-| `set`      | The controls, `name=address on/off`, separated by `;`; see [Switching it](#switching-it). May be left out.                                                                                                                                                   |
+| Config     | What it is                                                                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`      | The address to ask. `{date}` (2026-11-09), `{year}`, `{month}`, `{day}` and `{hour}` in it become the day and hour it is asked at, in EiN's time zone. |
+| `read`     | The readings, `name=path unit`, separated by `;`. Each becomes an endpoint of that name; the unit may be left out.                                     |
+| `interval` | How often it is asked: seconds, or `30s`, `15m`, `1h`. Five minutes unless given, and ten seconds at the least.                                        |
+| `set`      | The controls, `name=address on/off`, separated by `;`; see [Switching it](#switching-it). May be left out.                                             |
+| `user`     | The account, for an API that asks for one. It is sent, with the password, to `url`'s host alone. May be left out.                                      |
+| `password` | That account's password. It is kept in the device's `.secret`, which the administrator alone reads. May be left out.                                   |
+
+A user and password written into an address, `http://admin:secret@192.0.2.20/status`, are taken out
+of it when the device is made or changed and kept as `user` and `password`, so the address others
+see carries neither.
 
 A path walks the answer from the top:
 
@@ -442,7 +451,7 @@ device-config electricity-price 'read=price=[time_start..time_end].SEK_per_kWh S
 A device whose web API also takes commands is switched at an address of its own, which `set` names
 for each control: `name=address on/off`. `{value}` in the address becomes the value, spelled as the
 device spells on and off, which is what `on/off` says: `ON/OFF`, `on/off`, `1/0` or `true/false`. An
-address without `http://` is taken from `url`'s, sign-in included. A control whose name is also a
+address without `http://` is taken from `url`'s. A control whose name is also a
 reading's is a switch that shows that reading as its state, read as on or off however the device
 spells them; EiN asks the device again a second after it is switched. A control with no `{value}` and
 no `on/off` is a button that asks its address when pressed, such as a restart.
@@ -452,15 +461,15 @@ Say a garden pump's controller on your network answers `{"pump": {"running": tru
 `/api/restart`:
 
 ```bash
-device-create Garden pump --driver http --config 'url=http://admin:secret@192.0.2.40/api/status' \
-  --config 'read=pump=pump.running; power=pump.power W' \
-  --config 'set=pump=api/pump?run={value} 1/0; restart=api/restart' --config interval=30s
+device-create Garden pump --driver http --config 'url=http://192.0.2.40/api/status' \
+ --config 'read=pump=pump.running; power=pump.power W' \
+ --config 'set=pump=api/pump?run={value} 1/0; restart=api/restart' --config interval=30s \
+ --config user=admin --config password='the password'   # the leading space keeps it out of your history
 ```
 
 `pump` is then a switch, on while the answer says `running` is true, and `restart` a button; both
-are asked with the sign-in in `url`.
+are asked with the user and password, which go to `url`'s host and to no other a control names.
 
-The address, with a password in it, is the device's config, which every member of `devices` sees.
 EiN asks it from the machine it runs on, so an address on your home network is asked from there.
 
 ### A camera
@@ -487,6 +496,9 @@ camera in the terminal, once the administrator has named its network in
 | `snapshot` | The address of the camera's still picture, `http://…`, which a picture is taken from when there is no restreamer. May be left out |
 | `user`     | The camera's account                                                                                                              |
 | `password` | That account's password. It is kept in the device's `.secret`, which the administrator alone reads, and goes only to the sidecar  |
+
+A user and password written into a stream's or the still picture's address are taken out of it, as
+the `http` driver's are, and kept as `user` and `password`.
 
 A password or an address that changed is given again on the camera's **Info** tab, with **Change**,
 or in the terminal, and the camera is reached with it at once:
@@ -559,8 +571,9 @@ stream for faces, reading it from EiN as it reads any file, on this machine or a
 was, or `unknown`, within a second or so, as `dev.<camera>.faces` for automations, and the faces'
 pictures are filed under the camera in the archive, where they are named as photos' faces are
 ([Faces a camera sees](../archive/people.md#faces-a-camera-sees)). The media service records the
-camera's largest stream as well, and a clip of each visit, from a little before the face until a
-little after, is filed beside them as a video ([A security camera](../archive/cameras.md#a-security-camera)).
+camera's largest stream as well, its `.mp4`, which carries the sound whatever the camera sends it
+as, and a clip of each visit, from a little before the face until a little after, is filed beside
+them as a video, its sound as AAC ([A security camera](../archive/cameras.md#a-security-camera)).
 
 The camera is **online** while it answers the restreamer, asked every other minute, or without a
 restreamer while it gives its still picture. Who may see the

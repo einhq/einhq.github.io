@@ -700,13 +700,23 @@ Every setting of an EiN with all its modules: 121 of them, in the groups the Set
 
 ### `CFG_MODULE_SOURCES_KEY`
 
-**Tokens for module sources**. Access tokens for module sources that are not public, as host=token separated by spaces, such as forge.example:3000=… github.com=…. Each token is sent to its own host only.
+**Tokens for module sources**. Access tokens for module sources that are not public, as host=token separated by spaces, such as forge.example:3000=… github.com=…. Each token is sent to its own host only, over https; one for a host in Hosts reached over plain http is given as http://host=….
 
 | | |
 | --- | --- |
 | Who it is for | Everyone (an administrator sets it) |
 | Default | none: a key is set by you, and never shown again |
 | Kind | a key: never readable, in no shell |
+
+### `CFG_MODULE_SOURCES_INSECURE`
+
+**Hosts reached over plain http**. Hosts whose module sources and repositories may be addressed with http:// rather than https://, as host or host:port separated by spaces, such as forge.lan:3000. Anyone on the network between EiN and such a host can read its token and change the modules' code on the way, so name one only on a network you trust. This machine (localhost, 127.0.0.1) needs no entry.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means every source over https, but on this machine |
+| Kind | string |
 
 ## Places
 

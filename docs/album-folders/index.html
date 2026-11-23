@@ -155,13 +155,16 @@ EiN does not know. Give everyone and every program the folders read-only.</p>
 every photo, video and recording that was uploaded or copied in over SFTP is frozen as it arrives.
 A program can still write to a file that is not frozen, such as one taken out of a zip, and a
 program that may change permissions can make a frozen one writable again.</p>
-<p>Under podman, which the installer uses unless told otherwise, the files belong to your own user,
-who can write to every file that is not frozen. Two ways to give the folders read-only:</p>
+<p>The files belong to your own user, who can write to every file that is not frozen, and the data
+folder is yours alone (mode 700), so no other user on the machine reaches them through it. Two ways
+to give the folders read-only:</p>
 <ul>
 <li><p><strong>A shared folder</strong> in Samba, with <code>read only = yes</code>:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-section">[albums]</span>
 <span class="hljs-attr">path</span> = /home/helen/ein/data/files/albums
-read <span class="hljs-attr">only</span> = <span class="hljs-literal">yes</span></code></pre></div>
+read <span class="hljs-attr">only</span> = <span class="hljs-literal">yes</span>
+force <span class="hljs-attr">user</span> = helen</code></pre></div>
+<p><code>force user</code> reads them as the data folder&#39;s owner, whoever signs in to the share.</p>
 </li>
 <li><p><strong>A read-only view</strong> of the folders elsewhere on the machine, for a program of your own:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
@@ -170,7 +173,8 @@ read <span class="hljs-attr">only</span> = <span class="hljs-literal">yes</span>
 <span class="hljs-built_in">sudo</span> mount -o remount,<span class="hljs-built_in">bind</span>,ro /srv/albums</code></pre></div>
 </li>
 </ul>
-<p>Under Docker the files belong to root, and other users can read but not change them.</p>
+<p>Other users read the folders through the view, which does not pass through the data folder, but
+cannot change them.</p>
 <p>Who can see an album in EiN does not carry over: everyone who can read the folders sees every album.</p>
 <h2 id="how-they-keep-up">How they keep up<a class="anchor" href="#how-they-keep-up" aria-label="Link to this section"></a></h2>
 <p>The service follows each change to the albums and brings the folders it touches up to date a

@@ -40,7 +40,7 @@ Core brings ten services, the first ten below, and they are all an EiN without m
 | `models-second`     | media     | A second worker for the same work, in the reverse order; it runs idle, doing nothing, while `CFG_MODEL_SECOND_SLOTS` is `0`                                                                                                                 |
 | `llm-link`          | assistant | Watches the assistant's language model and reports whose it is and where it runs                                                                                                                                                            |
 
-Every time EiN starts, it registers and enables core's services and those of every module that is set up, then starts every enabled service as the last step of its start. A module's services are added when it is installed and removed with it; see [Modules](modules.md).
+Every time EiN starts, it registers and enables core's services and registers those of every module that is set up, then starts every enabled service as the last step of its start. A module's service is enabled when it is registered for the first time, as the module is installed; from then on it stays enabled or disabled as you leave it, through restarts and updates. A module's services are removed with it; see [Modules](modules.md).
 
 ## See the services on the Status page
 
@@ -317,7 +317,7 @@ To take a service away, stop it, disable it and remove it: `service-stop disk-re
 
 **A service is failed, with `×3` beside it.** It was restarted three times within a minute and failed again. Its `stderr.log` holds the output of the last attempt only, since each start empties it, so read it first: `tail -n 50 /var/logs/services/<name>/stderr.log`. `dmesg | grep "<name>"` shows EiN's lines about it, such as `Service 'media-worker' exited with code 1` and `Service 'media-worker' exceeded max restarts (3) within window`; the container's log has the details behind them. Start it again with **Start** once you have fixed the cause.
 
-**`service start: 'x' is not enabled`.** The service is switched off; the Status page shows it as **disabled**. Run `service-enable x`, then `service-start x`. Disabling one of core's or a module's services lasts only until EiN starts again, which enables them all.
+**`service start: 'x' is not enabled`.** The service is switched off; the Status page shows it as **disabled**. Run `service-enable x`, then `service-start x`. Disabling one of core's services lasts only until EiN starts again, which enables them; a module's service stays disabled until you enable it.
 
 **`service stop: service 'x' is not running`** or **`service 'x' is already running`.** The service was already in that state; the Status page row may be up to 10 seconds old.
 

@@ -236,7 +236,9 @@ read, and <strong>retired</strong> one the device no longer announces.</li>
 <li><strong>Config</strong>, what its driver was given when the device was made: a camera&#39;s stream addresses, a web
 API&#39;s address and what to read of it. A secret field, such as a password, reads <strong>set</strong> and never
 shows its value. A member of the <code>devices</code> group changes it with <strong>Change</strong> while the driver runs;
-a secret field left empty keeps what it had. The driver takes the change at once.</li>
+a secret field left empty keeps what it had. The driver takes the change at once. A user and
+password written into an address, <code>http://user:password@…</code>, go to the driver&#39;s <code>user</code> and secret
+<code>password</code>, out of the address; a driver that keeps no password refuses an address with one.</li>
 <li><strong>Device key</strong>, for a device whose driver reads what is posted to it, such as a phone: the address
 it posts to (see <a href="#a-phone-or-a-gps-tracker">A phone or a GPS tracker</a>). Only those who may change
 the device see it.</li>
@@ -339,8 +341,9 @@ device-key ruby-phone --off</code></pre></div>
 How to install the app, and what it does, is in <a href="phone.html#the-ein-app">The EiN app</a>. The app can
 pair itself, signed in once with your password on the phone (see there); or pair it from this page:</p>
 <ol>
-<li>Make the phone a device of the class <code>phone</code>, and open its page at the address the phone will
-reach EiN at, such as <code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
+<li>Make the phone a device of the class <code>phone</code>, and open its page at the <code>https://</code> address the
+phone will reach EiN at, such as <code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab. The app
+reaches EiN over HTTPS only and refuses a code made at an <code>http://</code> address.</li>
 <li>Under <strong>EiN app</strong>, choose <strong>Pair the app</strong>. A QR code appears.</li>
 <li>Scan it with the EiN app, or with the phone&#39;s camera where the app is installed. The code works
 once, for 15 minutes; the page says when the app has taken it.</li>

@@ -323,7 +323,11 @@ Install? [Y/n]</code></pre></div>
 </tr>
 <tr>
 <td><code>--source &lt;address&gt;</code></td>
-<td>Fetches the sources from this organisation instead of <code>https://github.com/einhq</code>, such as <code>http://forge.example:3000/ein</code> on a Forgejo or a Gitea. Sets <code>EIN_SOURCE</code>. See <a href="#where-the-sources-come-from">Where the sources come from</a>.</td>
+<td>Fetches the sources from this organisation instead of <code>https://github.com/einhq</code>, such as <code>https://forge.example:3000/ein</code> on a Forgejo or a Gitea. Sets <code>EIN_SOURCE</code>. See <a href="#where-the-sources-come-from">Where the sources come from</a>.</td>
+</tr>
+<tr>
+<td><code>--insecure-source</code></td>
+<td>Lets <code>--source</code> be a plain <code>http://</code> address on another machine, which is otherwise refused. Sets <code>EIN_SOURCE_INSECURE</code>. See <a href="#where-the-sources-come-from">Where the sources come from</a>.</td>
 </tr>
 <tr>
 <td><code>--db-dir &lt;folder&gt;</code></td>
@@ -365,6 +369,7 @@ Install? [Y/n]</code></pre></div>
 curl -fsSL https://einhq.eu/install.sh | bash -s -- --<span class="hljs-built_in">yes</span> archive</code></pre></div>
 <h3 id="where-the-sources-come-from">Where the sources come from<a class="anchor" href="#where-the-sources-come-from" aria-label="Link to this section"></a></h3>
 <p><code>--source</code> names an organisation on GitHub, Forgejo or Gitea, not a repository: it must hold <code>deploy</code>, <code>core</code>, <code>db</code>, and <code>ems</code> when you use that option, under those names. The installer fetches ein/deploy from there, and <code>setup.sh</code> keeps the address in <code>.env</code> as <code>EIN_SOURCE</code>, so later runs fetch from there too. EiN&#39;s, the database&#39;s and the media service&#39;s images are downloaded ready-made only from <code>https://github.com/einhq</code>, which publishes them; from any other organisation <code>setup.sh</code> builds them on the machine from its <code>core</code>, <code>db</code> and <code>ems</code>, since the published images have none of its own commits, and the media service&#39;s build takes about an hour. On GitHub the modules do not come from there: EiN looks for them in the places the setting <a href="../reference/settings.html#cfg_module_sources"><code>CFG_MODULE_SOURCES</code></a> names, <code>https://github.com/einhq</code> unless you change it. On a Forgejo or a Gitea, <code>setup.sh</code> sets <code>CFG_MODULE_SOURCES</code> in <code>.env</code> to the same organisation, and <code>CFG_MODULE_SOURCES_KEY</code> to its token, so EiN installs its modules from there too.</p>
+<p>The sources are fetched over HTTPS. Over plain HTTP anyone on the network between your machine and the forge could read the token and send code of their own, which <code>setup.sh</code> would build and run, so an <code>http://</code> source is refused unless it is on the machine itself (<code>localhost</code>, <code>127.0.0.1</code>). If the forge answers only HTTP on a network that is yours alone, add <code>--insecure-source</code>: <code>.env</code> keeps it as <code>EIN_SOURCE_INSECURE=1</code> for that source&#39;s host, a <code>--source</code> on another host drops it, and <code>setup.sh</code> names the host in <a href="../reference/settings.html#cfg_module_sources_insecure"><code>CFG_MODULE_SOURCES_INSECURE</code></a>, so EiN fetches its modules from there over HTTP too. A token that only reads repositories is enough.</p>
 <h2 id="what-the-checks-measure">What the checks measure<a class="anchor" href="#what-the-checks-measure" aria-label="Link to this section"></a></h2>
 <p>The installer checks the machine before it touches anything. Each check prints one line: <code>ok</code>, <code>low</code> (the install goes on) or <code>missing</code> (nothing is installed). The thresholds depend on whether <code>--ems</code> is among the options, or a module that brings it, named or chosen at the questions, or <code>EIN_EMS=1</code> is already in <code>~/ein/.env</code> from an earlier install and <code>--no-ems</code> is not given; the same goes for <code>--llm</code>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -501,7 +506,7 @@ git <span class="hljs-built_in">clone</span> https://github.com/einhq/deploy.git
 <tr>
 <td>Who owns what EiN writes in <code>EIN_DATA</code></td>
 <td>your user</td>
-<td>root, unless Docker itself runs rootless</td>
+<td>your user, or the user 65532 of EiN&#39;s images when root ran <code>setup.sh</code></td>
 </tr>
 <tr>
 <td>Where images and the database are</td>
@@ -791,6 +796,7 @@ podman compose down
 </tr>
 </tbody></table>
 </div>
+<p>The data folder is its owner&#39;s alone: <code>setup.sh</code> gives it mode 700, so no other user on the machine reads your files. EiN and the sidecar run as the user <code>EIN_USER</code> in <code>.env</code> names, with no capabilities, and the folders they write, <code>files</code>, <code>files-volatile</code>, <code>modules</code> and <code>mqtt</code>, are that user&#39;s: under rootless podman, root in the container, which is your own user; under Docker, your user, or the user 65532 of EiN&#39;s images when root ran <code>setup.sh</code>. You back the files up, move and remove them as yourself.</p>
 <p>The database&#39;s folder is <code>EIN_DB_DIR</code> in <code>.env</code>: <code>db</code> in the data folder, or the folder you gave <code>--db-dir</code>. <code>setup.sh</code> gives it to the database&#39;s own user before the database starts, so under rootless podman it belongs to one of your subordinate ids, and <code>ls</code> shows it only through <code>podman unshare</code>; under Docker it belongs to the image&#39;s postgres user. An installation whose <code>EIN_DB_DIR</code> is empty, from before the database moved into the data folder, keeps it in the volume <code>ein_db</code> in the container engine&#39;s storage. <a href="data.html">Your data</a> explains what to back up and why the database and the data folder belong together.</p>
 <h3 id="env"><code>.env</code><a class="anchor" href="#env" aria-label="Link to this section"></a></h3>
 <p><code>setup.sh</code> writes <code>~/ein/.env</code> the first time it runs, readable by your user only. It is three things at once: compose reads it for the values in the compose files, EiN gets every line of it as its environment and the media service its <code>EMS_</code> lines and <code>TZ</code> alone, and <code>setup.sh</code> keeps your options in it. A fresh one looks like this:</p>
@@ -823,7 +829,7 @@ podman compose down
 <span class="hljs-attr">EIN_SOURCE</span>=https://github.com/einhq
 <span class="hljs-attr">EIN_SOURCE_KEY</span>=
 <span class="hljs-attr">EIN_DB_DIR</span>=/home/anna/ein/data/db</code></pre></div>
-<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_DEVICES</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, and <code>CFG_MODULE_SOURCES_KEY</code> with a token. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or one of the sidecar&#39;s.</p>
+<p><code>setup.sh</code> then sets the options you gave in their own lines: <code>EIN_EMS</code>, <code>EIN_LLM</code>, <code>EIN_DEVICES</code>, <code>EIN_MODULES</code>, <code>EIN_BIND</code>, <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code>, <code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_SOURCE_INSECURE</code> and <code>EIN_DB_DIR</code>. With a Forgejo or a Gitea as the source it adds <code>CFG_MODULE_SOURCES</code>, <code>CFG_MODULE_SOURCES_KEY</code> with a token, and <code>CFG_MODULE_SOURCES_INSECURE</code> for a source over plain HTTP. When a port is taken, it changes <code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code> or one of the sidecar&#39;s.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -868,6 +874,10 @@ podman compose down
 <td>the data folder, chosen at the install with <code>--data</code> or at the question</td>
 </tr>
 <tr>
+<td><code>EIN_USER</code></td>
+<td>the user EiN and the sidecar run as, <code>uid:gid</code> in the container, who owns the folders they write in the data folder: <code>0:0</code> under rootless podman, your own under Docker. The first run of an installation that lacks it chooses it, and gives it what was written there as another user</td>
+</tr>
+<tr>
 <td><code>POSTGRES_PASSWORD</code></td>
 <td>the database&#39;s password, random, made here</td>
 </tr>
@@ -896,8 +906,8 @@ podman compose down
 <td>the Assistant&#39;s settings for a hosted language model instead of <code>--llm</code>; see <a href="../assistant/language-model.html">The language model</a></td>
 </tr>
 <tr>
-<td><code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code></td>
-<td>where the sources are cloned from, and the token that reads them when they are private; <code>--source</code> sets them, and one on another host empties the token unless <code>EIN_SOURCE_KEY</code> gives a new one</td>
+<td><code>EIN_SOURCE</code>, <code>EIN_SOURCE_KEY</code>, <code>EIN_SOURCE_INSECURE</code></td>
+<td>where the sources are cloned from, and the token that reads them when they are private; <code>--source</code> sets them, and one on another host empties the token unless <code>EIN_SOURCE_KEY</code> gives a new one, and <code>--insecure-source</code> lets one be plain HTTP on another machine</td>
 </tr>
 <tr>
 <td><code>EIN_DB_DIR</code></td>

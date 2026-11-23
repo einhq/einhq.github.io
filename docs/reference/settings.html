@@ -94,9 +94,7 @@
           <h1>Settings</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `config list` on a running EiN: make reference, never by hand. -->
-
-<p>Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
+<!-- Written by tools/reference.ts from `config list` on a running EiN: make reference, never by hand. --><p>Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
 <ul>
 <li><strong>Who it is for</strong>: <em>everyone</em> is a system setting, which only an administrator changes, on Settings → System or with <code>config set</code>; <em>each person</em> is a preference everyone sets for themselves, on Profile → Preferences.</li>
 <li><strong>Default</strong>: the value until someone changes it. A deployment can set another in <code>.env</code>, and a module can choose one.</li>
@@ -1783,7 +1781,7 @@
 </tbody></table>
 </div>
 <h3 id="cfg_module_sources_key"><code>CFG_MODULE_SOURCES_KEY</code><a class="anchor" href="#cfg_module_sources_key" aria-label="Link to this section"></a></h3>
-<p><strong>Tokens for module sources</strong>. Access tokens for module sources that are not public, as host=token separated by spaces, such as forge.example:3000=… github.com=…. Each token is sent to its own host only.</p>
+<p><strong>Tokens for module sources</strong>. Access tokens for module sources that are not public, as host=token separated by spaces, such as forge.example:3000=… github.com=…. Each token is sent to its own host only, over https; one for a host in Hosts reached over plain http is given as <a href="http://host=…">http://host=…</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1802,6 +1800,29 @@
 <tr>
 <td>Kind</td>
 <td>a key: never readable, in no shell</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_module_sources_insecure"><code>CFG_MODULE_SOURCES_INSECURE</code><a class="anchor" href="#cfg_module_sources_insecure" aria-label="Link to this section"></a></h3>
+<p><strong>Hosts reached over plain http</strong>. Hosts whose module sources and repositories may be addressed with http:// rather than https://, as host or host:port separated by spaces, such as forge.lan:3000. Anyone on the network between EiN and such a host can read its token and change the modules&#39; code on the way, so name one only on a network you trust. This machine (localhost, 127.0.0.1) needs no entry.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means every source over https, but on this machine</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
 </tr>
 </tbody></table>
 </div>

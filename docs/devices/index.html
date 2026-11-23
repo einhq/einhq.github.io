@@ -236,8 +236,10 @@ yet: <a href="#add-a-device-found-on-the-network">Add a device found on the netw
 <li><strong>A restreamer</strong>, go2rtc, which keeps one connection to each <a href="#a-camera">camera</a> EiN has and
 serves it again to EiN on port 1984 (<code>STREAMS_PORT</code>), behind the account <code>ein</code> and
 <code>STREAMS_PASSWORD</code> from <code>.env</code>. EiN gives it the cameras itself. Of go2rtc&#39;s API it answers only
-what EiN uses, so the password cannot change its config, and it runs as a user of its own.</li>
+what EiN uses, so the password cannot change its config.</li>
 </ul>
+<p>All three run as EiN does, as the user <code>EIN_USER</code> in <code>.env</code> names, with no capabilities
+(<a href="../admin/install.html#the-data-folder">The data folder</a>).</p>
 <p><code>setup.sh</code> gives EiN the broker&#39;s and the restreamer&#39;s addresses and passwords itself, and the
 <code>device</code> account a device added from the network is given: those settings say <strong>From deployment</strong>
 on the Settings page and need nothing from you. <code>./setup.sh --no-devices</code> takes the sidecar out
@@ -530,7 +532,7 @@ device-create Weather --driver http \
 </thead>
 <tbody><tr>
 <td><code>url</code></td>
-<td>The address to ask. <code>{date}</code> (2026-11-09), <code>{year}</code>, <code>{month}</code>, <code>{day}</code> and <code>{hour}</code> in it become the day and hour it is asked at, in EiN&#39;s time zone. A user and password in it, <code>http://admin:secret@192.0.2.20/status</code>, are sent as the device&#39;s sign-in.</td>
+<td>The address to ask. <code>{date}</code> (2026-11-09), <code>{year}</code>, <code>{month}</code>, <code>{day}</code> and <code>{hour}</code> in it become the day and hour it is asked at, in EiN&#39;s time zone.</td>
 </tr>
 <tr>
 <td><code>read</code></td>
@@ -544,8 +546,19 @@ device-create Weather --driver http \
 <td><code>set</code></td>
 <td>The controls, <code>name=address on/off</code>, separated by <code>;</code>; see <a href="#switching-it">Switching it</a>. May be left out.</td>
 </tr>
+<tr>
+<td><code>user</code></td>
+<td>The account, for an API that asks for one. It is sent, with the password, to <code>url</code>&#39;s host alone. May be left out.</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>That account&#39;s password. It is kept in the device&#39;s <code>.secret</code>, which the administrator alone reads. May be left out.</td>
+</tr>
 </tbody></table>
 </div>
+<p>A user and password written into an address, <code>http://admin:secret@192.0.2.20/status</code>, are taken out
+of it when the device is made or changed and kept as <code>user</code> and <code>password</code>, so the address others
+see carries neither.</p>
 <p>A path walks the answer from the top:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -600,20 +613,20 @@ device-create Electricity price --driver http \
 <p>A device whose web API also takes commands is switched at an address of its own, which <code>set</code> names
 for each control: <code>name=address on/off</code>. <code>{value}</code> in the address becomes the value, spelled as the
 device spells on and off, which is what <code>on/off</code> says: <code>ON/OFF</code>, <code>on/off</code>, <code>1/0</code> or <code>true/false</code>. An
-address without <code>http://</code> is taken from <code>url</code>&#39;s, sign-in included. A control whose name is also a
+address without <code>http://</code> is taken from <code>url</code>&#39;s. A control whose name is also a
 reading&#39;s is a switch that shows that reading as its state, read as on or off however the device
 spells them; EiN asks the device again a second after it is switched. A control with no <code>{value}</code> and
 no <code>on/off</code> is a button that asks its address when pressed, such as a restart.</p>
 <p>Say a garden pump&#39;s controller on your network answers <code>{&quot;pump&quot;: {&quot;running&quot;: true, &quot;power&quot;: 420}}</code> at
 <code>/api/status</code>, runs or stops the pump at <code>/api/pump?run=1</code> and <code>/api/pump?run=0</code>, and restarts at
 <code>/api/restart</code>:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code>device-create Garden pump --driver http --config <span class="hljs-string">&#x27;url=http://admin:secret@192.0.2.40/api/status&#x27;</span> \
-  --config <span class="hljs-string">&#x27;read=pump=pump.running; power=pump.power W&#x27;</span> \
-  --config <span class="hljs-string">&#x27;set=pump=api/pump?run={value} 1/0; restart=api/restart&#x27;</span> --config interval=30s</code></pre></div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>device-create Garden pump --driver http --config <span class="hljs-string">&#x27;url=http://192.0.2.40/api/status&#x27;</span> \
+ --config <span class="hljs-string">&#x27;read=pump=pump.running; power=pump.power W&#x27;</span> \
+ --config <span class="hljs-string">&#x27;set=pump=api/pump?run={value} 1/0; restart=api/restart&#x27;</span> --config interval=30s \
+ --config user=admin --config password=<span class="hljs-string">&#x27;the password&#x27;</span>   <span class="hljs-comment"># the leading space keeps it out of your history</span></code></pre></div>
 <p><code>pump</code> is then a switch, on while the answer says <code>running</code> is true, and <code>restart</code> a button; both
-are asked with the sign-in in <code>url</code>.</p>
-<p>The address, with a password in it, is the device&#39;s config, which every member of <code>devices</code> sees.
-EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
+are asked with the user and password, which go to <code>url</code>&#39;s host and to no other a control names.</p>
+<p>EiN asks it from the machine it runs on, so an address on your home network is asked from there.</p>
 <h3 id="a-camera">A camera<a class="anchor" href="#a-camera" aria-label="Link to this section"></a></h3>
 <p>The <code>rtsp</code> driver takes a camera on your network that sends its picture over RTSP, as most cameras
 that work without a cloud do (Reolink, Hikvision, Dahua, Amcrest, Axis, Tapo, …). The camera&#39;s
@@ -655,6 +668,8 @@ camera in the terminal, once the administrator has named its network in
 </tr>
 </tbody></table>
 </div>
+<p>A user and password written into a stream&#39;s or the still picture&#39;s address are taken out of it, as
+the <code>http</code> driver&#39;s are, and kept as <code>user</code> and <code>password</code>.</p>
 <p>A password or an address that changed is given again on the camera&#39;s <strong>Info</strong> tab, with <strong>Change</strong>,
 or in the terminal, and the camera is reached with it at once:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>device-config front-door password=<span class="hljs-string">&#x27;the new password&#x27;</span></code></pre></div>
@@ -706,8 +721,9 @@ stream for faces, reading it from EiN as it reads any file, on this machine or a
 was, or <code>unknown</code>, within a second or so, as <code>dev.&lt;camera&gt;.faces</code> for automations, and the faces&#39;
 pictures are filed under the camera in the archive, where they are named as photos&#39; faces are
 (<a href="../archive/people.html#faces-a-camera-sees">Faces a camera sees</a>). The media service records the
-camera&#39;s largest stream as well, and a clip of each visit, from a little before the face until a
-little after, is filed beside them as a video (<a href="../archive/cameras.html#a-security-camera">A security camera</a>).</p>
+camera&#39;s largest stream as well, its <code>.mp4</code>, which carries the sound whatever the camera sends it
+as, and a clip of each visit, from a little before the face until a little after, is filed beside
+them as a video, its sound as AAC (<a href="../archive/cameras.html#a-security-camera">A security camera</a>).</p>
 <p>The camera is <strong>online</strong> while it answers the restreamer, asked every other minute, or without a
 restreamer while it gives its still picture. Who may see the
 pictures is who may read the stream: the household, as for every device

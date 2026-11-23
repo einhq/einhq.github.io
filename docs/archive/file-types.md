@@ -31,7 +31,7 @@ still a JPEG photo, and a file with no extension at all is recognised the same w
 difference whether the file came in with **Import media**, an upload into an album, by dropping it
 on a page, or over [SFTP](../shell/ssh-sftp.md). A program that copies a file over SFTP under a
 temporary name, such as `IMG_0412.jpg.filepart`, and renames it when it is done gets the type the
-final name gives.
+final name gives, and the file is prepared under that name.
 
 The name decides in three cases, because the bytes say too little:
 

@@ -390,7 +390,7 @@ left).</li>
 <tr>
 <td><strong>Use temp-file scheme</strong></td>
 <td>Off</td>
-<td>EiN keeps nothing of a photo whose sending broke off, so the app gains nothing by it, and a photo renamed once it is sent can wait hours before it is prepared.</td>
+<td>EiN keeps nothing of a photo whose sending broke off, so the app gains nothing by it.</td>
 </tr>
 <tr>
 <td>Hidden files</td>
@@ -430,11 +430,11 @@ its position; see <a href="devices.html#a-phone-or-a-gps-tracker">A phone or a G
 <ol>
 <li><strong>Install the app and pair it</strong>; see <a href="#the-ein-app">The EiN app</a>.</li>
 <li><strong>Open App</strong> under <strong>System</strong> in the app&#39;s menu. <strong>Position reports</strong> is below the photo backup.</li>
-<li><strong>Turn Report this phone&#39;s position on.</strong> The phone asks whether the app may know where it is:
-choose <strong>While using the app</strong>, with <strong>Precise</strong> on, and allow its <strong>Physical activity</strong>. The
-app then says why it needs the position all the time, and opens the page in the phone&#39;s settings
-where you choose <strong>Allow all the time</strong>. Without it the reports go on once you close the app,
-but stop when the phone restarts.</li>
+<li><strong>Turn Report this phone&#39;s position on.</strong> The app first says why it needs the position all the
+time; choose <strong>Continue</strong>. The phone then asks whether the app may know where it is: choose
+<strong>While using the app</strong>, with <strong>Precise</strong> on, and allow its <strong>Physical activity</strong>. Then it opens
+the page in the phone&#39;s settings where you choose <strong>Allow all the time</strong>. Without it the reports
+go on once you close the app, but stop when the phone restarts.</li>
 <li><strong>Choose Precise position</strong> for a better track. It uses the phone&#39;s GPS, and the battery with it;
 without it the phone mostly places itself by the Wi-Fi and the cell towers around it, which spares
 the battery but gives a coarser track.</li>
@@ -468,16 +468,17 @@ position beside a place in an automation, is told once the app may know it.</p>
 <a href="#report-where-your-phone-is">report where it is</a> by itself. It is the same EiN, with the same
 pages and your account, but the app keeps no password: it is paired with your EiN for this one
 phone, signs in as you by itself, and stays signed in until the phone is unpaired. It needs
-Android 10 or newer.</p>
+Android 10 or newer, and EiN at an address that begins with <code>https://</code>: the app reaches EiN over
+HTTPS only, so EiN must be behind an HTTPS proxy, as <a href="../admin/network.html#put-ein-behind-https">Put EiN behind HTTPS</a>
+explains.</p>
 <p>Install it from its <a href="https://github.com/einhq/android/releases">releases on GitHub</a>: open the newest
 release on the phone, download its <code>.apk</code> file and open it, and allow your browser to install apps
 when the phone asks. It is not on Google Play yet.</p>
 <p>To pair it with your password, on the phone alone:</p>
 <ol>
 <li>Open the EiN app and choose <strong>Sign in with a password</strong>.</li>
-<li>Type your EiN&#39;s address, such as <code>ein.wrenfield.example</code> (the app adds <code>https://</code>; type
-<code>http://</code> yourself for an EiN that has no certificate), your username or e-mail address, and
-your password, and choose <strong>Sign in</strong>.</li>
+<li>Type your EiN&#39;s address, such as <code>ein.wrenfield.example</code> (the app adds <code>https://</code>), your
+username or e-mail address, and your password, and choose <strong>Sign in</strong>.</li>
 <li>The app is paired as this phone and opens EiN, signed in as you. The first time, EiN asks
 <strong>Which phone is this?</strong>: one of the phones you may change, or <strong>A new phone</strong>, named as the
 phone is in its settings. Signing in again from the same app later finds the same phone by
@@ -485,13 +486,13 @@ itself.</li>
 </ol>
 <p>The password is sent to EiN once, to pair the phone, and is not kept on the phone. Only members of
 the <code>devices</code> group add a new phone this way; anyone else picks one they have been given, or asks
-for one to be added. Over <code>http://</code>, the password crosses the network as it is typed: use <code>https://</code>
-away from home.</p>
+for one to be added.</p>
 <p>Or pair it with a QR code, with EiN open on a computer:</p>
 <ol>
 <li>In EiN on a computer, open <strong>Devices</strong> and the phone&#39;s page, or add the phone with <strong>Create</strong> →
-<strong>Device</strong> as a device of the class <code>phone</code>. Open it at the address the phone reaches EiN at,
-such as <code>https://ein.wrenfield.example</code>.</li>
+<strong>Device</strong> as a device of the class <code>phone</code>. Open it at the <code>https://</code> address the phone
+reaches EiN at, such as <code>https://ein.wrenfield.example</code>: the app refuses a code made at an
+<code>http://</code> address.</li>
 <li>On its <strong>Info</strong> tab, under <strong>EiN app</strong>, choose <strong>Pair the app</strong>. A QR code appears.</li>
 <li>On the phone, open the EiN app and choose <strong>Scan QR code</strong>, or scan the code with the phone&#39;s
 camera. The app opens EiN, signed in as you.</li>
@@ -514,8 +515,9 @@ paired again; below them are the phone&#39;s <a href="#back-up-your-phone-automa
 <li>the account menu has no <strong>Logout</strong>, since the app would sign in again by itself: unpair it
 instead.</li>
 </ul>
-<p>The app goes to the address it signed in at, or the QR code was made for, over <code>http://</code> as well as <code>https://</code>. Away from
-home it reaches EiN only if that address works there too.</p>
+<p>The app goes to the address it signed in at, or the QR code was made for, and over <code>https://</code> only,
+so nothing it sends crosses the network unencrypted. Away from home it reaches EiN only if that
+address works there too.</p>
 <p>What the app reads, where it sends it and what Google&#39;s services on the phone see is in
 <a href="app-privacy.html">The EiN app&#39;s privacy policy</a>.</p>
 <h2 id="put-ein-on-your-home-screen">Put EiN on your home screen<a class="anchor" href="#put-ein-on-your-home-screen" aria-label="Link to this section"></a></h2>
@@ -703,6 +705,11 @@ there; see <a href="../archive/staging.html#on-a-phone">Sorting in staging</a>.<
 <td>The EiN app says <strong>EiN does not answer</strong></td>
 <td>The phone cannot reach the address it was paired with: it is away from home, or EiN is down. Without a connection the app opens what it saved instead, once EiN has been opened in it over <code>https://</code>.</td>
 <td>Join the network EiN is on and choose <strong>Try again</strong>. Away from home, see <a href="../admin/network.html">Ports, HTTPS and remote access</a>; without a connection, see <a href="#without-a-connection">Without a connection</a>.</td>
+</tr>
+<tr>
+<td>The EiN app says it reaches EiN over https:// only</td>
+<td>The address typed, or the one the QR code was made at, begins with <code>http://</code>.</td>
+<td>Use EiN&#39;s <code>https://</code> address, and make the QR code with EiN opened at it. If EiN has none, ask your administrator; see <a href="../admin/network.html#put-ein-behind-https">Put EiN behind HTTPS</a>.</td>
 </tr>
 <tr>
 <td>The EiN app says <strong>EiN refused this phone</strong></td>

@@ -135,7 +135,9 @@ A span with nothing in it says **No values in this span.** or **No fixes in this
 - **Config**, what its driver was given when the device was made: a camera's stream addresses, a web
   API's address and what to read of it. A secret field, such as a password, reads **set** and never
   shows its value. A member of the `devices` group changes it with **Change** while the driver runs;
-  a secret field left empty keeps what it had. The driver takes the change at once.
+  a secret field left empty keeps what it had. The driver takes the change at once. A user and
+  password written into an address, `http://user:password@…`, go to the driver's `user` and secret
+  `password`, out of the address; a driver that keeps no password refuses an address with one.
 - **Device key**, for a device whose driver reads what is posted to it, such as a phone: the address
   it posts to (see [A phone or a GPS tracker](#a-phone-or-a-gps-tracker)). Only those who may change
   the device see it.
@@ -265,8 +267,9 @@ The EiN app for Android signs in with a key of its own, made for one phone, inst
 How to install the app, and what it does, is in [The EiN app](phone.md#the-ein-app). The app can
 pair itself, signed in once with your password on the phone (see there); or pair it from this page:
 
-1. Make the phone a device of the class `phone`, and open its page at the address the phone will
-   reach EiN at, such as `https://ein.wrenfield.example`, and its **Info** tab.
+1. Make the phone a device of the class `phone`, and open its page at the `https://` address the
+   phone will reach EiN at, such as `https://ein.wrenfield.example`, and its **Info** tab. The app
+   reaches EiN over HTTPS only and refuses a code made at an `http://` address.
 2. Under **EiN app**, choose **Pair the app**. A QR code appears.
 3. Scan it with the EiN app, or with the phone's camera where the app is installed. The code works
    once, for 15 minutes; the page says when the app has taken it.

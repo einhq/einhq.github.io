@@ -478,7 +478,8 @@ through either is seen by the other at once.
 ## Run something in the background
 
 A service is a script EiN keeps running: a folder `services/<name>/` with a `start.sh` and a
-`config.json`. Setup registers and enables it; EiN starts the enabled services when it starts, and
+`config.json`. Setup registers it, and enables it the first time it does: an administrator who
+disables it keeps it disabled. EiN starts the enabled services when it starts, and
 `service start <name>` starts one now.
 
 ```json

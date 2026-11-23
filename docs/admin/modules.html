@@ -397,6 +397,10 @@ now has got, or what the last one came to, and <code>mod status --follow</code> 
 <div class="code"><pre tabindex="0"><code>mod install seacharts: running for 32s, for admin
   Fetching https://github.com/einhq/module-seacharts at v0.4.0 (3a9c0e1f2)...
     12759 files of seacharts unpacked</code></pre></div>
+<p>A member who is not an administrator, asking <code>mod status</code> or on the Modules tab of the settings, is
+told only that a module install runs, how many files of the module it is unpacking are in place,
+and which modules it installed: not what it was asked, who started it, what it says or why it
+failed, since the arguments may name a private repository.</p>
 <p>EiN installs one thing at a time. While an install runs, <code>mod install</code> with the same modules
 follows it, and with any other refuses, naming the one running. An install EiN stopped in the
 middle of, by restarting, leaves nothing installed of it; the next install clears away what it left.</p>
@@ -580,9 +584,18 @@ config <span class="hljs-built_in">set</span> CFG_MODULE_SOURCES <span class="hl
 <p>A source that is not public needs an access token. <strong>Tokens for module sources</strong>,
 <code>CFG_MODULE_SOURCES_KEY</code>, takes one per host, as <code>host=token</code> separated by spaces, such as
 <code>forge.example:3000=…</code>. Like every key, nobody can read it back once set, and EiN sends each token
-only to its own host. On the <strong>Module sources</strong> page, what is typed under <strong>Tokens for private
+only to its own host, over HTTPS. On the <strong>Module sources</strong> page, what is typed under <strong>Tokens for private
 sources</strong> replaces every token set before. <a href="../reference/settings.html#cfg_module_sources">The settings reference</a> has
 both.</p>
+<p>A module is code EiN runs, so it is fetched over HTTPS: anyone on the network between EiN and a
+forge answering plain HTTP could read its token and change the module on the way. An <code>http://</code>
+source or repository address is refused unless the forge is on EiN&#39;s own machine (<code>localhost</code>,
+<code>127.0.0.1</code>) or <strong>Hosts reached over plain http</strong>, <code>CFG_MODULE_SOURCES_INSECURE</code>, names its host, as
+<code>host</code> or <code>host:port</code> separated by spaces, such as <code>forge.lan:3000</code>. A token for such a host is
+given as <code>http://forge.lan:3000=…</code>; one given as <code>forge.lan:3000=…</code> goes to it over HTTPS only.
+Name a host there only on a network that is yours alone; <a href="../reference/settings.html#cfg_module_sources_insecure">the settings reference</a>
+has it too. An installed file keeps only whether it is
+executable: one with an execute bit in the module&#39;s archive is installed <code>0755</code>, every other <code>0644</code>.</p>
 <p>A source that does not answer is named above the published modules, as &quot;<a href="https://forge.example:3000/wrenfield">https://forge.example:3000/wrenfield</a>
 did not answer&quot; with the reason, and the other sources are still listed.</p>
 <p>A module that is in no source can still be installed from its repository&#39;s address:

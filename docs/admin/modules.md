@@ -243,6 +243,11 @@ mod install seacharts: running for 32s, for admin
     12759 files of seacharts unpacked
 ```
 
+A member who is not an administrator, asking `mod status` or on the Modules tab of the settings, is
+told only that a module install runs, how many files of the module it is unpacking are in place,
+and which modules it installed: not what it was asked, who started it, what it says or why it
+failed, since the arguments may name a private repository.
+
 EiN installs one thing at a time. While an install runs, `mod install` with the same modules
 follows it, and with any other refuses, naming the one running. An install EiN stopped in the
 middle of, by restarting, leaves nothing installed of it; the next install clears away what it left.
@@ -491,9 +496,19 @@ config set CFG_MODULE_SOURCES "https://github.com/einhq https://forge.example:30
 A source that is not public needs an access token. **Tokens for module sources**,
 `CFG_MODULE_SOURCES_KEY`, takes one per host, as `host=token` separated by spaces, such as
 `forge.example:3000=…`. Like every key, nobody can read it back once set, and EiN sends each token
-only to its own host. On the **Module sources** page, what is typed under **Tokens for private
+only to its own host, over HTTPS. On the **Module sources** page, what is typed under **Tokens for private
 sources** replaces every token set before. [The settings reference](../reference/settings.md#cfg_module_sources) has
 both.
+
+A module is code EiN runs, so it is fetched over HTTPS: anyone on the network between EiN and a
+forge answering plain HTTP could read its token and change the module on the way. An `http://`
+source or repository address is refused unless the forge is on EiN's own machine (`localhost`,
+`127.0.0.1`) or **Hosts reached over plain http**, `CFG_MODULE_SOURCES_INSECURE`, names its host, as
+`host` or `host:port` separated by spaces, such as `forge.lan:3000`. A token for such a host is
+given as `http://forge.lan:3000=…`; one given as `forge.lan:3000=…` goes to it over HTTPS only.
+Name a host there only on a network that is yours alone; [the settings reference](../reference/settings.md#cfg_module_sources_insecure)
+has it too. An installed file keeps only whether it is
+executable: one with an execute bit in the module's archive is installed `0755`, every other `0644`.
 
 A source that does not answer is named above the published modules, as "https://forge.example:3000/wrenfield
 did not answer" with the reason, and the other sources are still listed.

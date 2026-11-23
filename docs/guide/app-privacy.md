@@ -41,9 +41,9 @@ one to ask about it. The EiN Team has no access to any installation, nor to anyt
 Each request names the app's version and Android's. Positions that cannot be sent yet wait on the
 phone until there is a connection.
 
-The app reaches your EiN at the address you typed or the QR code was made for. With an `https://` address what it
-sends is encrypted on the way; on a home network an EiN is often reached at an `http://` address,
-where it is not.
+The app reaches your EiN at the address you typed or the QR code was made for, and over `https://`
+only, so everything it sends is encrypted on the way. It refuses an address or a QR code that
+begins with `http://`.
 
 ## What the app does not do
 

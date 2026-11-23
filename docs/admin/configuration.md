@@ -54,7 +54,7 @@ The time zone is the one setting on **Language and time** that is not saved ther
 
 Each setting is saved on its own; there is no button that saves the page. The other tabs of Settings hold accounts, groups and modules: [Accounts and groups](accounts.md) covers **Users**, **Groups** and **Permissions**, and [Modules](modules.md) covers **Modules**. The **Permissions** tab shows some of the same settings as **System**, such as the default sharing, and a change made on either shows on both.
 
-The control depends on the kind of value: a switch shows **On** or **Off**, a choice is a list, a number has arrows, a person or a group is picked by name, a permission mode is a choice of None, View or Edit for the owner, the group and everyone else, and a date and time format is picked by its name, such as **British English**, with how it writes today's date beside it. On a narrow screen the pages under **Set up** and the categories are a **Show** list above the settings instead.
+The control depends on the kind of value: a switch shows **On** or **Off**, a choice is a list, a number has arrows, a person or a group is picked by name, a permission mode is a choice of None, View or Edit for the owner, the group and everyone else, a date and time format is picked by its name, such as **British English**, with how it writes today's date beside it, and where maps open is picked on a small map: drag and zoom it until the red mark is on the place, or click the place, or type the position in the field above it. On a narrow screen the pages under **Set up** and the categories are a **Show** list above the settings instead.
 
 What is shown is in the page's address, `?view=` with a page under **Set up** and `?category=` with a category, so a link opens it: `/settings?view=assistant.model` is the **Language model** page.
 
@@ -146,15 +146,16 @@ For a port, the answer ends with the note that it takes effect the next time the
 
 A value of the wrong kind is refused before anything is written:
 
-| Kind                 | What `config set` accepts                   | Refused, for example                                                  |
-| -------------------- | ------------------------------------------- | --------------------------------------------------------------------- |
-| number               | digits, with an optional minus and decimals | `config set: CFG_TRASH_RETENTION_DAYS: expected a number, got 'four'` |
-| on or off            | `true` or `false`                           | `expected 'true' or 'false', got 'yes'`                               |
-| choice               | one of the setting's choices                | `expected one of en, sv, got 'english'`                               |
-| permission mode      | an octal mode such as `0750`                | `expected an octal mode such as 0750, got 'rwxr-x---'`                |
-| person or group      | a name of letters, digits, `.`, `_` and `-` | `'Anna Andersson' is not a valid user name`                           |
-| date and time format | a locale such as `sv-SE` or `en-GB`         | `expected a locale such as en-SE or sv-SE, got 'swedish'`             |
-| text or key          | anything                                    |                                                                       |
+| Kind                 | What `config set` accepts                                                       | Refused, for example                                                                     |
+| -------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| number               | digits, with an optional minus and decimals                                     | `config set: CFG_TRASH_RETENTION_DAYS: expected a number, got 'four'`                    |
+| on or off            | `true` or `false`                                                               | `expected 'true' or 'false', got 'yes'`                                                  |
+| choice               | one of the setting's choices                                                    | `expected one of en, sv, got 'english'`                                                  |
+| permission mode      | an octal mode such as `0750`                                                    | `expected an octal mode such as 0750, got 'rwxr-x---'`                                   |
+| person or group      | a name of letters, digits, `.`, `_` and `-`                                     | `'Anna Andersson' is not a valid user name`                                              |
+| date and time format | a locale such as `sv-SE` or `en-GB`                                             | `expected a locale such as en-SE or sv-SE, got 'swedish'`                                |
+| map position         | a latitude, a longitude and a zoom from 2 to 18, such as `51.5074, -0.1278, 11` | `expected a latitude, a longitude and a zoom such as 51.5074, -0.1278, 11, got 'London'` |
+| text or key          | anything                                                                        |                                                                                          |
 
 An empty value is refused too, with `value must not be empty`, except for the settings where empty means something. To return a setting to its inherited value, use `config unset`, not an empty `config set`.
 

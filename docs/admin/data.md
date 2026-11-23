@@ -91,7 +91,7 @@ A backup tool that copies the whole data folder as root, such as one that backs 
 
 ### Under Docker
 
-Docker runs the containers as root, so the files in the data folder belong to root on the machine. Run the `rsync` of step 4, and of a restore, with `sudo`. Under rootless podman they belong to your own user, and no `sudo` is needed.
+EiN runs as the user who ran `setup.sh`, so the files in the data folder are yours and the `rsync` of step 4, and of a restore, needs no `sudo`, as under rootless podman. Only the database's folder, `db`, belongs to the database's own user, and the `rsync` leaves it out. When root ran `setup.sh`, the files belong to the user 65532 of EiN's images: run the `rsync` with `sudo`, which keeps their owner.
 
 ## Restore a backup
 

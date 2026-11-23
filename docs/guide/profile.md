@@ -119,13 +119,14 @@ the default. If a save fails, the reason shows in a red box under the setting.
 | Appearance | **Header entrance time**                 | `450`     | How many milliseconds that entrance takes, from the first tile starting to the last one in place. `0` shows the header as it is, without an entrance.                                                                              |
 | Appearance | **Header over a cover**                  | `split`   | How the tiles meet a page's cover photo, such as an album's or a person's: `split` gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; `lines` lays only their outlines over the photo. |
 | Language   | **Date and time format**                 | empty     | How dates and times are written for you; see below. Empty follows the administrator's **Date and time format**.                                                                                                                    |
+| Maps       | **Where maps open**                      | empty     | Where a map opens for you when it has nothing of its own to show, such as the Map page; see below. Empty follows the administrator's **Where maps open**.                                                                          |
 | Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                                       |
 | Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                 |
 | Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                   |
 | Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                   |
 | Todo       | **Todo widget**                          | **Off**   | A button floating over every page, which you can drag anywhere, counting and listing the todos about what is on screen; see [The todo widget](../todo/index.md#the-todo-widget).                                                   |
 
-EiN itself gives the settings under Appearance, Language, Sharing and Shell. The two under Playback come with
+EiN itself gives the settings under Appearance, Language, Maps, Sharing and Shell. The two under Playback come with
 the archive module, and only an EiN with the archive has them; the one under Todo comes with the
 todo module. [Viewing photos, videos and recordings](../archive/viewer.md) shows a slideshow, and [the settings reference](../reference/settings.md)
 lists each with its key, such as
@@ -169,6 +170,26 @@ Its key is `CFG_USER_TIME_LOCALE`, so a line in your `~/.config` sets it too, as
 export CFG_USER_TIME_LOCALE='en-GB'
 ```
 
+### Where maps open
+
+A map that has nothing of its own to show opens here: the Map page opened from the sidebar, and the
+map you pick a new location's place on. A map of a location, an album or a track opens on what it
+shows, whatever this says. On **Preferences** it is a small map: drag it and zoom it with its **+**
+and **−** buttons until the red mark is on the place and as much is in view as you want, or click
+the place, then **Save change**. The field above it holds the same as text, a latitude, a longitude
+and a zoom from 2 (the whole world) to 18 (a house), which you can type in instead, and its **×**
+empties it again.
+
+Left empty, it follows **Where maps open** under **Settings → System → Maps**, which an
+administrator sets for everyone and which is London, `51.5074, -0.1278, 11`, unless changed. A value
+that is not a position is refused, for example
+`config set: CFG_USER_MAP_CENTER: expected a latitude, a longitude and a zoom such as 51.5074, -0.1278, 11, got 'London'`.
+Its key is `CFG_USER_MAP_CENTER`, so a line in your `~/.config` sets it too:
+
+```bash
+export CFG_USER_MAP_CENTER='59.3293, 18.0686, 11'
+```
+
 ### How widely what you create is shared
 
 This preference decides how an album you create starts out: one made with **Create → Album**, with
@@ -194,6 +215,7 @@ administrator's default sharing lets everyone else view; otherwise you grant tha
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Appearance and Playback                  | At once, in the browser tab where you saved it. Other open tabs, and your other devices, when their page loads again.                   |
 | **Date and time format**                 | In the browser tab where you saved it, on the next page you open. Other open tabs, and your other devices, when their page loads again. |
+| **Where maps open**                      | In the browser tab where you saved it, on the next map you open. Other open tabs, and your other devices, when their page loads again.  |
 | **How widely what you create is shared** | At once, for the next album you create.                                                                                                 |
 | **Shell history length**                 | In the next terminal you open.                                                                                                          |
 
