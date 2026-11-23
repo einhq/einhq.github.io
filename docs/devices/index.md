@@ -155,6 +155,26 @@ Giving the **MQTT broker** page a broker on another host without a password remo
 here, so it is not sent to the new broker. While the broker is empty no device is heard on a
 broker, and only the devices EiN asks over the network itself are read.
 
+### Your own network
+
+A web API, a camera of the `rtsp` driver and an ONVIF camera are asked wherever their addresses
+say, and those addresses are anyone's in the `devices` group to give. So EiN asks them on the
+public internet only, until the administrator names the networks off it where they may be: the
+home network, a camera's own network. Nothing else on this machine, the containers beside EiN, or a
+cloud's metadata service is asked unless it is in one of them. In **Settings → System**, under
+**Devices**, that is **Local networks devices are on**, or in the terminal:
+
+```bash
+# in EiN's terminal, as the administrator: a whole network, and one more address
+config set 'CFG_DEVICES_NETWORKS=192.168.1.0/24, 192.168.2.20'
+```
+
+An address or a range, IPv4 or IPv6, separated by commas; `devices-bridge` restarts with them. A
+device at an address outside them is refused when it is made, saying so, and is not asked. Each
+address a web API redirects to is checked the same way, and a name is looked up and checked each
+time it is asked. A camera's streams are given to the restreamer only as `rtsp://` or `rtsps://`
+addresses, with no `#` in them.
+
 ## Connect a device
 
 A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
@@ -183,7 +203,7 @@ and **Add** on a card makes it a device:
 | What was found                                | What **Add** does                                                                                                                                                                                                                                                                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A Shelly, of any generation                   | EiN sets its MQTT to the broker, with the `device` account, and restarts it. It is under **Devices** when it is back, within a minute, with all it reads and switches.                                                                                                                                                                              |
-| A camera that speaks ONVIF                    | **Add** asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the `onvif` driver at once, with its streams, its events, and its presets and moves where it turns ([An ONVIF camera](#an-onvif-camera)).                                                                                                  |
+| A camera that speaks ONVIF                    | **Add** asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the `onvif` driver at once, once its network is named in [Your own network](#your-own-network), with its streams, its events, and its presets and moves where it turns ([An ONVIF camera](#an-onvif-camera)).                              |
 | A printer                                     | A device of the `ipp` driver at once: its `state` (idle, printing, stopped), its `warnings` (such as `marker-supply-low-warning`) and a level in % for each ink or toner it reports.                                                                                                                                                                |
 | A Google Cast speaker or screen               | A device of the `cast` driver: `player` says whether it plays (`idle`, `playing`, `paused`) and `playing` what, as title – artist (app); `volume` and `muted` can be set, `play`, `pause` and `stop` pressed, and `seek` given a second. What is written to its `show` is played ([Play on a speaker or a screen](#play-on-a-speaker-or-a-screen)). |
 | A DLNA renderer: a TV or a speaker            | A device of the `dlna` driver, with the same endpoints as a Cast device's. A TV that has Cast as well is one device of the `cast` driver, which uses its DLNA renderer when Cast does not answer.                                                                                                                                                   |
@@ -365,7 +385,8 @@ last moved), `roller-0-position` (0–100 %, empty until the roller is calibrate
 The `http` driver asks an address that answers JSON, as often as you say, and keeps the readings you
 name in its answer: today's weather, the price of electricity this hour, or a device on your network
 that answers on a web API of its own, and can be switched there. Nothing announces such a device; a
-member of `devices` makes it in the terminal:
+member of `devices` makes it in the terminal. One on your own network is asked once its network is
+named in [Your own network](#your-own-network):
 
 ```bash
 # in EiN's terminal, as a member of devices
@@ -448,7 +469,8 @@ The `rtsp` driver takes a camera on your network that sends its picture over RTS
 that work without a cloud do (Reolink, Hikvision, Dahua, Amcrest, Axis, Tapo, …). The camera's
 manual, or its own web page, names its stream's address; many send a second, smaller stream beside
 the main one, which costs less to watch and to take a picture of. A member of `devices` makes the
-camera in the terminal:
+camera in the terminal, once the administrator has named its network in
+[Your own network](#your-own-network):
 
 ```bash
 # in EiN's terminal, as a member of devices
@@ -460,7 +482,7 @@ camera in the terminal:
 
 | Config     | What it is                                                                                                                        |
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `url`      | The main stream's address, `rtsp://…`                                                                                             |
+| `url`      | The main stream's address, `rtsp://…` or `rtsps://…`                                                                              |
 | `sub`      | A second, smaller stream's address. May be left out                                                                               |
 | `snapshot` | The address of the camera's still picture, `http://…`, which a picture is taken from when there is no restreamer. May be left out |
 | `user`     | The camera's account                                                                                                              |
@@ -554,7 +576,8 @@ for it. It is found on the network, where **Add** on its card asks for the accou
 it with ([Add a device found on the network](#add-a-device-found-on-the-network)). Many cameras
 have ONVIF off, or want an account of its own for it, until it is set on their web page, among the
 advanced network settings: on a Hikvision under **Network → Advanced Settings → Integration
-Protocol**. A camera on another network is made in the terminal:
+Protocol**. EiN asks the camera, and the addresses it names, only on the networks named in
+[Your own network](#your-own-network). A camera on another network is made in the terminal:
 
 ```bash
 # in EiN's terminal, as a member of devices
@@ -889,27 +912,28 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power
 
 ## When something goes differently
 
-| What you see                                                        | What it means                                                                                   | What to do                                                                                                                                                                               |
-| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **No devices yet** on the Devices page                              | No device has announced itself, or EiN does not hear the broker                                 | Run `devices-status`, and check the device's own broker settings                                                                                                                         |
-| A device never shows up, while others do                            | It cannot reach the broker, or the broker refuses its account                                   | Check its server, user and password. ESPHome's log says whether MQTT connected. Open port 1883 in the machine's firewall ([network](../admin/network.md#open-the-ports-in-the-firewall)) |
-| A Shelly shows up without readings                                  | Its status updates are off                                                                      | On a second-generation Shelly, turn on **Generic status update over MQTT** and **RPC status notifications over MQTT**                                                                    |
-| A first-generation Shelly never shows up                            | It has not restarted since MQTT was turned on, or uses a custom prefix                          | Restart it, and turn its custom MQTT prefix off                                                                                                                                          |
-| A Shelly is there twice, under two names                            | Its topic prefix changed, and a new prefix is a new device                                      | **Forget** the old one                                                                                                                                                                   |
-| An endpoint is marked **not read**                                  | The device announced it in a way the bridge does not understand                                 | `devices-status` says why. Its readings are not kept                                                                                                                                     |
-| `… takes on, off or toggle, not …` when switching                   | The value is not one the control takes                                                          | See [What a device becomes](#what-a-device-becomes)                                                                                                                                      |
-| `… not connected to the broker, so nothing was sent`                | EiN does not hear the broker just now                                                           | Run `devices-status`                                                                                                                                                                     |
-| `<device>'s driver shelly is not running`                           | The `devices-bridge` service is stopped                                                         | `service start devices-bridge`, as the administrator                                                                                                                                     |
-| `Access denied for operation 'w' on node: …` when switching         | The control is narrowed to others                                                               | Ask the administrator                                                                                                                                                                    |
-| A device stays **offline**                                          | It said it was going, or the broker said so for it when it disappeared                          | Check its power and its Wi-Fi                                                                                                                                                            |
-| A camera shows **No picture**, and stays offline                    | The restreamer cannot reach the camera, or the camera refuses it                                | Check `url`, `user` and the password, and change them on its **Info** tab or with `device-config`. `service logs devices-bridge` says what the camera answered                           |
-| Adding a camera says `the camera refused admin's password`          | The account is not the camera's ONVIF account, or ONVIF is off on the camera                    | Turn ONVIF on in the camera's web page and give it an account there; some cameras keep ONVIF's accounts apart from the web page's                                                        |
-| A camera is not found on the network                                | ONVIF is off on the camera, or it is on another network                                         | Turn ONVIF on in its web page, or make it in the terminal ([An ONVIF camera](#an-onvif-camera))                                                                                          |
-| A camera's page has no **Live** tab                                 | No restreamer is set, or `devices-bridge` is stopped                                            | Set the **Restreamer** ([The installer's sidecar](#the-installers-sidecar)), or `service start devices-bridge`                                                                           |
-| `… which is not there` when showing a video or a page               | The [media service](../ems/index.md) is not installed, or does not answer                       | Set `video=original` for a screen that plays the original, or see [Check that it is running](../ems/index.md#check-that-it-is-running)                                                   |
-| A screen is greyed in **Show on…**                                  | It does not answer: it is off, or off the network                                               | Turn it on; it can be chosen once EiN hears it again                                                                                                                                     |
-| The **Live** tab stays at **Connecting…**, or says the stream ended | As above, the sidecar is not running, or the camera does not answer                             | `podman compose ps` on the machine; `./setup.sh --only devices` starts it again. `service logs devices-bridge` says what the restreamer answered                                         |
-| The **Live** tab says the browser does not play the camera's video  | The browser does not play its codec, often H.265, and the media service could not make it H.264 | Check the [media service](../ems/index.md#check-that-it-is-running), watch the smaller stream, which is often H.264, or set the camera to send H.264                                     |
+| What you see                                                        | What it means                                                                                      | What to do                                                                                                                                                                               |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **No devices yet** on the Devices page                              | No device has announced itself, or EiN does not hear the broker                                    | Run `devices-status`, and check the device's own broker settings                                                                                                                         |
+| A device never shows up, while others do                            | It cannot reach the broker, or the broker refuses its account                                      | Check its server, user and password. ESPHome's log says whether MQTT connected. Open port 1883 in the machine's firewall ([network](../admin/network.md#open-the-ports-in-the-firewall)) |
+| A Shelly shows up without readings                                  | Its status updates are off                                                                         | On a second-generation Shelly, turn on **Generic status update over MQTT** and **RPC status notifications over MQTT**                                                                    |
+| A first-generation Shelly never shows up                            | It has not restarted since MQTT was turned on, or uses a custom prefix                             | Restart it, and turn its custom MQTT prefix off                                                                                                                                          |
+| A Shelly is there twice, under two names                            | Its topic prefix changed, and a new prefix is a new device                                         | **Forget** the old one                                                                                                                                                                   |
+| An endpoint is marked **not read**                                  | The device announced it in a way the bridge does not understand                                    | `devices-status` says why. Its readings are not kept                                                                                                                                     |
+| `… takes on, off or toggle, not …` when switching                   | The value is not one the control takes                                                             | See [What a device becomes](#what-a-device-becomes)                                                                                                                                      |
+| `… not connected to the broker, so nothing was sent`                | EiN does not hear the broker just now                                                              | Run `devices-status`                                                                                                                                                                     |
+| `<device>'s driver shelly is not running`                           | The `devices-bridge` service is stopped                                                            | `service start devices-bridge`, as the administrator                                                                                                                                     |
+| `Access denied for operation 'w' on node: …` when switching         | The control is narrowed to others                                                                  | Ask the administrator                                                                                                                                                                    |
+| A device stays **offline**                                          | It said it was going, or the broker said so for it when it disappeared                             | Check its power and its Wi-Fi                                                                                                                                                            |
+| A camera shows **No picture**, and stays offline                    | The restreamer cannot reach the camera, or the camera refuses it                                   | Check `url`, `user` and the password, and change them on its **Info** tab or with `device-config`. `service logs devices-bridge` says what the camera answered                           |
+| Adding a camera says `the camera refused admin's password`          | The account is not the camera's ONVIF account, or ONVIF is off on the camera                       | Turn ONVIF on in the camera's web page and give it an account there; some cameras keep ONVIF's accounts apart from the web page's                                                        |
+| A camera is not found on the network                                | ONVIF is off on the camera, or it is on another network                                            | Turn ONVIF on in its web page, or make it in the terminal ([An ONVIF camera](#an-onvif-camera))                                                                                          |
+| A camera's page has no **Live** tab                                 | No restreamer is set, or `devices-bridge` is stopped                                               | Set the **Restreamer** ([The installer's sidecar](#the-installers-sidecar)), or `service start devices-bridge`                                                                           |
+| `… which is not there` when showing a video or a page               | The [media service](../ems/index.md) is not installed, or does not answer                          | Set `video=original` for a screen that plays the original, or see [Check that it is running](../ems/index.md#check-that-it-is-running)                                                   |
+| `… a page is never shown as the administrator` when showing a page  | The page is written by the administrator, and the media service would read it as the administrator | Write it signed in as a member                                                                                                                                                           |
+| A screen is greyed in **Show on…**                                  | It does not answer: it is off, or off the network                                                  | Turn it on; it can be chosen once EiN hears it again                                                                                                                                     |
+| The **Live** tab stays at **Connecting…**, or says the stream ended | As above, the sidecar is not running, or the camera does not answer                                | `podman compose ps` on the machine; `./setup.sh --only devices` starts it again. `service logs devices-bridge` says what the restreamer answered                                         |
+| The **Live** tab says the browser does not play the camera's video  | The browser does not play its codec, often H.265, and the media service could not make it H.264    | Check the [media service](../ems/index.md#check-that-it-is-running), watch the smaller stream, which is often H.264, or set the camera to send H.264                                     |
 
 ## Related pages
 

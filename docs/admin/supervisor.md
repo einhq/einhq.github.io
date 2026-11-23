@@ -71,11 +71,11 @@ media service it needs is one choice away.
 Installing a service asks first, saying what it downloads and what it is given beyond an ordinary
 container, such as:
 
-| Service             | It is given                                                                                                                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| the media service   | the graphics card, when the machine has one; `/dev/fuse` and the `SYS_ADMIN` capability without an AppArmor profile, to mount the files of each request from EiN; up to 16 GB of memory |
-| the language model  | the graphics card, when the machine has one; up to 10 GB of memory                                                                                                                      |
-| the devices sidecar | the machine's own network, which it listens on for devices, and the ports 1883 and 1984 for the devices' MQTT broker and the cameras' streams                                           |
+| Service             | It is given                                                                                                                                                                                                                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| the media service   | the graphics card, when the machine has one; `/dev/fuse` and the `SYS_ADMIN` capability without an AppArmor profile, to mount the files of each request from EiN, and no other capability but those it needs to start as root and run on as a user of its own; up to 16 GB of memory |
+| the language model  | the graphics card, when the machine has one; up to 10 GB of memory                                                                                                                                                                                                                   |
+| the devices sidecar | the machine's own network, which it listens on for devices, and the ports 1883 and 1984 for the devices' MQTT broker and the cameras' streams                                                                                                                                        |
 
 While a job runs, the top of the tab says what it does, who asked and its last line; when it ends,
 whether it did, with its last lines when it failed. Installing a service makes every container

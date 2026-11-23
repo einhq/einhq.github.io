@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/app-privacy.html">The EiN app's privacy policy</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -281,6 +281,20 @@ it only to that broker (<a href="../admin/configuration.html#give-a-key-to-anoth
 Giving the <strong>MQTT broker</strong> page a broker on another host without a password removes the one saved
 here, so it is not sent to the new broker. While the broker is empty no device is heard on a
 broker, and only the devices EiN asks over the network itself are read.</p>
+<h3 id="your-own-network">Your own network<a class="anchor" href="#your-own-network" aria-label="Link to this section"></a></h3>
+<p>A web API, a camera of the <code>rtsp</code> driver and an ONVIF camera are asked wherever their addresses
+say, and those addresses are anyone&#39;s in the <code>devices</code> group to give. So EiN asks them on the
+public internet only, until the administrator names the networks off it where they may be: the
+home network, a camera&#39;s own network. Nothing else on this machine, the containers beside EiN, or a
+cloud&#39;s metadata service is asked unless it is in one of them. In <strong>Settings → System</strong>, under
+<strong>Devices</strong>, that is <strong>Local networks devices are on</strong>, or in the terminal:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator: a whole network, and one more address</span>
+config <span class="hljs-built_in">set</span> <span class="hljs-string">&#x27;CFG_DEVICES_NETWORKS=192.168.1.0/24, 192.168.2.20&#x27;</span></code></pre></div>
+<p>An address or a range, IPv4 or IPv6, separated by commas; <code>devices-bridge</code> restarts with them. A
+device at an address outside them is refused when it is made, saying so, and is not asked. Each
+address a web API redirects to is checked the same way, and a name is looked up and checked each
+time it is asked. A camera&#39;s streams are given to the restreamer only as <code>rtsp://</code> or <code>rtsps://</code>
+addresses, with no <code>#</code> in them.</p>
 <h2 id="connect-a-device">Connect a device<a class="anchor" href="#connect-a-device" aria-label="Link to this section"></a></h2>
 <p>A device announces itself on the broker, and its driver makes it a device as soon as it hears it:
 within seconds of the device connecting it is on the <strong>Devices</strong> page with all it reads and does.
@@ -313,7 +327,7 @@ and <strong>Add</strong> on a card makes it a device:</p>
 </tr>
 <tr>
 <td>A camera that speaks ONVIF</td>
-<td><strong>Add</strong> asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the <code>onvif</code> driver at once, with its streams, its events, and its presets and moves where it turns (<a href="#an-onvif-camera">An ONVIF camera</a>).</td>
+<td><strong>Add</strong> asks for the account EiN signs in to the camera with, and checks it with the camera: a device of the <code>onvif</code> driver at once, once its network is named in <a href="#your-own-network">Your own network</a>, with its streams, its events, and its presets and moves where it turns (<a href="#an-onvif-camera">An ONVIF camera</a>).</td>
 </tr>
 <tr>
 <td>A printer</td>
@@ -500,7 +514,8 @@ last moved), <code>roller-0-position</code> (0–100 %, empty until the roller i
 <p>The <code>http</code> driver asks an address that answers JSON, as often as you say, and keeps the readings you
 name in its answer: today&#39;s weather, the price of electricity this hour, or a device on your network
 that answers on a web API of its own, and can be switched there. Nothing announces such a device; a
-member of <code>devices</code> makes it in the terminal:</p>
+member of <code>devices</code> makes it in the terminal. One on your own network is asked once its network is
+named in <a href="#your-own-network">Your own network</a>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
 device-create Weather --driver http \
   --config <span class="hljs-string">&#x27;url=https://api.open-meteo.com/v1/forecast?latitude=57.7&amp;longitude=11.97&amp;current=temperature_2m,wind_speed_10m&#x27;</span> \
@@ -604,7 +619,8 @@ EiN asks it from the machine it runs on, so an address on your home network is a
 that work without a cloud do (Reolink, Hikvision, Dahua, Amcrest, Axis, Tapo, …). The camera&#39;s
 manual, or its own web page, names its stream&#39;s address; many send a second, smaller stream beside
 the main one, which costs less to watch and to take a picture of. A member of <code>devices</code> makes the
-camera in the terminal:</p>
+camera in the terminal, once the administrator has named its network in
+<a href="#your-own-network">Your own network</a>:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
  device-create <span class="hljs-string">&#x27;Front door&#x27;</span> --driver rtsp \
   --config url=rtsp://192.0.2.30:554/h264Preview_01_main \
@@ -619,7 +635,7 @@ camera in the terminal:</p>
 </thead>
 <tbody><tr>
 <td><code>url</code></td>
-<td>The main stream&#39;s address, <code>rtsp://…</code></td>
+<td>The main stream&#39;s address, <code>rtsp://…</code> or <code>rtsps://…</code></td>
 </tr>
 <tr>
 <td><code>sub</code></td>
@@ -704,7 +720,8 @@ for it. It is found on the network, where <strong>Add</strong> on its card asks 
 it with (<a href="#add-a-device-found-on-the-network">Add a device found on the network</a>). Many cameras
 have ONVIF off, or want an account of its own for it, until it is set on their web page, among the
 advanced network settings: on a Hikvision under <strong>Network → Advanced Settings → Integration
-Protocol</strong>. A camera on another network is made in the terminal:</p>
+Protocol</strong>. EiN asks the camera, and the addresses it names, only on the networks named in
+<a href="#your-own-network">Your own network</a>. A camera on another network is made in the terminal:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as a member of devices</span>
  device-create <span class="hljs-string">&#x27;Back yard&#x27;</span> --driver onvif \
   --config address=192.0.2.31 \
@@ -1283,6 +1300,11 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <td>Set <code>video=original</code> for a screen that plays the original, or see <a href="../ems/index.html#check-that-it-is-running">Check that it is running</a></td>
 </tr>
 <tr>
+<td><code>… a page is never shown as the administrator</code> when showing a page</td>
+<td>The page is written by the administrator, and the media service would read it as the administrator</td>
+<td>Write it signed in as a member</td>
+</tr>
+<tr>
 <td>A screen is greyed in <strong>Show on…</strong></td>
 <td>It does not answer: it is off, or off the network</td>
 <td>Turn it on; it can be chosen once EiN hears it again</td>
@@ -1314,7 +1336,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/devices/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></li><li class="nested"><a href="#from-the-app">From the app</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li class="nested"><a href="#your-own-network">Your own network</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></li><li class="nested"><a href="#from-the-app">From the app</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

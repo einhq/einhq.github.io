@@ -31,7 +31,7 @@ The database is in `data/db`, or in the folder `setup.sh --db-dir` named. [Your 
 
 ### .env
 
-`.env` is read in two ways. Compose reads it to fill in `compose.yaml`, and EiN's and the media service's containers get every line of it as their environment. `setup.sh` writes it once, with mode `0600`, and from then on changes only the lines its options set: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY` and `EIN_DB_DIR`, and adds `EIN_ENGINE` to a `.env` written before it had that line. It also moves `EIN_HTTP_PORT` or `EIN_SSH_PORT` to the next free port when another program holds it, and with a Forgejo or Gitea source keeps `CFG_MODULE_SOURCES` and `CFG_MODULE_SOURCES_KEY` in step with `EIN_SOURCE`.
+`.env` is read in two ways. Compose reads it to fill in `compose.yaml`, EiN's container gets every line of it as its environment, and the media service's its `EMS_` lines and `TZ` alone, which `setup.sh` names to it in `compose.override.yaml`. `setup.sh` writes it once, with mode `0600`, and from then on changes only the lines its options set: `EIN_EMS`, `EIN_LLM`, `EIN_MODULES`, `EIN_SOURCE`, `EIN_SOURCE_KEY` and `EIN_DB_DIR`, and adds `EIN_ENGINE` to a `.env` written before it had that line. It also moves `EIN_HTTP_PORT` or `EIN_SSH_PORT` to the next free port when another program holds it, and with a Forgejo or Gitea source keeps `CFG_MODULE_SOURCES` and `CFG_MODULE_SOURCES_KEY` in step with `EIN_SOURCE`.
 
 The file the installer writes looks like this, with your own values:
 

@@ -88,11 +88,19 @@ takes HLS (Safari, VLC, an Apple TV), anyone with the address can watch without 
 EiN's address in front, such as `http://ein.local:8080/live/3f2a…9c/index.m3u8`, and play it in
 anything that plays a stream from an address, until the stream stops.
 
+- The media service's browser reads what your account reads, so the administrator's account, or
+  one in the **admin** group, cannot stream a page and is told
+  `a page is never shown as the administrator; show it as a member`. Stream it signed in as a
+  member, such as yourself or [an account for screens](#an-account-for-screens).
 - The video is a few seconds behind the dashboard, and a moving dashboard looks as it does in a
   browser, at 30 frames a second, 1920×1080 unless you give `--width`, `--height` or `--fps`.
 - It stops by itself 20 seconds after the last one watching stops (`--idle` for longer), and
   `page-stream stop <id>` stops it at once; its two streams go with it. `page-stream list` lists
   yours, with how many watch each.
+- The media service's browser reaches EiN at the address the administrator set
+  ([`CFG_EMS_PAGE_ADDRESS`](../ems/index.md)), and otherwise only the internet: a map's tiles
+  load, but nothing on your network or on the media service's machine does, such as a camera's or
+  a router's own page.
 - Each stream takes about two processor cores of the media service's machine while the page
   moves, and an encoder of its graphics card when it has one. Two run at once unless the
   administrator allows more (`EMS_PAGES`).

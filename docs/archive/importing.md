@@ -14,6 +14,7 @@ album. The usual way past staging is to upload straight into an album that alrea
 | Way in                                               | Where the files go                                      | Folders kept |
 | ---------------------------------------------------- | ------------------------------------------------------- | ------------ |
 | **Create → Import media**                            | the staging category you choose                         | yes          |
+| **Share** to EiN from a phone's gallery              | the staging category you choose, normally the Inbox     | no           |
 | Dropping files on the **Staging** page               | the category you drop them on                           | yes          |
 | **Upload**, or dropping files, on the **Media** page | your **Inbox** in staging                               | yes          |
 | **Upload**, or dropping files, on an album's page    | that album, in the library                              | no           |
@@ -49,7 +50,8 @@ you choose.
 1. Open the **Create** menu (the plus in the top bar) and choose **Import media**. The same dialog
    opens from the **Import media** button on the Staging page, the **Import** button on a category's
    card, **Import media…** in a category's ⋮ menu and, while the Home page has no news yet, the
-   **Import media** button there.
+   **Import media** button there. Pictures shared to EiN from a phone's gallery open it too, with
+   the files already chosen (see [Share pictures to EiN](../guide/phone.md#share-pictures-to-ein)).
 2. Under **Into which category?**, pick a category. Each shows how many files it holds and its
    folder, for example "0 files · files/inbox". The Inbox is chosen unless you opened the dialog
    from a category.
@@ -276,8 +278,9 @@ its processing waits behind other work, so pictures you upload to the Inbox in t
 ready first. A **Scans** category waits behind other work in the same way.
 
 An XMP file that a photo editor or a scanning tool writes beside a picture (`IMG_0001.jpg.xmp` or
-`IMG_0001.xmp`) is paired the same way. Every kind of category pairs sidecars except
-**Messaging** and **Screenshots**.
+`IMG_0001.xmp`) is paired the same way. The files it names as what the picture was made from, such
+as a scan's master, become versions of the picture ([Sidecar files](file-types.md#sidecar-files)).
+Every kind of category pairs sidecars except **Messaging** and **Screenshots**.
 
 ### If the export went into the Inbox
 

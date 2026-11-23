@@ -262,7 +262,8 @@ device-key ruby-phone --off
 ### Pair the EiN app
 
 The EiN app for Android signs in with a key of its own, made for one phone, instead of your password.
-How to install the app, and what it does, is in [The EiN app](phone.md#the-ein-app).
+How to install the app, and what it does, is in [The EiN app](phone.md#the-ein-app). The app can
+pair itself, signed in once with your password on the phone (see there); or pair it from this page:
 
 1. Make the phone a device of the class `phone`, and open its page at the address the phone will
    reach EiN at, such as `https://ein.wrenfield.example`, and its **Info** tab.
@@ -270,7 +271,7 @@ How to install the app, and what it does, is in [The EiN app](phone.md#the-ein-a
 3. Scan it with the EiN app, or with the phone's camera where the app is installed. The code works
    once, for 15 minutes; the page says when the app has taken it.
 
-The app then acts as you, whoever chose **Pair the app**, and nothing more: it opens EiN's pages as
+The app then acts as you, whoever chose **Pair the app** or signed in on the phone, and nothing more: it opens EiN's pages as
 you without asking for your password, adds the phone's positions to its track with its
 [position reports](phone.md#report-where-your-phone-is) on, and, with its
 [photo backup](phone.md#back-up-your-phone-automatically) on, sends the phone's photos into your

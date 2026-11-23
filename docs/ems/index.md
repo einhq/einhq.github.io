@@ -261,7 +261,8 @@ through the mount, and writes what it made back through it before it answers:
   standard install, where both run on the same machine and nothing else is on the compose network.
   The requests to the media service are not encrypted there either.
 - The media service's container has `/dev/fuse` and the `SYS_ADMIN` capability for the mount, which
-  `setup.sh` gives it. Without a mount it refuses the request, and the step that sent it waits and
+  `setup.sh` gives it. The media service itself runs as a user of its own with no capability, and
+  only the program that mounts takes `SYS_ADMIN` up. Without a mount it refuses the request, and the step that sent it waits and
   tries again, as when the media service is away. While `CFG_EMS_FILES_ADDRESS` is empty, EiN sends
   no request that names a file, and those steps wait the same way.
 
@@ -468,8 +469,8 @@ and [being told when the card goes missing](gpu.md#be-told-when-the-card-goes-mi
 
 ## Change how it works
 
-The media service is configured by its environment alone. `~/ein/.env` is that environment, so an
-`EMS_` line there reaches it:
+The media service is configured by its environment alone: the `EMS_` lines of `~/ein/.env`, and
+`TZ`. It gets none of the file's other lines, its passwords among them.
 
 1. Add or change the line in `~/ein/.env`:
 
@@ -478,18 +479,14 @@ The media service is configured by its environment alone. `~/ein/.env` is that e
    EMS_WHISPER_LANGUAGES=sv,en
    ```
 
-2. Apply it:
+2. Apply it, with `./setup.sh`, which names each `EMS_` line to the media service:
 
    ```bash
    # on the machine EiN runs on, in ~/ein
-   podman compose up -d
+   ./setup.sh
    ```
 
-   Under podman-compose, a container that `podman compose up -d` makes again has no swap limit, so
-   the media service's idle models may go to swap and a search waits for them; `./setup.sh` makes
-   the containers again with the limit.
-
-Any change restarts the media service, and EiN with it, since both read `.env`. Requests in flight fail and are retried; see
+Any change restarts the media service, and EiN with it. Requests in flight fail and are retried; see
 [When the media service restarts](#when-the-media-service-restarts).
 
 These are the settings an administrator is most likely to need:
@@ -540,20 +537,20 @@ transcribed with other settings are transcribed again.
 Every one is also in the **Media service** and **Transcription** groups of **Settings → System**,
 with `CFG_MODEL_SLOTS`, the Media module's, in **Processing**. All can be set with `config set`:
 
-| Setting                                                                                     | Default                                                     | What it does                                                                                                                                      |
-| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`CFG_EMS_URL`](../reference/settings.md#cfg_ems_url)                                       | `http://127.0.0.1:8181`; the install sets `http://ems:8181` | Where the media service answers                                                                                                                   |
-| [`CFG_EMS_KEY`](../reference/settings.md#cfg_ems_key)                                       | none; the install sets it                                   | The key the media service expects                                                                                                                 |
-| [`CFG_EMS_CONNECT_RETRY`](../reference/settings.md#cfg_ems_connect_retry)                   | `90`                                                        | Seconds a background request keeps retrying while the media service refuses connections                                                           |
-| [`CFG_EMS_LINK_INTERVAL_SECONDS`](../reference/settings.md#cfg_ems_link_interval_seconds)   | `60`                                                        | How often `ems-link` asks whether the media service answers                                                                                       |
-| [`CFG_EMS_FILES_ADDRESS`](../reference/settings.md#cfg_ems_files_address)                   | empty; the install sets it                                  | Where the media service reaches EiN's files; empty: steps that name a file wait                                                                   |
-| [`CFG_EMS_FILES_PORT`](../reference/settings.md#cfg_ems_files_port)                         | `2224`                                                      | The port `ems-files` listens on while that address is set                                                                                         |
-| [`CFG_EMS_FILES_TLS`](../reference/settings.md#cfg_ems_files_tls)                           | `false`                                                     | Encrypt the media service's file connections with TLS                                                                                             |
-| [`CFG_EMS_PAGE_ADDRESS`](../reference/settings.md#cfg_ems_page_address)                     | empty                                                       | Where the media service reaches EiN's pages, as `host:port`, to render one for a TV; empty: the host of `CFG_EMS_FILES_ADDRESS` at EiN's own port |
-| [`CFG_WHISPER_LANGUAGE`](../reference/settings.md#cfg_whisper_language)                     | empty                                                       | A language sent with every transcription; empty lets the media service decide                                                                     |
-| [`CFG_WHISPER_VAD_MIN_SILENCE_MS`](../reference/settings.md#cfg_whisper_vad_min_silence_ms) | empty                                                       | The pause that ends a stretch of speech                                                                                                           |
-| [`CFG_WHISPER_WORD_TIMESTAMPS`](../reference/settings.md#cfg_whisper_word_timestamps)       | empty                                                       | `1` for the time of every word, `0` for timings per segment                                                                                       |
-| [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                               | `2`                                                         | Model requests the `models` worker keeps in flight against the media service at once                                                              |
+| Setting                                                                                     | Default                                                     | What it does                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`CFG_EMS_URL`](../reference/settings.md#cfg_ems_url)                                       | `http://127.0.0.1:8181`; the install sets `http://ems:8181` | Where the media service answers                                                                                                                                                                                               |
+| [`CFG_EMS_KEY`](../reference/settings.md#cfg_ems_key)                                       | none; the install sets it                                   | The key the media service expects                                                                                                                                                                                             |
+| [`CFG_EMS_CONNECT_RETRY`](../reference/settings.md#cfg_ems_connect_retry)                   | `90`                                                        | Seconds a background request keeps retrying while the media service refuses connections                                                                                                                                       |
+| [`CFG_EMS_LINK_INTERVAL_SECONDS`](../reference/settings.md#cfg_ems_link_interval_seconds)   | `60`                                                        | How often `ems-link` asks whether the media service answers                                                                                                                                                                   |
+| [`CFG_EMS_FILES_ADDRESS`](../reference/settings.md#cfg_ems_files_address)                   | empty; the install sets it                                  | Where the media service reaches EiN's files; empty: steps that name a file wait                                                                                                                                               |
+| [`CFG_EMS_FILES_PORT`](../reference/settings.md#cfg_ems_files_port)                         | `2224`                                                      | The port `ems-files` listens on while that address is set                                                                                                                                                                     |
+| [`CFG_EMS_FILES_TLS`](../reference/settings.md#cfg_ems_files_tls)                           | `false`                                                     | Encrypt the media service's file connections with TLS                                                                                                                                                                         |
+| [`CFG_EMS_PAGE_ADDRESS`](../reference/settings.md#cfg_ems_page_address)                     | empty                                                       | Where the media service reaches EiN's pages, as `host:port`, to render one for a TV, as the system's settings hold it (one set for a single command is ignored); empty: the host of `CFG_EMS_FILES_ADDRESS` at EiN's own port |
+| [`CFG_WHISPER_LANGUAGE`](../reference/settings.md#cfg_whisper_language)                     | empty                                                       | A language sent with every transcription; empty lets the media service decide                                                                                                                                                 |
+| [`CFG_WHISPER_VAD_MIN_SILENCE_MS`](../reference/settings.md#cfg_whisper_vad_min_silence_ms) | empty                                                       | The pause that ends a stretch of speech                                                                                                                                                                                       |
+| [`CFG_WHISPER_WORD_TIMESTAMPS`](../reference/settings.md#cfg_whisper_word_timestamps)       | empty                                                       | `1` for the time of every word, `0` for timings per segment                                                                                                                                                                   |
+| [`CFG_MODEL_SLOTS`](../reference/settings.md#cfg_model_slots)                               | `2`                                                         | Model requests the `models` worker keeps in flight against the media service at once                                                                                                                                          |
 
 For the languages of a family archive, prefer `EMS_WHISPER_LANGUAGES` in `.env` to
 `CFG_WHISPER_LANGUAGE`: the first biases detection, so a holiday clip in English is still

@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html" aria-current="page">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="webdav.html">WebDAV</a></li></ul></section>
+<section class="here"><h2>Using EiN</h2><ul><li><a href="interface.html">Finding your way around</a></li><li><a href="search.html">Search and the finder</a></li><li><a href="home.html">Home and statistics</a></li><li><a href="devices.html" aria-current="page">Devices</a></li><li><a href="sharing.html">Sharing</a></li><li><a href="profile.html">Your profile, favourites and trash</a></li><li><a href="customizing.html">Your sidebar and top bar</a></li><li><a href="phone.html">EiN on a phone</a></li><li><a href="app-privacy.html">The EiN app's privacy policy</a></li><li><a href="webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -336,7 +336,8 @@ device-key ruby-phone --origin https://ein.wrenfield.example         <span class
 device-key ruby-phone --off</code></pre></div>
 <h3 id="pair-the-ein-app">Pair the EiN app<a class="anchor" href="#pair-the-ein-app" aria-label="Link to this section"></a></h3>
 <p>The EiN app for Android signs in with a key of its own, made for one phone, instead of your password.
-How to install the app, and what it does, is in <a href="phone.html#the-ein-app">The EiN app</a>.</p>
+How to install the app, and what it does, is in <a href="phone.html#the-ein-app">The EiN app</a>. The app can
+pair itself, signed in once with your password on the phone (see there); or pair it from this page:</p>
 <ol>
 <li>Make the phone a device of the class <code>phone</code>, and open its page at the address the phone will
 reach EiN at, such as <code>https://ein.wrenfield.example</code>, and its <strong>Info</strong> tab.</li>
@@ -344,7 +345,7 @@ reach EiN at, such as <code>https://ein.wrenfield.example</code>, and its <stron
 <li>Scan it with the EiN app, or with the phone&#39;s camera where the app is installed. The code works
 once, for 15 minutes; the page says when the app has taken it.</li>
 </ol>
-<p>The app then acts as you, whoever chose <strong>Pair the app</strong>, and nothing more: it opens EiN&#39;s pages as
+<p>The app then acts as you, whoever chose <strong>Pair the app</strong> or signed in on the phone, and nothing more: it opens EiN&#39;s pages as
 you without asking for your password, adds the phone&#39;s positions to its track with its
 <a href="phone.html#report-where-your-phone-is">position reports</a> on, and, with its
 <a href="phone.html#back-up-your-phone-automatically">photo backup</a> on, sends the phone&#39;s photos into your

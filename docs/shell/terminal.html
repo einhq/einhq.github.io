@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/app-privacy.html">The EiN app's privacy policy</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section class="here"><h2>The shell and SSH</h2><ul><li><a href="terminal.html" aria-current="page">The terminal</a></li><li><a href="bash.html">The shell language</a></li><li><a href="commands.html">Commands by task</a></li><li><a href="editor.html">The editor</a></li><li><a href="ssh-sftp.html">SSH and SFTP</a></li><li><a href="remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -241,7 +241,7 @@ closing a browser tab leaves its shells to end after the five minutes.</li>
 who signs in on that browser finds none of your shells.</li>
 <li><strong>When EiN restarts</strong>, for example for an update, every shell ends. The tabs stay, and each
 starts a fresh shell once EiN answers again.</li>
-<li><strong>While the connection is down</strong>, the top bar shows a red <strong>Disconnected</strong> badge, and each tab
+<li><strong>While the connection is down</strong>, the top bar shows <strong>Reconnecting</strong>, or <strong>Offline</strong> once EiN cannot be reached, and each tab
 whose shell is not connected shows a red crossed-out plug in place of its terminal icon. The
 terminal reconnects by itself; there is nothing to press.</li>
 </ul>
@@ -709,7 +709,7 @@ bash on Linux.</p>
 small screen press <kbd>Alt</kbd>+<kbd>T</kbd> with a keyboard, or use SSH from a computer.</p>
 <p><strong>The terminal closed while I was clicking on the page.</strong> A click outside the terminal hides it. Its
 shells keep running; press <kbd>Alt</kbd>+<kbd>T</kbd> to bring it back.</p>
-<p><strong>The top bar says Disconnected, or a tab shows a red crossed-out plug.</strong> EiN cannot be reached
+<p><strong>The top bar says Reconnecting or Offline, or a tab shows a red crossed-out plug.</strong> EiN cannot be reached
 from the browser just now: the badge is the page&#39;s own connection, the plug that tab&#39;s shell. The
 terminal reconnects by itself and finds its shell again if the connection is back within five
 minutes.</p>

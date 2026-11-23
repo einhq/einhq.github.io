@@ -128,9 +128,9 @@ A write without a key is a signed-in person's, as every `/file` write is, and ne
 
 ## The EiN app's key
 
-A phone paired with the EiN app (`device-app`, or **Pair the app** on the phone's **Info** tab; see
-[Pair the EiN app](../guide/devices.md#pair-the-ein-app)) holds a key of its own instead of an
-account's password.
+A phone paired with the EiN app (`device-app`, **Pair the app** on the phone's **Info** tab, or
+**Sign in with a password** in the app; see [Pair the EiN app](../guide/devices.md#pair-the-ein-app))
+holds a key of its own instead of an account's password.
 
 - **Whose it is.** It acts as the account that paired it, never as the administrator, whose account
   pairs no app. Only whoever may change the phone pairs it.
@@ -141,8 +141,14 @@ account's password.
   answers known or not and never where) and [uploads in pieces](../reference/routes.md#uploads-in-pieces)
   into the account's folders.
 - **How it is made.** `device-app <phone> --pair --origin <address>` shows a QR code with a code that
-  works once, for 15 minutes; the app trades it for the key at `/__app/pair`. Both go through the
-  same limit on failed tries as passwords, and show on the **Activity** tab as signed in or failed,
+  works once, for 15 minutes; the app trades it for the key at `/__app/pair`. Or the app sends an
+  account's username and password once to `/__app/sign-in`, with its installation (Android's id
+  for the app on that phone), and is given the key for the phone the request names, the phone
+  marked with that installation, or, for a member of the `devices` group who asks for it, a new
+  phone of the class `phone` named as the phone calls itself; any of them one the account may change.
+  Without one, it is answered with the phones the account may pair, and the app asks which. Either
+  way the phone is marked with the installation (its `install`) and no other device is. All of it
+  goes through the same limit on failed tries as passwords, and show on the **Activity** tab as signed in or failed,
   the way in `app` ([Monitoring](monitoring.md#the-activity-tab)).
 - **Where it is kept.** In the phone's `.app`, mode `0600` and the administrator's, as a hash: the
   code and the key are never shown again.

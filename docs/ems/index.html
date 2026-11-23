@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/app-privacy.html">The EiN app's privacy policy</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -523,7 +523,8 @@ the media service&#39;s side, and a restart leaves no secret behind that still w
 standard install, where both run on the same machine and nothing else is on the compose network.
 The requests to the media service are not encrypted there either.</li>
 <li>The media service&#39;s container has <code>/dev/fuse</code> and the <code>SYS_ADMIN</code> capability for the mount, which
-<code>setup.sh</code> gives it. Without a mount it refuses the request, and the step that sent it waits and
+<code>setup.sh</code> gives it. The media service itself runs as a user of its own with no capability, and
+only the program that mounts takes <code>SYS_ADMIN</code> up. Without a mount it refuses the request, and the step that sent it waits and
 tries again, as when the media service is away. While <code>CFG_EMS_FILES_ADDRESS</code> is empty, EiN sends
 no request that names a file, and those steps wait the same way.</li>
 </ul>
@@ -772,22 +773,19 @@ waits for the card: a separate model process answers searches on the CPU through
 the card, <a href="gpu.html#share-one-card-with-the-language-model">sharing the card with the language model</a>
 and <a href="gpu.html#be-told-when-the-card-goes-missing">being told when the card goes missing</a>.</p>
 <h2 id="change-how-it-works">Change how it works<a class="anchor" href="#change-how-it-works" aria-label="Link to this section"></a></h2>
-<p>The media service is configured by its environment alone. <code>~/ein/.env</code> is that environment, so an
-<code>EMS_</code> line there reaches it:</p>
+<p>The media service is configured by its environment alone: the <code>EMS_</code> lines of <code>~/ein/.env</code>, and
+<code>TZ</code>. It gets none of the file&#39;s other lines, its passwords among them.</p>
 <ol>
 <li><p>Add or change the line in <code>~/ein/.env</code>:</p>
 <div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
 <span class="hljs-attr">EMS_WHISPER_LANGUAGES</span>=sv,en</code></pre></div>
 </li>
-<li><p>Apply it:</p>
+<li><p>Apply it, with <code>./setup.sh</code>, which names each <code>EMS_</code> line to the media service:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose up -d</code></pre></div>
-<p>Under podman-compose, a container that <code>podman compose up -d</code> makes again has no swap limit, so
-the media service&#39;s idle models may go to swap and a search waits for them; <code>./setup.sh</code> makes
-the containers again with the limit.</p>
+./setup.sh</code></pre></div>
 </li>
 </ol>
-<p>Any change restarts the media service, and EiN with it, since both read <code>.env</code>. Requests in flight fail and are retried; see
+<p>Any change restarts the media service, and EiN with it. Requests in flight fail and are retried; see
 <a href="#when-the-media-service-restarts">When the media service restarts</a>.</p>
 <p>These are the settings an administrator is most likely to need:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -973,7 +971,7 @@ with <code>CFG_MODEL_SLOTS</code>, the Media module&#39;s, in <strong>Processing
 <tr>
 <td><a href="../reference/settings.html#cfg_ems_page_address"><code>CFG_EMS_PAGE_ADDRESS</code></a></td>
 <td>empty</td>
-<td>Where the media service reaches EiN&#39;s pages, as <code>host:port</code>, to render one for a TV; empty: the host of <code>CFG_EMS_FILES_ADDRESS</code> at EiN&#39;s own port</td>
+<td>Where the media service reaches EiN&#39;s pages, as <code>host:port</code>, to render one for a TV, as the system&#39;s settings hold it (one set for a single command is ignored); empty: the host of <code>CFG_EMS_FILES_ADDRESS</code> at EiN&#39;s own port</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_whisper_language"><code>CFG_WHISPER_LANGUAGE</code></a></td>

@@ -292,8 +292,9 @@ one.
 
 On a phone, EiN runs in the browser; there is no app to install from a store. The page fits the
 screen: the EiN mark at the top left opens the menu. From the browser's menu, a phone can add EiN
-to its home screen, where it opens full screen, like an app, when EiN is served over HTTPS. EiN
-does not work offline. [EiN on a phone](../guide/phone.md) shows what differs.
+to its home screen, where it opens full screen, like an app, when EiN is served over HTTPS; then it
+also opens without a connection and, on Android, is offered in the phone’s **Share** menu.
+[EiN on a phone](../guide/phone.md) shows what differs.
 
 ## Keep EiN running
 

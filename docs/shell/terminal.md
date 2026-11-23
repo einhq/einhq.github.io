@@ -133,7 +133,7 @@ page is away.
   who signs in on that browser finds none of your shells.
 - **When EiN restarts**, for example for an update, every shell ends. The tabs stay, and each
   starts a fresh shell once EiN answers again.
-- **While the connection is down**, the top bar shows a red **Disconnected** badge, and each tab
+- **While the connection is down**, the top bar shows **Reconnecting**, or **Offline** once EiN cannot be reached, and each tab
   whose shell is not connected shows a red crossed-out plug in place of its terminal icon. The
   terminal reconnects by itself; there is nothing to press.
 
@@ -451,7 +451,7 @@ small screen press <kbd>Alt</kbd>+<kbd>T</kbd> with a keyboard, or use SSH from 
 **The terminal closed while I was clicking on the page.** A click outside the terminal hides it. Its
 shells keep running; press <kbd>Alt</kbd>+<kbd>T</kbd> to bring it back.
 
-**The top bar says Disconnected, or a tab shows a red crossed-out plug.** EiN cannot be reached
+**The top bar says Reconnecting or Offline, or a tab shows a red crossed-out plug.** EiN cannot be reached
 from the browser just now: the badge is the page's own connection, the plug that tab's shell. The
 terminal reconnects by itself and finds its shell again if the connection is back within five
 minutes.

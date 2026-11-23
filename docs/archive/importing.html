@@ -66,7 +66,7 @@
         <nav class="docs-nav" aria-label="Pages">
 <ul class="top"><li><a href="../index.html">Welcome</a></li></ul>
 <p class="docs-part">Core</p><section><h2>Getting started</h2><ul><li><a href="../start/how-ein-works.html">How EiN works</a></li><li><a href="../start/install.html">Install EiN</a></li><li><a href="../start/first-steps.html">First steps</a></li></ul></section>
-<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
+<section><h2>Using EiN</h2><ul><li><a href="../guide/interface.html">Finding your way around</a></li><li><a href="../guide/search.html">Search and the finder</a></li><li><a href="../guide/home.html">Home and statistics</a></li><li><a href="../guide/devices.html">Devices</a></li><li><a href="../guide/sharing.html">Sharing</a></li><li><a href="../guide/profile.html">Your profile, favourites and trash</a></li><li><a href="../guide/customizing.html">Your sidebar and top bar</a></li><li><a href="../guide/phone.html">EiN on a phone</a></li><li><a href="../guide/app-privacy.html">The EiN app's privacy policy</a></li><li><a href="../guide/webdav.html">WebDAV</a></li></ul></section>
 <section><h2>The shell and SSH</h2><ul><li><a href="../shell/terminal.html">The terminal</a></li><li><a href="../shell/bash.html">The shell language</a></li><li><a href="../shell/commands.html">Commands by task</a></li><li><a href="../shell/editor.html">The editor</a></li><li><a href="../shell/ssh-sftp.html">SSH and SFTP</a></li><li><a href="../shell/remote.html">Reaching other machines</a></li></ul></section>
 <section><h2>Administration</h2><ul><li><a href="../admin/install.html">Installing in detail</a></li><li><a href="../admin/network.html">Ports, HTTPS and remote access</a></li><li><a href="../admin/configuration.html">Configuration</a></li><li><a href="../admin/modules.html">Modules</a></li><li><a href="../admin/accounts.html">Accounts and groups</a></li><li><a href="../admin/permissions.html">Permissions in depth</a></li><li><a href="../admin/devices.html">Devices and their keys</a></li><li><a href="../admin/monitoring.html">Health and status</a></li><li><a href="../admin/processing.html">Processing and pipelines</a></li><li><a href="../admin/services-logs.html">Services and logs</a></li><li><a href="../admin/performance.html">Performance and sizing</a></li><li><a href="../admin/updating.html">Updating</a></li><li><a href="../admin/supervisor.html">The supervisor</a></li><li><a href="../admin/data.html">Your data: backup, moving and removing</a></li><li><a href="../admin/troubleshooting.html">Troubleshooting</a></li></ul></section>
 <section><h2>Concepts</h2><ul><li><a href="../concepts/nodes.html">Nodes and node types</a></li><li><a href="../concepts/tree.html">The tree</a></li><li><a href="../concepts/links.html">Links</a></li><li><a href="../concepts/files.html">Files and storage</a></li><li><a href="../concepts/pipelines.html">Changes and pipelines</a></li><li><a href="../concepts/devices.html">Devices, endpoints and drivers</a></li></ul></section>
@@ -114,6 +114,11 @@ album. The usual way past staging is to upload straight into an album that alrea
 <td><strong>Create → Import media</strong></td>
 <td>the staging category you choose</td>
 <td>yes</td>
+</tr>
+<tr>
+<td><strong>Share</strong> to EiN from a phone&#39;s gallery</td>
+<td>the staging category you choose, normally the Inbox</td>
+<td>no</td>
 </tr>
 <tr>
 <td>Dropping files on the <strong>Staging</strong> page</td>
@@ -171,7 +176,8 @@ you choose.</p>
 <li>Open the <strong>Create</strong> menu (the plus in the top bar) and choose <strong>Import media</strong>. The same dialog
 opens from the <strong>Import media</strong> button on the Staging page, the <strong>Import</strong> button on a category&#39;s
 card, <strong>Import media…</strong> in a category&#39;s ⋮ menu and, while the Home page has no news yet, the
-<strong>Import media</strong> button there.</li>
+<strong>Import media</strong> button there. Pictures shared to EiN from a phone&#39;s gallery open it too, with
+the files already chosen (see <a href="../guide/phone.html#share-pictures-to-ein">Share pictures to EiN</a>).</li>
 <li>Under <strong>Into which category?</strong>, pick a category. Each shows how many files it holds and its
 folder, for example &quot;0 files · files/inbox&quot;. The Inbox is chosen unless you opened the dialog
 from a category.</li>
@@ -409,8 +415,9 @@ same name, edited copies, and the video of a Live Photo.</p>
 its processing waits behind other work, so pictures you upload to the Inbox in the meantime are
 ready first. A <strong>Scans</strong> category waits behind other work in the same way.</p>
 <p>An XMP file that a photo editor or a scanning tool writes beside a picture (<code>IMG_0001.jpg.xmp</code> or
-<code>IMG_0001.xmp</code>) is paired the same way. Every kind of category pairs sidecars except
-<strong>Messaging</strong> and <strong>Screenshots</strong>.</p>
+<code>IMG_0001.xmp</code>) is paired the same way. The files it names as what the picture was made from, such
+as a scan&#39;s master, become versions of the picture (<a href="file-types.html#sidecar-files">Sidecar files</a>).
+Every kind of category pairs sidecars except <strong>Messaging</strong> and <strong>Screenshots</strong>.</p>
 <h3 id="if-the-export-went-into-the-inbox">If the export went into the Inbox<a class="anchor" href="#if-the-export-went-into-the-inbox" aria-label="Link to this section"></a></h3>
 <p>A folder that arrives in the Inbox is looked at to see where it came from. When it looks like an
 export, a blue box on the Staging page and on the Inbox&#39;s <strong>Files</strong> tab says so, for example

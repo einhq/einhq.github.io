@@ -202,6 +202,14 @@ and its caption. [A Google Takeout export](importing.md#a-google-takeout-export)
 part of a Takeout becomes. A sidecar that matches no picture stays where it is, among the
 category's **Other files**.
 
+An XMP file can also say which files the picture was made from, as a scanning tool does for the
+lossless master it made a picture from and the master's infrared scan
+(`xmpMM:DerivedFrom` and `xmpMM:Ingredients`). Each of those files that lies beside the picture
+becomes a version of it, as a [camera RAW](#camera-raw) becomes one of its JPEG: it leaves the
+folder and the album, and the viewer lists it under **Versions**, where its name downloads it. A
+file named this way that is uploaded after the picture is filed when it arrives. Only files in the
+same folder count, by their names; a name with a folder in it is passed over.
+
 ## GPS tracks
 
 A GPX file is a route recorded by a GPS tracker, a watch or a tracking app. In staging it is not a
@@ -250,7 +258,8 @@ Some media formats are among these, because EiN does not recognise them from the
 | JPEG XL                       | `.jxl`          |
 
 To have EiN work with such a file, convert it on your own computer first: a video to MP4, a sound to
-M4A, FLAC or WAV, a JPEG XL picture to JPEG or PNG.
+M4A, FLAC or WAV, a JPEG XL picture to JPEG or PNG. A JPEG XL master that a picture's XMP file names
+as what it was made from becomes a version of that picture instead ([Sidecar files](#sidecar-files)).
 
 ## Your originals stay as they are
 
