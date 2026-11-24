@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Settings – EiN documentation</title>
-    <meta name="description" content="Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
+    <meta name="description" content="Every setting of an EiN with all its modules: 125 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/settings.html">
     <meta property="og:title" content="Settings – EiN documentation">
-    <meta property="og:description" content="Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
+    <meta property="og:description" content="Every setting of an EiN with all its modules: 125 of them, in the groups the Settings page shows. Configuration says where each value comes from and how to change it.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,7 +94,7 @@
           <h1>Settings</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `config list` on a running EiN: make reference, never by hand. --><p>Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
+<!-- Written by tools/reference.ts from `config list` on a running EiN: make reference, never by hand. --><p>Every setting of an EiN with all its modules: 125 of them, in the groups the Settings page shows. <a href="../admin/configuration.html">Configuration</a> says where each value comes from and how to change it.</p>
 <ul>
 <li><strong>Who it is for</strong>: <em>everyone</em> is a system setting, which only an administrator changes, on Settings → System or with <code>config set</code>; <em>each person</em> is a preference everyone sets for themselves, on Profile → Preferences.</li>
 <li><strong>Default</strong>: the value until someone changes it. A deployment can set another in <code>.env</code>, and a module can choose one.</li>
@@ -799,6 +799,37 @@
 </tr>
 </tbody></table>
 </div>
+<h3 id="cfg_devices_networks"><code>CFG_DEVICES_NETWORKS</code><a class="anchor" href="#cfg_devices_networks" aria-label="Link to this section"></a></h3>
+<p><strong>Local networks devices are on</strong>. Addresses or ranges off the public internet, such as 192.168.1.0/24 or 192.168.1.20, separated by commas, where the http driver and the cameras (rtsp, onvif) may ask a device. Anyone in the devices group chooses where those devices are, and EiN and its restreamer connect there, so a host on this machine, a local network, the containers beside EiN or a cloud&#39;s metadata service is refused unless it is in one of these.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means the http driver and the cameras ask hosts on the public internet only</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+<tr>
+<td>Restarts</td>
+<td><code>devices-bridge</code></td>
+</tr>
+<tr>
+<td>From the module</td>
+<td>Devices</td>
+</tr>
+</tbody></table>
+</div>
 <h3 id="cfg_devices_mqtt_url"><code>CFG_DEVICES_MQTT_URL</code><a class="anchor" href="#cfg_devices_mqtt_url" aria-label="Link to this section"></a></h3>
 <p><strong>MQTT broker</strong>. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --devices runs one beside EiN, in the devices sidecar, and sets this.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1411,6 +1442,53 @@
 </tr>
 </tbody></table>
 </div>
+<h2 id="maps">Maps<a class="anchor" href="#maps" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_map_center"><code>CFG_MAP_CENTER</code><a class="anchor" href="#cfg_map_center" aria-label="Link to this section"></a></h3>
+<p><strong>Where maps open</strong>. The place a map opens on when it has nothing of its own to show, such as the Map page without a place in its address, and how close it looks: a latitude, a longitude and a zoom from 2 (the world) to 18 (a house). Each person may choose their own.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td><code>51.5074, -0.1278, 11</code></td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>position</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="cfg_user_map_center"><code>CFG_USER_MAP_CENTER</code><a class="anchor" href="#cfg_user_map_center" aria-label="Link to this section"></a></h3>
+<p><strong>Where maps open</strong>. The place a map opens on for you when it has nothing of its own to show, and how close it looks: a latitude, a longitude and a zoom from 2 (the world) to 18 (a house). Empty follows the system setting.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Each person (Profile → Preferences)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means where the system opens maps</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>position</td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="media-service">Media service<a class="anchor" href="#media-service" aria-label="Link to this section"></a></h2>
 <h3 id="cfg_ems_url"><code>CFG_EMS_URL</code><a class="anchor" href="#cfg_ems_url" aria-label="Link to this section"></a></h3>
 <p><strong>Media service address</strong>. Where EMS answers. Every model and media-tool request goes there; the models themselves are configured on the EMS side.</p>
@@ -1688,6 +1766,29 @@
 </tbody></table>
 </div>
 <h2 id="modules">Modules<a class="anchor" href="#modules" aria-label="Link to this section"></a></h2>
+<h3 id="cfg_module_sources_insecure"><code>CFG_MODULE_SOURCES_INSECURE</code><a class="anchor" href="#cfg_module_sources_insecure" aria-label="Link to this section"></a></h3>
+<p><strong>Hosts reached over plain http</strong>. Hosts whose module sources and repositories may be addressed with http:// rather than https://, as host or host:port separated by spaces, such as forge.lan:3000. Anyone on the network between EiN and such a host can read its token and change the modules&#39; code on the way, so name one only on a network you trust. This machine (localhost, 127.0.0.1) needs no entry.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Who it is for</td>
+<td>Everyone (an administrator sets it)</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>empty, which means every source over https, but on this machine</td>
+</tr>
+<tr>
+<td>Kind</td>
+<td>string</td>
+</tr>
+</tbody></table>
+</div>
 <h3 id="cfg_module_prereleases"><code>CFG_MODULE_PRERELEASES</code><a class="anchor" href="#cfg_module_prereleases" aria-label="Link to this section"></a></h3>
 <p><strong>Install prereleases</strong>. Whether installing and updating a module takes its prereleases too, such as v0.6.0-dev.3, and not only its releases. A prerelease counts as the release it leads to when a module&#39;s dependency is checked: 0.6.0-dev.3 meets ^0.6.0. Off for an archive; on for an installation that follows a module&#39;s development.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1800,29 +1901,6 @@
 <tr>
 <td>Kind</td>
 <td>a key: never readable, in no shell</td>
-</tr>
-</tbody></table>
-</div>
-<h3 id="cfg_module_sources_insecure"><code>CFG_MODULE_SOURCES_INSECURE</code><a class="anchor" href="#cfg_module_sources_insecure" aria-label="Link to this section"></a></h3>
-<p><strong>Hosts reached over plain http</strong>. Hosts whose module sources and repositories may be addressed with http:// rather than https://, as host or host:port separated by spaces, such as forge.lan:3000. Anyone on the network between EiN and such a host can read its token and change the modules&#39; code on the way, so name one only on a network you trust. This machine (localhost, 127.0.0.1) needs no entry.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Who it is for</td>
-<td>Everyone (an administrator sets it)</td>
-</tr>
-<tr>
-<td>Default</td>
-<td>empty, which means every source over https, but on this machine</td>
-</tr>
-<tr>
-<td>Kind</td>
-<td>string</td>
 </tr>
 </tbody></table>
 </div>
@@ -3466,7 +3544,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/settings.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#access-log">Access log</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#albums">Albums</a></li><li><a href="#appearance">Appearance</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#automation">Automation</a></li><li><a href="#devices">Devices</a></li><li><a href="#faces">Faces</a></li><li><a href="#language">Language</a></li><li><a href="#media-service">Media service</a></li><li><a href="#modules">Modules</a></li><li><a href="#places">Places</a></li><li><a href="#playback">Playback</a></li><li><a href="#processing">Processing</a></li><li><a href="#search">Search</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#shell">Shell</a></li><li><a href="#storage">Storage</a></li><li><a href="#todo">Todo</a></li><li><a href="#transcription">Transcription</a></li><li><a href="#trash">Trash</a></li><li><a href="#users-and-sharing">Users and sharing</a></li><li><a href="#västtrafik">Västtrafik</a></li><li><a href="#voices">Voices</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#access-log">Access log</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#albums">Albums</a></li><li><a href="#appearance">Appearance</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#automation">Automation</a></li><li><a href="#devices">Devices</a></li><li><a href="#faces">Faces</a></li><li><a href="#language">Language</a></li><li><a href="#maps">Maps</a></li><li><a href="#media-service">Media service</a></li><li><a href="#modules">Modules</a></li><li><a href="#places">Places</a></li><li><a href="#playback">Playback</a></li><li><a href="#processing">Processing</a></li><li><a href="#search">Search</a></li><li><a href="#sessions">Sessions</a></li><li><a href="#sharing">Sharing</a></li><li><a href="#shell">Shell</a></li><li><a href="#storage">Storage</a></li><li><a href="#todo">Todo</a></li><li><a href="#transcription">Transcription</a></li><li><a href="#trash">Trash</a></li><li><a href="#users-and-sharing">Users and sharing</a></li><li><a href="#västtrafik">Västtrafik</a></li><li><a href="#voices">Voices</a></li></ul></aside>
     </div>
   </body>
 </html>

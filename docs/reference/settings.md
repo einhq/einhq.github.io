@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 121 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 125 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -297,6 +297,18 @@ Every setting of an EiN with all its modules: 121 of them, in the groups the Set
 | Default | empty, which means no recording or video goes to a screen near the browser |
 | Kind | string |
 
+### `CFG_DEVICES_NETWORKS`
+
+**Local networks devices are on**. Addresses or ranges off the public internet, such as 192.168.1.0/24 or 192.168.1.20, separated by commas, where the http driver and the cameras (rtsp, onvif) may ask a device. Anyone in the devices group chooses where those devices are, and EiN and its restreamer connect there, so a host on this machine, a local network, the containers beside EiN or a cloud's metadata service is refused unless it is in one of these.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means the http driver and the cameras ask hosts on the public internet only |
+| Kind | string |
+| Restarts | `devices-bridge` |
+| From the module | Devices |
+
 ### `CFG_DEVICES_MQTT_URL`
 
 **MQTT broker**. The broker devices talk to, as mqtt://host:1883 or mqtts://host:8883. setup.sh --devices runs one beside EiN, in the devices sidecar, and sets this.
@@ -547,6 +559,28 @@ Every setting of an EiN with all its modules: 121 of them, in the groups the Set
 | Default | empty, which means the system's date and time format |
 | Kind | locale |
 
+## Maps
+
+### `CFG_MAP_CENTER`
+
+**Where maps open**. The place a map opens on when it has nothing of its own to show, such as the Map page without a place in its address, and how close it looks: a latitude, a longitude and a zoom from 2 (the world) to 18 (a house). Each person may choose their own.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `51.5074, -0.1278, 11` |
+| Kind | position |
+
+### `CFG_USER_MAP_CENTER`
+
+**Where maps open**. The place a map opens on for you when it has nothing of its own to show, and how close it looks: a latitude, a longitude and a zoom from 2 (the world) to 18 (a house). Empty follows the system setting.
+
+| | |
+| --- | --- |
+| Who it is for | Each person (Profile → Preferences) |
+| Default | empty, which means where the system opens maps |
+| Kind | position |
+
 ## Media service
 
 ### `CFG_EMS_URL`
@@ -658,6 +692,16 @@ Every setting of an EiN with all its modules: 121 of them, in the groups the Set
 
 ## Modules
 
+### `CFG_MODULE_SOURCES_INSECURE`
+
+**Hosts reached over plain http**. Hosts whose module sources and repositories may be addressed with http:// rather than https://, as host or host:port separated by spaces, such as forge.lan:3000. Anyone on the network between EiN and such a host can read its token and change the modules' code on the way, so name one only on a network you trust. This machine (localhost, 127.0.0.1) needs no entry.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | empty, which means every source over https, but on this machine |
+| Kind | string |
+
 ### `CFG_MODULE_PRERELEASES`
 
 **Install prereleases**. Whether installing and updating a module takes its prereleases too, such as v0.6.0-dev.3, and not only its releases. A prerelease counts as the release it leads to when a module's dependency is checked: 0.6.0-dev.3 meets ^0.6.0. Off for an archive; on for an installation that follows a module's development.
@@ -707,16 +751,6 @@ Every setting of an EiN with all its modules: 121 of them, in the groups the Set
 | Who it is for | Everyone (an administrator sets it) |
 | Default | none: a key is set by you, and never shown again |
 | Kind | a key: never readable, in no shell |
-
-### `CFG_MODULE_SOURCES_INSECURE`
-
-**Hosts reached over plain http**. Hosts whose module sources and repositories may be addressed with http:// rather than https://, as host or host:port separated by spaces, such as forge.lan:3000. Anyone on the network between EiN and such a host can read its token and change the modules' code on the way, so name one only on a network you trust. This machine (localhost, 127.0.0.1) needs no entry.
-
-| | |
-| --- | --- |
-| Who it is for | Everyone (an administrator sets it) |
-| Default | empty, which means every source over https, but on this machine |
-| Kind | string |
 
 ## Places
 
