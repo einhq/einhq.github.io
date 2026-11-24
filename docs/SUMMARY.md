@@ -7,6 +7,7 @@
 ## Getting started
 
 - [How EiN works](start/how-ein-works.md)
+- [Try the demo](start/demo.md)
 - [Install EiN](start/install.md)
 - [First steps](start/first-steps.md)
 

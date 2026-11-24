@@ -1,13 +1,15 @@
 # Attribution
 
 The photos listed here are the work of the people named, published on Wikimedia Commons under the
-licences given, and used in this content as the photos of invented devices. They may be renamed,
+licences given, and used in this content as the photos of invented cameras. They may be renamed,
 re-encoded or converted to another format; nothing else in them is changed. Everything else here is
 invented or generated for this content, and dedicated to the public domain (CC0 1.0).
 
+Written by `build/attribution.ts` from `sources/`.
+
 ## david-7d
 
-23 photos, for the device `david-7d`.
+23 photos, for the camera `david-7d`.
 
 | File                                                                                                                                           | Author              | Licence                                                         |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------- |
@@ -37,7 +39,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## david-7d-raw
 
-3 photos, for the device `david-7d`.
+3 photos, for the camera `david-7d`.
 
 | File                                                             | Author                    | Licence                                                   |
 | ---------------------------------------------------------------- | ------------------------- | --------------------------------------------------------- |
@@ -47,7 +49,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## erik-iphone
 
-140 photos, for the device `erik-iphone`.
+140 photos, for the camera `erik-iphone`.
 
 | File                                                                                                                                                                           | Author  | Licence                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | --------------------------------------------------------------- |
@@ -194,7 +196,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## freya-k7
 
-3 photos, for the device `freya-k7`.
+3 photos, for the camera `freya-k7`.
 
 | File                                                                                                                                                                                               | Author | Licence                                                         |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------- |
@@ -204,7 +206,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## freya-k7-raw
 
-1 photos, for the device `freya-k7`.
+1 photos, for the camera `freya-k7`.
 
 | File                                                    | Author                    | Licence                                                   |
 | ------------------------------------------------------- | ------------------------- | --------------------------------------------------------- |
@@ -212,7 +214,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## freya-s10
 
-23 photos, for the device `freya-s10`.
+23 photos, for the camera `freya-s10`.
 
 | File                                                                                                                                                                                                                   | Author | Licence                                                         |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------- |
@@ -242,7 +244,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## helen-coolpix
 
-21 photos, for the device `helen-coolpix`.
+21 photos, for the camera `helen-coolpix`.
 
 | File                                                                                                                                                             | Author     | Licence                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------- |
@@ -270,7 +272,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## jon-xpro1
 
-15 photos, for the device `jon-xpro1`.
+15 photos, for the camera `jon-xpro1`.
 
 | File                                                                                                                                                                                                                                 | Author                           | Licence       |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- | ------------- |
@@ -292,7 +294,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## jon-xpro1-raw
 
-1 photos, for the device `jon-xpro1`.
+1 photos, for the camera `jon-xpro1`.
 
 | File                                                                            | Author                    | Licence                                                   |
 | ------------------------------------------------------------------------------- | ------------------------- | --------------------------------------------------------- |
@@ -300,7 +302,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## peggy-lumix
 
-38 photos, for the device `peggy-lumix`.
+38 photos, for the camera `peggy-lumix`.
 
 | File                                                                                                                                                                             | Author                  | Licence                                                  |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | -------------------------------------------------------- |
@@ -345,7 +347,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## ruby-iphone
 
-54 photos, for the device `ruby-iphone`.
+54 photos, for the camera `ruby-iphone`.
 
 | File                                                                                                                     | Author | Licence                                                         |
 | ------------------------------------------------------------------------------------------------------------------------ | ------ | --------------------------------------------------------------- |
@@ -406,7 +408,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## samuel-d200
 
-6 photos, for the device `samuel-d200`.
+6 photos, for the camera `samuel-d200`.
 
 | File                                                                                                                                                     | Author        | Licence                                                  |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------------------------------------------------------- |
@@ -419,7 +421,7 @@ invented or generated for this content, and dedicated to the public domain (CC0 
 
 ## samuel-d200-raw
 
-2 photos, for the device `samuel-d200`.
+2 photos, for the camera `samuel-d200`.
 
 | File                                                                                | Author                    | Licence                                                   |
 | ----------------------------------------------------------------------------------- | ------------------------- | --------------------------------------------------------- |

@@ -666,6 +666,10 @@ kbd {
   font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3rem);
   line-height: 1.55;
 }
+/* The buttons keep to one row where the page is wide enough, past the text's measure. */
+.hero-copy > .actions {
+  max-width: 52rem;
+}
 .actions {
   display: flex;
   flex-wrap: wrap;

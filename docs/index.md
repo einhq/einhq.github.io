@@ -23,7 +23,7 @@ These pages come in two parts, as EiN does:
 
 ## Where to start
 
-- **You want to try EiN.** [Install EiN](start/install.md) puts it on a Linux machine with one command, and [First steps](start/first-steps.md) takes you from the first sign-in to a family using it.
+- **You want to try EiN.** [The demo](start/demo.md) is an EiN on the internet, an invented family's archive you can look around without signing in. [Install EiN](start/install.md) puts it on a Linux machine with one command, and [First steps](start/first-steps.md) takes you from the first sign-in to a family using it.
 - **You use EiN day to day.** [Finding your way around](guide/interface.md) shows the Web UI, and [Search and the finder](guide/search.md) and [Sharing](guide/sharing.md) cover what every EiN offers. With the Archive installed, [Getting your photos in](archive/importing.md) and [Albums](archive/albums.md) cover what you do most.
 - **You run EiN for others.** [Installing in detail](admin/install.md) explains every part of the installation, [Configuration](admin/configuration.md) and [Modules](admin/modules.md) how to change what it does, [Health and status](admin/monitoring.md) how to tell that it is keeping up, and [Troubleshooting](admin/troubleshooting.md) what to do when something is wrong.
 - **You work in the shell.** [The terminal](shell/terminal.md) opens EiN's shell in the browser, and [SSH and SFTP](shell/ssh-sftp.md) connects to it from your own computer.
@@ -35,7 +35,7 @@ Under **Core**, the sidebar groups the pages in sections:
 
 | Section               | What it holds                                                                                                                                   |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Getting started**   | What EiN is, installing it, and setting it up for a family.                                                                                     |
+| **Getting started**   | What EiN is, the demo, installing it, and setting it up for a family.                                                                           |
 | **Using EiN**         | The Web UI, page by page, for everyone with an account.                                                                                         |
 | **The shell and SSH** | The terminal, the shell language, the commands by task, the editor, SSH and SFTP, and reaching other machines from EiN.                         |
 | **Administration**    | Installing, configuring, watching and maintaining EiN, for the person who looks after it.                                                       |
