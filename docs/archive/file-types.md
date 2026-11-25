@@ -242,7 +242,7 @@ zip inside.
 ## Other files
 
 Any other file is kept as it came, with its name and size, and nothing is made from it. In staging
-it counts among the category's **Other files**, and the **Folder** view of the **Files** tab lists
+it counts among the category's **Other files**, and the **Nodes** view of the **Files** tab lists
 it, where you can move or discard it ([Sorting in staging](staging.md#files-folders-and-moving)).
 It does not appear on the Media page, in albums' grids or in search by content. You reach it over
 [SFTP](../shell/ssh-sftp.md) or in the [terminal](../shell/terminal.md), and an administrator also
@@ -270,14 +270,14 @@ the viewer, and the file name at the top of its details panel, always give you t
 
 ## When a file does not show up as expected
 
-| What you see                                                                        | Why                                                                                                                 | What to do                                                                                                      |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| A new picture shows a plain tile with a picture icon                                | Its thumbnails are not made yet.                                                                                    | Wait. A large import keeps the media service busy for a long while.                                             |
-| A file you uploaded into staging is counted under **Other files**                   | EiN did not recognise it as a picture, video or recording: a document, a sidecar, or a format from the table above. | Look at it in the **Folder** view of the **Files** tab. Convert an unrecognised media file and upload it again. |
-| A video or recording says "This file cannot be played"                              | The file is damaged: nothing can read it. The reason is under the message.                                          | **Download** it and check it on your own device.                                                                |
-| A video says "This browser or device cannot play AV1, the format this video is in." | The browser cannot play the format EiN makes playable videos in.                                                    | Use a current browser, or **Download** the original.                                                            |
-| A document is not found by its words                                                | It is still in staging, or it is a format whose text EiN does not read.                                             | File it into an album. Save an RTF or `.doc` file as PDF or `.docx`.                                            |
-| A RAW file is shown as an ordinary picture with no RAW detail                       | Its sensor data could not be read, so it is shown from the preview inside it.                                       | Nothing is lost: the original is kept, and **Download** gives it to you.                                        |
+| What you see                                                                        | Why                                                                                                                 | What to do                                                                                                     |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| A new picture shows a plain tile with a picture icon                                | Its thumbnails are not made yet.                                                                                    | Wait. A large import keeps the media service busy for a long while.                                            |
+| A file you uploaded into staging is counted under **Other files**                   | EiN did not recognise it as a picture, video or recording: a document, a sidecar, or a format from the table above. | Look at it in the **Nodes** view of the **Files** tab. Convert an unrecognised media file and upload it again. |
+| A video or recording says "This file cannot be played"                              | The file is damaged: nothing can read it. The reason is under the message.                                          | **Download** it and check it on your own device.                                                               |
+| A video says "This browser or device cannot play AV1, the format this video is in." | The browser cannot play the format EiN makes playable videos in.                                                    | Use a current browser, or **Download** the original.                                                           |
+| A document is not found by its words                                                | It is still in staging, or it is a format whose text EiN does not read.                                             | File it into an album. Save an RTF or `.doc` file as PDF or `.docx`.                                           |
+| A RAW file is shown as an ordinary picture with no RAW detail                       | Its sensor data could not be read, so it is shown from the preview inside it.                                       | Nothing is lost: the original is kept, and **Download** gives it to you.                                       |
 
 [Viewing photos, videos and recordings](viewer.md#when-something-is-not-as-expected) covers the
 viewer's other messages.

@@ -12,7 +12,9 @@ Choose **Home** at the top of the sidebar. On a computer, the EiN mark at the to
 you there. EiN opens on Home when you sign in, unless you were on your way to another page.
 
 The page is headed **Welcome**, "What is new in the archive, what is coming up, and this day in
-years past". Under the header:
+years past". Under the header, a line in small grey text is the administrator's note to everyone,
+when there is one (see [Show a note on the sign-in page and Home](../admin/configuration.md#show-a-note-on-the-sign-in-page-and-home)).
+Then:
 
 - **On this day** runs across the top, when there is anything to show;
 - **News** fills the wider column on the left;

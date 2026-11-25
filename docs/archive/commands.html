@@ -722,7 +722,7 @@ auto-album-assign /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg --per fil
 <h3 id="auto-album-cluster"><code>auto-album-cluster</code><a class="anchor" href="#auto-album-cluster" aria-label="Link to this section"></a></h3>
 <p>Show how the staging organizer would group the media at and under some paths (directories, albums or files) into suggested albums, writing nothing.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>auto-album-cluster [--user=&lt;string&gt;] [--strategy=&lt;string&gt;] [--significance=&lt;string&gt;] [--home=&lt;string&gt;] [--members] &lt;path&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>auto-album-cluster [--user=&lt;string&gt;] [--home=&lt;string&gt;] [--members] &lt;path&gt;...</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -748,14 +748,6 @@ auto-album-assign /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg --per fil
 <td>whose home and household count (default the staging area&#39;s owner, else you)</td>
 </tr>
 <tr>
-<td><code>--strategy=&lt;string&gt;</code></td>
-<td>how to group (events, folders, none; default the category&#39;s, else events)</td>
-</tr>
-<tr>
-<td><code>--significance=&lt;string&gt;</code></td>
-<td>how readily a day is a group of its own (fewer, normal, more; default the category&#39;s, else normal)</td>
-</tr>
-<tr>
 <td><code>--home=&lt;string&gt;</code></td>
 <td>home for every year, as lat,lng or a location path (default the residence each year, else the densest cell)</td>
 </tr>
@@ -766,7 +758,7 @@ auto-album-assign /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg --per fil
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>auto-album-cluster /home/anna/staging/files/inbox
-auto-album-cluster /archive/albums/2019-lake --members --significance more</code></pre></div>
+auto-album-cluster /archive/albums/2019-lake --members</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: AutoAlbumClusterReport: the media read, the home each year, and the groups proposed, by kind.</p>
 <h2 id="c">C<a class="anchor" href="#c" aria-label="Link to this section"></a></h2>
 <h3 id="camera"><code>camera</code><a class="anchor" href="#camera" aria-label="Link to this section"></a></h3>
@@ -905,7 +897,7 @@ camera-cover --media /archive/albums/Exempelalbum_2019/files/clip.mp4</code></pr
 </tr>
 <tr>
 <td><code>--digitizer</code></td>
-<td>scanner whose camera dates are digitisation times, not capture times.</td>
+<td>scanner whose camera dates are digitisation times, not capture times; its media are scans.</td>
 </tr>
 <tr>
 <td><code>--quicktime-utc</code></td>
@@ -1264,7 +1256,7 @@ camera-device anna-phone --off</code></pre></div>
 </tr>
 <tr>
 <td><code>--digitizer</code></td>
-<td>mark as a scanner and suppress its camera dates on linked media.</td>
+<td>mark as a scanner: its linked media are scans, and its camera dates on them are suppressed.</td>
 </tr>
 <tr>
 <td><code>--quicktime-utc</code></td>
@@ -1623,7 +1615,7 @@ events-anniversaries --days-ahead 0 --days-past 0
 events-anniversaries --today 2026-12-24 --days-ahead 7</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: each birthday, milestone memorial and wedding anniversary in the window as an events entry, in date order: the day, the sentence, whether it is a milestone, the person, and the route that draws it.</p>
 <h3 id="exif-interpret"><code>exif-interpret</code><a class="anchor" href="#exif-interpret" aria-label="Link to this section"></a></h3>
-<p>Read what a file&#39;s metadata means in the archive: its capture time, resolved from its clocks, its camera, a paired sidecar and its name (a staged file by its category&#39;s time rules), and its position node from the GPS fix or the sidecar.</p>
+<p>Read what a file&#39;s metadata means in the archive: its capture time, resolved from its clocks, its camera and a paired sidecar, whether it is a scan (its camera is a digitizer), and its position node from the GPS fix or the sidecar.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>exif-interpret [-v] &lt;input&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2914,7 +2906,7 @@ media-scan --<span class="hljs-built_in">limit</span> 500 /archive/albums
 media-scan --only media.faces.stale --scan-limit 0 /archive/albums</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: how many files were announced to the media pipeline.</p>
 <h3 id="media-sidecars"><code>media-sidecars</code><a class="anchor" href="#media-sidecars" aria-label="Link to this section"></a></h3>
-<p>Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites.</p>
+<p>Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, carry over their dates, places, captions and favourites, and file the files an XMP names as made from under <file>/versions.</p>
 <p><small>changes things</small></p>
 <div class="code"><pre tabindex="0"><code>media-sidecars [--dry-run] &lt;folder&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2945,7 +2937,7 @@ media-scan --only media.faces.stale --scan-limit 0 /archive/albums</code></pre><
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>media-sidecars /home/anna/staging/files/google-photos/upload-2026-10-18
 media-sidecars <span class="hljs-string">&#x27;/home/anna/staging/files/google-photos/Takeout/Google Photos/Sommar i Exempelstad&#x27;</span> --dry-run</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: MediaSidecarsAnswer: the sidecars found, paired, shared and unmatched, and what the files were given.</p>
+<p>With <code>JSON_OUTPUT=1</code>: MediaSidecarsAnswer: the sidecars found, paired, shared and unmatched, what the files were given, and how many files were filed as versions.</p>
 <h3 id="members-album"><code>members-album</code><a class="anchor" href="#members-album" aria-label="Link to this section"></a></h3>
 <p>List an album&#39;s media by the album&#39;s own rules: an imported album&#39;s files/ folder, links followed, the cover left out, stacks of similar photos folded.</p>
 <p><small>reads only</small></p>
@@ -4623,9 +4615,9 @@ search-people -l 5 Anna</code></pre></div>
 source-list /archive/people/ruby-wrenfield</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: one row per kept file: its link name, path, size, type, when written, and the GEDCOM record for a person.</p>
 <h3 id="staging"><code>staging</code><a class="anchor" href="#staging" aria-label="Link to this section"></a></h3>
-<p>Manage a user&#39;s private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</p>
+<p>Manage a user&#39;s private staging area: its categories and where a newly arrived folder looks like it came from, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>staging [--user=&lt;string&gt;] [--all] [--stale] [--since=&lt;string&gt;] [--full] [--queue] [--if-pending] [--at=&lt;path&gt;] [--new] [--to=&lt;string&gt;] [--name=&lt;string&gt;] [--into=&lt;path&gt;] [--share=&lt;string&gt;] [--except=&lt;path&gt;] [--expect=&lt;string&gt;] [--confidence=&lt;string&gt;] [--action=&lt;string&gt;] [--limit=&lt;string&gt;] [--cursor=&lt;string&gt;] [--refresh] [--force] [--repair] [--counts] [--where=&lt;string&gt;] [--keep=&lt;string&gt;] [--apply] [--off] [--exact] [--near] [--loose-batch=&lt;string&gt;] [--layout-only] [--idle-minutes=&lt;string&gt;] [--dry-run] [--create] [--remove] [--kind=&lt;string&gt;] [--label=&lt;string&gt;] [--destination=&lt;path&gt;] [--no-destination] [--strategy=&lt;string&gt;] [--significance=&lt;string&gt;] [--digitized=&lt;string&gt;] [--filename-dates=&lt;string&gt;] [--lane=&lt;string&gt;] [--sidecars=&lt;string&gt;] &lt;subcommand&gt; &lt;path&gt;...</code></pre></div>
+<div class="code"><pre tabindex="0"><code>staging [--user=&lt;string&gt;] [--all] [--stale] [--since=&lt;string&gt;] [--full] [--queue] [--if-pending] [--at=&lt;path&gt;] [--new] [--to=&lt;string&gt;] [--name=&lt;string&gt;] [--into=&lt;path&gt;] [--share=&lt;string&gt;] [--except=&lt;path&gt;] [--expect=&lt;string&gt;] [--confidence=&lt;string&gt;] [--action=&lt;string&gt;] [--limit=&lt;string&gt;] [--cursor=&lt;string&gt;] [--refresh] [--force] [--repair] [--counts] [--where=&lt;string&gt;] [--keep=&lt;string&gt;] [--apply] [--off] [--exact] [--near] [--loose-batch=&lt;string&gt;] [--layout-only] [--idle-minutes=&lt;string&gt;] [--dry-run] [--create] [--remove] [--label=&lt;string&gt;] &lt;subcommand&gt; &lt;path&gt;...</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -4635,11 +4627,11 @@ source-list /archive/people/ruby-wrenfield</code></pre></div>
 </thead>
 <tbody><tr>
 <td><code>&lt;subcommand&gt;</code></td>
-<td>One of <code>init</code>, <code>status</code>, <code>check</code>, <code>detect</code>, <code>category</code>, <code>retime</code>, <code>organize</code>, <code>promote</code>, <code>discard</code>, <code>accept</code>, <code>later</code>, <code>undo</code>, <code>journal</code>, <code>move</code>, <code>split</code>, <code>regroup</code>, <code>merge</code>, <code>delete</code>, <code>rename</code>, <code>pin</code>, <code>reject</code>, <code>match</code>, <code>dedupe</code>, <code>duplicates</code>, <code>separate</code>.</td>
+<td>One of <code>init</code>, <code>status</code>, <code>check</code>, <code>detect</code>, <code>category</code>, <code>organize</code>, <code>promote</code>, <code>discard</code>, <code>accept</code>, <code>undo</code>, <code>journal</code>, <code>move</code>, <code>split</code>, <code>regroup</code>, <code>merge</code>, <code>delete</code>, <code>rename</code>, <code>pin</code>, <code>reject</code>, <code>match</code>, <code>dedupe</code>, <code>duplicates</code>, <code>separate</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;path&gt;...</code></td>
-<td>a category&#39;s name, or suggested groups by path or slug in the default category of --user, as required; detect takes at most 20 folders, of staging or not (by default the folders newly arrived in the default category); organize takes the categories to organize (every one by default); retime takes a category, or a folder or file of one (every category by default); discard also takes staged files and folders; accept takes at most 20 groups (50 with --dry-run), later 100; undo takes at most 20 journal entries; move takes what to move, then the folder; regroup takes the group, then the staged files to move into it (at most 2000), or with --new the files alone; merge takes the group to keep, then the groups to fold into it; rename takes the new name after it; reject takes the group, then the library album it does not go into; match takes groups (every group of the user&#39;s by default); duplicates takes a category, a folder of staged files (all of them by default), a suggested group, or staged files (at most 200) for the sets they belong to; dedupe takes the sets to resolve (exact:<id> or near:<id>), with a category, a folder in one or a suggested group to drop their files from (the default category by default); separate takes a staged file, then the files it is no duplicate of.</td>
+<td>a category&#39;s name, or suggested groups by path or slug in the default category of --user, as required; detect takes at most 20 folders, of staging or not (by default the folders newly arrived in the default category); organize takes the categories to organize (every one by default); discard also takes staged files and folders; accept takes at most 20 groups (50 with --dry-run); undo takes at most 20 journal entries; move takes what to move, then the folder; regroup takes the group, then the staged files to move into it (at most 2000), or with --new the files alone; merge takes the group to keep, then the groups to fold into it; rename takes the new name after it; reject takes the group, then the library album it does not go into; match takes groups (every group of the user&#39;s by default); duplicates takes a category, a folder of staged files (all of them by default), a suggested group, or staged files (at most 200) for the sets they belong to; dedupe takes the sets to resolve (exact:<id> or near:<id>), with a category, a folder in one or a suggested group to drop their files from (the default category by default); separate takes a staged file, then the files it is no duplicate of.</td>
 </tr>
 </tbody></table>
 </div>
@@ -4756,7 +4748,7 @@ source-list /archive/people/ruby-wrenfield</code></pre></div>
 </tr>
 <tr>
 <td><code>--off</code></td>
-<td>pin: unpin, so the organizer manages the group again; later: bring back into its lane; separate: no longer keep the files apart.</td>
+<td>pin: unpin, so the organizer manages the group again; separate: no longer keep the files apart.</td>
 </tr>
 <tr>
 <td><code>--exact</code></td>
@@ -4780,7 +4772,7 @@ source-list /archive/people/ruby-wrenfield</code></pre></div>
 </tr>
 <tr>
 <td><code>--dry-run</code></td>
-<td>init, organize, promote, discard, accept, dedupe, duplicates, retime --refresh: say what would be done, and do none of it.</td>
+<td>init, organize, promote, discard, accept, dedupe, duplicates --refresh: say what would be done, and do none of it.</td>
 </tr>
 <tr>
 <td><code>--create</code></td>
@@ -4791,44 +4783,8 @@ source-list /archive/people/ruby-wrenfield</code></pre></div>
 <td>category: remove it, which only an empty one other than the default can be.</td>
 </tr>
 <tr>
-<td><code>--kind=&lt;string&gt;</code></td>
-<td>category: what it holds, which resets its other settings to the kind&#39;s (inbox, google-photos, scans, phone, camera, messaging, screenshots, generic)</td>
-</tr>
-<tr>
 <td><code>--label=&lt;string&gt;</code></td>
 <td>category: what a page calls it.</td>
-</tr>
-<tr>
-<td><code>--destination=&lt;path&gt;</code></td>
-<td>category: the library album its files are filed into by default.</td>
-</tr>
-<tr>
-<td><code>--no-destination</code></td>
-<td>category: no default album.</td>
-</tr>
-<tr>
-<td><code>--strategy=&lt;string&gt;</code></td>
-<td>category: how its files are grouped (events, folders, none): by time and place, by folder and file-name run, or into monthly lanes.</td>
-</tr>
-<tr>
-<td><code>--significance=&lt;string&gt;</code></td>
-<td>category: how readily a day becomes a group of its own rather than part of an Everyday lane (fewer, normal, more)</td>
-</tr>
-<tr>
-<td><code>--digitized=&lt;string&gt;</code></td>
-<td>category: on, its files are digitized copies (scans), and no clock recorded while digitizing them (camera, GPS, file name) dates them; off, they do. Its files are dated again.</td>
-</tr>
-<tr>
-<td><code>--filename-dates=&lt;string&gt;</code></td>
-<td>category: on, a date its files&#39; names spell (IMG_20190601_123456.jpg) dates them when nothing better does; off, names are not dates. Its files are dated again.</td>
-</tr>
-<tr>
-<td><code>--lane=&lt;string&gt;</code></td>
-<td>category: the lane the work on its files runs in (normal, bulk); bulk runs below all other work, for an import of thousands, and applies to work announced from then on.</td>
-</tr>
-<tr>
-<td><code>--sidecars=&lt;string&gt;</code></td>
-<td>category: whether the Google Photos Takeout JSON and XMP sidecars arriving there are paired with their files (pair, ignore), from then on.</td>
 </tr>
 </tbody></table>
 </div>
@@ -4837,14 +4793,9 @@ staging status --user anna
 staging check
 staging detect
 staging detect /home/anna/staging/files/inbox/upload-2026-10-18/Takeout
-staging category scans --create --kind scans --label <span class="hljs-string">&quot;Box 3&quot;</span>
-staging category scans --destination /archive/albums/family-prints
-staging category inbox --significance more
-staging category box-3 --digitized on
-staging category takeout --lane bulk
-staging category whatsapp --sidecars ignore
-staging retime /home/anna/staging/files/inbox --dry-run
-staging retime scans --user anna
+staging category scans --create --label <span class="hljs-string">&quot;Box 3&quot;</span>
+staging category scans --label <span class="hljs-string">&#x27;Family prints&#x27;</span>
+staging category scans --remove
 staging organize --all
 staging organize inbox --user anna --full --dry-run
 staging organize inbox --queue
@@ -4866,7 +4817,6 @@ staging promote 2019-06-20 --name <span class="hljs-string">&#x27;Cottage notes&
 staging discard 2019-06-21
 staging discard /home/anna/staging/files/inbox/upload-2026-10-01/blurry
 staging accept 2019-06-14 2019-06-16 --dry-run
-staging later 2019-07-02
 staging journal inbox --<span class="hljs-built_in">limit</span> 50
 staging undo 01JA2B3C4D5E6F7G8H9J0K1M2N
 staging move /home/anna/staging/files/inbox/box-3 /home/anna/staging/files/scans
@@ -4882,7 +4832,7 @@ staging duplicates /home/anna/staging/files/inbox/upload/IMG_0001.jpg /home/anna
 staging dedupe inbox near:01JA2B3C4D5E6F7G8H9J0K1M2N --keep 01JA2B3C4D5E6F7G8H9J0K1M2P
 staging dedupe inbox --apply --near --<span class="hljs-built_in">where</span> library
 staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/files/inbox/IMG_0002.jpg</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: promote: StagingPromoteResult; discard: StagingDiscardResult; accept: StagingAcceptResult; later: StagingLaterResult; undo: StagingUndoResult; journal: StagingJournalPage; move: StagingMoveResult; split, regroup, merge, delete, rename, pin, reject: StagingEditResult; match: StagingMatchResult; organize: StagingOrganizeReport, with --queue StagingQueueReport; init: StagingInitAnswer; retime: StagingRetimeAnswer; status: StagingStatus; check: StagingCheckAnswer; detect: StagingDetectAnswer; category: StagingCategoryAnswer; duplicates: DuplicatePage; duplicates --counts: DuplicateCounts; dedupe: DuplicateResolveResult; separate: DuplicateSeparateResult; duplicates --refresh: DuplicateRefreshResult; duplicates --repair: DuplicateRepairResult.</p>
+<p>With <code>JSON_OUTPUT=1</code>: promote: StagingPromoteResult; discard: StagingDiscardResult; accept: StagingAcceptResult; undo: StagingUndoResult; journal: StagingJournalPage; move: StagingMoveResult; split, regroup, merge, delete, rename, pin, reject: StagingEditResult; match: StagingMatchResult; organize: StagingOrganizeReport, with --queue StagingQueueReport; init: StagingInitAnswer; status: StagingStatus; check: StagingCheckAnswer; detect: StagingDetectAnswer; category: StagingCategoryAnswer; duplicates: DuplicatePage; duplicates --counts: DuplicateCounts; dedupe: DuplicateResolveResult; separate: DuplicateSeparateResult; duplicates --refresh: DuplicateRefreshResult; duplicates --repair: DuplicateRepairResult.</p>
 <h3 id="staging-hold"><code>staging-hold</code><a class="anchor" href="#staging-hold" aria-label="Link to this section"></a></h3>
 <p>Decide a file&#39;s duplicate finding before the media module reads it: a staged exact copy of a file its owner can read is held unread (deferred) unless forced, another staged file&#39;s finding is recorded, and one left on a file no longer staged is taken off.</p>
 <p><small>changes things</small></p>

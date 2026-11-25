@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 526" width="800" height="526">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 448" width="800" height="448">
   <title>Which date a picture gets</title>
   <defs>
     <marker id="dates-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
-  <rect width="800" height="526" rx="14" fill="#1a1e27" />
+  <rect width="800" height="448" rx="14" fill="#1a1e27" />
 
   <!-- headings -->
   <text x="24" y="46" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">The first source with a date wins</text>
@@ -52,36 +52,24 @@
   <line x1="46" y1="354" x2="46" y2="374" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#dates-arrow)" />
   <text x="58" y="371" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
 
-  <!-- 5: The file name -->
-  <rect x="24" y="376" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="46" y="400" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">5</text>
-  <text x="68" y="400" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The file name</text>
-  <text x="488" y="400" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from the file name</text>
-  <text x="68" y="420" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
-    fill="#a2abbb">a date the name spells, where its staging category says so</text>
-  <line x1="46" y1="432" x2="46" y2="452" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#dates-arrow)" />
-  <text x="58" y="449" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
-
   <!-- undated -->
-  <rect x="24" y="454" width="480" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
-  <text x="46" y="483" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Undated</text>
-  <text x="488" y="483" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+  <rect x="24" y="376" width="480" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="46" y="405" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Undated</text>
+  <text x="488" y="405" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
     fill="#7d8697">never when it was uploaded or last changed</text>
 
   <!-- scans -->
-  <path d="M504,248 H520 V404 H504" fill="none" stroke="#a2abbb" stroke-width="1.5" />
-  <line x1="520" y1="326" x2="536" y2="326" stroke="#a2abbb" stroke-width="1.5" />
-  <rect x="536" y="220" width="240" height="212" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <line x1="504" y1="326" x2="536" y2="326" stroke="#a2abbb" stroke-width="1.5" />
+  <rect x="536" y="220" width="240" height="196" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="556" y="250" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A scan</text>
-  <text x="556" y="270" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from a Scans category</text>
+  <text x="556" y="270" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from a registered scanner</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
-    <tspan x="556" y="304">GPS time, the camera’s</tspan>
-    <tspan x="556" y="324">clock and the file name</tspan>
-    <tspan x="556" y="344">say when it was scanned,</tspan>
-    <tspan x="556" y="364">so they are ignored.</tspan>
+    <tspan x="556" y="304">The scanner’s clock says</tspan>
+    <tspan x="556" y="324">when it was scanned,</tspan>
+    <tspan x="556" y="344">so it is ignored.</tspan>
   </text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#eceff4">
-    <tspan x="556" y="396">It waits for a person’s</tspan>
-    <tspan x="556" y="416">date: rung 1 or 2.</tspan>
+    <tspan x="556" y="378">Rungs 1 to 3 still</tspan>
+    <tspan x="556" y="398">date it.</tspan>
   </text>
 </svg>

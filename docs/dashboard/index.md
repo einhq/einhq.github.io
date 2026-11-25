@@ -60,12 +60,12 @@ The cards that come with Dashboards:
 | **Device**      | A [device](../concepts/devices.md)'s readings and switches, each as on its page                                                                                                                                              |
 | **Reading**     | One reading of a device, large, with how it went over the last hours                                                                                                                                                         |
 | **Note**        | A few words of your own, in Markdown                                                                                                                                                                                         |
+| **Map**         | A map in the style you choose, with the layers you choose on it; see [The Map card](#the-map-card)                                                                                                                           |
 
 Other modules add their own: the Archive the **Picture of the day**, **Birthdays** and
 [**Weather**](../archive/home.md#on-a-dashboard), Todo a
 **Todo list**, [Devices](../devices/index.md#on-a-dashboard) a **Camera** and a
-**Button**, and [Västtrafik](../vasttrafik/index.md#on-a-dashboard) **Departures**,
-**Vehicles on the map** and **Disruptions**. A card whose module is removed later says so on the dashboard until you take it off.
+**Button**, and [Västtrafik](../vasttrafik/index.md#on-a-dashboard) **Departures** and **Disruptions**. A card whose module is removed later says so on the dashboard until you take it off.
 
 A card holding more than its tile has room for, such as a long **Coming up** list or a device with
 many readings, shows it all in turn rather than scrolling: after a few seconds the next row glides
@@ -76,6 +76,27 @@ reduced motion, the rows fade from one to the next instead of gliding. A **Note*
 tile scrolls; make it larger.
 
 ![The Kitchen dashboard's page, By the fridge, with Share, Full screen, Arrange and the ⋮ menu at the top right, and its cards: a clock, the weather at Home, a picture of an older couple with coffee on a boat, Birthdays, a Todo list, Coming up with a todo and the birthdays ahead, and a Device card with Erik's iPhone's position on a map](../../assets/shots/dashboard.webp "Cards from Dashboards, the Archive and Todo side by side on one page.")
+
+### The Map card
+
+The **Map** card is a map like the [Map page](../archive/places.md#choose-the-style-and-the-layers):
+a style, and the layers the installed modules offer drawn on it. Its settings:
+
+- **Map style**: **Map**, **Dark map**, **Satellite** or another style a module adds. Left empty,
+  each viewer sees their own **Map style**.
+- **Layers**: what it draws, such as **Photos and videos**, **Tracks**, **Sea marks** or
+  [Västtrafik's vehicles](../vasttrafik/index.md#on-a-map). A layer that takes settings of its own
+  has them under its name as soon as it is chosen: the photos a search and a range of years,
+  Västtrafik's vehicles their stops, lines and trails.
+- **Where it looks**: drag the small map and zoom it until it shows what the card should, or click
+  the place. Left empty, the card shows what its layers draw, such as the area around Västtrafik's
+  stops, or else where maps open.
+- **Buttons**: what a viewer may do with it: **Map style** and **Layers** open the same pickers as
+  on the Map page, for as long as the card is on screen, and **Enlarge** opens the map over the
+  dashboard with both. None unless chosen, which suits a screen on a wall.
+
+Each layer draws what its viewer may see, so a screen opened by a display link draws only what is
+shared with it.
 
 ## Arrange it
 

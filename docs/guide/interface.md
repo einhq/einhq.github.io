@@ -18,6 +18,9 @@ browser. EiN shows its sign-in page.
 EiN loads afresh and opens **Home**. If you followed a link to a particular page while signed out,
 you land on the sign-in page first and go on to that page once you are in.
 
+Under the form there may be a line from your administrator, such as who to ask for an account. A
+link in it to another website opens in a new tab.
+
 > [!NOTE]
 > A fresh installation has one account, `admin`, whose password the installer prints once.
 > [Install EiN](../start/install.md) and [First steps](../start/first-steps.md) take it from there.
@@ -172,6 +175,7 @@ Choose your picture at the right end of the top bar. The menu is headed **Accoun
 | **Favourites**             | With the Archive                                          | The pictures you have marked with a heart.                                                                                                                                                                             |
 | **Profile**                | Always                                                    | Your name, description, preferences and password.                                                                                                                                                                      |
 | **Trash**                  | Always                                                    | What you have deleted, to restore or remove for good.                                                                                                                                                                  |
+| **App**                    | In the EiN app                                            | The phone the app is paired with, its version and **Unpair**, its photo backup and position reports: [The EiN app](phone.md#the-ein-app).                                                                              |
 | **Arrange navigation**     | Always                                                    | Lets you drag the entries of the sidebar, the top bar and this menu where you want them; see [Arrange by dragging](customizing.md#arrange-by-dragging).                                                                |
 | **Shortcuts** <kbd>?</kbd> | Always                                                    | Opens the list of keyboard shortcuts.                                                                                                                                                                                  |
 | **About EiN**              | Always                                                    | A dialog with EiN's version, how long it has been running, the installed modules with their versions, the services it uses (the language model, the media service) and the versions of PostgreSQL and Deno it runs on. |
@@ -224,7 +228,6 @@ The sidebar lists the pages, in four sections. The first has no heading.
 | Browse  | **Cameras**       | The cameras, phones and scanners that took the pictures: [Cameras](../archive/cameras.md)                                                                           | everyone       | archive   |
 | System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                                                                           | administrators | EiN       |
 | System  | **Status**        | How EiN is doing: [Health and status](../admin/monitoring.md)                                                                                                       | administrators | EiN       |
-| System  | **App**           | The EiN app's pairing and version: [The EiN app](phone.md#the-ein-app)                                                                                              | in the EiN app | EiN       |
 | System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                                                                         | signed in      | EiN       |
 | System  | **Statistics**    | How the archive has grown: [Home and statistics](home.md)                                                                                                           | everyone       | EiN       |
 | System  | **Documentation** | EiN's own guide, and the commands, settings and modules installed on your EiN                                                                                       | everyone       | EiN       |

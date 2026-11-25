@@ -467,9 +467,9 @@ and the Archive&#39;s <code>media-scan</code>, in <a href="../archive/processing
 <h2 id="the-bulk-lane">The bulk lane<a class="anchor" href="#the-bulk-lane" aria-label="Link to this section"></a></h2>
 <p>An event can put the work it starts in the bulk lane, below all other work, so that what people do
 in the meantime is processed first. Bulk work is put behind, never stopped: it runs whenever
-nothing else that could run is waiting. With the Archive installed, the work on a large import
-runs there; <a href="../archive/processing.html#large-imports-and-the-bulk-lane">Processing pictures</a> says
-which.</p>
+nothing else that could run is waiting. With the Archive installed, the passes that close gaps and
+redo stale work run there; <a href="../archive/processing.html#work-in-the-bulk-lane">Processing pictures</a>
+says which.</p>
 <p><code>pipeline-rerun</code> and <code>pipeline-start</code> always run in the normal lane; <code>pipeline-heal</code> keeps the
 lane an instance had.</p>
 <h2 id="the-engines-settings">The engine&#39;s settings<a class="anchor" href="#the-engines-settings" aria-label="Link to this section"></a></h2>

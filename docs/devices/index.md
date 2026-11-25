@@ -22,12 +22,14 @@ household that uses them.
 | The `ipp` driver                                                   | A network printer, asked over IPP: its state, its warnings and how much of each ink or toner is left                                                                                                                                                                    |
 | The `cast` driver                                                  | A Google Cast speaker or screen: what it plays, its volume and mute, play, pause, stop and seek, and the recordings, videos, pictures and pages whose paths are written to its `show` played on it; see [Play on a speaker or a screen](#play-on-a-speaker-or-a-screen) |
 | The `dlna` driver                                                  | A DLNA renderer, a TV's or a speaker's, without Cast: the same as `cast`'s, over UPnP AV; see [Play on a speaker or a screen](#play-on-a-speaker-or-a-screen)                                                                                                           |
+| The `browser` driver                                               | A browser that shows EiN's display page, as a screen: the same as `cast`'s, played full screen in the browser; see [A browser as a screen](#a-browser-as-a-screen)                                                                                                      |
 | The `snmp` driver                                                  | A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume's use and its temperatures                                                                                                                                                    |
 | The `network` driver                                               | Anything else on the network: whether it answers, and how fast                                                                                                                                                                                                          |
 | The `http` driver                                                  | A web API that answers JSON, asked at its address for the readings you name, and set at the addresses you name: the weather, the price of electricity, a device on your network with a web API of its own; see [A web API](#a-web-api)                                  |
 | The `rtsp` driver                                                  | A camera that sends its picture over RTSP: its streams, a picture of each now, and the picture live; see [A camera](#a-camera)                                                                                                                                          |
 | The `onvif` driver                                                 | A camera that speaks ONVIF, found on the network: its streams as `rtsp`'s, its events (motion, the people it sees, tampering, a line crossed and the like), and its presets and moves where it turns; see [An ONVIF camera](#an-onvif-camera)                           |
 | The **Live** tab                                                   | A camera's picture as it comes, on its device page                                                                                                                                                                                                                      |
+| **Browser display**                                                | Makes a browser a screen to show on, with a button on the **Devices** page and a **Display** tab on its device page; see [A browser as a screen](#a-browser-as-a-screen)                                                                                                |
 | **Found on the network**                                           | The devices on the network that are not devices yet, with a button on the **Devices** page; see [Add a device found on the network](#add-a-device-found-on-the-network)                                                                                                 |
 | The **Camera** and **Button** cards                                | For [dashboards](../dashboard/index.md): a camera's picture, and one large button for a control; see [On a dashboard](#on-a-dashboard)                                                                                                                                  |
 | **MQTT broker** and **Restreamer**                                 | Two pages under **Set up** on **Settings → System**, for a [broker](#a-broker-you-already-run) and a restreamer of your own                                                                                                                                             |
@@ -705,7 +707,7 @@ lamp switched on an hour after it was asked would surprise.
 
 ## Play on a speaker or a screen
 
-Write the paths of what to play to the `show` of a speaker or screen of the `cast` or `dlna` driver,
+Write the paths of what to play to the `show` of a speaker or screen of the `cast`, `dlna` or `browser` driver,
 one per line, and it plays them in order: recordings, videos and pictures, and on the last line a
 page of EiN. `show` then says the line it is on.
 
@@ -773,7 +775,7 @@ such as **DLNA**, **DMR** or **Media sharing**.
 
 ### From the app
 
-**Show on…** gives what is open to a speaker or screen, without the terminal. It is there when you
+**Show on** gives what is open to a speaker or screen, without the terminal. It is there when you
 have one whose `show` you may write to and whose driver runs, so none while the `devices-bridge`
 service is stopped (`devices --endpoint show` lists them in the terminal):
 
@@ -806,6 +808,39 @@ address the [listener](#add-a-device-found-on-the-network) says the machine has,
 when the installer publishes EiN on another port (`EIN_HTTP_PORT`), or when there is no listener,
 where a write is refused with `EiN does not know its address on the network to give it: set
 CFG_DEVICES_MEDIA_URL`.
+
+### A browser as a screen
+
+Any browser can be a screen to show on: a computer by the TV, a tablet on the wall, a second
+monitor. It shows what it is given full screen, and waits in between.
+
+1. On the **Devices** page, choose **Browser display**, give the screen a name such as
+   **Living room TV**, and choose **Make**. This is for the administrator and the devices group.
+2. EiN gives the display's address, such as
+   `https://ein.example/display?device=living-room-tv&key=…`. Copy it and open it in the browser
+   that is to be the screen, or choose **Open here** to make this browser the screen.
+3. The page says **Waiting for something to show** under the screen's name. Tap or click it once: a
+   browser goes full screen, and plays sound, only after a tap.
+
+From then on it is listed in **Show on** for everyone who may use it, and its `show`, `play`, `pause`,
+`stop`, `seek`, `volume` and `muted` work as a Cast screen's do. It plays each thing in a form the
+browser says it plays: a video the browser cannot play as it is goes as one stream made by the media
+service, which cannot be sought in, unless its `video` setting is `av1`, for a browser that plays
+AV1 (Chrome, Edge and Firefox do). Until the first tap a video plays muted, with **Tap for sound** in a
+corner. The pointer hides after a few seconds.
+
+The browser keeps the address, so opening `/display` again, or starting the browser again, makes it
+the same screen. It is the screen while the page is open: closed, it is **offline** in **Show on**
+within a minute. **Sign out**, at the bottom right when the pointer moves, lets the screen go and
+forgets the address in that browser.
+
+The address holds the display's key, so anyone who has it can show the page as that screen, which
+shows only what someone chooses to show on it. The screen's device page has the address on its
+**Display** tab, with **New address**, which makes a new key: a browser showing the old address
+stops, and says so. `device-forget` removes the screen.
+
+A computer that only ever shows EiN can open it at start in kiosk mode, full screen and with sound
+from the first, as in `chromium --kiosk --autoplay-policy=no-user-gesture-required '<the address>'`.
 
 ## On a dashboard
 
@@ -944,7 +979,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power
 | A camera's page has no **Live** tab                                 | No restreamer is set, or `devices-bridge` is stopped                                               | Set the **Restreamer** ([The installer's sidecar](#the-installers-sidecar)), or `service start devices-bridge`                                                                           |
 | `… which is not there` when showing a video or a page               | The [media service](../ems/index.md) is not installed, or does not answer                          | Set `video=original` for a screen that plays the original, or see [Check that it is running](../ems/index.md#check-that-it-is-running)                                                   |
 | `… a page is never shown as the administrator` when showing a page  | The page is written by the administrator, and the media service would read it as the administrator | Write it signed in as a member                                                                                                                                                           |
-| A screen is greyed in **Show on…**                                  | It does not answer: it is off, or off the network                                                  | Turn it on; it can be chosen once EiN hears it again                                                                                                                                     |
+| A screen is greyed in **Show on**                                   | It does not answer: it is off, or off the network                                                  | Turn it on; it can be chosen once EiN hears it again                                                                                                                                     |
 | The **Live** tab stays at **Connecting…**, or says the stream ended | As above, the sidecar is not running, or the camera does not answer                                | `podman compose ps` on the machine; `./setup.sh --only devices` starts it again. `service logs devices-bridge` says what the restreamer answered                                         |
 | The **Live** tab says the browser does not play the camera's video  | The browser does not play its codec, often H.265, and the media service could not make it H.264    | Check the [media service](../ems/index.md#check-that-it-is-running), watch the smaller stream, which is often H.264, or set the camera to send H.264                                     |
 

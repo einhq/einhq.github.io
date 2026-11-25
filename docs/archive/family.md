@@ -379,7 +379,7 @@ The form stays open with the reason in a red box:
 A GEDCOM file (`.ged`) is the file genealogy programs and family tree websites export a family
 tree as. Upload one into your staging area, by **Import media**, the Media page's **Upload** or
 SFTP (see [Getting your photos in](importing.md)). Nothing is imported yet: the file waits, and
-the Staging page says so in a yellow **Needs you** box. **Review and import** opens the family tree
+the Inbox's page in Staging says so in a yellow **Needs you** box. **Review and import** opens the family tree
 (see [Look over a family tree before it is imported](#look-over-a-family-tree-before-it-is-imported)),
 where you can say who each person is before anything is written. When you press **Import**, EiN
 brings in the people and families in it:
@@ -431,7 +431,8 @@ fold them together with `person-merge` (see [People and faces](people.md#fold-se
 ### Look over a family tree before it is imported
 
 **Review and import** on the Staging page opens the family tree waiting there, drawn over the whole
-window as one tree with the archive's own people; the header counts them by what becomes of them.
+window as one tree with the archive's own people; the header counts them by what becomes of them,
+and **← Staging** above its title leads back to staging.
 Each card is a person in the file, and its coloured stripe says what the import would do with
 them:
 

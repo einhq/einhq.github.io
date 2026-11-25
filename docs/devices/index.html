@@ -137,6 +137,10 @@ household that uses them.</p>
 <td>A DLNA renderer, a TV&#39;s or a speaker&#39;s, without Cast: the same as <code>cast</code>&#39;s, over UPnP AV; see <a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></td>
 </tr>
 <tr>
+<td>The <code>browser</code> driver</td>
+<td>A browser that shows EiN&#39;s display page, as a screen: the same as <code>cast</code>&#39;s, played full screen in the browser; see <a href="#a-browser-as-a-screen">A browser as a screen</a></td>
+</tr>
+<tr>
 <td>The <code>snmp</code> driver</td>
 <td>A NAS, a router or anything else that answers SNMP: its uptime, load, memory, each volume&#39;s use and its temperatures</td>
 </tr>
@@ -159,6 +163,10 @@ household that uses them.</p>
 <tr>
 <td>The <strong>Live</strong> tab</td>
 <td>A camera&#39;s picture as it comes, on its device page</td>
+</tr>
+<tr>
+<td><strong>Browser display</strong></td>
+<td>Makes a browser a screen to show on, with a button on the <strong>Devices</strong> page and a <strong>Display</strong> tab on its device page; see <a href="#a-browser-as-a-screen">A browser as a screen</a></td>
 </tr>
 <tr>
 <td><strong>Found on the network</strong></td>
@@ -932,7 +940,7 @@ stopped with <code>hall-plug&#39;s driver shelly is not running</code>: a comman
 lamp switched on an hour after it was asked would surprise.
 <a href="../guide/devices.html#switch-something">Switch something</a> has the rest.</p>
 <h2 id="play-on-a-speaker-or-a-screen">Play on a speaker or a screen<a class="anchor" href="#play-on-a-speaker-or-a-screen" aria-label="Link to this section"></a></h2>
-<p>Write the paths of what to play to the <code>show</code> of a speaker or screen of the <code>cast</code> or <code>dlna</code> driver,
+<p>Write the paths of what to play to the <code>show</code> of a speaker or screen of the <code>cast</code>, <code>dlna</code> or <code>browser</code> driver,
 one per line, and it plays them in order: recordings, videos and pictures, and on the last line a
 page of EiN. <code>show</code> then says the line it is on.</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
@@ -1013,7 +1021,7 @@ list is done. A DLNA renderer plays one thing at a time, so EiN gives it the nex
 ends. On many TVs the renderer has to be switched on in the TV&#39;s own settings first, under a name
 such as <strong>DLNA</strong>, <strong>DMR</strong> or <strong>Media sharing</strong>.</p>
 <h3 id="from-the-app">From the app<a class="anchor" href="#from-the-app" aria-label="Link to this section"></a></h3>
-<p><strong>Show on…</strong> gives what is open to a speaker or screen, without the terminal. It is there when you
+<p><strong>Show on</strong> gives what is open to a speaker or screen, without the terminal. It is there when you
 have one whose <code>show</code> you may write to and whose driver runs, so none while the <code>devices-bridge</code>
 service is stopped (<code>devices --endpoint show</code> lists them in the terminal):</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -1059,6 +1067,34 @@ settings, plain HTTP on the speaker&#39;s network, such as <code>http://192.0.2.
 address the <a href="#add-a-device-found-on-the-network">listener</a> says the machine has, on port 8080: set it
 when the installer publishes EiN on another port (<code>EIN_HTTP_PORT</code>), or when there is no listener,
 where a write is refused with <code>EiN does not know its address on the network to give it: set CFG_DEVICES_MEDIA_URL</code>.</p>
+<h3 id="a-browser-as-a-screen">A browser as a screen<a class="anchor" href="#a-browser-as-a-screen" aria-label="Link to this section"></a></h3>
+<p>Any browser can be a screen to show on: a computer by the TV, a tablet on the wall, a second
+monitor. It shows what it is given full screen, and waits in between.</p>
+<ol>
+<li>On the <strong>Devices</strong> page, choose <strong>Browser display</strong>, give the screen a name such as
+<strong>Living room TV</strong>, and choose <strong>Make</strong>. This is for the administrator and the devices group.</li>
+<li>EiN gives the display&#39;s address, such as
+<code>https://ein.example/display?device=living-room-tv&amp;key=…</code>. Copy it and open it in the browser
+that is to be the screen, or choose <strong>Open here</strong> to make this browser the screen.</li>
+<li>The page says <strong>Waiting for something to show</strong> under the screen&#39;s name. Tap or click it once: a
+browser goes full screen, and plays sound, only after a tap.</li>
+</ol>
+<p>From then on it is listed in <strong>Show on</strong> for everyone who may use it, and its <code>show</code>, <code>play</code>, <code>pause</code>,
+<code>stop</code>, <code>seek</code>, <code>volume</code> and <code>muted</code> work as a Cast screen&#39;s do. It plays each thing in a form the
+browser says it plays: a video the browser cannot play as it is goes as one stream made by the media
+service, which cannot be sought in, unless its <code>video</code> setting is <code>av1</code>, for a browser that plays
+AV1 (Chrome, Edge and Firefox do). Until the first tap a video plays muted, with <strong>Tap for sound</strong> in a
+corner. The pointer hides after a few seconds.</p>
+<p>The browser keeps the address, so opening <code>/display</code> again, or starting the browser again, makes it
+the same screen. It is the screen while the page is open: closed, it is <strong>offline</strong> in <strong>Show on</strong>
+within a minute. <strong>Sign out</strong>, at the bottom right when the pointer moves, lets the screen go and
+forgets the address in that browser.</p>
+<p>The address holds the display&#39;s key, so anyone who has it can show the page as that screen, which
+shows only what someone chooses to show on it. The screen&#39;s device page has the address on its
+<strong>Display</strong> tab, with <strong>New address</strong>, which makes a new key: a browser showing the old address
+stops, and says so. <code>device-forget</code> removes the screen.</p>
+<p>A computer that only ever shows EiN can open it at start in kiosk mode, full screen and with sound
+from the first, as in <code>chromium --kiosk --autoplay-policy=no-user-gesture-required &#39;&lt;the address&gt;&#39;</code>.</p>
 <h2 id="on-a-dashboard">On a dashboard<a class="anchor" href="#on-a-dashboard" aria-label="Link to this section"></a></h2>
 <p>With the <a href="../dashboard/index.html">Dashboards</a> module, Devices offers two cards beside the
 dashboard&#39;s own <strong>Device</strong> and <strong>Reading</strong>:</p>
@@ -1321,7 +1357,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
 <td>Write it signed in as a member</td>
 </tr>
 <tr>
-<td>A screen is greyed in <strong>Show on…</strong></td>
+<td>A screen is greyed in <strong>Show on</strong></td>
 <td>It does not answer: it is off, or off the network</td>
 <td>Turn it on; it can be chosen once EiN hears it again</td>
 </tr>
@@ -1352,7 +1388,7 @@ attrs -J minInterval=60 /dev/heater-plug/switch-0-power</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/devices/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li class="nested"><a href="#your-own-network">Your own network</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></li><li class="nested"><a href="#from-the-app">From the app</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-it-adds">What it adds</a></li><li><a href="#what-it-needs">What it needs</a></li><li><a href="#install-it">Install it</a></li><li class="nested"><a href="#the-installers-sidecar">The installer's sidecar</a></li><li class="nested"><a href="#a-broker-you-already-run">A broker you already run</a></li><li class="nested"><a href="#your-own-network">Your own network</a></li><li><a href="#connect-a-device">Connect a device</a></li><li class="nested"><a href="#add-a-device-found-on-the-network">Add a device found on the network</a></li><li class="nested"><a href="#esphome">ESPHome</a></li><li class="nested"><a href="#shelly-second-generation-and-later">Shelly, second generation and later</a></li><li class="nested"><a href="#shelly-first-generation">Shelly, first generation</a></li><li class="nested"><a href="#a-web-api">A web API</a></li><li class="nested"><a href="#a-camera">A camera</a></li><li class="nested"><a href="#an-onvif-camera">An ONVIF camera</a></li><li class="nested"><a href="#check-that-ein-hears-them">Check that EiN hears them</a></li><li><a href="#what-a-device-becomes">What a device becomes</a></li><li><a href="#switch-things">Switch things</a></li><li><a href="#play-on-a-speaker-or-a-screen">Play on a speaker or a screen</a></li><li class="nested"><a href="#from-the-app">From the app</a></li><li class="nested"><a href="#a-browser-as-a-screen">A browser as a screen</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#readings-on-the-bus">Readings on the bus</a></li><li><a href="#who-may-do-what">Who may do what</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#settings">Settings</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

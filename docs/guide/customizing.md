@@ -530,6 +530,43 @@ Each panel has a slot, the place in a page where it is drawn:
 A panel draws a page that a module made for that place. Adding panels of your own works the same
 way in principle, but it is a module's work; see [Writing a module](../develop/modules.md).
 
+## Change the maps' styles and layers
+
+The same files hold what the maps offer: their **styles** under `"styles"` and their **layers**
+under `"layers"`, the ones listed under **Map style and layers** on the
+[Map page](../archive/places.md#choose-the-style-and-the-layers). They change by id like any entry.
+This starts [Västtrafik's vehicles](../vasttrafik/index.md#on-a-map) on and the sea marks off on
+your Map page until you choose otherwise, and hides the dark map:
+
+```json
+{
+  "layers": [
+    { "id": "vasttrafik.vehicles", "on": true },
+    { "id": "ui.seamarks", "on": false }
+  ],
+  "hide": ["ui.dark-map"]
+}
+```
+
+A style is tile sets from a tile server, drawn under everything, and a layer of your own can be tile
+sets too, drawn over the style. This adds a style of OpenTopoMap's, with its credit:
+
+```json
+{
+  "styles": [
+    {
+      "id": "me.topo",
+      "label": "Topographic",
+      "order": 35,
+      "tiles": [{ "url": "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", "options": { "maxZoom": 17, "attribution": "© OpenTopoMap (CC-BY-SA)" } }]
+    }
+  ]
+}
+```
+
+A layer that draws data, such as the Archive's pictures, is a page a module made for maps; adding
+one is a module's work, as for panels.
+
 ## Change the navigation for everyone
 
 As an administrator, signed in as `admin` or in [admin mode](interface.md#admin-mode), you write the
@@ -552,7 +589,7 @@ where they matter:
 | `"app": true`        | Only in the [EiN app](phone.md#the-ein-app), never in a browser.                                                                                               |
 
 EiN uses them itself: **Nodes** and **Status** are `admin`; **Staging**, **Settings**, **Create**
-and the account menu are `signedIn`; **Device** under **Create** is the `devices` group's; **App** is the EiN app's.
+and the account menu are `signedIn`; **Device** under **Create** is the `devices` group's; **App** in the account menu is the EiN app's.
 
 This file, for a family with no cameras to register and no devices, hides **Cameras** and
 **Devices** in the sidebar and **Camera** in the **Create** menu, keeps **Statistics** from visitors, and gives administrators a
@@ -713,6 +750,33 @@ Give one of these:
 | `admin`    | no       | `true`: shown to administrators only.                                                                                                                                                          |
 | `signedIn` | no       | `true`: never shown to a visitor.                                                                                                                                                              |
 | `app`      | no       | `true`: shown only in the EiN app.                                                                                                                                                             |
+
+### `styles`
+
+| Field      | Required | Value                                                                                                                                                                          |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`       | yes      | The style's id, such as `ui.satellite`.                                                                                                                                        |
+| `label`    | yes      | Its name under its preview.                                                                                                                                                    |
+| `tiles`    | yes      | Tile sets drawn bottom first: each `{ "url": "…/{z}/{x}/{y}.png", "options": { … } }`, the options Leaflet's (`attribution`, `minZoom`, `maxZoom`, `maxNativeZoom`, `bounds`). |
+| `order`    | no       | Its place among the styles; the first is what a map shows when nothing names another. Without it, 1000.                                                                        |
+| `admin`    | no       | `true`: shown to administrators only.                                                                                                                                          |
+| `signedIn` | no       | `true`: never shown to a visitor.                                                                                                                                              |
+
+### `layers`
+
+| Field         | Required           | Value                                                                                                  |
+| ------------- | ------------------ | ------------------------------------------------------------------------------------------------------ |
+| `id`          | yes                | The layer's id, such as `archive.tracks`.                                                              |
+| `label`       | yes                | Its name beside its switch.                                                                            |
+| `tiles`       | `tiles` or `route` | Tile sets laid over the style, as a style's.                                                           |
+| `route`       | `tiles` or `route` | The address of a module's page that draws the layer inside a map, its settings as the address's query. |
+| `icon`        | no                 | An icon, as for the sidebar, beside its switch.                                                        |
+| `description` | no                 | The line under its switch.                                                                             |
+| `on`          | no                 | `true`: on in a map that names no layers of its own, such as your Map page before you choose.          |
+| `params`      | no                 | Its settings, as a module describes them for a dashboard's **Map** card.                               |
+| `order`       | no                 | Its place among the layers. Without it, 1000.                                                          |
+| `admin`       | no                 | `true`: shown to administrators only.                                                                  |
+| `signedIn`    | no                 | `true`: never shown to a visitor.                                                                      |
 
 ## When something goes differently
 

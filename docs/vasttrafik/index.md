@@ -1,8 +1,8 @@
 # Västtrafik
 
-The Västtrafik module shows public transport in and around Gothenburg on a dashboard: when the next
-tram, bus or boat leaves a stop, where the vehicles are right now, and what disrupts them: a moved
-platform, a diversion, a line not running. It asks
+The Västtrafik module shows public transport in and around Gothenburg on a dashboard and on the
+maps: when the next tram, bus or boat leaves a stop, where the vehicles are right now, and what
+disrupts them: a moved platform, a diversion, a line not running. It asks
 [Västtrafik's open API](https://developer.vasttrafik.se) for all three, with a key of your own, and
 a screen in the hall can show it as well as a phone.
 
@@ -46,17 +46,17 @@ application that lacks a subscription, they name the API it lacks.
 
 ## On a dashboard
 
-The module offers three cards to [Dashboards](../dashboard/index.md):
+The module offers two cards to [Dashboards](../dashboard/index.md); the vehicles are a
+[map layer](#on-a-map), which the dashboard's **Map** card draws:
 
-| Card                    | What it shows                                                                                                                                                                                                                                                                                                                |
-| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Departures**          | The next departures from one stop: each line's badge in its own colours, where it is going, its platform, and the minutes until it leaves as Västtrafik now expects it. A cancelled one is struck out in red, and a line Västtrafik reports a disruption on has a warning mark.                                              |
-| **Vehicles on the map** | The trams, buses and boats around one or more stops on a map, where they are now: each a dot under its line's badge in its own colours, as on **Departures**, driving along its line's track to the next place, with a short trail behind it. Each stop is a dot under a white tag with its name, short, under the vehicles. |
-| **Disruptions**         | What Västtrafik says disrupts some stops, and some lines anywhere along them: each with its lines' badges, its title, what Västtrafik says further, and until when it lasts. The worst first, marked red, then orange, then yellow.                                                                                          |
+| Card            | What it shows                                                                                                                                                                                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Departures**  | The next departures from one stop: each line's badge in its own colours, where it is going, its platform, and the minutes until it leaves as Västtrafik now expects it. A cancelled one is struck out in red, and a line Västtrafik reports a disruption on has a warning mark. |
+| **Disruptions** | What Västtrafik says disrupts some stops, and some lines anywhere along them: each with its lines' badges, its title, what Västtrafik says further, and until when it lasts. The worst first, marked red, then orange, then yellow.                                             |
 
 Their settings:
 
-- **Stop** (**Stops** on the map): type part of its name, such as `brunns`, and pick it. The list
+- **Stop** (**Stops** on **Disruptions**): type part of its name, such as `brunns`, and pick it. The list
   holds every one of Västtrafik's stops, over eleven thousand, and shows those that match what you
   type.
 - **Lines**: only these lines, chosen among those that leave the stop within the next twelve hours.
@@ -74,24 +74,40 @@ Their settings:
   that has not begun yet as well; it says when it starts. None unless you set it.
 - **What Västtrafik says further**, on **Disruptions**: the description below each title, such as
   the reason and the hours it applies. On unless you turn it off.
-- **Metres around the stops**, on the map: how much of the map the card shows, as how far it reaches
-  beyond the stops, from 100 to 5,000 metres. The vehicles are those of the whole card,
-  however large it is, and a little beyond its edges, so that a vehicle drives in from the edge
-  rather than appearing on the map. Västtrafik gives at most 200 vehicles at a time, which a large
-  map of the city centre can hold.
-- **Trails**, on the map: behind each vehicle, the stretch of its line's track it drove in the last
-  minute, in the darker of its line's colours, and ahead of it, dimmed, the next 200 metres it will
-  drive; both fade out away from the vehicle, which draws its trail as it drives. On unless you turn
-  it off.
-
-On **Departures**, a warning mark before a departure's direction says that Västtrafik reports a
-disruption on its line, wherever along the line it is; one after the stop's name, a disruption at
-the stop itself, such as a platform moved. Hover over the mark to read what it is; the
-**Disruptions** card gives the whole text.
+  On **Departures**, a warning mark before a departure's direction says that Västtrafik reports a
+  disruption on its line, wherever along the line it is; one after the stop's name, a disruption at
+  the stop itself, such as a platform moved. Hover over the mark to read what it is; the
+  **Disruptions** card gives the whole text.
 
 The departures are asked for again as soon as EiN's answer is due, 20 seconds old unless
-[set otherwise](#how-often-it-asks-västtrafik), and the minutes count down in between. The map is
-asked for again as soon as its answer is due, five seconds old unless set otherwise, and each
+[set otherwise](#how-often-it-asks-västtrafik), and the minutes count down in between.
+
+## On a map
+
+**Västtrafik's vehicles** is a layer any map in EiN can draw: turn it on under **Map style and
+layers** on the [Map page](../archive/places.md#choose-the-style-and-the-layers), where it starts
+off, or choose it among the layers of a dashboard's [**Map** card](../dashboard/index.md#the-map-card).
+The trams, buses and boats are drawn where they are now: each a dot under its line's badge in its
+own colours, as on **Departures**, driving along its line's track to the next place, with a short
+trail behind it. The vehicles are those of the whole map and a little beyond its edges, so that a
+vehicle drives in from the edge rather than appearing on the map. A map zoomed out further than a
+city's centre asks for none, and the layer's switch says "Zoom in to see the vehicles.";
+Västtrafik gives at most 200 vehicles at a time, which a large map of the city centre can hold.
+
+On a **Map** card the layer takes settings of its own:
+
+- **Stops**: type part of a stop's name and pick it. Each stop is a dot under a white tag with its
+  name, short, under the vehicles, and a card that has no **Where it looks** of its own shows the
+  area around them.
+- **Lines**: only these lines' vehicles; every line when you choose none.
+- **Metres around the stops**: how much of the map that area takes, as how far it reaches beyond
+  the stops, from 100 to 5,000 metres.
+- **Trails**: behind each vehicle, the stretch of its line's track it drove in the last minute, in
+  the darker of its line's colours, and ahead of it, dimmed, the next 200 metres it will drive; both
+  fade out away from the vehicle, which draws its trail as it drives. On unless you turn it off.
+
+The vehicles are asked for again as soon as EiN's answer is due, five seconds old unless set
+otherwise, and each
 vehicle drives from where it is drawn to where the answer puts it, along its line's track and round
 its curves, or straight when it is off the track; it takes a second longer than the time between
 answers, so it never stops to wait for the next. Västtrafik moves its vehicles on between their own
@@ -102,7 +118,7 @@ minute, so a line coming onto the map has one within a minute.
 
 ## How often it asks Västtrafik
 
-EiN asks Västtrafik only while a card or a command wants an answer, and keeps each answer for a
+EiN asks Västtrafik only while a card, a map or a command wants an answer, and keeps each answer for a
 while, so that every screen showing the same stop costs a single call:
 
 | What                  | Kept for                                |

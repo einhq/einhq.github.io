@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 476 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 478 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 476 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 478 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,7 +94,7 @@
           <h1>Commands</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>Every command an EiN with all its modules has: 476 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>Every command an EiN with all its modules has: 478 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -106,7 +106,7 @@
 </ul>
 <p>A command of a family, such as <code>mod-install</code> or <code>user-passwd</code>, can be typed as two words where the family has a command of its own: <code>mod install archive</code>. In the shell, <code>&lt;command&gt; --help</code> says the same as these pages, for what is installed there; the documentation page in the Web UI has them too.</p>
 <h2 id="core">Core<a class="anchor" href="#core" aria-label="Link to this section"></a></h2>
-<p><a href="commands-core.html">All 233 in full</a>.</p>
+<p><a href="commands-core.html">All 235 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -145,6 +145,10 @@
 <tr>
 <td><a href="commands-core.html#awk">awk</a></td>
 <td>Pattern scanning and text processing language (fields, patterns, arrays, printf)</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#base64">base64</a></td>
+<td>Encode bytes as base64 text, or decode it with -d.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#basename">basename</a></td>
@@ -936,7 +940,11 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#ui-nav">ui-nav</a></td>
-<td>The Web UI&#39;s sidebar, top bar, panels and map layers for the caller, from every module&#39;s entries and the administrator&#39;s, the caller&#39;s groups&#39; and the user&#39;s changes.</td>
+<td>The Web UI&#39;s sidebar, top bar, panels, map styles and map layers for the caller, from every module&#39;s entries and the administrator&#39;s, the caller&#39;s groups&#39; and the user&#39;s changes.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#ui-notice">ui-notice</a></td>
+<td>The administrator&#39;s note to whoever opens EiN, which the sign-in page and Home show: the first paragraph of /etc/ui/notice.md.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#uniq">uniq</a></td>
@@ -1230,7 +1238,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#exif-interpret">exif-interpret</a></td>
-<td>Read what a file&#39;s metadata means in the archive: its capture time, resolved from its clocks, its camera, a paired sidecar and its name (a staged file by its category&#39;s time rules), and its position node from the GPS fix or the sidecar.</td>
+<td>Read what a file&#39;s metadata means in the archive: its capture time, resolved from its clocks, its camera and a paired sidecar, whether it is a scan (its camera is a digitizer), and its position node from the GPS fix or the sidecar.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#face-add">face-add</a></td>
@@ -1362,7 +1370,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#media-sidecars">media-sidecars</a></td>
-<td>Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites.</td>
+<td>Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, carry over their dates, places, captions and favourites, and file the files an XMP names as made from under <file>/versions.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#members-album">members-album</a></td>
@@ -1542,7 +1550,7 @@
 </tr>
 <tr>
 <td><a href="../archive/commands.html#staging">staging</a></td>
-<td>Manage a user&#39;s private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</td>
+<td>Manage a user&#39;s private staging area: its categories and where a newly arrived folder looks like it came from, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.</td>
 </tr>
 <tr>
 <td><a href="../archive/commands.html#staging-hold">staging-hold</a></td>

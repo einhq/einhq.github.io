@@ -125,7 +125,7 @@ Each row's menu sets what they may do:
 | **Remove access** |                                              | Takes the row away when you save.                                                                                         |
 
 Give **Can edit** only to people you trust with the album: they can share it further or make it
-private.
+private. They cannot take it from you: what the owner may do with it stays the owner's to change.
 
 Groups are made by the administrator, under **Settings → Groups** (see
 [Accounts and groups](../admin/accounts.md)). To share with part of the family only, ask for a
@@ -329,8 +329,8 @@ then **Profile**, the **Preferences** tab, and **How widely what you create is s
 Change the choice and **Save change** appears under it. [Your profile, favourites and trash](profile.md) has more on preferences.
 
 The preference applies to albums you create with **Create → Album**, and to new albums you make
-when you file pictures from your staging area. There, **New private album** always makes one only
-you can open, and pictures filed into an existing album take that album's sharing; see
+when you file pictures from your staging area with **Create album**. Pictures filed there into an
+existing album take that album's sharing; see
 [Sorting in staging](../archive/staging.md#file-a-group). Anything else you create, such as a person or a
 location, or a picture you upload into an album, takes the sharing of where it is created.
 

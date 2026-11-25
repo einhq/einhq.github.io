@@ -722,6 +722,33 @@ like any entry. This puts <strong>Years</strong> first on the <strong>Search</st
 </div>
 <p>A panel draws a page that a module made for that place. Adding panels of your own works the same
 way in principle, but it is a module&#39;s work; see <a href="../develop/modules.html">Writing a module</a>.</p>
+<h2 id="change-the-maps-styles-and-layers">Change the maps&#39; styles and layers<a class="anchor" href="#change-the-maps-styles-and-layers" aria-label="Link to this section"></a></h2>
+<p>The same files hold what the maps offer: their <strong>styles</strong> under <code>&quot;styles&quot;</code> and their <strong>layers</strong>
+under <code>&quot;layers&quot;</code>, the ones listed under <strong>Map style and layers</strong> on the
+<a href="../archive/places.html#choose-the-style-and-the-layers">Map page</a>. They change by id like any entry.
+This starts <a href="../vasttrafik/index.html#on-a-map">Västtrafik&#39;s vehicles</a> on and the sea marks off on
+your Map page until you choose otherwise, and hides the dark map:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;layers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vasttrafik.vehicles&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;on&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui.seamarks&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;on&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;hide&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;ui.dark-map&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A style is tile sets from a tile server, drawn under everything, and a layer of your own can be tile
+sets too, drawn over the style. This adds a style of OpenTopoMap&#39;s, with its credit:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;styles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;me.topo&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Topographic&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">35</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;tiles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;url&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;maxZoom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">17</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;attribution&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;© OpenTopoMap (CC-BY-SA)&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>A layer that draws data, such as the Archive&#39;s pictures, is a page a module made for maps; adding
+one is a module&#39;s work, as for panels.</p>
 <h2 id="change-the-navigation-for-everyone">Change the navigation for everyone<a class="anchor" href="#change-the-navigation-for-everyone" aria-label="Link to this section"></a></h2>
 <p>As an administrator, signed in as <code>admin</code> or in <a href="interface.html#admin-mode">admin mode</a>, you write the
 same kind of file to <code>/etc/ui/nav.json</code>. It applies to every account and to visitors, and each
@@ -756,7 +783,7 @@ where they matter:</p>
 </tbody></table>
 </div>
 <p>EiN uses them itself: <strong>Nodes</strong> and <strong>Status</strong> are <code>admin</code>; <strong>Staging</strong>, <strong>Settings</strong>, <strong>Create</strong>
-and the account menu are <code>signedIn</code>; <strong>Device</strong> under <strong>Create</strong> is the <code>devices</code> group&#39;s; <strong>App</strong> is the EiN app&#39;s.</p>
+and the account menu are <code>signedIn</code>; <strong>Device</strong> under <strong>Create</strong> is the <code>devices</code> group&#39;s; <strong>App</strong> in the account menu is the EiN app&#39;s.</p>
 <p>This file, for a family with no cameras to register and no devices, hides <strong>Cameras</strong> and
 <strong>Devices</strong> in the sidebar and <strong>Camera</strong> in the <strong>Create</strong> menu, keeps <strong>Statistics</strong> from visitors, and gives administrators a
 button that reruns failed work with
@@ -1126,6 +1153,113 @@ or hidden; neither can the search box.</p>
 </tr>
 </tbody></table>
 </div>
+<h3 id="styles"><code>styles</code><a class="anchor" href="#styles" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td>The style&#39;s id, such as <code>ui.satellite</code>.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>Its name under its preview.</td>
+</tr>
+<tr>
+<td><code>tiles</code></td>
+<td>yes</td>
+<td>Tile sets drawn bottom first: each <code>{ &quot;url&quot;: &quot;…/{z}/{x}/{y}.png&quot;, &quot;options&quot;: { … } }</code>, the options Leaflet&#39;s (<code>attribution</code>, <code>minZoom</code>, <code>maxZoom</code>, <code>maxNativeZoom</code>, <code>bounds</code>).</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>no</td>
+<td>Its place among the styles; the first is what a map shows when nothing names another. Without it, 1000.</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td>no</td>
+<td><code>true</code>: shown to administrators only.</td>
+</tr>
+<tr>
+<td><code>signedIn</code></td>
+<td>no</td>
+<td><code>true</code>: never shown to a visitor.</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="layers"><code>layers</code><a class="anchor" href="#layers" aria-label="Link to this section"></a></h3>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td>The layer&#39;s id, such as <code>archive.tracks</code>.</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>yes</td>
+<td>Its name beside its switch.</td>
+</tr>
+<tr>
+<td><code>tiles</code></td>
+<td><code>tiles</code> or <code>route</code></td>
+<td>Tile sets laid over the style, as a style&#39;s.</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td><code>tiles</code> or <code>route</code></td>
+<td>The address of a module&#39;s page that draws the layer inside a map, its settings as the address&#39;s query.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>no</td>
+<td>An icon, as for the sidebar, beside its switch.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>no</td>
+<td>The line under its switch.</td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td>no</td>
+<td><code>true</code>: on in a map that names no layers of its own, such as your Map page before you choose.</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>no</td>
+<td>Its settings, as a module describes them for a dashboard&#39;s <strong>Map</strong> card.</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>no</td>
+<td>Its place among the layers. Without it, 1000.</td>
+</tr>
+<tr>
+<td><code>admin</code></td>
+<td>no</td>
+<td><code>true</code>: shown to administrators only.</td>
+</tr>
+<tr>
+<td><code>signedIn</code></td>
+<td>no</td>
+<td><code>true</code>: never shown to a visitor.</td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <p><code>ui-nav</code> prints a line for each thing it could not use, and leaves that thing out. The rest of the
 file still applies, except when the file is not valid JSON.</p>
@@ -1255,7 +1389,7 @@ the other files you can edit.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/guide/customizing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#arrange-by-dragging">Arrange by dragging</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li class="nested"><a href="#move-an-entry-between-the-sidebar-the-top-bar-and-a-menu">Move an entry between the sidebar, the top bar and a menu</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#change-the-navigation-for-a-group">Change the navigation for a group</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-the-sidebar-and-top-bar-are-put-together">How the sidebar and top bar are put together</a></li><li><a href="#see-what-you-have">See what you have</a></li><li><a href="#create-or-edit-your-file">Create or edit your file</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#in-the-nodes-explorers-code-editor">In the Nodes explorer's code editor</a></li><li><a href="#arrange-by-dragging">Arrange by dragging</a></li><li><a href="#rename-move-and-hide-entries">Rename, move and hide entries</a></li><li class="nested"><a href="#move-an-entry-between-the-sidebar-the-top-bar-and-a-menu">Move an entry between the sidebar, the top bar and a menu</a></li><li><a href="#add-a-page-of-your-own">Add a page of your own</a></li><li><a href="#add-buttons-to-the-top-bar">Add buttons to the top bar</a></li><li><a href="#make-a-dropdown-menu">Make a dropdown menu</a></li><li><a href="#give-an-entry-a-key">Give an entry a key</a></li><li><a href="#change-the-panels-inside-pages">Change the panels inside pages</a></li><li><a href="#change-the-maps-styles-and-layers">Change the maps' styles and layers</a></li><li><a href="#change-the-navigation-for-everyone">Change the navigation for everyone</a></li><li><a href="#change-the-navigation-for-a-group">Change the navigation for a group</a></li><li><a href="#field-reference">Field reference</a></li><li class="nested"><a href="#the-file">The file</a></li><li class="nested"><a href="#sections">sections</a></li><li class="nested"><a href="#sidebar">sidebar</a></li><li class="nested"><a href="#topbar">topbar</a></li><li class="nested"><a href="#action">action</a></li><li class="nested"><a href="#panels">panels</a></li><li class="nested"><a href="#styles">styles</a></li><li class="nested"><a href="#layers">layers</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#where-to-go-next">Where to go next</a></li></ul></aside>
     </div>
   </body>
 </html>

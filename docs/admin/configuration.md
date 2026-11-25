@@ -1,6 +1,6 @@
 # Configuration
 
-This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's `.env`, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on [Settings](../reference/settings.md).
+This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's `.env`, which value wins when several are set, what a change restarts, and the note the sign-in page and Home show. Every setting itself, with its default, is listed on [Settings](../reference/settings.md).
 
 ## Two kinds of settings
 
@@ -245,6 +245,23 @@ An administrator can open `/etc/config` in the editor, `edit /etc/config`, and a
 - Nothing is restarted. Policy settings apply at once, and settings read by the commands a pipeline runs from the next step; a setting a service reads at its start applies when that service restarts, from [Services and logs](services-logs.md) or the next time EiN starts.
 
 A line for a name no part of EiN declares is exported into every shell but shows nowhere. Prefer the Settings page or `config set` for anything listed there.
+
+## Show a note on the sign-in page and Home
+
+An administrator can put a line of their own in front of everyone who opens EiN: "Ask Anna for an account", say, or a maintenance window. Write it in Markdown to `/etc/ui/notice.md`:
+
+```bash
+# in EiN's terminal, as an administrator
+edit /etc/ui/notice.md
+```
+
+```markdown
+The archive of the Wrenfield family. Ask [Anna](mailto:anna@example.org) for an account, or read [about EiN](https://einhq.eu/docs/).
+```
+
+Its first paragraph, up to the first blank line, is shown in small grey text under the sign-in form and under Home's header, to visitors who have not signed in as well as to everyone signed in; anything after the blank line is not shown. A link to a web or mail address opens in a new tab, and a path such as `/docs` opens that page of EiN in place. Everyone sees the change the next time they load a page.
+
+The note is read with the reader's own rights, so the file must be readable by everyone, as a new file in `/etc/ui` is. Remove the file, or empty it, and no note is shown. [`ui-notice`](../reference/commands-core.md#ui-notice) prints what is shown.
 
 ## When a change does not take effect
 

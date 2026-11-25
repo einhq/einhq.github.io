@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Configuration – EiN documentation</title>
-    <meta name="description" content="This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's .env, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on Settings.">
+    <meta name="description" content="This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's .env, which value wins when several are set, what a change restarts, and the note the sign-in page and Home show. Every setting itself, with its default, is listed on Settings.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/admin/configuration.html">
     <meta property="og:title" content="Configuration – EiN documentation">
-    <meta property="og:description" content="This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's .env, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on Settings.">
+    <meta property="og:description" content="This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation's .env, which value wins when several are set, what a change restarts, and the note the sign-in page and Home show. Every setting itself, with its default, is listed on Settings.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,7 +94,7 @@
           <h1>Configuration</h1>
         </header>
         <article class="prose">
-<p>This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation&#39;s <code>.env</code>, which value wins when several are set, and what a change restarts. Every setting itself, with its default, is listed on <a href="../reference/settings.html">Settings</a>.</p>
+<p>This page is for the administrator who runs EiN: where its settings live, how to change them on the Settings page, in the terminal or in the installation&#39;s <code>.env</code>, which value wins when several are set, what a change restarts, and the note the sign-in page and Home show. Every setting itself, with its default, is listed on <a href="../reference/settings.html">Settings</a>.</p>
 <h2 id="two-kinds-of-settings">Two kinds of settings<a class="anchor" href="#two-kinds-of-settings" aria-label="Link to this section"></a></h2>
 <p>EiN has a single table of settings. Each one is an environment variable, such as <code>CFG_TRASH_RETENTION_DAYS</code>, with a plain name, a description, a kind of value and a default. Core declares some, and each module declares its own when it is installed, so the table grows and shrinks with the modules.</p>
 <p>Each setting belongs to one of two scopes:</p>
@@ -515,6 +515,13 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
 <li>Nothing is restarted. Policy settings apply at once, and settings read by the commands a pipeline runs from the next step; a setting a service reads at its start applies when that service restarts, from <a href="services-logs.html">Services and logs</a> or the next time EiN starts.</li>
 </ul>
 <p>A line for a name no part of EiN declares is exported into every shell but shows nowhere. Prefer the Settings page or <code>config set</code> for anything listed there.</p>
+<h2 id="show-a-note-on-the-sign-in-page-and-home">Show a note on the sign-in page and Home<a class="anchor" href="#show-a-note-on-the-sign-in-page-and-home" aria-label="Link to this section"></a></h2>
+<p>An administrator can put a line of their own in front of everyone who opens EiN: &quot;Ask Anna for an account&quot;, say, or a maintenance window. Write it in Markdown to <code>/etc/ui/notice.md</code>:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as an administrator</span>
+edit /etc/ui/notice.md</code></pre></div>
+<div class="code" data-lang="markdown"><pre tabindex="0"><code>The archive of the Wrenfield family. Ask [Anna](mailto:anna@example.org) for an account, or read [about EiN](https://einhq.eu/docs/).</code></pre></div>
+<p>Its first paragraph, up to the first blank line, is shown in small grey text under the sign-in form and under Home&#39;s header, to visitors who have not signed in as well as to everyone signed in; anything after the blank line is not shown. A link to a web or mail address opens in a new tab, and a path such as <code>/docs</code> opens that page of EiN in place. Everyone sees the change the next time they load a page.</p>
+<p>The note is read with the reader&#39;s own rights, so the file must be readable by everyone, as a new file in <code>/etc/ui</code> is. Remove the file, or empty it, and no note is shown. <a href="../reference/commands-core.html#ui-notice"><code>ui-notice</code></a> prints what is shown.</p>
 <h2 id="when-a-change-does-not-take-effect">When a change does not take effect<a class="anchor" href="#when-a-change-does-not-take-effect" aria-label="Link to this section"></a></h2>
 <ul>
 <li><strong>The value in <code>.env</code> does not show.</strong> The setting is <strong>Set here</strong> or chosen by a module, both of which win; or it is one of the values <code>compose.yaml</code> fixes; or EiN&#39;s container was not made again. See <a href="#set-a-value-in-the-deployment">Set a value in the deployment</a>.</li>
@@ -541,7 +548,7 @@ gives each one; <code>./setup.sh</code> makes the containers again with it.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/configuration.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-kinds-of-settings">Two kinds of settings</a></li><li><a href="#set-up-one-thing-at-a-time">Set up one thing at a time</a></li><li><a href="#change-a-setting-on-the-settings-page">Change a setting on the Settings page</a></li><li class="nested"><a href="#read-where-a-value-comes-from">Read where a value comes from</a></li><li class="nested"><a href="#give-a-key-to-another-service">Give a key to another service</a></li><li><a href="#what-a-change-restarts">What a change restarts</a></li><li><a href="#change-settings-from-the-terminal">Change settings from the terminal</a></li><li><a href="#set-a-value-in-the-deployment">Set a value in the deployment</a></li><li><a href="#how-the-layers-combine">How the layers combine</a></li><li><a href="#edit-the-settings-file-by-hand">Edit the settings file by hand</a></li><li><a href="#when-a-change-does-not-take-effect">When a change does not take effect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-kinds-of-settings">Two kinds of settings</a></li><li><a href="#set-up-one-thing-at-a-time">Set up one thing at a time</a></li><li><a href="#change-a-setting-on-the-settings-page">Change a setting on the Settings page</a></li><li class="nested"><a href="#read-where-a-value-comes-from">Read where a value comes from</a></li><li class="nested"><a href="#give-a-key-to-another-service">Give a key to another service</a></li><li><a href="#what-a-change-restarts">What a change restarts</a></li><li><a href="#change-settings-from-the-terminal">Change settings from the terminal</a></li><li><a href="#set-a-value-in-the-deployment">Set a value in the deployment</a></li><li><a href="#how-the-layers-combine">How the layers combine</a></li><li><a href="#edit-the-settings-file-by-hand">Edit the settings file by hand</a></li><li><a href="#show-a-note-on-the-sign-in-page-and-home">Show a note on the sign-in page and Home</a></li><li><a href="#when-a-change-does-not-take-effect">When a change does not take effect</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -3,7 +3,8 @@
 This page is for everyone in the family who works with places: the homes, cottages, churches and
 towns where pictures were taken and people lived. It covers the **Locations** page, creating a
 location and drawing where it lies, how pictures join a location by themselves, the weather at a
-place and time, and the **Map** page, where pictures, locations and GPS tracks are drawn together.
+place and time, and the **Map** page, where pictures, locations and GPS tracks are drawn together with what other
+modules put on a map.
 
 How one picture gets its position, and how you correct it, is on
 [Dates and places of pictures](dates-places.md).
@@ -288,7 +289,9 @@ the map zooms it rather than scrolling the page. Scroll up over the tabs to brin
 
 - A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.
 - Pictures close together form a pile with a count. Choose it to list them in **N photos here**.
-- The layers button in the corner switches between **Map**, **Dark map** and **Satellite**.
+- The button in the corner, **Map style and layers**, changes the style and turns on other layers,
+  such as **Tracks**, as on the Map page; see
+  [Choose the style and the layers](#choose-the-style-and-the-layers).
 
 A location with no place, no suggestions and no pictures with a position says "No location set
 yet." instead of a map. If you may change the location, **Location on map** under it opens **Edit
@@ -425,12 +428,16 @@ Open **Map** in the sidebar, under **Explore**. The map fills the page, with no 
 
 ![The Map page over the Stockholm archipelago: photo piles with counts such as 32, 17 and 8, single photos as thumbnails, coloured GPS tracks between the islands, three buttons in the top-right corner, and the search box with the years 1956 and 2026 at the foot](../../assets/shots/map.webp "Pictures, locations and the routes of the tracks share one map, narrowed by the search box and the years under it.")
 
-The map draws three things:
+The map draws its **layers** over a **map style**. These layers come with the Archive, and are on
+until you turn them off (see [Choose the style and the layers](#choose-the-style-and-the-layers)):
 
-- **Pictures** with a position that you may see, gathered into piles. Pictures in staging are left
-  out until they are filed.
+- **Photos and videos** with a position that you may see, gathered into piles. Pictures in staging
+  are left out until they are filed.
 - **Locations** that have a place, as pins.
-- **GPS tracks**, the routes of the devices' [tracks](tracks.md).
+- **Tracks**, the routes of the devices' [tracks](tracks.md).
+
+**Sea marks**, OpenSeaMap's buoys, lights and beacons, are on too. Other modules add layers of
+their own, such as [Västtrafik's vehicles](../vasttrafik/index.md#on-a-map), which start off.
 
 Opened from the sidebar, the map starts where **Where maps open** says, whatever your pictures show:
 over London unless an administrator chose another place under **Settings → System → Maps**, or you
@@ -488,34 +495,40 @@ Click **Follow** (the crosshair beside a track), or the track's pin, and the map
 it, keeping its newest point in view; zooming does not stop it. Drag the map, or click **Follow**
 again, to stop. A track drops out of the list four hours after its last point.
 
-Live tracks are drawn with the other tracks: they show while **Show** is on **All** or **Tracks**.
+Live tracks are drawn with the other tracks: they show while the **Tracks** layer is on.
 
-### Choose what the map shows
+### Choose the style and the layers
 
-The funnel button at the top of the right-hand corner is the **Show** menu:
+The button at the top of the right-hand corner, **Map style and layers**, opens the styles and the
+layers. Each style is a preview of the place you are looking at in that style; click one to change
+the map:
 
-| Choice        | Draws                          |
-| ------------- | ------------------------------ |
-| **All**       | Pictures, locations and tracks |
-| **Media**     | Pictures only                  |
-| **Locations** | Location pins only             |
-| **Tracks**    | Tracks only                    |
+| Style         | What it is                              |
+| ------------- | --------------------------------------- |
+| **Map**       | OpenStreetMap's street map, the default |
+| **Dark map**  | A dark grey map from Esri               |
+| **Satellite** | Aerial photographs from Esri            |
 
-While one layer is chosen, the button shows that layer's icon instead of the funnel.
+Under them each layer has a switch, with a line saying what it draws:
 
-### Change the map style
+| Layer                 | Draws                                                                       | Starts |
+| --------------------- | --------------------------------------------------------------------------- | ------ |
+| **Photos and videos** | Pictures and piles; see [Open pictures and piles](#open-pictures-and-piles) | on     |
+| **Locations**         | Location pins                                                               | on     |
+| **Tracks**            | Tracks, and the live ones with their list                                   | on     |
+| **Sea marks**         | OpenSeaMap's buoys, lights and beacons over the style                       | on     |
 
-The button under it, **Map style**, opens a column of previews, each showing the place you are
-looking at in one style. Pointing at a preview names it, and clicking it changes the map:
+A module can add layers, such as [Västtrafik's vehicles](../vasttrafik/index.md#on-a-map). A layer
+that draws nothing at the moment says why under its switch, such as "Zoom in to see the vehicles."
 
-| Style         | What it is                                                                          |
-| ------------- | ----------------------------------------------------------------------------------- |
-| **Map**       | OpenStreetMap's street map with OpenSeaMap's buoys, lights and beacons, the default |
-| **Dark map**  | A dark grey map from Esri                                                           |
-| **Satellite** | Aerial photographs from Esri                                                        |
+EiN keeps what you choose as your own: the Map page opens with the same style and layers the next
+time, in any browser you sign in on. The style is also what every other map opens in for you, such
+as the one in the viewer's details, unless that map has a style of its own. Both are the settings
+**Map style** and **Map layers** under **Preferences**; see
+[Your profile](../guide/profile.md#map-style-and-map-layers).
 
-The **Map** tabs of a location and of an album have their own style button in the corner, with the
-same three styles.
+The **Map** tabs of a location and of an album have the same button, with their own pictures as
+the **Photos and videos** layer; what you choose there lasts while the tab is open.
 
 ### Narrow by years
 
@@ -548,17 +561,19 @@ Finding pictures by what they show needs the media service; see
 The address bar holds the whole view, so a bookmark or a link you send opens the same map, and a
 reload keeps it. These parts of the address are the map's:
 
-| Part                             | What it holds                                                     |
-| -------------------------------- | ----------------------------------------------------------------- |
-| `c`                              | The centre, as latitude and longitude                             |
-| `z`                              | The zoom                                                          |
-| `layers`                         | Which of `media`, `locations` and `tracks` are on; absent for all |
-| `from`, `to`                     | The years                                                         |
-| `base`                           | The map style; absent for **Map**                                 |
-| `q`, `person`, `location`, `tag` | What the search box holds                                         |
+| Part                             | What it holds                                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `c`                              | The centre, as latitude and longitude                                                                   |
+| `z`                              | The zoom                                                                                                |
+| `layers`                         | The layers that are on, by their ids separated by commas, or `none`; absent for the ones you chose last |
+| `from`, `to`                     | The years                                                                                               |
+| `style`                          | The map style's id, such as `ui.satellite`; absent for the one you chose last                           |
+| `q`, `person`, `location`, `tag` | What the search box holds                                                                               |
 
-For example, `/map?c=50.244,-5.027&z=14&layers=media&from=1968&to=1975` shows the pictures taken
-around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is listed on
+The layers' ids are `archive.media`, `archive.locations`, `archive.tracks` and `ui.seamarks`, and a
+module's own, such as `vasttrafik.vehicles`. For example,
+`/map?c=50.244,-5.027&z=14&layers=archive.media&from=1968&to=1975` shows the pictures taken around
+the cottage at Malpas from 1968 to 1975, and nothing else. Every address of the Web UI is listed on
 [Addresses in the Web UI](../reference/routes.md).
 
 ## Where the maps and addresses come from
@@ -566,15 +581,15 @@ around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is l
 The map pictures, the address lookups and the weather come from outside services. Your photos, videos and
 recordings are never sent to them.
 
-| What                                               | From                                                                                                  | What is sent                                                                                                                                                               |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The **Map** style, and the small maps on cards     | OpenStreetMap's tile servers, `tile.openstreetmap.org`                                                | Your browser asks for the map squares of the area you look at                                                                                                              |
-| The sea marks on the **Map** style and cards       | OpenSeaMap, `tiles.openseamap.org`                                                                    | The same                                                                                                                                                                   |
-| The **Dark map** and **Satellite** styles          | Esri, `server.arcgisonline.com`                                                                       | The same                                                                                                                                                                   |
-| A location's position from its address             | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`                                              | The machine EiN runs on sends the location's address, or its name                                                                                                          |
-| Pictures' street addresses                         | Nominatim                                                                                             | The machine EiN runs on sends each picture's coordinates                                                                                                                   |
-| The names of places a track stayed at              | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
-| The weather at a place and time, unless turned off | SMHI's observations, `opendata-download-metobs.smhi.se`, and Open-Meteo, `archive-api.open-meteo.com` | The machine EiN runs on asks SMHI for its list of stations and a station's values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month |
+| What                                                 | From                                                                                                  | What is sent                                                                                                                                                               |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The **Map** style, and the small maps on cards in it | OpenStreetMap's tile servers, `tile.openstreetmap.org`                                                | Your browser asks for the map squares of the area you look at                                                                                                              |
+| The **Sea marks** layer                              | OpenSeaMap, `tiles.openseamap.org`                                                                    | The same                                                                                                                                                                   |
+| The **Dark map** and **Satellite** styles            | Esri, `server.arcgisonline.com`                                                                       | The same                                                                                                                                                                   |
+| A location's position from its address               | OpenStreetMap's Nominatim, `nominatim.openstreetmap.org`                                              | The machine EiN runs on sends the location's address, or its name                                                                                                          |
+| Pictures' street addresses                           | Nominatim                                                                                             | The machine EiN runs on sends each picture's coordinates                                                                                                                   |
+| The names of places a track stayed at                | OpenStreetMap's Overpass API, `overpass-api.de`, and Nominatim                                        | The machine EiN runs on sends the corners of each new area, about 5 km across, and the point of a stay with no harbour, island or bay near it                              |
+| The weather at a place and time, unless turned off   | SMHI's observations, `opendata-download-metobs.smhi.se`, and Open-Meteo, `archive-api.open-meteo.com` | The machine EiN runs on asks SMHI for its list of stations and a station's values, which says roughly where; it sends Open-Meteo the place, to 0.25 degrees, and the month |
 
 Without an internet connection, the maps have no background, while pins, thumbnails and tracks are
 still drawn, and addresses cannot be looked up.
@@ -649,11 +664,11 @@ link one picture to a location by hand is in [Dates and places of pictures](date
   servers: you are offline, or a network filter blocks `tile.openstreetmap.org` or
   `server.arcgisonline.com`.
 - **The Map page shows no pictures.** It opens where **Where maps open** says, London unless it
-  was changed; zoom out, or set it to where your pictures are. Check that **Show** is on
-  **All** or **Media**, that the year slider's handles are at the ends, and that the search box is
-  empty.
-- **The location pins are gone from the map.** The search box narrows the map, or **Show** is on
-  **Media** or **Tracks**.
+  was changed; zoom out, or set it to where your pictures are. Check that the **Photos and videos**
+  layer is on under **Map style and layers**, that the year slider's handles are at the ends, and
+  that the search box is empty.
+- **The location pins are gone from the map.** The search box narrows the map, or the
+  **Locations** layer is off.
 - **A track ignores the year slider.** Tracks are always drawn in full; only the pictures are
   narrowed.
 - **A live track's pin stays where it was.** Its last point is older than you expected: the

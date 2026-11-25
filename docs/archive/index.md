@@ -127,8 +127,8 @@ Removing the module never removes the folders under `/archive`, since they hold 
    For more than about 10,000 files, copy them over SFTP instead. See
    [Getting your photos in](importing.md).
 2. **Sort in staging.** A few minutes after the files are prepared, open **Staging** in the sidebar,
-   then the category, then **Sort**. Each group shows its proposal, such as **New album “…”**,
-   which <kbd>Enter</kbd> accepts on a computer; or choose **New album…** in the group's ⋯ menu,
+   then the category, then **Sort**. Each group shows its proposal, such as **Create album “…”**,
+   which <kbd>Enter</kbd> accepts on a computer; or choose **Create album…** in the group's ⋯ menu,
    check the **Name** and choose **Create album**. The pictures leave staging for the album, which is now under **Albums**. Every
    decision can be undone. See [Sorting in staging](staging.md).
 3. **Share an album.** Open the album and choose **Share** in its header. Under **Who can see it**,

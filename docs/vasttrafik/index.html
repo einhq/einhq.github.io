@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Västtrafik – EiN documentation</title>
-    <meta name="description" content="The Västtrafik module shows public transport in and around Gothenburg on a dashboard: when the next tram, bus or boat leaves a stop, where the vehicles are right now, and what disrupts them: a moved platform, a diversion, a line not running. It asks Västtrafik's open API for all three, with a key of your own, and a screen in the hall can show it as well as a phone.">
+    <meta name="description" content="The Västtrafik module shows public transport in and around Gothenburg on a dashboard and on the maps: when the next tram, bus or boat leaves a stop, where the vehicles are right now, and what disrupts them: a moved platform, a diversion, a line not running. It asks Västtrafik's open API for all three, with a key of your own, and a screen in the hall can show it as well as a phone.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/vasttrafik/">
     <meta property="og:title" content="Västtrafik – EiN documentation">
-    <meta property="og:description" content="The Västtrafik module shows public transport in and around Gothenburg on a dashboard: when the next tram, bus or boat leaves a stop, where the vehicles are right now, and what disrupts them: a moved platform, a diversion, a line not running. It asks Västtrafik's open API for all three, with a key of your own, and a screen in the hall can show it as well as a phone.">
+    <meta property="og:description" content="The Västtrafik module shows public transport in and around Gothenburg on a dashboard and on the maps: when the next tram, bus or boat leaves a stop, where the vehicles are right now, and what disrupts them: a moved platform, a diversion, a line not running. It asks Västtrafik's open API for all three, with a key of your own, and a screen in the hall can show it as well as a phone.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,9 +94,9 @@
           <h1>Västtrafik</h1>
         </header>
         <article class="prose">
-<p>The Västtrafik module shows public transport in and around Gothenburg on a dashboard: when the next
-tram, bus or boat leaves a stop, where the vehicles are right now, and what disrupts them: a moved
-platform, a diversion, a line not running. It asks
+<p>The Västtrafik module shows public transport in and around Gothenburg on a dashboard and on the
+maps: when the next tram, bus or boat leaves a stop, where the vehicles are right now, and what
+disrupts them: a moved platform, a diversion, a line not running. It asks
 <a href="https://developer.vasttrafik.se">Västtrafik&#39;s open API</a> for all three, with a key of your own, and
 a screen in the hall can show it as well as a phone.</p>
 <h2 id="install-it">Install it<a class="anchor" href="#install-it" aria-label="Link to this section"></a></h2>
@@ -131,7 +131,8 @@ vt-status
 it to Västtrafik&#39;s address alone. Without it, the cards say that the key is missing; with an
 application that lacks a subscription, they name the API it lacks.</p>
 <h2 id="on-a-dashboard">On a dashboard<a class="anchor" href="#on-a-dashboard" aria-label="Link to this section"></a></h2>
-<p>The module offers three cards to <a href="../dashboard/index.html">Dashboards</a>:</p>
+<p>The module offers two cards to <a href="../dashboard/index.html">Dashboards</a>; the vehicles are a
+<a href="#on-a-map">map layer</a>, which the dashboard&#39;s <strong>Map</strong> card draws:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -144,10 +145,6 @@ application that lacks a subscription, they name the API it lacks.</p>
 <td>The next departures from one stop: each line&#39;s badge in its own colours, where it is going, its platform, and the minutes until it leaves as Västtrafik now expects it. A cancelled one is struck out in red, and a line Västtrafik reports a disruption on has a warning mark.</td>
 </tr>
 <tr>
-<td><strong>Vehicles on the map</strong></td>
-<td>The trams, buses and boats around one or more stops on a map, where they are now: each a dot under its line&#39;s badge in its own colours, as on <strong>Departures</strong>, driving along its line&#39;s track to the next place, with a short trail behind it. Each stop is a dot under a white tag with its name, short, under the vehicles.</td>
-</tr>
-<tr>
 <td><strong>Disruptions</strong></td>
 <td>What Västtrafik says disrupts some stops, and some lines anywhere along them: each with its lines&#39; badges, its title, what Västtrafik says further, and until when it lasts. The worst first, marked red, then orange, then yellow.</td>
 </tr>
@@ -155,7 +152,7 @@ application that lacks a subscription, they name the API it lacks.</p>
 </div>
 <p>Their settings:</p>
 <ul>
-<li><strong>Stop</strong> (<strong>Stops</strong> on the map): type part of its name, such as <code>brunns</code>, and pick it. The list
+<li><strong>Stop</strong> (<strong>Stops</strong> on <strong>Disruptions</strong>): type part of its name, such as <code>brunns</code>, and pick it. The list
 holds every one of Västtrafik&#39;s stops, over eleven thousand, and shows those that match what you
 type.</li>
 <li><strong>Lines</strong>: only these lines, chosen among those that leave the stop within the next twelve hours.
@@ -172,24 +169,38 @@ line.</li>
 <li><strong>Also those starting within</strong>, on <strong>Disruptions</strong>: hours ahead, up to a week, to list a closure
 that has not begun yet as well; it says when it starts. None unless you set it.</li>
 <li><strong>What Västtrafik says further</strong>, on <strong>Disruptions</strong>: the description below each title, such as
-the reason and the hours it applies. On unless you turn it off.</li>
-<li><strong>Metres around the stops</strong>, on the map: how much of the map the card shows, as how far it reaches
-beyond the stops, from 100 to 5,000 metres. The vehicles are those of the whole card,
-however large it is, and a little beyond its edges, so that a vehicle drives in from the edge
-rather than appearing on the map. Västtrafik gives at most 200 vehicles at a time, which a large
-map of the city centre can hold.</li>
-<li><strong>Trails</strong>, on the map: behind each vehicle, the stretch of its line&#39;s track it drove in the last
-minute, in the darker of its line&#39;s colours, and ahead of it, dimmed, the next 200 metres it will
-drive; both fade out away from the vehicle, which draws its trail as it drives. On unless you turn
-it off.</li>
-</ul>
-<p>On <strong>Departures</strong>, a warning mark before a departure&#39;s direction says that Västtrafik reports a
+the reason and the hours it applies. On unless you turn it off.
+On <strong>Departures</strong>, a warning mark before a departure&#39;s direction says that Västtrafik reports a
 disruption on its line, wherever along the line it is; one after the stop&#39;s name, a disruption at
 the stop itself, such as a platform moved. Hover over the mark to read what it is; the
-<strong>Disruptions</strong> card gives the whole text.</p>
+<strong>Disruptions</strong> card gives the whole text.</li>
+</ul>
 <p>The departures are asked for again as soon as EiN&#39;s answer is due, 20 seconds old unless
-<a href="#how-often-it-asks-västtrafik">set otherwise</a>, and the minutes count down in between. The map is
-asked for again as soon as its answer is due, five seconds old unless set otherwise, and each
+<a href="#how-often-it-asks-västtrafik">set otherwise</a>, and the minutes count down in between.</p>
+<h2 id="on-a-map">On a map<a class="anchor" href="#on-a-map" aria-label="Link to this section"></a></h2>
+<p><strong>Västtrafik&#39;s vehicles</strong> is a layer any map in EiN can draw: turn it on under <strong>Map style and
+layers</strong> on the <a href="../archive/places.html#choose-the-style-and-the-layers">Map page</a>, where it starts
+off, or choose it among the layers of a dashboard&#39;s <a href="../dashboard/index.html#the-map-card"><strong>Map</strong> card</a>.
+The trams, buses and boats are drawn where they are now: each a dot under its line&#39;s badge in its
+own colours, as on <strong>Departures</strong>, driving along its line&#39;s track to the next place, with a short
+trail behind it. The vehicles are those of the whole map and a little beyond its edges, so that a
+vehicle drives in from the edge rather than appearing on the map. A map zoomed out further than a
+city&#39;s centre asks for none, and the layer&#39;s switch says &quot;Zoom in to see the vehicles.&quot;;
+Västtrafik gives at most 200 vehicles at a time, which a large map of the city centre can hold.</p>
+<p>On a <strong>Map</strong> card the layer takes settings of its own:</p>
+<ul>
+<li><strong>Stops</strong>: type part of a stop&#39;s name and pick it. Each stop is a dot under a white tag with its
+name, short, under the vehicles, and a card that has no <strong>Where it looks</strong> of its own shows the
+area around them.</li>
+<li><strong>Lines</strong>: only these lines&#39; vehicles; every line when you choose none.</li>
+<li><strong>Metres around the stops</strong>: how much of the map that area takes, as how far it reaches beyond
+the stops, from 100 to 5,000 metres.</li>
+<li><strong>Trails</strong>: behind each vehicle, the stretch of its line&#39;s track it drove in the last minute, in
+the darker of its line&#39;s colours, and ahead of it, dimmed, the next 200 metres it will drive; both
+fade out away from the vehicle, which draws its trail as it drives. On unless you turn it off.</li>
+</ul>
+<p>The vehicles are asked for again as soon as EiN&#39;s answer is due, five seconds old unless set
+otherwise, and each
 vehicle drives from where it is drawn to where the answer puts it, along its line&#39;s track and round
 its curves, or straight when it is off the track; it takes a second longer than the time between
 answers, so it never stops to wait for the next. Västtrafik moves its vehicles on between their own
@@ -198,7 +209,7 @@ drives on to where it was going and waits there instead, until it has passed tha
 its line&#39;s track, as Västtrafik gives the journey of a vehicle on it; the tracks are asked for every
 minute, so a line coming onto the map has one within a minute.</p>
 <h2 id="how-often-it-asks-västtrafik">How often it asks Västtrafik<a class="anchor" href="#how-often-it-asks-västtrafik" aria-label="Link to this section"></a></h2>
-<p>EiN asks Västtrafik only while a card or a command wants an answer, and keeps each answer for a
+<p>EiN asks Västtrafik only while a card, a map or a command wants an answer, and keeps each answer for a
 while, so that every screen showing the same stop costs a single call:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -287,7 +298,7 @@ signed in</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/vasttrafik/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#give-it-a-key">Give it a key</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#how-often-it-asks-västtrafik">How often it asks Västtrafik</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#give-it-a-key">Give it a key</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#on-a-map">On a map</a></li><li><a href="#how-often-it-asks-västtrafik">How often it asks Västtrafik</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

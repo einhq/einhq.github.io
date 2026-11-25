@@ -380,7 +380,6 @@ The Media module's pipelines and the Archive's, and what starts them:
 | `staging-unzip`          | a file `updated` in a staging category                                    | Expands a zip beside itself and removes it                                      |
 | `staging-sidecars`       | `staging.sidecars.arrived`                                                | Pairs sidecar files with their files                                            |
 | `staging-organize`       | `staging.category.changed`                                                | Suggests groups for a staging category again                                    |
-| `staging-retime`         | `staging.retime.requested`                                                | Dates staged files by their category's time rules                               |
 | `track-stage`            | a file `updated` in staging                                               | Turns a GPX file into its track's route                                         |
 
 [Staging and importing for administrators](../archive/staging-admin.md) explains the staging pipelines in

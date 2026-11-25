@@ -247,11 +247,6 @@ show <strong>waiting for EMS</strong> on the <strong>Status</strong>.</p>
 <td><code>organize</code></td>
 </tr>
 <tr>
-<td><code>staging-retime</code></td>
-<td>Dates staged files again by the rules of the category they were moved into</td>
-<td><code>retime</code></td>
-</tr>
-<tr>
 <td><code>track-stage</code></td>
 <td>Gives a GPX file dropped in staging to the device it was recorded on</td>
 <td>run by the engine</td>
@@ -334,7 +329,7 @@ media service could not cut during detection is cut once it can.</p>
 <p>Every kind of work above that is not run by the engine goes as a job into the pool
 <code>/var/pools/media</code>, where the <a href="../media/index.html">Media</a> module&#39;s workers take it: the Archive names
 its kinds for them. <code>media-worker</code> takes the Archive&#39;s <code>unzip</code>, <code>interpret</code>, <code>face-crops</code>, <code>face-assign</code>,
-<code>speaker-assign</code>, <code>dedupe</code>, <code>retime</code>, <code>organize</code> and <code>sidecars</code>, beside the Media module&#39;s own
+<code>speaker-assign</code>, <code>dedupe</code>, <code>organize</code> and <code>sidecars</code>, beside the Media module&#39;s own
 <code>ingest</code>, <code>stills</code>, <code>transcode</code> and <code>fingerprint</code>; <code>models</code> takes the Archive&#39;s <code>faces</code>, <code>diarize</code>
 and <code>damage</code>, beside the Media module&#39;s <code>shots</code>, <code>embed-picture</code>, <code>ocr</code>, <code>embed-text</code>, <code>transcribe</code>
 and <code>restore</code>,
@@ -418,18 +413,24 @@ media-scan /archive/albums/christmas-2019</code></pre></div>
 remembers where it stopped, so the next run goes on from there; <code>--restart</code> starts from the top. It
 announces fewer as running <code>media-ingest</code> instances and waiting triggers add up, and nothing once they reach 500
 (<code>--max-active</code>).</p>
-<h2 id="large-imports-and-the-bulk-lane">Large imports and the bulk lane<a class="anchor" href="#large-imports-and-the-bulk-lane" aria-label="Link to this section"></a></h2>
-<p>Work on a staging category of the <strong>Google Photos export</strong> or <strong>Scans</strong> kind runs in core&#39;s
-<a href="../admin/processing.html#the-bulk-lane">bulk lane</a>, below all other work, so what people upload in
-the meantime is processed first. Any category can be put in that lane with
-<code>staging category &lt;name&gt; --lane bulk</code>, which applies to work announced from then on.
-<a href="staging-admin.html">Staging for administrators</a> covers categories.</p>
+<h2 id="work-in-the-bulk-lane">Work in the bulk lane<a class="anchor" href="#work-in-the-bulk-lane" aria-label="Link to this section"></a></h2>
+<p>Work that nobody waits on runs in core&#39;s <a href="../admin/processing.html#the-bulk-lane">bulk lane</a>, below
+all other work, so what people upload in the meantime is processed first:</p>
+<ul>
+<li>a <code>media-heal</code> pass (see <a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a>);</li>
+<li>finding a recording&#39;s voices again when other voice models found them;</li>
+<li>the work the Media module&#39;s hourly scans announce, such as <code>renditions-scan</code> and <code>pictures-scan</code>
+(<a href="../media/index.html">Media</a>).</li>
+</ul>
+<p>Staging categories put no work there: what people upload is read and grouped as soon as it can
+be. To put the work on the files under a folder behind the rest, set its <code>lane</code> attribute to
+<code>bulk</code>; see <a href="../media/index.html#the-bulk-lane">The bulk lane</a> on the Media module&#39;s page.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
 <li><a href="../admin/processing.html">Processing and pipelines</a>: the engine, failed work, and watching it all.</li>
 <li><a href="../ems/index.html">The media service</a>: where the model work and much of the media work runs.</li>
 <li><a href="file-types.html">Supported files</a>: what the Archive reads and makes of each kind of file.</li>
-<li><a href="staging-admin.html">Staging for administrators</a>: categories and their lanes.</li>
+<li><a href="staging-admin.html">Staging for administrators</a>: categories and the staging work.</li>
 <li><a href="../admin/troubleshooting.html">Troubleshooting</a>: when photos do not get thumbnails, faces or dates.</li>
 <li><a href="commands.html">Archive commands</a>: every command the Archive adds.</li>
 </ul>
@@ -440,7 +441,7 @@ the meantime is processed first. Any category can be put in that lane with
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/processing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-renditions">The renditions</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#large-imports-and-the-bulk-lane">Large imports and the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-runs-after-an-upload">What runs after an upload</a></li><li><a href="#the-archives-pipelines">The Archive's pipelines</a></li><li><a href="#which-processing-a-folder-gets">Which processing a folder gets</a></li><li><a href="#the-renditions">The renditions</a></li><li><a href="#the-workers">The workers</a></li><li><a href="#run-work-again-on-purpose">Run work again on purpose</a></li><li class="nested"><a href="#close-gaps-the-pipelines-missed">Close gaps the pipelines missed</a></li><li><a href="#work-in-the-bulk-lane">Work in the bulk lane</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

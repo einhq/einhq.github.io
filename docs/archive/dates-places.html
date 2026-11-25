@@ -123,14 +123,14 @@ feed lists pictures by date, so it leaves out a picture that has none.</p>
 <h2 id="which-date-a-picture-gets">Which date a picture gets<a class="anchor" href="#which-date-a-picture-gets" aria-label="Link to this section"></a></h2>
 <p>EiN looks at up to five sources for a picture&#39;s date and takes the first one that has it. The
 <strong>Time source</strong> says in words which one it was.</p>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 526" role="img" aria-label="A ladder of five date sources, the first with a date winning, each with the words Time source shows: set by hand, a sidecar or Google Photos, GPS time, the camera's clock and the file name, then Undated; beside the last three, a box for scans, whose GPS time, camera clock and file name are ignored, so a scan waits for a person's date">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 448" role="img" aria-label="A ladder of four date sources, the first with a date winning, each with the words Time source shows: set by hand, a sidecar or Google Photos, GPS time and the camera's clock, then Undated; beside the camera's clock, a box for scans from a registered scanner, whose clock is ignored">
   <title>Which date a picture gets</title>
   <defs>
     <marker id="archive-dates-places-md-1-dates-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#a2abbb" />
     </marker>
   </defs>
-  <rect width="800" height="526" rx="14" fill="#1a1e27" />
+  <rect width="800" height="448" rx="14" fill="#1a1e27" />
 
   
   <text x="24" y="46" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">The first source with a date wins</text>
@@ -178,38 +178,26 @@ feed lists pictures by date, so it leaves out a picture that has none.</p>
   <text x="58" y="371" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
 
   
-  <rect x="24" y="376" width="480" height="56" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="46" y="400" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="600" fill="#7d8697">5</text>
-  <text x="68" y="400" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The file name</text>
-  <text x="488" y="400" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from the file name</text>
-  <text x="68" y="420" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
-    fill="#a2abbb">a date the name spells, where its staging category says so</text>
-  <line x1="46" y1="432" x2="46" y2="452" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-dates-places-md-1-dates-arrow)" />
-  <text x="58" y="449" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="12" fill="#7d8697">no date</text>
-
-  
-  <rect x="24" y="454" width="480" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
-  <text x="46" y="483" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Undated</text>
-  <text x="488" y="483" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
+  <rect x="24" y="376" width="480" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
+  <text x="46" y="405" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Undated</text>
+  <text x="488" y="405" text-anchor="end" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
     fill="#7d8697">never when it was uploaded or last changed</text>
 
   
-  <path d="M504,248 H520 V404 H504" fill="none" stroke="#a2abbb" stroke-width="1.5" />
-  <line x1="520" y1="326" x2="536" y2="326" stroke="#a2abbb" stroke-width="1.5" />
-  <rect x="536" y="220" width="240" height="212" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <line x1="504" y1="326" x2="536" y2="326" stroke="#a2abbb" stroke-width="1.5" />
+  <rect x="536" y="220" width="240" height="196" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="556" y="250" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">A scan</text>
-  <text x="556" y="270" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from a Scans category</text>
+  <text x="556" y="270" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">from a registered scanner</text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#a2abbb">
-    <tspan x="556" y="304">GPS time, the camera’s</tspan>
-    <tspan x="556" y="324">clock and the file name</tspan>
-    <tspan x="556" y="344">say when it was scanned,</tspan>
-    <tspan x="556" y="364">so they are ignored.</tspan>
+    <tspan x="556" y="304">The scanner’s clock says</tspan>
+    <tspan x="556" y="324">when it was scanned,</tspan>
+    <tspan x="556" y="344">so it is ignored.</tspan>
   </text>
   <text font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="14" fill="#eceff4">
-    <tspan x="556" y="396">It waits for a person’s</tspan>
-    <tspan x="556" y="416">date: rung 1 or 2.</tspan>
+    <tspan x="556" y="378">Rungs 1 to 3 still</tspan>
+    <tspan x="556" y="398">date it.</tspan>
   </text>
-</svg><figcaption>The first source on the ladder that has a date decides; a scan waits until a person gives it one</figcaption></figure>
+</svg><figcaption>The first source on the ladder that has a date decides; a scanner&#39;s clock never does</figcaption></figure>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -243,20 +231,14 @@ feed lists pictures by date, so it leaves out a picture that has none.</p>
 <td>from the camera clock</td>
 <td>The date and time the camera or phone wrote into the file, or a video&#39;s recording time.</td>
 </tr>
-<tr>
-<td>5</td>
-<td>The file name</td>
-<td>from the file name</td>
-<td>A date the name spells, such as <code>IMG_20190601_123456.jpg</code>, for files from a staging category whose names count as dates.</td>
-</tr>
 </tbody></table>
 </div>
-<p>When none of them has a date, the picture is undated. EiN never dates a picture by when it was
-uploaded or when the file was last changed.</p>
+<p>When none of them has a date, the picture is undated. EiN never dates a picture by its file name,
+when it was uploaded or when the file was last changed; in staging, undated pictures are listed by
+file name, so <code>IMG_20190601_123456.jpg</code> still falls in date order there.</p>
 <p>A <strong>sidecar</strong> is a small file beside a picture that says things about it: the JSON Google Photos
 writes for each photo of a Takeout export, or the <code>.xmp</code> file a photo editor writes. EiN pairs
-sidecars with their pictures as they arrive in staging, in every kind of category but Messaging and
-Screenshots. <a href="importing.html">Getting your photos in</a> and <a href="file-types.html">Supported files</a> say which
+sidecars with their pictures as they arrive in staging, in every category. <a href="importing.html">Getting your photos in</a> and <a href="file-types.html">Supported files</a> say which
 names it understands.</p>
 <p>A few rules decide the close cases:</p>
 <ul>
@@ -269,120 +251,34 @@ reading of the camera&#39;s clock: the picture keeps the camera&#39;s time, Goog
 time zone the clock was in, and <strong>Time source</strong> reads &quot;from Google Photos or a sidecar&quot;. A GPS time
 still comes first then, and a camera that recorded its own time zone keeps &quot;from the camera
 clock&quot;.</li>
-<li><strong>File names count only where a staging category says so</strong>, and only the names a phone, a
-messenger, a screenshot tool or a desktop uploader writes. A name that dates a picture before 1995
-is not believed, and a scanner&#39;s running number such as <code>IMG_20190601_0001.jpg</code> is no date.</li>
 <li><strong>A scanner&#39;s clock never dates a picture</strong> once the scanner is registered as a camera with
 <strong>Scanner or digitizer</strong> turned on (see <a href="cameras.html#clocks-time-zones-and-scanners">Cameras</a>). A GPS time in the
 file still counts.</li>
 </ul>
 <h2 id="date-scans-of-old-prints-and-slides">Date scans of old prints and slides<a class="anchor" href="#date-scans-of-old-prints-and-slides" aria-label="Link to this section"></a></h2>
-<p>A scanner writes the day of the scan into the file, and a scanning app on a phone adds where the
-scan was made. Neither says when the picture was taken. When files arrive in a staging category of
-the kind <strong>Scans</strong>, EiN marks them as scans and sets aside the scanner&#39;s clock, the GPS time and
-position, the file name, and a Google Photos time that agrees with them. A scan is dated only by a
-date a person gives it: with <strong>Set time</strong>, with <code>file-set-time</code>, in an XMP sidecar, or by changing
-it in Google Photos. Until then it is undated, rather than dated to the day it was scanned.</p>
+<p>A scanner writes the day of the scan into the file. That says when the picture was digitised, not
+when it was taken. Register the scanner as a camera with <strong>Scanner or digitizer</strong> turned on (see
+<a href="cameras.html#clocks-time-zones-and-scanners">Cameras</a>), and EiN marks every file it made as a scan
+and sets aside its clock. A scan is then dated only by a date a person gives it: with <strong>Set time</strong>,
+with <code>file-set-time</code>, in an XMP sidecar, or by changing it in Google Photos. Until then it is
+undated, rather than dated to the day it was scanned. Saving that setting re-dates the files
+already linked to the scanner and says &quot;Removed scanner dates from N linked files.&quot;</p>
 <p>A date in an XMP sidecar keeps the precision it was written with: <code>1985</code>, <code>1985-06</code>, <code>1985-06-12</code>
 or a time. A date the scan application marks approximate, as when someone typed &quot;ca. 1985&quot;, is shown
 as <code>~1985</code> in the viewer and its details panel, and pointing at the date says &quot;approximate&quot;. A date
 set by hand replaces it and is exact.</p>
 <p><strong>Time source</strong> on a scan adds &quot;a scan: its scanner’s clocks are not when it was taken&quot;. The mark
 goes with the file when it is filed into an album, so the scan stays undated there until someone
-dates it.</p>
-<p>To bring in a box of scans:</p>
-<ol>
-<li>Open the <strong>Create</strong> menu (the plus in the top bar) and choose <strong>Import media</strong>.</li>
-<li>Under <strong>Into which category?</strong>, choose your Scans category, or <strong>New category</strong> with <strong>What it
-holds</strong> set to <strong>Scans</strong> and a name under <strong>Called</strong>, such as &quot;Box 3&quot;.</li>
-<li>Press <strong>Choose files</strong> or <strong>Choose a folder</strong>, then <strong>Upload</strong>, which shows the number of files.</li>
-</ol>
-<p>Scans that already arrived in the Inbox can be moved: on the Inbox&#39;s <strong>Files</strong> tab, open the
-folder&#39;s ⋯ menu, choose <strong>Move to category…</strong>, pick the Scans category and press <strong>Move here</strong>. EiN
-dates the moved files again by the scans&#39; rules, in the background. <a href="staging.html">Sorting in staging</a>
-explains categories and the Files tab.</p>
-<aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>A scan uploaded straight into an album, or copied into one over SFTP, is not marked: no staging
-category&#39;s rules apply there. For those, register the scanner as a camera with <strong>Scanner or
-digitizer</strong> turned on. Saving that setting re-dates the files already linked to it and says
-&quot;Removed scanner dates from N linked files.&quot;</p>
-</aside>
-<p>Helen Okafor scanned the family&#39;s slides of &quot;Cornwall, summer 1968&quot; in March 2012. Uploaded into a
-Scans category, they wait undated until she gives them a date. Uploaded straight into an album
-from an unregistered scanner, they would all show March 2012.</p>
-<p>In a Scans category the <strong>Sort</strong> tab keeps the scans in runs, by folder and file name, under
-<strong>To sort</strong>, dated or not. Once most of a run has dates set by hand, its name gains their years, and
-a run splits where two neighbouring scans were given different years.</p>
-<h2 id="time-rules-of-staging-categories">Time rules of staging categories<a class="anchor" href="#time-rules-of-staging-categories" aria-label="Link to this section"></a></h2>
-<p>Each staging category has two time rules, which come with its kind (<strong>What it holds</strong>): whether its
-files are scans, and whether a date in a file name counts.</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>What it holds</th>
-<th>Treated as scans</th>
-<th>File names count as dates</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Inbox</td>
-<td>no</td>
-<td>yes</td>
-</tr>
-<tr>
-<td>Google Photos export</td>
-<td>no</td>
-<td>no</td>
-</tr>
-<tr>
-<td>Scans</td>
-<td>yes</td>
-<td>no</td>
-</tr>
-<tr>
-<td>Phone</td>
-<td>no</td>
-<td>yes</td>
-</tr>
-<tr>
-<td>Camera</td>
-<td>no</td>
-<td>no</td>
-</tr>
-<tr>
-<td>Messaging</td>
-<td>no</td>
-<td>yes</td>
-</tr>
-<tr>
-<td>Screenshots</td>
-<td>no</td>
-<td>yes</td>
-</tr>
-<tr>
-<td>Other</td>
-<td>no</td>
-<td>no</td>
-</tr>
-</tbody></table>
-</div>
-<ul>
-<li>Files that move into a category with other rules are dated again by that category&#39;s rules, in the
-background. A move within a category, or between two with the same rules, changes nothing.</li>
-<li><strong>Category settings</strong> has no switch for the two rules. Changing <strong>What it holds</strong> there resets
-them, together with the category&#39;s other settings, to those of the kind you chose.</li>
-<li>In the terminal, <code>staging category &lt;name&gt; --digitized on|off</code> and
-<code>staging category &lt;name&gt; --filename-dates on|off</code> change one rule and date the category&#39;s files
-again before they answer.</li>
-<li>A date set by hand outranks both rules.</li>
-</ul>
+dates it. A scan is also read for how faded, dusty and scratched it is, so it can be restored.</p>
+<p>Helen Okafor scanned the family&#39;s slides of &quot;Cornwall, summer 1968&quot; in March 2012. With the scanner
+registered, they wait undated until she gives them a date. From an unregistered scanner, they
+would all show March 2012.</p>
 <h2 id="give-pictures-that-need-a-date-a-date">Give pictures that need a date a date<a class="anchor" href="#give-pictures-that-need-a-date-a-date" aria-label="Link to this section"></a></h2>
-<p>Staging shows what has no date. A category&#39;s card on the Staging overview, and the strip above the
-category&#39;s tabs, has a bar whose <strong>Needs a date</strong> part counts the pictures read without a date. On
+<p>Staging shows what has no date. A category&#39;s card on the Staging overview, and the strip under the
+category&#39;s title, has a bar whose <strong>Needs a date</strong> part counts the pictures read without a date. On
 the category&#39;s <strong>Sort</strong> tab, the <strong>Needs a date</strong> lane holds groups of undated pictures, named like
 &quot;Undated · Peggy&#39;s shoebox&quot;, and groups of pictures dated only to a year or a month, named like
-&quot;1987 · Peggy&#39;s shoebox&quot;. In a Scans category the scans stay in their runs under <strong>To sort</strong>
-instead, as described above.</p>
+&quot;1987 · Peggy&#39;s shoebox&quot;.</p>
 <ol>
 <li>Open <strong>Staging</strong>, then the category, then its <strong>Sort</strong> tab.</li>
 <li>Choose <strong>Needs a date</strong> in the row of lanes above the groups. The row appears when more than one
@@ -400,9 +296,8 @@ a time.&quot;</li>
 <p>EiN confirms with &quot;The time is set on N photos of “<group>”&quot;. Within a few minutes the organizer
 puts the pictures into groups by the dates you gave them: an event, a trip, or a year&#39;s
 <strong>Everyday</strong> lane. On a phone there are no keys; tap the group and use its ⋯ menu.</p>
-<p>You can also file a <strong>Needs a date</strong> group as it is, undated, with <strong>New album…</strong>, <strong>Add to album…</strong>
-or the other decisions of the Sort tab. Its proposal is the category&#39;s album when the category has
-one; otherwise there is none.</p>
+<p>You can also file a <strong>Needs a date</strong> group as it is, undated, with <strong>Create album…</strong>, <strong>Add to album…</strong>
+or the other decisions of the Sort tab. It has no proposal.</p>
 <p>Pictures already in the library have no lane. An album lists its undated pictures last, under
 <strong>Undated</strong>: select them there and use <strong>Set time</strong>. In the <a href="../shell/terminal.html">terminal</a>,
 <code>search --undated</code> lists everything undated in the library that you may see.</p>
@@ -531,8 +426,6 @@ back over it.</li>
 <li>The GPS position in the file.</li>
 <li>The place in its sidecar: an XMP sidecar&#39;s, or a Google Photos Takeout&#39;s.</li>
 </ol>
-<p>A scan&#39;s own GPS position is where it was scanned, so EiN ignores it, and a Takeout&#39;s place for a
-scan too, unless someone set that place in Google Photos.</p>
 <p>A position of exactly 0,0, in the sea off West Africa, is what a camera or phone writes when it has
 no GPS fix, and Google Photos when it has no place. EiN takes it for no place, in the file and in a
 sidecar alike, and <strong>Set location</strong> refuses it.</p>
@@ -626,14 +519,6 @@ place. To clear several pictures at once, use <code>file-set-position</code> wit
 <td>Look up a picture&#39;s street address again, as an administrator</td>
 <td><a href="commands.html#geocode-position"><code>geocode-position</code></a> <code>-f &#39;&lt;file&gt;/position&#39;</code></td>
 </tr>
-<tr>
-<td>Date a staging category&#39;s files again by its rules</td>
-<td><a href="commands.html#staging"><code>staging</code></a> <code>retime [&lt;category&gt;]</code></td>
-</tr>
-<tr>
-<td>Change a category&#39;s time rules</td>
-<td><code>staging category &lt;name&gt; --digitized on|off</code> or <code>--filename-dates on|off</code></td>
-</tr>
 </tbody></table>
 </div>
 <p>Write a negative coordinate with <code>=</code>, as in <code>--lng=-5.066</code>: on its own, <code>-5.066</code> would be read as an
@@ -644,13 +529,11 @@ file-set-position P1000412.JPG P1000413.JPG --lat=50.153 --lng=-5.066</code></pr
 Set location 50.153,-5.066 on /archive/albums/Peggy's Falmouth/P1000413.JPG</code></pre></div>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>
 <ul>
-<li><strong>A scan shows the day it was scanned.</strong> It did not arrive in a Scans category, and its scanner is
-not registered as one. Give it its date with <strong>Set time</strong>, which outranks the scanner&#39;s clock; move
-its folder into a Scans category while it is still in staging; or register the scanner with
-<strong>Scanner or digitizer</strong>.</li>
+<li><strong>A scan shows the day it was scanned.</strong> Its scanner is not registered as one. Register it with
+<strong>Scanner or digitizer</strong>, or give the scan its date with <strong>Set time</strong>, which outranks the
+scanner&#39;s clock.</li>
 <li><strong>A picture has a date you did not expect.</strong> Look at <strong>Time source</strong> under <strong>Details</strong>. &quot;from the
-file name&quot; means its category reads dates from names; &quot;from the camera clock&quot; with a wrong year
-means the camera&#39;s clock was wrong.</li>
+camera clock&quot; with a wrong year means the camera&#39;s clock was wrong.</li>
 <li><strong>All pictures from one camera are some hours off.</strong> Set the camera&#39;s <strong>Timezone</strong>, or for a
 phone&#39;s videos turn on <strong>Video times in UTC</strong>, as described under
 <a href="#time-zones">Time zones</a>. A clock that was simply wrong, by a day or some minutes, takes
@@ -682,7 +565,7 @@ EiN never replaces such a link. In <strong>Edit file</strong>, press
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/dates-places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-you-see-a-pictures-date-and-place">Where you see a picture's date and place</a></li><li><a href="#which-date-a-picture-gets">Which date a picture gets</a></li><li><a href="#date-scans-of-old-prints-and-slides">Date scans of old prints and slides</a></li><li><a href="#time-rules-of-staging-categories">Time rules of staging categories</a></li><li><a href="#give-pictures-that-need-a-date-a-date">Give pictures that need a date a date</a></li><li><a href="#set-the-time-of-several-pictures-at-once">Set the time of several pictures at once</a></li><li><a href="#give-a-picture-a-vague-date">Give a picture a vague date</a></li><li><a href="#time-zones">Time zones</a></li><li><a href="#where-a-pictures-place-comes-from">Where a picture's place comes from</a></li><li><a href="#set-the-place-of-pictures">Set the place of pictures</a></li><li><a href="#change-or-clear-the-place-of-one-picture">Change or clear the place of one picture</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-you-see-a-pictures-date-and-place">Where you see a picture's date and place</a></li><li><a href="#which-date-a-picture-gets">Which date a picture gets</a></li><li><a href="#date-scans-of-old-prints-and-slides">Date scans of old prints and slides</a></li><li><a href="#give-pictures-that-need-a-date-a-date">Give pictures that need a date a date</a></li><li><a href="#set-the-time-of-several-pictures-at-once">Set the time of several pictures at once</a></li><li><a href="#give-a-picture-a-vague-date">Give a picture a vague date</a></li><li><a href="#time-zones">Time zones</a></li><li><a href="#where-a-pictures-place-comes-from">Where a picture's place comes from</a></li><li><a href="#set-the-place-of-pictures">Set the place of pictures</a></li><li><a href="#change-or-clear-the-place-of-one-picture">Change or clear the place of one picture</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li></ul></aside>
     </div>
   </body>
 </html>

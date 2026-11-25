@@ -171,6 +171,7 @@ These files are nodes in the tree, so they live in the database and survive a re
 | `~/.bash_history`                         | your shell                                                                  | your shell                                          |        |
 | `/etc/ui/nav.d/<module>.json`             | `mod setup`, as a link to the module's file                                 | the sidebar and top bar                             |        |
 | `/etc/ui/nav.json`                        | the administrator                                                           | the sidebar and top bar                             |        |
+| `/etc/ui/notice.md`                       | the administrator                                                           | the sign-in page and Home, for everyone             |        |
 | `/groups/<group>/.ui/nav.json`            | the group's members                                                         | the group's members' sidebar and top bar            |        |
 | `/groups/<group>/.ui/nav.d/<module>.json` | `mod setup`, as a link to the module's file, for a module kept to the group | the group's members' sidebar and top bar            |        |
 | `/etc/modules/<module>.groups`            | `mod groups`, `mod install --groups`, **Settings → Modules**                | `mod setup` and the shell, for who has the module   | `0644` |

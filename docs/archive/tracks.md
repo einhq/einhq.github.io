@@ -293,9 +293,9 @@ to choose its device, as below.
 
 When a file names no device, or more than one, it waits for you:
 
-1. Open **Staging** in the sidebar. A yellow box titled **Needs you** says "1 GPX file waits for the
-   device it belongs to." (or how many), whichever category the file was dropped on. The box is on
-   the overview, not on a category's page.
+1. Open **Staging** in the sidebar, and the Inbox. A yellow box titled **Needs you** says "1 GPX
+   file waits for the device it belongs to." (or how many), whichever category the file was dropped
+   on.
 2. Click **Choose device**. The page **Routes waiting for a device** opens, with your staging area's
    `routes` folder listed below its header as on the Nodes page, and a panel beside it.
 3. Click a file to see in the panel what it says about itself: its **Name** and **Description**,
@@ -307,8 +307,8 @@ When a file names no device, or more than one, it waits for you:
    hold a file, then tap the others. At the top of the panel, choose the device in the
    **Device they come from** list and click **Import** (**Import 3 files** with three selected).
    Each route joins that device's track and its file moves out of the list into the track's `routes`
-   folder. A file that cannot be read stays, and the panel names it and why. **Back to staging**
-   returns to the staging page.
+   folder. A file that cannot be read stays, and the panel names it and why. **← Staging** above
+   the page's title returns to the staging page.
 
 On a narrow screen the panel is below the list.
 
@@ -435,7 +435,7 @@ see the albums the trip may belong to under **Maybe in**.
 | **How it travels**, **Upload GPX** or **Add home base** is missing.               | You may not change this track: it is the device's owner's.                                                                               | Ask whoever made the device, or an administrator.                                                                                                         |
 | **Upload GPX** gives a message ending in "no track points found".                 | The file holds no recorded track points, only a planned route or waypoints.                                                              | Use the file that was recorded while it moved.                                                                                                            |
 | **Upload GPX** gives a message ending in "none of its N track points has a time". | The file's points carry no times: a route drawn on a map, or a file the program saved without them.                                      | Use the file that was recorded while it moved, or export it again with times.                                                                             |
-| A GPX file dropped in staging waits, though its device exists.                    | The file names neither the device nor a camera linked to it, or it names more than one device.                                           | Click **Choose device** under **Needs you** on the Staging page; see [GPX files in staging](#gpx-files-in-staging).                                       |
+| A GPX file dropped in staging waits, though its device exists.                    | The file names neither the device nor a camera linked to it, or it names more than one device.                                           | Click **Choose device** under **Needs you** on the Inbox's page in Staging; see [GPX files in staging](#gpx-files-in-staging).                            |
 | The phone reports nothing to the track.                                           | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client or the EiN app. | See [Report from a phone](../guide/devices.md#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting). |
 | A GPX file sits in an album as an ordinary file.                                  | It was uploaded straight into the album, where GPX files are not read as routes.                                                         | Upload it on the device's **Trips** tab, then delete the file from the album.                                                                             |
 

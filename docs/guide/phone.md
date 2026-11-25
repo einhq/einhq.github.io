@@ -147,8 +147,8 @@ With the Archive installed, bring the photos and videos on your phone into your 
 
 1. Tap the plus in the top bar, then **Import media**. The dialog fills the screen.
 2. Under **Into which category?**, pick where the files go. The **Inbox** is chosen at first. To
-   keep a phone's pictures together, choose **New category** and, under **What it holds**,
-   **Phone**; see [The kinds of category](../archive/staging.md#the-kinds-of-category).
+   keep a phone's pictures together, make a category for it first; see
+   [Make a category](../archive/staging.md#make-a-category).
 3. Tap **Choose files**. Your phone's own picker opens, with your photo library, the camera or your
    files, depending on the phone.
 4. Pick the files, then tap the button that counts them, for example **Upload 24**.
@@ -187,9 +187,9 @@ It needs no password and no address of its own: it sends as you, to the EiN it i
 1. **Install the app and pair it**; see [The EiN app](#the-ein-app).
 2. **Open App** under **System** in the app's menu. **Photo backup** is at its foot.
 3. **Choose where the photos go**, under **Back up into**: a staging category of yours, or **New
-   category:** with the phone's name, which makes a [**Phone** category](../archive/staging.md#the-kinds-of-category)
-   called after the phone. On the **Staging** page in the app, a phone category's empty **Files**
-   tab has **Back up this phone here**, which does the same and turns the backup on.
+   category:** with the phone's name, which makes a [category](../archive/staging.md#categories)
+   called after the phone. On the **Staging** page in the app, every category's **Info** tab has
+   **Back up this phone here**, which does the same and turns the backup on.
 4. **Turn Back up photos and videos on.** The phone asks whether the app may see your photos and
    videos: choose **Allow all**. With **Allow limited access** the app sees, and sends, only the
    ones you pick. Where a photo was taken is asked for with them; without it the phone takes the place
@@ -231,10 +231,10 @@ below use FolderSync, which is free, with ads, on Google Play; another app that 
 way to a WebDAV server, and never deletes there, can do the same. The names of its settings differ
 between versions; what each is for is said with it.
 
-1. **Make a category for the phone.** On the Staging page choose **Phone** on the dashed **New
-   category** card, call it after the phone, for example `Helen's phone`, and choose **Create**; see
-   [The kinds of category](../archive/staging.md#the-kinds-of-category). Its **Files** tab, while it
-   is empty, shows the address and the folder to give the app, each with a button that copies it.
+1. **Make a category for the phone.** On the Staging page choose **New category** in the header,
+   call it after the phone, for example `Helen's phone`, and choose **Create**; see
+   [Make a category](../archive/staging.md#make-a-category). Its **Info** tab shows the address and
+   the folder to give the app, each with a button that copies it.
 2. **Add an account in the app.** In FolderSync, add a **WebDAV** account with EiN's address and
    `/dav` after it, for example `https://ein.wrenfield.example/dav`, and your EiN username and
    password.
@@ -363,7 +363,7 @@ In the app:
 - **EiN** is in the phone's **Share** menu, to [share pictures to EiN](#share-pictures-to-ein) from
   the gallery or another app;
 - a download is saved in the phone's **Downloads**;
-- **App**, under **System** in the menu, shows the EiN and the phone the app is paired with, the
+- **App**, in the account menu under your picture, shows the EiN and the phone the app is paired with, the
   account it signs in as and the app's version, and has **Unpair**, after which the app asks to be
   paired again; below them are the phone's [photo backup](#back-up-your-phone-automatically) and
   [position reports](#report-where-your-phone-is);

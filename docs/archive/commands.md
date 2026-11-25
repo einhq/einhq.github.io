@@ -412,24 +412,22 @@ Show how the staging organizer would group the media at and under some paths (di
 <small>reads only</small>
 
 ```text
-auto-album-cluster [--user=<string>] [--strategy=<string>] [--significance=<string>] [--home=<string>] [--members] <path>...
+auto-album-cluster [--user=<string>] [--home=<string>] [--members] <path>...
 ```
 
 | Argument    | What it is                                                        |
 | ----------- | ----------------------------------------------------------------- |
 | `<path>...` | directories (everything within), albums (their members) or files. |
 
-| Option                    | What it does                                                                                                |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `--user=<string>`         | whose home and household count (default the staging area's owner, else you)                                 |
-| `--strategy=<string>`     | how to group (events, folders, none; default the category's, else events)                                   |
-| `--significance=<string>` | how readily a day is a group of its own (fewer, normal, more; default the category's, else normal)          |
-| `--home=<string>`         | home for every year, as lat,lng or a location path (default the residence each year, else the densest cell) |
-| `--members`               | list each group's member paths.                                                                             |
+| Option            | What it does                                                                                                |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| `--user=<string>` | whose home and household count (default the staging area's owner, else you)                                 |
+| `--home=<string>` | home for every year, as lat,lng or a location path (default the residence each year, else the densest cell) |
+| `--members`       | list each group's member paths.                                                                             |
 
 ```bash
 auto-album-cluster /home/anna/staging/files/inbox
-auto-album-cluster /archive/albums/2019-lake --members --significance more
+auto-album-cluster /archive/albums/2019-lake --members
 ```
 
 With `JSON_OUTPUT=1`: AutoAlbumClusterReport: the media read, the home each year, and the groups proposed, by kind.
@@ -513,16 +511,16 @@ camera-create [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<
 | ---------- | --------------------------------------------------------------- |
 | `<target>` | VFS path for the camera node (default: /archive/cameras/<name>) |
 
-| Option                   | What it does                                                            |
-| ------------------------ | ----------------------------------------------------------------------- |
-| `--name=<string>`        | display name (required)                                                 |
-| `--make=<string>`        | manufacturer, as exif writes it.                                        |
-| `--model=<string>`       | model, as exif writes it.                                               |
-| `--serial=<string>`      | serial number (the strong match key)                                    |
-| `--timezone=<string>`    | IANA timezone, e.g. Europe/Stockholm.                                   |
-| `--digitizer`            | scanner whose camera dates are digitisation times, not capture times.   |
-| `--quicktime-utc`        | keeps its videos' QuickTime CreateDate in UTC (phones), not local time. |
-| `--description=<string>` | free-text note.                                                         |
+| Option                   | What it does                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------ |
+| `--name=<string>`        | display name (required)                                                                    |
+| `--make=<string>`        | manufacturer, as exif writes it.                                                           |
+| `--model=<string>`       | model, as exif writes it.                                                                  |
+| `--serial=<string>`      | serial number (the strong match key)                                                       |
+| `--timezone=<string>`    | IANA timezone, e.g. Europe/Stockholm.                                                      |
+| `--digitizer`            | scanner whose camera dates are digitisation times, not capture times; its media are scans. |
+| `--quicktime-utc`        | keeps its videos' QuickTime CreateDate in UTC (phones), not local time.                    |
+| `--description=<string>` | free-text note.                                                                            |
 
 ### `camera-device`
 
@@ -745,7 +743,7 @@ camera-update [--name=<string>] [--make=<string>] [--model=<string>] [--serial=<
 | `--timezone=<string>`     | IANA timezone its clock was set to, e.g. Europe/Stockholm.                                      |
 | `--clock-offset=<string>` | how far its clock ran ahead of the time in its zone, e.g. +23h2m, -5m, 0 once right.            |
 | `--clock-from=<string>`   | with --clock-offset: the date it applies from (all its pictures without it)                     |
-| `--digitizer`             | mark as a scanner and suppress its camera dates on linked media.                                |
+| `--digitizer`             | mark as a scanner: its linked media are scans, and its camera dates on them are suppressed.     |
 | `--quicktime-utc`         | read its videos' QuickTime CreateDate as UTC (phones), not local time.                          |
 | `--description=<string>`  | free-text note.                                                                                 |
 | `--clips=<string>`        | what opens a clip of its device's stream: face (the default), motion (a face or motion) or off. |
@@ -956,7 +954,7 @@ With `JSON_OUTPUT=1`: each birthday, milestone memorial and wedding anniversary 
 
 ### `exif-interpret`
 
-Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its camera, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar.
+Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its camera and a paired sidecar, whether it is a scan (its camera is a digitizer), and its position node from the GPS fix or the sidecar.
 
 <small>changes things</small>
 
@@ -1801,7 +1799,7 @@ With `JSON_OUTPUT=1`: how many files were announced to the media pipeline.
 
 ### `media-sidecars`
 
-Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites.
+Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, carry over their dates, places, captions and favourites, and file the files an XMP names as made from under <file>/versions.
 
 <small>changes things</small>
 
@@ -1822,7 +1820,7 @@ media-sidecars /home/anna/staging/files/google-photos/upload-2026-10-18
 media-sidecars '/home/anna/staging/files/google-photos/Takeout/Google Photos/Sommar i Exempelstad' --dry-run
 ```
 
-With `JSON_OUTPUT=1`: MediaSidecarsAnswer: the sidecars found, paired, shared and unmatched, and what the files were given.
+With `JSON_OUTPUT=1`: MediaSidecarsAnswer: the sidecars found, paired, shared and unmatched, what the files were given, and how many files were filed as versions.
 
 ### `members-album`
 
@@ -2965,66 +2963,57 @@ With `JSON_OUTPUT=1`: one row per kept file: its link name, path, size, type, wh
 
 ### `staging`
 
-Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.
+Manage a user's private staging area: its categories and where a newly arrived folder looks like it came from, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable.
 
 <small>reads only</small>
 
 ```text
-staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue] [--if-pending] [--at=<path>] [--new] [--to=<string>] [--name=<string>] [--into=<path>] [--share=<string>] [--except=<path>] [--expect=<string>] [--confidence=<string>] [--action=<string>] [--limit=<string>] [--cursor=<string>] [--refresh] [--force] [--repair] [--counts] [--where=<string>] [--keep=<string>] [--apply] [--off] [--exact] [--near] [--loose-batch=<string>] [--layout-only] [--idle-minutes=<string>] [--dry-run] [--create] [--remove] [--kind=<string>] [--label=<string>] [--destination=<path>] [--no-destination] [--strategy=<string>] [--significance=<string>] [--digitized=<string>] [--filename-dates=<string>] [--lane=<string>] [--sidecars=<string>] <subcommand> <path>...
+staging [--user=<string>] [--all] [--stale] [--since=<string>] [--full] [--queue] [--if-pending] [--at=<path>] [--new] [--to=<string>] [--name=<string>] [--into=<path>] [--share=<string>] [--except=<path>] [--expect=<string>] [--confidence=<string>] [--action=<string>] [--limit=<string>] [--cursor=<string>] [--refresh] [--force] [--repair] [--counts] [--where=<string>] [--keep=<string>] [--apply] [--off] [--exact] [--near] [--loose-batch=<string>] [--layout-only] [--idle-minutes=<string>] [--dry-run] [--create] [--remove] [--label=<string>] <subcommand> <path>...
 ```
 
-| Argument       | What it is                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<subcommand>` | One of `init`, `status`, `check`, `detect`, `category`, `retime`, `organize`, `promote`, `discard`, `accept`, `later`, `undo`, `journal`, `move`, `split`, `regroup`, `merge`, `delete`, `rename`, `pin`, `reject`, `match`, `dedupe`, `duplicates`, `separate`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `<path>...`    | a category's name, or suggested groups by path or slug in the default category of --user, as required; detect takes at most 20 folders, of staging or not (by default the folders newly arrived in the default category); organize takes the categories to organize (every one by default); retime takes a category, or a folder or file of one (every category by default); discard also takes staged files and folders; accept takes at most 20 groups (50 with --dry-run), later 100; undo takes at most 20 journal entries; move takes what to move, then the folder; regroup takes the group, then the staged files to move into it (at most 2000), or with --new the files alone; merge takes the group to keep, then the groups to fold into it; rename takes the new name after it; reject takes the group, then the library album it does not go into; match takes groups (every group of the user's by default); duplicates takes a category, a folder of staged files (all of them by default), a suggested group, or staged files (at most 200) for the sets they belong to; dedupe takes the sets to resolve (exact:<id> or near:<id>), with a category, a folder in one or a suggested group to drop their files from (the default category by default); separate takes a staged file, then the files it is no duplicate of. |
+| Argument       | What it is                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<subcommand>` | One of `init`, `status`, `check`, `detect`, `category`, `organize`, `promote`, `discard`, `accept`, `undo`, `journal`, `move`, `split`, `regroup`, `merge`, `delete`, `rename`, `pin`, `reject`, `match`, `dedupe`, `duplicates`, `separate`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `<path>...`    | a category's name, or suggested groups by path or slug in the default category of --user, as required; detect takes at most 20 folders, of staging or not (by default the folders newly arrived in the default category); organize takes the categories to organize (every one by default); discard also takes staged files and folders; accept takes at most 20 groups (50 with --dry-run); undo takes at most 20 journal entries; move takes what to move, then the folder; regroup takes the group, then the staged files to move into it (at most 2000), or with --new the files alone; merge takes the group to keep, then the groups to fold into it; rename takes the new name after it; reject takes the group, then the library album it does not go into; match takes groups (every group of the user's by default); duplicates takes a category, a folder of staged files (all of them by default), a suggested group, or staged files (at most 200) for the sets they belong to; dedupe takes the sets to resolve (exact:<id> or near:<id>), with a category, a folder in one or a suggested group to drop their files from (the default category by default); separate takes a staged file, then the files it is no duplicate of. |
 
-| Option                      | What it does                                                                                                                                                                                                            |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--user=<string>`           | act on this user (defaults to the current user)                                                                                                                                                                         |
-| `--all`                     | init, organize, match, duplicates --repair: act on every user (administrator only)                                                                                                                                      |
-| `--stale`                   | match: only the groups due a match: none for their members as they are, by another model, or older than a candidate profile.                                                                                            |
-| `--since=<string>`          | match: only the groups around the days of the library albums whose profile changed after this time.                                                                                                                     |
-| `--full`                    | organize: plan the whole category again, not only what changed since the last run.                                                                                                                                      |
-| `--queue`                   | organize: ask for a run rather than run one; the organizer's pipeline runs it within minutes. A user may ask for their own categories.                                                                                  |
-| `--if-pending`              | organize --queue: only for a category something waits for: changes since its last run, edits, a first run, or a week since its last full build (administrator only)                                                     |
-| `--at=<path>`               | split: the first file of the new group.                                                                                                                                                                                 |
-| `--new`                     | regroup: the files make a new group of their own.                                                                                                                                                                       |
-| `--to=<string>`             | promote: the directory a new album is made in (default /archive/albums)                                                                                                                                                 |
-| `--name=<string>`           | promote: the new album's title, its path made from it (default the first group's name); split, regroup --new: the new group's name; merge: the kept group's new name.                                                   |
-| `--into=<path>`             | promote: file into this library album instead of a new one.                                                                                                                                                             |
-| `--share=<string>`          | promote: 'private' makes the new album yours alone; 'default' shares it as your new albums are.                                                                                                                         |
-| `--except=<path>`           | promote, discard: leave this member in its group, which is then pinned (repeatable)                                                                                                                                     |
-| `--expect=<string>`         | promote, discard, accept, split, regroup, merge, delete: the member key each group must still have, in group order (repeatable)                                                                                         |
-| `--confidence=<string>`     | accept: the least sure proposal to apply (high, medium, low; default medium)                                                                                                                                            |
-| `--action=<string>`         | journal: only decisions of this kind (promote, file, discard, dedupe, edit, reject)                                                                                                                                     |
-| `--limit=<string>`          | journal: entries per page (default 50, at most 200); duplicates: sets per page (default 50, at most 200); duplicates --refresh: files announced per call (default 5000); dedupe --apply: copies dropped per call.       |
-| `--cursor=<string>`         | journal, duplicates, duplicates --refresh, dedupe --apply: go on after this one's cursor.                                                                                                                               |
-| `--refresh`                 | duplicates: announce each staged media file whose duplicate finding is missing, from another inbox or for other bytes, for media-duplicates to record; takes a folder of the user's staging files (default all of them) |
-| `--force`                   | duplicates --refresh: announce every staged media file.                                                                                                                                                                 |
-| `--repair`                  | duplicates: check each duplicate finding against where its file is now, and fix it (with --all, every user's)                                                                                                           |
-| `--counts`                  | duplicates: how many staged copies the scope holds, by where their originals lie.                                                                                                                                       |
-| `--where=<string>`          | duplicates, dedupe --apply: only copies or look-alikes of library photos (library), or of files within the inbox (inbox); both, in that order, by default.                                                              |
-| `--keep=<string>`           | dedupe: keep this staged file (its id) of the one set named, instead of the one the rules keep.                                                                                                                         |
-| `--apply`                   | dedupe: resolve every set of the scope that resolves unasked, at most 500 sets and --limit copies (default and most 2000) a call.                                                                                       |
-| `--off`                     | pin: unpin, so the organizer manages the group again; later: bring back into its lane; separate: no longer keep the files apart.                                                                                        |
-| `--exact`                   | duplicates, dedupe --apply: only byte copies.                                                                                                                                                                           |
-| `--near`                    | duplicates, dedupe --apply: only look-alikes: the same picture in other bytes.                                                                                                                                          |
-| `--loose-batch=<string>`    | init: the default category's folder that loose entries of files/ move into (default unsorted)                                                                                                                           |
-| `--layout-only`             | init: make the directories and categories only; move nothing.                                                                                                                                                           |
-| `--idle-minutes=<string>`   | init: leave the loose files of files/ changed within this many minutes, which may still be being copied.                                                                                                                |
-| `--dry-run`                 | init, organize, promote, discard, accept, dedupe, duplicates, retime --refresh: say what would be done, and do none of it.                                                                                              |
-| `--create`                  | category: make it, with its directory of groups.                                                                                                                                                                        |
-| `--remove`                  | category: remove it, which only an empty one other than the default can be.                                                                                                                                             |
-| `--kind=<string>`           | category: what it holds, which resets its other settings to the kind's (inbox, google-photos, scans, phone, camera, messaging, screenshots, generic)                                                                    |
-| `--label=<string>`          | category: what a page calls it.                                                                                                                                                                                         |
-| `--destination=<path>`      | category: the library album its files are filed into by default.                                                                                                                                                        |
-| `--no-destination`          | category: no default album.                                                                                                                                                                                             |
-| `--strategy=<string>`       | category: how its files are grouped (events, folders, none): by time and place, by folder and file-name run, or into monthly lanes.                                                                                     |
-| `--significance=<string>`   | category: how readily a day becomes a group of its own rather than part of an Everyday lane (fewer, normal, more)                                                                                                       |
-| `--digitized=<string>`      | category: on, its files are digitized copies (scans), and no clock recorded while digitizing them (camera, GPS, file name) dates them; off, they do. Its files are dated again.                                         |
-| `--filename-dates=<string>` | category: on, a date its files' names spell (IMG_20190601_123456.jpg) dates them when nothing better does; off, names are not dates. Its files are dated again.                                                         |
-| `--lane=<string>`           | category: the lane the work on its files runs in (normal, bulk); bulk runs below all other work, for an import of thousands, and applies to work announced from then on.                                                |
-| `--sidecars=<string>`       | category: whether the Google Photos Takeout JSON and XMP sidecars arriving there are paired with their files (pair, ignore), from then on.                                                                              |
+| Option                    | What it does                                                                                                                                                                                                            |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--user=<string>`         | act on this user (defaults to the current user)                                                                                                                                                                         |
+| `--all`                   | init, organize, match, duplicates --repair: act on every user (administrator only)                                                                                                                                      |
+| `--stale`                 | match: only the groups due a match: none for their members as they are, by another model, or older than a candidate profile.                                                                                            |
+| `--since=<string>`        | match: only the groups around the days of the library albums whose profile changed after this time.                                                                                                                     |
+| `--full`                  | organize: plan the whole category again, not only what changed since the last run.                                                                                                                                      |
+| `--queue`                 | organize: ask for a run rather than run one; the organizer's pipeline runs it within minutes. A user may ask for their own categories.                                                                                  |
+| `--if-pending`            | organize --queue: only for a category something waits for: changes since its last run, edits, a first run, or a week since its last full build (administrator only)                                                     |
+| `--at=<path>`             | split: the first file of the new group.                                                                                                                                                                                 |
+| `--new`                   | regroup: the files make a new group of their own.                                                                                                                                                                       |
+| `--to=<string>`           | promote: the directory a new album is made in (default /archive/albums)                                                                                                                                                 |
+| `--name=<string>`         | promote: the new album's title, its path made from it (default the first group's name); split, regroup --new: the new group's name; merge: the kept group's new name.                                                   |
+| `--into=<path>`           | promote: file into this library album instead of a new one.                                                                                                                                                             |
+| `--share=<string>`        | promote: 'private' makes the new album yours alone; 'default' shares it as your new albums are.                                                                                                                         |
+| `--except=<path>`         | promote, discard: leave this member in its group, which is then pinned (repeatable)                                                                                                                                     |
+| `--expect=<string>`       | promote, discard, accept, split, regroup, merge, delete: the member key each group must still have, in group order (repeatable)                                                                                         |
+| `--confidence=<string>`   | accept: the least sure proposal to apply (high, medium, low; default medium)                                                                                                                                            |
+| `--action=<string>`       | journal: only decisions of this kind (promote, file, discard, dedupe, edit, reject)                                                                                                                                     |
+| `--limit=<string>`        | journal: entries per page (default 50, at most 200); duplicates: sets per page (default 50, at most 200); duplicates --refresh: files announced per call (default 5000); dedupe --apply: copies dropped per call.       |
+| `--cursor=<string>`       | journal, duplicates, duplicates --refresh, dedupe --apply: go on after this one's cursor.                                                                                                                               |
+| `--refresh`               | duplicates: announce each staged media file whose duplicate finding is missing, from another inbox or for other bytes, for media-duplicates to record; takes a folder of the user's staging files (default all of them) |
+| `--force`                 | duplicates --refresh: announce every staged media file.                                                                                                                                                                 |
+| `--repair`                | duplicates: check each duplicate finding against where its file is now, and fix it (with --all, every user's)                                                                                                           |
+| `--counts`                | duplicates: how many staged copies the scope holds, by where their originals lie.                                                                                                                                       |
+| `--where=<string>`        | duplicates, dedupe --apply: only copies or look-alikes of library photos (library), or of files within the inbox (inbox); both, in that order, by default.                                                              |
+| `--keep=<string>`         | dedupe: keep this staged file (its id) of the one set named, instead of the one the rules keep.                                                                                                                         |
+| `--apply`                 | dedupe: resolve every set of the scope that resolves unasked, at most 500 sets and --limit copies (default and most 2000) a call.                                                                                       |
+| `--off`                   | pin: unpin, so the organizer manages the group again; separate: no longer keep the files apart.                                                                                                                         |
+| `--exact`                 | duplicates, dedupe --apply: only byte copies.                                                                                                                                                                           |
+| `--near`                  | duplicates, dedupe --apply: only look-alikes: the same picture in other bytes.                                                                                                                                          |
+| `--loose-batch=<string>`  | init: the default category's folder that loose entries of files/ move into (default unsorted)                                                                                                                           |
+| `--layout-only`           | init: make the directories and categories only; move nothing.                                                                                                                                                           |
+| `--idle-minutes=<string>` | init: leave the loose files of files/ changed within this many minutes, which may still be being copied.                                                                                                                |
+| `--dry-run`               | init, organize, promote, discard, accept, dedupe, duplicates --refresh: say what would be done, and do none of it.                                                                                                      |
+| `--create`                | category: make it, with its directory of groups.                                                                                                                                                                        |
+| `--remove`                | category: remove it, which only an empty one other than the default can be.                                                                                                                                             |
+| `--label=<string>`        | category: what a page calls it.                                                                                                                                                                                         |
 
 ```bash
 staging init --all --loose-batch old-scans --dry-run
@@ -3032,14 +3021,9 @@ staging status --user anna
 staging check
 staging detect
 staging detect /home/anna/staging/files/inbox/upload-2026-10-18/Takeout
-staging category scans --create --kind scans --label "Box 3"
-staging category scans --destination /archive/albums/family-prints
-staging category inbox --significance more
-staging category box-3 --digitized on
-staging category takeout --lane bulk
-staging category whatsapp --sidecars ignore
-staging retime /home/anna/staging/files/inbox --dry-run
-staging retime scans --user anna
+staging category scans --create --label "Box 3"
+staging category scans --label 'Family prints'
+staging category scans --remove
 staging organize --all
 staging organize inbox --user anna --full --dry-run
 staging organize inbox --queue
@@ -3061,7 +3045,6 @@ staging promote 2019-06-20 --name 'Cottage notes' --share private
 staging discard 2019-06-21
 staging discard /home/anna/staging/files/inbox/upload-2026-10-01/blurry
 staging accept 2019-06-14 2019-06-16 --dry-run
-staging later 2019-07-02
 staging journal inbox --limit 50
 staging undo 01JA2B3C4D5E6F7G8H9J0K1M2N
 staging move /home/anna/staging/files/inbox/box-3 /home/anna/staging/files/scans
@@ -3079,7 +3062,7 @@ staging dedupe inbox --apply --near --where library
 staging separate /home/anna/staging/files/inbox/IMG_0001.jpg /home/anna/staging/files/inbox/IMG_0002.jpg
 ```
 
-With `JSON_OUTPUT=1`: promote: StagingPromoteResult; discard: StagingDiscardResult; accept: StagingAcceptResult; later: StagingLaterResult; undo: StagingUndoResult; journal: StagingJournalPage; move: StagingMoveResult; split, regroup, merge, delete, rename, pin, reject: StagingEditResult; match: StagingMatchResult; organize: StagingOrganizeReport, with --queue StagingQueueReport; init: StagingInitAnswer; retime: StagingRetimeAnswer; status: StagingStatus; check: StagingCheckAnswer; detect: StagingDetectAnswer; category: StagingCategoryAnswer; duplicates: DuplicatePage; duplicates --counts: DuplicateCounts; dedupe: DuplicateResolveResult; separate: DuplicateSeparateResult; duplicates --refresh: DuplicateRefreshResult; duplicates --repair: DuplicateRepairResult.
+With `JSON_OUTPUT=1`: promote: StagingPromoteResult; discard: StagingDiscardResult; accept: StagingAcceptResult; undo: StagingUndoResult; journal: StagingJournalPage; move: StagingMoveResult; split, regroup, merge, delete, rename, pin, reject: StagingEditResult; match: StagingMatchResult; organize: StagingOrganizeReport, with --queue StagingQueueReport; init: StagingInitAnswer; status: StagingStatus; check: StagingCheckAnswer; detect: StagingDetectAnswer; category: StagingCategoryAnswer; duplicates: DuplicatePage; duplicates --counts: DuplicateCounts; dedupe: DuplicateResolveResult; separate: DuplicateSeparateResult; duplicates --refresh: DuplicateRefreshResult; duplicates --repair: DuplicateRepairResult.
 
 ### `staging-hold`
 

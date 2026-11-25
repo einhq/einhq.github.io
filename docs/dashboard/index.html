@@ -169,13 +169,16 @@ list to choose from reads it from EiN as you, so it lists what you can see.</li>
 <td><strong>Note</strong></td>
 <td>A few words of your own, in Markdown</td>
 </tr>
+<tr>
+<td><strong>Map</strong></td>
+<td>A map in the style you choose, with the layers you choose on it; see <a href="#the-map-card">The Map card</a></td>
+</tr>
 </tbody></table>
 </div>
 <p>Other modules add their own: the Archive the <strong>Picture of the day</strong>, <strong>Birthdays</strong> and
 <a href="../archive/home.html#on-a-dashboard"><strong>Weather</strong></a>, Todo a
 <strong>Todo list</strong>, <a href="../devices/index.html#on-a-dashboard">Devices</a> a <strong>Camera</strong> and a
-<strong>Button</strong>, and <a href="../vasttrafik/index.html#on-a-dashboard">Västtrafik</a> <strong>Departures</strong>,
-<strong>Vehicles on the map</strong> and <strong>Disruptions</strong>. A card whose module is removed later says so on the dashboard until you take it off.</p>
+<strong>Button</strong>, and <a href="../vasttrafik/index.html#on-a-dashboard">Västtrafik</a> <strong>Departures</strong> and <strong>Disruptions</strong>. A card whose module is removed later says so on the dashboard until you take it off.</p>
 <p>A card holding more than its tile has room for, such as a long <strong>Coming up</strong> list or a device with
 many readings, shows it all in turn rather than scrolling: after a few seconds the next row glides
 in at the bottom while the top one fades out, and after the last the first comes round again,
@@ -184,6 +187,25 @@ the pointer over a card holds it still for a few seconds, and where the computer
 reduced motion, the rows fade from one to the next instead of gliding. A <strong>Note</strong> too long for its
 tile scrolls; make it larger.</p>
 <figure class="shot"><a href="../../assets/shots/dashboard@2x.webp"><img src="../../assets/shots/dashboard.webp" srcset="../../assets/shots/dashboard.webp 1x, ../../assets/shots/dashboard@2x.webp 2x" alt="The Kitchen dashboard's page, By the fridge, with Share, Full screen, Arrange and the ⋮ menu at the top right, and its cards: a clock, the weather at Home, a picture of an older couple with coffee on a boat, Birthdays, a Todo list, Coming up with a todo and the birthdays ahead, and a Device card with Erik's iPhone's position on a map" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Cards from Dashboards, the Archive and Todo side by side on one page.</figcaption></figure>
+<h3 id="the-map-card">The Map card<a class="anchor" href="#the-map-card" aria-label="Link to this section"></a></h3>
+<p>The <strong>Map</strong> card is a map like the <a href="../archive/places.html#choose-the-style-and-the-layers">Map page</a>:
+a style, and the layers the installed modules offer drawn on it. Its settings:</p>
+<ul>
+<li><strong>Map style</strong>: <strong>Map</strong>, <strong>Dark map</strong>, <strong>Satellite</strong> or another style a module adds. Left empty,
+each viewer sees their own <strong>Map style</strong>.</li>
+<li><strong>Layers</strong>: what it draws, such as <strong>Photos and videos</strong>, <strong>Tracks</strong>, <strong>Sea marks</strong> or
+<a href="../vasttrafik/index.html#on-a-map">Västtrafik&#39;s vehicles</a>. A layer that takes settings of its own
+has them under its name as soon as it is chosen: the photos a search and a range of years,
+Västtrafik&#39;s vehicles their stops, lines and trails.</li>
+<li><strong>Where it looks</strong>: drag the small map and zoom it until it shows what the card should, or click
+the place. Left empty, the card shows what its layers draw, such as the area around Västtrafik&#39;s
+stops, or else where maps open.</li>
+<li><strong>Buttons</strong>: what a viewer may do with it: <strong>Map style</strong> and <strong>Layers</strong> open the same pickers as
+on the Map page, for as long as the card is on screen, and <strong>Enlarge</strong> opens the map over the
+dashboard with both. None unless chosen, which suits a screen on a wall.</li>
+</ul>
+<p>Each layer draws what its viewer may see, so a screen opened by a display link draws only what is
+shared with it.</p>
 <h2 id="arrange-it">Arrange it<a class="anchor" href="#arrange-it" aria-label="Link to this section"></a></h2>
 <p>Choose <strong>Arrange</strong> on the dashboard&#39;s page. Each card gets a row of buttons in its top corner and
 a bracket in its bottom one:</p>
@@ -280,7 +302,7 @@ dashboard-set Kitchen --dim 22:30-06:30@0.3</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/dashboard/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#make-a-dashboard">Make a dashboard</a></li><li><a href="#add-cards">Add cards</a></li><li><a href="#arrange-it">Arrange it</a></li><li><a href="#show-it-full-screen">Show it full screen</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#offer-a-card-from-a-module">Offer a card from a module</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#make-a-dashboard">Make a dashboard</a></li><li><a href="#add-cards">Add cards</a></li><li class="nested"><a href="#the-map-card">The Map card</a></li><li><a href="#arrange-it">Arrange it</a></li><li><a href="#show-it-full-screen">Show it full screen</a></li><li><a href="#ask-the-assistant">Ask the assistant</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#offer-a-card-from-a-module">Offer a card from a module</a></li></ul></aside>
     </div>
   </body>
 </html>

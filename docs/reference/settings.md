@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 125 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 127 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -560,6 +560,26 @@ Every setting of an EiN with all its modules: 125 of them, in the groups the Set
 | Kind | locale |
 
 ## Maps
+
+### `CFG_USER_MAP_LAYERS`
+
+**Map layers**. What the Map page draws for you when its address names nothing, by the layers' ids separated by commas (archive.media, archive.tracks), or none. The Map page sets it when you turn a layer on or off there.
+
+| | |
+| --- | --- |
+| Who it is for | Each person (Profile → Preferences) |
+| Default | empty, which means the layers that start on |
+| Kind | string |
+
+### `CFG_USER_MAP_STYLE`
+
+**Map style**. The style every map shows you when it names none of its own, by its id (ui.map, ui.satellite). The Map page sets it when you pick a style there.
+
+| | |
+| --- | --- |
+| Who it is for | Each person (Profile → Preferences) |
+| Default | empty, which means the first map style |
+| Kind | string |
 
 ### `CFG_MAP_CENTER`
 
@@ -1334,7 +1354,7 @@ Every setting of an EiN with all its modules: 125 of them, in the groups the Set
 
 ### `CFG_VASTTRAFIK_POSITIONS_SECONDS`
 
-**Vehicles kept (seconds)**. How long EiN keeps where the vehicles in a map card's box are before it asks Västtrafik again, 2 to 300. Vehicles report where they are every two or three seconds; each map on a screen costs one call this often, and its vehicles drive smoothly between answers.
+**Vehicles kept (seconds)**. How long EiN keeps where the vehicles on a map are before it asks Västtrafik again, 2 to 300. Vehicles report where they are every two or three seconds; each map showing them costs one call this often, and its vehicles drive smoothly between answers.
 
 | | |
 | --- | --- |

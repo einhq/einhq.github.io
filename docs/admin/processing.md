@@ -324,9 +324,9 @@ and the Archive's `media-scan`, in [Processing pictures](../archive/processing.m
 
 An event can put the work it starts in the bulk lane, below all other work, so that what people do
 in the meantime is processed first. Bulk work is put behind, never stopped: it runs whenever
-nothing else that could run is waiting. With the Archive installed, the work on a large import
-runs there; [Processing pictures](../archive/processing.md#large-imports-and-the-bulk-lane) says
-which.
+nothing else that could run is waiting. With the Archive installed, the passes that close gaps and
+redo stale work run there; [Processing pictures](../archive/processing.md#work-in-the-bulk-lane)
+says which.
 
 `pipeline-rerun` and `pipeline-start` always run in the normal lane; `pipeline-heal` keeps the
 lane an instance had.

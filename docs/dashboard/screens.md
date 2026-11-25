@@ -81,7 +81,7 @@ It answers the stream's id and where to play it. The media service writes the vi
 streams in EiN's tree, yours alone: `/tmp/page-streams/<id>.mp4`, for a Cast device, and the same
 ending in `.ts`, for a DLNA TV, which you read signed in, such as
 `http://ein.local:8080/file/tmp/page-streams/page-3f2a….mp4` in a browser, and a TV given the page
-with **Show on…** reads with a ticket of its own. Whoever starts reading one starts at its latest
+with **Show on** reads with a ticket of its own. Whoever starts reading one starts at its latest
 keyframe. Two more addresses, one ending in `screen.mp4`, the video saying it lasts a day, which
 Chrome hands a TV near it, and one ending in `index.m3u8`, a live HLS playlist, for a player that
 takes HLS (Safari, VLC, an Apple TV), anyone with the address can watch without signing in: put
@@ -107,7 +107,7 @@ anything that plays a stream from an address, until the stream stops.
   administrator allows more (`EMS_PAGES`).
 
 With the [Devices](../devices/index.md#play-on-a-speaker-or-a-screen) module there is no need
-to: **Show on…** under the dashboard's **⋮** gives its wall to a Cast or DLNA screen, which streams it
+to: **Show on** under the dashboard's **⋮** gives its wall to a Cast or DLNA screen, which streams it
 as above and plays it until it is stopped, and `echo /dashboard-wall/Kitchen > /dev/living-room-tv/show`
 does the same from the terminal.
 

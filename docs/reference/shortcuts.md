@@ -223,17 +223,17 @@ the last.
 While a photo, video or recording is open. [Viewing photos, videos and recordings](../archive/viewer.md#keyboard-shortcuts-in-the-viewer)
 explains each.
 
-| Keys                         | What they do                                                                                                                                    |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| <kbd>←</kbd> / <kbd>→</kbd>  | Previous / next file, also during a slideshow.                                                                                                  |
-| <kbd>i</kbd>                 | Shows or hides the details panel. Not for a visitor who came by a share link.                                                                   |
-| <kbd>f</kbd>                 | Shows or hides the face boxes with their names.                                                                                                 |
-| <kbd>t</kbd>                 | Shows or hides the text in the picture, when it has some.                                                                                       |
-| <kbd>s</kbd>                 | Adds the file to your favourites, or takes it out.                                                                                              |
-| <kbd>+</kbd> or <kbd>=</kbd> | Zooms in a step (photos and videos, not during a slideshow).                                                                                    |
-| <kbd>-</kbd>                 | Zooms out a step.                                                                                                                               |
-| <kbd>0</kbd>                 | Fits the whole picture again.                                                                                                                   |
-| <kbd>Esc</kbd>               | Closes what lies over the picture first: the enlarged map, the text dialog, drawing a face box. Then stops a slideshow. Then closes the viewer. |
+| Keys                         | What they do                                                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <kbd>←</kbd> / <kbd>→</kbd>  | Previous / next file, also during a slideshow.                                                                                                          |
+| <kbd>i</kbd>                 | Shows or hides the details panel. Not for a visitor who came by a share link.                                                                           |
+| <kbd>f</kbd>                 | Shows or hides the face boxes with their names.                                                                                                         |
+| <kbd>t</kbd>                 | Shows or hides the text in the picture, when it has some.                                                                                               |
+| <kbd>s</kbd>                 | Adds the file to your favourites, or takes it out.                                                                                                      |
+| <kbd>+</kbd> or <kbd>=</kbd> | Zooms in a step (photos and videos, not during a slideshow).                                                                                            |
+| <kbd>-</kbd>                 | Zooms out a step.                                                                                                                                       |
+| <kbd>0</kbd>                 | Fits the whole picture again.                                                                                                                           |
+| <kbd>Esc</kbd>               | Closes what lies over the picture first: a menu, the enlarged map, the text dialog, drawing a face box. Then stops a slideshow. Then closes the viewer. |
 
 In the **Who is this?** box of an unnamed face, <kbd>Enter</kbd> names it. In the **Text in the
 picture** dialog, <kbd>Enter</kbd> saves and <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line.
@@ -292,53 +292,47 @@ On **Home**, while **On this day** plays as a story ([Memories, news and events 
 
 ### Staging: the Sort tab
 
-On a computer, <kbd>?</kbd>, or **Keyboard shortcuts** at the foot of the column beside the
-stream, lists them under **Staging**, a section for each place the cursor can be. The keys do nothing while you type in a field or a dialog is open, and there
+On a computer, <kbd>?</kbd>, or **Keyboard shortcuts** in the page's ⋮ menu, lists them under **Staging**, a section for each place the cursor can be. The keys do nothing while you type in a field or a dialog is open, and there
 are none on a phone. [Sorting in staging](../archive/staging.md#keys-in-the-sort-tab) explains what
 each does to a group.
 
 On a group:
 
-| Keys                                                                                                                            | What they do                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| <kbd>J</kbd> / <kbd>K</kbd>                                                                                                     | Next / previous group                                          |
-| <kbd>Shift</kbd>+<kbd>J</kbd> / <kbd>Shift</kbd>+<kbd>K</kbd>, or <kbd>Shift</kbd>+<kbd>↓</kbd> / <kbd>Shift</kbd>+<kbd>↑</kbd> | Select on to the next / previous group                         |
-| <kbd>Enter</kbd>                                                                                                                | The proposal                                                   |
-| <kbd>N</kbd>                                                                                                                    | New album from the group                                       |
-| <kbd>P</kbd>                                                                                                                    | New private album                                              |
-| <kbd>A</kbd>                                                                                                                    | **Add to album…**                                              |
-| <kbd>B</kbd>                                                                                                                    | Into the target, or **Choose a target…** when there is none    |
-| <kbd>Shift</kbd>+<kbd>B</kbd>                                                                                                   | Choose the target                                              |
-| <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>                                                                                          | Into that candidate album                                      |
-| <kbd>,</kbd> / <kbd>.</kbd>                                                                                                     | Highlight the candidate above / below                          |
-| <kbd>R</kbd>                                                                                                                    | Not the highlighted candidate                                  |
-| <kbd>C</kbd>                                                                                                                    | Compare with the highlighted album, or narrow the column again |
-| <kbd>X</kbd>                                                                                                                    | Discard                                                        |
-| <kbd>L</kbd>                                                                                                                    | Later, or back to its lane                                     |
-| <kbd>Z</kbd>                                                                                                                    | Undo                                                           |
-| <kbd>E</kbd>                                                                                                                    | Rename                                                         |
-| <kbd>T</kbd>                                                                                                                    | Set the time of every picture, or of the selected ones         |
-| <kbd>M</kbd> / <kbd>Shift</kbd>+<kbd>M</kbd>                                                                                    | Merge into the group above / merge the group below in          |
-| <kbd>[</kbd> / <kbd>]</kbd>                                                                                                     | Previous / next day or month of the group                      |
-| <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd>                                                                             | Step through the pictures                                      |
-| <kbd>O</kbd>                                                                                                                    | Open the first picture                                         |
+| Keys                                                                                                                            | What they do                                                |
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| <kbd>J</kbd> / <kbd>K</kbd>                                                                                                     | Next / previous group                                       |
+| <kbd>Shift</kbd>+<kbd>J</kbd> / <kbd>Shift</kbd>+<kbd>K</kbd>, or <kbd>Shift</kbd>+<kbd>↓</kbd> / <kbd>Shift</kbd>+<kbd>↑</kbd> | Select on to the next / previous group                      |
+| <kbd>Enter</kbd>                                                                                                                | The proposal                                                |
+| <kbd>N</kbd>                                                                                                                    | Create album from the group                                 |
+| <kbd>A</kbd>                                                                                                                    | **Add to album…**                                           |
+| <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>                                                                                          | Into that candidate album                                   |
+| <kbd>,</kbd> / <kbd>.</kbd>                                                                                                     | Select the candidate album above / below                    |
+| <kbd>R</kbd>                                                                                                                    | Not the selected candidate album                            |
+| <kbd>C</kbd>                                                                                                                    | Compare with the selected album, or narrow the column again |
+| <kbd>X</kbd>                                                                                                                    | Discard                                                     |
+| <kbd>Z</kbd>                                                                                                                    | Undo                                                        |
+| <kbd>E</kbd>                                                                                                                    | Rename                                                      |
+| <kbd>T</kbd>                                                                                                                    | Set the time of every picture, or of the selected ones      |
+| <kbd>[</kbd> / <kbd>]</kbd>                                                                                                     | Previous / next day or month of the group                   |
+| <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd>                                                                             | Step through the pictures                                   |
+| <kbd>O</kbd>                                                                                                                    | Open the first picture                                      |
 
 On a picture (after an arrow key), on a day or month (after <kbd>[</kbd> or <kbd>]</kbd>), or with
 pictures selected:
 
-| Keys                                                                              | What they do                                                  |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| <kbd>Space</kbd>                                                                  | Select the picture, or the day's pictures                     |
-| <kbd>O</kbd>                                                                      | Open the picture                                              |
-| <kbd>S</kbd>                                                                      | Split the group before them; in a lane, make them a new group |
-| <kbd>&lt;</kbd> / <kbd>&gt;</kbd>                                                 | Move them to the group above / below                          |
-| <kbd>G</kbd>                                                                      | Move them to a group…                                         |
-| <kbd>Enter</kbd> <kbd>N</kbd> <kbd>P</kbd> <kbd>A</kbd> <kbd>B</kbd> <kbd>X</kbd> | Act on the day or the selected pictures only                  |
-| <kbd>Esc</kbd>                                                                    | Back to the group, or clear the selection                     |
+| Keys                                                    | What they do                                                  |
+| ------------------------------------------------------- | ------------------------------------------------------------- |
+| <kbd>Space</kbd>                                        | Select the picture, or the day's pictures                     |
+| <kbd>O</kbd>                                            | Open the picture                                              |
+| <kbd>S</kbd>                                            | Split the group before them; in a lane, make them a new group |
+| <kbd>&lt;</kbd> / <kbd>&gt;</kbd>                       | Move them to the group above / below                          |
+| <kbd>G</kbd>                                            | Move them to a group…                                         |
+| <kbd>Enter</kbd> <kbd>N</kbd> <kbd>A</kbd> <kbd>X</kbd> | Act on the day or the selected pictures only                  |
+| <kbd>Esc</kbd>                                          | Back to the group, or clear the selection                     |
 
 With a selection that reaches past the open group, <kbd>Enter</kbd> asks to accept the proposals of
-every group in it, <kbd>N</kbd>, <kbd>P</kbd>, <kbd>A</kbd>, <kbd>B</kbd> and <kbd>X</kbd> act on the
-whole selection, <kbd>L</kbd> puts the groups aside, and <kbd>Esc</kbd> clears it.
+every group in it, <kbd>N</kbd>, <kbd>A</kbd> and <kbd>X</kbd> act on the whole selection, and
+<kbd>Esc</kbd> clears it.
 <kbd>&lt;</kbd>, <kbd>&gt;</kbd>, <kbd>[</kbd> and <kbd>]</kbd> work on any keyboard layout, also
 where you type them with AltGr or Option.
 
@@ -347,7 +341,7 @@ With a mouse, drag across the stream to select the pictures and groups the box t
 
 In the dialogs these keys open:
 
-- **Add to an album** and **Choose the target**: with nothing typed, <kbd>1</kbd>, <kbd>2</kbd> and
+- **Add to an album**: with nothing typed, <kbd>1</kbd>, <kbd>2</kbd> and
   so on pick the suggested album of that number.
 - **Move to a group**: <kbd>↑</kbd> and <kbd>↓</kbd> light a group, <kbd>Enter</kbd> takes it.
 - Renaming a group: <kbd>Enter</kbd> keeps the name, <kbd>Esc</kbd> gives it up.

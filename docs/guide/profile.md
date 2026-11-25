@@ -120,6 +120,8 @@ the default. If a save fails, the reason shows in a red box under the setting.
 | Appearance | **Header over a cover**                  | `split`   | How the tiles meet a page's cover photo, such as an album's or a person's: `split` gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; `lines` lays only their outlines over the photo. |
 | Language   | **Date and time format**                 | empty     | How dates and times are written for you; see below. Empty follows the administrator's **Date and time format**.                                                                                                                    |
 | Maps       | **Where maps open**                      | empty     | Where a map opens for you when it has nothing of its own to show, such as the Map page; see below. Empty follows the administrator's **Where maps open**.                                                                          |
+| Maps       | **Map style**                            | empty     | The style every map shows you when it names none of its own; the Map page sets it. Empty is the first style, **Map**.                                                                                                              |
+| Maps       | **Map layers**                           | empty     | What the Map page draws for you; the Map page sets it. Empty is the layers that start on.                                                                                                                                          |
 | Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                                       |
 | Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                 |
 | Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                   |
@@ -190,10 +192,24 @@ Its key is `CFG_USER_MAP_CENTER`, so a line in your `~/.config` sets it too:
 export CFG_USER_MAP_CENTER='59.3293, 18.0686, 11'
 ```
 
+### Map style and map layers
+
+The [Map page](../archive/places.md#choose-the-style-and-the-layers) keeps what you choose under its
+**Map style and layers** button here, so it opens the same way next time, on any browser you sign
+in on. **Map style** holds the style's id, such as `ui.satellite`, and every map that names no style
+of its own opens in it: the viewer's, an album's, a dashboard's Map card that leaves its style to
+the viewer. **Map layers** holds the layers' ids separated by commas, such as
+`archive.media,archive.tracks`, or `none`; only the Map page reads it. Empty, the Map page draws the
+layers that start on. Their keys are `CFG_USER_MAP_STYLE` and `CFG_USER_MAP_LAYERS`:
+
+```bash
+export CFG_USER_MAP_STYLE='ui.dark-map'
+```
+
 ### How widely what you create is shared
 
 This preference decides how an album you create starts out: one made with **Create → Album**, with
-**New album “…”** in **Add to an album**, or with **New album** in staging. It does not change albums
+**New album “…”** in **Add to an album**, or with **Create album** in staging. It does not change albums
 that exist already; to change who sees one of those, use its **Share** button. Albums come with the
 Archive; without it, nothing you create follows this preference.
 
@@ -206,7 +222,7 @@ Archive; without it, nothing you create follows this preference.
 
 None of them shows an album to visitors who are not signed in, unless you keep `default` and the
 administrator's default sharing lets everyone else view; otherwise you grant that yourself in the
-**Share** dialog. An administrator can see every album, whatever you choose. **New private album** in staging is always private, whatever you choose here.
+**Share** dialog. An administrator can see every album, whatever you choose.
 [Sharing](sharing.md) explains the default sharing and the **Share** dialog.
 
 ### When a change takes effect

@@ -19,12 +19,14 @@ album. The usual way past staging is to upload straight into an album that alrea
 | **Upload**, or dropping files, on the **Media** page | your **Inbox** in staging                               | yes          |
 | **Upload**, or dropping files, on an album's page    | that album, in the library                              | no           |
 | Copying over SFTP or `scp`                           | the folder you copy into, normally a staging category   | yes          |
-| The EiN app's photo backup                           | the category chosen for it, normally a **Phone** one    | no           |
-| A phone's backup app, over WebDAV                    | the folder it sends into, normally a **Phone** category | yes          |
+| The EiN app's photo backup                           | the category chosen for it, normally one for the phone  | no           |
+| A phone's backup app, over WebDAV                    | the folder it sends into, normally the phone's category | yes          |
 
 Your staging area is divided into **categories**. The **Inbox** is always there and takes
 everything you do not put elsewhere; you can add others, one per source: a Google Photos export, a
-box of scanned prints, an old phone. Each category is a folder, `/home/<you>/staging/files/<name>`.
+box of scanned prints, an old phone. A category is only a name and a folder,
+`/home/<you>/staging/files/<name>`: every category's files are dated, grouped and processed the
+same way.
 [Sorting in staging](staging.md) covers categories in full.
 
 Until they are filed, staged files stay out of the library's own views: the Media page, the map, On
@@ -44,39 +46,28 @@ them and their relations into the archive (see [Bring in a family tree from a GE
 
 ## Import media
 
-**Import media** is the main way in. It puts files into one staging category, keeping the folders
-you choose.
+**Import media** is the main way in. It puts files into one of your staging categories, keeping
+the folders you choose. To bring a new source in a category of its own, make the category first
+with **New category** (see [Make a category](staging.md#make-a-category)), then import into it.
 
 1. Open the **Create** menu (the plus in the top bar) and choose **Import media**. The same dialog
-   opens from the **Import media** button on the Staging page, the **Import** button on a category's
-   card, **Import media…** in a category's ⋮ menu and, while the Home page has no news yet, the
-   **Import media** button there. Pictures shared to EiN from a phone's gallery open it too, with
-   the files already chosen (see [Share pictures to EiN](../guide/phone.md#share-pictures-to-ein)).
+   opens from **Import media…** in a category's ⋮ menu, the **Import media** button of an empty
+   category and, while the Home page has no news yet, the **Import media** button there. Pictures
+   shared to EiN from a phone's gallery open it too, with the files already chosen (see
+   [Share pictures to EiN](../guide/phone.md#share-pictures-to-ein)).
 2. Under **Into which category?**, pick a category. Each shows how many files it holds and its
    folder, for example "0 files · files/inbox". The Inbox is chosen unless you opened the dialog
    from a category.
-3. To keep this batch in a category of its own, choose **New category** instead ("For one source
-   kept together: an export, a box of scans, a phone."). Pick **What it holds**, and type what the
-   category is **Called**. The line under the name shows the folder it gets, for example
-   "Folder files/box-3".
-4. Choose **Choose files** or **Choose a folder**. The line under the buttons counts what you
+3. Choose **Choose files** or **Choose a folder**. The line under the buttons counts what you
    picked, for example "212 files in 3 folders, 1.4 GB".
-5. Choose **Upload 212**. The button counts your files.
+4. Choose **Upload 212**. The button counts your files.
 
 ![The Import media dialog with the Inbox chosen, the Choose files and Choose a folder buttons, and the SFTP folder with its copy button and How link](../../assets/shots/import.webp "Import media: a category, the files, then Upload.")
 
 The dialog closes, the category opens on its **Files** tab and the files upload in the background.
-If you made a new category, it is created first.
 
-**What it holds** starts on **Google Photos export**. Pick the kind closest to where the files come
-from: **Google Photos export**, **Scans**, **Phone**, **Camera**, **Messaging**, **Screenshots** or
-**Other**. The kind decides how the files are dated and grouped; a scan, for example, is never
-dated by the scanner's clock. [The kinds of category](staging.md#the-kinds-of-category) explains
-each one.
-
-For an existing category, the dialog also says "Over about 10,000 files? Copy them over SFTP
-instead, folders and all, into" with the category's folder, a button that copies the path, and a
-**How** link. See [Copy files in over SFTP](#copy-files-in-over-sftp).
+The dialog also says "Over about 10,000 files? Copy them over SFTP instead, folders and all, into"
+with the category's folder, a button that copies the path, and a **How** link. See [Copy files in over SFTP](#copy-files-in-over-sftp).
 
 ### Follow an upload
 
@@ -101,22 +92,21 @@ as `IMG_0042 (2).jpg`, and the panel says "N saved under a new name, theirs was 
 
 ## Upload or drop files on a page
 
-Four pages take files from a button in their header and from files dropped anywhere on them:
+Three pages take files from a button in their header and from files dropped anywhere on them:
 
-| Page                                          | Buttons                                     | When you drag files over it                                                       | Where the files go                       |
-| --------------------------------------------- | ------------------------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------- |
-| **Staging** (the overview of your categories) | **Import media**                            | "Drop the files on where they go", with a tile for each category                  | the category whose tile you drop them on |
-| A staging category, on any tab                | **Upload**, and **Upload a folder** under ⋮ | "Drop files to upload", "Into Box 3, folders and all" (with the category's name)  | that category                            |
-| **Media**                                     | **Upload**, and **Upload a folder** under ⋮ | "Drop files to upload", "Into staging, folders and all"                           | your Inbox                               |
-| An album you may change                       | **Upload**                                  | "Drop files to upload", "Into Sailing in the archipelago" (with the album's name) | that album                               |
+| Page                           | Buttons                                     | When you drag files over it                                                       | Where the files go |
+| ------------------------------ | ------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ |
+| A staging category, on any tab | **Upload**, and **Upload a folder** under ⋮ | "Drop files to upload", "Into Box 3, folders and all" (with the category's name)  | that category      |
+| **Media**                      | **Upload**, and **Upload a folder** under ⋮ | "Drop files to upload", "Into staging, folders and all"                           | your Inbox         |
+| An album you may change        | **Upload**                                  | "Drop files to upload", "Into Sailing in the archipelago" (with the album's name) | that album         |
 
-On the Staging overview, files dropped beside the tiles go nowhere.
+The Staging overview, the list of your categories, takes no files: open a category to upload into
+it.
 
 An upload into staging goes into a folder for the day inside the category, named
 `upload-YYYY-MM-DD`, and a folder you drop or choose keeps its structure below it:
 `Trip/day 2/IMG_0001.jpg` lands in `upload-2026-10-25/Trip/day 2/`. Folder names help the
-grouping. In most kinds of category, a folder you named yourself, holding at least three pictures,
-becomes a suggested album of its own, named after the folder, such as "Cornwall, summer 1968".
+grouping. A folder you named yourself, holding at least three pictures, becomes a suggested album of its own, named after the folder, such as "Cornwall, summer 1968".
 Names that cameras and exports give folders, such as `DCIM`, `100CANON`, a bare year or date, or
 `Takeout`, are not used.
 
@@ -163,11 +153,11 @@ server" all work; [SSH and SFTP](../shell/ssh-sftp.md) explains connecting.
 
 1. Open **Staging** in the Web UI once. This sets up your staging area. Without that, EiN
    sets it up within the hour.
-2. For a big export or a box of scans, make its category first: on the Staging page, choose its
-   kind on the **New category** card, type what it is **Called** and choose **Create**.
-3. Copy the files into the category's folder, `/home/<you>/staging/files/<name>/`. The Staging page
-   says "Tens of thousands of files? Copy them over SFTP into a category's folder:", and the Import
-   media dialog shows the folder of the category you pick, with a button that copies the path.
+2. For a big export or a box of scans, make its category first: on the Staging page, choose
+   **New category** in the header, type its **Name** and choose **Create**.
+3. Copy the files into the category's folder, `/home/<you>/staging/files/<name>/`. The category's
+   **Info** tab shows the path to copy into, and the Import media dialog shows the folder of the
+   category you pick, with a button that copies the path.
 
 ```bash
 # on your own computer
@@ -196,7 +186,7 @@ Pictures in a folder only one level down are still grouped, by when and where th
 only the folder's name is not used.
 
 Put files in a category's folder, never in `files/` itself: a folder copied directly into `files/`
-becomes a category of its own, of the **Other** kind, and a file left there belongs to no category
+becomes a category of its own, named after it, and a file left there belongs to no category
 until EiN moves it into `files/inbox/unsorted/`. It does that once an hour, for a file nothing has
 changed on for six hours, so a copy still being written is left alone.
 
@@ -207,11 +197,10 @@ changed on for six hours, so a copy still being written is left alone.
 ## Let a phone send its photos by itself
 
 The EiN app on an Android phone sends every new photo and video into a staging category by itself:
-choose the category on its **App** page, or make a **Phone** category called after the phone there,
-or choose **Back up this phone here** on a phone category's empty **Files** tab in the app. It sends
-only what you do not have yet. Another app can do the same over [WebDAV](../guide/webdav.md),
-through your EiN's `https://` address: while a **Phone** category is empty, its **Files** tab shows
-the address and folder to give it, and so does **Import media** when you choose it.
+choose the category on its **App** page, or make a category called after the phone there, or
+choose **Back up this phone here** on a category's **Info** tab in the app. It sends only what you
+do not have yet. Another app can do the same over [WebDAV](../guide/webdav.md), through your EiN's
+`https://` address: every category's **Info** tab shows the address and folder to give it.
 [Back up your phone automatically](../guide/phone.md#back-up-your-phone-automatically) has the
 steps for both. What a phone sends is taken in exactly as a browser upload is, and like a copy over
 SFTP skips the "arriving" stage.
@@ -241,9 +230,8 @@ A Google Photos Takeout comes as one or more zips. Beside every photo and video,
 JSON file with what it knows of it: when it was taken, where, its caption and whether it was a
 favourite. EiN reads these files, called sidecars, and gives what they say to the picture.
 
-1. On the Staging page, choose **Google Photos export** on the **New category** card. Call it, for
-   example, "Google Photos"; its folder is `files/google-photos`. You can also choose
-   **New category** in the Import media dialog, where **Google Photos export** is the first kind.
+1. On the Staging page, choose **New category** in the header. Call it, for example, "Google
+   Photos"; its folder is `files/google-photos`.
 2. Bring in the zips as they are: in **Import media**, choose the category, **Choose files** and
    the zips, then **Upload**. For a large export, copy them over SFTP instead:
 
@@ -273,14 +261,12 @@ The pairing knows Google's ways of naming: `IMG_0001.jpg.json` and
 `IMG_0001.jpg.supplemental-metadata.json`, names cut short, the `(1)` of a second picture of the
 same name, edited copies, and the video of a Live Photo.
 
-A category of the Google Photos export kind is worth making for two reasons: it pairs sidecars, and
-its processing waits behind other work, so pictures you upload to the Inbox in the meantime are
-ready first. A **Scans** category waits behind other work in the same way.
+A category of its own keeps the export together, so you sort it apart from what else you upload.
+Sidecars are paired in every category, the Inbox too.
 
 An XMP file that a photo editor or a scanning tool writes beside a picture (`IMG_0001.jpg.xmp` or
 `IMG_0001.xmp`) is paired the same way. The files it names as what the picture was made from, such
 as a scan's master, become versions of the picture ([Sidecar files](file-types.md#sidecar-files)).
-Every kind of category pairs sidecars except **Messaging** and **Screenshots**.
 
 ### If the export went into the Inbox
 
@@ -288,9 +274,10 @@ A folder that arrives in the Inbox is looked at to see where it came from. When 
 export, a blue box on the Staging page and on the Inbox's **Files** tab says so, for example
 "“Takeout” looks like Google Photos", with the two strongest signs.
 
-- **Make a Google Photos export category…** makes the category and moves the folder into it.
-- **Move to Google Photos…** (with your category's name) appears instead when you have a category
-  of that kind already.
+- **Move to category…** opens the move dialog, where you choose the category it goes into.
+- **New category…** opens the **New category** dialog with the source's name under
+  **Name**, here `Google Photos`; **Create and move “Takeout”** makes the category and moves the
+  folder into it.
 - The ✕ ("Keep it here, stop asking") leaves the folder where it is.
 
 Nothing moves by itself. The same box recognises scans, a phone's or a camera's pictures, pictures
@@ -298,9 +285,9 @@ from a messenger and screenshots.
 
 ## What happens after the upload
 
-![Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
+![Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album or into an album already there, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
 
-Each category's card on the Staging page, and the strip above a category's tabs, show where your
+Each category's card on the Staging page, and the strip under a category's title, show where your
 newest files are. Each stage shows while it holds files:
 
 | You see                          | Its tooltip                                                                    |
@@ -317,14 +304,11 @@ newest files are. Each stage shows while it holds files:
    [An exact copy shows its original](duplicates.md#an-exact-copy-shows-its-original)). The time
    estimate comes from how fast files left this stage while the page was open.
 3. **Being grouped.** The organizer sorts read files into groups within minutes of their arrival.
-   On a category's page, **Group now** beside this stage asks it at once, and a message says
-   "Grouping asked for: the new files are grouped within a few minutes".
 4. **Suggested albums.** The groups appear on the category's **Sort** tab, one after another, each
-   in a lane: **To sort**, **Everyday**, **Needs a date**, **Clutter** or **Later**. Before the
+   in a lane: **To sort**, **Everyday**, **Needs a date** or **Clutter**. Before the
    first is ready, the tab says "No groups yet" and "Groups appear as your files are prepared:
    N still to go."
-5. **Filed.** For each group you choose **New album**, **New private album**, **Add to album…**,
-   **Later** or **Discard**. Filing moves the files into an album in the library, with everything
+5. **Filed.** For each group you choose **Create album**, **Add to album…** or **Discard**. Filing moves the files into an album in the library, with everything
    EiN worked out about them; from then on whoever can see that album sees them. A discarded group
    goes to your trash. Filing and discarding can be undone on the category's **Done** tab.
 
@@ -378,8 +362,7 @@ catching up: 1,500 jobs waiting, the slowest kind done in 4h00m
 
 ## If something goes differently
 
-**Upload stays greyed out in the dialog.** Choose files first. With **New category**, the name must
-hold a letter or a digit; the line under it says "Needs a letter or digit" until it does.
+**Upload stays greyed out in the dialog.** Choose files first.
 
 **Some files failed.** Open the **Uploads** button in the top bar: the failures are listed with
 their reasons. Choose **Retry failed**.
@@ -397,7 +380,7 @@ your own.
 go down at all, the media service may not be running; tell your administrator.
 
 **The Sort tab says "No groups yet".** The files are still being prepared, or the organizer has not
-grouped them yet. Wait a few minutes, or choose **Group now** on the category's page.
+grouped them yet. Wait a few minutes.
 
 **A zip is still a zip.** It was uploaded outside staging, the disk lacked room, or a file in it
 clashed with one already there. Your administrator can see the reason.
@@ -412,8 +395,8 @@ appear there once you file them. Look for them on the **Staging** page.
 **Over SFTP or WebDAV, `/home/<you>/staging` does not exist.** Open **Staging** in the Web UI
 once, then copy or send again.
 
-**The dates are wrong, or scans have none.** A scan is undated until you give it a date; see
-[Dates and places of pictures](dates-places.md).
+**The dates are wrong, or scans have none.** A scan from a registered scanner is undated until you
+give it a date; see [Dates and places of pictures](dates-places.md).
 
 ## Related pages
 

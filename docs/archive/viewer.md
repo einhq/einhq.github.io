@@ -33,9 +33,8 @@ their name, opens over the viewer: Back returns to the picture you were on.
 
 On a computer:
 
-- **Top right**: the cog, which shows or hides the [toolbar](#the-toolbar) when you may change the
-  file, and close (×) beside it. They sit at the top of the details panel while it is open, and over
-  the picture's background while it is hidden.
+- **Top right**: close (×). It sits at the top of the details panel while it is open, and over the
+  picture's background while it is hidden.
 - **Over the picture**: an arrow to the next file while the pointer is on the right half of the
   picture, and to the previous one on the left half. With the [details panel](#the-details-panel)
   hidden, a handle sticks out of the right edge low down,
@@ -55,16 +54,15 @@ On a computer:
   - the place: the name of the location the picture is linked to, or else the street address read
     from its GPS position;
   - **Show text** / **Hide text** (<kbd>t</kbd>) when text was read from the photo, **Pin faces** /
-    **Unpin faces** (<kbd>f</kbd>) on photos and videos with faces found, **Fullscreen**, **Show toolbar** /
-    **Hide toolbar** when you may change the file, **Download**, and the cast icon, **Show on a
+    **Unpin faces** (<kbd>f</kbd>) on photos and videos with faces found, **Fullscreen**, **Download**, and the cast icon, **Show on a
     screen near you**, when the file can go to a TV where you are
     ([On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is));
-  - **More** (⋮), when some of these did not fit, or you have a speaker or screen in the house to
-    play it on (**Show on…**).
+  - **More** (⋮): **Show toolbar** / **Hide toolbar** when you may change the file, the buttons that
+    did not fit, and **Show on** when you have a speaker or screen in the house to play it on.
 
   The buttons stay in the bar as far as there is room without cutting the date or the place short.
-  In a narrower window they move into the More menu from the end: first the cast icon, **Download**
-  and the toolbar, then the view buttons, and last the slideshow and the heart.
+  In a narrower window they move into the More menu from the end: first the cast icon and **Download**,
+  then the view buttons, and last the slideshow and the heart.
 
 ### The date under the picture
 
@@ -73,7 +71,7 @@ The date is shown as precisely as it is known, and no more. A picture known only
 A date known only approximately shows a tilde, **~1985**.
 
 Point at the date to see where it came from: **from the camera clock**, **from GPS**, **entered by
-hand**, **from Google Photos or a sidecar** or **from the file name**. A scan adds **a scan: its
+hand** or **from Google Photos or a sidecar**. A scan adds **a scan: its
 scanner’s clocks are not when it was taken**. A picture taken in another time zone is shown at the
 time on the photographer's clock, and the tooltip adds the same moment in your own time, such as
 **27 Dec 2025, 01:16 your time**. [Dates and places of pictures](dates-places.md) explains which
@@ -82,7 +80,7 @@ date a picture gets and how to change it.
 ### The More menu
 
 **More** (⋮) at the right end of the bar holds the bar's buttons it has no room for, in the bar's
-order, and **Show on…**:
+order, **Show toolbar** and **Show on**:
 
 | Row                                            | What it does                                                                                                                                                                    |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -91,23 +89,24 @@ order, and **Show on…**:
 | **Show text** / **Hide text** (<kbd>t</kbd>)   | Lays the text read from the photo over it.                                                                                                                                      |
 | **Pin faces** / **Unpin faces** (<kbd>f</kbd>) | Shows every face box with its name, or hides them again. Not there when no faces were found.                                                                                    |
 | **Fullscreen** / **Exit fullscreen**           | Gives the viewer the whole screen.                                                                                                                                              |
-| **Show toolbar** / **Hide toolbar**            | On a phone, shows the [toolbar](#the-toolbar) at the top of the viewer. When you may change the file.                                                                           |
+| **Show toolbar** / **Hide toolbar**            | Shows the [toolbar](#the-toolbar) at the top of the viewer, or hides it. When you may change the file.                                                                          |
 | **Download**                                   | Saves the original file to your device.                                                                                                                                         |
 | **Show on a screen near you**                  | Plays the file on a TV where you are, chosen in your browser's own list of screens; see [On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is).     |
-| **Show on…**                                   | Plays the file on a speaker or screen in the house; see [Play on a speaker or a screen](../devices/index.md#from-the-app). Only with the [Devices](../devices/index.md) module. |
+| **Show on**                                    | Plays the file on a speaker or screen in the house; see [Play on a speaker or a screen](../devices/index.md#from-the-app). Only with the [Devices](../devices/index.md) module. |
 
 The viewer remembers on this device whether the text, the faces and the toolbar are shown, from
 picture to picture and the next time you open it.
 
 ### The toolbar
 
-The cog at the top right (on a phone **Show toolbar** in ⋮) floats the
+**Show toolbar** in ⋮ (on a computer **More** at the right end of the bar) floats the
 [file's actions](#change-a-file-from-the-toolbar) as icons on a dark, rounded strip at the top of the viewer, where it stays from picture to picture (on a phone
 under the date, with larger icons): **Edit**, **Share**, **Add to album**,
 **Edit faces**, **Edit text**, **Restore…**, **Rotate left**, **Rotate right** and the others, as
 the file allows. Point at an icon to see its name. An action that is on, such as drawing faces or a
-mirrored picture, has its icon coloured. The toolbar works with the details panel closed, and is
-hidden during a slideshow.
+mirrored picture, has its icon coloured. Past a divider at its right end, × (**Hide toolbar**)
+puts it away again. The toolbar works with the details panel closed, and is hidden during a
+slideshow.
 
 The file name at the top of the details panel downloads the original too. To download several files
 at once, select them in the grid and use **Download** in the selection bar.
@@ -138,8 +137,8 @@ To close the viewer, press × at the top right, press <kbd>Esc</kbd>, use the br
 or on a phone swipe down on the picture. The picture shrinks back into its tile, so you see where
 you were in the grid.
 
-<kbd>Esc</kbd> first closes whatever lies over the picture: the enlarged map, the text dialog or
-**Edit faces**. During a slideshow it stops the slideshow. Only then does it close the viewer.
+<kbd>Esc</kbd> first closes whatever lies over the picture: an open menu, the enlarged map, the
+text dialog or **Edit faces**. During a slideshow it stops the slideshow. Only then does it close the viewer.
 
 ## Zoom in on a photo
 
@@ -189,7 +188,7 @@ narrower.
 - The top right corner has the cast icon, **Show on a screen near you**, when the file can go to a
   TV where you are, blue while a TV plays or is connected; and ⋮, which holds **Favourite**,
   **Start slideshow**, the buttons the bar has no room for, **Show toolbar**, **Download**,
-  **Show on…** and **Chat**.
+  **Show on** and **Chat**.
 - The details panel is closed when the viewer opens. Held upright, swipe up on the picture to pull
   up the details sheet over the bottom half, and swipe down on it to put it away. Held sideways,
   the details open as a panel on the right: press **Show details** beside ⋮, or swipe up, and swipe
@@ -234,14 +233,14 @@ folded is remembered in this browser, for the next picture and the next visit. F
 
 | Row               | What it shows                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The file          | The file name, which downloads the original, and its size. Under it a line of facts: `3200 × 2400 · 7.7 MP · ISO 100 · 1/250 s`; a video adds its length and frame rate, and a recording its length, kbps, kHz and `mono` or `stereo`; a document shows its first page's size in millimetres, such as `210 × 297 mm`. Then the sharing chip, which says who can see the file ([Sharing](../guide/sharing.md)), and the file's labels; a label opens a search for it ([Media, Year and labels](media.md)). On a computer the cog and close sit at the right.                                                                                                                       |
+| The file          | The file name, which downloads the original, and its size. Under it a line of facts: `3200 × 2400 · 7.7 MP · ISO 100 · 1/250 s`; a video adds its length and frame rate, and a recording its length, kbps, kHz and `mono` or `stereo`; a document shows its first page's size in millimetres, such as `210 × 297 mm`. Then the sharing chip, which says who can see the file ([Sharing](../guide/sharing.md)), and the file's labels; a label opens a search for it ([Media, Year and labels](media.md)). On a computer close sits at the right.                                                                                                                                  |
 | Description       | What someone wrote about the file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | Copies in staging | Only for a file of yours still in your staging area: its exact copies and look-alikes. See [Duplicates](duplicates.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Transcript        | For videos and recordings with speech: what is said, line by line. See [Read along with a transcript](#read-along-with-a-transcript).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Camera            | The camera that took it, linking to its page; **Owned by** whoever owned it then, with the years; **Shot by** the photographer, when someone has said who. Without a registered camera, the make and model the file names. See [Cameras](cameras.md).                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | Albums            | Every album the file is in, with its cover. A file can be in several albums without being copied.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | People            | Everyone recognised or tagged in the picture, with their age that day. See [People in the picture](#people-in-the-picture).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| Place             | The location the file is linked to, as a link, the street address, and a small map. **Enlarge map** opens a large map of the spot.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Place             | The location the file is linked to, as a link, the street address, and a small map. **Enlarge the map**, the button in its corner, opens it over the viewer with the picture on its spot, where **Map style and layers** changes the style and turns on layers such as **Tracks** or **Photos and videos**.                                                                                                                                                                                                                                                                                                                                                                       |
 | Weather           | For a file with a place and a date: the weather that hour, such as **14.5 °C · Wind 4 m/s, from SW · 40 % cloud**, and under it where that came from, an SMHI station or Open-Meteo. See [The weather at a place and time](places.md#the-weather-at-a-place-and-time).                                                                                                                                                                                                                                                                                                                                                                                                            |
 | Stack             | For a photo stacked with others in this album: **N stacked photos**, or **Kept separate**, with a thumbnail of each and **Front** on the one the album shows. Click a thumbnail to see it in the viewer. **Make front**, **Keep separate** and **Allow stacking** are there when you may change the album and every photo in the stack. See [Albums](albums.md).                                                                                                                                                                                                                                                                                                                  |
 | Versions          | For a file with other versions, such as the camera RAW of a JPEG, the master a scan was made from or a restored copy: each one's name, which downloads it, with its kind of file and size; a restored copy also what was done to it, **Compare**, and **Show this copy** or, for the one shown, **Show the original**. See [Camera RAW](file-types.md#camera-raw) and [Restore a faded or damaged photo](#restore-a-faded-or-damaged-photo).                                                                                                                                                                                                                                      |
@@ -328,7 +327,7 @@ you click its icon, and then stays open for the next picture and the next visit,
 ## Change a file from the toolbar
 
 The [toolbar](#the-toolbar) holds what you can do to the file. It is there when you may change the
-file: show it with the cog at the top right, or on a phone with **Show toolbar** in ⋮. To add a file
+file: show it with **Show toolbar** in ⋮. To add a file
 you may only see to an album, select it in a grid and use **Add to album** in the selection bar.
 
 | Icon                                  | Who sees it                                                                        | What it does                                                                                                                                                                                                                                                                                                 |
@@ -842,12 +841,12 @@ the selection bar. Visitors who are not signed in have no favourites and see no 
 
 ## What you see depends on who you are
 
-| You are                              | What differs                                                                                                                                                                                                                       |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Signed in, and may change the file   | Everything on this page.                                                                                                                                                                                                           |
-| Signed in, and may only see the file | No cog and no toolbar; **Add to album** is in a grid's selection bar. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit subtitles**, **Edit faces**, rotate or mirror. |
-| A visitor who is not signed in       | No heart, no cog and no sharing chip. **Path** is plain text.                                                                                                                                                                      |
-| Someone who opened a share link      | The pictures without the details panel; its handle and <kbd>i</kbd> are not there.                                                                                                                                                 |
+| You are                              | What differs                                                                                                                                                                                                                                    |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signed in, and may change the file   | Everything on this page.                                                                                                                                                                                                                        |
+| Signed in, and may only see the file | No **Show toolbar** and no toolbar; **Add to album** is in a grid's selection bar. You read comments but cannot write them, and see the text language without the menu. No **Edit text**, **Edit subtitles**, **Edit faces**, rotate or mirror. |
+| A visitor who is not signed in       | No heart, no toolbar and no sharing chip. **Path** is plain text.                                                                                                                                                                               |
+| Someone who opened a share link      | The pictures without the details panel; its handle and <kbd>i</kbd> are not there.                                                                                                                                                              |
 
 [Sharing](../guide/sharing.md) explains who can see what.
 

@@ -248,10 +248,8 @@ in progress is picked up again. [Configuration](../admin/configuration.md) expla
 A folder can put the work on the files under it behind all other work. When its `lane` attribute
 is `bulk`, everything that starts for a file under it, from its reading and its renditions to the
 other modules' work, waits until nothing else does, so what anyone uploads meanwhile is ready
-first. The nearest folder above a file that sets `lane` decides. The Archive's staging categories
-set it from their lane
-([Plan a large import](../archive/staging-admin.md#plan-a-large-import)); on any
-other folder, as its owner or the administrator:
+first. The nearest folder above a file that sets `lane` decides. Set it as the folder's owner or the
+administrator:
 
 ```bash
 # in EiN's terminal

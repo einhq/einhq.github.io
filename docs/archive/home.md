@@ -87,7 +87,7 @@ linked to a person in the archive; otherwise a picture icon. See
 What makes an entry:
 
 - **An album is made.** Every way of making one counts: **Create → Album**, **New album** while
-  adding pictures, and filing a group from staging as a **New album** or **New private album**. See
+  adding pictures, and filing a group from staging with **Create album**. See
   [Create an album](albums.md#create-an-album) and [Sorting in staging](staging.md).
 - **The time is when the album was made.** Adding pictures to an album, renaming it or changing
   its dates does not bring it back to the top.

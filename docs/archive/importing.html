@@ -142,19 +142,21 @@ album. The usual way past staging is to upload straight into an album that alrea
 </tr>
 <tr>
 <td>The EiN app&#39;s photo backup</td>
-<td>the category chosen for it, normally a <strong>Phone</strong> one</td>
+<td>the category chosen for it, normally one for the phone</td>
 <td>no</td>
 </tr>
 <tr>
 <td>A phone&#39;s backup app, over WebDAV</td>
-<td>the folder it sends into, normally a <strong>Phone</strong> category</td>
+<td>the folder it sends into, normally the phone&#39;s category</td>
 <td>yes</td>
 </tr>
 </tbody></table>
 </div>
 <p>Your staging area is divided into <strong>categories</strong>. The <strong>Inbox</strong> is always there and takes
 everything you do not put elsewhere; you can add others, one per source: a Google Photos export, a
-box of scanned prints, an old phone. Each category is a folder, <code>/home/&lt;you&gt;/staging/files/&lt;name&gt;</code>.
+box of scanned prints, an old phone. A category is only a name and a folder,
+<code>/home/&lt;you&gt;/staging/files/&lt;name&gt;</code>: every category&#39;s files are dated, grouped and processed the
+same way.
 <a href="staging.html">Sorting in staging</a> covers categories in full.</p>
 <p>Until they are filed, staged files stay out of the library&#39;s own views: the Media page, the map, On
 this day, the newest pictures and search leave them out. You find them on the <strong>Staging</strong> page,
@@ -170,36 +172,26 @@ them and their relations into the archive (see <a href="family.html#bring-in-a-f
 <strong>Staging</strong>.</p>
 </aside>
 <h2 id="import-media">Import media<a class="anchor" href="#import-media" aria-label="Link to this section"></a></h2>
-<p><strong>Import media</strong> is the main way in. It puts files into one staging category, keeping the folders
-you choose.</p>
+<p><strong>Import media</strong> is the main way in. It puts files into one of your staging categories, keeping
+the folders you choose. To bring a new source in a category of its own, make the category first
+with <strong>New category</strong> (see <a href="staging.html#make-a-category">Make a category</a>), then import into it.</p>
 <ol>
 <li>Open the <strong>Create</strong> menu (the plus in the top bar) and choose <strong>Import media</strong>. The same dialog
-opens from the <strong>Import media</strong> button on the Staging page, the <strong>Import</strong> button on a category&#39;s
-card, <strong>Import media…</strong> in a category&#39;s ⋮ menu and, while the Home page has no news yet, the
-<strong>Import media</strong> button there. Pictures shared to EiN from a phone&#39;s gallery open it too, with
-the files already chosen (see <a href="../guide/phone.html#share-pictures-to-ein">Share pictures to EiN</a>).</li>
+opens from <strong>Import media…</strong> in a category&#39;s ⋮ menu, the <strong>Import media</strong> button of an empty
+category and, while the Home page has no news yet, the <strong>Import media</strong> button there. Pictures
+shared to EiN from a phone&#39;s gallery open it too, with the files already chosen (see
+<a href="../guide/phone.html#share-pictures-to-ein">Share pictures to EiN</a>).</li>
 <li>Under <strong>Into which category?</strong>, pick a category. Each shows how many files it holds and its
 folder, for example &quot;0 files · files/inbox&quot;. The Inbox is chosen unless you opened the dialog
 from a category.</li>
-<li>To keep this batch in a category of its own, choose <strong>New category</strong> instead (&quot;For one source
-kept together: an export, a box of scans, a phone.&quot;). Pick <strong>What it holds</strong>, and type what the
-category is <strong>Called</strong>. The line under the name shows the folder it gets, for example
-&quot;Folder files/box-3&quot;.</li>
 <li>Choose <strong>Choose files</strong> or <strong>Choose a folder</strong>. The line under the buttons counts what you
 picked, for example &quot;212 files in 3 folders, 1.4 GB&quot;.</li>
 <li>Choose <strong>Upload 212</strong>. The button counts your files.</li>
 </ol>
 <figure class="shot"><a href="../../assets/shots/import@2x.webp"><img src="../../assets/shots/import.webp" srcset="../../assets/shots/import.webp 1x, ../../assets/shots/import@2x.webp 2x" alt="The Import media dialog with the Inbox chosen, the Choose files and Choose a folder buttons, and the SFTP folder with its copy button and How link" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Import media: a category, the files, then Upload.</figcaption></figure>
-<p>The dialog closes, the category opens on its <strong>Files</strong> tab and the files upload in the background.
-If you made a new category, it is created first.</p>
-<p><strong>What it holds</strong> starts on <strong>Google Photos export</strong>. Pick the kind closest to where the files come
-from: <strong>Google Photos export</strong>, <strong>Scans</strong>, <strong>Phone</strong>, <strong>Camera</strong>, <strong>Messaging</strong>, <strong>Screenshots</strong> or
-<strong>Other</strong>. The kind decides how the files are dated and grouped; a scan, for example, is never
-dated by the scanner&#39;s clock. <a href="staging.html#the-kinds-of-category">The kinds of category</a> explains
-each one.</p>
-<p>For an existing category, the dialog also says &quot;Over about 10,000 files? Copy them over SFTP
-instead, folders and all, into&quot; with the category&#39;s folder, a button that copies the path, and a
-<strong>How</strong> link. See <a href="#copy-files-in-over-sftp">Copy files in over SFTP</a>.</p>
+<p>The dialog closes, the category opens on its <strong>Files</strong> tab and the files upload in the background.</p>
+<p>The dialog also says &quot;Over about 10,000 files? Copy them over SFTP instead, folders and all, into&quot;
+with the category&#39;s folder, a button that copies the path, and a <strong>How</strong> link. See <a href="#copy-files-in-over-sftp">Copy files in over SFTP</a>.</p>
 <h3 id="follow-an-upload">Follow an upload<a class="anchor" href="#follow-an-upload" aria-label="Link to this section"></a></h3>
 <p>While files upload, an <strong>Uploads</strong> button with a progress ring appears in the top bar. Its panel
 shows how far the whole upload is (&quot;1,204 of 3,000&quot; and the bytes), the progress of each place the
@@ -218,7 +210,7 @@ stay.</p>
 <p>A name already taken in a folder is never replaced. The file is stored under a numbered name, such
 as <code>IMG_0042 (2).jpg</code>, and the panel says &quot;N saved under a new name, theirs was taken&quot;.</p>
 <h2 id="upload-or-drop-files-on-a-page">Upload or drop files on a page<a class="anchor" href="#upload-or-drop-files-on-a-page" aria-label="Link to this section"></a></h2>
-<p>Four pages take files from a button in their header and from files dropped anywhere on them:</p>
+<p>Three pages take files from a button in their header and from files dropped anywhere on them:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -229,12 +221,6 @@ as <code>IMG_0042 (2).jpg</code>, and the panel says &quot;N saved under a new n
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Staging</strong> (the overview of your categories)</td>
-<td><strong>Import media</strong></td>
-<td>&quot;Drop the files on where they go&quot;, with a tile for each category</td>
-<td>the category whose tile you drop them on</td>
-</tr>
-<tr>
 <td>A staging category, on any tab</td>
 <td><strong>Upload</strong>, and <strong>Upload a folder</strong> under ⋮</td>
 <td>&quot;Drop files to upload&quot;, &quot;Into Box 3, folders and all&quot; (with the category&#39;s name)</td>
@@ -254,12 +240,12 @@ as <code>IMG_0042 (2).jpg</code>, and the panel says &quot;N saved under a new n
 </tr>
 </tbody></table>
 </div>
-<p>On the Staging overview, files dropped beside the tiles go nowhere.</p>
+<p>The Staging overview, the list of your categories, takes no files: open a category to upload into
+it.</p>
 <p>An upload into staging goes into a folder for the day inside the category, named
 <code>upload-YYYY-MM-DD</code>, and a folder you drop or choose keeps its structure below it:
 <code>Trip/day 2/IMG_0001.jpg</code> lands in <code>upload-2026-10-25/Trip/day 2/</code>. Folder names help the
-grouping. In most kinds of category, a folder you named yourself, holding at least three pictures,
-becomes a suggested album of its own, named after the folder, such as &quot;Cornwall, summer 1968&quot;.
+grouping. A folder you named yourself, holding at least three pictures, becomes a suggested album of its own, named after the folder, such as &quot;Cornwall, summer 1968&quot;.
 Names that cameras and exports give folders, such as <code>DCIM</code>, <code>100CANON</code>, a bare year or date, or
 <code>Takeout</code>, are not used.</p>
 <p>On a phone the header&#39;s buttons fold into the ⋮ menu, and <strong>Upload</strong> offers your photo library and
@@ -297,11 +283,11 @@ server&quot; all work; <a href="../shell/ssh-sftp.html">SSH and SFTP</a> explain
 <ol>
 <li>Open <strong>Staging</strong> in the Web UI once. This sets up your staging area. Without that, EiN
 sets it up within the hour.</li>
-<li>For a big export or a box of scans, make its category first: on the Staging page, choose its
-kind on the <strong>New category</strong> card, type what it is <strong>Called</strong> and choose <strong>Create</strong>.</li>
-<li>Copy the files into the category&#39;s folder, <code>/home/&lt;you&gt;/staging/files/&lt;name&gt;/</code>. The Staging page
-says &quot;Tens of thousands of files? Copy them over SFTP into a category&#39;s folder:&quot;, and the Import
-media dialog shows the folder of the category you pick, with a button that copies the path.</li>
+<li>For a big export or a box of scans, make its category first: on the Staging page, choose
+<strong>New category</strong> in the header, type its <strong>Name</strong> and choose <strong>Create</strong>.</li>
+<li>Copy the files into the category&#39;s folder, <code>/home/&lt;you&gt;/staging/files/&lt;name&gt;/</code>. The category&#39;s
+<strong>Info</strong> tab shows the path to copy into, and the Import media dialog shows the folder of the
+category you pick, with a button that copies the path.</li>
 </ol>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 scp -P 2222 -r <span class="hljs-string">&quot;From the old laptop&quot;</span> anna@ein.local:/home/anna/staging/files/inbox/</code></pre></div>
@@ -320,7 +306,7 @@ themselves:</p>
 <p>Pictures in a folder only one level down are still grouped, by when and where they were taken;
 only the folder&#39;s name is not used.</p>
 <p>Put files in a category&#39;s folder, never in <code>files/</code> itself: a folder copied directly into <code>files/</code>
-becomes a category of its own, of the <strong>Other</strong> kind, and a file left there belongs to no category
+becomes a category of its own, named after it, and a file left there belongs to no category
 until EiN moves it into <code>files/inbox/unsorted/</code>. It does that once an hour, for a file nothing has
 changed on for six hours, so a copy still being written is left alone.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
@@ -329,11 +315,10 @@ files, use <strong>Discard…</strong> on the category&#39;s <strong>Files</stro
 </aside>
 <h2 id="let-a-phone-send-its-photos-by-itself">Let a phone send its photos by itself<a class="anchor" href="#let-a-phone-send-its-photos-by-itself" aria-label="Link to this section"></a></h2>
 <p>The EiN app on an Android phone sends every new photo and video into a staging category by itself:
-choose the category on its <strong>App</strong> page, or make a <strong>Phone</strong> category called after the phone there,
-or choose <strong>Back up this phone here</strong> on a phone category&#39;s empty <strong>Files</strong> tab in the app. It sends
-only what you do not have yet. Another app can do the same over <a href="../guide/webdav.html">WebDAV</a>,
-through your EiN&#39;s <code>https://</code> address: while a <strong>Phone</strong> category is empty, its <strong>Files</strong> tab shows
-the address and folder to give it, and so does <strong>Import media</strong> when you choose it.
+choose the category on its <strong>App</strong> page, or make a category called after the phone there, or
+choose <strong>Back up this phone here</strong> on a category&#39;s <strong>Info</strong> tab in the app. It sends only what you
+do not have yet. Another app can do the same over <a href="../guide/webdav.html">WebDAV</a>, through your EiN&#39;s
+<code>https://</code> address: every category&#39;s <strong>Info</strong> tab shows the address and folder to give it.
 <a href="../guide/phone.html#back-up-your-phone-automatically">Back up your phone automatically</a> has the
 steps for both. What a phone sends is taken in exactly as a browser upload is, and like a copy over
 SFTP skips the &quot;arriving&quot; stage.</p>
@@ -358,9 +343,8 @@ rest of the zip is expanded, and the zip stays.</li>
 JSON file with what it knows of it: when it was taken, where, its caption and whether it was a
 favourite. EiN reads these files, called sidecars, and gives what they say to the picture.</p>
 <ol>
-<li><p>On the Staging page, choose <strong>Google Photos export</strong> on the <strong>New category</strong> card. Call it, for
-example, &quot;Google Photos&quot;; its folder is <code>files/google-photos</code>. You can also choose
-<strong>New category</strong> in the Import media dialog, where <strong>Google Photos export</strong> is the first kind.</p>
+<li><p>On the Staging page, choose <strong>New category</strong> in the header. Call it, for example, &quot;Google
+Photos&quot;; its folder is <code>files/google-photos</code>.</p>
 </li>
 <li><p>Bring in the zips as they are: in <strong>Import media</strong>, choose the category, <strong>Choose files</strong> and
 the zips, then <strong>Upload</strong>. For a large export, copy them over SFTP instead:</p>
@@ -411,27 +395,26 @@ file that matches no picture stays where it is and counts among the category&#39
 The pairing knows Google&#39;s ways of naming: <code>IMG_0001.jpg.json</code> and
 <code>IMG_0001.jpg.supplemental-metadata.json</code>, names cut short, the <code>(1)</code> of a second picture of the
 same name, edited copies, and the video of a Live Photo.</p>
-<p>A category of the Google Photos export kind is worth making for two reasons: it pairs sidecars, and
-its processing waits behind other work, so pictures you upload to the Inbox in the meantime are
-ready first. A <strong>Scans</strong> category waits behind other work in the same way.</p>
+<p>A category of its own keeps the export together, so you sort it apart from what else you upload.
+Sidecars are paired in every category, the Inbox too.</p>
 <p>An XMP file that a photo editor or a scanning tool writes beside a picture (<code>IMG_0001.jpg.xmp</code> or
 <code>IMG_0001.xmp</code>) is paired the same way. The files it names as what the picture was made from, such
-as a scan&#39;s master, become versions of the picture (<a href="file-types.html#sidecar-files">Sidecar files</a>).
-Every kind of category pairs sidecars except <strong>Messaging</strong> and <strong>Screenshots</strong>.</p>
+as a scan&#39;s master, become versions of the picture (<a href="file-types.html#sidecar-files">Sidecar files</a>).</p>
 <h3 id="if-the-export-went-into-the-inbox">If the export went into the Inbox<a class="anchor" href="#if-the-export-went-into-the-inbox" aria-label="Link to this section"></a></h3>
 <p>A folder that arrives in the Inbox is looked at to see where it came from. When it looks like an
 export, a blue box on the Staging page and on the Inbox&#39;s <strong>Files</strong> tab says so, for example
 &quot;“Takeout” looks like Google Photos&quot;, with the two strongest signs.</p>
 <ul>
-<li><strong>Make a Google Photos export category…</strong> makes the category and moves the folder into it.</li>
-<li><strong>Move to Google Photos…</strong> (with your category&#39;s name) appears instead when you have a category
-of that kind already.</li>
+<li><strong>Move to category…</strong> opens the move dialog, where you choose the category it goes into.</li>
+<li><strong>New category…</strong> opens the <strong>New category</strong> dialog with the source&#39;s name under
+<strong>Name</strong>, here <code>Google Photos</code>; <strong>Create and move “Takeout”</strong> makes the category and moves the
+folder into it.</li>
 <li>The ✕ (&quot;Keep it here, stop asking&quot;) leaves the folder where it is.</li>
 </ul>
 <p>Nothing moves by itself. The same box recognises scans, a phone&#39;s or a camera&#39;s pictures, pictures
 from a messenger and screenshots.</p>
 <h2 id="what-happens-after-the-upload">What happens after the upload<a class="anchor" href="#what-happens-after-the-upload" aria-label="Link to this section"></a></h2>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 516" role="img" aria-label="Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album, a new private album or into an album already there, put aside in the Later lane, or discarded to your trash">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 516" role="img" aria-label="Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album or into an album already there, or discarded to your trash">
   <title>A file's way through staging</title>
   <defs>
     <marker id="archive-importing-md-1-staging-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -495,52 +478,38 @@ from a messenger and screenshots.</p>
   <text x="188" y="288" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#7d8697">only you can see it</text>
 
   
-  <path d="M674.5 256 V332 M84 332 H712" fill="none" stroke="#a2abbb" stroke-width="1.5" />
-  <line x1="84" y1="332" x2="84" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="240" y1="332" x2="240" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="402" y1="332" x2="402" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="558" y1="332" x2="558" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="712" y1="332" x2="712" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
+  <path d="M674.5 256 V332 M169 332 H706" fill="none" stroke="#a2abbb" stroke-width="1.5" />
+  <line x1="169" y1="332" x2="169" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
+  <line x1="475" y1="332" x2="475" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
+  <line x1="706" y1="332" x2="706" y2="354" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
 
-  <rect x="24" y="356" width="120" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="84" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">New album</text>
-  <rect x="160" y="356" width="160" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="240" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">New private album</text>
-  <rect x="336" y="356" width="132" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="402" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+  <rect x="24" y="356" width="290" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="169" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+    fill="#eceff4">Create album</text>
+  <rect x="330" y="356" width="290" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="475" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Add to album…</text>
-  <rect x="484" y="356" width="148" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="558" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">Later</text>
-  <rect x="648" y="356" width="128" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="712" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+  <rect x="636" y="356" width="140" height="44" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="706" y="383" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Discard</text>
 
   
-  <line x1="84" y1="400" x2="84" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="240" y1="400" x2="240" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="402" y1="400" x2="402" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="558" y1="400" x2="558" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
-  <line x1="712" y1="400" x2="712" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
+  <line x1="169" y1="400" x2="169" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
+  <line x1="475" y1="400" x2="475" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
+  <line x1="706" y1="400" x2="706" y2="426" stroke="#a2abbb" stroke-width="1.5" marker-end="url(#archive-importing-md-1-staging-flow-arrow)" />
 
-  <rect x="24" y="428" width="444" height="64" rx="10" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
+  <rect x="24" y="428" width="596" height="64" rx="10" fill="#339af0" fill-opacity="0.12" stroke="#339af0" stroke-width="1.25" />
   <text x="42" y="454" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#eceff4">The library</text>
-  <text x="450" y="454" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/archive/albums</text>
+  <text x="602" y="454" text-anchor="end" font-family="Fragment Mono, ui-monospace, monospace" font-size="13" fill="#7d8697">/archive/albums</text>
   <text x="42" y="476" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13"
-    fill="#a2abbb">shared as its album is; a private one with you alone</text>
+    fill="#a2abbb">a new album shared as your new albums are, an album already there as it is</text>
 
-  <rect x="484" y="428" width="148" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" stroke-dasharray="5 4" />
-  <text x="558" y="454" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">Still in staging</text>
-  <text x="558" y="476" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">the Later lane</text>
-
-  <rect x="648" y="428" width="128" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
-  <text x="712" y="454" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
+  <rect x="636" y="428" width="140" height="64" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
+  <text x="706" y="454" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Your trash</text>
-  <text x="712" y="476" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">Undo restores it</text>
+  <text x="706" y="476" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="13" fill="#a2abbb">Undo restores it</text>
 </svg><figcaption>Files wait in your staging area until you decide; only filing can make them visible to others</figcaption></figure>
-<p>Each category&#39;s card on the Staging page, and the strip above a category&#39;s tabs, show where your
+<p>Each category&#39;s card on the Staging page, and the strip under a category&#39;s title, show where your
 newest files are. Each stage shows while it holds files:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -571,15 +540,12 @@ of a picture you can open already is recognised here and goes no further: it is 
 and shows its original&#39;s picture (see
 <a href="duplicates.html#an-exact-copy-shows-its-original">An exact copy shows its original</a>). The time
 estimate comes from how fast files left this stage while the page was open.</li>
-<li><strong>Being grouped.</strong> The organizer sorts read files into groups within minutes of their arrival.
-On a category&#39;s page, <strong>Group now</strong> beside this stage asks it at once, and a message says
-&quot;Grouping asked for: the new files are grouped within a few minutes&quot;.</li>
+<li><strong>Being grouped.</strong> The organizer sorts read files into groups within minutes of their arrival.</li>
 <li><strong>Suggested albums.</strong> The groups appear on the category&#39;s <strong>Sort</strong> tab, one after another, each
-in a lane: <strong>To sort</strong>, <strong>Everyday</strong>, <strong>Needs a date</strong>, <strong>Clutter</strong> or <strong>Later</strong>. Before the
+in a lane: <strong>To sort</strong>, <strong>Everyday</strong>, <strong>Needs a date</strong> or <strong>Clutter</strong>. Before the
 first is ready, the tab says &quot;No groups yet&quot; and &quot;Groups appear as your files are prepared:
 N still to go.&quot;</li>
-<li><strong>Filed.</strong> For each group you choose <strong>New album</strong>, <strong>New private album</strong>, <strong>Add to album…</strong>,
-<strong>Later</strong> or <strong>Discard</strong>. Filing moves the files into an album in the library, with everything
+<li><strong>Filed.</strong> For each group you choose <strong>Create album</strong>, <strong>Add to album…</strong> or <strong>Discard</strong>. Filing moves the files into an album in the library, with everything
 EiN worked out about them; from then on whoever can see that album sees them. A discarded group
 goes to your trash. Filing and discarding can be undone on the category&#39;s <strong>Done</strong> tab.</li>
 </ol>
@@ -758,8 +724,7 @@ something needs looking at; see <a href="../admin/monitoring.html">Health and st
 the same question in the terminal with <code>health</code>, whose first line is the verdict:</p>
 <div class="code"><pre tabindex="0"><code>catching up: 1,500 jobs waiting, the slowest kind done in 4h00m</code></pre></div>
 <h2 id="if-something-goes-differently">If something goes differently<a class="anchor" href="#if-something-goes-differently" aria-label="Link to this section"></a></h2>
-<p><strong>Upload stays greyed out in the dialog.</strong> Choose files first. With <strong>New category</strong>, the name must
-hold a letter or a digit; the line under it says &quot;Needs a letter or digit&quot; until it does.</p>
+<p><strong>Upload stays greyed out in the dialog.</strong> Choose files first.</p>
 <p><strong>Some files failed.</strong> Open the <strong>Uploads</strong> button in the top bar: the failures are listed with
 their reasons. Choose <strong>Retry failed</strong>.</p>
 <p><strong>The panel says files were &quot;saved under a new name, theirs was taken&quot;.</strong> A file of that name was in
@@ -772,7 +737,7 @@ your own.</p>
 <p><strong>Files stay &quot;being prepared&quot; for a long time.</strong> A large import can take hours. If the count does not
 go down at all, the media service may not be running; tell your administrator.</p>
 <p><strong>The Sort tab says &quot;No groups yet&quot;.</strong> The files are still being prepared, or the organizer has not
-grouped them yet. Wait a few minutes, or choose <strong>Group now</strong> on the category&#39;s page.</p>
+grouped them yet. Wait a few minutes.</p>
 <p><strong>A zip is still a zip.</strong> It was uploaded outside staging, the disk lacked room, or a file in it
 clashed with one already there. Your administrator can see the reason.</p>
 <p><strong>A folder&#39;s name was not used for a group.</strong> The folder lies only one level below the category
@@ -782,8 +747,8 @@ three pictures, or has a name a camera or an export gives.</p>
 appear there once you file them. Look for them on the <strong>Staging</strong> page.</p>
 <p><strong>Over SFTP or WebDAV, <code>/home/&lt;you&gt;/staging</code> does not exist.</strong> Open <strong>Staging</strong> in the Web UI
 once, then copy or send again.</p>
-<p><strong>The dates are wrong, or scans have none.</strong> A scan is undated until you give it a date; see
-<a href="dates-places.html">Dates and places of pictures</a>.</p>
+<p><strong>The dates are wrong, or scans have none.</strong> A scan from a registered scanner is undated until you
+give it a date; see <a href="dates-places.html">Dates and places of pictures</a>.</p>
 <h2 id="related-pages">Related pages<a class="anchor" href="#related-pages" aria-label="Link to this section"></a></h2>
 <ul>
 <li><a href="staging.html">Sorting in staging</a>: categories, the suggested albums and filing them.</li>

@@ -51,9 +51,10 @@ bits give: a node at `0074` still lets its owner read it. The access list adds p
 takes anyone away; there is no entry that denies.
 
 > [!NOTE]
-> Write on a node is enough to change its mode and its access list. That is why **Can edit** in the
-> **Share** dialog also lets someone change who a node is shared with. Changing the owner is the
-> exception; see [Change the owner and the group](#change-the-owner-and-the-group).
+> Write on a node is enough to change its group's and everyone else's bits and its access list. That
+> is why **Can edit** in the **Share** dialog also lets someone change who a node is shared with. The
+> owner's own bits and [the sticky bit](#the-sticky-bit) stay the owner's, and changing the owner is
+> the administrator's; see [Change the owner and the group](#change-the-owner-and-the-group).
 
 ## Who you are to EiN
 
@@ -157,7 +158,14 @@ chmod -r o-rw /archive                 # the whole subtree; each node keeps its 
 
 A symbolic mode is worked out from each node's own mode, as coreutils' `chmod -R` does, so
 `chmod -r o-rw` clears only those bits and leaves every node's other bits as they were. EiN has no
-setuid or setgid bit and no `X`.
+setuid or setgid bit and no `X`: a mode with a leading `2` to `7` is refused, and an SFTP client's
+setuid and setgid bits are dropped.
+
+Only a node's owner or an administrator changes the owner's bits or the sticky bit. Anyone else who
+may change the node is refused with `Access denied for operation 'change the owner's bits'`, so
+someone you let edit a photo cannot take your own access to it away. In a recursive change by
+someone else, each node below the one they named keeps its owner's bits and sticky bit and takes
+the rest of the mode, so an editor's change reaches everyone's pictures in an album.
 
 ### The sticky bit
 

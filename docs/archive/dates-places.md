@@ -35,7 +35,7 @@ feed lists pictures by date, so it leaves out a picture that has none.
 EiN looks at up to five sources for a picture's date and takes the first one that has it. The
 **Time source** says in words which one it was.
 
-![A ladder of five date sources, the first with a date winning, each with the words Time source shows: set by hand, a sidecar or Google Photos, GPS time, the camera's clock and the file name, then Undated; beside the last three, a box for scans, whose GPS time, camera clock and file name are ignored, so a scan waits for a person's date](../diagrams/dates.svg "The first source on the ladder that has a date decides; a scan waits until a person gives it one")
+![A ladder of four date sources, the first with a date winning, each with the words Time source shows: set by hand, a sidecar or Google Photos, GPS time and the camera's clock, then Undated; beside the camera's clock, a box for scans from a registered scanner, whose clock is ignored](../diagrams/dates.svg "The first source on the ladder that has a date decides; a scanner's clock never does")
 
 | Order | Source                     | Time source reads               | What it is                                                                                                                        |
 | ----- | -------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -43,15 +43,14 @@ EiN looks at up to five sources for a picture's date and takes the first one tha
 | 2     | A sidecar or Google Photos | from Google Photos or a sidecar | A date a photo editor or scanning program wrote into an XMP sidecar, or a date someone changed in Google Photos before exporting. |
 | 3     | GPS                        | from GPS                        | The GPS receiver's clock, the one source that knows the exact moment.                                                             |
 | 4     | The camera's clock         | from the camera clock           | The date and time the camera or phone wrote into the file, or a video's recording time.                                           |
-| 5     | The file name              | from the file name              | A date the name spells, such as `IMG_20190601_123456.jpg`, for files from a staging category whose names count as dates.          |
 
-When none of them has a date, the picture is undated. EiN never dates a picture by when it was
-uploaded or when the file was last changed.
+When none of them has a date, the picture is undated. EiN never dates a picture by its file name,
+when it was uploaded or when the file was last changed; in staging, undated pictures are listed by
+file name, so `IMG_20190601_123456.jpg` still falls in date order there.
 
 A **sidecar** is a small file beside a picture that says things about it: the JSON Google Photos
 writes for each photo of a Takeout export, or the `.xmp` file a photo editor writes. EiN pairs
-sidecars with their pictures as they arrive in staging, in every kind of category but Messaging and
-Screenshots. [Getting your photos in](importing.md) and [Supported files](file-types.md) say which
+sidecars with their pictures as they arrive in staging, in every category. [Getting your photos in](importing.md) and [Supported files](file-types.md) say which
 names it understands.
 
 A few rules decide the close cases:
@@ -65,21 +64,19 @@ A few rules decide the close cases:
   time zone the clock was in, and **Time source** reads "from Google Photos or a sidecar". A GPS time
   still comes first then, and a camera that recorded its own time zone keeps "from the camera
   clock".
-- **File names count only where a staging category says so**, and only the names a phone, a
-  messenger, a screenshot tool or a desktop uploader writes. A name that dates a picture before 1995
-  is not believed, and a scanner's running number such as `IMG_20190601_0001.jpg` is no date.
 - **A scanner's clock never dates a picture** once the scanner is registered as a camera with
   **Scanner or digitizer** turned on (see [Cameras](cameras.md#clocks-time-zones-and-scanners)). A GPS time in the
   file still counts.
 
 ## Date scans of old prints and slides
 
-A scanner writes the day of the scan into the file, and a scanning app on a phone adds where the
-scan was made. Neither says when the picture was taken. When files arrive in a staging category of
-the kind **Scans**, EiN marks them as scans and sets aside the scanner's clock, the GPS time and
-position, the file name, and a Google Photos time that agrees with them. A scan is dated only by a
-date a person gives it: with **Set time**, with `file-set-time`, in an XMP sidecar, or by changing
-it in Google Photos. Until then it is undated, rather than dated to the day it was scanned.
+A scanner writes the day of the scan into the file. That says when the picture was digitised, not
+when it was taken. Register the scanner as a camera with **Scanner or digitizer** turned on (see
+[Cameras](cameras.md#clocks-time-zones-and-scanners)), and EiN marks every file it made as a scan
+and sets aside its clock. A scan is then dated only by a date a person gives it: with **Set time**,
+with `file-set-time`, in an XMP sidecar, or by changing it in Google Photos. Until then it is
+undated, rather than dated to the day it was scanned. Saving that setting re-dates the files
+already linked to the scanner and says "Removed scanner dates from N linked files."
 
 A date in an XMP sidecar keeps the precision it was written with: `1985`, `1985-06`, `1985-06-12`
 or a time. A date the scan application marks approximate, as when someone typed "ca. 1985", is shown
@@ -88,67 +85,19 @@ set by hand replaces it and is exact.
 
 **Time source** on a scan adds "a scan: its scanner’s clocks are not when it was taken". The mark
 goes with the file when it is filed into an album, so the scan stays undated there until someone
-dates it.
+dates it. A scan is also read for how faded, dusty and scratched it is, so it can be restored.
 
-To bring in a box of scans:
-
-1. Open the **Create** menu (the plus in the top bar) and choose **Import media**.
-2. Under **Into which category?**, choose your Scans category, or **New category** with **What it
-   holds** set to **Scans** and a name under **Called**, such as "Box 3".
-3. Press **Choose files** or **Choose a folder**, then **Upload**, which shows the number of files.
-
-Scans that already arrived in the Inbox can be moved: on the Inbox's **Files** tab, open the
-folder's ⋯ menu, choose **Move to category…**, pick the Scans category and press **Move here**. EiN
-dates the moved files again by the scans' rules, in the background. [Sorting in staging](staging.md)
-explains categories and the Files tab.
-
-> [!NOTE]
-> A scan uploaded straight into an album, or copied into one over SFTP, is not marked: no staging
-> category's rules apply there. For those, register the scanner as a camera with **Scanner or
-> digitizer** turned on. Saving that setting re-dates the files already linked to it and says
-> "Removed scanner dates from N linked files."
-
-Helen Okafor scanned the family's slides of "Cornwall, summer 1968" in March 2012. Uploaded into a
-Scans category, they wait undated until she gives them a date. Uploaded straight into an album
-from an unregistered scanner, they would all show March 2012.
-
-In a Scans category the **Sort** tab keeps the scans in runs, by folder and file name, under
-**To sort**, dated or not. Once most of a run has dates set by hand, its name gains their years, and
-a run splits where two neighbouring scans were given different years.
-
-## Time rules of staging categories
-
-Each staging category has two time rules, which come with its kind (**What it holds**): whether its
-files are scans, and whether a date in a file name counts.
-
-| What it holds        | Treated as scans | File names count as dates |
-| -------------------- | ---------------- | ------------------------- |
-| Inbox                | no               | yes                       |
-| Google Photos export | no               | no                        |
-| Scans                | yes              | no                        |
-| Phone                | no               | yes                       |
-| Camera               | no               | no                        |
-| Messaging            | no               | yes                       |
-| Screenshots          | no               | yes                       |
-| Other                | no               | no                        |
-
-- Files that move into a category with other rules are dated again by that category's rules, in the
-  background. A move within a category, or between two with the same rules, changes nothing.
-- **Category settings** has no switch for the two rules. Changing **What it holds** there resets
-  them, together with the category's other settings, to those of the kind you chose.
-- In the terminal, `staging category <name> --digitized on|off` and
-  `staging category <name> --filename-dates on|off` change one rule and date the category's files
-  again before they answer.
-- A date set by hand outranks both rules.
+Helen Okafor scanned the family's slides of "Cornwall, summer 1968" in March 2012. With the scanner
+registered, they wait undated until she gives them a date. From an unregistered scanner, they
+would all show March 2012.
 
 ## Give pictures that need a date a date
 
-Staging shows what has no date. A category's card on the Staging overview, and the strip above the
-category's tabs, has a bar whose **Needs a date** part counts the pictures read without a date. On
+Staging shows what has no date. A category's card on the Staging overview, and the strip under the
+category's title, has a bar whose **Needs a date** part counts the pictures read without a date. On
 the category's **Sort** tab, the **Needs a date** lane holds groups of undated pictures, named like
 "Undated · Peggy's shoebox", and groups of pictures dated only to a year or a month, named like
-"1987 · Peggy's shoebox". In a Scans category the scans stay in their runs under **To sort**
-instead, as described above.
+"1987 · Peggy's shoebox".
 
 1. Open **Staging**, then the category, then its **Sort** tab.
 2. Choose **Needs a date** in the row of lanes above the groups. The row appears when more than one
@@ -167,9 +116,8 @@ EiN confirms with "The time is set on N photos of “<group>”". Within a few m
 puts the pictures into groups by the dates you gave them: an event, a trip, or a year's
 **Everyday** lane. On a phone there are no keys; tap the group and use its ⋯ menu.
 
-You can also file a **Needs a date** group as it is, undated, with **New album…**, **Add to album…**
-or the other decisions of the Sort tab. Its proposal is the category's album when the category has
-one; otherwise there is none.
+You can also file a **Needs a date** group as it is, undated, with **Create album…**, **Add to album…**
+or the other decisions of the Sort tab. It has no proposal.
 
 Pictures already in the library have no lane. An album lists its undated pictures last, under
 **Undated**: select them there and use **Set time**. In the [terminal](../shell/terminal.md),
@@ -320,9 +268,6 @@ A picture gets its place from the first of these that has one:
 2. The GPS position in the file.
 3. The place in its sidecar: an XMP sidecar's, or a Google Photos Takeout's.
 
-A scan's own GPS position is where it was scanned, so EiN ignores it, and a Takeout's place for a
-scan too, unless someone set that place in Google Photos.
-
 A position of exactly 0,0, in the sea off West Africa, is what a camera or phone writes when it has
 no GPS fix, and Google Photos when it has no place. EiN takes it for no place, in the file and in a
 sidecar alike, and **Set location** refuses it.
@@ -396,8 +341,6 @@ The [terminal](../shell/terminal.md) does the same work with commands, and some 
 | Clear the place of pictures                                   | `file-set-position <file>… --clear`                                                            |
 | Link a picture to a location by hand                          | `ln -s -f /archive/locations/<location> '<file>/location'`                                     |
 | Look up a picture's street address again, as an administrator | [`geocode-position`](commands.md#geocode-position) `-f '<file>/position'`                      |
-| Date a staging category's files again by its rules            | [`staging`](commands.md#staging) `retime [<category>]`                                         |
-| Change a category's time rules                                | `staging category <name> --digitized on\|off` or `--filename-dates on\|off`                    |
 
 Write a negative coordinate with `=`, as in `--lng=-5.066`: on its own, `-5.066` would be read as an
 option.
@@ -414,13 +357,11 @@ Set location 50.153,-5.066 on /archive/albums/Peggy's Falmouth/P1000413.JPG
 
 ## When something goes differently
 
-- **A scan shows the day it was scanned.** It did not arrive in a Scans category, and its scanner is
-  not registered as one. Give it its date with **Set time**, which outranks the scanner's clock; move
-  its folder into a Scans category while it is still in staging; or register the scanner with
-  **Scanner or digitizer**.
+- **A scan shows the day it was scanned.** Its scanner is not registered as one. Register it with
+  **Scanner or digitizer**, or give the scan its date with **Set time**, which outranks the
+  scanner's clock.
 - **A picture has a date you did not expect.** Look at **Time source** under **Details**. "from the
-  file name" means its category reads dates from names; "from the camera clock" with a wrong year
-  means the camera's clock was wrong.
+  camera clock" with a wrong year means the camera's clock was wrong.
 - **All pictures from one camera are some hours off.** Set the camera's **Timezone**, or for a
   phone's videos turn on **Video times in UTC**, as described under
   [Time zones](#time-zones). A clock that was simply wrong, by a day or some minutes, takes

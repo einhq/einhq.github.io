@@ -178,9 +178,10 @@ the Archive to albums, people and locations: a photo holds its thumbnails and me
 bits give: a node at <code>0074</code> still lets its owner read it. The access list adds people and never
 takes anyone away; there is no entry that denies.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>Write on a node is enough to change its mode and its access list. That is why <strong>Can edit</strong> in the
-<strong>Share</strong> dialog also lets someone change who a node is shared with. Changing the owner is the
-exception; see <a href="#change-the-owner-and-the-group">Change the owner and the group</a>.</p>
+<p>Write on a node is enough to change its group&#39;s and everyone else&#39;s bits and its access list. That
+is why <strong>Can edit</strong> in the <strong>Share</strong> dialog also lets someone change who a node is shared with. The
+owner&#39;s own bits and <a href="#the-sticky-bit">the sticky bit</a> stay the owner&#39;s, and changing the owner is
+the administrator&#39;s; see <a href="#change-the-owner-and-the-group">Change the owner and the group</a>.</p>
 </aside>
 <h2 id="who-you-are-to-ein">Who you are to EiN<a class="anchor" href="#who-you-are-to-ein" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -317,7 +318,13 @@ an administrator, everyone who has access and through what.</p>
 </div>
 <p>A symbolic mode is worked out from each node&#39;s own mode, as coreutils&#39; <code>chmod -R</code> does, so
 <code>chmod -r o-rw</code> clears only those bits and leaves every node&#39;s other bits as they were. EiN has no
-setuid or setgid bit and no <code>X</code>.</p>
+setuid or setgid bit and no <code>X</code>: a mode with a leading <code>2</code> to <code>7</code> is refused, and an SFTP client&#39;s
+setuid and setgid bits are dropped.</p>
+<p>Only a node&#39;s owner or an administrator changes the owner&#39;s bits or the sticky bit. Anyone else who
+may change the node is refused with <code>Access denied for operation &#39;change the owner&#39;s bits&#39;</code>, so
+someone you let edit a photo cannot take your own access to it away. In a recursive change by
+someone else, each node below the one they named keeps its owner&#39;s bits and sticky bit and takes
+the rest of the mode, so an editor&#39;s change reaches everyone&#39;s pictures in an album.</p>
 <h3 id="the-sticky-bit">The sticky bit<a class="anchor" href="#the-sticky-bit" aria-label="Link to this section"></a></h3>
 <p>A folder with the sticky bit is one people may add to without being able to remove what others
 keep private there, like <code>/tmp</code> on Linux. Writing the folder is not enough to remove a node in it,

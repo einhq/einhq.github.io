@@ -434,10 +434,8 @@ families of models at once, and both must fit on its graphics card, or one runs 
 <p>A folder can put the work on the files under it behind all other work. When its <code>lane</code> attribute
 is <code>bulk</code>, everything that starts for a file under it, from its reading and its renditions to the
 other modules&#39; work, waits until nothing else does, so what anyone uploads meanwhile is ready
-first. The nearest folder above a file that sets <code>lane</code> decides. The Archive&#39;s staging categories
-set it from their lane
-(<a href="../archive/staging-admin.html#plan-a-large-import">Plan a large import</a>); on any
-other folder, as its owner or the administrator:</p>
+first. The nearest folder above a file that sets <code>lane</code> decides. Set it as the folder&#39;s owner or the
+administrator:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 attrs -s lane=bulk /archive/imports/old-drive</code></pre></div>
 <p>It applies to work announced from then on, within a minute; work already waiting keeps its place.</p>

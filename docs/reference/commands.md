@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 476 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 478 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 233 in full](commands-core.md).
+[All 235 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -33,6 +33,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [attrs](commands-core.md#attrs) | Display or set node attributes. |
 | [audit](commands-core.md#audit) | Show who created, changed, moved, linked or removed which node, and when (administrators only). Reads the last 14 days unless given --all, a time range, or a record, node, session or cause to find. |
 | [awk](commands-core.md#awk) | Pattern scanning and text processing language (fields, patterns, arrays, printf) |
+| [base64](commands-core.md#base64) | Encode bytes as base64 text, or decode it with -d. |
 | [basename](commands-core.md#basename) | Strip directory and suffix from filenames. |
 | [cat](commands-core.md#cat) | Print nodes' contents, one after the other: a text file, a log (one JSON entry a line), a position or an embedding (JSON), a stream (its bytes from now on, to a file); a picture, video or recording is a preview on a terminal and its bytes to a file or a pipe. |
 | [chmod](commands-core.md#chmod) | Change file mode bits. |
@@ -230,7 +231,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [truncate](commands-core.md#truncate) | Truncate an associated resource of a node if it has one. |
 | [ui-build](commands-core.md#ui-build) | Bundle modules' pages into /var/cache/ui for the Web UI to load, unless unchanged since the last build, and write the installation's third-party notices there. |
 | [ui-icons](commands-core.md#ui-icons) | Tabler icons by name, as SVG markup, for the Web UI. |
-| [ui-nav](commands-core.md#ui-nav) | The Web UI's sidebar, top bar, panels and map layers for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes. |
+| [ui-nav](commands-core.md#ui-nav) | The Web UI's sidebar, top bar, panels, map styles and map layers for the caller, from every module's entries and the administrator's, the caller's groups' and the user's changes. |
+| [ui-notice](commands-core.md#ui-notice) | The administrator's note to whoever opens EiN, which the sign-in page and Home show: the first paragraph of /etc/ui/notice.md. |
 | [uniq](commands-core.md#uniq) | Report or omit repeated lines. |
 | [unmount](commands-core.md#unmount) | Unmount a filesystem. |
 | [unrelate](commands-core.md#unrelate) | Remove a bidirectional relation (both sides) |
@@ -312,7 +314,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [detect-faces](../archive/commands.md#detect-faces) | Detect faces in an image or a video and keep the usable ones as face regions. |
 | [duplicates](../archive/commands.md#duplicates) | Find duplicate files by checksum (exact) or by fingerprint, copies with other bytes (--fuzzy); record the staged exact copies of files (--record), or look checksums up before an upload (--checksum) |
 | [events-anniversaries](../archive/commands.md#events-anniversaries) | Birthdays, memorials and wedding anniversaries around a date, as events entries (core events gathers them) |
-| [exif-interpret](../archive/commands.md#exif-interpret) | Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its camera, a paired sidecar and its name (a staged file by its category's time rules), and its position node from the GPS fix or the sidecar. |
+| [exif-interpret](../archive/commands.md#exif-interpret) | Read what a file's metadata means in the archive: its capture time, resolved from its clocks, its camera and a paired sidecar, whether it is a scan (its camera is a digitizer), and its position node from the GPS fix or the sidecar. |
 | [face-add](../archive/commands.md#face-add) | Add a human-drawn face box to an image or a video frame as a new unidentified person. |
 | [face-confirm](../archive/commands.md#face-confirm) | Confirm that regions show the person they are assigned to. |
 | [face-doubt](../archive/commands.md#face-doubt) | Question whether regions show the person they are assigned to. |
@@ -345,7 +347,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [media-heal](../archive/commands.md#media-heal) | Start a pass of media-scan over the albums or a staging area when one is due, and none while a pass runs. |
 | [media-resolve-time](../archive/commands.md#media-resolve-time) | Re-resolve media originals' capture times from their stored exif and manual sources. |
 | [media-scan](../archive/commands.md#media-scan) | Emit media events for files the bridge never saw (backfill / gap recovery) |
-| [media-sidecars](../archive/commands.md#media-sidecars) | Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, and carry over their dates, places, captions and favourites. |
+| [media-sidecars](../archive/commands.md#media-sidecars) | Pair the Google Photos Takeout JSON and XMP sidecars in a folder with their files, as <file>/sidecar, carry over their dates, places, captions and favourites, and file the files an XMP names as made from under <file>/versions. |
 | [members-album](../archive/commands.md#members-album) | List an album's media by the album's own rules: an imported album's files/ folder, links followed, the cover left out, stacks of similar photos folded. |
 | [merge-duplicates](../archive/commands.md#merge-duplicates) | Keep one file of a set of duplicates, fill it in from the others, and move them to the trash as one batch. |
 | [news-albums](../archive/commands.md#news-albums) | Recently created albums, newest first, with who made them, as news entries (core news gathers them) |
@@ -390,7 +392,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [search-track](../archive/commands.md#search-track) | Search tracks by the device they belong to, or their description. |
 | [see-speakers](../archive/commands.md#see-speakers) | Tie a video's voices to the faces seen speaking them, the video's own face regions first. |
 | [source-list](../archive/commands.md#source-list) | List the files a node was read from: the links in its sources/, such as a track's GPX files or a person's GEDCOM files. |
-| [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and which one a newly arrived folder looks like it belongs in, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
+| [staging](../archive/commands.md#staging) | Manage a user's private staging area: its categories and where a newly arrived folder looks like it came from, their suggested groups and the organizer that makes them, the edits that change them, and the decisions that file them into the library or discard them, each journaled and undoable. |
 | [staging-hold](../archive/commands.md#staging-hold) | Decide a file's duplicate finding before the media module reads it: a staged exact copy of a file its owner can read is held unread (deferred) unless forced, another staged file's finding is recorded, and one left on a file no longer staged is taken off. |
 | [subcluster-faces](../archive/commands.md#subcluster-faces) | Re-cluster one person's faces with average linkage, to find two people fused into one. |
 | [subcluster-voices](../archive/commands.md#subcluster-voices) | Re-cluster one person's voices with average linkage, to find two people fused into one. |

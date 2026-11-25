@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Locations and the map – EiN documentation</title>
-    <meta name="description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, the weather at a place and time, and the Map page, where pictures, locations and GPS tracks are drawn together.">
+    <meta name="description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, the weather at a place and time, and the Map page, where pictures, locations and GPS tracks are drawn together with what other modules put on a map.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/archive/places.html">
     <meta property="og:title" content="Locations and the map – EiN documentation">
-    <meta property="og:description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, the weather at a place and time, and the Map page, where pictures, locations and GPS tracks are drawn together.">
+    <meta property="og:description" content="This page is for everyone in the family who works with places: the homes, cottages, churches and towns where pictures were taken and people lived. It covers the Locations page, creating a location and drawing where it lies, how pictures join a location by themselves, the weather at a place and time, and the Map page, where pictures, locations and GPS tracks are drawn together with what other modules put on a map.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -97,7 +97,8 @@
 <p>This page is for everyone in the family who works with places: the homes, cottages, churches and
 towns where pictures were taken and people lived. It covers the <strong>Locations</strong> page, creating a
 location and drawing where it lies, how pictures join a location by themselves, the weather at a
-place and time, and the <strong>Map</strong> page, where pictures, locations and GPS tracks are drawn together.</p>
+place and time, and the <strong>Map</strong> page, where pictures, locations and GPS tracks are drawn together with what other
+modules put on a map.</p>
 <p>How one picture gets its position, and how you correct it, is on
 <a href="dates-places.html">Dates and places of pictures</a>.</p>
 <h2 id="what-a-location-is">What a location is<a class="anchor" href="#what-a-location-is" aria-label="Link to this section"></a></h2>
@@ -433,7 +434,9 @@ the map zooms it rather than scrolling the page. Scroll up over the tabs to brin
 <ul>
 <li>A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.</li>
 <li>Pictures close together form a pile with a count. Choose it to list them in <strong>N photos here</strong>.</li>
-<li>The layers button in the corner switches between <strong>Map</strong>, <strong>Dark map</strong> and <strong>Satellite</strong>.</li>
+<li>The button in the corner, <strong>Map style and layers</strong>, changes the style and turns on other layers,
+such as <strong>Tracks</strong>, as on the Map page; see
+<a href="#choose-the-style-and-the-layers">Choose the style and the layers</a>.</li>
 </ul>
 <p>A location with no place, no suggestions and no pictures with a position says &quot;No location set
 yet.&quot; instead of a map. If you may change the location, <strong>Location on map</strong> under it opens <strong>Edit
@@ -572,13 +575,16 @@ from <strong>Trash</strong> in the account menu, for as many days as an administ
 <h2 id="the-map-page">The Map page<a class="anchor" href="#the-map-page" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Map</strong> in the sidebar, under <strong>Explore</strong>. The map fills the page, with no header.</p>
 <figure class="shot"><a href="../../assets/shots/map@2x.webp"><img src="../../assets/shots/map.webp" srcset="../../assets/shots/map.webp 1x, ../../assets/shots/map@2x.webp 2x" alt="The Map page over the Stockholm archipelago: photo piles with counts such as 32, 17 and 8, single photos as thumbnails, coloured GPS tracks between the islands, three buttons in the top-right corner, and the search box with the years 1956 and 2026 at the foot" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Pictures, locations and the routes of the tracks share one map, narrowed by the search box and the years under it.</figcaption></figure>
-<p>The map draws three things:</p>
+<p>The map draws its <strong>layers</strong> over a <strong>map style</strong>. These layers come with the Archive, and are on
+until you turn them off (see <a href="#choose-the-style-and-the-layers">Choose the style and the layers</a>):</p>
 <ul>
-<li><strong>Pictures</strong> with a position that you may see, gathered into piles. Pictures in staging are left
-out until they are filed.</li>
+<li><strong>Photos and videos</strong> with a position that you may see, gathered into piles. Pictures in staging
+are left out until they are filed.</li>
 <li><strong>Locations</strong> that have a place, as pins.</li>
-<li><strong>GPS tracks</strong>, the routes of the devices&#39; <a href="tracks.html">tracks</a>.</li>
+<li><strong>Tracks</strong>, the routes of the devices&#39; <a href="tracks.html">tracks</a>.</li>
 </ul>
+<p><strong>Sea marks</strong>, OpenSeaMap&#39;s buoys, lights and beacons, are on too. Other modules add layers of
+their own, such as <a href="../vasttrafik/index.html#on-a-map">Västtrafik&#39;s vehicles</a>, which start off.</p>
 <p>Opened from the sidebar, the map starts where <strong>Where maps open</strong> says, whatever your pictures show:
 over London unless an administrator chose another place under <strong>Settings → System → Maps</strong>, or you
 chose your own under <strong>Preferences</strong> (see <a href="../guide/profile.html#where-maps-open">Your profile</a>).
@@ -626,38 +632,11 @@ Click a name to open its device&#39;s page.
 Click <strong>Follow</strong> (the crosshair beside a track), or the track&#39;s pin, and the map moves along with
 it, keeping its newest point in view; zooming does not stop it. Drag the map, or click <strong>Follow</strong>
 again, to stop. A track drops out of the list four hours after its last point.</p>
-<p>Live tracks are drawn with the other tracks: they show while <strong>Show</strong> is on <strong>All</strong> or <strong>Tracks</strong>.</p>
-<h3 id="choose-what-the-map-shows">Choose what the map shows<a class="anchor" href="#choose-what-the-map-shows" aria-label="Link to this section"></a></h3>
-<p>The funnel button at the top of the right-hand corner is the <strong>Show</strong> menu:</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Choice</th>
-<th>Draws</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>All</strong></td>
-<td>Pictures, locations and tracks</td>
-</tr>
-<tr>
-<td><strong>Media</strong></td>
-<td>Pictures only</td>
-</tr>
-<tr>
-<td><strong>Locations</strong></td>
-<td>Location pins only</td>
-</tr>
-<tr>
-<td><strong>Tracks</strong></td>
-<td>Tracks only</td>
-</tr>
-</tbody></table>
-</div>
-<p>While one layer is chosen, the button shows that layer&#39;s icon instead of the funnel.</p>
-<h3 id="change-the-map-style">Change the map style<a class="anchor" href="#change-the-map-style" aria-label="Link to this section"></a></h3>
-<p>The button under it, <strong>Map style</strong>, opens a column of previews, each showing the place you are
-looking at in one style. Pointing at a preview names it, and clicking it changes the map:</p>
+<p>Live tracks are drawn with the other tracks: they show while the <strong>Tracks</strong> layer is on.</p>
+<h3 id="choose-the-style-and-the-layers">Choose the style and the layers<a class="anchor" href="#choose-the-style-and-the-layers" aria-label="Link to this section"></a></h3>
+<p>The button at the top of the right-hand corner, <strong>Map style and layers</strong>, opens the styles and the
+layers. Each style is a preview of the place you are looking at in that style; click one to change
+the map:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -667,7 +646,7 @@ looking at in one style. Pointing at a preview names it, and clicking it changes
 </thead>
 <tbody><tr>
 <td><strong>Map</strong></td>
-<td>OpenStreetMap&#39;s street map with OpenSeaMap&#39;s buoys, lights and beacons, the default</td>
+<td>OpenStreetMap&#39;s street map, the default</td>
 </tr>
 <tr>
 <td><strong>Dark map</strong></td>
@@ -679,8 +658,46 @@ looking at in one style. Pointing at a preview names it, and clicking it changes
 </tr>
 </tbody></table>
 </div>
-<p>The <strong>Map</strong> tabs of a location and of an album have their own style button in the corner, with the
-same three styles.</p>
+<p>Under them each layer has a switch, with a line saying what it draws:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Draws</th>
+<th>Starts</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Photos and videos</strong></td>
+<td>Pictures and piles; see <a href="#open-pictures-and-piles">Open pictures and piles</a></td>
+<td>on</td>
+</tr>
+<tr>
+<td><strong>Locations</strong></td>
+<td>Location pins</td>
+<td>on</td>
+</tr>
+<tr>
+<td><strong>Tracks</strong></td>
+<td>Tracks, and the live ones with their list</td>
+<td>on</td>
+</tr>
+<tr>
+<td><strong>Sea marks</strong></td>
+<td>OpenSeaMap&#39;s buoys, lights and beacons over the style</td>
+<td>on</td>
+</tr>
+</tbody></table>
+</div>
+<p>A module can add layers, such as <a href="../vasttrafik/index.html#on-a-map">Västtrafik&#39;s vehicles</a>. A layer
+that draws nothing at the moment says why under its switch, such as &quot;Zoom in to see the vehicles.&quot;</p>
+<p>EiN keeps what you choose as your own: the Map page opens with the same style and layers the next
+time, in any browser you sign in on. The style is also what every other map opens in for you, such
+as the one in the viewer&#39;s details, unless that map has a style of its own. Both are the settings
+<strong>Map style</strong> and <strong>Map layers</strong> under <strong>Preferences</strong>; see
+<a href="../guide/profile.html#map-style-and-map-layers">Your profile</a>.</p>
+<p>The <strong>Map</strong> tabs of a location and of an album have the same button, with their own pictures as
+the <strong>Photos and videos</strong> layer; what you choose there lasts while the tab is open.</p>
 <h3 id="narrow-by-years">Narrow by years<a class="anchor" href="#narrow-by-years" aria-label="Link to this section"></a></h3>
 <p>Under the search box is a slider for the years, with the first year of the range drawn at its
 left and the last at its right. Drag either handle, and the map reads again when you let go. While
@@ -722,15 +739,15 @@ reload keeps it. These parts of the address are the map&#39;s:</p>
 </tr>
 <tr>
 <td><code>layers</code></td>
-<td>Which of <code>media</code>, <code>locations</code> and <code>tracks</code> are on; absent for all</td>
+<td>The layers that are on, by their ids separated by commas, or <code>none</code>; absent for the ones you chose last</td>
 </tr>
 <tr>
 <td><code>from</code>, <code>to</code></td>
 <td>The years</td>
 </tr>
 <tr>
-<td><code>base</code></td>
-<td>The map style; absent for <strong>Map</strong></td>
+<td><code>style</code></td>
+<td>The map style&#39;s id, such as <code>ui.satellite</code>; absent for the one you chose last</td>
 </tr>
 <tr>
 <td><code>q</code>, <code>person</code>, <code>location</code>, <code>tag</code></td>
@@ -738,8 +755,10 @@ reload keeps it. These parts of the address are the map&#39;s:</p>
 </tr>
 </tbody></table>
 </div>
-<p>For example, <code>/map?c=50.244,-5.027&amp;z=14&amp;layers=media&amp;from=1968&amp;to=1975</code> shows the pictures taken
-around the cottage at Malpas from 1968 to 1975. Every address of the Web UI is listed on
+<p>The layers&#39; ids are <code>archive.media</code>, <code>archive.locations</code>, <code>archive.tracks</code> and <code>ui.seamarks</code>, and a
+module&#39;s own, such as <code>vasttrafik.vehicles</code>. For example,
+<code>/map?c=50.244,-5.027&amp;z=14&amp;layers=archive.media&amp;from=1968&amp;to=1975</code> shows the pictures taken around
+the cottage at Malpas from 1968 to 1975, and nothing else. Every address of the Web UI is listed on
 <a href="../reference/routes.html">Addresses in the Web UI</a>.</p>
 <h2 id="where-the-maps-and-addresses-come-from">Where the maps and addresses come from<a class="anchor" href="#where-the-maps-and-addresses-come-from" aria-label="Link to this section"></a></h2>
 <p>The map pictures, the address lookups and the weather come from outside services. Your photos, videos and
@@ -753,12 +772,12 @@ recordings are never sent to them.</p>
 </tr>
 </thead>
 <tbody><tr>
-<td>The <strong>Map</strong> style, and the small maps on cards</td>
+<td>The <strong>Map</strong> style, and the small maps on cards in it</td>
 <td>OpenStreetMap&#39;s tile servers, <code>tile.openstreetmap.org</code></td>
 <td>Your browser asks for the map squares of the area you look at</td>
 </tr>
 <tr>
-<td>The sea marks on the <strong>Map</strong> style and cards</td>
+<td>The <strong>Sea marks</strong> layer</td>
 <td>OpenSeaMap, <code>tiles.openseamap.org</code></td>
 <td>The same</td>
 </tr>
@@ -897,11 +916,11 @@ to share it with you; see <a href="../guide/sharing.html">Sharing</a>.</li>
 servers: you are offline, or a network filter blocks <code>tile.openstreetmap.org</code> or
 <code>server.arcgisonline.com</code>.</li>
 <li><strong>The Map page shows no pictures.</strong> It opens where <strong>Where maps open</strong> says, London unless it
-was changed; zoom out, or set it to where your pictures are. Check that <strong>Show</strong> is on
-<strong>All</strong> or <strong>Media</strong>, that the year slider&#39;s handles are at the ends, and that the search box is
-empty.</li>
-<li><strong>The location pins are gone from the map.</strong> The search box narrows the map, or <strong>Show</strong> is on
-<strong>Media</strong> or <strong>Tracks</strong>.</li>
+was changed; zoom out, or set it to where your pictures are. Check that the <strong>Photos and videos</strong>
+layer is on under <strong>Map style and layers</strong>, that the year slider&#39;s handles are at the ends, and
+that the search box is empty.</li>
+<li><strong>The location pins are gone from the map.</strong> The search box narrows the map, or the
+<strong>Locations</strong> layer is off.</li>
 <li><strong>A track ignores the year slider.</strong> Tracks are always drawn in full; only the pictures are
 narrowed.</li>
 <li><strong>A live track&#39;s pin stays where it was.</strong> Its last point is older than you expected: the
@@ -934,7 +953,7 @@ later lookups there are immediate.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/places.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-track-stayed-at">Places a track stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-weather-ahead">The weather ahead</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-track-live">Follow a track live</a></li><li class="nested"><a href="#choose-what-the-map-shows">Choose what the map shows</a></li><li class="nested"><a href="#change-the-map-style">Change the map style</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-location-is">What a location is</a></li><li><a href="#browse-the-locations-page">Browse the Locations page</a></li><li><a href="#create-a-location">Create a location</a></li><li><a href="#where-a-locations-position-comes-from">Where a location's position comes from</a></li><li><a href="#places-a-track-stayed-at">Places a track stayed at</a></li><li><a href="#the-weather-at-a-place-and-time">The weather at a place and time</a></li><li class="nested"><a href="#the-weather-ahead">The weather ahead</a></li><li><a href="#a-locations-page">A location's page</a></li><li class="nested"><a href="#the-info-tab">The Info tab</a></li><li class="nested"><a href="#the-map-tab">The Map tab</a></li><li class="nested"><a href="#the-media-tab">The Media tab</a></li><li><a href="#pick-from-suggested-locations">Pick from suggested locations</a></li><li><a href="#draw-a-circle-or-a-polygon">Draw a circle or a polygon</a></li><li><a href="#change-a-locations-name-address-or-description">Change a location's name, address or description</a></li><li><a href="#how-pictures-join-a-location">How pictures join a location</a></li><li><a href="#residents-and-events">Residents and events</a></li><li><a href="#move-a-location-to-the-trash">Move a location to the trash</a></li><li><a href="#the-map-page">The Map page</a></li><li class="nested"><a href="#move-around-the-map">Move around the map</a></li><li class="nested"><a href="#open-pictures-and-piles">Open pictures and piles</a></li><li class="nested"><a href="#locations-and-tracks-on-the-map">Locations and tracks on the map</a></li><li class="nested"><a href="#follow-a-track-live">Follow a track live</a></li><li class="nested"><a href="#choose-the-style-and-the-layers">Choose the style and the layers</a></li><li class="nested"><a href="#narrow-by-years">Narrow by years</a></li><li class="nested"><a href="#search-the-map">Search the map</a></li><li class="nested"><a href="#share-or-bookmark-a-view">Share or bookmark a view</a></li><li><a href="#where-the-maps-and-addresses-come-from">Where the maps and addresses come from</a></li><li><a href="#in-the-terminal">In the terminal</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -105,7 +105,7 @@ they are with the cast icon after them, **Show on a screen near you**
 ([On a TV where your phone is](../dashboard/screens.md#on-a-tv-where-your-phone-is)), as the album
 is narrowed and ordered, with the sound of its videos, and step through it or pause it from the
 cast icon's controls; and to a
-speaker or screen in the house with **Show on…** under **⋮**
+speaker or screen in the house with **Show on** under **⋮**
 ([From the app](../devices/index.md#from-the-app)). With the default sharing, everyone with an account
 sees every album and only its owner changes it, so on someone else's album you usually have none of
 these buttons.
@@ -211,7 +211,10 @@ tracker carried on the trip; a route someone else recorded on the same days stay
 - A picture on its own is drawn as its thumbnail; choose it to open it in the viewer.
 - Pictures close together form a pile with a count. Choose it to list them in **N photos here**.
 - Choosing never zooms. Zoom with the mouse wheel or a pinch; the map has no zoom buttons.
-- The layers button in the corner switches between **Map**, **Dark map** and **Satellite**.
+- The button in the corner, **Map style and layers**, changes the style and turns on other layers,
+  such as every track or the locations, as on the
+  [Map page](places.md#choose-the-style-and-the-layers); the album's pictures are its
+  **Photos and videos** layer.
 
 The routes come from the album's whole span, so widening its dates in **Edit album** brings in the
 journey there and back. When nothing has a position and none of its devices recorded a route, the

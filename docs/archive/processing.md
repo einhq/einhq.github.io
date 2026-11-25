@@ -62,7 +62,6 @@ show **waiting for EMS** on the **Status**.
 | `staging-unzip`          | Expands a zip that lands in a staging category, then removes the zip                                                | `unzip`                     |
 | `staging-sidecars`       | Pairs Takeout and XMP sidecars with their files                                                                     | `sidecars`                  |
 | `staging-organize`       | Plans a staging category's suggested groups again                                                                   | `organize`                  |
-| `staging-retime`         | Dates staged files again by the rules of the category they were moved into                                          | `retime`                    |
 | `track-stage`            | Gives a GPX file dropped in staging to the device it was recorded on                                                | run by the engine           |
 | `track-trips`            | Finds a track's trips again after points arrive, names the places it stayed, and looks up their weather             | run by the engine           |
 | `gedcom-stage`           | Moves a GEDCOM file dropped in staging to `genealogy/`, to be looked over and imported                              | run by the engine           |
@@ -104,7 +103,7 @@ media service could not cut during detection is cut once it can.
 Every kind of work above that is not run by the engine goes as a job into the pool
 `/var/pools/media`, where the [Media](../media/index.md) module's workers take it: the Archive names
 its kinds for them. `media-worker` takes the Archive's `unzip`, `interpret`, `face-crops`, `face-assign`,
-`speaker-assign`, `dedupe`, `retime`, `organize` and `sidecars`, beside the Media module's own
+`speaker-assign`, `dedupe`, `organize` and `sidecars`, beside the Media module's own
 `ingest`, `stills`, `transcode` and `fingerprint`; `models` takes the Archive's `faces`, `diarize`
 and `damage`, beside the Media module's `shots`, `embed-picture`, `ocr`, `embed-text`, `transcribe`
 and `restore`,
@@ -178,19 +177,25 @@ remembers where it stopped, so the next run goes on from there; `--restart` star
 announces fewer as running `media-ingest` instances and waiting triggers add up, and nothing once they reach 500
 (`--max-active`).
 
-## Large imports and the bulk lane
+## Work in the bulk lane
 
-Work on a staging category of the **Google Photos export** or **Scans** kind runs in core's
-[bulk lane](../admin/processing.md#the-bulk-lane), below all other work, so what people upload in
-the meantime is processed first. Any category can be put in that lane with
-`staging category <name> --lane bulk`, which applies to work announced from then on.
-[Staging for administrators](staging-admin.md) covers categories.
+Work that nobody waits on runs in core's [bulk lane](../admin/processing.md#the-bulk-lane), below
+all other work, so what people upload in the meantime is processed first:
+
+- a `media-heal` pass (see [Close gaps the pipelines missed](#close-gaps-the-pipelines-missed));
+- finding a recording's voices again when other voice models found them;
+- the work the Media module's hourly scans announce, such as `renditions-scan` and `pictures-scan`
+  ([Media](../media/index.md)).
+
+Staging categories put no work there: what people upload is read and grouped as soon as it can
+be. To put the work on the files under a folder behind the rest, set its `lane` attribute to
+`bulk`; see [The bulk lane](../media/index.md#the-bulk-lane) on the Media module's page.
 
 ## Related pages
 
 - [Processing and pipelines](../admin/processing.md): the engine, failed work, and watching it all.
 - [The media service](../ems/index.md): where the model work and much of the media work runs.
 - [Supported files](file-types.md): what the Archive reads and makes of each kind of file.
-- [Staging for administrators](staging-admin.md): categories and their lanes.
+- [Staging for administrators](staging-admin.md): categories and the staging work.
 - [Troubleshooting](../admin/troubleshooting.md): when photos do not get thumbnails, faces or dates.
 - [Archive commands](commands.md): every command the Archive adds.
