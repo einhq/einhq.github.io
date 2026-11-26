@@ -19,7 +19,7 @@ holds the whole search, so a search can be linked, and the browser's Back and Fo
 your searches.
 
 Every search finds only what you are allowed to see. Files still in your staging area are left out
-until they are filed ([Sorting in staging](staging.md)).
+until they are filed ([Sorting in staging](staging.md)), unless **Show only mine** is on.
 
 ## Find photos, videos, recordings and documents
 
@@ -74,7 +74,7 @@ beside them when they span enough dates.
 ### Show only your own files
 
 **Show only mine** (only when you are signed in) limits the page, both the feed and a search, to
-the files you added yourself. EiN remembers the choice in this browser, not in your account. The
+the files you added yourself, those still in your staging included. EiN remembers the choice in this browser, not in your account. The
 Media page's other controls, its layouts and label pills, are covered in
 [Media, Year and labels](media.md#the-media-page).
 

@@ -113,20 +113,20 @@ the default. If a save fails, the reason shows in a red box under the setting.
 
 ### The settings
 
-| Category   | Setting                                  | Default   | What it changes                                                                                                                                                                                                                    |
-| ---------- | ---------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Appearance | **Header entrance**                      | `drawn`   | How the tiles of the coloured band at the top of a page arrive when the page opens; the choices are below. A device set to reduce motion never animates it.                                                                        |
-| Appearance | **Header entrance time**                 | `450`     | How many milliseconds that entrance takes, from the first tile starting to the last one in place. `0` shows the header as it is, without an entrance.                                                                              |
-| Appearance | **Header over a cover**                  | `split`   | How the tiles meet a page's cover photo, such as an album's or a person's: `split` gives the left of the header to the tiles, which dissolve into the photo along a slanted edge; `lines` lays only their outlines over the photo. |
-| Language   | **Date and time format**                 | empty     | How dates and times are written for you; see below. Empty follows the administrator's **Date and time format**.                                                                                                                    |
-| Maps       | **Where maps open**                      | empty     | Where a map opens for you when it has nothing of its own to show, such as the Map page; see below. Empty follows the administrator's **Where maps open**.                                                                          |
-| Maps       | **Map style**                            | empty     | The style every map shows you when it names none of its own; the Map page sets it. Empty is the first style, **Map**.                                                                                                              |
-| Maps       | **Map layers**                           | empty     | What the Map page draws for you; the Map page sets it. Empty is the layers that start on.                                                                                                                                          |
-| Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                                       |
-| Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                 |
-| Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                   |
-| Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                   |
-| Todo       | **Todo widget**                          | **Off**   | A button floating over every page, which you can drag anywhere, counting and listing the todos about what is on screen; see [The todo widget](../todo/index.md#the-todo-widget).                                                   |
+| Category   | Setting                                  | Default   | What it changes                                                                                                                                                                                                                                                                 |
+| ---------- | ---------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Appearance | **Header entrance**                      | `drawn`   | How the tiles of the coloured band at the top of a page arrive when the page opens; the choices are below. A device set to reduce motion never animates it.                                                                                                                     |
+| Appearance | **Header entrance time**                 | `450`     | How many milliseconds that entrance takes, from the first tile starting to the last one in place. `0` shows the header as it is, without an entrance.                                                                                                                           |
+| Appearance | **Header over a cover**                  | `split`   | How the tiles meet a page's cover photo, such as an album's or a person's: `split` gives the left of the header to the tiles, which dissolve into the photo along a slanted edge, the photo starting where they begin to fade; `lines` lays only their outlines over the photo. |
+| Language   | **Date and time format**                 | empty     | How dates and times are written for you; see below. Empty follows the administrator's **Date and time format**.                                                                                                                                                                 |
+| Maps       | **Where maps open**                      | empty     | Where a map opens for you when it has nothing of its own to show, such as the Map page; see below. Empty follows the administrator's **Where maps open**.                                                                                                                       |
+| Maps       | **Map style**                            | empty     | The style every map shows you when it names none of its own; the Map page sets it. Empty is the first style, **Map**.                                                                                                                                                           |
+| Maps       | **Map layers**                           | empty     | What the Map page draws for you; the Map page sets it. Empty is the layers that start on.                                                                                                                                                                                       |
+| Playback   | **Seconds per slide**                    | `3`       | How long each photo is shown in a slideshow.                                                                                                                                                                                                                                    |
+| Playback   | **Ken Burns effect**                     | **On**    | Slowly pan and zoom each photo during a slideshow.                                                                                                                                                                                                                              |
+| Sharing    | **How widely what you create is shared** | `default` | Where an album you create starts out; see below.                                                                                                                                                                                                                                |
+| Shell      | **Shell history length**                 | `1000`    | How many commands the terminal remembers between sessions, in `~/.bash_history`.                                                                                                                                                                                                |
+| Todo       | **Todo widget**                          | **Off**   | A button floating over every page, which you can drag anywhere, counting and listing the todos about what is on screen; see [The todo widget](../todo/index.md#the-todo-widget).                                                                                                |
 
 EiN itself gives the settings under Appearance, Language, Maps, Sharing and Shell. The two under Playback come with
 the archive module, and only an EiN with the archive has them; the one under Todo comes with the
@@ -136,16 +136,16 @@ lists each with its key, such as
 
 The choices for **Header entrance**:
 
-| Choice    | The tiles are                                     |
-| --------- | ------------------------------------------------- |
-| `drawn`   | drawn as if by pen, and filled from the bottom up |
-| `falling` | falling into place                                |
-| `sliding` | sliding in from the right                         |
-| `sweep`   | swept in from left to right                       |
-| `growing` | growing from the bottom edge                      |
-| `ripple`  | rippling out from the title                       |
-| `puzzle`  | snapping in like puzzle pieces                    |
-| `wave`    | crossed by a wave of light                        |
+| Choice    | The tiles are                                |
+| --------- | -------------------------------------------- |
+| `drawn`   | drawn as if by pen, and filled from the left |
+| `falling` | falling into place                           |
+| `sliding` | sliding in from the right                    |
+| `sweep`   | swept in from left to right                  |
+| `growing` | growing from the bottom edge                 |
+| `ripple`  | rippling out from the title                  |
+| `puzzle`  | snapping in like puzzle pieces               |
+| `wave`    | crossed by a wave of light                   |
 
 ### Date and time format
 

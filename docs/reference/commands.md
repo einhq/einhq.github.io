@@ -355,7 +355,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [parse-eval](../archive/commands.md#parse-eval) | Score the search parse (archive-parse) against the filters each question means. |
 | [person](../archive/commands.md#person) | People and family tree management. |
 | [person-add-event](../archive/commands.md#person-add-event) | Add an event (blob) to a person, album, location or camera. |
-| [person-check](../archive/commands.md#person-check) | Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died) |
+| [person-check](../archive/commands.md#person-check) | Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died, faces on photos from before the birth) |
 | [person-children](../archive/commands.md#person-children) | List a person's children (children/ dir) |
 | [person-cover](../archive/commands.md#person-cover) | Give a named person without a cover the crop of one of their own faces (coverPhoto softlink) |
 | [person-create](../archive/commands.md#person-create) | Create a person node. |

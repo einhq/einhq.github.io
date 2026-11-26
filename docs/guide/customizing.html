@@ -265,7 +265,7 @@ System
 top bar
   Chat             assistant.chat
   Create           ui.create
-    Import media   archive.import
+    Upload         archive.import
     Album          archive.create-album
     Person         archive.create-person
     Location       archive.create-location
@@ -280,10 +280,10 @@ panels
   search.explore   Labels           /explore/labels          archive.explore-labels
   device.tabs      Trips            /trips?device={path}     archive.trips
   app.backup       Back up into     /staging/app-backup      archive.app-backup
-  share.receive    Import media     /staging/import          archive.share
+  share.receive    Upload           /staging/receive         archive.share
   nodes.tools      Duplicates       /duplicates?path={path}  archive.duplicates
   stats.sections   Events           /stats/life-events       archive.life-events
-  home.start       Import media     /start/upload            archive.start-upload
+  home.start       Upload           /start/upload            archive.start-upload
   search.label     Looks like       /looks-like?path={path}  archive.looks-like
   about.services   Language model   /about/language-model    assistant.about
   system.overview  GPU              /system/gpu              ems.gpu
@@ -565,7 +565,7 @@ open menu. With <code>&quot;order&quot;: 15</code> the button stands between <st
 <p>Rows can go into the menus EiN has as well:</p>
 <ul>
 <li><strong><code>&quot;parent&quot;: &quot;ui.create&quot;</code></strong> adds a row to the <strong>Create New</strong> menu under the plus. The archive&#39;s
-rows are <strong>Import media</strong> (5), <strong>Album</strong> (10), <strong>Person</strong> (20), <strong>Location</strong> (30) and <strong>Camera</strong>
+rows are <strong>Upload</strong> (5), <strong>Album</strong> (10), <strong>Person</strong> (20), <strong>Location</strong> (30) and <strong>Camera</strong>
 (40); Recipes puts <strong>Recipe</strong> at 31, EiN its <strong>Device</strong> at 50 (<code>ui.create-device</code>), and Dashboards
 <strong>Dashboard</strong> at 60.</li>
 <li><strong><code>&quot;parent&quot;: &quot;ui.account&quot;</code></strong> adds a row to the menu under your picture, after <strong>Me</strong>. The archive
@@ -666,7 +666,7 @@ like any entry. This puts <strong>Years</strong> first on the <strong>Search</st
 <tr>
 <td><code>home.start</code></td>
 <td>Under <strong>News</strong> on <strong>Home</strong> while there is no news</td>
-<td><code>archive.start-upload</code> (<strong>Import media</strong>, signed in only)</td>
+<td><code>archive.start-upload</code> (<strong>Upload</strong>, signed in only)</td>
 </tr>
 <tr>
 <td><code>stats.sections</code></td>
@@ -696,7 +696,7 @@ like any entry. This puts <strong>Years</strong> first on the <strong>Search</st
 <tr>
 <td><code>share.receive</code></td>
 <td>The dialog that opens with files shared to EiN from another app; the first panel only</td>
-<td><code>archive.share</code> (<strong>Import media</strong>, signed in only)</td>
+<td><code>archive.share</code> (<strong>Upload</strong>, signed in only)</td>
 </tr>
 <tr>
 <td><code>system.overview</code></td>

@@ -2,9 +2,9 @@
 
 # Core commands
 
-The commands every EiN has, whatever modules it runs. 235 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
+The commands every EiN has, whatever modules it runs. 236 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
 
-[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [base64](#base64) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [curl](#curl) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-app](#device-app) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [ui-notice](#ui-notice) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
+[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [base64](#base64) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [curl](#curl) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-app](#device-app) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-changelog](#mod-changelog) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [ui-notice](#ui-notice) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
 
 ## A
 
@@ -1804,7 +1804,7 @@ login [--session] <username> [<password>]
 
 | Option | What it does |
 | --- | --- |
-| `--session` | login session not just shell. |
+| `--session` | sign in the session, every page and terminal of it, not just this shell; it gets a new secret, whose handover token the JSON answer carries. |
 
 ### `logout`
 
@@ -1818,7 +1818,7 @@ logout [--session]
 
 | Option | What it does |
 | --- | --- |
-| `--session` | logout session not just shell. |
+| `--session` | sign the session out, not just this shell; it gets a new secret, whose handover token the JSON answer carries. |
 
 ### `ls`
 
@@ -2091,6 +2091,24 @@ mod-cache <name>
 | --- | --- |
 | `<name>` | Module name (directory name under /modules) |
 
+### `mod-changelog`
+
+An installed module's commits, newest first, from what an update would install down past the one installed, each with its release tags; marked which is installed and which an update brings.
+
+<small>reads only</small>
+
+```text
+mod-changelog [--limit=<number>] <module>
+```
+
+| Argument | What it is |
+| --- | --- |
+| `<module>` | The installed module. |
+
+| Option | What it does |
+| --- | --- |
+| `--limit=<number>` | How many commits at most; 50 when not given, at most 500. |
+
 ### `mod-groups`
 
 Say which groups a module is kept to, or keep it to some groups, or make it everyone's again.
@@ -2144,7 +2162,7 @@ mod-install [--force] [--missing] [--groups=<string>] [--no-setup] [--background
 
 | Argument | What it is |
 | --- | --- |
-| `<module>...` | A published module by name (archive), or its repository (https://github.com/einhq/module-archive), either with @branch, @tag or @commit (its id whole, or its first seven characters or more); without one, its newest release (v<version> tag) that this core can run, or its default branch when it has none. |
+| `<module>...` | A published module by name (archive), or its repository (https://github.com/einhq/module-archive), either with @branch, @tag or @commit (its id whole, or its first seven characters or more); without one, its newest release (v<version> tag) that this core can run, or its default branch when it has none. Several are one change: the ranges between them are judged as they will be once all are installed. |
 
 | Option | What it does |
 | --- | --- |
@@ -2343,7 +2361,7 @@ What the archive has from a calendar day (MM-DD, default today) in earlier years
 <small>reads only</small>
 
 ```text
-onthisday [--limit=<number>] [<day>]
+onthisday [--limit=<string>] [<day>]
 ```
 
 | Argument | What it is |
@@ -2352,11 +2370,12 @@ onthisday [--limit=<number>] [<day>]
 
 | Option | What it does |
 | --- | --- |
-| `--limit=<number>` | entries returned across all providers (default 8) |
+| `--limit=<string>` | entries returned across all providers, or all of them (default 8) |
 
 ```bash
 onthisday
 onthisday 06-21 --limit 20
+onthisday --limit all
 ```
 
 With `JSON_OUTPUT=1`: the entries of every onthisday-* provider, newest year first: the year, what, the node it is about, which provider, and the route that draws it.
@@ -3171,7 +3190,7 @@ Faceted search over content: text, time, region, kind, tags, subjects (people, l
 <small>reads only</small>
 
 ```text
-search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--occasion=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--undated] [--missing=<string>] [--has=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
+search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--from=<string>] [--to=<string>] [--occasion=<string>] [--after=<string>] [--before=<string>] [--creator=<string>] [--subject=<string>] [--subject-name=<string>] [--under=<path>] [--include-stacked] [--within=<path>] [--include-unlisted=<path>] [--undated] [--missing=<string>] [--has=<string>] [--like=<path>] [--bbox=<string>] [--circle=<string>] [--polygon=<string>] [--sort=<string>] [--at=<string>] [--facets] [--group-by=<string>] [--layout] [--cursor=<string>] [--above=<string>] [--max-scan=<number>] [--fields=<string>] [<query>]
 ```
 
 | Argument | What it is |
@@ -3195,6 +3214,7 @@ search [-l <number>] [--limit=<number>] [--kind=<string>] [--tag=<string>] [--fr
 | `--under=<path>` | media held by one album or directory (its own level; softlink members followed) |
 | `--include-stacked` | with --under, include hidden stack members (internal aggregate mode) |
 | `--within=<path>` | media anywhere in the tree under this directory, at any depth; by time, with the undated after the dated when there is no date window. Inside an unlisted tree (staging) it lists what the library's searches leave out. |
+| `--include-unlisted=<path>` | a directory in an unlisted tree (staging) to list as well, the rest of the tree still left out (repeatable) |
 | `--undated` | only media with no capture time, in the order it arrived. |
 | `--missing=<string>` | only what lacks this attr, dotted for a nested one (duplicate.deferred); repeatable, each must be missing. Quick on an attr core or a module keeps statistics on (labels, damage); on another one it may read the whole library. |
 | `--has=<string>` | only what holds this value in an attr, as <attr>=<value>: the attr is the value, or a list holding it (labels=sea); repeatable, each must hold. Quick on an attr core or a module indexes (labels, damage); on another one it may read the whole library. |

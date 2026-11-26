@@ -227,7 +227,7 @@ podman run -d --name ems --restart always -p 8181:8181 \
   -e EMS_OPS=<span class="hljs-string">&#x27;media.probe,image.*,video.poster,audio.*,fingerprint.compute,vision.embed&#x27;</span> \
   --memory 16g ghcr.io/einhq/ems:0.4.9</code></pre></div>
 <p><code>0.4.9</code> is the release EiN&#39;s own media service runs (<code>EIN_EMS_VERSION</code> in <code>~/ein/.env</code> on EiN&#39;s
-machine), the newest of the line the <code>ems</code> module asks for: an instance of another line is named
+machine), the newest the <code>ems</code> module takes: an instance of another line is named
 in the <strong>Status</strong> page&#39;s <code>ems laptop api</code> check.</p>
 <p>Add <code>--device nvidia.com/gpu=all</code> on a machine with an NVIDIA card set up as
 <a href="gpu.html">The graphics card</a> says. <code>EMS_OPS</code> is a list of operations separated by commas, where

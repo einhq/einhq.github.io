@@ -43,7 +43,7 @@ ones nearest to today.
 With no module installed, Home shows the **Welcome** header, News says "Nothing has been added yet"
 and "What people add shows up here.", Events says "Nothing comes round in the next few weeks.",
 and On this day is not shown. A module can offer a way to begin under the empty News: the Archive
-offers **Import media** when you are signed in.
+offers **Upload**, which opens Staging, when you are signed in.
 
 With the Archive installed, On this day shows the pictures taken on today's date in earlier years,
 News the albums people made lately, and Events the birthdays, memorials and wedding anniversaries

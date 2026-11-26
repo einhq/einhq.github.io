@@ -28,7 +28,7 @@ read only when you file it into an album.
 
 EiN looks at the first bytes of a file, not at its name. A JPEG photo named `IMG_0412.png` is
 still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
-difference whether the file came in with **Import media**, an upload into an album, by dropping it
+difference whether the file came in with an upload into staging or into an album, by dropping it
 on a page, or over [SFTP](../shell/ssh-sftp.md). A program that copies a file over SFTP under a
 temporary name, such as `IMG_0412.jpg.filepart`, and renames it when it is done gets the type the
 final name gives, and the file is prepared under that name.

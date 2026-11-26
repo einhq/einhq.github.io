@@ -152,16 +152,16 @@ Dashboards installed, the menu has these rows:
 
 ![The Create New menu open under the plus: Import media, Album, Person, Location, Recipe, Camera, Device and Dashboard](../../assets/shots/create-menu.webp "The Create menu gathers the rows that EiN and the installed modules give it.")
 
-| Row              | Opens                                                                                | More                                              |
-| ---------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------- |
-| **Import media** | **Import media**: choose a category in staging and the files or folders to bring in. | [Getting your photos in](../archive/importing.md) |
-| **Album**        | **Create Album**                                                                     | [Albums](../archive/albums.md)                    |
-| **Person**       | **Create Person**                                                                    | [People and faces](../archive/people.md)          |
-| **Location**     | **Create Location**                                                                  | [Locations and the map](../archive/places.md)     |
-| **Recipe**       | **New recipe**, with Recipes                                                         | [Recipes](../recipes/index.md)                    |
-| **Camera**       | **Register Camera**                                                                  | [Cameras](../archive/cameras.md)                  |
-| **Device**       | **New Device**, for members of the `devices` group                                   | [Devices](devices.md)                             |
-| **Dashboard**    | **New dashboard**, with Dashboards                                                   | [Dashboards](../dashboard/index.md)               |
+| Row           | Opens                                                        | More                                              |
+| ------------- | ------------------------------------------------------------ | ------------------------------------------------- |
+| **Upload**    | Opens **Staging**, where files are uploaded into a category. | [Getting your photos in](../archive/importing.md) |
+| **Album**     | **Create Album**                                             | [Albums](../archive/albums.md)                    |
+| **Person**    | **Create Person**                                            | [People and faces](../archive/people.md)          |
+| **Location**  | **Create Location**                                          | [Locations and the map](../archive/places.md)     |
+| **Recipe**    | **New recipe**, with Recipes                                 | [Recipes](../recipes/index.md)                    |
+| **Camera**    | **Register Camera**                                          | [Cameras](../archive/cameras.md)                  |
+| **Device**    | **New Device**, for members of the `devices` group           | [Devices](devices.md)                             |
+| **Dashboard** | **New dashboard**, with Dashboards                           | [Dashboards](../dashboard/index.md)               |
 
 ### The account menu
 
@@ -226,6 +226,7 @@ The sidebar lists the pages, in four sections. The first has no heading.
 | Browse  | **Locations**     | [Locations and the map](../archive/places.md)                                                                                                                       | everyone       | archive   |
 | Browse  | **Devices**       | Sensors, plugs and switches, phones and GPS loggers: [Devices](devices.md)                                                                                          | signed in      | EiN       |
 | Browse  | **Cameras**       | The cameras, phones and scanners that took the pictures: [Cameras](../archive/cameras.md)                                                                           | everyone       | archive   |
+| Browse  | **Recipes**       | The household's recipes: [Recipes](../recipes/index.md)                                                                                                             | signed in      | recipes   |
 | System  | **Nodes**         | A file manager over the whole [tree](../concepts/tree.md)                                                                                                           | administrators | EiN       |
 | System  | **Status**        | How EiN is doing: [Health and status](../admin/monitoring.md)                                                                                                       | administrators | EiN       |
 | System  | **Settings**      | How this installation is set up: [Configuration](../admin/configuration.md)                                                                                         | signed in      | EiN       |

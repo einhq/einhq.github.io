@@ -18,7 +18,7 @@ The page works in two ways:
 - Each section is headed by its date, such as "29 June 2026", and the number of pictures in it. As you scroll, the date of the section you are in stays at the top of the page.
 - Click a date heading to select everything under it. Click it again to clear the selection.
 - A picture known only to a year, such as a scan dated 1975, sits under the year alone. Pictures with no date at all come last, under **Undated**. [Dates and places of pictures](dates-places.md) explains where dates come from.
-- Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today's date, marked "1 year ago", "12 years ago" and so on. A ring plays that year's pictures as a story. [Memories, news and events on Home](home.md) describes it.
+- Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today's date, however far back, marked "1 year ago", "12 years ago" and so on. When they do not all fit, swipe the row sideways, or use the arrows at its ends with a mouse. A ring plays that year's pictures as a story. [Memories, news and events on Home](home.md) describes it.
 - Once the feed holds more than 120 pictures, a time rail runs down the right edge of the page. Drag it to move through the years; the feed loads the pictures from the date you drag to.
 - Click a picture to open it in the viewer, where the arrows walk through the feed. The viewer's "N of M" counter is not shown here, because the feed loads part of the archive at a time. [Viewing photos, videos and recordings](viewer.md) covers the viewer.
 - On a phone, in the **Default** layout, pinch the grid to fit between 2 and 5 pictures across.
@@ -39,7 +39,7 @@ A search is one grid without dates, so **Layout** is hidden while you search. Yo
 
 ### Show only what you added
 
-Turn on **Show only mine** to see only the files you added yourself, the ones uploaded or imported under your account. It narrows searches from the box as well as the feed. With nothing of yours to show, the page says "Nothing you have added yet."
+Turn on **Show only mine** to see only the files you added yourself, the ones uploaded or imported under your account, including those still waiting in your staging categories. It narrows searches from the box as well as the feed. With nothing of yours to show, the page says "Nothing you have added yet."
 
 The switch is off by default, and like the layout it is remembered in this browser. Visitors who have not signed in do not have it.
 
@@ -59,15 +59,14 @@ Choosing a kind keeps the feed: the videos alone are still newest first, by date
 
 ### Find damaged scans
 
-**Damage** keeps the scans EiN found worn: **Faded**, **Dusty**, **Scratched**, **Out of focus**
-or with **Camera shake**, or **Any condition** for everything. EiN looks at every scan as it arrives, a file from a staging category
-that holds scans, and photos from a camera or a phone are never in these lists. The choice becomes
-a chip in the box, such as **Faded**, and the page turns into a search; remove the chip with its ×,
-or choose **Any condition**, to return. Select what you find and choose **Restore…** to restore them
-all in the background ([Restore many photos at once](viewer.md#restore-many-photos-at-once)).
+EiN looks at every scan as it arrives, a file from a staging category that holds scans, and notes
+what wear it found; photos from a camera or a phone are never in these lists. Open the Media page at
+`/media?has=damage=faded` to see the scans found faded, or put `dust`, `scratches`, `blurred` (out of
+focus) or `shaken` (camera shake) in place of `faded`. The kind shows as a chip in the box, such as
+**Faded**; remove it with its × to return to the feed. Select what you find and choose
+**Restore…** to restore them all in the background
+([Restore many photos at once](viewer.md#restore-many-photos-at-once)).
 [Find the scans worth restoring](viewer.md#find-the-scans-worth-restoring) says what each one means.
-
-On a phone, **Damage** folds into the button with a sliders icon with the other choices.
 
 ### Narrow by label
 
@@ -107,11 +106,12 @@ A bar at the bottom says how many are selected and offers what you may do with t
 
 On a phone, or when the window has no room for them all, the buttons fold into one **Actions** menu. Your favourites and your trash are described in [Your profile, favourites and trash](../guide/profile.md).
 
-### Upload from the Media page
+### Uploading new pictures
 
-**Upload**, at the top right of the page, picks files to send, and **Upload a folder**, under ⋮, picks a whole folder. You can also drop files anywhere on the page: the screen says "Drop files to upload" and "Into staging, folders and all".
-
-All three send the files to your staging area, into today's folder of your inbox, and not into the library. They appear on the Media page once you have filed them into an album. You need to be signed in to upload. [Getting your photos in](importing.md) explains every way in and what happens to a file afterwards.
+The Media page takes no files. New pictures go into your staging area first: open **Staging** in
+the sidebar, or choose **Upload** in the **Create** menu, and upload there. They appear on the
+Media page once you have filed them into an album. [Getting your photos in](importing.md) explains
+every way in and what happens to a file afterwards.
 
 ## The Year page
 
@@ -241,17 +241,17 @@ Learning works from what the media service has worked out about each picture, so
 
 ## When something goes differently
 
-| What you see                                                                                                                  | What it means, and what to do                                                                                                                                                                                                                          |
-| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Incomplete answer**: "The content match did not answer in time, so these are filename matches only. Try again in a moment." | The media service did not answer the search in time, so only file names were searched. Try again shortly. If it keeps happening, tell whoever looks after EiN; [The media service](../ems/index.md) is theirs.                                         |
-| "No person or location filter matched … — searched those words as description instead."                                       | The Media page found no person or place by that name, and searched the words as text. Pick the person with `@` instead.                                                                                                                                |
-| "No match for @… — searched as plain text instead."                                                                           | The same on the Year page.                                                                                                                                                                                                                             |
-| Pictures you uploaded are missing from the Media page                                                                         | Files sent with **Import media** or the Media page's **Upload** wait in your staging area until you file them into an album; see [Sorting in staging](staging.md). A file that is still being prepared shows a placeholder until its thumbnail exists. |
-| An album is missing from a year                                                                                               | None of its pictures is dated in that year. Check the pictures' dates; see [Dates and places of pictures](dates-places.md).                                                                                                                            |
-| "The histogram counts only the first N matches."                                                                              | There is more than the histogram counts, so its bars show part of it. The cards for the chosen year are complete.                                                                                                                                      |
-| "Nothing matches that filter."                                                                                                | No picture meets every chip. Remove a chip, or choose **All** under **Show**.                                                                                                                                                                          |
-| **Label**, **Set time** or **Delete** is missing from the selection bar                                                       | You may not change every selected picture. Select only your own, or ask the person who shared them.                                                                                                                                                    |
-| The layout, **Show only mine** or the Year page's **Show** and **Sort** are different on another device                       | They are remembered per browser, not per account.                                                                                                                                                                                                      |
+| What you see                                                                                                                  | What it means, and what to do                                                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Incomplete answer**: "The content match did not answer in time, so these are filename matches only. Try again in a moment." | The media service did not answer the search in time, so only file names were searched. Try again shortly. If it keeps happening, tell whoever looks after EiN; [The media service](../ems/index.md) is theirs.     |
+| "No person or location filter matched … — searched those words as description instead."                                       | The Media page found no person or place by that name, and searched the words as text. Pick the person with `@` instead.                                                                                            |
+| "No match for @… — searched as plain text instead."                                                                           | The same on the Year page.                                                                                                                                                                                         |
+| Pictures you uploaded are missing from the Media page                                                                         | Files uploaded into staging wait in your staging area until you file them into an album; see [Sorting in staging](staging.md). A file that is still being prepared shows a placeholder until its thumbnail exists. |
+| An album is missing from a year                                                                                               | None of its pictures is dated in that year. Check the pictures' dates; see [Dates and places of pictures](dates-places.md).                                                                                        |
+| "The histogram counts only the first N matches."                                                                              | There is more than the histogram counts, so its bars show part of it. The cards for the chosen year are complete.                                                                                                  |
+| "Nothing matches that filter."                                                                                                | No picture meets every chip. Remove a chip, or choose **All** under **Show**.                                                                                                                                      |
+| **Label**, **Set time** or **Delete** is missing from the selection bar                                                       | You may not change every selected picture. Select only your own, or ask the person who shared them.                                                                                                                |
+| The layout, **Show only mine** or the Year page's **Show** and **Sort** are different on another device                       | They are remembered per browser, not per account.                                                                                                                                                                  |
 
 ## In the terminal
 

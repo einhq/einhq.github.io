@@ -103,7 +103,7 @@
 <li><strong>It stays unknown</strong> when it is too small or too unsure to start anyone. In the viewer its box reads <strong>Unassigned</strong>.</li>
 </ol>
 <p>The next photo of the same stranger finds the first one, sees that it already belongs to an unidentified person, and joins that person instead of starting another. So when you name an unidentified person you name every face in the group at once, and new pictures of them join the named person by themselves from then on.</p>
-<p>Two faces in the same photo are never made the same person automatically. Voices work the same way across recordings and the sound of videos: a voice that matches nobody starts an unidentified person when it speaks for at least 10 seconds in all in one recording, and two voices in one recording are never made the same person. In a video, a face seen speaking in step with a voice counts as evidence of who is speaking.</p>
+<p>Two faces in the same photo are never made the same person automatically, and nobody is recognised in a photo taken before they were born: once a person has a birth date, a look-alike in an older photo, such as an older brother or sister, is somebody else. Voices work the same way across recordings and the sound of videos: a voice that matches nobody starts an unidentified person when it speaks for at least 10 seconds in all in one recording, and two voices in one recording are never made the same person. In a video, a face seen speaking in step with a voice counts as evidence of who is speaking.</p>
 <figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 552" role="img" aria-label="A detected face with three outcomes: it joins a person it clearly matches, named or not; it starts an unidentified person when it matches nobody but is clear and at least 48 px across; or it stays unknown, marked Unassigned; below them the actions a person can take: Name or Add to someone, Split off as someone new or Move to…, and Not a person or Not a face">
   <title>Faces become people</title>
   <defs>
@@ -245,6 +245,7 @@ the page.</li>
 <li><strong>A new name</strong> names the person. They move to the People page with every face and voice they hold, and a message says <strong>Named Ruby Wrenfield</strong>.</li>
 <li><strong>The name of someone who already exists</strong> adds the faces and voices to that person instead of making a second one, and the message says <strong>Added to Ruby Wrenfield</strong>. The name must match exactly, apart from capital letters, so pick it from the list rather than typing it differently.</li>
 </ul>
+<p>Faces in photos taken before the person you add them to was born stay where they were, since they must be somebody else. A yellow message says so, for example <strong>2 faces stayed: their photos were taken before Ruby Wrenfield was born (2018-04-18)</strong>, and the card stays on the page with those faces. When the birth date or the photos&#39; dates are wrong, press <strong>Move anyway</strong> in the message, or correct the date and add them again. The same goes for <strong>Move to…</strong>, <strong>Someone I know</strong>, and naming a face in the viewer.</p>
 <aside class="callout callout-tip"><p class="callout-title">Tip</p>
 <p>Before you name a card you are unsure of, open it. A card shows at most four glimpses; the <a href="#look-at-everything-before-you-decide">review</a> shows every face and recording, which is where you notice that two people were put together.</p>
 </aside>
@@ -312,7 +313,7 @@ the page.</li>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 person-merge --dry-run /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield
 person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield</code></pre></div>
-<p>The last path is the person who stays. See <a href="commands.html#person-merge"><code>person-merge</code></a> in the command reference.</p>
+<p>The last path is the person who stays. Faces in photos taken before that person was born stay on the other, which is then kept; <code>--before-birth</code> moves them too. <code>person-check /archive/people</code> lists the faces already on someone in a photo taken before their birth. See <a href="commands.html#person-merge"><code>person-merge</code></a> in the command reference.</p>
 <h2 id="say-what-is-not-a-person">Say what is not a person<a class="anchor" href="#say-what-is-not-a-person" aria-label="Link to this section"></a></h2>
 <p>A poster, a statue, a doll, a pattern in the wallpaper or the back of a head can all be taken for a face. Saying so keeps recognition from trying again:</p>
 <ul>

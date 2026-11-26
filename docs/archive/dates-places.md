@@ -103,7 +103,7 @@ the category's **Sort** tab, the **Needs a date** lane holds groups of undated p
 2. Choose **Needs a date** in the row of lanes above the groups. The row appears when more than one
    lane has groups, each lane with its number of groups.
 3. Open a group: click it, or move to it with <kbd>J</kbd> and <kbd>K</kbd>.
-4. Press <kbd>T</kbd>, or open the group's ⋯ menu and choose **Set the time…**. To date only some of
+4. Press <kbd>T</kbd>, or open the group's ⋮ menu and choose **Set the time**. To date only some of
    its pictures, select them first; <kbd>T</kbd> then sets the time of those.
 5. In the **Set time** dialog, set **Start time** and the order (see the next section), then press
    **Set time on N files**. A picture dated only to a year or a month keeps that date unless you
@@ -114,9 +114,9 @@ the category's **Sort** tab, the **Needs a date** lane holds groups of undated p
 
 EiN confirms with "The time is set on N photos of “<group>”". Within a few minutes the organizer
 puts the pictures into groups by the dates you gave them: an event, a trip, or a year's
-**Everyday** lane. On a phone there are no keys; tap the group and use its ⋯ menu.
+**Everyday** lane. On a phone there are no keys; tap the group and use its ⋮ menu.
 
-You can also file a **Needs a date** group as it is, undated, with **Create album…**, **Add to album…**
+You can also file a **Needs a date** group as it is, undated, with **Create album**, **Add to existing**
 or the other decisions of the Sort tab. It has no proposal.
 
 Pictures already in the library have no lane. An album lists its undated pictures last, under

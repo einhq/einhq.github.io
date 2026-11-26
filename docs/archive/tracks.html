@@ -349,8 +349,8 @@ gets a message of its own, starting with its name; the others are added all the 
 <p>The button is offered to those who may change the track. The file is kept with the track under its
 own name, in its <code>routes</code> folder.</p>
 <h3 id="gpx-files-in-staging">GPX files in staging<a class="anchor" href="#gpx-files-in-staging" aria-label="Link to this section"></a></h3>
-<p>A GPX file that arrives in your staging area, by <strong>Import media</strong>, the Media page&#39;s <strong>Upload</strong> or
-copying over SFTP (see <a href="importing.html">Getting your photos in</a>), is not treated as a picture. EiN
+<p>A GPX file that arrives in your staging area, by <strong>Upload</strong> on the Staging page or copying over
+SFTP (see <a href="importing.html">Getting your photos in</a>), is not treated as a picture. EiN
 reads which device the file names and gives the route to that device; the file then moves out of
 staging into the device&#39;s track&#39;s <code>routes</code> folder.</p>
 <p>The file names its device in its <code>creator</code> attribute or in one of its <code>&lt;name&gt;</code> entries. It matches a
@@ -371,24 +371,25 @@ own name as the creator (<code>Track Logger 2.1</code>) and no device anywhere; 
 to choose its device, as below.</p>
 <p>When a file names no device, or more than one, it waits for you:</p>
 <ol>
-<li>Open <strong>Staging</strong> in the sidebar, and the Inbox. A yellow box titled <strong>Needs you</strong> says &quot;1 GPX
-file waits for the device it belongs to.&quot; (or how many), whichever category the file was dropped
-on.</li>
-<li>Click <strong>Choose device</strong>. The page <strong>Routes waiting for a device</strong> opens, with your staging area&#39;s
-<code>routes</code> folder listed below its header as on the Nodes page, and a panel beside it.</li>
-<li>Click a file to see in the panel what it says about itself: its <strong>Name</strong> and <strong>Description</strong>,
-its <strong>Tracks</strong>, its <strong>Creator</strong>, when it was <strong>Recorded</strong> (first and last point, in UTC, and how
-long between), its <strong>Points</strong>, its <strong>Size</strong>, and under <strong>Matches</strong> the devices it names, or &quot;no
-device it names&quot;. The arrow keys move from file to file.</li>
-<li>Select the files of one device: <kbd>Ctrl</kbd> and click adds or removes one, <kbd>Shift</kbd>
-and click takes a run of them, <kbd>Ctrl</kbd>+<kbd>A</kbd> takes them all. On a phone, press and
-hold a file, then tap the others. At the top of the panel, choose the device in the
-<strong>Device they come from</strong> list and click <strong>Import</strong> (<strong>Import 3 files</strong> with three selected).
-Each route joins that device&#39;s track and its file moves out of the list into the track&#39;s <code>routes</code>
-folder. A file that cannot be read stays, and the panel names it and why. <strong>← Staging</strong> above
-the page&#39;s title returns to the staging page.</li>
+<li>Open <strong>Staging</strong> in the sidebar, the Inbox, and its <strong>Sort</strong> tab. Whichever category the files
+were dropped on, a card heads the groups there: <strong>21 GPX files</strong> (or how many), when they were
+recorded and how large they are together. Each file is a line with when it was recorded (in
+UTC), how many points it has and its size; with more than 24, <strong>Show all</strong> lists the rest.</li>
+<li>At the card&#39;s top right is a button for each device, named after it, the ones last heard from
+first; the others are in the card&#39;s <strong>⋮</strong> menu. Click the device the files were recorded on:
+every file&#39;s route joins that device&#39;s track, one file after another, and the files move out of
+staging into the track&#39;s <code>routes</code> folder. To give only some files to a device, check them first
+(the box in the card&#39;s header checks them all), then click its button. A file that cannot be
+read stays, and the card names it and why. Once no file waits, the card is gone.</li>
+<li>To see more of what a file says about itself, choose <strong>Open the files</strong> in the card&#39;s <strong>⋮</strong> menu.
+The page <strong>Routes waiting for a device</strong> lists your staging area&#39;s <code>routes</code> folder as on the
+Nodes page, with a panel beside it. Click a file to see in the panel its <strong>Name</strong> and
+<strong>Description</strong>, its <strong>Tracks</strong>, its <strong>Creator</strong>, when it was <strong>Recorded</strong> (first and last point,
+in UTC, and how long between), its <strong>Points</strong>, its <strong>Size</strong>, and under <strong>Matches</strong> the devices
+it names, or &quot;no device it names&quot;. There too you can select files, choose the device in the
+<strong>Device they come from</strong> list and click <strong>Import</strong>. <strong>← Staging</strong> above the page&#39;s title
+returns to the staging page. On a narrow screen the panel is below the list.</li>
 </ol>
-<p>On a narrow screen the panel is below the list.</p>
 <p>In the terminal, <a href="commands.html#gpx-info"><code>gpx-info</code></a> says the same of any GPX file without importing it:
 <code>gpx-info /home/&lt;you&gt;/staging/routes/*.gpx</code>.</p>
 <p>If the device does not exist yet, have a member of <code>devices</code> make it first (see
@@ -532,7 +533,7 @@ see the albums the trip may belong to under <strong>Maybe in</strong>.</p>
 <tr>
 <td>A GPX file dropped in staging waits, though its device exists.</td>
 <td>The file names neither the device nor a camera linked to it, or it names more than one device.</td>
-<td>Click <strong>Choose device</strong> under <strong>Needs you</strong> on the Inbox&#39;s page in Staging; see <a href="#gpx-files-in-staging">GPX files in staging</a>.</td>
+<td>Click the device&#39;s button on the GPX files&#39; card, at the head of the Inbox&#39;s <strong>Sort</strong> tab in Staging; see <a href="#gpx-files-in-staging">GPX files in staging</a>.</td>
 </tr>
 <tr>
 <td>The phone reports nothing to the track.</td>

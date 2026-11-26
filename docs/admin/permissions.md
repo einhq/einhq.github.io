@@ -315,7 +315,7 @@ When a node is created and nothing names its access:
 
 | Part        | What it gets                                                                                                                                                                                                                 |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Owner       | Whoever created it.                                                                                                                                                                                                          |
+| Owner       | Whoever created it, or, under a file at any depth, that file's owner.                                                                                                                                                        |
 | Group       | Its parent's group, as a setgid directory does on Linux.                                                                                                                                                                     |
 | Mode        | Everything for the owner; read and pass-through for the group, plus write where the group could write the parent; for everyone else, only the read and pass-through the parent gives them. Others' write is never inherited. |
 | Access list | Its parent's, as a Linux default ACL carries down.                                                                                                                                                                           |
@@ -325,7 +325,8 @@ A node created in a folder everyone may write that has [the sticky bit](#the-sti
 
 So, with the Archive, a family album's new uploads, and the thumbnails, faces and metadata processing adds under them,
 take the album's group and grants whoever created them: a person or group granted an album sees
-what is added to it later. What is made under `/home/<user>` stays in that user's group, and the
+what is added to it later. What processing adds under a photo is the photo's owner's, so they see
+its thumbnails whatever group the photo is in. What is made under `/home/<user>` stays in that user's group, and the
 system tree under `/` stays `0755`.
 
 Moving a node with `mv` keeps its own access, as on Linux. Copying with `cp` is a create in the

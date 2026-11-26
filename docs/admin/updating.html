@@ -183,17 +183,19 @@ EiN cannot run is replaced, at its start (<a href="#what-happens-when-the-new-ei
 <h3 id="the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules<a class="anchor" href="#the-media-service-and-the-sidecar-follow-their-modules" aria-label="Link to this section"></a></h3>
 <p>The media service and the Devices module&#39;s sidecar each have a version of what they offer EiN,
 and the modules that talk to them, <code>ems</code> and <code>devices</code>, say in their manifest which versions
-they speak, as in <code>&quot;services&quot;: { &quot;ems&quot;: &quot;^0.4.4&quot; }</code>. An update moves each to the newest release of
-the line its module asks for: the <code>ems</code> module asking for <code>^0.4.4</code> speaks every 0.4 release, so
+they speak, as in <code>&quot;services&quot;: { &quot;ems&quot;: &quot;^0.4.4&quot; }</code>. An update moves each to the newest release its
+module takes: the <code>ems</code> module asking for <code>^0.4.4</code> speaks 0.4.4 and every later 0.4 release, so
 the media service runs the newest 0.4, say <code>ghcr.io/einhq/ems:0.4.9</code>, and <code>.env</code> says
 <code>EIN_EMS_VERSION=0.4.9</code> (and <code>EIN_DEVICES_VERSION</code> for the sidecar). Before any module asks, it
 runs the newest release of all.</p>
 <p>So after you update a module on <strong>Settings → Modules</strong> to a release that needs a newer media
-service, the <strong>Status</strong> page says so, as <code>ems api</code>: <code>EMS speaks API 0.4.4, older than the ^0.5.0 this module needs: update the media service</code>. Run <code>~/ein/setup.sh --only ems</code> (or <code>--only devices</code> for <code>devices sidecar</code>), and it downloads the newest release of the line the module asks for and restarts
+service, the <strong>Status</strong> page says so, as <code>ems api</code>: <code>EMS speaks API 0.4.4, older than the ^0.5.0 this module needs: update the media service</code>. Run <code>~/ein/setup.sh --only ems</code> (or <code>--only devices</code> for <code>devices sidecar</code>), and it downloads the newest release the module takes and restarts
 the service alone. With the <a href="supervisor.html">supervisor</a> there is nothing to run: it does the same
-within a minute of the module&#39;s update. A line not published yet, as for a few hours after a module&#39;s release, leaves
-the service as it is, and says <code>The modules here ask for ems 0.5, which is not published yet: it stays at 0.4</code>. Installed from another source, the service is built from its newest source, and
-<code>setup.sh</code> only says when that is not the line the modules ask for.</p>
+within a minute of the module&#39;s update, for a newer line (<code>^0.5.0</code> while it runs 0.4.9) and a newer
+release of the same line (<code>^0.4.11</code> while it runs 0.4.9) alike. A release not published yet, as for
+a few hours after a module&#39;s release, leaves the service as it is, and says <code>The modules here ask for ems ^0.5.0, which is not published yet: it stays at 0.4.9</code>. Installed from another source, the
+service is built from its newest source, and <code>setup.sh</code> only says when that is not a version the
+modules take.</p>
 <h2 id="before-you-update">Before you update<a class="anchor" href="#before-you-update" aria-label="Link to this section"></a></h2>
 <ol>
 <li>Back up. An update cannot be undone: there is no command to go back to the previous version,

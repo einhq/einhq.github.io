@@ -68,7 +68,7 @@ more slowly. Which operations are worth giving it is your choice, made with `EMS
    ```
 
    `0.4.9` is the release EiN's own media service runs (`EIN_EMS_VERSION` in `~/ein/.env` on EiN's
-   machine), the newest of the line the `ems` module asks for: an instance of another line is named
+   machine), the newest the `ems` module takes: an instance of another line is named
    in the **Status** page's `ems laptop api` check.
 
    Add `--device nvidia.com/gpu=all` on a machine with an NVIDIA card set up as

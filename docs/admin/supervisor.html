@@ -144,9 +144,11 @@ updates every one that has; a service that runs its newest release has no button
 the list says when the releases were last checked.</p>
 <p>A module&#39;s panel shows the services it talks to under <strong>Services beside EiN</strong> on its <strong>Overview</strong>,
 each with the versions it takes and whether it is installed, with <strong>Install</strong> beside one that is
-not. When an installed module talks to a service that is not installed, the top of the tab says so,
-as <strong>The media service is not installed</strong>, with <strong>Install</strong> beside it: install the Archive, and the
-media service it needs is one choice away.</p>
+not. When an installed module talks to a service that is not installed, the tab&#39;s <strong>Overview</strong> lists
+it, as <strong>The media service</strong>, with what needs it and <strong>Install</strong> beside it: install the Archive, and
+the media service it needs is one choice away. The overview also lists every service with a newer
+release beside the modules that have one, with <strong>Update all services</strong> (see
+<a href="modules.html#see-what-can-be-updated">See what can be updated</a>).</p>
 <p>Installing a service asks first, saying what it downloads and what it is given beyond an ordinary
 container, such as:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -170,24 +172,26 @@ container, such as:</p>
 </tr>
 </tbody></table>
 </div>
-<p>While a job runs, the top of the tab says what it does, who asked and its last line; when it ends,
-whether it did, with its last lines when it failed. Installing a service makes every container
+<p>While a job runs, a notice at the foot of the screen says what it does and its last line; when it
+ends, whether it did, and when it failed <strong>Details</strong> opens the overview, which shows its last lines. Installing a service makes every container
 again, as <code>setup.sh --ems</code> does, so EiN is away for a minute or two, and the page comes back with
 it. An update of EiN does the same; an update of another service leaves EiN running.</p>
 <h2 id="updates">Updates<a class="anchor" href="#updates" aria-label="Link to this section"></a></h2>
 <p>The supervisor updates the services by itself in two ways:</p>
 <p>Once an hour it reads which releases GitHub has of each service, and a service with a newer
-release than the one it runs has an update: the newest release of the line its modules ask for for
-the media service and the sidecar, the newest of all for EiN and the database, and deploy&#39;s newest
+release than the one it runs has an update: the newest release its modules take for the media
+service and the sidecar, the newest of all for EiN and the database, and deploy&#39;s newest
 release for the supervisor. The language model has one when <code>compose.llm.yaml</code> names another image
 than it runs, as after an update of deploy. It updates them by itself in two ways:</p>
 <ul>
-<li><strong>With their modules.</strong> When an installed module asks for another line of the media service or
-the sidecar than the one that runs, as after you update the <code>ems</code> module to a release that needs
-a newer media service, the supervisor installs the newest release of that line within a minute
-and makes the service again (<a href="updating.html#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a>).
-A line not published yet waits until it is; a release that did not come up is tried again a day
-later.</li>
+<li><strong>With their modules.</strong> When an installed module asks for a version of the media service or the
+sidecar that the one that runs is not, another line or a newer release of its line (<code>^0.6.3</code>
+while it runs 0.6.1), as after you update the <code>ems</code> module to a release that needs a newer media
+service, the supervisor installs the newest release the module takes within a minute and makes
+the service again (<a href="updating.html#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a>).
+The job says which module asked, as <code>the supervisor: ems asks for the media service ^0.6.3</code>. A
+release not published yet waits until it is; a release that did not come up is tried again a day
+later. A newer release the modules do not need waits for the night.</li>
 <li><strong>Each night</strong>, at <code>EIN_UPDATE_AT</code> in <code>~/ein/.env</code>, 04:00 by default in the machine&#39;s time zone,
 it updates every service that has an update. <code>off</code> turns this off; the services are then updated
 when you ask.</li>

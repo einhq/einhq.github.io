@@ -486,7 +486,7 @@ while on an album of thousands of photos.</p>
 </thead>
 <tbody><tr>
 <td>Owner</td>
-<td>Whoever created it.</td>
+<td>Whoever created it, or, under a file at any depth, that file&#39;s owner.</td>
 </tr>
 <tr>
 <td>Group</td>
@@ -506,7 +506,8 @@ while on an album of thousands of photos.</p>
 <code>/tmp</code>, is the exception: it is its creator&#39;s alone, in their own group.</p>
 <p>So, with the Archive, a family album&#39;s new uploads, and the thumbnails, faces and metadata processing adds under them,
 take the album&#39;s group and grants whoever created them: a person or group granted an album sees
-what is added to it later. What is made under <code>/home/&lt;user&gt;</code> stays in that user&#39;s group, and the
+what is added to it later. What processing adds under a photo is the photo&#39;s owner&#39;s, so they see
+its thumbnails whatever group the photo is in. What is made under <code>/home/&lt;user&gt;</code> stays in that user&#39;s group, and the
 system tree under <code>/</code> stays <code>0755</code>.</p>
 <p>Moving a node with <code>mv</code> keeps its own access, as on Linux. Copying with <code>cp</code> is a create in the
 destination: the copy takes the destination&#39;s group and keeps its source&#39;s mode, less group write

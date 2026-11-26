@@ -264,7 +264,6 @@ const SHOTS: Shot[] = [
       await settle(page, 6000);
     },
   },
-  { id: 'import', run: (page) => open(page, '/staging/import', 4000) },
   // The Chat page answering a question about the system rather than the archive.
   {
     id: 'chat-page',

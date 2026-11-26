@@ -298,7 +298,7 @@ large upload. [Getting your photos in](importing.md) explains what happens to ea
 takes a while.
 
 > [!TIP]
-> For a card full of pictures you have not sorted, use **Create → Import media** instead. Those
+> For a card full of pictures you have not sorted, upload them into **Staging** instead. Those
 > files wait in your private staging area, where EiN suggests albums for them and nobody else sees
 > them until you file them. [Getting your photos in](importing.md) compares the ways in.
 
@@ -605,7 +605,7 @@ it. The pictures that were only added to it stay where they live.
 
 When you upload into your staging area, EiN groups the files and suggests albums for them. Those
 live in your staging area, only you see them, and you decide them on the **Staging** page. You can
-open one as an album page (**Open as an album page** in staging). It then shows why its pictures
+open one as an album page (**Open as album page** in a group's ⋮ menu in staging). It then shows why its pictures
 were grouped, with **Sort in Staging** to go back to it, a match percentage, and under **⋮** the
 choice **Keep album as is** or **Let the organizer manage album**. It has no **Upload** and no
 **Move to trash**, and **Edit** changes only its name and labels. [Sorting in staging](staging.md)

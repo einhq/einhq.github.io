@@ -255,58 +255,25 @@ file. If you discard the original in staging, this happens at once, and the copy
 like any other file. If the original goes some other way, for example when someone deletes it from the
 library, it happens within the hour.</p>
 <h2 id="where-duplicates-are-marked">Where duplicates are marked<a class="anchor" href="#where-duplicates-are-marked" aria-label="Link to this section"></a></h2>
-<h3 id="in-the-sort-stream">In the Sort stream<a class="anchor" href="#in-the-sort-stream" aria-label="Link to this section"></a></h3>
-<p>In the open group, a picture that copies or looks like another one carries a badge in its corner:</p>
-<div class="table-scroll" role="region" tabindex="0"><table>
-<thead>
-<tr>
-<th>Badge</th>
-<th>Tooltip</th>
-<th>Means</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>⧉</strong></td>
-<td>&quot;In the library already: compare&quot;</td>
-<td>It is a copy or look-alike of a photo in the library</td>
-</tr>
-<tr>
-<td><strong>2×</strong></td>
-<td>&quot;Another one here is the same picture: compare&quot;</td>
-<td>It is a copy or look-alike of another staged photo</td>
-</tr>
-</tbody></table>
-</div>
-<p>Click a badge to open <a href="#compare-side-by-side">Compare</a> for that picture.</p>
-<p>The open group&#39;s header also gets a chip with the totals, for example &quot;⧉ 4 in library · 2× 1&quot;.
-Its menu has these items:</p>
-<ul>
-<li><strong>Compare</strong> opens the first marked picture side by side with its matches.</li>
-<li><strong>Keep the library copies</strong> removes the group&#39;s pictures the library already has. It removes
-only those that need no look: exact copies, and smaller versions of a library photo (see
-<a href="#remove-a-whole-list-at-once">Remove all</a> for what counts). Look-alikes that need a look stay
-in the group.</li>
-<li><strong>Select these</strong> selects the marked pictures, so you can act on them together. It is offered on a computer.</li>
-</ul>
-<p>When at least four in five of the open group&#39;s pictures are copies or smaller versions of library
-photos, the group&#39;s proposal becomes <strong>Keep the library copies · N photos go</strong>, marked sure (●●●).
-<kbd>Enter</kbd> removes them, and the rest of the group stays to be sorted. The message says,
-for example, &quot;12 photos of “Cornwall, summer 1968” removed&quot;, with <strong>Undo</strong>.</p>
-<h3 id="on-the-files-tab">On the Files tab<a class="anchor" href="#on-the-files-tab" aria-label="Link to this section"></a></h3>
-<p>In the <strong>Media</strong> view of a category&#39;s <strong>Files</strong> tab, tiles carry the same <strong>⧉</strong> and <strong>2×</strong> badges.
-A photo that is kept over copies left out of the list also gets <strong>2×</strong>, so you can see that it
-has copies. Click the badge to compare.</p>
+<p>Only exact copies are marked: files with the same bytes. Look-alikes are not, since each is a
+picture of its own beside the other, where you can see them; the viewer&#39;s <strong>Similar</strong> section
+shows the pictures that look like one.</p>
+<h3 id="in-sort-and-on-the-files-tab">In Sort and on the Files tab<a class="anchor" href="#in-sort-and-on-the-files-tab" aria-label="Link to this section"></a></h3>
+<p>In the <strong>Sort</strong> stream and in the <strong>Media</strong> view of a category&#39;s <strong>Files</strong> tab, a picture that has
+exact copies carries a badge with a copy icon and how many identical files there are, itself
+included: <strong>⧉ 2</strong> for a photo and one copy. A library icon beside the number says that one of them
+is already in the library. The copies themselves join no group, so in Sort the badge is how you
+see them. Click the badge to <a href="#compare-side-by-side">compare</a> the files.</p>
+<p>When you file a group into an album, its pictures go and their copies stay in staging. Each copy
+is then a copy of a library photo, listed under <strong>Copies of library photos</strong> on the <strong>Duplicates</strong>
+tab, where removing it first fills in the library photo with what the copy has that it lacks.</p>
 <h3 id="in-the-viewer">In the viewer<a class="anchor" href="#in-the-viewer" aria-label="Link to this section"></a></h3>
-<p>When you open one of your own staged pictures in the <a href="viewer.html">viewer</a>, its details panel
-says which sets it belongs to, with one of these lines:</p>
-<ul>
-<li>&quot;A copy of a library photo&quot; or &quot;A copy of a photo in this import&quot;</li>
-<li>&quot;Looks like a library photo&quot; or &quot;Looks like a photo in this import&quot;</li>
-<li>&quot;Kept over 2 copies&quot; or &quot;Kept over 1 look-alike&quot;</li>
-</ul>
-<p>Under the line are the set&#39;s other files as thumbnails, with the kept one marked <strong>Kept</strong>, and why
-it is kept. <strong>Compare</strong> opens the files side by side, and for look-alikes <strong>Not duplicates</strong> keeps
-them apart. If you remove the picture you are viewing, the viewer closes.</p>
+<p>When you open one of your own staged pictures that has exact copies in the <a href="viewer.html">viewer</a>,
+its details panel has a <strong>Duplicates</strong> section with the number of other files: a small grid of
+them, like <strong>Similar</strong>. Point at one for its name, where it is (&quot;In the album Summer 2024&quot;, or
+&quot;Staged in phone/2024-06&quot; for a folder of your staging area) and its full path; a library one has
+a library icon in its corner. Click one to compare the files side by side with that one in focus,
+and remove one of them there. If you remove the picture you are viewing, the viewer closes.</p>
 <h3 id="bursts-become-stacks">Bursts become stacks<a class="anchor" href="#bursts-become-stacks" aria-label="Link to this section"></a></h3>
 <p>A burst is not a duplicate, so it has no set to remove. In a suggested group, consecutive photos that look alike
 and were taken within seconds of each other are folded behind one tile, which shows a stack icon
@@ -372,7 +339,7 @@ the copies frees.</p>
 </thead>
 <tbody><tr>
 <td><strong>Keep · library</strong></td>
-<td>The kept file is a library photo. The album holding it is named under the tile</td>
+<td>The kept file is a library photo</td>
 </tr>
 <tr>
 <td><strong>Keep</strong></td>
@@ -388,52 +355,54 @@ the copies frees.</p>
 </tr>
 </tbody></table>
 </div>
-<p>Under each tile are its picture size, file size and the time it was taken. A copy that holds
+<p>Under each tile are its name, where it is (&quot;In the album Summer 2024&quot;, or &quot;Staged in
+phone/2024-06&quot;; point at it for the full path), its picture size, file size and the time it was
+taken. A copy that holds
 something the kept file lacks says so, for example &quot;gives description, labels&quot;.</p>
-<p>Under the tiles, one line says why the kept file is kept and what it gains, for example &quot;kept: it
-is in the library · the kept one gains: description, star&quot;. Yellow lines warn of anything to look
+<p>Under the tiles, one line names the kept file, why it is kept and what it gains, for example
+&quot;Keeps IMG_0001.jpg because it is already in the library · the kept one gains: description, star&quot;. Yellow lines warn of anything to look
 out for. They are listed under <a href="#when-something-looks-wrong">When something looks wrong</a>.</p>
 <h3 id="which-copy-is-kept">Which copy is kept<a class="anchor" href="#which-copy-is-kept" aria-label="Link to this section"></a></h3>
 <p>A library photo is always kept: nothing in staging removes or changes a library photo, except to
 fill it in. Between your staged files, EiN keeps these:</p>
 <ul>
-<li>In a set of exact copies, the file that arrived first (&quot;kept: it came first&quot;).</li>
+<li>In a set of exact copies, the file that arrived first (&quot;because it arrived in staging first&quot;).</li>
 <li>In a set of look-alikes, the better picture, by the first of these rules that tells two apart:</li>
 </ul>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
 <th>Rule</th>
-<th>What the line says</th>
+<th>The line says it is kept because…</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>More pixels</td>
-<td>&quot;kept: it has more pixels (4032×3024 over 1600×1200)&quot;</td>
+<td>&quot;it has more pixels (4032×3024 over 1600×1200)&quot;</td>
 </tr>
 <tr>
 <td>A better format: RAW, then HEIC, then TIFF or PNG, then JPEG, then WebP, then GIF</td>
-<td>&quot;kept: its format is better&quot;</td>
+<td>&quot;its file format is better&quot;</td>
 </tr>
 <tr>
 <td>A surer time: typed in by hand, then GPS, then the camera&#39;s clock, then a sidecar, then the file name</td>
-<td>&quot;kept: its time is surer&quot;</td>
+<td>&quot;its date comes from a surer source&quot;</td>
 </tr>
 <tr>
 <td>The larger file</td>
-<td>&quot;kept: it is the larger file&quot;</td>
+<td>&quot;it is the larger file&quot;</td>
 </tr>
 <tr>
 <td>A name that is not a copy&#39;s, such as one without <code>(2)</code>, a trailing <code>-1</code> or <code>copy</code></td>
-<td>&quot;kept: its name is not a copy’s&quot;</td>
+<td>&quot;its name has no copy mark such as “(1)”&quot;</td>
 </tr>
 <tr>
 <td>Otherwise, the one that arrived first</td>
-<td>&quot;kept: it came first&quot;</td>
+<td>&quot;it arrived in staging first&quot;</td>
 </tr>
 </tbody></table>
 </div>
-<p>When you pick another one yourself, the line says &quot;kept: you chose it&quot;.</p>
+<p>When you pick another one yourself, the line says &quot;because you chose it&quot;.</p>
 <h3 id="what-the-kept-one-gains">What the kept one gains<a class="anchor" href="#what-the-kept-one-gains" aria-label="Link to this section"></a></h3>
 <p>Removing a set merges the copies into the kept file before they go. The kept file is <strong>filled in,
 never overwritten</strong>. From the copies it takes a description, a time typed in by hand, a place or a
@@ -483,13 +452,16 @@ files of the set. A library photo stays whichever file you pick.</p>
 <p>Clicking a set marks it too. All keys are on <a href="../reference/shortcuts.html">Keyboard shortcuts</a>.</p>
 <h2 id="compare-side-by-side">Compare side by side<a class="anchor" href="#compare-side-by-side" aria-label="Link to this section"></a></h2>
 <p><strong>Compare</strong> opens a set&#39;s files large, side by side. You can open it from the <strong>Duplicates</strong> tab,
-from a badge in <strong>Sort</strong> or on the <strong>Files</strong> tab, and from the viewer. The dialog is titled
-<strong>Copies</strong> or <strong>Look-alikes</strong>. Under the title, the set&#39;s likeness and why the kept file is kept
-appear, for example &quot;97% alike · kept: it has more pixels (4032×3024 over 1600×1200)&quot;.</p>
+from a badge on the <strong>Files</strong> tab, and from the viewer. The dialog is titled
+<strong>Copies</strong> or <strong>Look-alikes</strong>. Under the title, the set&#39;s likeness, the kept file and why it is
+kept appear, for example &quot;97% alike · Keeps IMG_0001.jpg because it has more pixels (4032×3024
+over 1600×1200)&quot;.</p>
 <p>Each file is labelled <strong>Keep · library</strong>, <strong>Keep</strong>, <strong>Drop</strong>, <strong>Library</strong> (a library photo that
-stays) or <strong>Stays</strong>. Under each are its picture size, file size, the time it was taken, the camera,
+stays) or <strong>Stays</strong>. Under each are its name, where it is (its album, or its folder in staging), its
+full path, its picture size, file size, the time it was taken, the camera,
 and how alike it is. When a file has exact copies of its own, &quot;and 2 byte copies&quot; says so: they
-go with it when it is removed.</p>
+go with it when it is removed. Under the files, &quot;Click the one to keep.&quot; Click a file you staged to
+keep it instead of the one EiN chose; a library photo cannot be chosen.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -520,7 +492,7 @@ go with it when it is removed.</p>
 </tbody></table>
 </div>
 <p>The buttons at the bottom do the same: <strong>Not duplicates</strong> (for look-alikes), <strong>Cancel</strong> and
-<strong>Remove the others</strong>. On a phone, tap a file to focus it and use the buttons.</p>
+<strong>Remove the others</strong>. On a phone, tap a file to keep it and use the buttons.</p>
 <h2 id="say-that-two-pictures-are-not-duplicates">Say that two pictures are not duplicates<a class="anchor" href="#say-that-two-pictures-are-not-duplicates" aria-label="Link to this section"></a></h2>
 <p>Look-alikes can be wrong: two photos of the same view, or two shots of one moment that the camera
 did not time apart. Click <strong>Not duplicates</strong> on the set, in <strong>Compare</strong> or in the viewer. The set
@@ -663,7 +635,7 @@ administrator&#39;s side of staging is on <a href="staging-admin.html">Staging a
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/duplicates.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#copies-look-alikes-and-bursts">Copies, look-alikes and bursts</a></li><li><a href="#an-exact-copy-shows-its-original">An exact copy shows its original</a></li><li><a href="#where-duplicates-are-marked">Where duplicates are marked</a></li><li class="nested"><a href="#in-the-sort-stream">In the Sort stream</a></li><li class="nested"><a href="#on-the-files-tab">On the Files tab</a></li><li class="nested"><a href="#in-the-viewer">In the viewer</a></li><li class="nested"><a href="#bursts-become-stacks">Bursts become stacks</a></li><li><a href="#the-duplicates-tab">The Duplicates tab</a></li><li class="nested"><a href="#reading-a-set">Reading a set</a></li><li class="nested"><a href="#which-copy-is-kept">Which copy is kept</a></li><li class="nested"><a href="#what-the-kept-one-gains">What the kept one gains</a></li><li><a href="#remove-the-copies-of-one-set">Remove the copies of one set</a></li><li><a href="#compare-side-by-side">Compare side by side</a></li><li><a href="#say-that-two-pictures-are-not-duplicates">Say that two pictures are not duplicates</a></li><li><a href="#remove-a-whole-list-at-once">Remove a whole list at once</a></li><li><a href="#undo-a-removal">Undo a removal</a></li><li><a href="#when-something-looks-wrong">When something looks wrong</a></li><li><a href="#copies-already-in-the-library">Copies already in the library</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#copies-look-alikes-and-bursts">Copies, look-alikes and bursts</a></li><li><a href="#an-exact-copy-shows-its-original">An exact copy shows its original</a></li><li><a href="#where-duplicates-are-marked">Where duplicates are marked</a></li><li class="nested"><a href="#in-sort-and-on-the-files-tab">In Sort and on the Files tab</a></li><li class="nested"><a href="#in-the-viewer">In the viewer</a></li><li class="nested"><a href="#bursts-become-stacks">Bursts become stacks</a></li><li><a href="#the-duplicates-tab">The Duplicates tab</a></li><li class="nested"><a href="#reading-a-set">Reading a set</a></li><li class="nested"><a href="#which-copy-is-kept">Which copy is kept</a></li><li class="nested"><a href="#what-the-kept-one-gains">What the kept one gains</a></li><li><a href="#remove-the-copies-of-one-set">Remove the copies of one set</a></li><li><a href="#compare-side-by-side">Compare side by side</a></li><li><a href="#say-that-two-pictures-are-not-duplicates">Say that two pictures are not duplicates</a></li><li><a href="#remove-a-whole-list-at-once">Remove a whole list at once</a></li><li><a href="#undo-a-removal">Undo a removal</a></li><li><a href="#when-something-looks-wrong">When something looks wrong</a></li><li><a href="#copies-already-in-the-library">Copies already in the library</a></li><li><a href="#from-the-shell">From the shell</a></li></ul></aside>
     </div>
   </body>
 </html>

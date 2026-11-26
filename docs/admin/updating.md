@@ -54,8 +54,8 @@ EiN cannot run is replaced, at its start ([below](#what-happens-when-the-new-ein
 
 The media service and the Devices module's sidecar each have a version of what they offer EiN,
 and the modules that talk to them, `ems` and `devices`, say in their manifest which versions
-they speak, as in `"services": { "ems": "^0.4.4" }`. An update moves each to the newest release of
-the line its module asks for: the `ems` module asking for `^0.4.4` speaks every 0.4 release, so
+they speak, as in `"services": { "ems": "^0.4.4" }`. An update moves each to the newest release its
+module takes: the `ems` module asking for `^0.4.4` speaks 0.4.4 and every later 0.4 release, so
 the media service runs the newest 0.4, say `ghcr.io/einhq/ems:0.4.9`, and `.env` says
 `EIN_EMS_VERSION=0.4.9` (and `EIN_DEVICES_VERSION` for the sidecar). Before any module asks, it
 runs the newest release of all.
@@ -63,12 +63,14 @@ runs the newest release of all.
 So after you update a module on **Settings → Modules** to a release that needs a newer media
 service, the **Status** page says so, as `ems api`: `EMS speaks API 0.4.4, older than the ^0.5.0
 this module needs: update the media service`. Run `~/ein/setup.sh --only ems` (or `--only
-devices` for `devices sidecar`), and it downloads the newest release of the line the module asks for and restarts
+devices` for `devices sidecar`), and it downloads the newest release the module takes and restarts
 the service alone. With the [supervisor](supervisor.md) there is nothing to run: it does the same
-within a minute of the module's update. A line not published yet, as for a few hours after a module's release, leaves
-the service as it is, and says `The modules here ask for ems 0.5, which is not published yet: it
-stays at 0.4`. Installed from another source, the service is built from its newest source, and
-`setup.sh` only says when that is not the line the modules ask for.
+within a minute of the module's update, for a newer line (`^0.5.0` while it runs 0.4.9) and a newer
+release of the same line (`^0.4.11` while it runs 0.4.9) alike. A release not published yet, as for
+a few hours after a module's release, leaves the service as it is, and says `The modules here ask
+for ems ^0.5.0, which is not published yet: it stays at 0.4.9`. Installed from another source, the
+service is built from its newest source, and `setup.sh` only says when that is not a version the
+modules take.
 
 ## Before you update
 

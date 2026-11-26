@@ -304,9 +304,9 @@ All of these need you to be signed in. [Sorting in staging](../archive/staging.m
 | Address                      | What it shows                                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `/staging`                   | **Staging**: your categories, or the one category when you have only one                               |
-| `/staging/import`            | **Import media**, also from **Create New**                                                             |
+| `/staging/receive`           | Takes files shared to EiN from another app into your Inbox, then opens it                              |
 | `/staging/categories/new`    | **New category**                                                                                       |
-| `/staging/categories/<name>` | **Category settings** for one category                                                                 |
+| `/staging/categories/<name>` | **Edit** for one category                                                                              |
 | `/staging/routes`            | **Routes waiting for a device**, see [GPX files in staging](../archive/tracks.md#gpx-files-in-staging) |
 
 ### Parts of other pages

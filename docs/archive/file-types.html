@@ -161,7 +161,7 @@ read only when you file it into an album.</p>
 <h2 id="how-ein-tells-what-a-file-is">How EiN tells what a file is<a class="anchor" href="#how-ein-tells-what-a-file-is" aria-label="Link to this section"></a></h2>
 <p>EiN looks at the first bytes of a file, not at its name. A JPEG photo named <code>IMG_0412.png</code> is
 still a JPEG photo, and a file with no extension at all is recognised the same way. It makes no
-difference whether the file came in with <strong>Import media</strong>, an upload into an album, by dropping it
+difference whether the file came in with an upload into staging or into an album, by dropping it
 on a page, or over <a href="../shell/ssh-sftp.html">SFTP</a>. A program that copies a file over SFTP under a
 temporary name, such as <code>IMG_0412.jpg.filepart</code>, and renames it when it is done gets the type the
 final name gives, and the file is prepared under that name.</p>

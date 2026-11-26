@@ -1437,7 +1437,7 @@ camera-device anna-phone --off</code></pre></div>
 <h3 id="dayinhistory"><code>dayinhistory</code><a class="anchor" href="#dayinhistory" aria-label="Link to this section"></a></h3>
 <p>List media taken on a given day (MM-DD, default today) in past years.</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>dayinhistory [--years=&lt;number&gt;] [--per-year=&lt;number&gt;] [&lt;day&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>dayinhistory [--years=&lt;string&gt;] [--per-year=&lt;number&gt;] [&lt;day&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -1459,8 +1459,8 @@ camera-device anna-phone --off</code></pre></div>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--years=&lt;number&gt;</code></td>
-<td>years with media to collect, newest first (default 8)</td>
+<td><code>--years=&lt;string&gt;</code></td>
+<td>years with media to collect, newest first, or all of them (default 8)</td>
 </tr>
 <tr>
 <td><code>--per-year=&lt;number&gt;</code></td>
@@ -1469,7 +1469,8 @@ camera-device anna-phone --off</code></pre></div>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>dayinhistory
-dayinhistory 06-21 --years 20 --per-year 1</code></pre></div>
+dayinhistory 06-21 --years 20 --per-year 1
+dayinhistory --years all --per-year 1</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: monthDay, and the years that have media taken on that day, newest first, each with its first media.</p>
 <h3 id="detect-faces"><code>detect-faces</code><a class="anchor" href="#detect-faces" aria-label="Link to this section"></a></h3>
 <p>Detect faces in an image or a video and keep the usable ones as face regions.</p>
@@ -3049,7 +3050,7 @@ news-albums --<span class="hljs-built_in">limit</span> 20 --preview 0</code></pr
 <h3 id="onthisday-media"><code>onthisday-media</code><a class="anchor" href="#onthisday-media" aria-label="Link to this section"></a></h3>
 <p>The years with pictures taken on a day (MM-DD, default today), as onthisday entries (core onthisday gathers them)</p>
 <p><small>reads only</small></p>
-<div class="code"><pre tabindex="0"><code>onthisday-media [--limit=&lt;number&gt;] [&lt;day&gt;]</code></pre></div>
+<div class="code"><pre tabindex="0"><code>onthisday-media [--limit=&lt;string&gt;] [&lt;day&gt;]</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3071,13 +3072,14 @@ news-albums --<span class="hljs-built_in">limit</span> 20 --preview 0</code></pr
 </tr>
 </thead>
 <tbody><tr>
-<td><code>--limit=&lt;number&gt;</code></td>
-<td>years returned, newest first (default 8)</td>
+<td><code>--limit=&lt;string&gt;</code></td>
+<td>years returned, newest first, or all of them (default 8)</td>
 </tr>
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>onthisday-media
-onthisday-media 06-21 --<span class="hljs-built_in">limit</span> 20</code></pre></div>
+onthisday-media 06-21 --<span class="hljs-built_in">limit</span> 20
+onthisday-media --<span class="hljs-built_in">limit</span> all</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: one onthisday entry per year with pictures taken on that day, newest year first: the year, a title, the year&#39;s first picture, and the route that draws it as a ring.</p>
 <h2 id="p">P<a class="anchor" href="#p" aria-label="Link to this section"></a></h2>
 <h3 id="parse-eval"><code>parse-eval</code><a class="anchor" href="#parse-eval" aria-label="Link to this section"></a></h3>
@@ -3185,7 +3187,7 @@ person-add-event --<span class="hljs-built_in">type</span> marriage --<span clas
 person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <span class="hljs-string">&#x27;A day on the water&#x27;</span> --writer /archive/people/anna-exempel /archive/albums/Exempelalbum_2019</code></pre></div>
 <p>With <code>JSON_OUTPUT=1</code>: the event path; the event is written, and for a dated birth/death the born/died attr.</p>
 <h3 id="person-check"><code>person-check</code><a class="anchor" href="#person-check" aria-label="Link to this section"></a></h3>
-<p>Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died)</p>
+<p>Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died, faces on photos from before the birth)</p>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>person-check [--json] &lt;root&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -3215,7 +3217,7 @@ person-add-event --<span class="hljs-built_in">date</span> 2019-07-14 --body <sp
 </tbody></table>
 </div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>person-check /archive/people</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: every dangling link, missing reciprocal, cycle, impossible date and birth/death event not mirrored onto born/died it found.</p>
+<p>With <code>JSON_OUTPUT=1</code>: every dangling link, missing reciprocal, cycle, impossible date, birth/death event not mirrored onto born/died and face on a photo taken before its person was born it found.</p>
 <h3 id="person-children"><code>person-children</code><a class="anchor" href="#person-children" aria-label="Link to this section"></a></h3>
 <p>List a person&#39;s children (children/ dir)</p>
 <p><small>reads only</small></p>
@@ -3341,7 +3343,7 @@ person-cover --all --repick</code></pre></div>
 <h3 id="person-detach"><code>person-detach</code><a class="anchor" href="#person-detach" aria-label="Link to this section"></a></h3>
 <p>Take faces off a person: to a new unnamed person, to an existing one, or off identity entirely.</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>person-detach [--to=&lt;string&gt;] [--to-new-person] [--rematch] [--dry-run] [--verbose] &lt;facePath...&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>person-detach [--to=&lt;string&gt;] [--to-new-person] [--rematch] [--before-birth] [--dry-run] [--verbose] &lt;facePath...&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3373,6 +3375,10 @@ person-cover --all --repick</code></pre></div>
 <tr>
 <td><code>--rematch</code></td>
 <td>not this person: let recognition place each face again, never back on the person it left.</td>
+</tr>
+<tr>
+<td><code>--before-birth</code></td>
+<td>with --to: move faces from photos taken before that person was born too; without it they stay.</td>
 </tr>
 <tr>
 <td><code>--dry-run</code></td>
@@ -3673,7 +3679,7 @@ person-how-related --lang sv /archive/people/anna-exempel /archive/people/bo-exe
 <h3 id="person-merge"><code>person-merge</code><a class="anchor" href="#person-merge" aria-label="Link to this section"></a></h3>
 <p>Merge people into another (faces, events, relations and links to them move; the sources are removed)</p>
 <p><small>changes things</small></p>
-<div class="code"><pre tabindex="0"><code>person-merge [--dry-run] [--force] [--verbose] &lt;src...&gt; &lt;dst&gt;</code></pre></div>
+<div class="code"><pre tabindex="0"><code>person-merge [--dry-run] [--force] [--before-birth] [--verbose] &lt;src...&gt; &lt;dst&gt;</code></pre></div>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -3705,6 +3711,10 @@ person-how-related --lang sv /archive/people/anna-exempel /archive/people/bo-exe
 <tr>
 <td><code>--force</code></td>
 <td>merge even if a source has children this cannot move.</td>
+</tr>
+<tr>
+<td><code>--before-birth</code></td>
+<td>move faces from photos taken before the destination was born too; without it they stay on the source.</td>
 </tr>
 <tr>
 <td><code>--verbose</code></td>

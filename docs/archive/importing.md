@@ -11,16 +11,15 @@ can see. EiN reads each file there, checks whether you have it already and sugge
 Nobody else sees the files, and they stay out of the shared library, until you file them into an
 album. The usual way past staging is to upload straight into an album that already exists.
 
-| Way in                                               | Where the files go                                      | Folders kept |
-| ---------------------------------------------------- | ------------------------------------------------------- | ------------ |
-| **Create → Import media**                            | the staging category you choose                         | yes          |
-| **Share** to EiN from a phone's gallery              | the staging category you choose, normally the Inbox     | no           |
-| Dropping files on the **Staging** page               | the category you drop them on                           | yes          |
-| **Upload**, or dropping files, on the **Media** page | your **Inbox** in staging                               | yes          |
-| **Upload**, or dropping files, on an album's page    | that album, in the library                              | no           |
-| Copying over SFTP or `scp`                           | the folder you copy into, normally a staging category   | yes          |
-| The EiN app's photo backup                           | the category chosen for it, normally one for the phone  | no           |
-| A phone's backup app, over WebDAV                    | the folder it sends into, normally the phone's category | yes          |
+| Way in                                            | Where the files go                                      | Folders kept |
+| ------------------------------------------------- | ------------------------------------------------------- | ------------ |
+| **Upload** on a staging category's page           | that category                                           | no           |
+| Dropping files or folders on a staging category   | that category                                           | yes          |
+| **Share** to EiN from a phone's gallery           | your **Inbox** in staging                               | no           |
+| **Upload**, or dropping files, on an album's page | that album, in the library                              | no           |
+| Copying over SFTP or `scp`                        | the folder you copy into, normally a staging category   | yes          |
+| The EiN app's photo backup                        | the category chosen for it, normally one for the phone  | no           |
+| A phone's backup app, over WebDAV                 | the folder it sends into, normally the phone's category | yes          |
 
 Your staging area is divided into **categories**. The **Inbox** is always there and takes
 everything you do not put elsewhere; you can add others, one per source: a Google Photos export, a
@@ -41,33 +40,28 @@ such as a phone or a GPS logger, or waits for you to say which device it belongs
 them and their relations into the archive (see [Bring in a family tree from a GEDCOM file](family.md#bring-in-a-family-tree-from-a-gedcom-file)).
 
 > [!NOTE]
-> You need to be signed in to bring files in: visitors are not offered **Import media** or
+> You need to be signed in to bring files in: visitors are not offered **Upload** or
 > **Staging**.
 
-## Import media
+## Upload into staging
 
-**Import media** is the main way in. It puts files into one of your staging categories, keeping
-the folders you choose. To bring a new source in a category of its own, make the category first
-with **New category** (see [Make a category](staging.md#make-a-category)), then import into it.
+Uploading into one of your staging categories is the main way in. To bring a new source in a
+category of its own, make the category first with **New category** (see
+[Make a category](staging.md#make-a-category)), then upload into it.
 
-1. Open the **Create** menu (the plus in the top bar) and choose **Import media**. The same dialog
-   opens from **Import media…** in a category's ⋮ menu, the **Import media** button of an empty
-   category and, while the Home page has no news yet, the **Import media** button there. Pictures
-   shared to EiN from a phone's gallery open it too, with the files already chosen (see
-   [Share pictures to EiN](../guide/phone.md#share-pictures-to-ein)).
-2. Under **Into which category?**, pick a category. Each shows how many files it holds and its
-   folder, for example "0 files · files/inbox". The Inbox is chosen unless you opened the dialog
-   from a category.
-3. Choose **Choose files** or **Choose a folder**. The line under the buttons counts what you
-   picked, for example "212 files in 3 folders, 1.4 GB".
-4. Choose **Upload 212**. The button counts your files.
+1. Open **Staging** in the sidebar, or choose **Upload** in the **Create** menu (the plus in the
+   top bar), which opens it too. While the Home page has no news yet, its **Upload** button does
+   the same.
+2. Open the category the files belong in. With only the Inbox, Staging opens on it.
+3. Choose **Upload** in the header and pick the files, or drop files or whole folders anywhere on
+   the page. A dropped folder keeps its structure.
 
-![The Import media dialog with the Inbox chosen, the Choose files and Choose a folder buttons, and the SFTP folder with its copy button and How link](../../assets/shots/import.webp "Import media: a category, the files, then Upload.")
+The files upload in the background, and the category's **Files** tab shows them as they arrive.
+Pictures shared to EiN from a phone's gallery go into the Inbox the same way (see
+[Share pictures to EiN](../guide/phone.md#share-pictures-to-ein)).
 
-The dialog closes, the category opens on its **Files** tab and the files upload in the background.
-
-The dialog also says "Over about 10,000 files? Copy them over SFTP instead, folders and all, into"
-with the category's folder, a button that copies the path, and a **How** link. See [Copy files in over SFTP](#copy-files-in-over-sftp).
+For more than about 10,000 files, copy them over SFTP instead, folders and all; the category's
+**Info** tab shows the folder to copy into. See [Copy files in over SFTP](#copy-files-in-over-sftp).
 
 ### Follow an upload
 
@@ -92,19 +86,19 @@ as `IMG_0042 (2).jpg`, and the panel says "N saved under a new name, theirs was 
 
 ## Upload or drop files on a page
 
-Three pages take files from a button in their header and from files dropped anywhere on them:
+Two kinds of page take files from **Upload** in their header and from files dropped anywhere on
+them:
 
-| Page                           | Buttons                                     | When you drag files over it                                                       | Where the files go |
-| ------------------------------ | ------------------------------------------- | --------------------------------------------------------------------------------- | ------------------ |
-| A staging category, on any tab | **Upload**, and **Upload a folder** under ⋮ | "Drop files to upload", "Into Box 3, folders and all" (with the category's name)  | that category      |
-| **Media**                      | **Upload**, and **Upload a folder** under ⋮ | "Drop files to upload", "Into staging, folders and all"                           | your Inbox         |
-| An album you may change        | **Upload**                                  | "Drop files to upload", "Into Sailing in the archipelago" (with the album's name) | that album         |
+| Page                           | When you drag files over it                                                       | Where the files go |
+| ------------------------------ | --------------------------------------------------------------------------------- | ------------------ |
+| A staging category, on any tab | "Drop files to upload", "Into Box 3, folders and all" (with the category's name)  | that category      |
+| An album you may change        | "Drop files to upload", "Into Sailing in the archipelago" (with the album's name) | that album         |
 
 The Staging overview, the list of your categories, takes no files: open a category to upload into
 it.
 
 An upload into staging goes into a folder for the day inside the category, named
-`upload-YYYY-MM-DD`, and a folder you drop or choose keeps its structure below it:
+`upload-YYYY-MM-DD`, and a folder you drop keeps its structure below it:
 `Trip/day 2/IMG_0001.jpg` lands in `upload-2026-10-25/Trip/day 2/`. Folder names help the
 grouping. A folder you named yourself, holding at least three pictures, becomes a suggested album of its own, named after the folder, such as "Cornwall, summer 1968".
 Names that cameras and exports give folders, such as `DCIM`, `100CANON`, a bare year or date, or
@@ -135,7 +129,7 @@ group opened as an album page). [Albums](albums.md) covers the album page.
 
 ### Staging or an album?
 
-Use staging (**Import media**, the Media page or the Staging page) when:
+Use staging (**Upload** on the Staging page) when:
 
 - you bring in a batch: a phone's worth, an export, a box of scans or a folder from an old laptop;
 - you want EiN to find the pictures you have already and suggest which albums the rest belong in;
@@ -156,8 +150,7 @@ server" all work; [SSH and SFTP](../shell/ssh-sftp.md) explains connecting.
 2. For a big export or a box of scans, make its category first: on the Staging page, choose
    **New category** in the header, type its **Name** and choose **Create**.
 3. Copy the files into the category's folder, `/home/<you>/staging/files/<name>/`. The category's
-   **Info** tab shows the path to copy into, and the Import media dialog shows the folder of the
-   category you pick, with a button that copies the path.
+   **Info** tab shows the path to copy into.
 
 ```bash
 # on your own computer
@@ -232,8 +225,8 @@ favourite. EiN reads these files, called sidecars, and gives what they say to th
 
 1. On the Staging page, choose **New category** in the header. Call it, for example, "Google
    Photos"; its folder is `files/google-photos`.
-2. Bring in the zips as they are: in **Import media**, choose the category, **Choose files** and
-   the zips, then **Upload**. For a large export, copy them over SFTP instead:
+2. Bring in the zips as they are: open the category, choose **Upload** and pick the zips. For a
+   large export, copy them over SFTP instead:
 
    ```bash
    # on your own computer
@@ -285,7 +278,7 @@ from a messenger and screenshots.
 
 ## What happens after the upload
 
-![Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album or into an album already there, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
+![Four ways in (Upload, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album or into an album already there, or discarded to your trash](../diagrams/staging-flow.svg "Files wait in your staging area until you decide; only filing can make them visible to others")
 
 Each category's card on the Staging page, and the strip under a category's title, show where your
 newest files are. Each stage shows while it holds files:

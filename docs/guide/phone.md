@@ -142,27 +142,23 @@ and [Watch the memories story](../archive/home.md#watch-the-memories-story) the 
 
 ## Upload from your phone
 
-With the Archive installed, bring the photos and videos on your phone into your staging area with
-**Import media**:
+With the Archive installed, bring the photos and videos on your phone into your staging area from
+the **Staging** page:
 
-1. Tap the plus in the top bar, then **Import media**. The dialog fills the screen.
-2. Under **Into which category?**, pick where the files go. The **Inbox** is chosen at first. To
-   keep a phone's pictures together, make a category for it first; see
+1. Open **Staging** from the menu, or tap the plus in the top bar, then **Upload**. To keep a
+   phone's pictures together, make a category for it first and open it; see
    [Make a category](../archive/staging.md#make-a-category).
-3. Tap **Choose files**. Your phone's own picker opens, with your photo library, the camera or your
-   files, depending on the phone.
-4. Pick the files, then tap the button that counts them, for example **Upload 24**.
+2. Tap ⋮, then **Upload**. Your phone's own picker opens, with your photo library, the camera, so
+   you can take a picture and upload it in one go, or your files, such as a GPX track or a GEDCOM
+   family tree, depending on the phone.
+3. Pick the files.
 
-The category opens on its **Files** tab, and the **Uploads** ring in the top bar shows how far the
-upload is. [Getting your photos in](../archive/importing.md#import-media) covers the dialog in full, and
+The **Uploads** ring in the top bar shows how far the upload is.
+[Getting your photos in](../archive/importing.md#upload-into-staging) covers it in full, and
 [Sorting in staging](../archive/staging.md) what to do with the files once they are in.
 
-**Upload** also sits under ⋮ on an album you may change, on the **Media** page and on a staging
-category. Its picker is your phone's own, as in **Import media**: your photo library, the camera, so
-you can take a picture and upload it in one go, and your files, such as a GPX track or a GEDCOM
-family tree. An album's **Upload** puts the files straight into that album; the Media page's puts
-them into your Inbox. **Choose a folder** and **Upload a folder** need a browser that can pick a
-folder, which a phone's browser may not offer.
+**Upload** also sits under ⋮ on an album you may change, and puts the files straight into that
+album.
 
 > [!WARNING]
 > An upload runs in the open page. Keep EiN on screen until the upload has finished: a phone may
@@ -172,8 +168,8 @@ folder, which a phone's browser may not offer.
 > once the connection is back.
 
 For a whole camera roll, thousands of files, copying from a computer is steadier than uploading
-from the page, and the EiN app can keep sending the new ones by itself; see [Back up your phone automatically](#back-up-your-phone-automatically). The **Import media** dialog itself suggests copying over SFTP for more than about
-10,000 files; see [Copy files in over SFTP](../archive/importing.md#copy-files-in-over-sftp).
+from the page, and the EiN app can keep sending the new ones by itself; see [Back up your phone automatically](#back-up-your-phone-automatically). For more than about
+10,000 files, copy them over SFTP; see [Copy files in over SFTP](../archive/importing.md#copy-files-in-over-sftp).
 
 On the Media page, **Search with a picture** can take a photo with the camera and find what looks
 like it; see [Search with a picture](../archive/search.md#search-with-a-picture).
@@ -410,17 +406,15 @@ sign in once more.
 
 On an Android phone with [the EiN app](#the-ein-app), or with EiN on its home screen, added from
 Chrome as [above](#put-ein-on-your-home-screen), **EiN** is offered in the phone's **Share** menu.
-Pictures, videos and recordings shared to it from the gallery or another app go into your staging
-area, as **Import media** puts them there:
+Pictures, videos and recordings shared to it from the gallery or another app go into your
+**Inbox** in staging:
 
 1. In the gallery, select the pictures and tap **Share**, then **EiN**.
-2. EiN opens on **Import media** with the files chosen; sign in first if it asks, or, in an app
-   not paired yet, pair it first. The line under the buttons counts them, for example "3 files,
-   12.4 MB".
-3. The Inbox is chosen. Pick another category if they belong there, then choose **Upload 3**.
+2. Sign in first if it asks, or, in an app not paired yet, pair it first.
 
-The category opens on its **Files** tab while the files upload, as after any
-[Import media](../archive/importing.md#import-media). **Cancel** drops them. Sharing to EiN needs the
+The files start uploading at once, and the Inbox opens on its **Files** tab while they upload, as
+after any [upload into staging](../archive/importing.md#upload-into-staging). **Cancel** in the
+**Uploads** panel stops them. Sharing to EiN needs the
 [Archive](../archive/index.md); without it, EiN says nothing takes the files.
 
 Without the app, **EiN** is in the Share menu only where the browser offers it to a web app on the
@@ -460,8 +454,7 @@ position reports waiting on the phone until it has one; see [The EiN app](#the-e
 - **Keyboard shortcuts**, unless a keyboard is connected. **Shortcuts** in the account menu still
   lists them.
 - **Edit faces** in the Archive's viewer while the phone is held upright; turn it sideways to draw face boxes.
-- **Keys and the column beside the stream in the Archive's staging Sort tab**, and selecting several groups
-  there; see [Sorting in staging](../archive/staging.md#on-a-phone).
+- **Keys in the Archive's staging Sort tab**, and selecting several groups there; see [Sorting in staging](../archive/staging.md#on-a-phone).
 
 ## When something goes differently
 

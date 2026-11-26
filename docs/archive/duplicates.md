@@ -62,50 +62,30 @@ library, it happens within the hour.
 
 ## Where duplicates are marked
 
-### In the Sort stream
+Only exact copies are marked: files with the same bytes. Look-alikes are not, since each is a
+picture of its own beside the other, where you can see them; the viewer's **Similar** section
+shows the pictures that look like one.
 
-In the open group, a picture that copies or looks like another one carries a badge in its corner:
+### In Sort and on the Files tab
 
-| Badge  | Tooltip                                         | Means                                                |
-| ------ | ----------------------------------------------- | ---------------------------------------------------- |
-| **⧉**  | "In the library already: compare"               | It is a copy or look-alike of a photo in the library |
-| **2×** | "Another one here is the same picture: compare" | It is a copy or look-alike of another staged photo   |
+In the **Sort** stream and in the **Media** view of a category's **Files** tab, a picture that has
+exact copies carries a badge with a copy icon and how many identical files there are, itself
+included: **⧉ 2** for a photo and one copy. A library icon beside the number says that one of them
+is already in the library. The copies themselves join no group, so in Sort the badge is how you
+see them. Click the badge to [compare](#compare-side-by-side) the files.
 
-Click a badge to open [Compare](#compare-side-by-side) for that picture.
-
-The open group's header also gets a chip with the totals, for example "⧉ 4 in library · 2× 1".
-Its menu has these items:
-
-- **Compare** opens the first marked picture side by side with its matches.
-- **Keep the library copies** removes the group's pictures the library already has. It removes
-  only those that need no look: exact copies, and smaller versions of a library photo (see
-  [Remove all](#remove-a-whole-list-at-once) for what counts). Look-alikes that need a look stay
-  in the group.
-- **Select these** selects the marked pictures, so you can act on them together. It is offered on a computer.
-
-When at least four in five of the open group's pictures are copies or smaller versions of library
-photos, the group's proposal becomes **Keep the library copies · N photos go**, marked sure (●●●).
-<kbd>Enter</kbd> removes them, and the rest of the group stays to be sorted. The message says,
-for example, "12 photos of “Cornwall, summer 1968” removed", with **Undo**.
-
-### On the Files tab
-
-In the **Media** view of a category's **Files** tab, tiles carry the same **⧉** and **2×** badges.
-A photo that is kept over copies left out of the list also gets **2×**, so you can see that it
-has copies. Click the badge to compare.
+When you file a group into an album, its pictures go and their copies stay in staging. Each copy
+is then a copy of a library photo, listed under **Copies of library photos** on the **Duplicates**
+tab, where removing it first fills in the library photo with what the copy has that it lacks.
 
 ### In the viewer
 
-When you open one of your own staged pictures in the [viewer](viewer.md), its details panel
-says which sets it belongs to, with one of these lines:
-
-- "A copy of a library photo" or "A copy of a photo in this import"
-- "Looks like a library photo" or "Looks like a photo in this import"
-- "Kept over 2 copies" or "Kept over 1 look-alike"
-
-Under the line are the set's other files as thumbnails, with the kept one marked **Kept**, and why
-it is kept. **Compare** opens the files side by side, and for look-alikes **Not duplicates** keeps
-them apart. If you remove the picture you are viewing, the viewer closes.
+When you open one of your own staged pictures that has exact copies in the [viewer](viewer.md),
+its details panel has a **Duplicates** section with the number of other files: a small grid of
+them, like **Similar**. Point at one for its name, where it is ("In the album Summer 2024", or
+"Staged in phone/2024-06" for a folder of your staging area) and its full path; a library one has
+a library icon in its corner. Click one to compare the files side by side with that one in focus,
+and remove one of them there. If you remove the picture you are viewing, the viewer closes.
 
 ### Bursts become stacks
 
@@ -152,16 +132,18 @@ Each file is a tile with a label in its corner:
 
 | Label              | Means                                                                                             |
 | ------------------ | ------------------------------------------------------------------------------------------------- |
-| **Keep · library** | The kept file is a library photo. The album holding it is named under the tile                    |
+| **Keep · library** | The kept file is a library photo                                                                  |
 | **Keep**           | The kept file is one of your staged photos                                                        |
 | **Drop**           | This file goes to your trash when you remove the set                                              |
 | **Elsewhere**      | A file of the set that this removal leaves alone, for example a copy in another category (dimmed) |
 
-Under each tile are its picture size, file size and the time it was taken. A copy that holds
+Under each tile are its name, where it is ("In the album Summer 2024", or "Staged in
+phone/2024-06"; point at it for the full path), its picture size, file size and the time it was
+taken. A copy that holds
 something the kept file lacks says so, for example "gives description, labels".
 
-Under the tiles, one line says why the kept file is kept and what it gains, for example "kept: it
-is in the library · the kept one gains: description, star". Yellow lines warn of anything to look
+Under the tiles, one line names the kept file, why it is kept and what it gains, for example
+"Keeps IMG_0001.jpg because it is already in the library · the kept one gains: description, star". Yellow lines warn of anything to look
 out for. They are listed under [When something looks wrong](#when-something-looks-wrong).
 
 ### Which copy is kept
@@ -169,19 +151,19 @@ out for. They are listed under [When something looks wrong](#when-something-look
 A library photo is always kept: nothing in staging removes or changes a library photo, except to
 fill it in. Between your staged files, EiN keeps these:
 
-- In a set of exact copies, the file that arrived first ("kept: it came first").
+- In a set of exact copies, the file that arrived first ("because it arrived in staging first").
 - In a set of look-alikes, the better picture, by the first of these rules that tells two apart:
 
-| Rule                                                                                                  | What the line says                                    |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| More pixels                                                                                           | "kept: it has more pixels (4032×3024 over 1600×1200)" |
-| A better format: RAW, then HEIC, then TIFF or PNG, then JPEG, then WebP, then GIF                     | "kept: its format is better"                          |
-| A surer time: typed in by hand, then GPS, then the camera's clock, then a sidecar, then the file name | "kept: its time is surer"                             |
-| The larger file                                                                                       | "kept: it is the larger file"                         |
-| A name that is not a copy's, such as one without `(2)`, a trailing `-1` or `copy`                     | "kept: its name is not a copy’s"                      |
-| Otherwise, the one that arrived first                                                                 | "kept: it came first"                                 |
+| Rule                                                                                                  | The line says it is kept because…               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| More pixels                                                                                           | "it has more pixels (4032×3024 over 1600×1200)" |
+| A better format: RAW, then HEIC, then TIFF or PNG, then JPEG, then WebP, then GIF                     | "its file format is better"                     |
+| A surer time: typed in by hand, then GPS, then the camera's clock, then a sidecar, then the file name | "its date comes from a surer source"            |
+| The larger file                                                                                       | "it is the larger file"                         |
+| A name that is not a copy's, such as one without `(2)`, a trailing `-1` or `copy`                     | "its name has no copy mark such as “(1)”"       |
+| Otherwise, the one that arrived first                                                                 | "it arrived in staging first"                   |
 
-When you pick another one yourself, the line says "kept: you chose it".
+When you pick another one yourself, the line says "because you chose it".
 
 ### What the kept one gains
 
@@ -222,14 +204,17 @@ Clicking a set marks it too. All keys are on [Keyboard shortcuts](../reference/s
 ## Compare side by side
 
 **Compare** opens a set's files large, side by side. You can open it from the **Duplicates** tab,
-from a badge in **Sort** or on the **Files** tab, and from the viewer. The dialog is titled
-**Copies** or **Look-alikes**. Under the title, the set's likeness and why the kept file is kept
-appear, for example "97% alike · kept: it has more pixels (4032×3024 over 1600×1200)".
+from a badge on the **Files** tab, and from the viewer. The dialog is titled
+**Copies** or **Look-alikes**. Under the title, the set's likeness, the kept file and why it is
+kept appear, for example "97% alike · Keeps IMG_0001.jpg because it has more pixels (4032×3024
+over 1600×1200)".
 
 Each file is labelled **Keep · library**, **Keep**, **Drop**, **Library** (a library photo that
-stays) or **Stays**. Under each are its picture size, file size, the time it was taken, the camera,
+stays) or **Stays**. Under each are its name, where it is (its album, or its folder in staging), its
+full path, its picture size, file size, the time it was taken, the camera,
 and how alike it is. When a file has exact copies of its own, "and 2 byte copies" says so: they
-go with it when it is removed.
+go with it when it is removed. Under the files, "Click the one to keep." Click a file you staged to
+keep it instead of the one EiN chose; a library photo cannot be chosen.
 
 | Key                         | What it does                                       |
 | --------------------------- | -------------------------------------------------- |
@@ -240,7 +225,7 @@ go with it when it is removed.
 | <kbd>Esc</kbd>              | Close without changing anything                    |
 
 The buttons at the bottom do the same: **Not duplicates** (for look-alikes), **Cancel** and
-**Remove the others**. On a phone, tap a file to focus it and use the buttons.
+**Remove the others**. On a phone, tap a file to keep it and use the buttons.
 
 ## Say that two pictures are not duplicates
 

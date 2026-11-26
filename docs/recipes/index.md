@@ -13,9 +13,9 @@ Install it from **Settings → Modules**, or in EiN's terminal:
 mod install recipes
 ```
 
-**Recipes** is then in the sidebar, and **Recipe** in the top bar's **Create** menu. It brings the
-[Media](../media/index.md) module, which reads the recipes' pictures and makes their thumbnails
-through the [media service](../ems/index.md); the Archive is not needed.
+**Recipes** is then in the sidebar, under **Browse**, and **Recipe** in the top bar's **Create**
+menu. It brings the [Media](../media/index.md) module, which reads the recipes' pictures and makes
+their thumbnails through the [media service](../ems/index.md); the Archive is not needed.
 [Modules](../admin/modules.md) covers installing and removing modules.
 
 ## Where recipes are

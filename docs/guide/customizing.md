@@ -80,7 +80,7 @@ System
 top bar
   Chat             assistant.chat
   Create           ui.create
-    Import media   archive.import
+    Upload         archive.import
     Album          archive.create-album
     Person         archive.create-person
     Location       archive.create-location
@@ -95,10 +95,10 @@ panels
   search.explore   Labels           /explore/labels          archive.explore-labels
   device.tabs      Trips            /trips?device={path}     archive.trips
   app.backup       Back up into     /staging/app-backup      archive.app-backup
-  share.receive    Import media     /staging/import          archive.share
+  share.receive    Upload           /staging/receive         archive.share
   nodes.tools      Duplicates       /duplicates?path={path}  archive.duplicates
   stats.sections   Events           /stats/life-events       archive.life-events
-  home.start       Import media     /start/upload            archive.start-upload
+  home.start       Upload           /start/upload            archive.start-upload
   search.label     Looks like       /looks-like?path={path}  archive.looks-like
   about.services   Language model   /about/language-model    assistant.about
   system.overview  GPU              /system/gpu              ems.gpu
@@ -415,7 +415,7 @@ open menu. With `"order": 15` the button stands between **Chat** (10) and **Crea
 Rows can go into the menus EiN has as well:
 
 - **`"parent": "ui.create"`** adds a row to the **Create New** menu under the plus. The archive's
-  rows are **Import media** (5), **Album** (10), **Person** (20), **Location** (30) and **Camera**
+  rows are **Upload** (5), **Album** (10), **Person** (20), **Location** (30) and **Camera**
   (40); Recipes puts **Recipe** at 31, EiN its **Device** at 50 (`ui.create-device`), and Dashboards
   **Dashboard** at 60.
 - **`"parent": "ui.account"`** adds a row to the menu under your picture, after **Me**. The archive
@@ -515,13 +515,13 @@ Each panel has a slot, the place in a page where it is drawn:
 | ----------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `search.explore`  | A section of the **Search** page before you search                                     | `archive.explore-people`, `-locations`, `-years`, `-labels`                                                                                        |
 | `search.label`    | Above the **Search** page's results when it searches for one label                     | `archive.looks-like` (**Looks like**, signed in only)                                                                                              |
-| `home.start`      | Under **News** on **Home** while there is no news                                      | `archive.start-upload` (**Import media**, signed in only)                                                                                          |
+| `home.start`      | Under **News** on **Home** while there is no news                                      | `archive.start-upload` (**Upload**, signed in only)                                                                                                |
 | `stats.sections`  | A section of **Statistics**                                                            | `archive.life-events` (**Events**)                                                                                                                 |
 | `nodes.tools`     | A tool in the **Nodes** explorer's tool pane                                           | `archive.duplicates` (**Duplicates**)                                                                                                              |
 | `system.tabs`     | A tab of the **Status**                                                                | `ems.media-service` (**Media service**)                                                                                                            |
 | `device.tabs`     | A tab of a device's page, after **Info**                                               | `archive.trips` (**Trips**, on a device with a track)                                                                                              |
 | `app.backup`      | The photo backup on the EiN app's **App** page, where it sends to                      | `archive.app-backup` (**Back up into**, signed in only)                                                                                            |
-| `share.receive`   | The dialog that opens with files shared to EiN from another app; the first panel only  | `archive.share` (**Import media**, signed in only)                                                                                                 |
+| `share.receive`   | The dialog that opens with files shared to EiN from another app; the first panel only  | `archive.share` (**Upload**, signed in only)                                                                                                       |
 | `system.overview` | Gauges beside the computer's own on the **Status**'s overview                          | `ems.gpu` (**GPU**)                                                                                                                                |
 | `about.services`  | A tile in **About EiN**                                                                | `assistant.about` (**Language model**), `ems.about` (**Media service**)                                                                            |
 | `shell.float`     | Floating over every page and the lightbox, under dialogs                               | `todo.widget` (**Todo widget**, signed in only)                                                                                                    |

@@ -265,8 +265,8 @@ own name, in its `routes` folder.
 
 ### GPX files in staging
 
-A GPX file that arrives in your staging area, by **Import media**, the Media page's **Upload** or
-copying over SFTP (see [Getting your photos in](importing.md)), is not treated as a picture. EiN
+A GPX file that arrives in your staging area, by **Upload** on the Staging page or copying over
+SFTP (see [Getting your photos in](importing.md)), is not treated as a picture. EiN
 reads which device the file names and gives the route to that device; the file then moves out of
 staging into the device's track's `routes` folder.
 
@@ -293,24 +293,24 @@ to choose its device, as below.
 
 When a file names no device, or more than one, it waits for you:
 
-1. Open **Staging** in the sidebar, and the Inbox. A yellow box titled **Needs you** says "1 GPX
-   file waits for the device it belongs to." (or how many), whichever category the file was dropped
-   on.
-2. Click **Choose device**. The page **Routes waiting for a device** opens, with your staging area's
-   `routes` folder listed below its header as on the Nodes page, and a panel beside it.
-3. Click a file to see in the panel what it says about itself: its **Name** and **Description**,
-   its **Tracks**, its **Creator**, when it was **Recorded** (first and last point, in UTC, and how
-   long between), its **Points**, its **Size**, and under **Matches** the devices it names, or "no
-   device it names". The arrow keys move from file to file.
-4. Select the files of one device: <kbd>Ctrl</kbd> and click adds or removes one, <kbd>Shift</kbd>
-   and click takes a run of them, <kbd>Ctrl</kbd>+<kbd>A</kbd> takes them all. On a phone, press and
-   hold a file, then tap the others. At the top of the panel, choose the device in the
-   **Device they come from** list and click **Import** (**Import 3 files** with three selected).
-   Each route joins that device's track and its file moves out of the list into the track's `routes`
-   folder. A file that cannot be read stays, and the panel names it and why. **← Staging** above
-   the page's title returns to the staging page.
-
-On a narrow screen the panel is below the list.
+1. Open **Staging** in the sidebar, the Inbox, and its **Sort** tab. Whichever category the files
+   were dropped on, a card heads the groups there: **21 GPX files** (or how many), when they were
+   recorded and how large they are together. Each file is a line with when it was recorded (in
+   UTC), how many points it has and its size; with more than 24, **Show all** lists the rest.
+2. At the card's top right is a button for each device, named after it, the ones last heard from
+   first; the others are in the card's **⋮** menu. Click the device the files were recorded on:
+   every file's route joins that device's track, one file after another, and the files move out of
+   staging into the track's `routes` folder. To give only some files to a device, check them first
+   (the box in the card's header checks them all), then click its button. A file that cannot be
+   read stays, and the card names it and why. Once no file waits, the card is gone.
+3. To see more of what a file says about itself, choose **Open the files** in the card's **⋮** menu.
+   The page **Routes waiting for a device** lists your staging area's `routes` folder as on the
+   Nodes page, with a panel beside it. Click a file to see in the panel its **Name** and
+   **Description**, its **Tracks**, its **Creator**, when it was **Recorded** (first and last point,
+   in UTC, and how long between), its **Points**, its **Size**, and under **Matches** the devices
+   it names, or "no device it names". There too you can select files, choose the device in the
+   **Device they come from** list and click **Import**. **← Staging** above the page's title
+   returns to the staging page. On a narrow screen the panel is below the list.
 
 In the terminal, [`gpx-info`](commands.md#gpx-info) says the same of any GPX file without importing it:
 `gpx-info /home/<you>/staging/routes/*.gpx`.
@@ -435,7 +435,7 @@ see the albums the trip may belong to under **Maybe in**.
 | **How it travels**, **Upload GPX** or **Add home base** is missing.               | You may not change this track: it is the device's owner's.                                                                               | Ask whoever made the device, or an administrator.                                                                                                         |
 | **Upload GPX** gives a message ending in "no track points found".                 | The file holds no recorded track points, only a planned route or waypoints.                                                              | Use the file that was recorded while it moved.                                                                                                            |
 | **Upload GPX** gives a message ending in "none of its N track points has a time". | The file's points carry no times: a route drawn on a map, or a file the program saved without them.                                      | Use the file that was recorded while it moved, or export it again with times.                                                                             |
-| A GPX file dropped in staging waits, though its device exists.                    | The file names neither the device nor a camera linked to it, or it names more than one device.                                           | Click **Choose device** under **Needs you** on the Inbox's page in Staging; see [GPX files in staging](#gpx-files-in-staging).                            |
+| A GPX file dropped in staging waits, though its device exists.                    | The file names neither the device nor a camera linked to it, or it names more than one device.                                           | Click the device's button on the GPX files' card, at the head of the Inbox's **Sort** tab in Staging; see [GPX files in staging](#gpx-files-in-staging).  |
 | The phone reports nothing to the track.                                           | It cannot reach EiN over HTTPS from where it is, its key was renewed or taken away, or tracking is off in Traccar Client or the EiN app. | See [Report from a phone](../guide/devices.md#report-from-a-phone) and [Ports, HTTPS and remote access](../admin/network.md#phones-and-trackers-posting). |
 | A GPX file sits in an album as an ordinary file.                                  | It was uploaded straight into the album, where GPX files are not read as routes.                                                         | Upload it on the device's **Trips** tab, then delete the file from the album.                                                                             |
 

@@ -108,7 +108,7 @@
 <li>Each section is headed by its date, such as &quot;29 June 2026&quot;, and the number of pictures in it. As you scroll, the date of the section you are in stays at the top of the page.</li>
 <li>Click a date heading to select everything under it. Click it again to clear the selection.</li>
 <li>A picture known only to a year, such as a scan dated 1975, sits under the year alone. Pictures with no date at all come last, under <strong>Undated</strong>. <a href="dates-places.html">Dates and places of pictures</a> explains where dates come from.</li>
-<li>Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today&#39;s date, marked &quot;1 year ago&quot;, &quot;12 years ago&quot; and so on. A ring plays that year&#39;s pictures as a story. <a href="home.html">Memories, news and events on Home</a> describes it.</li>
+<li>Above the feed, a row of round rings shows this day in earlier years: one for each earlier year with pictures taken on today&#39;s date, however far back, marked &quot;1 year ago&quot;, &quot;12 years ago&quot; and so on. When they do not all fit, swipe the row sideways, or use the arrows at its ends with a mouse. A ring plays that year&#39;s pictures as a story. <a href="home.html">Memories, news and events on Home</a> describes it.</li>
 <li>Once the feed holds more than 120 pictures, a time rail runs down the right edge of the page. Drag it to move through the years; the feed loads the pictures from the date you drag to.</li>
 <li>Click a picture to open it in the viewer, where the arrows walk through the feed. The viewer&#39;s &quot;N of M&quot; counter is not shown here, because the feed loads part of the archive at a time. <a href="viewer.html">Viewing photos, videos and recordings</a> covers the viewer.</li>
 <li>On a phone, in the <strong>Default</strong> layout, pinch the grid to fit between 2 and 5 pictures across.</li>
@@ -139,7 +139,7 @@
 </div>
 <p>A search is one grid without dates, so <strong>Layout</strong> is hidden while you search. Your choice is remembered in this browser, not for your account: another computer or phone starts with <strong>Default</strong>.</p>
 <h3 id="show-only-what-you-added">Show only what you added<a class="anchor" href="#show-only-what-you-added" aria-label="Link to this section"></a></h3>
-<p>Turn on <strong>Show only mine</strong> to see only the files you added yourself, the ones uploaded or imported under your account. It narrows searches from the box as well as the feed. With nothing of yours to show, the page says &quot;Nothing you have added yet.&quot;</p>
+<p>Turn on <strong>Show only mine</strong> to see only the files you added yourself, the ones uploaded or imported under your account, including those still waiting in your staging categories. It narrows searches from the box as well as the feed. With nothing of yours to show, the page says &quot;Nothing you have added yet.&quot;</p>
 <p>The switch is off by default, and like the layout it is remembered in this browser. Visitors who have not signed in do not have it.</p>
 <h3 id="show-one-kind-of-file">Show one kind of file<a class="anchor" href="#show-one-kind-of-file" aria-label="Link to this section"></a></h3>
 <p><strong>Show</strong> keeps one kind of file:</p>
@@ -174,14 +174,14 @@
 </div>
 <p>Choosing a kind keeps the feed: the videos alone are still newest first, by date. The kind goes into the page&#39;s address (<code>/media?kind=video</code>), so a link you copy opens the same view. A document&#39;s tile is a picture of its first page, and the viewer shows the document to read (<a href="viewer.html#read-a-document">Read a document</a>); <a href="file-types.html">Supported files</a> lists which ones EiN reads the text of.</p>
 <h3 id="find-damaged-scans">Find damaged scans<a class="anchor" href="#find-damaged-scans" aria-label="Link to this section"></a></h3>
-<p><strong>Damage</strong> keeps the scans EiN found worn: <strong>Faded</strong>, <strong>Dusty</strong>, <strong>Scratched</strong>, <strong>Out of focus</strong>
-or with <strong>Camera shake</strong>, or <strong>Any condition</strong> for everything. EiN looks at every scan as it arrives, a file from a staging category
-that holds scans, and photos from a camera or a phone are never in these lists. The choice becomes
-a chip in the box, such as <strong>Faded</strong>, and the page turns into a search; remove the chip with its ×,
-or choose <strong>Any condition</strong>, to return. Select what you find and choose <strong>Restore…</strong> to restore them
-all in the background (<a href="viewer.html#restore-many-photos-at-once">Restore many photos at once</a>).
+<p>EiN looks at every scan as it arrives, a file from a staging category that holds scans, and notes
+what wear it found; photos from a camera or a phone are never in these lists. Open the Media page at
+<code>/media?has=damage=faded</code> to see the scans found faded, or put <code>dust</code>, <code>scratches</code>, <code>blurred</code> (out of
+focus) or <code>shaken</code> (camera shake) in place of <code>faded</code>. The kind shows as a chip in the box, such as
+<strong>Faded</strong>; remove it with its × to return to the feed. Select what you find and choose
+<strong>Restore…</strong> to restore them all in the background
+(<a href="viewer.html#restore-many-photos-at-once">Restore many photos at once</a>).
 <a href="viewer.html#find-the-scans-worth-restoring">Find the scans worth restoring</a> says what each one means.</p>
-<p>On a phone, <strong>Damage</strong> folds into the button with a sliders icon with the other choices.</p>
 <h3 id="narrow-by-label">Narrow by label<a class="anchor" href="#narrow-by-label" aria-label="Link to this section"></a></h3>
 <p>When the pictures shown carry labels, a row of label pills appears above them, each with the number of pictures that carry it. Click a pill to keep only those pictures: the label becomes a <code>#label</code> chip in the box, and the page turns into a search. Click another pill to narrow further, to pictures that carry both labels. Remove a chip with its × to widen the view again.</p>
 <p>A label that every picture shown already carries would narrow nothing, so it is left out of the row, as are the labels you have already chosen. <a href="#labels">Labels</a> explains how pictures get them.</p>
@@ -249,9 +249,11 @@ all in the background (<a href="viewer.html#restore-many-photos-at-once">Restore
 </tbody></table>
 </div>
 <p>On a phone, or when the window has no room for them all, the buttons fold into one <strong>Actions</strong> menu. Your favourites and your trash are described in <a href="../guide/profile.html">Your profile, favourites and trash</a>.</p>
-<h3 id="upload-from-the-media-page">Upload from the Media page<a class="anchor" href="#upload-from-the-media-page" aria-label="Link to this section"></a></h3>
-<p><strong>Upload</strong>, at the top right of the page, picks files to send, and <strong>Upload a folder</strong>, under ⋮, picks a whole folder. You can also drop files anywhere on the page: the screen says &quot;Drop files to upload&quot; and &quot;Into staging, folders and all&quot;.</p>
-<p>All three send the files to your staging area, into today&#39;s folder of your inbox, and not into the library. They appear on the Media page once you have filed them into an album. You need to be signed in to upload. <a href="importing.html">Getting your photos in</a> explains every way in and what happens to a file afterwards.</p>
+<h3 id="uploading-new-pictures">Uploading new pictures<a class="anchor" href="#uploading-new-pictures" aria-label="Link to this section"></a></h3>
+<p>The Media page takes no files. New pictures go into your staging area first: open <strong>Staging</strong> in
+the sidebar, or choose <strong>Upload</strong> in the <strong>Create</strong> menu, and upload there. They appear on the
+Media page once you have filed them into an album. <a href="importing.html">Getting your photos in</a> explains
+every way in and what happens to a file afterwards.</p>
 <h2 id="the-year-page">The Year page<a class="anchor" href="#the-year-page" aria-label="Link to this section"></a></h2>
 <p>Open <strong>Year</strong> under <strong>Explore</strong> in the sidebar. The page is headed <strong>Year</strong>, &quot;Everything from one year&quot;, and opens on the current year, or on the year its address names: <code>/year?year=1968</code> opens 1968.</p>
 <figure class="shot"><a href="../../assets/shots/year@2x.webp"><img src="../../assets/shots/year.webp" srcset="../../assets/shots/year.webp 1x, ../../assets/shots/year@2x.webp 2x" alt="The Year page on 2025: the year with its arrows at the top, a faint bar for each year behind the header with 2025 lit, the slider marked 1931, 1983, 2001 and 2020, the Show and Sort controls, and five album cards" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The histogram shows which years hold anything; the slider and the arrows move between them.</figcaption></figure>
@@ -435,7 +437,7 @@ all in the background (<a href="viewer.html#restore-many-photos-at-once">Restore
 </tr>
 <tr>
 <td>Pictures you uploaded are missing from the Media page</td>
-<td>Files sent with <strong>Import media</strong> or the Media page&#39;s <strong>Upload</strong> wait in your staging area until you file them into an album; see <a href="staging.html">Sorting in staging</a>. A file that is still being prepared shows a placeholder until its thumbnail exists.</td>
+<td>Files uploaded into staging wait in your staging area until you file them into an album; see <a href="staging.html">Sorting in staging</a>. A file that is still being prepared shows a placeholder until its thumbnail exists.</td>
 </tr>
 <tr>
 <td>An album is missing from a year</td>
@@ -479,7 +481,7 @@ label-model show sailing                         <span class="hljs-comment"># ho
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/media.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-media-page">The Media page</a></li><li class="nested"><a href="#browse-the-feed">Browse the feed</a></li><li class="nested"><a href="#choose-a-layout">Choose a layout</a></li><li class="nested"><a href="#show-only-what-you-added">Show only what you added</a></li><li class="nested"><a href="#show-one-kind-of-file">Show one kind of file</a></li><li class="nested"><a href="#find-damaged-scans">Find damaged scans</a></li><li class="nested"><a href="#narrow-by-label">Narrow by label</a></li><li class="nested"><a href="#search-from-the-media-page">Search from the Media page</a></li><li class="nested"><a href="#act-on-pictures">Act on pictures</a></li><li class="nested"><a href="#upload-from-the-media-page">Upload from the Media page</a></li><li><a href="#the-year-page">The Year page</a></li><li class="nested"><a href="#pick-a-year">Pick a year</a></li><li class="nested"><a href="#what-a-year-shows">What a year shows</a></li><li class="nested"><a href="#narrow-the-year-to-a-person-a-place-or-a-label">Narrow the year to a person, a place or a label</a></li><li><a href="#labels">Labels</a></li><li class="nested"><a href="#put-labels-on-pictures">Put labels on pictures</a></li><li class="nested"><a href="#put-labels-on-an-album-a-person-a-location-or-a-camera">Put labels on an album, a person, a location or a camera</a></li><li class="nested"><a href="#find-what-carries-a-label">Find what carries a label</a></li><li class="nested"><a href="#the-labels-folder">The labels folder</a></li><li class="nested"><a href="#let-ein-suggest-where-a-label-belongs">Let EiN suggest where a label belongs</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#in-the-terminal">In the terminal</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-media-page">The Media page</a></li><li class="nested"><a href="#browse-the-feed">Browse the feed</a></li><li class="nested"><a href="#choose-a-layout">Choose a layout</a></li><li class="nested"><a href="#show-only-what-you-added">Show only what you added</a></li><li class="nested"><a href="#show-one-kind-of-file">Show one kind of file</a></li><li class="nested"><a href="#find-damaged-scans">Find damaged scans</a></li><li class="nested"><a href="#narrow-by-label">Narrow by label</a></li><li class="nested"><a href="#search-from-the-media-page">Search from the Media page</a></li><li class="nested"><a href="#act-on-pictures">Act on pictures</a></li><li class="nested"><a href="#uploading-new-pictures">Uploading new pictures</a></li><li><a href="#the-year-page">The Year page</a></li><li class="nested"><a href="#pick-a-year">Pick a year</a></li><li class="nested"><a href="#what-a-year-shows">What a year shows</a></li><li class="nested"><a href="#narrow-the-year-to-a-person-a-place-or-a-label">Narrow the year to a person, a place or a label</a></li><li><a href="#labels">Labels</a></li><li class="nested"><a href="#put-labels-on-pictures">Put labels on pictures</a></li><li class="nested"><a href="#put-labels-on-an-album-a-person-a-location-or-a-camera">Put labels on an album, a person, a location or a camera</a></li><li class="nested"><a href="#find-what-carries-a-label">Find what carries a label</a></li><li class="nested"><a href="#the-labels-folder">The labels folder</a></li><li class="nested"><a href="#let-ein-suggest-where-a-label-belongs">Let EiN suggest where a label belongs</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#in-the-terminal">In the terminal</a></li></ul></aside>
     </div>
   </body>
 </html>

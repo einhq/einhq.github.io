@@ -179,6 +179,9 @@ its version at the right; one that does not shows a badge instead and is listed 
 </div>
 <p>Type in the filter box to narrow the list by name or description. <strong>Show only active modules</strong>, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.</p>
+<p>For the administrator the list starts with <strong>Overview</strong>, which the tab opens on when the list and a
+panel stand side by side (see <a href="#see-what-can-be-updated">See what can be updated</a>); its row says
+how many updates there are.</p>
 <p>Choose a module to open its panel. At the top, on a tile in the module&#39;s colour, are its picture,
 name, version and state, and under them what it is; a long description shows three lines, and
 <strong>More</strong> opens the rest. At the top right are the buttons: <strong>Update</strong> and <strong>Remove</strong> for the
@@ -198,6 +201,10 @@ out:</p>
 <tbody><tr>
 <td><strong>Overview</strong></td>
 <td>What it needs and what needs it, its details, and who has it</td>
+</tr>
+<tr>
+<td><strong>Changes</strong></td>
+<td>For a module installed from its repository, what changed in it: what an update would bring, and the version installed with what came before (see <a href="#see-what-changed">See what changed</a>)</td>
 </tr>
 <tr>
 <td><strong>Set up</strong></td>
@@ -294,12 +301,13 @@ and starts their services. Its entries in the sidebar and its pages appear witho
 page. Every page open in a browser, this one included, then says <strong>EiN has been updated. This page
 reloads in 60 s.</strong> and reloads, so it runs the module&#39;s pages as installed; each install, update or
 removal in a row starts the 60 seconds again, so updating several modules reloads the page once.</p>
-<p>The install runs on its own: closing the page, or signing out, does not stop it. While it runs, the
-top of <strong>Settings → Modules</strong> says so to everyone who opens the tab, with who started it, how many of
-the module&#39;s files are in place and the last thing it did, and <strong>Install</strong> and <strong>Update</strong> wait for
-it, since EiN installs one thing at a time. A module of many files, such as one with map tiles, can
-take a long while. When it ends, the tab says what it installed, with a link to each module, or why
-it failed.</p>
+<p>The install runs on its own: closing the page, or signing out, does not stop it. While it runs, a
+notice at the foot of the screen says so to everyone who has <strong>Settings → Modules</strong> open, with how
+many of the module&#39;s files are in place, and <strong>Install</strong> and <strong>Update</strong> wait for it, since EiN
+installs one thing at a time. A module of many files, such as one with map tiles, can take a long
+while. When it ends, the notice says what it installed, with <strong>Open</strong> for the module, or why it
+failed, with <strong>Details</strong>, which opens the overview: under <strong>Needs a look</strong> it shows how the last
+install went, with its last lines when it failed.</p>
 <p>The group a published module is in says what is installed of it:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -435,11 +443,39 @@ Fetching https://github.com/einhq/module-archive at v0.4.0 (8c2e41d07)...</code>
 than this one, it takes the newest that runs here. When no release runs here, the module stays as
 it was, does not set up, and <code>setup.sh</code>&#39;s list ends with the reason, such as
 <code>mod install: archive: needs @ein/client ^0.7.0, this core provides 0.8.0</code>.</p>
+<h2 id="see-what-can-be-updated">See what can be updated<a class="anchor" href="#see-what-can-be-updated" aria-label="Link to this section"></a></h2>
+<p>On <strong>Settings → Modules</strong>, the administrator&#39;s list starts with <strong>Overview</strong>: everything that can be
+updated in one place, and what needs a look. <strong>Check again</strong> asks once more; under the title it
+says when the modules and the services were last checked.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>EiN and the services beside it</strong></td>
+<td>With the <a href="supervisor.html">supervisor</a>: EiN and each service with a newer release, from the release it runs to the new one, with <strong>Update</strong>, and <strong>Update all services</strong>; a service a module needs that is not installed, with <strong>Install</strong>; one that does not run as it should</td>
+</tr>
+<tr>
+<td><strong>Modules</strong></td>
+<td>Each module with a newer release, from its version to the new one, the modules updated together with it, and what holds it; <strong>What&#39;s new</strong> opens its <strong>Changes</strong> tab, <strong>Update</strong> updates it, and <strong>Update all modules</strong> every one nothing holds</td>
+</tr>
+<tr>
+<td><strong>Needs a look</strong></td>
+<td>Modules whose setup failed or that are not set up, modules whose repository did not answer, how the last install went, and the supervisor&#39;s last job when it failed</td>
+</tr>
+</tbody></table>
+</div>
+<p>Update EiN and its services first: a module&#39;s newer release may need the newer EiN, and the
+overview offers it once EiN runs it.</p>
 <h2 id="update-a-module">Update a module<a class="anchor" href="#update-a-module" aria-label="Link to this section"></a></h2>
 <p>Updating EiN with <code>setup.sh</code> does not update its modules. Update them here instead.</p>
 <ul>
-<li>On <strong>Settings → Modules</strong>, choose <strong>Install</strong> beside the filter box and choose <strong>Update</strong> on a
-module under <strong>Updates</strong>.</li>
+<li>On <strong>Settings → Modules</strong>, choose <strong>Overview</strong> at the top of the list and choose <strong>Update</strong> beside
+a module, or <strong>Update all modules</strong>; or choose <strong>Install</strong> beside the filter box and choose
+<strong>Update</strong> on a module under <strong>Updates</strong>.</li>
 <li>Or open the module&#39;s panel. A module installed from its repository has <strong>Update</strong> and
 <strong>Remove</strong> at the top right, and its <strong>Overview</strong> says under <strong>Source</strong> and <strong>Installed</strong> which
 repository and commit it came from and when. When the tab opens, EiN asks the module&#39;s repository
@@ -450,8 +486,8 @@ one installed at a release, and the newest commit of the branch for one installe
 which the button names by its commit when the version is the same. One installed at any other
 tag gets that tag again, and one installed at a commit stays there, and its panel offers no
 <strong>Update</strong>. When the repository does not answer, the button reads <strong>Update</strong> and tries all the
-same. The top of the tab says how it goes, as for an install, and when it ends what it updated, or
-that there was nothing newer.</li>
+same. A notice at the foot of the screen says how it goes, as for an install, and when it ends what
+it updated, or that there was nothing newer.</li>
 <li>In the terminal, <code>mod outdated</code> lists the modules with something newer, and <code>mod install archive</code>
 updates an installed module. The same commit again is left alone:
 <code>archive is installed at 5e1c07a42 (v0.1.0) already</code>.</li>
@@ -462,13 +498,37 @@ mod outdated</code></pre></div>
 ems 0.1.2 → 0.1.3 (v0.1.3)</code></pre></div>
 <p><code>mod outdated</code> asks the repository of each module installed from one what <code>mod install</code> would
 update it to, the same way <strong>Update</strong> does, and lists those that would move on, with the version, or
-the commit when the version is the same, and the release or ref. Names after it check only those
+the commit when the version is the same, and the release or ref. Names after it list only those
 modules. When every one is current it says <code>Every module is up to date</code>; a module whose repository
 does not answer is named with why, and the others are still listed.</p>
-<p>An update installs what the new version needs and is missing. It is refused when an installed
-module depends on this one and does not accept the new version; the message names them, for
-example <code>letters needs archive ^0.1.0, and this is archive 0.2.0: --force installs it all the same</code>. <code>mod install --force</code> updates anyway, and also fetches again a commit that is installed
-already.</p>
+<p>An update installs what the new version needs and is missing. A module and the modules that depend
+on it ask each other for versions, such as <code>^0.1.0</code>, so a new version that one of them does not
+accept is updated together with the newer releases that accept it. <code>mod outdated</code> names them after
+the version, and says what holds the update when one has no such release yet:</p>
+<div class="code"><pre tabindex="0"><code>archive 0.3.1 → 0.4.0 (v0.4.0), with album-folders, letters
+  held: letters 0.2.0 needs archive ^0.3.0, and nothing newer of letters takes archive 0.4.0</code></pre></div>
+<p><strong>Update</strong> does the same: when more than the module asked for has to be updated, it says which and
+why before it starts, as <strong>More than you asked for is updated</strong>, and installs them together. When
+something holds the update, it says which modules will stop working and offers <strong>Update anyway</strong>.</p>
+<p>In the terminal, modules named together are one change: <code>mod install archive album-folders letters</code>
+judges the versions they ask of each other as they will be once all three are installed, and puts
+each in place after the modules it needs. One named alone is refused when an installed module
+depends on it and does not accept the new version, and the message says what to name with it, for
+example <code>letters needs archive ^0.3.0, and this is archive 0.4.0: mod install archive letters updates them together, when it has a release that accepts it (mod outdated says), and --force installs it all the same</code>. <code>mod install --force</code> updates anyway, leaving the modules that do not
+accept it with their setup failing, and also fetches again a commit that is installed already.</p>
+<h2 id="see-what-changed">See what changed<a class="anchor" href="#see-what-changed" aria-label="Link to this section"></a></h2>
+<p>A module installed from its repository has a <strong>Changes</strong> tab: the commits of its repository, newest
+first. Under <strong>Coming with</strong> and the new version are the changes an update would bring, marked down
+their left edge; under <strong>Installed</strong> is the commit installed, marked <strong>Installed</strong>, and the changes
+before it. A release starts with a line of its own holding its version, and a change says its kind,
+such as <strong>feat</strong>, <strong>fix</strong> or <strong>breaking</strong>, when its message does; <strong>Details</strong> opens the rest of it.
+<strong>Older</strong> lists more. A module installed from GitHub has one summary for each day it was published;
+one from another forge has every change as it was made.</p>
+<p>In the terminal, <code>mod changelog archive</code> lists the same, a line each, marking the installed commit
+and those an update would bring; <code>--limit</code> says how many, 50 when not given:</p>
+<div class="code"><pre tabindex="0"><code>1cc6b1aae 2026-11-24 chore(release): archive 0.4.0 (v0.4.0, coming)
+4f0d2e5c1 2026-11-24 feat(archive): albums keep their order (coming)
+5e1c07a42 2026-11-20 chore(release): archive 0.3.1 (v0.3.1, installed)</code></pre></div>
 <p>After the update EiN sets the module up again and restarts its services; its settings take the new
 version&#39;s defaults and descriptions, and a setting it no longer has is gone. Every module that depends
 on it, directly or through another, is set up again too, and its running services restarted, so
@@ -488,8 +548,9 @@ and so the Archive, to the media service; the <code>devices</code> module to its
 language model. A module&#39;s panel lists them under <strong>Services beside EiN</strong> on its <strong>Overview</strong>, with
 the versions it takes, as <code>Accepts ^0.4.4</code>.</p>
 <p>With the <a href="supervisor.html">supervisor</a>, which an installation from GitHub has, each shows whether it
-is installed, and the administrator installs one that is not with <strong>Install</strong> beside it; the top of
-the Modules tab says when an installed module talks to a service that is not installed. Without
+is installed, and the administrator installs one that is not with <strong>Install</strong> beside it; the
+<a href="#see-what-can-be-updated">overview</a> lists a service an installed module talks to that is not
+installed, with <strong>Install</strong>. Without
 it, the row names the option of <code>setup.sh</code> that installs the service on the machine, such as
 <code>./setup.sh --ems</code>.</p>
 <h2 id="keep-a-module-to-some-groups">Keep a module to some groups<a class="anchor" href="#keep-a-module-to-some-groups" aria-label="Link to this section"></a></h2>
@@ -709,8 +770,16 @@ something are for administrators only.</p>
 <td>The published modules of the module sources, and what is installed of them</td>
 </tr>
 <tr>
+<td><code>mod outdated [name...]</code></td>
+<td>The modules with a newer release, and which go together</td>
+</tr>
+<tr>
+<td><code>mod changelog &lt;name&gt;</code></td>
+<td>A module&#39;s changes, what an update brings above the one installed</td>
+</tr>
+<tr>
 <td><code>mod install &lt;module&gt;...</code></td>
-<td>Install or update modules with what they need, and set them up</td>
+<td>Install or update modules with what they need, as one change, and set them up</td>
 </tr>
 <tr>
 <td><code>mod groups &lt;name&gt; [group...]</code></td>
@@ -735,7 +804,7 @@ something are for administrators only.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li class="nested"><a href="#what-eins-start-does-with-installed-modules">What EiN's start does with installed modules</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#services-a-module-needs">Services a module needs</a></li><li><a href="#keep-a-module-to-some-groups">Keep a module to some groups</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#the-modules-there-are">The modules there are</a></li><li><a href="#see-what-is-installed">See what is installed</a></li><li><a href="#install-a-module">Install a module</a></li><li class="nested"><a href="#install-modules-with-the-installer">Install modules with the installer</a></li><li class="nested"><a href="#what-eins-start-does-with-installed-modules">What EiN's start does with installed modules</a></li><li><a href="#see-what-can-be-updated">See what can be updated</a></li><li><a href="#update-a-module">Update a module</a></li><li><a href="#see-what-changed">See what changed</a></li><li><a href="#services-a-module-needs">Services a module needs</a></li><li><a href="#keep-a-module-to-some-groups">Keep a module to some groups</a></li><li><a href="#remove-a-module">Remove a module</a></li><li><a href="#modules-from-other-places">Modules from other places</a></li><li><a href="#where-modules-are-kept">Where modules are kept</a></li><li class="nested"><a href="#modules-the-deployment-provides">Modules the deployment provides</a></li><li><a href="#when-a-module-does-not-work">When a module does not work</a></li><li><a href="#commands">Commands</a></li></ul></aside>
     </div>
   </body>
 </html>

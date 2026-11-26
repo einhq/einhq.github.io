@@ -12,7 +12,7 @@ You do not have to tag anyone for recognition to start. Every photo, and frames 
 
 The next photo of the same stranger finds the first one, sees that it already belongs to an unidentified person, and joins that person instead of starting another. So when you name an unidentified person you name every face in the group at once, and new pictures of them join the named person by themselves from then on.
 
-Two faces in the same photo are never made the same person automatically. Voices work the same way across recordings and the sound of videos: a voice that matches nobody starts an unidentified person when it speaks for at least 10 seconds in all in one recording, and two voices in one recording are never made the same person. In a video, a face seen speaking in step with a voice counts as evidence of who is speaking.
+Two faces in the same photo are never made the same person automatically, and nobody is recognised in a photo taken before they were born: once a person has a birth date, a look-alike in an older photo, such as an older brother or sister, is somebody else. Voices work the same way across recordings and the sound of videos: a voice that matches nobody starts an unidentified person when it speaks for at least 10 seconds in all in one recording, and two voices in one recording are never made the same person. In a video, a face seen speaking in step with a voice counts as evidence of who is speaking.
 
 ![A detected face with three outcomes: it joins a person it clearly matches, named or not; it starts an unidentified person when it matches nobody but is clear and at least 48 px across; or it stays unknown, marked Unassigned; below them the actions a person can take: Name or Add to someone, Split off as someone new or Move to…, and Not a person or Not a face](../diagrams/faces.svg "Recognition decides on its own, and anything a person decides afterwards is kept.")
 
@@ -83,6 +83,8 @@ What happens depends on the name:
 - **A new name** names the person. They move to the People page with every face and voice they hold, and a message says **Named Ruby Wrenfield**.
 - **The name of someone who already exists** adds the faces and voices to that person instead of making a second one, and the message says **Added to Ruby Wrenfield**. The name must match exactly, apart from capital letters, so pick it from the list rather than typing it differently.
 
+Faces in photos taken before the person you add them to was born stay where they were, since they must be somebody else. A yellow message says so, for example **2 faces stayed: their photos were taken before Ruby Wrenfield was born (2018-04-18)**, and the card stays on the page with those faces. When the birth date or the photos' dates are wrong, press **Move anyway** in the message, or correct the date and add them again. The same goes for **Move to…**, **Someone I know**, and naming a face in the viewer.
+
 > [!TIP]
 > Before you name a card you are unsure of, open it. A card shows at most four glimpses; the [review](#look-at-everything-before-you-decide) shows every face and recording, which is where you notice that two people were put together.
 
@@ -141,7 +143,7 @@ person-merge --dry-run /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfi
 person-merge /archive/people/ruby-wrenfeld /archive/people/ruby-wrenfield
 ```
 
-The last path is the person who stays. See [`person-merge`](commands.md#person-merge) in the command reference.
+The last path is the person who stays. Faces in photos taken before that person was born stay on the other, which is then kept; `--before-birth` moves them too. `person-check /archive/people` lists the faces already on someone in a photo taken before their birth. See [`person-merge`](commands.md#person-merge) in the command reference.
 
 ## Say what is not a person
 

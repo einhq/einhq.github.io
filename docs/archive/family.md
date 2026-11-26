@@ -377,9 +377,9 @@ The form stays open with the reason in a red box:
 ## Bring in a family tree from a GEDCOM file
 
 A GEDCOM file (`.ged`) is the file genealogy programs and family tree websites export a family
-tree as. Upload one into your staging area, by **Import media**, the Media page's **Upload** or
+tree as. Upload one into your staging area, by **Upload** on the Staging page or over
 SFTP (see [Getting your photos in](importing.md)). Nothing is imported yet: the file waits, and
-the Inbox's page in Staging says so in a yellow **Needs you** box. **Review and import** opens the family tree
+a card at the head of the Inbox's **Sort** tab in Staging says so. Its **Review and import** opens the family tree
 (see [Look over a family tree before it is imported](#look-over-a-family-tree-before-it-is-imported)),
 where you can say who each person is before anything is written. When you press **Import**, EiN
 brings in the people and families in it:

@@ -113,7 +113,7 @@ Set by the server that opened the shell: the Web UI, the terminal panel or SSH.
 | `TTY_NAME` |  | The terminal this shell is attached to, when it has one. |
 | `TERM` |  | The terminal type an interactive shell reports to programs. |
 | `HOSTNAME` |  | The host name shown in the prompt. |
-| `COOKIE_NAME` |  | The browser cookie that carries a web session. |
+| `COOKIE_NAME` |  | The browser cookie that carries a web session; over HTTPS the cookie is `__Host-` followed by this name. |
 
 ## Options you set
 

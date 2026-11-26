@@ -58,6 +58,10 @@ its version at the right; one that does not shows a badge instead and is listed 
 Type in the filter box to narrow the list by name or description. **Show only active modules**, at
 the foot of the list, leaves out the ones that do not work; your browser remembers the switch.
 
+For the administrator the list starts with **Overview**, which the tab opens on when the list and a
+panel stand side by side (see [See what can be updated](#see-what-can-be-updated)); its row says
+how many updates there are.
+
 Choose a module to open its panel. At the top, on a tile in the module's colour, are its picture,
 name, version and state, and under them what it is; a long description shows three lines, and
 **More** opens the rest. At the top right are the buttons: **Update** and **Remove** for the
@@ -71,6 +75,7 @@ out:
 | Tab            | What it shows                                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Overview**   | What it needs and what needs it, its details, and who has it                                                                                                                                     |
+| **Changes**    | For a module installed from its repository, what changed in it: what an update would bring, and the version installed with what came before (see [See what changed](#see-what-changed))          |
 | **Set up**     | For the administrator, the module's pages that each set up one thing, the same ones as under **Set up** on the **System** tab (see [Configuration](configuration.md#set-up-one-thing-at-a-time)) |
 | **Services**   | Its background services, their state now and how long they have been up. They are started and stopped on the **Status**'s services tab.                                                          |
 | **Pages**      | The addresses of the pages it adds; one without a parameter is a link to the page                                                                                                                |
@@ -144,12 +149,13 @@ page. Every page open in a browser, this one included, then says **EiN has been 
 reloads in 60 s.** and reloads, so it runs the module's pages as installed; each install, update or
 removal in a row starts the 60 seconds again, so updating several modules reloads the page once.
 
-The install runs on its own: closing the page, or signing out, does not stop it. While it runs, the
-top of **Settings → Modules** says so to everyone who opens the tab, with who started it, how many of
-the module's files are in place and the last thing it did, and **Install** and **Update** wait for
-it, since EiN installs one thing at a time. A module of many files, such as one with map tiles, can
-take a long while. When it ends, the tab says what it installed, with a link to each module, or why
-it failed.
+The install runs on its own: closing the page, or signing out, does not stop it. While it runs, a
+notice at the foot of the screen says so to everyone who has **Settings → Modules** open, with how
+many of the module's files are in place, and **Install** and **Update** wait for it, since EiN
+installs one thing at a time. A module of many files, such as one with map tiles, can take a long
+while. When it ends, the notice says what it installed, with **Open** for the module, or why it
+failed, with **Details**, which opens the overview: under **Needs a look** it shows how the last
+install went, with its last lines when it failed.
 
 The group a published module is in says what is installed of it:
 
@@ -301,12 +307,28 @@ than this one, it takes the newest that runs here. When no release runs here, th
 it was, does not set up, and `setup.sh`'s list ends with the reason, such as
 `mod install: archive: needs @ein/client ^0.7.0, this core provides 0.8.0`.
 
+## See what can be updated
+
+On **Settings → Modules**, the administrator's list starts with **Overview**: everything that can be
+updated in one place, and what needs a look. **Check again** asks once more; under the title it
+says when the modules and the services were last checked.
+
+| Part                               | What it holds                                                                                                                                                                                                                                                                |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **EiN and the services beside it** | With the [supervisor](supervisor.md): EiN and each service with a newer release, from the release it runs to the new one, with **Update**, and **Update all services**; a service a module needs that is not installed, with **Install**; one that does not run as it should |
+| **Modules**                        | Each module with a newer release, from its version to the new one, the modules updated together with it, and what holds it; **What's new** opens its **Changes** tab, **Update** updates it, and **Update all modules** every one nothing holds                              |
+| **Needs a look**                   | Modules whose setup failed or that are not set up, modules whose repository did not answer, how the last install went, and the supervisor's last job when it failed                                                                                                          |
+
+Update EiN and its services first: a module's newer release may need the newer EiN, and the
+overview offers it once EiN runs it.
+
 ## Update a module
 
 Updating EiN with `setup.sh` does not update its modules. Update them here instead.
 
-- On **Settings → Modules**, choose **Install** beside the filter box and choose **Update** on a
-  module under **Updates**.
+- On **Settings → Modules**, choose **Overview** at the top of the list and choose **Update** beside
+  a module, or **Update all modules**; or choose **Install** beside the filter box and choose
+  **Update** on a module under **Updates**.
 - Or open the module's panel. A module installed from its repository has **Update** and
   **Remove** at the top right, and its **Overview** says under **Source** and **Installed** which
   repository and commit it came from and when. When the tab opens, EiN asks the module's repository
@@ -317,8 +339,8 @@ Updating EiN with `setup.sh` does not update its modules. Update them here inste
   which the button names by its commit when the version is the same. One installed at any other
   tag gets that tag again, and one installed at a commit stays there, and its panel offers no
   **Update**. When the repository does not answer, the button reads **Update** and tries all the
-  same. The top of the tab says how it goes, as for an install, and when it ends what it updated, or
-  that there was nothing newer.
+  same. A notice at the foot of the screen says how it goes, as for an install, and when it ends what
+  it updated, or that there was nothing newer.
 - In the terminal, `mod outdated` lists the modules with something newer, and `mod install archive`
   updates an installed module. The same commit again is left alone:
   `archive is installed at 5e1c07a42 (v0.1.0) already`.
@@ -335,15 +357,51 @@ ems 0.1.2 → 0.1.3 (v0.1.3)
 
 `mod outdated` asks the repository of each module installed from one what `mod install` would
 update it to, the same way **Update** does, and lists those that would move on, with the version, or
-the commit when the version is the same, and the release or ref. Names after it check only those
+the commit when the version is the same, and the release or ref. Names after it list only those
 modules. When every one is current it says `Every module is up to date`; a module whose repository
 does not answer is named with why, and the others are still listed.
 
-An update installs what the new version needs and is missing. It is refused when an installed
-module depends on this one and does not accept the new version; the message names them, for
-example `letters needs archive ^0.1.0, and this is archive 0.2.0: --force installs it all the
-same`. `mod install --force` updates anyway, and also fetches again a commit that is installed
-already.
+An update installs what the new version needs and is missing. A module and the modules that depend
+on it ask each other for versions, such as `^0.1.0`, so a new version that one of them does not
+accept is updated together with the newer releases that accept it. `mod outdated` names them after
+the version, and says what holds the update when one has no such release yet:
+
+```text
+archive 0.3.1 → 0.4.0 (v0.4.0), with album-folders, letters
+  held: letters 0.2.0 needs archive ^0.3.0, and nothing newer of letters takes archive 0.4.0
+```
+
+**Update** does the same: when more than the module asked for has to be updated, it says which and
+why before it starts, as **More than you asked for is updated**, and installs them together. When
+something holds the update, it says which modules will stop working and offers **Update anyway**.
+
+In the terminal, modules named together are one change: `mod install archive album-folders letters`
+judges the versions they ask of each other as they will be once all three are installed, and puts
+each in place after the modules it needs. One named alone is refused when an installed module
+depends on it and does not accept the new version, and the message says what to name with it, for
+example `letters needs archive ^0.3.0, and this is archive 0.4.0: mod install archive letters
+updates them together, when it has a release that accepts it (mod outdated says), and --force
+installs it all the same`. `mod install --force` updates anyway, leaving the modules that do not
+accept it with their setup failing, and also fetches again a commit that is installed already.
+
+## See what changed
+
+A module installed from its repository has a **Changes** tab: the commits of its repository, newest
+first. Under **Coming with** and the new version are the changes an update would bring, marked down
+their left edge; under **Installed** is the commit installed, marked **Installed**, and the changes
+before it. A release starts with a line of its own holding its version, and a change says its kind,
+such as **feat**, **fix** or **breaking**, when its message does; **Details** opens the rest of it.
+**Older** lists more. A module installed from GitHub has one summary for each day it was published;
+one from another forge has every change as it was made.
+
+In the terminal, `mod changelog archive` lists the same, a line each, marking the installed commit
+and those an update would bring; `--limit` says how many, 50 when not given:
+
+```text
+1cc6b1aae 2026-11-24 chore(release): archive 0.4.0 (v0.4.0, coming)
+4f0d2e5c1 2026-11-24 feat(archive): albums keep their order (coming)
+5e1c07a42 2026-11-20 chore(release): archive 0.3.1 (v0.3.1, installed)
+```
 
 After the update EiN sets the module up again and restarts its services; its settings take the new
 version's defaults and descriptions, and a setting it no longer has is gone. Every module that depends
@@ -370,8 +428,9 @@ language model. A module's panel lists them under **Services beside EiN** on its
 the versions it takes, as `Accepts ^0.4.4`.
 
 With the [supervisor](supervisor.md), which an installation from GitHub has, each shows whether it
-is installed, and the administrator installs one that is not with **Install** beside it; the top of
-the Modules tab says when an installed module talks to a service that is not installed. Without
+is installed, and the administrator installs one that is not with **Install** beside it; the
+[overview](#see-what-can-be-updated) lists a service an installed module talks to that is not
+installed, with **Install**. Without
 it, the row names the option of `setup.sh` that installs the service on the machine, such as
 `./setup.sh --ems`.
 
@@ -584,15 +643,17 @@ it does by itself a minute after the install.
 Every command here runs in EiN's [terminal](../shell/terminal.md) or over SSH. Those that change
 something are for administrators only.
 
-| Command                               | What it does                                                                |
-| ------------------------------------- | --------------------------------------------------------------------------- |
-| `mod list [--long]`                   | The installed modules and whether each works                                |
-| `mod info <name>`                     | One module's manifest, what it requires and what uses it                    |
-| `mod search [words]`                  | The published modules of the module sources, and what is installed of them  |
-| `mod install <module>...`             | Install or update modules with what they need, and set them up              |
-| `mod groups <name> [group...]`        | Who a module is for, or keep it to groups; `--everyone` makes it everyone's |
-| `mod remove [--force] <name>`         | Stop and remove a module                                                    |
-| `mod setup <name>`, `mod setup --all` | Set up one module, or every module in the order of their dependencies       |
+| Command                               | What it does                                                                  |
+| ------------------------------------- | ----------------------------------------------------------------------------- |
+| `mod list [--long]`                   | The installed modules and whether each works                                  |
+| `mod info <name>`                     | One module's manifest, what it requires and what uses it                      |
+| `mod search [words]`                  | The published modules of the module sources, and what is installed of them    |
+| `mod outdated [name...]`              | The modules with a newer release, and which go together                       |
+| `mod changelog <name>`                | A module's changes, what an update brings above the one installed             |
+| `mod install <module>...`             | Install or update modules with what they need, as one change, and set them up |
+| `mod groups <name> [group...]`        | Who a module is for, or keep it to groups; `--everyone` makes it everyone's   |
+| `mod remove [--force] <name>`         | Stop and remove a module                                                      |
+| `mod setup <name>`, `mod setup --all` | Set up one module, or every module in the order of their dependencies         |
 
 [The core commands reference](../reference/commands-core.md#mod) has each one's options, and
 [Updating](updating.md) covers updating EiN itself.

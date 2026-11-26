@@ -298,24 +298,22 @@ each does to a group.
 
 On a group:
 
-| Keys                                                                                                                            | What they do                                                |
-| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| <kbd>J</kbd> / <kbd>K</kbd>                                                                                                     | Next / previous group                                       |
-| <kbd>Shift</kbd>+<kbd>J</kbd> / <kbd>Shift</kbd>+<kbd>K</kbd>, or <kbd>Shift</kbd>+<kbd>↓</kbd> / <kbd>Shift</kbd>+<kbd>↑</kbd> | Select on to the next / previous group                      |
-| <kbd>Enter</kbd>                                                                                                                | The proposal                                                |
-| <kbd>N</kbd>                                                                                                                    | Create album from the group                                 |
-| <kbd>A</kbd>                                                                                                                    | **Add to album…**                                           |
-| <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>                                                                                          | Into that candidate album                                   |
-| <kbd>,</kbd> / <kbd>.</kbd>                                                                                                     | Select the candidate album above / below                    |
-| <kbd>R</kbd>                                                                                                                    | Not the selected candidate album                            |
-| <kbd>C</kbd>                                                                                                                    | Compare with the selected album, or narrow the column again |
-| <kbd>X</kbd>                                                                                                                    | Discard                                                     |
-| <kbd>Z</kbd>                                                                                                                    | Undo                                                        |
-| <kbd>E</kbd>                                                                                                                    | Rename                                                      |
-| <kbd>T</kbd>                                                                                                                    | Set the time of every picture, or of the selected ones      |
-| <kbd>[</kbd> / <kbd>]</kbd>                                                                                                     | Previous / next day or month of the group                   |
-| <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd>                                                                             | Step through the pictures                                   |
-| <kbd>O</kbd>                                                                                                                    | Open the first picture                                      |
+| Keys                                                                                                                            | What they do                                           |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| <kbd>J</kbd> / <kbd>K</kbd>                                                                                                     | Next / previous group                                  |
+| <kbd>Shift</kbd>+<kbd>J</kbd> / <kbd>Shift</kbd>+<kbd>K</kbd>, or <kbd>Shift</kbd>+<kbd>↓</kbd> / <kbd>Shift</kbd>+<kbd>↑</kbd> | Select on to the next / previous group                 |
+| <kbd>Enter</kbd>                                                                                                                | The proposal                                           |
+| <kbd>N</kbd>                                                                                                                    | Create album from the group                            |
+| <kbd>A</kbd>                                                                                                                    | **Add to an existing album**                           |
+| <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd>                                                                                          | Into that suggested album                              |
+| <kbd>X</kbd>                                                                                                                    | Discard                                                |
+| <kbd>Z</kbd>                                                                                                                    | Undo                                                   |
+| <kbd>E</kbd>                                                                                                                    | Rename                                                 |
+| <kbd>Space</kbd>                                                                                                                | Show the pictures by day, or in one grid again         |
+| <kbd>T</kbd>                                                                                                                    | Set the time of every picture, or of the selected ones |
+| <kbd>[</kbd> / <kbd>]</kbd>                                                                                                     | Previous / next day or month of the group              |
+| <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd>                                                                             | Step through the pictures                              |
+| <kbd>O</kbd>                                                                                                                    | Open the first picture                                 |
 
 On a picture (after an arrow key), on a day or month (after <kbd>[</kbd> or <kbd>]</kbd>), or with
 pictures selected:

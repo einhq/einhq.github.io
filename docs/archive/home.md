@@ -14,11 +14,12 @@ may see: an album or a person that is not shared with you does not appear.
 ## On this day
 
 **On this day** is a row of round pictures, one for each year that has pictures taken on today's
-date, newest year first, up to 8. Under each ring it says how long ago that was, such as "1 year
+date, newest year first, however far back. Under each ring it says how long ago that was, such as "1 year
 ago" or "12 years ago", and the year. The picture in the ring is the first one taken that day.
 This year counts too, so a picture taken today has a ring of its own, "0 years ago".
 
-When there are more rings than fit, swipe the row sideways, or scroll it with a trackpad.
+When there are more rings than fit, swipe the row sideways, or with a mouse use the arrows at its
+ends.
 
 The row counts pictures in albums only. Pictures still in your staging area, and pictures with no
 date, are not part of it, and neither are pictures you may not see. When no year has anything for
@@ -34,7 +35,7 @@ The same rings stand above the feed on the **Media** page; see
    stays 5 seconds. Under the bars it says how long ago it was, such as "7 years ago", and the
    date, such as "25 December 2019".
 3. The story plays that year's pictures in the order they were taken, up to 24 of them, then moves
-   on to the next earlier year with pictures from this day, through up to 30 years that have
+   on to the next earlier year with pictures from this day, through every year that has
    pictures. After the last picture of the oldest year, it closes.
 
 | To                             | With a finger or the mouse                                                                          | With the keyboard |
@@ -95,8 +96,8 @@ What makes an entry:
   to you, do not. An album moved to the trash leaves the news.
 
 When nothing has been added yet, News says "Nothing has been added yet" and "What people add shows
-up here.", and when you are signed in the Archive offers **Import media** under it; see
-[Import media](importing.md#import-media).
+up here.", and when you are signed in the Archive offers **Upload** under it, which opens
+Staging; see [Upload into staging](importing.md#upload-into-staging).
 
 ## Events
 

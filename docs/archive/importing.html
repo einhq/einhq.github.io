@@ -111,24 +111,19 @@ album. The usual way past staging is to upload straight into an album that alrea
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>Create → Import media</strong></td>
-<td>the staging category you choose</td>
+<td><strong>Upload</strong> on a staging category&#39;s page</td>
+<td>that category</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Dropping files or folders on a staging category</td>
+<td>that category</td>
 <td>yes</td>
 </tr>
 <tr>
 <td><strong>Share</strong> to EiN from a phone&#39;s gallery</td>
-<td>the staging category you choose, normally the Inbox</td>
-<td>no</td>
-</tr>
-<tr>
-<td>Dropping files on the <strong>Staging</strong> page</td>
-<td>the category you drop them on</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><strong>Upload</strong>, or dropping files, on the <strong>Media</strong> page</td>
 <td>your <strong>Inbox</strong> in staging</td>
-<td>yes</td>
+<td>no</td>
 </tr>
 <tr>
 <td><strong>Upload</strong>, or dropping files, on an album&#39;s page</td>
@@ -168,30 +163,26 @@ such as a phone or a GPS logger, or waits for you to say which device it belongs
 <a href="tracks.html#gpx-files-in-staging">GPX files in staging</a>). A GEDCOM file waits for you to say who its people are, then brings
 them and their relations into the archive (see <a href="family.html#bring-in-a-family-tree-from-a-gedcom-file">Bring in a family tree from a GEDCOM file</a>).</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
-<p>You need to be signed in to bring files in: visitors are not offered <strong>Import media</strong> or
+<p>You need to be signed in to bring files in: visitors are not offered <strong>Upload</strong> or
 <strong>Staging</strong>.</p>
 </aside>
-<h2 id="import-media">Import media<a class="anchor" href="#import-media" aria-label="Link to this section"></a></h2>
-<p><strong>Import media</strong> is the main way in. It puts files into one of your staging categories, keeping
-the folders you choose. To bring a new source in a category of its own, make the category first
-with <strong>New category</strong> (see <a href="staging.html#make-a-category">Make a category</a>), then import into it.</p>
+<h2 id="upload-into-staging">Upload into staging<a class="anchor" href="#upload-into-staging" aria-label="Link to this section"></a></h2>
+<p>Uploading into one of your staging categories is the main way in. To bring a new source in a
+category of its own, make the category first with <strong>New category</strong> (see
+<a href="staging.html#make-a-category">Make a category</a>), then upload into it.</p>
 <ol>
-<li>Open the <strong>Create</strong> menu (the plus in the top bar) and choose <strong>Import media</strong>. The same dialog
-opens from <strong>Import media…</strong> in a category&#39;s ⋮ menu, the <strong>Import media</strong> button of an empty
-category and, while the Home page has no news yet, the <strong>Import media</strong> button there. Pictures
-shared to EiN from a phone&#39;s gallery open it too, with the files already chosen (see
-<a href="../guide/phone.html#share-pictures-to-ein">Share pictures to EiN</a>).</li>
-<li>Under <strong>Into which category?</strong>, pick a category. Each shows how many files it holds and its
-folder, for example &quot;0 files · files/inbox&quot;. The Inbox is chosen unless you opened the dialog
-from a category.</li>
-<li>Choose <strong>Choose files</strong> or <strong>Choose a folder</strong>. The line under the buttons counts what you
-picked, for example &quot;212 files in 3 folders, 1.4 GB&quot;.</li>
-<li>Choose <strong>Upload 212</strong>. The button counts your files.</li>
+<li>Open <strong>Staging</strong> in the sidebar, or choose <strong>Upload</strong> in the <strong>Create</strong> menu (the plus in the
+top bar), which opens it too. While the Home page has no news yet, its <strong>Upload</strong> button does
+the same.</li>
+<li>Open the category the files belong in. With only the Inbox, Staging opens on it.</li>
+<li>Choose <strong>Upload</strong> in the header and pick the files, or drop files or whole folders anywhere on
+the page. A dropped folder keeps its structure.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/import@2x.webp"><img src="../../assets/shots/import.webp" srcset="../../assets/shots/import.webp 1x, ../../assets/shots/import@2x.webp 2x" alt="The Import media dialog with the Inbox chosen, the Choose files and Choose a folder buttons, and the SFTP folder with its copy button and How link" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Import media: a category, the files, then Upload.</figcaption></figure>
-<p>The dialog closes, the category opens on its <strong>Files</strong> tab and the files upload in the background.</p>
-<p>The dialog also says &quot;Over about 10,000 files? Copy them over SFTP instead, folders and all, into&quot;
-with the category&#39;s folder, a button that copies the path, and a <strong>How</strong> link. See <a href="#copy-files-in-over-sftp">Copy files in over SFTP</a>.</p>
+<p>The files upload in the background, and the category&#39;s <strong>Files</strong> tab shows them as they arrive.
+Pictures shared to EiN from a phone&#39;s gallery go into the Inbox the same way (see
+<a href="../guide/phone.html#share-pictures-to-ein">Share pictures to EiN</a>).</p>
+<p>For more than about 10,000 files, copy them over SFTP instead, folders and all; the category&#39;s
+<strong>Info</strong> tab shows the folder to copy into. See <a href="#copy-files-in-over-sftp">Copy files in over SFTP</a>.</p>
 <h3 id="follow-an-upload">Follow an upload<a class="anchor" href="#follow-an-upload" aria-label="Link to this section"></a></h3>
 <p>While files upload, an <strong>Uploads</strong> button with a progress ring appears in the top bar. Its panel
 shows how far the whole upload is (&quot;1,204 of 3,000&quot; and the bytes), the progress of each place the
@@ -210,31 +201,23 @@ stay.</p>
 <p>A name already taken in a folder is never replaced. The file is stored under a numbered name, such
 as <code>IMG_0042 (2).jpg</code>, and the panel says &quot;N saved under a new name, theirs was taken&quot;.</p>
 <h2 id="upload-or-drop-files-on-a-page">Upload or drop files on a page<a class="anchor" href="#upload-or-drop-files-on-a-page" aria-label="Link to this section"></a></h2>
-<p>Three pages take files from a button in their header and from files dropped anywhere on them:</p>
+<p>Two kinds of page take files from <strong>Upload</strong> in their header and from files dropped anywhere on
+them:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
 <th>Page</th>
-<th>Buttons</th>
 <th>When you drag files over it</th>
 <th>Where the files go</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>A staging category, on any tab</td>
-<td><strong>Upload</strong>, and <strong>Upload a folder</strong> under ⋮</td>
 <td>&quot;Drop files to upload&quot;, &quot;Into Box 3, folders and all&quot; (with the category&#39;s name)</td>
 <td>that category</td>
 </tr>
 <tr>
-<td><strong>Media</strong></td>
-<td><strong>Upload</strong>, and <strong>Upload a folder</strong> under ⋮</td>
-<td>&quot;Drop files to upload&quot;, &quot;Into staging, folders and all&quot;</td>
-<td>your Inbox</td>
-</tr>
-<tr>
 <td>An album you may change</td>
-<td><strong>Upload</strong></td>
 <td>&quot;Drop files to upload&quot;, &quot;Into Sailing in the archipelago&quot; (with the album&#39;s name)</td>
 <td>that album</td>
 </tr>
@@ -243,7 +226,7 @@ as <code>IMG_0042 (2).jpg</code>, and the panel says &quot;N saved under a new n
 <p>The Staging overview, the list of your categories, takes no files: open a category to upload into
 it.</p>
 <p>An upload into staging goes into a folder for the day inside the category, named
-<code>upload-YYYY-MM-DD</code>, and a folder you drop or choose keeps its structure below it:
+<code>upload-YYYY-MM-DD</code>, and a folder you drop keeps its structure below it:
 <code>Trip/day 2/IMG_0001.jpg</code> lands in <code>upload-2026-10-25/Trip/day 2/</code>. Folder names help the
 grouping. A folder you named yourself, holding at least three pictures, becomes a suggested album of its own, named after the folder, such as &quot;Cornwall, summer 1968&quot;.
 Names that cameras and exports give folders, such as <code>DCIM</code>, <code>100CANON</code>, a bare year or date, or
@@ -267,7 +250,7 @@ place in date order once their dates have been read.</p>
 <p><strong>Upload</strong> is offered only on an album you may change, and never on a suggested album (a staging
 group opened as an album page). <a href="albums.html">Albums</a> covers the album page.</p>
 <h3 id="staging-or-an-album">Staging or an album?<a class="anchor" href="#staging-or-an-album" aria-label="Link to this section"></a></h3>
-<p>Use staging (<strong>Import media</strong>, the Media page or the Staging page) when:</p>
+<p>Use staging (<strong>Upload</strong> on the Staging page) when:</p>
 <ul>
 <li>you bring in a batch: a phone&#39;s worth, an export, a box of scans or a folder from an old laptop;</li>
 <li>you want EiN to find the pictures you have already and suggest which albums the rest belong in;</li>
@@ -286,8 +269,7 @@ sets it up within the hour.</li>
 <li>For a big export or a box of scans, make its category first: on the Staging page, choose
 <strong>New category</strong> in the header, type its <strong>Name</strong> and choose <strong>Create</strong>.</li>
 <li>Copy the files into the category&#39;s folder, <code>/home/&lt;you&gt;/staging/files/&lt;name&gt;/</code>. The category&#39;s
-<strong>Info</strong> tab shows the path to copy into, and the Import media dialog shows the folder of the
-category you pick, with a button that copies the path.</li>
+<strong>Info</strong> tab shows the path to copy into.</li>
 </ol>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 scp -P 2222 -r <span class="hljs-string">&quot;From the old laptop&quot;</span> anna@ein.local:/home/anna/staging/files/inbox/</code></pre></div>
@@ -346,8 +328,8 @@ favourite. EiN reads these files, called sidecars, and gives what they say to th
 <li><p>On the Staging page, choose <strong>New category</strong> in the header. Call it, for example, &quot;Google
 Photos&quot;; its folder is <code>files/google-photos</code>.</p>
 </li>
-<li><p>Bring in the zips as they are: in <strong>Import media</strong>, choose the category, <strong>Choose files</strong> and
-the zips, then <strong>Upload</strong>. For a large export, copy them over SFTP instead:</p>
+<li><p>Bring in the zips as they are: open the category, choose <strong>Upload</strong> and pick the zips. For a
+large export, copy them over SFTP instead:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on your own computer</span>
 scp -P 2222 takeout-001.zip takeout-002.zip anna@ein.local:/home/anna/staging/files/google-photos/</code></pre></div>
 </li>
@@ -414,7 +396,7 @@ folder into it.</li>
 <p>Nothing moves by itself. The same box recognises scans, a phone&#39;s or a camera&#39;s pictures, pictures
 from a messenger and screenshots.</p>
 <h2 id="what-happens-after-the-upload">What happens after the upload<a class="anchor" href="#what-happens-after-the-upload" aria-label="Link to this section"></a></h2>
-<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 516" role="img" aria-label="Four ways in (Import media, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album or into an album already there, or discarded to your trash">
+<figure class="diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 516" role="img" aria-label="Four ways in (Upload, drag and drop, SFTP or WebDAV, a zip or Takeout) lead to a category folder in your staging area, where files go through arriving, being prepared and being grouped and become a suggested album in a lane; from there they are filed into the library as a new album or into an album already there, or discarded to your trash">
   <title>A file's way through staging</title>
   <defs>
     <marker id="archive-importing-md-1-staging-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -426,7 +408,7 @@ from a messenger and screenshots.</p>
   
   <rect x="24" y="24" width="170" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="109" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
-    fill="#eceff4">Import media</text>
+    fill="#eceff4">Upload</text>
   <rect x="218" y="24" width="170" height="48" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.25" />
   <text x="303" y="53" text-anchor="middle" font-family="Familjen Grotesk, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600"
     fill="#eceff4">Drag and drop</text>
@@ -765,7 +747,7 @@ imports and the <code>staging</code> command.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/archive/importing.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-new-files-go">Where new files go</a></li><li><a href="#import-media">Import media</a></li><li class="nested"><a href="#follow-an-upload">Follow an upload</a></li><li><a href="#upload-or-drop-files-on-a-page">Upload or drop files on a page</a></li><li><a href="#upload-straight-into-an-album">Upload straight into an album</a></li><li class="nested"><a href="#staging-or-an-album">Staging or an album?</a></li><li><a href="#copy-files-in-over-sftp">Copy files in over SFTP</a></li><li class="nested"><a href="#keep-folder-names-for-the-grouping">Keep folder names for the grouping</a></li><li><a href="#let-a-phone-send-its-photos-by-itself">Let a phone send its photos by itself</a></li><li><a href="#zips-and-google-takeout-exports">Zips and Google Takeout exports</a></li><li class="nested"><a href="#zips">Zips</a></li><li class="nested"><a href="#a-google-takeout-export">A Google Takeout export</a></li><li class="nested"><a href="#if-the-export-went-into-the-inbox">If the export went into the Inbox</a></li><li><a href="#what-happens-after-the-upload">What happens after the upload</a></li><li><a href="#why-new-pictures-have-no-thumbnails-yet">Why new pictures have no thumbnails yet</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#where-new-files-go">Where new files go</a></li><li><a href="#upload-into-staging">Upload into staging</a></li><li class="nested"><a href="#follow-an-upload">Follow an upload</a></li><li><a href="#upload-or-drop-files-on-a-page">Upload or drop files on a page</a></li><li><a href="#upload-straight-into-an-album">Upload straight into an album</a></li><li class="nested"><a href="#staging-or-an-album">Staging or an album?</a></li><li><a href="#copy-files-in-over-sftp">Copy files in over SFTP</a></li><li class="nested"><a href="#keep-folder-names-for-the-grouping">Keep folder names for the grouping</a></li><li><a href="#let-a-phone-send-its-photos-by-itself">Let a phone send its photos by itself</a></li><li><a href="#zips-and-google-takeout-exports">Zips and Google Takeout exports</a></li><li class="nested"><a href="#zips">Zips</a></li><li class="nested"><a href="#a-google-takeout-export">A Google Takeout export</a></li><li class="nested"><a href="#if-the-export-went-into-the-inbox">If the export went into the Inbox</a></li><li><a href="#what-happens-after-the-upload">What happens after the upload</a></li><li><a href="#why-new-pictures-have-no-thumbnails-yet">Why new pictures have no thumbnails yet</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

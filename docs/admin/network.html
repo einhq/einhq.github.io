@@ -243,7 +243,7 @@ podman compose up -d   <span class="hljs-comment"># or: docker compose up -d</sp
 </tr>
 <tr>
 <td>Sends <code>X-Forwarded-Proto: https</code> (or <code>Forwarded: proto=https</code>)</td>
-<td>EiN then marks its sign-in cookie <code>Secure</code> and names it <code>__Host-ein</code>, so the browser sends it only over HTTPS and takes it only from EiN&#39;s own address, not from another name under the same domain. Over plain HTTP the cookie is neither, so the same EiN keeps working on the home network.</td>
+<td>EiN then marks its sign-in cookie <code>Secure</code> and names it <code>__Host-ein</code>, so the browser sends it only over HTTPS and takes it only from EiN&#39;s own address, not from another name under the same domain. A proxy that says <code>wss</code> for the WebSocket, as Traefik does, is understood the same way. Over plain HTTP the cookie is neither, so the same EiN keeps working on the home network.</td>
 </tr>
 <tr>
 <td>Passes every method and header as the client sent it</td>

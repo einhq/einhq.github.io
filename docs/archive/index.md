@@ -76,7 +76,7 @@ In the sidebar:
 
 In the top bar:
 
-- The **Create** menu gets **Import media** (when you are signed in), **Album**, **Person**,
+- The **Create** menu gets **Upload** (when you are signed in, opening Staging), **Album**, **Person**,
   **Location** and **Camera**.
 - The account menu gets **Favourites**.
 - **Random album**, the button with two crossing arrows beside the search box, opens an album at
@@ -84,7 +84,7 @@ In the top bar:
 
 In EiN's own pages:
 
-- **Home**: the Archive fills **On this day**, **News** and **Events**, and offers **Import media**
+- **Home**: the Archive fills **On this day**, **News** and **Events**, and offers **Upload**
   under an empty News when you are signed in; see [Memories, news and events on Home](home.md).
 - **Statistics**: the **Events** section, with births, engagements, marriages and deaths by month.
 - **Search**: the **People**, **Locations**, **Years** and **Labels** rows before you search, and,
@@ -121,9 +121,8 @@ Removing the module never removes the folders under `/archive`, since they hold 
 
 ## Start using it
 
-1. **Upload.** In the top bar, open **Create** (the plus) and choose **Import media**. Choose
-   **Inbox** under **Into which category?**, click **Choose files** or **Choose a folder**, and
-   click **Upload**. Keep the tab open until the **Uploads** button in the top bar says it is done.
+1. **Upload.** Open **Staging** in the sidebar (or **Create**, the plus, then **Upload**), click
+   **Upload** in the header and pick the files, or drop files or folders on the page. Keep the tab open until the **Uploads** button in the top bar says it is done.
    For more than about 10,000 files, copy them over SFTP instead. See
    [Getting your photos in](importing.md).
 2. **Sort in staging.** A few minutes after the files are prepared, open **Staging** in the sidebar,
@@ -142,7 +141,7 @@ whole order of steps on [First steps](../start/first-steps.md).
 
 ## Pages in this section
 
-- [Getting your photos in](importing.md): Import media, dropping files, SFTP, zips and Google
+- [Getting your photos in](importing.md): uploading, dropping files, SFTP, zips and Google
   Takeout.
 - [Sorting in staging](staging.md): filing uploads into albums.
 - [Duplicates](duplicates.md): copies, look-alikes and bursts, and removing them.

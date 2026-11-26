@@ -77,7 +77,7 @@ Every setting of an EiN with all its modules: 127 of them, in the groups the Set
 
 ### `CFG_USER_HEADER_ENTRANCE`
 
-**Header entrance**. How the tiles of a page's header arrive when the page opens: drawn as if by pen and filled from the bottom up, falling into place, sliding in from the right, swept in from left to right, growing from the bottom edge, rippling out from the title, snapping in like puzzle pieces, or a wave of light across them. A device set to reduce motion never animates it.
+**Header entrance**. How the tiles of a page's header arrive when the page opens: drawn as if by pen and filled from the left, falling into place, sliding in from the right, swept in from left to right, growing from the bottom edge, rippling out from the title, snapping in like puzzle pieces, or a wave of light across them. A device set to reduce motion never animates it.
 
 | | |
 | --- | --- |
@@ -98,7 +98,7 @@ Every setting of an EiN with all its modules: 127 of them, in the groups the Set
 
 ### `CFG_USER_HEADER_COVER`
 
-**Header over a cover**. How the tiles of a page's header meet its cover photo: split gives the left of the header to the tiles, dissolving hat by hat into the photo along a slanted edge, with their outlines running on over it; lines lays only their outlines over the photo, fading out from the left.
+**Header over a cover**. How the tiles of a page's header meet its cover photo: split gives the left of the header to the tiles, dissolving hat by hat into the photo along a slanted edge, the photo starting where they begin to fade, with their outlines running on over it; lines lays only their outlines over the photo, fading out from the left.
 
 | | |
 | --- | --- |

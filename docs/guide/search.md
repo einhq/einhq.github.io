@@ -30,7 +30,7 @@ With the box empty, the list shows two groups:
 - **Go to**: every page in your sidebar, with the sidebar section it is in beside it.
 - **Do**: every button in the top bar, and every row of its menus named after its menu. With the
   Archive and the assistant installed, these include **Chat**, **Random album**, **Create: Album**,
-  **Create: Import media** and **Account: Favourites**.
+  **Create: Upload** and **Account: Favourites**.
 
 Use the arrow keys to light a row and <kbd>Enter</kbd> to open it, or click it. While nothing is
 typed, <kbd>Enter</kbd> does nothing until an arrow key has lit a row.

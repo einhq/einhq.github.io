@@ -843,21 +843,22 @@ List media taken on a given day (MM-DD, default today) in past years.
 <small>reads only</small>
 
 ```text
-dayinhistory [--years=<number>] [--per-year=<number>] [<day>]
+dayinhistory [--years=<string>] [--per-year=<number>] [<day>]
 ```
 
 | Argument  | What it is                   |
 | --------- | ---------------------------- |
 | `[<day>]` | day as MM-DD (default today) |
 
-| Option                | What it does                                          |
-| --------------------- | ----------------------------------------------------- |
-| `--years=<number>`    | years with media to collect, newest first (default 8) |
-| `--per-year=<number>` | media kept per year, earliest first (default 4)       |
+| Option                | What it does                                                          |
+| --------------------- | --------------------------------------------------------------------- |
+| `--years=<string>`    | years with media to collect, newest first, or all of them (default 8) |
+| `--per-year=<number>` | media kept per year, earliest first (default 4)                       |
 
 ```bash
 dayinhistory
 dayinhistory 06-21 --years 20 --per-year 1
+dayinhistory --years all --per-year 1
 ```
 
 With `JSON_OUTPUT=1`: monthDay, and the years that have media taken on that day, newest first, each with its first media.
@@ -1909,20 +1910,21 @@ The years with pictures taken on a day (MM-DD, default today), as onthisday entr
 <small>reads only</small>
 
 ```text
-onthisday-media [--limit=<number>] [<day>]
+onthisday-media [--limit=<string>] [<day>]
 ```
 
 | Argument  | What it is                        |
 | --------- | --------------------------------- |
 | `[<day>]` | day as MM-DD (default today, UTC) |
 
-| Option             | What it does                             |
-| ------------------ | ---------------------------------------- |
-| `--limit=<number>` | years returned, newest first (default 8) |
+| Option             | What it does                                             |
+| ------------------ | -------------------------------------------------------- |
+| `--limit=<string>` | years returned, newest first, or all of them (default 8) |
 
 ```bash
 onthisday-media
 onthisday-media 06-21 --limit 20
+onthisday-media --limit all
 ```
 
 With `JSON_OUTPUT=1`: one onthisday entry per year with pictures taken on that day, newest year first: the year, a title, the year's first picture, and the route that draws it as a ring.
@@ -2004,7 +2006,7 @@ With `JSON_OUTPUT=1`: the event path; the event is written, and for a dated birt
 
 ### `person-check`
 
-Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died)
+Check family-tree integrity (dangling links, reciprocity, cycles, dates, birth/death events not on born/died, faces on photos from before the birth)
 
 <small>reads only</small>
 
@@ -2024,7 +2026,7 @@ person-check [--json] <root>
 person-check /archive/people
 ```
 
-With `JSON_OUTPUT=1`: every dangling link, missing reciprocal, cycle, impossible date and birth/death event not mirrored onto born/died it found.
+With `JSON_OUTPUT=1`: every dangling link, missing reciprocal, cycle, impossible date, birth/death event not mirrored onto born/died and face on a photo taken before its person was born it found.
 
 ### `person-children`
 
@@ -2113,20 +2115,21 @@ Take faces off a person: to a new unnamed person, to an existing one, or off ide
 <small>changes things</small>
 
 ```text
-person-detach [--to=<string>] [--to-new-person] [--rematch] [--dry-run] [--verbose] <facePath...>
+person-detach [--to=<string>] [--to-new-person] [--rematch] [--before-birth] [--dry-run] [--verbose] <facePath...>
 ```
 
 | Argument        | What it is                                            |
 | --------------- | ----------------------------------------------------- |
 | `<facePath...>` | regions or voices, e.g. /albums/x.jpg/regions/face-0. |
 
-| Option            | What it does                                                                              |
-| ----------------- | ----------------------------------------------------------------------------------------- |
-| `--to=<string>`   | move the faces to this person (path or bare unknown id)                                   |
-| `--to-new-person` | mint one unnamed person and move the faces there.                                         |
-| `--rematch`       | not this person: let recognition place each face again, never back on the person it left. |
-| `--dry-run`       | report what would move without changing anything.                                         |
-| `--verbose`       | print each face.                                                                          |
+| Option            | What it does                                                                                   |
+| ----------------- | ---------------------------------------------------------------------------------------------- |
+| `--to=<string>`   | move the faces to this person (path or bare unknown id)                                        |
+| `--to-new-person` | mint one unnamed person and move the faces there.                                              |
+| `--rematch`       | not this person: let recognition place each face again, never back on the person it left.      |
+| `--before-birth`  | with --to: move faces from photos taken before that person was born too; without it they stay. |
+| `--dry-run`       | report what would move without changing anything.                                              |
+| `--verbose`       | print each face.                                                                               |
 
 ```bash
 person-detach --rematch /archive/albums/Exempelalbum_2019/files/IMG_0007.jpg/regions/face-1
@@ -2340,7 +2343,7 @@ Merge people into another (faces, events, relations and links to them move; the 
 <small>changes things</small>
 
 ```text
-person-merge [--dry-run] [--force] [--verbose] <src...> <dst>
+person-merge [--dry-run] [--force] [--before-birth] [--verbose] <src...> <dst>
 ```
 
 | Argument   | What it is            |
@@ -2348,11 +2351,12 @@ person-merge [--dry-run] [--force] [--verbose] <src...> <dst>
 | `<src...>` | people to merge away. |
 | `<dst>`    | person to keep.       |
 
-| Option      | What it does                                          |
-| ----------- | ----------------------------------------------------- |
-| `--dry-run` | report what would move without changing anything.     |
-| `--force`   | merge even if a source has children this cannot move. |
-| `--verbose` | print detail.                                         |
+| Option           | What it does                                                                                          |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| `--dry-run`      | report what would move without changing anything.                                                     |
+| `--force`        | merge even if a source has children this cannot move.                                                 |
+| `--before-birth` | move faces from photos taken before the destination was born too; without it they stay on the source. |
+| `--verbose`      | print detail.                                                                                         |
 
 ```bash
 person-merge /archive/people/unnamed-1 /archive/people/anna-exempel
