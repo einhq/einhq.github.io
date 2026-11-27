@@ -219,7 +219,7 @@ or, when its writer marks where a reader may start (the media service marks each
 video it writes), from the latest such point, so a player starts with a whole picture; then until
 you stop: <code>cat /dev/front-door/main.ts &gt; door.ts</code> records a camera, and its name&#39;s extension
 says what the bytes are (<code>.ts</code>, MPEG-TS). The driver writes it only while someone reads it. A picture
-of it now is <code>/stream/dev/front-door/main.ts</code> in a browser, which the device&#39;s driver takes from the
+of it now is its <code>main.jpg</code>, <code>/file/dev/front-door/main.jpg</code> in a browser, which the device&#39;s driver takes from the
 camera then. A stream of fragmented MP4 (<code>.mp4</code>) the device&#39;s page plays live while its driver
 runs, reading it as any file, which <code>device-show</code> says as <code>&quot;live&quot;: true</code>. Its attributes say what it is: <code>mimetype</code>, <code>codec</code>, <code>width</code>, <code>height</code>, <code>fps</code>
 and <code>audio</code>, as far as the driver knows them.</p>

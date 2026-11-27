@@ -122,9 +122,10 @@ the personal group. You can pick any shared group instead.
 
 Type a **New password**, **Repeat** it, and choose **Set password**. **Password set** appears
 beside it. Their current password stops working at once, in the browser, over SSH and SFTP and
-over WebDAV, but browsers and terminals where they are signed in stay signed in. A program using
-[WebDAV](../guide/webdav.md), such as a phone's backup app, sends the password with every request,
-so it needs the new one at once.
+over WebDAV, and they are signed out wherever they were signed in: browsers, terminals, SSH
+connections and the app. Setting your own password signs you out everywhere but where you set it. A
+program using [WebDAV](../guide/webdav.md), such as a phone's backup app, sends the password with
+every request, so it needs the new one at once.
 
 EiN has no rules for passwords: it takes any password that is not empty. It sends no e-mail, so it
 has no "forgot password" of its own, and cannot make someone choose a new password at their next
@@ -145,7 +146,8 @@ they may not know, such as an account you made for them, or one brought over fro
    and a long code, with when it expires: in 7 days.
 2. Click the link to copy it, and send it to the person however you like: a message, a mail of your
    own, a note. EiN sends nothing itself.
-3. They open it, see their username, and choose a password, which signs them in
+3. They open it, see their username, and choose a password, which signs them out wherever the
+   account was signed in and signs them in
    ([Sign in with a link](../guide/interface.md#sign-in-with-a-link) shows their side).
 
 The link works once: choosing a password with it spends it, and the section is empty again. Until
@@ -162,8 +164,10 @@ terminal**, each with the address it comes from and since when. Earlier sign-ins
 included, are on the Status page's [Activity tab](monitoring.md#the-activity-tab).
 
 **Disable sign-in** signs them out everywhere at once, ends what they have running, and keeps them
-out of the browser, SSH, SFTP and WebDAV alike. Nothing they own is changed. The button then reads
-**Enable sign-in**, which lets them sign in again with their password. A disabled account is
+out of the browser, SSH, SFTP and WebDAV alike. Nothing they own is changed, but a home folder with
+nothing in it but empty folders, as someone who never used EiN leaves it, is removed: a disabled
+account then leaves nothing behind. The button then reads **Enable sign-in**, which lets them sign
+in again with their password and makes their home folder again, empty, if it was removed. A disabled account is
 hidden from the Users list until you switch on **Show disabled users** at the foot of the list,
 which is there only while some account is disabled.
 
@@ -185,9 +189,10 @@ personal group goes too, unless someone else is in it; then it stays, and EiN sa
 
 > [!WARNING]
 > There is no undo, and deleted home folders do not go to the trash. If you only want to keep
-> someone out, use **Disable sign-in** instead. EiN has no backup command; see
-> [Your data](data.md) before you delete an account whose home folder holds anything you want to
-> keep, such as pictures still unsorted in the Archive's staging.
+> someone out, use **Disable sign-in** instead. Only a [backup](data.md#back-up-ein) of the whole
+> EiN, taken before, brings it back, and restoring it brings back everything else as it was then
+> too; back up before you delete an account whose home folder holds anything you want to keep, such
+> as pictures still unsorted in the Archive's staging.
 
 ## Create and change groups
 
@@ -275,7 +280,7 @@ created after you change them; [First steps](../start/first-steps.md#decide-who-
 values for common households, and [How new albums start out](../guide/sharing.md#how-new-albums-start-out)
 shows how each person can narrow them.
 
-![The Permissions tab: the New users, Visitors, Sharing and Sign-in sessions cards, each with a sentence saying what its values come to](../../assets/shots/settings-permissions.webp "Each card says in plain words what new accounts, visitors and new albums get")
+![The Permissions tab: the New users, Visitors and Sharing cards, each with a sentence saying what its values come to](../../assets/shots/settings-permissions.webp "Each card says in plain words what new accounts, visitors and new albums get")
 
 ## Let a second person administer
 
@@ -332,6 +337,7 @@ user-set-primary-group helen family
 user-disable helen                   # signs her out everywhere and keeps her out
 user-enable helen
 user-delete helen --to=peggy         # what she owned passes to peggy
+user-delete helen --unused           # only when nothing but her account names her; says what does
 
 group-create family --title=Family --home   # --home: with a shared home, /groups/family
 group-home family                    # give an existing group its shared home
@@ -363,8 +369,14 @@ who                      # who is signed in, from where, and what they run
 ```
 
 `user-create` without `--groups` uses [`CFG_DEFAULT_USER_GROUPS`](../reference/settings.md#cfg_default_user_groups);
-`--groups=` with nothing after it adds the account to no group but its own. `user-delete` and
-`group-delete` without `--to` hand what was owned to `admin`.
+`--groups=` with nothing after it adds the account to no group but its own. Without `--uid` or
+`--gid`, `user-create` and `group-create` take a number no account or group has had, a deleted one
+included, so a new account never shows as the maker of what a deleted one made. `user-delete` and
+`group-delete` without `--to` hand what was owned to `admin`. `user-delete --unused` hands nothing
+over: it deletes the account only when its home holds nothing but folders and nothing else in EiN
+names it — nothing it owns, made or changed, no access given to it, nothing it did in the audit
+trail, no sign-in in the access log, no share link showing things as it — and otherwise says which
+of these there are, so an account someone never used can go without anything passing to anyone.
 [Commands by task](../shell/commands.md) and the [core command reference](../reference/commands-core.md#user-create)
 list every option.
 

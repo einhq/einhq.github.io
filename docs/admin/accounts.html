@@ -236,9 +236,10 @@ once, sign them out everywhere with <strong>Disable sign-in</strong> and then <s
 <h3 id="password">Password<a class="anchor" href="#password" aria-label="Link to this section"></a></h3>
 <p>Type a <strong>New password</strong>, <strong>Repeat</strong> it, and choose <strong>Set password</strong>. <strong>Password set</strong> appears
 beside it. Their current password stops working at once, in the browser, over SSH and SFTP and
-over WebDAV, but browsers and terminals where they are signed in stay signed in. A program using
-<a href="../guide/webdav.html">WebDAV</a>, such as a phone&#39;s backup app, sends the password with every request,
-so it needs the new one at once.</p>
+over WebDAV, and they are signed out wherever they were signed in: browsers, terminals, SSH
+connections and the app. Setting your own password signs you out everywhere but where you set it. A
+program using <a href="../guide/webdav.html">WebDAV</a>, such as a phone&#39;s backup app, sends the password with
+every request, so it needs the new one at once.</p>
 <p>EiN has no rules for passwords: it takes any password that is not empty. It sends no e-mail, so it
 has no &quot;forgot password&quot; of its own, and cannot make someone choose a new password at their next
 sign-in. When someone has forgotten theirs, or has never had one, send them a
@@ -255,7 +256,8 @@ they may not know, such as an account you made for them, or one brought over fro
 and a long code, with when it expires: in 7 days.</li>
 <li>Click the link to copy it, and send it to the person however you like: a message, a mail of your
 own, a note. EiN sends nothing itself.</li>
-<li>They open it, see their username, and choose a password, which signs them in
+<li>They open it, see their username, and choose a password, which signs them out wherever the
+account was signed in and signs them in
 (<a href="../guide/interface.html#sign-in-with-a-link">Sign in with a link</a> shows their side).</li>
 </ol>
 <p>The link works once: choosing a password with it spends it, and the section is empty again. Until
@@ -269,8 +271,10 @@ disabled works again once it is enabled, if it has not expired. In the terminal,
 terminal</strong>, each with the address it comes from and since when. Earlier sign-ins, failed ones
 included, are on the Status page&#39;s <a href="monitoring.html#the-activity-tab">Activity tab</a>.</p>
 <p><strong>Disable sign-in</strong> signs them out everywhere at once, ends what they have running, and keeps them
-out of the browser, SSH, SFTP and WebDAV alike. Nothing they own is changed. The button then reads
-<strong>Enable sign-in</strong>, which lets them sign in again with their password. A disabled account is
+out of the browser, SSH, SFTP and WebDAV alike. Nothing they own is changed, but a home folder with
+nothing in it but empty folders, as someone who never used EiN leaves it, is removed: a disabled
+account then leaves nothing behind. The button then reads <strong>Enable sign-in</strong>, which lets them sign
+in again with their password and makes their home folder again, empty, if it was removed. A disabled account is
 hidden from the Users list until you switch on <strong>Show disabled users</strong> at the foot of the list,
 which is there only while some account is disabled.</p>
 <p>The <code>admin</code> account has neither button: &quot;The administrator can&#39;t be disabled or deleted.&quot; The
@@ -289,9 +293,10 @@ The administrator is picked to start with.</li>
 personal group goes too, unless someone else is in it; then it stays, and EiN says so.</p>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
 <p>There is no undo, and deleted home folders do not go to the trash. If you only want to keep
-someone out, use <strong>Disable sign-in</strong> instead. EiN has no backup command; see
-<a href="data.html">Your data</a> before you delete an account whose home folder holds anything you want to
-keep, such as pictures still unsorted in the Archive&#39;s staging.</p>
+someone out, use <strong>Disable sign-in</strong> instead. Only a <a href="data.html#back-up-ein">backup</a> of the whole
+EiN, taken before, brings it back, and restoring it brings back everything else as it was then
+too; back up before you delete an account whose home folder holds anything you want to keep, such
+as pictures still unsorted in the Archive&#39;s staging.</p>
 </aside>
 <h2 id="create-and-change-groups">Create and change groups<a class="anchor" href="#create-and-change-groups" aria-label="Link to this section"></a></h2>
 <p>A group is a set of accounts to share with. If everyone with an account is family, the built-in
@@ -388,7 +393,7 @@ explains what visitors see when it is on.</p>
 created after you change them; <a href="../start/first-steps.html#decide-who-sees-what">First steps</a> suggests
 values for common households, and <a href="../guide/sharing.html#how-new-albums-start-out">How new albums start out</a>
 shows how each person can narrow them.</p>
-<figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="The Permissions tab: the New users, Visitors, Sharing and Sign-in sessions cards, each with a sentence saying what its values come to" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each card says in plain words what new accounts, visitors and new albums get</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="The Permissions tab: the New users, Visitors and Sharing cards, each with a sentence saying what its values come to" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each card says in plain words what new accounts, visitors and new albums get</figcaption></figure>
 <h2 id="let-a-second-person-administer">Let a second person administer<a class="anchor" href="#let-a-second-person-administer" aria-label="Link to this section"></a></h2>
 <p>Being in the <code>admin</code> group does not make anyone an administrator. To let someone you trust act as
 the administrator, or to keep an everyday account for yourself, put that account in <strong>Administrators
@@ -433,6 +438,7 @@ user-set-primary-group helen family
 user-disable helen                   <span class="hljs-comment"># signs her out everywhere and keeps her out</span>
 user-enable helen
 user-delete helen --to=peggy         <span class="hljs-comment"># what she owned passes to peggy</span>
+user-delete helen --unused           <span class="hljs-comment"># only when nothing but her account names her; says what does</span>
 
 group-create family --title=Family --home   <span class="hljs-comment"># --home: with a shared home, /groups/family</span>
 group-home family                    <span class="hljs-comment"># give an existing group its shared home</span>
@@ -457,8 +463,14 @@ user-groups helen
 group-list --members     <span class="hljs-comment"># every group, and who is linked into it</span>
 <span class="hljs-built_in">who</span>                      <span class="hljs-comment"># who is signed in, from where, and what they run</span></code></pre></div>
 <p><code>user-create</code> without <code>--groups</code> uses <a href="../reference/settings.html#cfg_default_user_groups"><code>CFG_DEFAULT_USER_GROUPS</code></a>;
-<code>--groups=</code> with nothing after it adds the account to no group but its own. <code>user-delete</code> and
-<code>group-delete</code> without <code>--to</code> hand what was owned to <code>admin</code>.
+<code>--groups=</code> with nothing after it adds the account to no group but its own. Without <code>--uid</code> or
+<code>--gid</code>, <code>user-create</code> and <code>group-create</code> take a number no account or group has had, a deleted one
+included, so a new account never shows as the maker of what a deleted one made. <code>user-delete</code> and
+<code>group-delete</code> without <code>--to</code> hand what was owned to <code>admin</code>. <code>user-delete --unused</code> hands nothing
+over: it deletes the account only when its home holds nothing but folders and nothing else in EiN
+names it — nothing it owns, made or changed, no access given to it, nothing it did in the audit
+trail, no sign-in in the access log, no share link showing things as it — and otherwise says which
+of these there are, so an account someone never used can go without anything passing to anyone.
 <a href="../shell/commands.html">Commands by task</a> and the <a href="../reference/commands-core.html#user-create">core command reference</a>
 list every option.</p>
 <h2 id="when-something-goes-differently">When something goes differently<a class="anchor" href="#when-something-goes-differently" aria-label="Link to this section"></a></h2>

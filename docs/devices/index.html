@@ -274,13 +274,17 @@ lists it with EiN&#39;s other ports.</p>
 <h3 id="a-broker-you-already-run">A broker you already run<a class="anchor" href="#a-broker-you-already-run" aria-label="Link to this section"></a></h3>
 <p>Give EiN the broker&#39;s address and an account on it:</p>
 <ol>
-<li>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>MQTT broker</strong> under
-<strong>Set up</strong>.</li>
-<li>Fill in <strong>Broker</strong>, <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS, and
-the <strong>User</strong> and <strong>Password</strong> EiN signs in with.</li>
-<li>Choose <strong>Save</strong>. The three are saved together and <code>devices-bridge</code> restarts once. Under
+<li><p>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>MQTT broker</strong> under
+<strong>Set up</strong>.</p>
+<figure class="shot"><a href="../../assets/shots/settings-mqtt@2x.webp"><img src="../../assets/shots/settings-mqtt.webp" srcset="../../assets/shots/settings-mqtt.webp 1x, ../../assets/shots/settings-mqtt@2x.webp 2x" alt="The MQTT broker page under Set up on Settings → System: the Broker field, empty and marked Default, with mqtt://host:1883 as its hint, the User and Password fields, and under Now &quot;No broker is set: devices are not heard over MQTT. Those EiN asks over the network are still read.&quot;" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The broker, the account EiN signs in with, and under Now whether it is heard.</figcaption></figure>
+</li>
+<li><p>Fill in <strong>Broker</strong>, <code>mqtt://host:1883</code>, or <code>mqtts://host:8883</code> for a broker that takes TLS, and
+the <strong>User</strong> and <strong>Password</strong> EiN signs in with.</p>
+</li>
+<li><p>Choose <strong>Save</strong>. The three are saved together and <code>devices-bridge</code> restarts once. Under
 <strong>Now</strong> the page says whether EiN is connected to the broker, with how many devices and messages
-it has heard, or why it is not, such as &quot;Connection refused&quot;.</li>
+it has heard, or why it is not, such as &quot;Connection refused&quot;.</p>
+</li>
 </ol>
 <p>Or with <code>config set</code>, the three in one call:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator; the leading space keeps the password out of your history</span>
@@ -1081,9 +1085,11 @@ browser goes full screen, and plays sound, only after a tap.</li>
 </ol>
 <p>From then on it is listed in <strong>Show on</strong> for everyone who may use it, and its <code>show</code>, <code>play</code>, <code>pause</code>,
 <code>stop</code>, <code>seek</code>, <code>volume</code> and <code>muted</code> work as a Cast screen&#39;s do. It plays each thing in a form the
-browser says it plays: a video the browser cannot play as it is goes as one stream made by the media
-service, which cannot be sought in, unless its <code>video</code> setting is <code>av1</code>, for a browser that plays
-AV1 (Chrome, Edge and Firefox do). Until the first tap a video plays muted, with <strong>Tap for sound</strong> in a
+browser says it plays: a video the browser cannot play as it is is made by the media service as it
+plays, as HLS for a browser with its own HLS player, such as Chrome, and otherwise as one stream,
+which cannot be sought in; unless its <code>video</code> setting is <code>av1</code>, for a browser that plays AV1 (Chrome,
+Edge and Firefox do). A page, such as an album&#39;s slideshow or a dashboard, plays as live
+video, kept at its newest moment. Until the first tap a video plays muted, with <strong>Tap for sound</strong> in a
 corner. The pointer hides after a few seconds.</p>
 <p>The browser keeps the address, so opening <code>/display</code> again, or starting the browser again, makes it
 the same screen. It is the screen while the page is open: closed, it is <strong>offline</strong> in <strong>Show on</strong>

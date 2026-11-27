@@ -38,7 +38,8 @@ password.
 3. Choose **Set password and sign in**.
 
 EiN signs you in and opens **Home**. The password is now yours: you sign in with it in the browser
-and over SSH and SFTP, and the link stops working. A link works once and for a few days, a week
+and over SSH and SFTP, and the link stops working. Wherever your account was signed in before is
+signed out. A link works once and for a few days, a week
 unless the administrator chose otherwise. When it no longer works, the page says "This link no
 longer works": it has expired, been used already, or been replaced by a newer one. Ask for a new
 one.
@@ -150,7 +151,7 @@ EiN itself puts one row in this menu, **Device**, for members of the `devices` g
 put the others. With no row for you, there is no plus in the top bar. With the Archive, Recipes and
 Dashboards installed, the menu has these rows:
 
-![The Create New menu open under the plus: Import media, Album, Person, Location, Recipe, Camera, Device and Dashboard](../../assets/shots/create-menu.webp "The Create menu gathers the rows that EiN and the installed modules give it.")
+![The Create New menu open under the plus: Upload, Album, Person, Location, Recipe, Camera, Device and Dashboard](../../assets/shots/create-menu.webp "The Create menu gathers the rows that EiN and the installed modules give it.")
 
 | Row           | Opens                                                        | More                                              |
 | ------------- | ------------------------------------------------------------ | ------------------------------------------------- |
@@ -177,7 +178,7 @@ Choose your picture at the right end of the top bar. The menu is headed **Accoun
 | **Trash**                  | Always                                                    | What you have deleted, to restore or remove for good.                                                                                                                                                                  |
 | **App**                    | In the EiN app                                            | The phone the app is paired with, its version and **Unpair**, its photo backup and position reports: [The EiN app](phone.md#the-ein-app).                                                                              |
 | **Arrange navigation**     | Always                                                    | Lets you drag the entries of the sidebar, the top bar and this menu where you want them; see [Arrange by dragging](customizing.md#arrange-by-dragging).                                                                |
-| **Shortcuts** <kbd>?</kbd> | Always                                                    | Opens the list of keyboard shortcuts.                                                                                                                                                                                  |
+| **Shortcuts** <kbd>?</kbd> | Not on a phone                                            | Opens the list of keyboard shortcuts.                                                                                                                                                                                  |
 | **About EiN**              | Always                                                    | A dialog with EiN's version, how long it has been running, the installed modules with their versions, the services it uses (the language model, the media service) and the versions of PostgreSQL and Deno it runs on. |
 | **Administer…**            | For members of the `sudo` group, outside admin mode       | Admin mode, below.                                                                                                                                                                                                     |
 | **Leave admin mode**       | In admin mode                                             | Back to your own rights.                                                                                                                                                                                               |

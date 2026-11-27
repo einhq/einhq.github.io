@@ -2,7 +2,7 @@
 
 # Settings
 
-Every setting of an EiN with all its modules: 127 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
+Every setting of an EiN with all its modules: 128 of them, in the groups the Settings page shows. [Configuration](../admin/configuration.md) says where each value comes from and how to change it.
 
 - **Who it is for**: _everyone_ is a system setting, which only an administrator changes, on Settings → System or with `config set`; _each person_ is a preference everyone sets for themselves, on Profile → Preferences.
 - **Default**: the value until someone changes it. A deployment can set another in `.env`, and a module can choose one.
@@ -146,7 +146,7 @@ Every setting of an EiN with all its modules: 127 of them, in the groups the Set
 
 ### `CFG_LLM_KEY`
 
-**Language model key**. The bearer key the provider expects, sent only to the language model address above. Unset when the server needs none. No shell sees it, and nothing shows it once it is set.
+**Language model key**. The bearer key the language model expects, sent only to the language model address above: this machine's model takes the one its installation made, a provider its own. Unset when the server needs none. No shell sees it, and nothing shows it once it is set.
 
 | | |
 | --- | --- |
@@ -1081,6 +1081,16 @@ Every setting of an EiN with all its modules: 127 of them, in the groups the Set
 | Kind | string |
 
 ## Sessions
+
+### `CFG_SSH_PASSWORD_AUTH`
+
+**Passwords over SSH and SFTP**. Whether the SSH and SFTP server accepts an account's password, or only a key from its ~/.ssh/authorized_keys. Off, it does not offer passwords and refuses them; connections already signed in stay. Turn it off before port 2222 is reachable from the internet.
+
+| | |
+| --- | --- |
+| Who it is for | Everyone (an administrator sets it) |
+| Default | `true` |
+| Kind | boolean |
 
 ### `CFG_SESSION_REAP_INTERVAL`
 

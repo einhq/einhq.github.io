@@ -73,7 +73,8 @@ computer with `ssh-keygen` and accept the defaults.
 
    It asks for your EiN password this one time. The `-s` matters: it makes `ssh-copy-id` copy the
    key over SFTP. Without it, `ssh-copy-id` sends a script of Unix shell commands, which EiN's shell
-   does not run.
+   does not run. Where the administrator has turned passwords over SSH off, `ssh-copy-id` cannot
+   sign in: add the key from EiN's terminal instead, as below.
 
 2. Log in as before. `ssh` and `sftp` now use the key and do not ask for the password.
 
@@ -90,7 +91,8 @@ none of them may be a link. `ssh-copy-id -s` sets the modes for you.
 
 ### Add a key without ssh-copy-id
 
-Where `ssh-copy-id` is missing, as on Windows, add the key from EiN's terminal. Copy the contents of
+Where `ssh-copy-id` is missing, as on Windows, or passwords over SSH are off, add the key from EiN's
+terminal in the Web UI. Copy the contents of
 your public key file (`id_ed25519.pub` in the `.ssh` folder of your home on your own computer), then:
 
 ```bash
@@ -241,6 +243,9 @@ it needs an `rsync` program on EiN's side, and EiN's shell has none.
 - Every account with a password can sign in over SSH and SFTP; no group membership is needed. Being in
   the group `ssh` is about reaching other machines from EiN, not about reaching EiN (see
   [Reaching other machines](remote.md)).
+- The administrator can turn passwords over SSH and SFTP off with the setting **Passwords over SSH and
+  SFTP** (`CFG_SSH_PASSWORD_AUTH`), so that only a key signs in. The Web UI and WebDAV still take the
+  password. See [Ports, HTTPS and remote access](../admin/network.md#before-you-open-ein-to-the-internet).
 - An account still waiting for a password, such as one imported without one, cannot sign in over SSH,
   with a key or with a password, nor anywhere else, until the administrator sets one for it.
 - A disabled account cannot sign in at all, and disabling an account, or deleting it, ends the SSH and
@@ -259,6 +264,7 @@ agent.
 | ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `Connection refused` or a time-out                               | Wrong port or host, or EiN is not running, or the port is not reachable from where you are.                     | Check the port with your administrator; from outside your home network see [Ports, HTTPS and remote access](../admin/network.md).  |
 | `Permission denied (publickey,password)` with the right password | The account still waits for a password, is disabled, or your address is held back after failed attempts.        | Ask your administrator to set a password or enable the account, or wait and try again.                                             |
+| `Permission denied (publickey)` without asking for a password    | Passwords over SSH are off, and no key of yours is in `~/.ssh/authorized_keys` or it is not used.               | Add your key from EiN's terminal in the Web UI, as in [Add a key without ssh-copy-id](#add-a-key-without-ssh-copy-id).             |
 | The key is not used and you are asked for the password           | `authorized_keys` is missing, the key line has options in front, or the modes let others write.                 | Check with `ls -la ~/.ssh` in EiN's terminal and fix with `chmod 700 ~/.ssh` and `chmod 600 ~/.ssh/authorized_keys`.               |
 | `WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!`               | EiN's server key is not the one your computer remembers, as after EiN was installed again from scratch.         | Ask your administrator whether that happened. If so, forget the old key with `ssh-keygen -R "[ein.local]:2222"` and connect again. |
 | `no matching key exchange method found`                          | Your client offers only Diffie-Hellman key exchange; EiN's server speaks curve25519 and ECDH.                   | Update the client (OpenSSH since 5.7, PuTTY since 0.68 and WinSCP speak them), or turn on `curve25519-sha256` in its settings.     |

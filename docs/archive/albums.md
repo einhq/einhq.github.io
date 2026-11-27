@@ -85,7 +85,7 @@ differently with **Share**.
 
 ## What an album page shows
 
-![An album page, Sailing in the archipelago: dates and title over the cover, the Upload, Share and Edit buttons, the Media, Map and Info tabs, Show and Sort, and the pictures of 4 August 2025](../../assets/shots/album.webp "An album opens on its pictures, one section for each day they were taken.")
+![An album page, Sailing in the archipelago: dates and title over the cover, the Upload, Share and Edit buttons, the Search the album box with All, Images, Video and Oldest first at its right, the Media, Map and Info tabs under it, and the pictures of 4 August 2025](../../assets/shots/album.webp "An album opens on its pictures, one section for each day they were taken.")
 
 The header holds, from the top:
 

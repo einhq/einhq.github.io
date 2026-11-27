@@ -10,7 +10,8 @@
  *
  * Only what describes EiN is kept: a setting's default, never its value on that instance, and no
  * variable that instance has set without describing it. The pages are as good as the instance's
- * modules are complete, so take them from one running every module (`mod list`).
+ * modules are complete, so take them from one running every published module (`mod list`); MODULES
+ * names those.
  */
 import { dirname, join } from '@std/path';
 
@@ -64,23 +65,33 @@ const sentence = (text = '') => {
 };
 const code = (text: string) => (text.includes('`') ? `\`\` ${text} \`\`` : `\`${text}\``);
 
+/**
+ * EiN's published modules, by their name in the documentation. The pages describe these alone: a module
+ * the instance runs that is not here, one not published or someone else's, is left out, and named when
+ * the pages are written, so a module published since is added here.
+ */
 const MODULES: Record<string, string> = {
   core: 'Core',
+  'album-folders': 'Album folders',
   archive: 'Archive',
   assistant: 'Assistant',
+  automation: 'Automation',
+  dashboard: 'Dashboards',
+  devices: 'Devices',
   ems: 'Media service',
   media: 'Media',
-  'album-folders': 'Album folders',
-  todo: 'Todo',
   recipes: 'Recipes',
-  dashboard: 'Dashboards',
+  todo: 'Todo',
   vasttrafik: 'Västtrafik',
 };
 
-/** Modules that are not published, which the public documentation leaves out even when the EiN it is made from has them. */
-const UNPUBLISHED = new Set(['importer', 'recipe-scraper']);
-const published = (module = 'core') => !UNPUBLISHED.has(module);
-const moduleName = (m: string) => MODULES[m] ?? m[0].toUpperCase() + m.slice(1);
+const leftOut = new Set<string>();
+const published = (module = 'core') => {
+  if (module in MODULES) return true;
+  leftOut.add(module);
+  return false;
+};
+const moduleName = (m: string) => MODULES[m];
 
 // --- commands ---
 
@@ -315,3 +326,4 @@ for (const [name, text] of Object.entries(pages)) {
 console.log(
   `${Object.keys(pages).length} reference pages: ${commands.length} commands, ${settings.length} settings, ${environment.length} variables, ${nodeTypes.length} node types`,
 );
+if (leftOut.size) console.log(`left out, as not among EiN's published modules: ${[...leftOut].sort().join(', ')}`);

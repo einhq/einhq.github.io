@@ -236,7 +236,7 @@ themselves. Step 3 says how to add either part.</p>
 so: &quot;Installed, with ems&quot;.</li>
 <li>The module&#39;s pages appear in the sidebar without a reload.</li>
 </ol>
-<figure class="shot"><a href="../../assets/shots/settings-modules@2x.webp"><img src="../../assets/shots/settings-modules.webp" srcset="../../assets/shots/settings-modules.webp 1x, ../../assets/shots/settings-modules@2x.webp 2x" alt="Settings → Modules with the archive module's panel open: its version, its Active badge, and the About, Dependencies, Services, Pages, Commands and Settings tabs" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each installed module has a panel that says whether it is set up and what it adds</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/settings-modules@2x.webp"><img src="../../assets/shots/settings-modules.webp" srcset="../../assets/shots/settings-modules.webp 1x, ../../assets/shots/settings-modules@2x.webp 2x" alt="Settings → Modules with the archive module's panel open: its version, its Active badge, and the Overview, Services, Pages, Commands, Settings and Node types tabs, Overview showing the modules it needs and that need it" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>Each installed module has a panel that says whether it is set up and what it adds</figcaption></figure>
 <p>In EiN&#39;s terminal, <a href="../reference/commands-core.html#mod-install"><code>mod install</code></a> does the same:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 mod install archive</code></pre></div>
@@ -247,8 +247,8 @@ does not install the service. If you left it out at the install, add it on the m
 ~/ein/setup.sh --ems</code></pre></div>
 <p>It downloads the media service&#39;s image, about 30 GB, and starts EiN again. Without
 it, uploads arrive but wait in staging as <strong>being prepared</strong>. The assistant needs a language
-model the same way: <code>~/ein/setup.sh --llm</code> runs one on this machine, and a hosted provider is set
-in <code>~/ein/.env</code>. <a href="../admin/modules.html">Modules</a>, <a href="../ems/index.html">The media service</a> and
+model the same way: <code>~/ein/setup.sh --llm</code> runs one on this machine, and a hosted provider is chosen
+on <strong>Settings → System → Language model</strong>. <a href="../admin/modules.html">Modules</a>, <a href="../ems/index.html">The media service</a> and
 <a href="../assistant/language-model.html">The language model</a> have the details.</p>
 <h2 id="decide-who-sees-what">Decide who sees what<a class="anchor" href="#decide-who-sees-what" aria-label="Link to this section"></a></h2>
 <p><strong>Settings</strong>, under <strong>System</strong> in the sidebar, is where you set up EiN. Its tabs are <strong>System</strong>,
@@ -257,7 +257,7 @@ Each setting says what it does and which module brought it, and is saved on its 
 <strong>Save change</strong>. <a href="../admin/configuration.html">Configuration</a> explains the page and the same settings
 in the terminal. Start with who sees what.</p>
 <p>Open <strong>Settings → Permissions</strong>. Its cards each say in a sentence what their settings come to.</p>
-<figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="Settings → Permissions with the New users, Visitors, Sharing and Sign-in sessions cards" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The demo shown here lets visitors browse; a family&#39;s own EiN keeps that off</figcaption></figure>
+<figure class="shot"><a href="../../assets/shots/settings-permissions@2x.webp"><img src="../../assets/shots/settings-permissions.webp" srcset="../../assets/shots/settings-permissions.webp 1x, ../../assets/shots/settings-permissions@2x.webp 2x" alt="Settings → Permissions with the New users, Visitors and Sharing cards" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The demo shown here lets visitors browse; a family&#39;s own EiN keeps that off</figcaption></figure>
 <p><strong>Visitors.</strong> <strong>Visitors may browse</strong> is <strong>Off</strong> on a new install, and the setting itself advises
 keeping it off for a family&#39;s own archive. Off, anyone who has not signed in is asked to sign in.
 A share link still opens what it was made for (see <a href="../guide/sharing.html">Sharing</a>). Turn it on only
@@ -426,21 +426,19 @@ after a reboot:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
 podman compose ps
 podman compose up -d</code></pre></div>
-<p><strong>Back up.</strong> EiN has no backup command; you copy its data yourself, with your own tools. A backup
-needs three things, taken together:</p>
-<ul>
-<li><code>~/ein/.env</code>, which holds your options and the passwords made at the install, and nothing else
-keeps them;</li>
-<li>the data folder, <code>~/ein/data</code> unless you chose another at the install, and above all its
-<code>files</code> folder, which holds your originals;</li>
-<li>the database, in the data folder&#39;s <code>db</code> (or the folder you gave <code>--db-dir</code>).</li>
-</ul>
+<p><strong>Back up.</strong> <code>setup.sh</code> backs up EiN into a folder of its own on another disk, such as
+<code>/mnt/backup/ein</code>, while EiN runs:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+~/ein/setup.sh --backup /mnt/backup/ein --keep 14</code></pre></div>
+<p>A backup holds <code>~/ein/.env</code>, which holds your options and the passwords made at the install, and
+nothing else keeps them; the database; and the data folder&#39;s files, renditions and modules.</p>
 <aside class="callout callout-note"><p class="callout-title">Note</p>
 <p>The database holds every name, album, person and setting, and the <code>files</code> folder holds the
 files themselves, stored by an id rather than by name. Neither is any use without the other, so
-copy them at the same time, and back up before each update.</p>
+a backup takes them of the same moment. Back up before each update, and each night on a timer.</p>
 </aside>
-<p><a href="../admin/data.html">Your data: backup, moving and removing</a> gives a procedure, and
+<p><a href="../admin/data.html">Your data: backup, moving and removing</a> has the timer, the restore and copies off
+the machine, and
 <a href="../admin/troubleshooting.html">Troubleshooting</a> helps when something goes differently.</p>
 
         </article>

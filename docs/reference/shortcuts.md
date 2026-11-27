@@ -5,7 +5,7 @@ page that explains that part in full; this page is for looking a key up.
 
 ## See the keys where you are
 
-Press <kbd>?</kbd> anywhere outside a text field, or choose **Shortcuts** in the account menu. The
+Press <kbd>?</kbd> anywhere outside a text field, or choose **Shortcuts** in the account menu (not on a phone). The
 **Keyboard shortcuts** dialog opens, listing the keys that work anywhere under **Anywhere**, the
 keys that open a page under **Go to**, and a group for each part of the screen that has keys of its own while that part is on screen:
 **Pictures** for a grid of pictures and **Nodes**, and with the Archive installed **Lightbox**,

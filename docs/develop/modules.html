@@ -829,6 +829,197 @@ disables it keeps it disabled. EiN starts the enabled services when it starts, a
 <p>Module services use <code>&quot;restartPolicy&quot;: &quot;on-failure&quot;</code>. A service whose name the module stops
 shipping is stopped and removed at the next setup. <a href="../admin/services-logs.html">Services and logs</a>
 shows where a service&#39;s output goes.</p>
+<h2 id="talk-live-with-a-page">Talk live with a page<a class="anchor" href="#talk-live-with-a-page" aria-label="Link to this section"></a></h2>
+<p>A module&#39;s service and its pages can talk while both run, such as a game several people play or a
+board they draw on at once, through two node types of which nothing is kept:</p>
+<ul>
+<li>A <strong><code>socket</code></strong> is a conversation: the service listens on it, and each page connects to it, each
+connection carrying messages both ways between that page and the service alone.</li>
+<li>A <strong><code>stream</code></strong> is live bytes from one writer to any number of readers, such as a camera&#39;s video.</li>
+</ul>
+<p>A page holds either open over a WebSocket at the node&#39;s address under <code>/file/</code>, with
+<code>openNodeSocket(path, mode)</code> from <code>@ein/ui/lib</code>, which gives a <code>WebSocket</code> on the page&#39;s own host,
+<code>ws:</code> or <code>wss:</code> as the page is, with its messages as <code>ArrayBuffer</code>s. The service opens the same node
+as it opens a file.</p>
+<h3 id="a-conversation-a-socket">A conversation: a socket<a class="anchor" href="#a-conversation-a-socket" aria-label="Link to this section"></a></h3>
+<p>The service makes the socket where its pages find it, open to the accounts that may join, and
+listens on it:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, or the service&#x27;s setup</span>
+mknode -t socket -m 0666 /tmp/recipes/board</code></pre></div>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-keyword">import</span> { isSocketListener, <span class="hljs-keyword">type</span> <span class="hljs-title class_">SocketConnection</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/client&#x27;</span>;
+
+<span class="hljs-keyword">const</span> listener = <span class="hljs-keyword">await</span> cmd.<span class="hljs-property">sys</span>.<span class="hljs-property">vfs</span>.<span class="hljs-title function_">open</span>(cmd.<span class="hljs-property">access</span>, <span class="hljs-string">&#x27;/tmp/recipes/board&#x27;</span>, { <span class="hljs-attr">mode</span>: <span class="hljs-string">&#x27;r&#x27;</span> });
+<span class="hljs-keyword">if</span> (!<span class="hljs-title function_">isSocketListener</span>(listener)) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;not a socket&#x27;</span>);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> connection = <span class="hljs-keyword">await</span> listener.<span class="hljs-title function_">accept</span>(); connection; connection = <span class="hljs-keyword">await</span> listener.<span class="hljs-title function_">accept</span>()) <span class="hljs-built_in">void</span> <span class="hljs-title function_">answer</span>(connection);
+
+<span class="hljs-comment">// Answers each message with itself, until the page leaves.</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">answer</span>(<span class="hljs-params"><span class="hljs-attr">connection</span>: <span class="hljs-title class_">SocketConnection</span></span>) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> message = <span class="hljs-keyword">await</span> connection.<span class="hljs-title function_">read</span>(<span class="hljs-number">65536</span>); message.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>; message = <span class="hljs-keyword">await</span> connection.<span class="hljs-title function_">read</span>(<span class="hljs-number">65536</span>)) <span class="hljs-keyword">await</span> connection.<span class="hljs-title function_">write</span>(message);
+}</code></pre></div>
+<p>The page connects with <code>rw</code>:</p>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>import { NODE_SOCKET_CLOSE, openNodeSocket } from '@ein/ui/lib';
+
+const board = openNodeSocket('/tmp/recipes/board', 'rw');
+board.onopen = () =&gt; board.send(new TextEncoder().encode('hello'));
+board.onmessage = (event) =&gt; show(new Uint8Array(event.data));
+board.onclose = (event) =&gt; {
+  if (event.code === NODE_SOCKET_CLOSE.ended) startOver();
+};</code></pre></div>
+<ul>
+<li><strong>Who listens</strong>: the socket&#39;s owner, or an administrator, opening it to read. A socket has one
+listener at a time; another is refused. A module&#39;s service runs as the administrator, so it
+listens on any socket it makes.</li>
+<li><strong>Who connects</strong>: an account that may both read and write the socket, at <code>/file/&lt;path&gt;?mode=rw</code>,
+or with any mode that writes when it opens the node itself (<code>vfs.open</code> with <code>mode: &#39;w&#39;</code>). While
+nobody listens the socket is closed with 4503.</li>
+<li><strong><code>accept</code></strong> answers each connection in turn, and <code>undefined</code> once the listener is closed or the
+node removed. A connection&#39;s <code>peer</code> says who opened it: the account&#39;s <code>uid</code> and <code>gid</code>, and the
+<code>invitation</code> it came through (below).</li>
+<li><strong>Messages</strong> are binary, at most 8 MiB each, and arrive whole, each <code>send</code> one message and each
+<code>read</code> one message when its size holds it. What a page sends before the service accepts it waits
+in its connection.</li>
+<li><strong>Nobody waits for the other end.</strong> An end that falls more than 8 MiB behind lets the connection
+go: the page&#39;s socket closes with 4001.</li>
+<li><strong>Either end closing ends the connection</strong>: the page&#39;s close makes the service&#39;s <code>read</code> answer an
+empty message, and the service&#39;s <code>close</code> closes the page&#39;s socket with 1000. Closing the listener,
+or removing the node, ends every connection.</li>
+</ul>
+<h3 id="one-writer-many-readers-a-stream">One writer, many readers: a stream<a class="anchor" href="#one-writer-many-readers-a-stream" aria-label="Link to this section"></a></h3>
+<p>A stream carries one direction: the service writes it and every page reading it is given what it
+writes from then on, or a page writes it for the service to read.</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in the service: the board&#x27;s moves, for everyone watching</span>
+mknode -t stream -m 0644 /tmp/recipes/moves</code></pre></div>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>const moves = openNodeSocket('/tmp/recipes/moves', 'r');
+moves.onmessage = (event) =&gt; show(new Uint8Array(event.data));</code></pre></div>
+<ul>
+<li><strong><code>mode=w</code></strong>: the socket is the stream&#39;s writer for as long as it is open. Each binary message is
+one write, and closing the socket ends the stream for its readers. A stream has one writer at a
+time: a second socket is closed with 4409.</li>
+<li><strong><code>mode=r</code></strong>: each write comes as one binary message. A reader starts at the moment it opens, or
+at the latest point the writer marked as a start; what came before is gone. The writer&#39;s close
+closes the reader&#39;s socket with 1000, and the reader opens it again to go on.</li>
+<li><strong>Messages</strong> are binary, and at most 8 MiB each. A reader is given each write whole, so between a
+page writing over a socket and a page reading over one, a message arrives as it was sent. A writer
+that writes in pieces of its own, such as <code>cat</code> or a program over SFTP, may pass on several
+messages as one write or one as several: give the messages a frame of your own, such as a length
+before each, when they pass through one.</li>
+<li><strong>Nobody waits for a reader.</strong> A reader that falls more than 8 MiB behind is given what it holds
+and then closed with 4001.</li>
+<li>A stream is read or written, never both: a conversation is a socket.</li>
+</ul>
+<h3 id="who-may-open-them-and-how-they-end">Who may open them, and how they end<a class="anchor" href="#who-may-open-them-and-how-they-end" aria-label="Link to this section"></a></h3>
+<p>Who may open either is decided as for any <code>/file/</code> address: as the account signed in, with the
+node&#39;s own permissions, and only from EiN&#39;s own pages; a page from any other address cannot use the
+sign-in. A file ticket (<code>?ticket=</code>) reads a stream instead, and never writes, and an invitation
+(<code>?invite=</code>) opens its own nodes from a page at any address (below). <code>nodeSocketUrl(path, mode)</code>
+gives a socket&#39;s address without opening it. Any other node type is refused.</p>
+<p>What could not open, and how a socket ended, is in its close code, with a reason a page can show.
+All of them are in <code>NODE_SOCKET_CLOSE</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Code</th>
+<th><code>NODE_SOCKET_CLOSE</code></th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1000</td>
+<td><code>ended</code></td>
+<td>The stream&#39;s writer closed, the node was removed under a reader, or the connection ended</td>
+</tr>
+<tr>
+<td>1001</td>
+<td></td>
+<td>EiN is stopping</td>
+</tr>
+<tr>
+<td>1003</td>
+<td><code>unsupported</code></td>
+<td>A text message, or a message from a stream&#39;s reader</td>
+</tr>
+<tr>
+<td>1009</td>
+<td><code>tooBig</code></td>
+<td>A message over 8 MiB</td>
+</tr>
+<tr>
+<td>1011</td>
+<td><code>failed</code></td>
+<td>Something failed in EiN</td>
+</tr>
+<tr>
+<td>4001</td>
+<td><code>behind</code></td>
+<td>The reader, or one end of a connection, fell more than 8 MiB behind</td>
+</tr>
+<tr>
+<td>4400</td>
+<td><code>badRequest</code></td>
+<td>No <code>mode</code>, a mode the node does not open with, or a node that is neither a stream nor a socket</td>
+</tr>
+<tr>
+<td>4401</td>
+<td><code>signIn</code></td>
+<td>Not signed in, where visitors may not browse</td>
+</tr>
+<tr>
+<td>4403</td>
+<td><code>forbidden</code></td>
+<td>The account may not open the node in that mode, or the ticket or invitation does not open it</td>
+</tr>
+<tr>
+<td>4404</td>
+<td><code>notFound</code></td>
+<td>Nothing at the path</td>
+</tr>
+<tr>
+<td>4409</td>
+<td><code>conflict</code></td>
+<td>The stream has a writer already</td>
+</tr>
+<tr>
+<td>4410</td>
+<td><code>gone</code></td>
+<td>The node was removed under its writer, or the invitation expired or was turned off</td>
+</tr>
+<tr>
+<td>4503</td>
+<td><code>unavailable</code></td>
+<td>Nobody listens on the socket, or too many connections wait for its listener</td>
+</tr>
+</tbody></table>
+</div>
+<h3 id="someone-with-no-account-here">Someone with no account here<a class="anchor" href="#someone-with-no-account-here" aria-label="Link to this section"></a></h3>
+<p>Someone without an account here, or a page served by another EiN, takes part through an
+<a href="../admin/permissions.html#invitations">invitation</a>: a token that opens the nodes it names, a socket to
+connect to or a stream to read or to write, as the account that made it, until it expires or is
+turned off. The service makes one when someone is invited, and hands its link to whoever invites
+them:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in the service: someone from elsewhere is invited to the board</span>
+invitation create --connect /tmp/recipes/board
+<span class="hljs-comment"># /__invite/Xq3…  opens rw /tmp/recipes/board until …</span></code></pre></div>
+<p>It works for 24 hours unless <code>--expires</code> says otherwise. With <code>JSON_OUTPUT=1</code> in front it answers
+the token, the link and the nodes as JSON. Either way it gives the token once: only a hash of it is
+kept. Put the server&#39;s own address in front of the link, <code>https://ein.example/__invite/Xq3…</code>, and
+send that. A page that is handed it, on this EiN or another, asks the link what it opens and opens
+each node with the token instead of a sign-in:</p>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>import { fetchInvitation, openNodeSocket } from '@ein/ui/lib';
+
+const invitation = await fetchInvitation(link);
+const sockets = invitation.nodes.map((node) =&gt; openNodeSocket(node.path, node.mode, { origin: invitation.origin, invite: invitation.token }));</code></pre></div>
+<p><code>fetchInvitation</code> reads <code>GET &lt;origin&gt;/__invite/&lt;token&gt;</code>, which answers a page at any address with the
+nodes and the expiry, <code>{ &quot;nodes&quot;: [{ &quot;path&quot;: …, &quot;mode&quot;: &quot;rw&quot; }], &quot;expires&quot;: &quot;2026-…Z&quot; }</code>, or <code>404</code>
+once the invitation opens nothing; <code>parseInvitationLink</code> splits a link into its EiN and token without
+asking. The socket is <code>wss://ein.example/file/&lt;path&gt;?mode=&lt;mode&gt;&amp;invite=&lt;token&gt;</code>: on it EiN reads no
+cookie and does not ask which page it came from, and opens only the invitation&#39;s nodes, each in its
+own mode. A connection made with it is its maker&#39;s, and its <code>peer.invitation</code> is the invitation&#39;s
+id, so the service can tell a guest from the maker. When the invitation expires or is turned off,
+its sockets close with 4410.</p>
+<p><code>openNodeSocket</code>, <code>nodeSocketUrl</code> and <code>NODE_SOCKET_CLOSE</code> came with core&#39;s module contract 0.15.71;
+invitations, <code>fetchInvitation</code>, <code>parseInvitationLink</code> and <code>openNodeSocket</code>&#39;s <code>origin</code> and <code>invite</code>
+with 0.15.73; and socket nodes, <code>isSocketListener</code>, <code>isSocketConnection</code> and <code>rw</code> with 0.15.74: give
+a module that uses them <code>&quot;coreApi&quot;: &quot;^0.15.74&quot;</code>.</p>
 <h2 id="react-to-changes-with-pipelines">React to changes with pipelines<a class="anchor" href="#react-to-changes-with-pipelines" aria-label="Link to this section"></a></h2>
 <p>A pipeline runs commands when something happens in the tree, such as a photo&#39;s metadata being read.
 Each file in <code>pipelines/</code> defines one:</p>
@@ -1159,7 +1350,7 @@ show them afterwards.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#talk-live-with-a-page">Talk live with a page</a></li><li class="nested"><a href="#a-conversation-a-socket">A conversation: a socket</a></li><li class="nested"><a href="#one-writer-many-readers-a-stream">One writer, many readers: a stream</a></li><li class="nested"><a href="#who-may-open-them-and-how-they-end">Who may open them, and how they end</a></li><li class="nested"><a href="#someone-with-no-account-here">Someone with no account here</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

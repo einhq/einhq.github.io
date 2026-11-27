@@ -82,7 +82,7 @@ The node types `find -type` takes are listed in [Node types](../reference/node-t
 | Create an account, _administrators only_                                  | `user-create anna --title 'Anna Andersson' --email anna@example.com`        | [user-create](../reference/commands-core.md#user-create)                                                             |
 | Set someone's password                                                    | `user-passwd anna` (asks `Password:`; others than your own: administrators) | [user-passwd](../reference/commands-core.md#user-passwd)                                                             |
 | Stop or allow someone signing in, _administrators only_                   | `user-disable anna`, `user-enable anna`                                     | [user-disable](../reference/commands-core.md#user-disable), [user-enable](../reference/commands-core.md#user-enable) |
-| Delete an account, _administrators only_                                  | `user-delete anna --to helen`                                               | [user-delete](../reference/commands-core.md#user-delete)                                                             |
+| Delete an account, _administrators only_                                  | `user-delete anna --to helen`, `user-delete anna --unused`                  | [user-delete](../reference/commands-core.md#user-delete)                                                             |
 | Change someone's primary group, _administrators only_                     | `user-set-primary-group anna family`                                        | [user-set-primary-group](../reference/commands-core.md#user-set-primary-group)                                       |
 | Act as the administrator, as a member of `sudo`                           | `admin` (this terminal), `user-elevate --session`, `admin --off`            | [admin](../reference/commands-core.md#admin), [user-elevate](../reference/commands-core.md#user-elevate)             |
 | Run a line as someone else, with only their rights, _administrators only_ | `runas anna 'ls ~'`                                                         | [runas](../reference/commands-core.md#runas)                                                                         |
@@ -224,7 +224,8 @@ A detached job writes its output to `/var/logs/jobs/<pid>/stdout.log` and `stder
 | Restart, stop or start a service, _administrators only_             | `service restart metrics-sampler`, `service stop metrics-sampler`, `service start metrics-sampler` | [service-restart](../reference/commands-core.md#service-restart), [service-stop](../reference/commands-core.md#service-stop), [service-start](../reference/commands-core.md#service-start) |
 
 > [!WARNING]
-> `cat` on a queue takes the entries it prints out of the queue. Use `queue-peek` to look.
+> `cat` on a queue takes the entries it prints out of the queue, so it needs write access to the
+> queue. Use `queue-peek` to look.
 
 ### Logs and the audit trail
 

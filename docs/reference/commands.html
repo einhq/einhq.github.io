@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 478 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 480 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 478 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 480 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,7 +94,7 @@
           <h1>Commands</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>Every command an EiN with all its modules has: 478 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>Every command an EiN with all its modules has: 480 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -106,7 +106,7 @@
 </ul>
 <p>A command of a family, such as <code>mod-install</code> or <code>user-passwd</code>, can be typed as two words where the family has a command of its own: <code>mod install archive</code>. In the shell, <code>&lt;command&gt; --help</code> says the same as these pages, for what is installed there; the documentation page in the Web UI has them too.</p>
 <h2 id="core">Core<a class="anchor" href="#core" aria-label="Link to this section"></a></h2>
-<p><a href="commands-core.html">All 235 in full</a>.</p>
+<p><a href="commands-core.html">All 237 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
 <tr>
@@ -447,6 +447,10 @@
 <td>Display node ID and type.</td>
 </tr>
 <tr>
+<td><a href="commands-core.html#invitation">invitation</a></td>
+<td>Make, list and turn off invitations: tokens that open stream and socket nodes over a WebSocket to someone with no account here.</td>
+</tr>
+<tr>
 <td><a href="commands-core.html#jq">jq</a></td>
 <td>Lightweight JSON processor.</td>
 </tr>
@@ -533,6 +537,10 @@
 <tr>
 <td><a href="commands-core.html#mod-cache">mod-cache</a></td>
 <td>Pre-fetch a module&#39;s TypeScript command dependencies.</td>
+</tr>
+<tr>
+<td><a href="commands-core.html#mod-changelog">mod-changelog</a></td>
+<td>An installed module&#39;s commits, newest first, from what an update would install down past the one installed, each with its release tags; marked which is installed and which an update brings.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#mod-groups">mod-groups</a></td>
@@ -624,7 +632,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#pipeline-overview">pipeline-overview</a></td>
-<td>Pipeline workload summary: instance counts (running, failed, completed), queue depths, active instances, completion rate.</td>
+<td>Pipeline workload summary: instance counts (running, failed, completed), queue depths, active instances, completion rate, and the pool kinds held because a service their steps call cannot run them.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#pipeline-prune">pipeline-prune</a></td>
@@ -972,11 +980,11 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#user-delete">user-delete</a></td>
-<td>Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user.</td>
+<td>Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user, or with --unused it goes only when nothing outside it names it.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#user-disable">user-disable</a></td>
-<td>Disable a user account and end its open sessions.</td>
+<td>Disable a user account and end its open sessions; a home that holds nothing but directories is removed.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#user-elevate">user-elevate</a></td>
@@ -984,7 +992,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#user-enable">user-enable</a></td>
-<td>Enable a disabled user account.</td>
+<td>Enable a disabled user account, making its home again when disabling removed it.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#user-exists">user-exists</a></td>
@@ -1008,7 +1016,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#user-invite-accept">user-invite-accept</a></td>
-<td>Which account a sign-in link is for, and with --password, choose its password with it, which spends the link and signs in.</td>
+<td>Which account a sign-in link is for, and with --password, choose its password with it, which spends the link, ends the account&#39;s other sign-ins and signs in.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#user-list">user-list</a></td>
@@ -1016,7 +1024,7 @@
 </tr>
 <tr>
 <td><a href="commands-core.html#user-passwd">user-passwd</a></td>
-<td>Change user password.</td>
+<td>Change user password; the account&#39;s other sign-ins end.</td>
 </tr>
 <tr>
 <td><a href="commands-core.html#user-resolve">user-resolve</a></td>

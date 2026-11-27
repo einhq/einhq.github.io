@@ -130,7 +130,10 @@ the Archive's, which [Archive commands](commands.md) lists with their options.
 
 `media-scan` walks a folder and announces each file that was never taken in, or that lacks
 something a pipeline should have given it: its date and place, faces or voices, its address, or
-the weather it was taken in. Each pipeline then skips what is already done.
+the weather it was taken in. Each pipeline then skips what is already done. It passes over EiN's
+own folders, `/usr`, `/etc`, `/var`, `/dev` and `/tmp`, whose pictures are nobody's media, and over
+work that failed on a file that has not changed since: that work is run again like any other
+[failed work](../admin/processing.md), and the scan says how many it left to that.
 
 What describes a file is the Media module's to keep current, in every folder:
 [renditions](../media/index.md#renditions-kept-current), [picture vectors](../media/index.md#picture-vectors),

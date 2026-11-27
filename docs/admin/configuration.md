@@ -31,6 +31,7 @@ The **System** tab of Settings starts with **Set up**: pages that each set up on
 | **Media service**     | The [media service](../ems/index.md)   | Where the media service answers, its key, and how much of the graphics card its models may hold                                                                         |
 | **Transcription**     | The [media service](../ems/index.md)   | The language spoken in recordings or that it is detected, the pause that ends a line, word or line timings, and whether recordings are transcribed again after a change |
 | **Processing**        | [Media](../media/index.md)             | How much media work runs at once, as a level: **Standard**, **More** or **Full** for the machine's cores                                                                |
+| **Västtrafik**        | [Västtrafik](../vasttrafik/index.md)   | The key to Västtrafik's open API, and how often it is asked for departures, vehicles and disruptions                                                                    |
 | **Module sources**    | EiN                                    | Where published modules are looked for, one organisation to a row, and the tokens for private ones                                                                      |
 
 A module that is installed adds its own pages there, and they are also on its **Set up** tab under **Settings → Modules**.
@@ -39,6 +40,8 @@ A module that is installed adds its own pages there, and they are also on its **
 2. Choose the page in **Set up**, on the left.
 3. Fill it in. **Save** and **Cancel** appear once something is changed; while something is missing, such as a key, a line beside **Save** says what.
 4. Choose **Save**. What belongs together is saved at once, so a service that reads several of the settings restarts once, and a line says what was restarted, such as "Restarted llm-link.". A page that can tell whether it works says so under **Now**: whether the language model, the media service or the restreamer answers, whether EiN is connected to the broker, or which modules each module source has.
+
+![The System tab of Settings: the Find a setting box across all 114 settings with the Overrides only (1) button, the Set up list from Language and time, Sign-in and Language model to Processing, Västtrafik and Module sources, and Language and time open beside it with Archive language set to English and marked Default, Date and time format set to British English, marked Set here, and the Time zone, Europe/London](../../assets/shots/settings.webp "Settings opens on the first page under Set up, Language and time; the categories with every setting follow the pages.")
 
 The time zone is the one setting on **Language and time** that is not saved there: the installation sets it, as `TZ` in `.env`, and the page only shows it.
 
@@ -49,8 +52,6 @@ The time zone is the one setting on **Language and time** that is not saved ther
 3. Pick a category in the **Categories** list on the left, under **Set up**, or type in **Find a setting** to search names, descriptions, modules and keys across every category. A page under **Set up** whose name or description matches the search is offered above the results.
 4. Change the value in the setting's field. **Save change** and **Cancel** appear under it.
 5. Choose **Save change**. A line under the setting says what was restarted, for example "Restarted trash-purger.", or why nothing could be.
-
-![The System tab of Settings: the Find a setting box across all 96 settings with the Overrides only (1) button, a list of categories beginning with Access log, Album folders and Albums, and the Access log category open with Days the access log keeps sign-ins and downloads at 365, marked Default and "Restarts access-log-purger"](../../assets/shots/settings.webp "Settings are browsed by category, and each says where its value comes from and what a change restarts.")
 
 Each setting is saved on its own; there is no button that saves the page. The other tabs of Settings hold accounts, groups and modules: [Accounts and groups](accounts.md) covers **Users**, **Groups** and **Permissions**, and [Modules](modules.md) covers **Modules**. The **Permissions** tab shows some of the same settings as **System**, such as the default sharing, and a change made on either shows on both.
 
@@ -78,11 +79,11 @@ Some settings mean something when they are empty. For those, the description end
 
 ### Give a key to another service
 
-A few settings are keys that EiN sends to another service: the access tokens for private module sources, and, with the modules that bring them, the media service's key and a hosted language model's key. Their names end in `_KEY`, and they are kept apart from every other setting:
+A few settings are keys that EiN sends to another service: the access tokens for private module sources, and, with the modules that bring them, the media service's key and the language model's key. Their names end in `_KEY`, and they are kept apart from every other setting:
 
 - Nobody can read a key back, administrators included. The field is empty, with "Not set" or "Set — type a new one to replace it" in it, and the badge says whether the key comes from the deployment or was set here.
 - To replace a key, type the new one and choose **Save change**. The field empties again once it is saved.
-- A key is in no shell's environment, and EiN sends it only to the address set for its service. If a shell gives that address another value for one command, the request goes without the key.
+- A key is in no shell's environment, and EiN sends it only to the address set for its service. If a shell gives that address another value for one command, the request goes without the key. A key from `.env` goes only to the address `.env` names beside it: point the service at another address here and give it its own key, or it is sent none.
 
 > [!WARNING]
 > With the `ems` module installed, the media service's key, `CFG_EMS_KEY`, must be one the media service accepts. The installer gives both sides the same key from `.env`. A different key saved here leaves EiN unable to reach the media service; **Restore inherited value** brings back the deployment's. [The media service](../ems/index.md) explains the keys.
@@ -196,13 +197,13 @@ A value in `.env` does not always win:
 
 - **A value set here wins over it.** If the setting shows **Set here**, the line in `.env` has no visible effect. Choose **Restore inherited value**, or run `config unset`, to let it through.
 - **A module's choice wins over it.** An installed module may name commands for the **Search** and **Devices** settings: the Archive names `CFG_SEARCH_PARSER`, the Assistant `CFG_LANGUAGE_MODEL` and `CFG_COMMAND_FINDER`, the `ems` module `CFG_TEXT_EMBEDDER`, `CFG_PAGE_STREAMER` and `CFG_PAGE_CONTROL`, and the Devices module `CFG_FILE_STREAMER`. To use another one, set it on the Settings page.
-- **Some variables are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT` and `CFG_SSH_PORT`, the ports EiN listens on inside its container, which are not settings, and the `ems` module's settings `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds.
+- **Some variables are fixed by the installation's `compose.yaml`**, which wins over `.env`: `CFG_HTTP_PORT` and `CFG_SSH_PORT`, the ports EiN listens on inside its container, which are not settings, and the `ems` module's settings `CFG_EMS_URL` and `CFG_EMS_KEY`. A line for them in `.env` changes nothing. The published ports are `EIN_HTTP_PORT` and `EIN_SSH_PORT` instead, and the media service's key is `EMS_KEY`, which goes to both sides. The Assistant's `CFG_LLM_URL` is read from `.env` and defaults to the language model the installer adds, whose key, `LLM_KEY`, the installer gives that model and EiN alike, as `CFG_LLM_KEY` unless `.env` names a hosted model.
 - **An empty line sets nothing.** `CFG_LANGUAGE_MODEL=` in `.env` is the same as leaving the line out.
 
 The rest of `.env` is not settings but the installation's own variables: `EIN_DATA`, `EIN_BIND`, `EIN_HTTP_PORT`, `EIN_SSH_PORT`, `EIN_MODULES`, `EIN_EMS`, `EIN_LLM`, `EIN_GPU`, `EIN_SOURCE`, `EIN_SOURCE_KEY`, `EIN_DB_DIR`, `EIN_ENGINE`, `EIN_HOSTNAME`, `COMPOSE_PROJECT_NAME`, `TZ` and the passwords. `setup.sh`'s options set most of them, such as `--http-port` for `EIN_HTTP_PORT`; [Installing in detail](install.md) explains each, and [Environment variables](../reference/environment.md) lists every variable EiN reads besides its settings. With the media service installed, its settings are `EMS_…` lines in the same file; [The media service](../ems/index.md) describes them.
 
 > [!NOTE]
-> `.env` holds the database password and the media service's key, and nothing else keeps them. Keep a copy of it with your backups; [Your data: backup, moving and removing](data.md) says what else to keep.
+> `.env` holds the database password and the keys of the media service and the language model, and nothing else keeps them. Keep a copy of it with your backups; [Your data: backup, moving and removing](data.md) says what else to keep.
 
 ## How the layers combine
 

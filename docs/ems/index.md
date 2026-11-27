@@ -203,14 +203,36 @@ them, all set up by `setup.sh`:
 
 | What           | Where it is set                                                        | Value                                                     |
 | -------------- | ---------------------------------------------------------------------- | --------------------------------------------------------- |
-| The address    | `CFG_EMS_URL` for EiN, in `compose.yaml`                               | `http://ems:8181`                                         |
+| The address    | `CFG_EMS_URL` for EiN, in `compose.yaml` unless `.env` names one       | `http://ems:8181`                                         |
 | The key        | `EMS_KEY` in `.env`, made at the install; EiN gets it as `CFG_EMS_KEY` | 48 random hexadecimal characters                          |
 | The files' way | `CFG_EMS_FILES_ADDRESS` for EiN, which `setup.sh` writes               | `ein:2224`, or `host.containers.internal:2224`; see below |
 
 The key is a secret: no shell in EiN sees it, and the settings page never shows it once it is set.
 The media service accepts a request only with that key. Leave `CFG_EMS_URL`, `EMS_KEY` and
-`EMS_PORT` as `setup.sh` and the compose files set them; [Configuration](../admin/configuration.md)
+`EMS_PORT` as `setup.sh` and the compose files set them, unless EiN uses a media service on another
+machine ([below](#a-media-service-on-another-machine)); [Configuration](../admin/configuration.md)
 explains how a value set in the deployment relates to the settings page.
+
+### A media service on another machine
+
+EiN can use a media service another machine runs, such as one with a graphics card, instead of one
+of its own: install EiN without `--ems` (or run `./setup.sh --no-ems`), put three lines in
+`~/ein/.env` and run `./setup.sh`:
+
+```ini
+# in ~/ein/.env
+CFG_EMS_URL=http://192.168.1.20:18181
+EMS_KEY=4f6c…e1
+CFG_EMS_FILES_ADDRESS=192.168.1.10:2224
+```
+
+`CFG_EMS_URL` is where that media service answers, published there as in
+[Callers on other machines](#callers-on-other-machines), and `EMS_KEY` the key of this EiN among its
+callers, a line in that machine's `ems.keys`. `CFG_EMS_FILES_ADDRESS` is this machine's address and
+port as that machine reaches them, where it reads the files of each request; `setup.sh` publishes
+the port on `EIN_BIND`. With `EIN_BIND=127.0.0.1` that machine cannot reach it there: publish the
+port on an address it reaches with a compose file of your own beside the others, named in
+`COMPOSE_FILE` in `.env`.
 
 ### Callers on other machines
 
@@ -268,7 +290,7 @@ through the mount, and writes what it made back through it before it answers:
 
 A media service on another machine reaches EiN's machine at the address you set: put
 `CFG_EMS_FILES_ADDRESS`, as `host:port`, in `~/ein/.env` and run `./setup.sh`, which then publishes
-the port on `EIN_BIND`. A second media service beside the first reaches it at an address of its own
+the port on `EIN_BIND` ([A media service on another machine](#a-media-service-on-another-machine)). A second media service beside the first reaches it at an address of its own
 ([More than one media service](instances.md)).
 
 #### Encrypting the files' way

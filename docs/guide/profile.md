@@ -305,17 +305,18 @@ The new password is the one you sign in with from then on, in the browser, over 
 over [WebDAV](webdav.md), where a program such as a phone's backup app needs it at its next request.
 A key you added for SSH keeps working; see [SSH and SFTP](../shell/ssh-sftp.md).
 
-Changing your password does not sign out the browsers and terminals where you are signed in
-already. If you change it because someone else may know it, ask an administrator to choose
-**Disable sign-in** for your account and then **Enable sign-in**: that signs your account out
-everywhere.
+Changing your password signs your account out everywhere else: other browsers, terminals, SSH
+connections and the app are signed out and have to sign in again. Where you changed it stays signed
+in. So if you change it because someone else may know it, whatever they signed in with ends with it;
+look over your SSH keys too, which a password change keeps.
 
 If the password is not changed, the reason shows in a red box above the fields:
 
-| Message                                                  | What it means                                  | What to do                                                     |
-| -------------------------------------------------------- | ---------------------------------------------- | -------------------------------------------------------------- |
-| `user passwd: authentication failed`                     | **Current password** is not your password.     | Type it again. If you have forgotten it, see the next section. |
-| `user passwd: no existing password found, contact admin` | Your account has no password to check against. | Ask an administrator for a sign-in link.                       |
+| Message                                                   | What it means                                                        | What to do                                                     |
+| --------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `user passwd: authentication failed`                      | **Current password** is not your password.                           | Type it again. If you have forgotten it, see the next section. |
+| `user passwd: no existing password found, contact admin`  | Your account has no password to check against.                       | Ask an administrator for a sign-in link.                       |
+| `user passwd: too many failed sign-ins; try again in 8 s` | **Current password** was wrong several times, as a sign-in would be. | Wait the time it says and type it again.                       |
 
 ### If you have forgotten your password
 
@@ -465,7 +466,7 @@ want it back."
 The days count from when you deleted it; for things deleted together, from the last time something
 was added to that row. EiN clears out what is older when it starts and every 12 hours after that,
 so something can stay up to half a day past its time. Once it is cleared, nothing in EiN brings it
-back: EiN has no backup of its own; see [Your data: backup, moving and removing](../admin/data.md).
+back but restoring a backup of the whole EiN, as it was then; see [Your data: backup, moving and removing](../admin/data.md).
 
 ### The trash in the terminal
 

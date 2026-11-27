@@ -126,7 +126,7 @@ To install a module:
    so: "Installed, with ems".
 4. The module's pages appear in the sidebar without a reload.
 
-![Settings → Modules with the archive module's panel open: its version, its Active badge, and the About, Dependencies, Services, Pages, Commands and Settings tabs](../../assets/shots/settings-modules.webp "Each installed module has a panel that says whether it is set up and what it adds")
+![Settings → Modules with the archive module's panel open: its version, its Active badge, and the Overview, Services, Pages, Commands, Settings and Node types tabs, Overview showing the modules it needs and that need it](../../assets/shots/settings-modules.webp "Each installed module has a panel that says whether it is set up and what it adds")
 
 In EiN's terminal, [`mod install`](../reference/commands-core.md#mod-install) does the same:
 
@@ -146,8 +146,8 @@ does not install the service. If you left it out at the install, add it on the m
 
 It downloads the media service's image, about 30 GB, and starts EiN again. Without
 it, uploads arrive but wait in staging as **being prepared**. The assistant needs a language
-model the same way: `~/ein/setup.sh --llm` runs one on this machine, and a hosted provider is set
-in `~/ein/.env`. [Modules](../admin/modules.md), [The media service](../ems/index.md) and
+model the same way: `~/ein/setup.sh --llm` runs one on this machine, and a hosted provider is chosen
+on **Settings → System → Language model**. [Modules](../admin/modules.md), [The media service](../ems/index.md) and
 [The language model](../assistant/language-model.md) have the details.
 
 ## Decide who sees what
@@ -160,7 +160,7 @@ in the terminal. Start with who sees what.
 
 Open **Settings → Permissions**. Its cards each say in a sentence what their settings come to.
 
-![Settings → Permissions with the New users, Visitors, Sharing and Sign-in sessions cards](../../assets/shots/settings-permissions.webp "The demo shown here lets visitors browse; a family's own EiN keeps that off")
+![Settings → Permissions with the New users, Visitors and Sharing cards](../../assets/shots/settings-permissions.webp "The demo shown here lets visitors browse; a family's own EiN keeps that off")
 
 **Visitors.** **Visitors may browse** is **Off** on a new install, and the setting itself advises
 keeping it off for a family's own archive. Off, anyone who has not signed in is asked to sign in.
@@ -330,19 +330,22 @@ podman compose ps
 podman compose up -d
 ```
 
-**Back up.** EiN has no backup command; you copy its data yourself, with your own tools. A backup
-needs three things, taken together:
+**Back up.** `setup.sh` backs up EiN into a folder of its own on another disk, such as
+`/mnt/backup/ein`, while EiN runs:
 
-- `~/ein/.env`, which holds your options and the passwords made at the install, and nothing else
-  keeps them;
-- the data folder, `~/ein/data` unless you chose another at the install, and above all its
-  `files` folder, which holds your originals;
-- the database, in the data folder's `db` (or the folder you gave `--db-dir`).
+```bash
+# on the machine EiN runs on
+~/ein/setup.sh --backup /mnt/backup/ein --keep 14
+```
+
+A backup holds `~/ein/.env`, which holds your options and the passwords made at the install, and
+nothing else keeps them; the database; and the data folder's files, renditions and modules.
 
 > [!NOTE]
 > The database holds every name, album, person and setting, and the `files` folder holds the
 > files themselves, stored by an id rather than by name. Neither is any use without the other, so
-> copy them at the same time, and back up before each update.
+> a backup takes them of the same moment. Back up before each update, and each night on a timer.
 
-[Your data: backup, moving and removing](../admin/data.md) gives a procedure, and
+[Your data: backup, moving and removing](../admin/data.md) has the timer, the restore and copies off
+the machine, and
 [Troubleshooting](../admin/troubleshooting.md) helps when something goes differently.

@@ -341,7 +341,7 @@ administrator sets under **Settings → Permissions**, on the **Sharing** card. 
 new album, made in the Web UI or with `album create`, and what staging publishes start with
 it.
 
-![The Permissions tab of Settings: the New users card with Users (users) chosen under Groups, the Visitors card with Visitors may browse on, the Sharing card saying "Shared with Users: the owner can change it, members can see it, anyone else can't see it", with Owner empty (the person who creates it), Group Users and Permissions Owner Edit, Group "users" View, Everyone else None, as 0750, and the Sign-in sessions card](../../assets/shots/settings-permissions.webp "The Sharing card sets what every new album starts with, and says in a sentence what that comes to.")
+![The Permissions tab of Settings: the New users card with Users (users) chosen under Groups, the Visitors card with Visitors may browse on, the Sharing card saying "Shared with Users: the owner can change it, members can see it, anyone else can't see it", with Owner empty (the person who creates it), Group Users and Permissions Owner Edit, Group "users" View, Everyone else None, as 0750](../../assets/shots/settings-permissions.webp "The Sharing card sets what every new album starts with, and says in a sentence what that comes to.")
 
 | Setting                                                                       | On the card                                                                        | Default                   |
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------- |
@@ -422,8 +422,9 @@ those on every start, whatever they were changed to.
 | `/etc/users/<name>/.password` | `admin`                    | `0600` | Its user can neither read nor replace it.                                                                                                                                                                                                                               |
 | `/etc/groups/<group>/users`   | its creator, the group     | `0750` | Members may see who else is in the group, not add anyone.                                                                                                                                                                                                               |
 | `/var/links/<id>`             | `admin`                    | `0600` | A share link's record, holding its token.                                                                                                                                                                                                                               |
+| `/var/invitations/<id>`       | `admin`                    | `0600` | An [invitation](#invitations)'s record, holding only a hash of its token.                                                                                                                                                                                               |
 | `/var/logs`                   | `admin`, `users`           | `0750` | What EiN logs. The system log and the service logs in it are the `admin` group's alone.                                                                                                                                                                                 |
-| `/var/queues`, `/var/pools`   | `admin`, `users`           | `0750` | The work EiN has in hand, which the **System** page shows.                                                                                                                                                                                                              |
+| `/var/queues`, `/var/pools`   | `admin`                    | `0750` | The work EiN has in hand, which the **System** page shows; the `admin` group's alone. Reading a queue takes its entries, so a queue is read only by those who may write it; `queue-peek` shows its entries to those who may read it.                                    |
 | `/var/pipelines`              | `admin`, `users`           | `0750` | The pipelines; the runs, under `instances`, are the `admin` group's alone.                                                                                                                                                                                              |
 
 Content reaches every account through the `users` group, and visitors who are not signed in through
@@ -464,6 +465,48 @@ node, wherever the node has moved since. Someone already signed in who opens a l
 Every opening is recorded, with the address it came from, on the Status page's
 [Activity tab](monitoring.md#the-activity-tab). How to make and send one is on [Sharing](../guide/sharing.md#share-an-album-with-a-link).
 
+## Invitations
+
+An invitation lets someone with no account here, or a page on another EiN, take part in something
+live: it opens socket and stream nodes, such as the socket a module's service listens on for the
+people who join, over a WebSocket (see
+[Talk live with a page](../develop/modules.md#talk-live-with-a-page)). Whoever holds its link opens
+those nodes and nothing else. It is made with `invitation`, by a module's command or by hand:
+
+```bash
+# in EiN's terminal
+invitation create --connect /tmp/board/socket
+# /__invite/Xq3…  opens rw /tmp/board/socket until 2026-11-28T09:12:00.000Z
+invitation list
+invitation remove 3f9a0c51d2e8b7a4
+```
+
+What it can do:
+
+- Open each of its nodes in its own mode, `rw` to connect to a socket, `r` to read a stream or `w` to
+  write one (`--connect`, `--read`, `--write`), from a page at any address, without signing in: the
+  socket carries the token, and EiN neither reads a cookie on it nor asks which page it came from.
+- Write and read as the account that made it, as that account may now: it never reaches more than its
+  maker does, and stops when the maker's account is disabled or deleted.
+
+What it cannot do:
+
+- Open anything but socket and stream nodes, or a node it does not name, or one of its nodes in
+  another mode. Asking for any other path gets the same refusal whether the path exists or not.
+- List, read or change anything else, or sign anyone in. For an album, send a
+  [share link](../guide/sharing.md#share-an-album-with-a-link) instead.
+- Make itself again: EiN keeps only a hash of its token, so the link is shown once, when it is made.
+
+It works for 24 hours unless `--expires` says otherwise, and for at most 90 days. When it expires, or
+`invitation remove` turns it off, the sockets it opened close with 4410 and its link opens nothing
+more; the session-reaper removes expired ones' records. Only its maker or an administrator lists and
+removes it. Its link, `https://<your EiN>/__invite/<token>`, answers which nodes it opens and until
+when, to a page at any address:
+
+```json
+{ "nodes": [{ "path": "/tmp/board/wren/out", "mode": "r" }, { "path": "/tmp/board/wren/in", "mode": "w" }], "expires": "2026-11-28T09:12:00.000Z" }
+```
+
 ## Administrators
 
 The administrator, uid `0`, passes every check, as root does on Linux: other people's homes and
@@ -489,8 +532,10 @@ Only an administrator creates or hard-links an account, group or session node, a
 the administrator included, changes an account's uid or a group's gid once it exists, since
 ownership and access lists name the number. When an account or group is deleted, its number is
 taken off every node first: what it owned goes to the account named with `--to` (the administrator
-by default), and every access-list entry naming it is dropped, so whoever is given that number later
-inherits nothing.
+by default), and every access-list entry naming it is dropped. The number is never given out again,
+since what the account made, changed and did still names it: a new account or group takes a number
+past every one an account or group has had, the deleted ones' included, and a new share link one
+past every link's.
 
 ## Over SSH, SFTP and the web
 

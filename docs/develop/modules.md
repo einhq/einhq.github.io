@@ -514,6 +514,172 @@ Module services use `"restartPolicy": "on-failure"`. A service whose name the mo
 shipping is stopped and removed at the next setup. [Services and logs](../admin/services-logs.md)
 shows where a service's output goes.
 
+## Talk live with a page
+
+A module's service and its pages can talk while both run, such as a game several people play or a
+board they draw on at once, through two node types of which nothing is kept:
+
+- A **`socket`** is a conversation: the service listens on it, and each page connects to it, each
+  connection carrying messages both ways between that page and the service alone.
+- A **`stream`** is live bytes from one writer to any number of readers, such as a camera's video.
+
+A page holds either open over a WebSocket at the node's address under `/file/`, with
+`openNodeSocket(path, mode)` from `@ein/ui/lib`, which gives a `WebSocket` on the page's own host,
+`ws:` or `wss:` as the page is, with its messages as `ArrayBuffer`s. The service opens the same node
+as it opens a file.
+
+### A conversation: a socket
+
+The service makes the socket where its pages find it, open to the accounts that may join, and
+listens on it:
+
+```bash
+# in EiN's terminal, or the service's setup
+mknode -t socket -m 0666 /tmp/recipes/board
+```
+
+```ts
+import { isSocketListener, type SocketConnection } from '@ein/client';
+
+const listener = await cmd.sys.vfs.open(cmd.access, '/tmp/recipes/board', { mode: 'r' });
+if (!isSocketListener(listener)) throw new Error('not a socket');
+for (let connection = await listener.accept(); connection; connection = await listener.accept()) void answer(connection);
+
+// Answers each message with itself, until the page leaves.
+async function answer(connection: SocketConnection) {
+  for (let message = await connection.read(65536); message.length > 0; message = await connection.read(65536)) await connection.write(message);
+}
+```
+
+The page connects with `rw`:
+
+```tsx
+import { NODE_SOCKET_CLOSE, openNodeSocket } from '@ein/ui/lib';
+
+const board = openNodeSocket('/tmp/recipes/board', 'rw');
+board.onopen = () => board.send(new TextEncoder().encode('hello'));
+board.onmessage = (event) => show(new Uint8Array(event.data));
+board.onclose = (event) => {
+  if (event.code === NODE_SOCKET_CLOSE.ended) startOver();
+};
+```
+
+- **Who listens**: the socket's owner, or an administrator, opening it to read. A socket has one
+  listener at a time; another is refused. A module's service runs as the administrator, so it
+  listens on any socket it makes.
+- **Who connects**: an account that may both read and write the socket, at `/file/<path>?mode=rw`,
+  or with any mode that writes when it opens the node itself (`vfs.open` with `mode: 'w'`). While
+  nobody listens the socket is closed with 4503.
+- **`accept`** answers each connection in turn, and `undefined` once the listener is closed or the
+  node removed. A connection's `peer` says who opened it: the account's `uid` and `gid`, and the
+  `invitation` it came through (below).
+- **Messages** are binary, at most 8 MiB each, and arrive whole, each `send` one message and each
+  `read` one message when its size holds it. What a page sends before the service accepts it waits
+  in its connection.
+- **Nobody waits for the other end.** An end that falls more than 8 MiB behind lets the connection
+  go: the page's socket closes with 4001.
+- **Either end closing ends the connection**: the page's close makes the service's `read` answer an
+  empty message, and the service's `close` closes the page's socket with 1000. Closing the listener,
+  or removing the node, ends every connection.
+
+### One writer, many readers: a stream
+
+A stream carries one direction: the service writes it and every page reading it is given what it
+writes from then on, or a page writes it for the service to read.
+
+```bash
+# in the service: the board's moves, for everyone watching
+mknode -t stream -m 0644 /tmp/recipes/moves
+```
+
+```tsx
+const moves = openNodeSocket('/tmp/recipes/moves', 'r');
+moves.onmessage = (event) => show(new Uint8Array(event.data));
+```
+
+- **`mode=w`**: the socket is the stream's writer for as long as it is open. Each binary message is
+  one write, and closing the socket ends the stream for its readers. A stream has one writer at a
+  time: a second socket is closed with 4409.
+- **`mode=r`**: each write comes as one binary message. A reader starts at the moment it opens, or
+  at the latest point the writer marked as a start; what came before is gone. The writer's close
+  closes the reader's socket with 1000, and the reader opens it again to go on.
+- **Messages** are binary, and at most 8 MiB each. A reader is given each write whole, so between a
+  page writing over a socket and a page reading over one, a message arrives as it was sent. A writer
+  that writes in pieces of its own, such as `cat` or a program over SFTP, may pass on several
+  messages as one write or one as several: give the messages a frame of your own, such as a length
+  before each, when they pass through one.
+- **Nobody waits for a reader.** A reader that falls more than 8 MiB behind is given what it holds
+  and then closed with 4001.
+- A stream is read or written, never both: a conversation is a socket.
+
+### Who may open them, and how they end
+
+Who may open either is decided as for any `/file/` address: as the account signed in, with the
+node's own permissions, and only from EiN's own pages; a page from any other address cannot use the
+sign-in. A file ticket (`?ticket=`) reads a stream instead, and never writes, and an invitation
+(`?invite=`) opens its own nodes from a page at any address (below). `nodeSocketUrl(path, mode)`
+gives a socket's address without opening it. Any other node type is refused.
+
+What could not open, and how a socket ended, is in its close code, with a reason a page can show.
+All of them are in `NODE_SOCKET_CLOSE`:
+
+| Code | `NODE_SOCKET_CLOSE` | What happened                                                                                  |
+| ---- | ------------------- | ---------------------------------------------------------------------------------------------- |
+| 1000 | `ended`             | The stream's writer closed, the node was removed under a reader, or the connection ended       |
+| 1001 |                     | EiN is stopping                                                                                |
+| 1003 | `unsupported`       | A text message, or a message from a stream's reader                                            |
+| 1009 | `tooBig`            | A message over 8 MiB                                                                           |
+| 1011 | `failed`            | Something failed in EiN                                                                        |
+| 4001 | `behind`            | The reader, or one end of a connection, fell more than 8 MiB behind                            |
+| 4400 | `badRequest`        | No `mode`, a mode the node does not open with, or a node that is neither a stream nor a socket |
+| 4401 | `signIn`            | Not signed in, where visitors may not browse                                                   |
+| 4403 | `forbidden`         | The account may not open the node in that mode, or the ticket or invitation does not open it   |
+| 4404 | `notFound`          | Nothing at the path                                                                            |
+| 4409 | `conflict`          | The stream has a writer already                                                                |
+| 4410 | `gone`              | The node was removed under its writer, or the invitation expired or was turned off             |
+| 4503 | `unavailable`       | Nobody listens on the socket, or too many connections wait for its listener                    |
+
+### Someone with no account here
+
+Someone without an account here, or a page served by another EiN, takes part through an
+[invitation](../admin/permissions.md#invitations): a token that opens the nodes it names, a socket to
+connect to or a stream to read or to write, as the account that made it, until it expires or is
+turned off. The service makes one when someone is invited, and hands its link to whoever invites
+them:
+
+```bash
+# in the service: someone from elsewhere is invited to the board
+invitation create --connect /tmp/recipes/board
+# /__invite/Xq3…  opens rw /tmp/recipes/board until …
+```
+
+It works for 24 hours unless `--expires` says otherwise. With `JSON_OUTPUT=1` in front it answers
+the token, the link and the nodes as JSON. Either way it gives the token once: only a hash of it is
+kept. Put the server's own address in front of the link, `https://ein.example/__invite/Xq3…`, and
+send that. A page that is handed it, on this EiN or another, asks the link what it opens and opens
+each node with the token instead of a sign-in:
+
+```tsx
+import { fetchInvitation, openNodeSocket } from '@ein/ui/lib';
+
+const invitation = await fetchInvitation(link);
+const sockets = invitation.nodes.map((node) => openNodeSocket(node.path, node.mode, { origin: invitation.origin, invite: invitation.token }));
+```
+
+`fetchInvitation` reads `GET <origin>/__invite/<token>`, which answers a page at any address with the
+nodes and the expiry, `{ "nodes": [{ "path": …, "mode": "rw" }], "expires": "2026-…Z" }`, or `404`
+once the invitation opens nothing; `parseInvitationLink` splits a link into its EiN and token without
+asking. The socket is `wss://ein.example/file/<path>?mode=<mode>&invite=<token>`: on it EiN reads no
+cookie and does not ask which page it came from, and opens only the invitation's nodes, each in its
+own mode. A connection made with it is its maker's, and its `peer.invitation` is the invitation's
+id, so the service can tell a guest from the maker. When the invitation expires or is turned off,
+its sockets close with 4410.
+
+`openNodeSocket`, `nodeSocketUrl` and `NODE_SOCKET_CLOSE` came with core's module contract 0.15.71;
+invitations, `fetchInvitation`, `parseInvitationLink` and `openNodeSocket`'s `origin` and `invite`
+with 0.15.73; and socket nodes, `isSocketListener`, `isSocketConnection` and `rw` with 0.15.74: give
+a module that uses them `"coreApi": "^0.15.74"`.
+
 ## React to changes with pipelines
 
 A pipeline runs commands when something happens in the tree, such as a photo's metadata being read.

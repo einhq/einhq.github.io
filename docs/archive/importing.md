@@ -56,6 +56,8 @@ category of its own, make the category first with **New category** (see
 3. Choose **Upload** in the header and pick the files, or drop files or whole folders anywhere on
    the page. A dropped folder keeps its structure.
 
+![The Inbox, a staging category, with nothing in it yet: Upload and Edit in the header, the tabs Files, Sort, Duplicates, Done and Info, and in the middle "Nothing in Inbox yet", what Upload does, a pointer to Info for SFTP and phone backup, and an Upload button](../../assets/shots/staging.webp "Upload in the header, or the one in the middle while the category is empty: the files wait here, seen only by you.")
+
 The files upload in the background, and the category's **Files** tab shows them as they arrive.
 Pictures shared to EiN from a phone's gallery go into the Inbox the same way (see
 [Share pictures to EiN](../guide/phone.md#share-pictures-to-ein)).

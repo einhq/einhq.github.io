@@ -361,7 +361,7 @@
 </tr>
 <tr>
 <td>Delete an account, <em>administrators only</em></td>
-<td><code>user-delete anna --to helen</code></td>
+<td><code>user-delete anna --to helen</code>, <code>user-delete anna --unused</code></td>
 <td><a href="../reference/commands-core.html#user-delete">user-delete</a></td>
 </tr>
 <tr>
@@ -865,7 +865,8 @@
 </tbody></table>
 </div>
 <aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p><code>cat</code> on a queue takes the entries it prints out of the queue. Use <code>queue-peek</code> to look.</p>
+<p><code>cat</code> on a queue takes the entries it prints out of the queue, so it needs write access to the
+queue. Use <code>queue-peek</code> to look.</p>
 </aside>
 <h3 id="logs-and-the-audit-trail">Logs and the audit trail<a class="anchor" href="#logs-and-the-audit-trail" aria-label="Link to this section"></a></h3>
 <p>There is no <code>logs</code> command. The system log, each service&#39;s output and the metrics series under <code>/var/logs/metrics</code> are log nodes, read with <code>dmesg</code>, <code>tail</code>, <code>cat</code> and <code>log-read</code>.</p>

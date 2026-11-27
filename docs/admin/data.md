@@ -2,7 +2,7 @@
 
 This page is for whoever runs EiN on its machine: what makes up an installation's data and where each part is, how to back it up and restore it, how to move EiN to another disk or machine, how to get your files out in a form you can read without EiN, and how to delete things, free space and remove EiN altogether.
 
-EiN has no backup or export command of its own. Everything below uses the container engine, PostgreSQL's own tools and ordinary copying, run on the machine EiN runs on.
+`setup.sh`, in `~/ein`, backs EiN up and puts a backup back. Everything else below uses the container engine and ordinary copying, run on the machine EiN runs on.
 
 The commands are written for podman, run in `~/ein`. With Docker, write `docker` for `podman` and `docker compose` for `podman compose`, and see [Under Docker](#under-docker) for the one difference that matters.
 
@@ -10,17 +10,17 @@ The commands are written for podman, run in `~/ein`. With Docker, write `docker`
 
 An installation keeps its data in two places: the data folder, which holds the database too, and `~/ein/.env`.
 
-| Part                            | Where                                                         | What it holds                                                                                                                                                               | Back it up?                                                                                                                |
-| ------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `db`, the database              | the data folder, or the folder `EIN_DB_DIR` names             | every node of the tree: names, folders, links, permissions, accounts and settings, the albums, people and faces of the Archive, and small content such as comments and keys | Yes, as a dump                                                                                                             |
-| `files`                         | the data folder, `~/ein/data` unless `EIN_DATA` names another | your originals                                                                                                                                                              | Yes                                                                                                                        |
-| `old`                           | the data folder                                               | files kept from an older installation; empty unless you put files there                                                                                                     | When it holds anything                                                                                                     |
-| `modules`                       | the data folder                                               | the installed modules                                                                                                                                                       | Yes; it is small, and a module installed from **Settings → Modules** is installed again only by hand                       |
-| `files-volatile`                | the data folder                                               | with the Archive, the thumbnails, video renditions, face crops and the other renditions it makes from the originals                                                         | Optional: EiN can make them again, but over a large archive that takes days and needs the [media service](../ems/index.md) |
-| `mqtt`                          | the data folder                                               | with `--devices`, the MQTT broker's accounts, hashed, and what the devices announced                                                                                        | No; `setup.sh` writes the accounts again from `.env`, and the devices announce themselves again when they connect          |
-| `llm`                           | the data folder                                               | with `--llm`, the language model, downloaded at its first start                                                                                                             | No; it is downloaded again                                                                                                 |
-| `~/ein/.env`                    | `~/ein`                                                       | your options, the lines you added, and the passwords made at the install                                                                                                    | Yes                                                                                                                        |
-| `src/`, `compose.override.yaml` | `~/ein`                                                       | the sources and the options as services                                                                                                                                     | No; `setup.sh` makes them again                                                                                            |
+| Part                            | Where                                                         | What it holds                                                                                                                                                               | In a backup?                                                                                                       |
+| ------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `db`, the database              | the data folder, or the folder `EIN_DB_DIR` names             | every node of the tree: names, folders, links, permissions, accounts and settings, the albums, people and faces of the Archive, and small content such as comments and keys | Yes, as a dump                                                                                                     |
+| `files`                         | the data folder, `~/ein/data` unless `EIN_DATA` names another | your originals                                                                                                                                                              | Yes, without the [Album folders](../album-folders/index.md) in `files/albums`, which EiN makes again               |
+| `old`                           | the data folder                                               | files kept from an older installation, which `files` links to; empty unless you put files there                                                                             | Yes                                                                                                                |
+| `modules`                       | the data folder                                               | the installed modules                                                                                                                                                       | Yes; the folder is EiN's list of what is installed                                                                 |
+| `files-volatile`                | the data folder                                               | with the Archive, the thumbnails, video renditions, face crops and the other renditions it makes from the originals                                                         | Yes: EiN does not notice by itself that they are gone, and making them again takes as long as the first processing |
+| `mqtt`                          | the data folder                                               | with `--devices`, the MQTT broker's accounts, hashed, and what the devices announced                                                                                        | No; `setup.sh` writes the accounts again from `.env`, and the devices announce themselves again when they connect  |
+| `llm`                           | the data folder                                               | with `--llm`, the language model, downloaded at its first start                                                                                                             | No; it is downloaded again                                                                                         |
+| `~/ein/.env`, `ems.keys`        | `~/ein`                                                       | your options, the lines you added, and the passwords made at the install; the keys of the media service's other callers                                                     | Yes                                                                                                                |
+| `src/`, `compose.override.yaml` | `~/ein`                                                       | the sources and the options as services                                                                                                                                     | No; `setup.sh` makes them again                                                                                    |
 
 [Installing in detail](install.md#the-data-folder) shows how the folders are mounted into the containers.
 
@@ -28,131 +28,141 @@ An installation keeps its data in two places: the data folder, which holds the d
 
 The `files` folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as `files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K`. What a file is called, who may see it and, with the Archive, which album it is in and whose face is in it are all in the database.
 
-Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. Take both while EiN is stopped, and restore both together.
+Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. A backup takes both of one moment, and a restore puts both back together.
 
-The database password in `.env`, `POSTGRES_PASSWORD`, is kept nowhere else. The restore below does not need it, as it loads the dump into a fresh database, but containers made again on the existing database folder cannot reach the database without it. Keep a copy of `.env` with every backup.
+The database password in `.env`, `POSTGRES_PASSWORD`, is kept nowhere else, and neither are the keys of the media service and the language model. A backup holds `.env`.
 
 ## Back up EiN
 
-Do this before every [update](updating.md) and on a schedule of your own. The example writes the backup to `/mnt/backup/ein`, a disk other than the one EiN runs on.
+Do this before every [update](updating.md), and each night on a [timer](#back-up-on-a-timer). The example writes the backup to `/mnt/backup/ein`, a disk other than the one EiN runs on:
 
-1. Stop EiN, but not its database, so nothing changes while you copy:
+```bash
+# on the machine EiN runs on
+~/ein/setup.sh --backup /mnt/backup/ein --keep 14
+```
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   podman compose stop core
-   ```
+```text
+== Copying the files, while EiN runs
 
-   The Web UI, SSH and SFTP are down until step 5.
+== EiN is paused while what changed is copied and the database's dump begins
+EiN goes on after 2 seconds; the dump goes on beside it
+Backed up to /mnt/backup/ein/2026-11-26-030000, with a dump of 6.1GB
+Removed the backup 2026-11-12-030000
+```
 
-2. Find the database's container and dump the database, with the TimescaleDB version it was made with:
+Each backup is a folder of its own, named by the time it began, and `latest` beside them points at the newest. `--keep 14` removes all but the newest 14; without it, every backup is kept. A folder given without a `/` in front is taken from `~/ein`. The backup needs `rsync` on the machine.
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   mkdir -p /mnt/backup/ein
-   db=$(podman ps -q --filter label=com.docker.compose.project=ein --filter label=com.docker.compose.service=db)
-   podman exec "$db" psql -U ein -d ein -tAc "SELECT extversion FROM pg_extension WHERE extname = 'timescaledb'" > /mnt/backup/ein/timescaledb-version
-   podman exec "$db" pg_dump -U ein -d ein -Fc > /mnt/backup/ein/ein-db.dump
-   ```
+A backup copies the files while EiN runs, which takes as long as the files are large the first time. Then EiN is paused while what changed meanwhile is copied and the database's dump begins, so that the files and the database are of the same moment; the Web UI, SSH and SFTP wait for it, and go on where they were. The pause is as long as `rsync` takes to look through the files and renditions once more: a few seconds for a family's archive, and minutes for a million files on a spinning disk that is busy, which is why the backup belongs in the night. `old`, which EiN only reads, is not looked through again. The dump is written while EiN runs on. Where the container engine cannot pause a container, EiN is stopped until the dump is done instead, and `setup.sh` says so.
 
-   The dump is PostgreSQL's custom format and includes the small content EiN keeps in the database. It is much smaller than the files; `df` in EiN's terminal shows the database's size.
+A file that the backup before holds unchanged is not copied again: both backups name the same bytes on the backup disk (a hard link). Each backup takes the room of what changed since the one before, while each is a whole backup by itself, which you can delete or copy without the others. `du -sh /mnt/backup/ein/*` counts the shared files once, for the first backup that has them.
 
-3. Copy `.env`:
+A backup holds:
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   cp .env /mnt/backup/ein/env
-   ```
+| In the backup's folder                      | What it is                                                                                                      |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ein.dump`                                  | the database, in PostgreSQL's custom format, with the small content EiN keeps in it, such as comments and keys  |
+| `env`, `ems.keys`                           | `.env`, and `ems.keys` when there is one                                                                        |
+| `about`                                     | when it was taken and from where, the releases of EiN and its database, and the TimescaleDB version of the dump |
+| `files`, `files-volatile`, `old`, `modules` | the data folder's folders, as [What makes up your data](#what-makes-up-your-data) says                          |
 
-4. Copy the data folder, leaving out what is not worth keeping:
+The folder is readable by you alone, as `.env` is: it holds the passwords. A backup that went wrong or was cut short leaves `.<time>.partial`, which is no backup, and which the next one removes.
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   rsync -a --delete --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/
-   ```
+### Back up on a timer
 
-   `--exclude /db` leaves out the database's own folder: the dump of step 2 is its backup, and the folder belongs to the database's user, which your own cannot read.
+A systemd timer runs the backup each night. Make these two files, with the path of your backup disk:
 
-   With the [Album folders](../album-folders/index.md) module, add `--exclude /files/albums` too: its folders are second names for the originals in `files`, which `rsync -a` would copy once more, and EiN makes them again. Add `--exclude /files-volatile` to leave out the renditions as well; see [Make the renditions again](#make-the-renditions-again) for what that costs at a restore. If you chose another data folder at the install, give its path instead of `~/ein/data/`.
+```ini
+# ~/.config/systemd/user/ein-backup.service
+[Unit]
+Description=Back up EiN
 
-5. Start EiN again:
+[Service]
+Type=oneshot
+ExecStart=%h/ein/setup.sh --backup /mnt/backup/ein --keep 14
+```
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   podman compose start core
-   ```
+```ini
+# ~/.config/systemd/user/ein-backup.timer
+[Unit]
+Description=Back up EiN each night
 
-A backup tool that copies the whole data folder as root, such as one that backs up the whole machine, takes `db` too. That copy is a database only when the database was stopped while it was taken (`podman compose stop db`, then `podman compose start db`); the dump is one either way.
+[Timer]
+OnCalendar=*-*-* 03:00
+Persistent=true
 
-`rsync --delete` makes the copy the same as the data folder, so something deleted by mistake is gone from the copy at the next run. To keep older backups, write each run to a folder of its own, such as `/mnt/backup/ein/2026-10-25`, or use a backup tool that keeps versions, such as restic or Borg, on the dump, `.env` and the data folder.
+[Install]
+WantedBy=timers.target
+```
 
-> [!WARNING]
-> Never start a dump just before an update or a restart. EiN changes its database tables when it starts, and a dump in progress holds them, so EiN waits for the dump and the update looks as if EiN does not come up. Take the dump while EiN is stopped, as above, or while it is already running.
+Then turn it on:
+
+```bash
+# on the machine EiN runs on, as your own user
+systemctl --user daemon-reload
+systemctl --user enable --now ein-backup.timer
+systemctl --user start ein-backup.service   # one backup now, to see that it works
+journalctl --user -u ein-backup             # what each backup said
+```
+
+A user's timer runs while the user is not logged in only when the user lingers, which `setup.sh` turns on under podman (`loginctl show-user $USER -p Linger`). 03:00 is before the [supervisor](supervisor.md)'s nightly updates at 04:00; a backup and an update never run at once, as one waits for the other. When root ran `setup.sh`, put the two files in `/etc/systemd/system`, with the full path of `setup.sh` for `%h/ein`, and leave out `--user`.
+
+### Copy the backups off the machine
+
+A backup disk in the same machine is lost with it in a fire or a theft. Copy the backups to another place too, such as a NAS or a storage service, and encrypted when it is not yours. A tool made for it, such as [restic](https://restic.net), encrypts what it sends, sends only what changed, and keeps older copies:
+
+```bash
+# on the machine EiN runs on: once, to make the encrypted repository on the NAS
+restic -r sftp:helen@nas.local:/backups/ein init
+# each time, after the backup
+restic -r sftp:helen@nas.local:/backups/ein backup /mnt/backup/ein
+```
+
+`init` asks for the repository's password, without which nothing in it can be read: keep it somewhere other than the machine. For a timer, put it in a file only you can read, give that file in `RESTIC_PASSWORD_FILE`, and run `restic` as a second `ExecStart=` line of the service above. `restic restore latest --target /mnt/restore` brings the backups back to a disk, from which `--restore` puts one back.
 
 ### Under Docker
 
-EiN runs as the user who ran `setup.sh`, so the files in the data folder are yours and the `rsync` of step 4, and of a restore, needs no `sudo`, as under rootless podman. Only the database's folder, `db`, belongs to the database's own user, and the `rsync` leaves it out. When root ran `setup.sh`, the files belong to the user 65532 of EiN's images: run the `rsync` with `sudo`, which keeps their owner.
+EiN runs as the user who ran `setup.sh`, so the files in the data folder are yours and a backup needs no `sudo`, as under rootless podman. When root ran `setup.sh`, the files belong to the user 65532 of EiN's images: run `setup.sh --backup` and `--restore` as root too, which keeps their owner.
 
 ## Restore a backup
 
-A restore loads the dump into an empty database and puts the files back beside it. On the machine the backup came from, start at step 3. On a new machine, or after reinstalling, start at step 1.
+A restore puts a backup's database, files and `.env` back, and starts EiN on them. On the machine the backup came from, it replaces what EiN holds now:
 
-1. Install EiN with the same options as before, such as `--ems --module archive`, as [Install EiN](../start/install.md) describes. The installer starts an empty EiN with a new admin password; that password stops mattering after the restore, when the accounts from your backup apply. When `setup.sh` made it, delete its `INITIAL_ADMIN_PASSWORD` line from the new `.env` then, or `setup.sh` keeps showing a password that no longer signs in.
+```bash
+# on the machine EiN runs on
+~/ein/setup.sh --restore /mnt/backup/ein                     # the newest backup there
+~/ein/setup.sh --restore /mnt/backup/ein/2026-11-20-030000   # or this one
+```
 
-2. Compare the new `~/ein/.env` with the copy in your backup, and copy over the lines you added yourself, such as `CFG_` settings, ports or memory limits. Keep the new `POSTGRES_PASSWORD` and `EMS_KEY`: the new database was made with them. Check `EIN_GPU` too, which says whether this machine has a graphics card for EiN; see [The graphics card](../ems/gpu.md).
+On a new machine, or after reinstalling the system, the installer installs EiN from the backup. Install podman or Docker as for [an install](../start/install.md), make the backup reachable on the machine, and run:
 
-3. Stop EiN and find the database's container:
+```bash
+# on the new machine, as your own user
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --restore /mnt/backup/ein
+```
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   podman compose stop core
-   db=$(podman ps -q --filter label=com.docker.compose.project=ein --filter label=com.docker.compose.service=db)
-   ```
+It asks only where EiN goes, checks the machine for the options and the modules of the backup, and installs EiN with them. `--data` and `--db-dir` place the data folder and the database elsewhere, as at an install. The new machine keeps its own name, graphics card and container engine.
 
-4. Replace the database with the dump:
+Either way, `setup.sh`:
 
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   podman exec "$db" dropdb -U ein --force ein
-   podman exec "$db" createdb -U ein ein
-   podman exec "$db" psql -U ein -d ein -c "CREATE EXTENSION timescaledb VERSION '$(cat /mnt/backup/ein/timescaledb-version)'"
-   podman exec "$db" psql -U ein -d ein -c "SELECT timescaledb_pre_restore()"
-   podman exec -i "$db" pg_restore -U ein -d ein < /mnt/backup/ein/ein-db.dump
-   podman exec "$db" psql -U ein -d ein -c "SELECT timescaledb_post_restore()"
-   ```
+1. stops EiN, when it runs here, and puts back `.env` with this machine's own settings in it, the data folder and the database's folder of the installation here, or the ones given;
+2. copies the backup's files into the data folder, so that it holds exactly what the backup holds; [Album folders](../album-folders/index.md) are made again when EiN starts;
+3. starts the database alone, replaces EiN's database with the dump, and gives it the password of `.env`;
+4. starts EiN and the other services on it, as an update does.
 
-   `dropdb` deletes the database EiN was running on; `--force` first ends the connections still open to it, such as the health check that connects every few seconds. TimescaleDB asks for the same version the dump was made with, and for `timescaledb_pre_restore()` and `timescaledb_post_restore()` around the restore. EiN brings TimescaleDB and the other extensions up to the newest version the image has when it next starts.
+The accounts and their passwords are the backup's. The database runs the release the backup was made on, `EIN_DB_VERSION` in its `env`, since a dump loads only into the TimescaleDB version it was made with; the next update brings it up to the newest. An installation that [builds its images](install.md#where-the-sources-come-from) from your own source builds the database from its newest source instead, which loads a backup made on the same version only. A restore that stops halfway, such as when a download fails, goes on with `~/ein/setup.sh`.
 
-5. Put the files back, so that the data folder holds exactly what the backup holds:
-
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   rsync -a --delete --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/
-   ```
-
-   `--exclude /db` keeps the database you restored in step 4. This also removes the few files the empty EiN of step 1 wrote, which the restored database knows nothing of.
-
-6. Start EiN with the restored data and any lines you changed in `.env`:
-
-   ```bash
-   # on the machine EiN runs on, in ~/ein
-   podman compose up -d
-   ```
-
-7. Sign in with an account from your backup, and choose **Status** under **System** in the sidebar: the **Storage** card shows the data folder and the database's size, and the badge above the title turns to **Healthy** once the work after the start is done. [Health and status](monitoring.md) explains what you see.
-
-With the Archive, if you left out `files-volatile`, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.
+Then sign in with an account from your backup, and choose **Status** under **System** in the sidebar: the **Storage** card shows the data folder and the database's size, and the badge above the title turns to **Healthy** once the work after the start is done. [Health and status](monitoring.md) explains what you see.
 
 ### Make the renditions again
 
-With the Media module installed, the [`regenerate`](../media/commands.md#regenerate) command makes the renditions of every picture, video and recording under a folder, and with the Archive, [`regenerate-face-crops --missing`](../archive/commands.md#regenerate-face-crops) the face crops. After a restore without `files-volatile`, the database still records the renditions, so add `--force` to make them although they seem to exist:
+A backup made otherwise than above may have left out `files-volatile`. With the Media module installed, the [`regenerate`](../media/commands.md#regenerate) command makes the renditions of every picture, video and recording under a folder, and with the Archive, [`regenerate-face-crops`](../archive/commands.md#regenerate-face-crops) the face crops. The database still records the renditions, so add `--force` to make them although they seem to exist:
 
 ```bash
 # in EiN's terminal, as the administrator
 nohup regenerate --force /archive
 ```
 
-The face crops go a page at a time: `regenerate-face-crops --missing --limit 1000` prints where the next page starts, and `--after` with that id goes on from there, until it says nothing is left.
+The face crops go a page at a time: `regenerate-face-crops --limit 1000` prints where the next page starts, and `--after` with that id goes on from there, until it says nothing is left.
 
 [`nohup`](../reference/commands-core.md#nohup) lets it run on when you close the terminal and logs it under `/var/logs/jobs`. It needs the media service, and over a large archive it takes as long as the first processing did. `regenerate --force '/archive/albums/Summer 1987'` does one album first, so you can check the result.
 
@@ -160,13 +170,11 @@ The face crops go a page at a time: `regenerate-face-crops --missing --limit 100
 
 Moving is a backup on the old machine and a restore on the new one:
 
-1. On the old machine, [back up EiN](#back-up-ein) to a disk you can take along, or to a folder you then copy to the new machine with `rsync -a` over SSH.
-2. On the new machine, follow [Restore a backup](#restore-a-backup) from step 1, giving the paths where the backup is.
+1. On the old machine, stop EiN, with `podman compose stop core` in `~/ein`, so no one adds pictures there that the backup would not have, and [back up EiN](#back-up-ein) to a disk you can take along, or to a folder you then copy to the new machine with `rsync -aH` over SSH (`-H` keeps the backups' shared files shared).
+2. On the new machine, [restore it](#restore-a-backup) with the installer.
 3. Point the family's bookmarks, phones and SFTP clients at the new machine's address. EiN's SSH host key, `/etc/ssh_host_key` in the tree, moves with the database, so SSH and SFTP clients see the same key as before.
 
-The old machine keeps running until you stop it. Stop it after the move, with `podman compose down` in `~/ein`, so no one goes on adding pictures there.
-
-If `CREATE EXTENSION` in step 4 says that TimescaleDB has no installation script for the version, the new machine's database image no longer carries the version the old one used. Update the old EiN first, so both run the same image, as [Updating](updating.md) describes, and take the backup again.
+Remove the old installation once the new one shows your files, as [Remove EiN](#remove-ein) describes.
 
 ## Move the data folder to another disk
 
@@ -322,15 +330,17 @@ There is no uninstall script. Removing EiN and everything in it takes these step
 
 ## When something goes differently
 
-| What you see                                                            | What to do                                                                                                                                                |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `db=$(…)` is empty, and `podman exec` says it needs a container         | The database is not running. Start it with `podman compose up -d db`, and check `podman compose ps`. Under Docker, use `docker ps` in the `db=$(…)` line. |
-| `CREATE EXTENSION` says there is no installation script for the version | The database image does not carry the TimescaleDB version the dump was made with; see [Move EiN to another machine](#move-ein-to-another-machine).        |
-| With the Archive, after a restore, pictures show without thumbnails     | The renditions were not restored. [Make the renditions again](#make-the-renditions-again).                                                                |
-| After a restore, some pictures open as a broken image                   | Their files are missing from the data folder: the files and the database came from different moments. Restore both from the same backup.                  |
-| A module is missing after a restore                                     | It was installed from **Settings → Modules** and its folder was not restored. Install it again there; see [Modules](modules.md).                          |
-| `rsync` says permission denied                                          | Under Docker the data folder belongs to root; run it with `sudo`.                                                                                         |
-| The update after a backup reports that EiN did not come up              | A dump was still running when EiN started. Wait for it to finish, then `podman compose restart core`.                                                     |
+| What you see                                                                                   | What to do                                                                                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `setup.sh: the database is not running, and a backup dumps it`                                 | Start EiN, `podman compose up -d` in `~/ein`, and back up again.                                                                                                                                                                                                                |
+| `setup.sh: --backup copies the files with rsync, which is not installed here`                  | Install `rsync` with the system's package manager, such as `sudo apt install rsync`.                                                                                                                                                                                            |
+| `rsync` says permission denied                                                                 | Root ran `setup.sh`, so the data folder belongs to the user 65532: back up and restore as root ([Under Docker](#under-docker)).                                                                                                                                                 |
+| `setup.sh: the database's dump failed`                                                         | The output above it says why. A dump that waited a minute for a table EiN held stops; back up again. Nothing of the backup is kept but `.<time>.partial`, which the next one removes.                                                                                           |
+| `setup.sh: the backup's database is of TimescaleDB …, which this database image does not have` | The restore runs another release of the database than the one the backup was made with, as when it was built from your own source. Install the database's release that `EIN_DB_VERSION` in the backup's `env` names, or make the backup again on an EiN with the same database. |
+| `setup.sh: the backup's database did not load`                                                 | `pg_restore`'s output above it says why. Run `~/ein/setup.sh` again once it is fixed: it loads the dump again from the start.                                                                                                                                                   |
+| `setup.sh: the database of an earlier install is here` at a restore on a new machine           | A database is in the data folder or the volume `ein_db` already, without its `.env`. Remove it as the message says, or restore into another data folder with `--data`.                                                                                                          |
+| With the Archive, after a restore, pictures show without thumbnails                            | The backup holds no renditions, as one made by hand may not. [Make the renditions again](#make-the-renditions-again).                                                                                                                                                           |
+| After a restore, some pictures open as a broken image                                          | Their files are missing from the data folder: the files and the database came from different moments. Restore both from the same backup.                                                                                                                                        |
 
 [Troubleshooting](troubleshooting.md) covers problems that are not about the data.
 

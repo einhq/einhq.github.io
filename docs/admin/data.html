@@ -95,7 +95,7 @@
         </header>
         <article class="prose">
 <p>This page is for whoever runs EiN on its machine: what makes up an installation&#39;s data and where each part is, how to back it up and restore it, how to move EiN to another disk or machine, how to get your files out in a form you can read without EiN, and how to delete things, free space and remove EiN altogether.</p>
-<p>EiN has no backup or export command of its own. Everything below uses the container engine, PostgreSQL&#39;s own tools and ordinary copying, run on the machine EiN runs on.</p>
+<p><code>setup.sh</code>, in <code>~/ein</code>, backs EiN up and puts a backup back. Everything else below uses the container engine and ordinary copying, run on the machine EiN runs on.</p>
 <p>The commands are written for podman, run in <code>~/ein</code>. With Docker, write <code>docker</code> for <code>podman</code> and <code>docker compose</code> for <code>podman compose</code>, and see <a href="#under-docker">Under Docker</a> for the one difference that matters.</p>
 <h2 id="what-makes-up-your-data">What makes up your data<a class="anchor" href="#what-makes-up-your-data" aria-label="Link to this section"></a></h2>
 <p>An installation keeps its data in two places: the data folder, which holds the database too, and <code>~/ein/.env</code>.</p>
@@ -105,7 +105,7 @@
 <th>Part</th>
 <th>Where</th>
 <th>What it holds</th>
-<th>Back it up?</th>
+<th>In a backup?</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -118,25 +118,25 @@
 <td><code>files</code></td>
 <td>the data folder, <code>~/ein/data</code> unless <code>EIN_DATA</code> names another</td>
 <td>your originals</td>
-<td>Yes</td>
+<td>Yes, without the <a href="../album-folders/index.html">Album folders</a> in <code>files/albums</code>, which EiN makes again</td>
 </tr>
 <tr>
 <td><code>old</code></td>
 <td>the data folder</td>
-<td>files kept from an older installation; empty unless you put files there</td>
-<td>When it holds anything</td>
+<td>files kept from an older installation, which <code>files</code> links to; empty unless you put files there</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td><code>modules</code></td>
 <td>the data folder</td>
 <td>the installed modules</td>
-<td>Yes; it is small, and a module installed from <strong>Settings → Modules</strong> is installed again only by hand</td>
+<td>Yes; the folder is EiN&#39;s list of what is installed</td>
 </tr>
 <tr>
 <td><code>files-volatile</code></td>
 <td>the data folder</td>
 <td>with the Archive, the thumbnails, video renditions, face crops and the other renditions it makes from the originals</td>
-<td>Optional: EiN can make them again, but over a large archive that takes days and needs the <a href="../ems/index.html">media service</a></td>
+<td>Yes: EiN does not notice by itself that they are gone, and making them again takes as long as the first processing</td>
 </tr>
 <tr>
 <td><code>mqtt</code></td>
@@ -151,9 +151,9 @@
 <td>No; it is downloaded again</td>
 </tr>
 <tr>
-<td><code>~/ein/.env</code></td>
+<td><code>~/ein/.env</code>, <code>ems.keys</code></td>
 <td><code>~/ein</code></td>
-<td>your options, the lines you added, and the passwords made at the install</td>
+<td>your options, the lines you added, and the passwords made at the install; the keys of the media service&#39;s other callers</td>
 <td>Yes</td>
 </tr>
 <tr>
@@ -167,96 +167,115 @@
 <p><a href="install.html#the-data-folder">Installing in detail</a> shows how the folders are mounted into the containers.</p>
 <h3 id="why-the-database-and-the-files-belong-together">Why the database and the files belong together<a class="anchor" href="#why-the-database-and-the-files-belong-together" aria-label="Link to this section"></a></h3>
 <p>The <code>files</code> folder does not hold your files by name. Each file is stored under the id of its node, in a folder named after the last two characters of the id, such as <code>files/7K/01JA3W6Q0V3XG0M2ZK8Q5T7R7K</code>. What a file is called, who may see it and, with the Archive, which album it is in and whose face is in it are all in the database.</p>
-<p>Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. Take both while EiN is stopped, and restore both together.</p>
-<p>The database password in <code>.env</code>, <code>POSTGRES_PASSWORD</code>, is kept nowhere else. The restore below does not need it, as it loads the dump into a fresh database, but containers made again on the existing database folder cannot reach the database without it. Keep a copy of <code>.env</code> with every backup.</p>
+<p>Neither half is any use without the other, and they must come from the same moment. When something is deleted for good, EiN removes its bytes from the data folder, so a database restored from an older backup than the files points at files that are gone; files newer than the database are simply not in the tree. A backup takes both of one moment, and a restore puts both back together.</p>
+<p>The database password in <code>.env</code>, <code>POSTGRES_PASSWORD</code>, is kept nowhere else, and neither are the keys of the media service and the language model. A backup holds <code>.env</code>.</p>
 <h2 id="back-up-ein">Back up EiN<a class="anchor" href="#back-up-ein" aria-label="Link to this section"></a></h2>
-<p>Do this before every <a href="updating.html">update</a> and on a schedule of your own. The example writes the backup to <code>/mnt/backup/ein</code>, a disk other than the one EiN runs on.</p>
-<ol>
-<li><p>Stop EiN, but not its database, so nothing changes while you copy:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose stop core</code></pre></div>
-<p>The Web UI, SSH and SFTP are down until step 5.</p>
-</li>
-<li><p>Find the database&#39;s container and dump the database, with the TimescaleDB version it was made with:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-<span class="hljs-built_in">mkdir</span> -p /mnt/backup/ein
-db=$(podman ps -q --filter label=com.docker.compose.project=ein --filter label=com.docker.compose.service=db)
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> psql -U ein -d ein -tAc <span class="hljs-string">&quot;SELECT extversion FROM pg_extension WHERE extname = &#x27;timescaledb&#x27;&quot;</span> &gt; /mnt/backup/ein/timescaledb-version
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> pg_dump -U ein -d ein -Fc &gt; /mnt/backup/ein/ein-db.dump</code></pre></div>
-<p>The dump is PostgreSQL&#39;s custom format and includes the small content EiN keeps in the database. It is much smaller than the files; <code>df</code> in EiN&#39;s terminal shows the database&#39;s size.</p>
-</li>
-<li><p>Copy <code>.env</code>:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-<span class="hljs-built_in">cp</span> .<span class="hljs-built_in">env</span> /mnt/backup/ein/env</code></pre></div>
-</li>
-<li><p>Copy the data folder, leaving out what is not worth keeping:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-rsync -a --delete --exclude /llm --exclude /db ~/ein/data/ /mnt/backup/ein/data/</code></pre></div>
-<p><code>--exclude /db</code> leaves out the database&#39;s own folder: the dump of step 2 is its backup, and the folder belongs to the database&#39;s user, which your own cannot read.</p>
-<p>With the <a href="../album-folders/index.html">Album folders</a> module, add <code>--exclude /files/albums</code> too: its folders are second names for the originals in <code>files</code>, which <code>rsync -a</code> would copy once more, and EiN makes them again. Add <code>--exclude /files-volatile</code> to leave out the renditions as well; see <a href="#make-the-renditions-again">Make the renditions again</a> for what that costs at a restore. If you chose another data folder at the install, give its path instead of <code>~/ein/data/</code>.</p>
-</li>
-<li><p>Start EiN again:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose start core</code></pre></div>
-</li>
-</ol>
-<p>A backup tool that copies the whole data folder as root, such as one that backs up the whole machine, takes <code>db</code> too. That copy is a database only when the database was stopped while it was taken (<code>podman compose stop db</code>, then <code>podman compose start db</code>); the dump is one either way.</p>
-<p><code>rsync --delete</code> makes the copy the same as the data folder, so something deleted by mistake is gone from the copy at the next run. To keep older backups, write each run to a folder of its own, such as <code>/mnt/backup/ein/2026-10-25</code>, or use a backup tool that keeps versions, such as restic or Borg, on the dump, <code>.env</code> and the data folder.</p>
-<aside class="callout callout-warning"><p class="callout-title">Warning</p>
-<p>Never start a dump just before an update or a restart. EiN changes its database tables when it starts, and a dump in progress holds them, so EiN waits for the dump and the update looks as if EiN does not come up. Take the dump while EiN is stopped, as above, or while it is already running.</p>
-</aside>
+<p>Do this before every <a href="updating.html">update</a>, and each night on a <a href="#back-up-on-a-timer">timer</a>. The example writes the backup to <code>/mnt/backup/ein</code>, a disk other than the one EiN runs on:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+~/ein/setup.sh --backup /mnt/backup/ein --keep 14</code></pre></div>
+<div class="code"><pre tabindex="0"><code>== Copying the files, while EiN runs
+
+== EiN is paused while what changed is copied and the database's dump begins
+EiN goes on after 2 seconds; the dump goes on beside it
+Backed up to /mnt/backup/ein/2026-11-26-030000, with a dump of 6.1GB
+Removed the backup 2026-11-12-030000</code></pre></div>
+<p>Each backup is a folder of its own, named by the time it began, and <code>latest</code> beside them points at the newest. <code>--keep 14</code> removes all but the newest 14; without it, every backup is kept. A folder given without a <code>/</code> in front is taken from <code>~/ein</code>. The backup needs <code>rsync</code> on the machine.</p>
+<p>A backup copies the files while EiN runs, which takes as long as the files are large the first time. Then EiN is paused while what changed meanwhile is copied and the database&#39;s dump begins, so that the files and the database are of the same moment; the Web UI, SSH and SFTP wait for it, and go on where they were. The pause is as long as <code>rsync</code> takes to look through the files and renditions once more: a few seconds for a family&#39;s archive, and minutes for a million files on a spinning disk that is busy, which is why the backup belongs in the night. <code>old</code>, which EiN only reads, is not looked through again. The dump is written while EiN runs on. Where the container engine cannot pause a container, EiN is stopped until the dump is done instead, and <code>setup.sh</code> says so.</p>
+<p>A file that the backup before holds unchanged is not copied again: both backups name the same bytes on the backup disk (a hard link). Each backup takes the room of what changed since the one before, while each is a whole backup by itself, which you can delete or copy without the others. <code>du -sh /mnt/backup/ein/*</code> counts the shared files once, for the first backup that has them.</p>
+<p>A backup holds:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>In the backup&#39;s folder</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ein.dump</code></td>
+<td>the database, in PostgreSQL&#39;s custom format, with the small content EiN keeps in it, such as comments and keys</td>
+</tr>
+<tr>
+<td><code>env</code>, <code>ems.keys</code></td>
+<td><code>.env</code>, and <code>ems.keys</code> when there is one</td>
+</tr>
+<tr>
+<td><code>about</code></td>
+<td>when it was taken and from where, the releases of EiN and its database, and the TimescaleDB version of the dump</td>
+</tr>
+<tr>
+<td><code>files</code>, <code>files-volatile</code>, <code>old</code>, <code>modules</code></td>
+<td>the data folder&#39;s folders, as <a href="#what-makes-up-your-data">What makes up your data</a> says</td>
+</tr>
+</tbody></table>
+</div>
+<p>The folder is readable by you alone, as <code>.env</code> is: it holds the passwords. A backup that went wrong or was cut short leaves <code>.&lt;time&gt;.partial</code>, which is no backup, and which the next one removes.</p>
+<h3 id="back-up-on-a-timer">Back up on a timer<a class="anchor" href="#back-up-on-a-timer" aria-label="Link to this section"></a></h3>
+<p>A systemd timer runs the backup each night. Make these two files, with the path of your backup disk:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/.config/systemd/user/ein-backup.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Back up EiN
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot
+<span class="hljs-attr">ExecStart</span>=%h/ein/setup.sh --backup /mnt/backup/ein --keep <span class="hljs-number">14</span></code></pre></div>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># ~/.config/systemd/user/ein-backup.timer</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Back up EiN each night
+
+<span class="hljs-section">[Timer]</span>
+<span class="hljs-attr">OnCalendar</span>=*-*-* <span class="hljs-number">03</span>:<span class="hljs-number">00</span>
+<span class="hljs-attr">Persistent</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=timers.target</code></pre></div>
+<p>Then turn it on:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
+systemctl --user daemon-reload
+systemctl --user <span class="hljs-built_in">enable</span> --now ein-backup.timer
+systemctl --user start ein-backup.service   <span class="hljs-comment"># one backup now, to see that it works</span>
+journalctl --user -u ein-backup             <span class="hljs-comment"># what each backup said</span></code></pre></div>
+<p>A user&#39;s timer runs while the user is not logged in only when the user lingers, which <code>setup.sh</code> turns on under podman (<code>loginctl show-user $USER -p Linger</code>). 03:00 is before the <a href="supervisor.html">supervisor</a>&#39;s nightly updates at 04:00; a backup and an update never run at once, as one waits for the other. When root ran <code>setup.sh</code>, put the two files in <code>/etc/systemd/system</code>, with the full path of <code>setup.sh</code> for <code>%h/ein</code>, and leave out <code>--user</code>.</p>
+<h3 id="copy-the-backups-off-the-machine">Copy the backups off the machine<a class="anchor" href="#copy-the-backups-off-the-machine" aria-label="Link to this section"></a></h3>
+<p>A backup disk in the same machine is lost with it in a fire or a theft. Copy the backups to another place too, such as a NAS or a storage service, and encrypted when it is not yours. A tool made for it, such as <a href="https://restic.net">restic</a>, encrypts what it sends, sends only what changed, and keeps older copies:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on: once, to make the encrypted repository on the NAS</span>
+restic -r sftp:helen@nas.local:/backups/ein init
+<span class="hljs-comment"># each time, after the backup</span>
+restic -r sftp:helen@nas.local:/backups/ein backup /mnt/backup/ein</code></pre></div>
+<p><code>init</code> asks for the repository&#39;s password, without which nothing in it can be read: keep it somewhere other than the machine. For a timer, put it in a file only you can read, give that file in <code>RESTIC_PASSWORD_FILE</code>, and run <code>restic</code> as a second <code>ExecStart=</code> line of the service above. <code>restic restore latest --target /mnt/restore</code> brings the backups back to a disk, from which <code>--restore</code> puts one back.</p>
 <h3 id="under-docker">Under Docker<a class="anchor" href="#under-docker" aria-label="Link to this section"></a></h3>
-<p>EiN runs as the user who ran <code>setup.sh</code>, so the files in the data folder are yours and the <code>rsync</code> of step 4, and of a restore, needs no <code>sudo</code>, as under rootless podman. Only the database&#39;s folder, <code>db</code>, belongs to the database&#39;s own user, and the <code>rsync</code> leaves it out. When root ran <code>setup.sh</code>, the files belong to the user 65532 of EiN&#39;s images: run the <code>rsync</code> with <code>sudo</code>, which keeps their owner.</p>
+<p>EiN runs as the user who ran <code>setup.sh</code>, so the files in the data folder are yours and a backup needs no <code>sudo</code>, as under rootless podman. When root ran <code>setup.sh</code>, the files belong to the user 65532 of EiN&#39;s images: run <code>setup.sh --backup</code> and <code>--restore</code> as root too, which keeps their owner.</p>
 <h2 id="restore-a-backup">Restore a backup<a class="anchor" href="#restore-a-backup" aria-label="Link to this section"></a></h2>
-<p>A restore loads the dump into an empty database and puts the files back beside it. On the machine the backup came from, start at step 3. On a new machine, or after reinstalling, start at step 1.</p>
+<p>A restore puts a backup&#39;s database, files and <code>.env</code> back, and starts EiN on them. On the machine the backup came from, it replaces what EiN holds now:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on</span>
+~/ein/setup.sh --restore /mnt/backup/ein                     <span class="hljs-comment"># the newest backup there</span>
+~/ein/setup.sh --restore /mnt/backup/ein/2026-11-20-030000   <span class="hljs-comment"># or this one</span></code></pre></div>
+<p>On a new machine, or after reinstalling the system, the installer installs EiN from the backup. Install podman or Docker as for <a href="../start/install.html">an install</a>, make the backup reachable on the machine, and run:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the new machine, as your own user</span>
+curl -fsSL https://einhq.eu/install.sh | bash -s -- --restore /mnt/backup/ein</code></pre></div>
+<p>It asks only where EiN goes, checks the machine for the options and the modules of the backup, and installs EiN with them. <code>--data</code> and <code>--db-dir</code> place the data folder and the database elsewhere, as at an install. The new machine keeps its own name, graphics card and container engine.</p>
+<p>Either way, <code>setup.sh</code>:</p>
 <ol>
-<li><p>Install EiN with the same options as before, such as <code>--ems --module archive</code>, as <a href="../start/install.html">Install EiN</a> describes. The installer starts an empty EiN with a new admin password; that password stops mattering after the restore, when the accounts from your backup apply. When <code>setup.sh</code> made it, delete its <code>INITIAL_ADMIN_PASSWORD</code> line from the new <code>.env</code> then, or <code>setup.sh</code> keeps showing a password that no longer signs in.</p>
-</li>
-<li><p>Compare the new <code>~/ein/.env</code> with the copy in your backup, and copy over the lines you added yourself, such as <code>CFG_</code> settings, ports or memory limits. Keep the new <code>POSTGRES_PASSWORD</code> and <code>EMS_KEY</code>: the new database was made with them. Check <code>EIN_GPU</code> too, which says whether this machine has a graphics card for EiN; see <a href="../ems/gpu.html">The graphics card</a>.</p>
-</li>
-<li><p>Stop EiN and find the database&#39;s container:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose stop core
-db=$(podman ps -q --filter label=com.docker.compose.project=ein --filter label=com.docker.compose.service=db)</code></pre></div>
-</li>
-<li><p>Replace the database with the dump:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> dropdb -U ein --force ein
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> createdb -U ein ein
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> psql -U ein -d ein -c <span class="hljs-string">&quot;CREATE EXTENSION timescaledb VERSION &#x27;<span class="hljs-subst">$(cat /mnt/backup/ein/timescaledb-version)</span>&#x27;&quot;</span>
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> psql -U ein -d ein -c <span class="hljs-string">&quot;SELECT timescaledb_pre_restore()&quot;</span>
-podman <span class="hljs-built_in">exec</span> -i <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> pg_restore -U ein -d ein &lt; /mnt/backup/ein/ein-db.dump
-podman <span class="hljs-built_in">exec</span> <span class="hljs-string">&quot;<span class="hljs-variable">$db</span>&quot;</span> psql -U ein -d ein -c <span class="hljs-string">&quot;SELECT timescaledb_post_restore()&quot;</span></code></pre></div>
-<p><code>dropdb</code> deletes the database EiN was running on; <code>--force</code> first ends the connections still open to it, such as the health check that connects every few seconds. TimescaleDB asks for the same version the dump was made with, and for <code>timescaledb_pre_restore()</code> and <code>timescaledb_post_restore()</code> around the restore. EiN brings TimescaleDB and the other extensions up to the newest version the image has when it next starts.</p>
-</li>
-<li><p>Put the files back, so that the data folder holds exactly what the backup holds:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-rsync -a --delete --exclude /llm --exclude /db /mnt/backup/ein/data/ ~/ein/data/</code></pre></div>
-<p><code>--exclude /db</code> keeps the database you restored in step 4. This also removes the few files the empty EiN of step 1 wrote, which the restored database knows nothing of.</p>
-</li>
-<li><p>Start EiN with the restored data and any lines you changed in <code>.env</code>:</p>
-<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, in ~/ein</span>
-podman compose up -d</code></pre></div>
-</li>
-<li><p>Sign in with an account from your backup, and choose <strong>Status</strong> under <strong>System</strong> in the sidebar: the <strong>Storage</strong> card shows the data folder and the database&#39;s size, and the badge above the title turns to <strong>Healthy</strong> once the work after the start is done. <a href="monitoring.html">Health and status</a> explains what you see.</p>
-</li>
+<li>stops EiN, when it runs here, and puts back <code>.env</code> with this machine&#39;s own settings in it, the data folder and the database&#39;s folder of the installation here, or the ones given;</li>
+<li>copies the backup&#39;s files into the data folder, so that it holds exactly what the backup holds; <a href="../album-folders/index.html">Album folders</a> are made again when EiN starts;</li>
+<li>starts the database alone, replaces EiN&#39;s database with the dump, and gives it the password of <code>.env</code>;</li>
+<li>starts EiN and the other services on it, as an update does.</li>
 </ol>
-<p>With the Archive, if you left out <code>files-volatile</code>, make the renditions again now, as the next section says. Until then, pictures and videos have no thumbnails or previews.</p>
+<p>The accounts and their passwords are the backup&#39;s. The database runs the release the backup was made on, <code>EIN_DB_VERSION</code> in its <code>env</code>, since a dump loads only into the TimescaleDB version it was made with; the next update brings it up to the newest. An installation that <a href="install.html#where-the-sources-come-from">builds its images</a> from your own source builds the database from its newest source instead, which loads a backup made on the same version only. A restore that stops halfway, such as when a download fails, goes on with <code>~/ein/setup.sh</code>.</p>
+<p>Then sign in with an account from your backup, and choose <strong>Status</strong> under <strong>System</strong> in the sidebar: the <strong>Storage</strong> card shows the data folder and the database&#39;s size, and the badge above the title turns to <strong>Healthy</strong> once the work after the start is done. <a href="monitoring.html">Health and status</a> explains what you see.</p>
 <h3 id="make-the-renditions-again">Make the renditions again<a class="anchor" href="#make-the-renditions-again" aria-label="Link to this section"></a></h3>
-<p>With the Media module installed, the <a href="../media/commands.html#regenerate"><code>regenerate</code></a> command makes the renditions of every picture, video and recording under a folder, and with the Archive, <a href="../archive/commands.html#regenerate-face-crops"><code>regenerate-face-crops --missing</code></a> the face crops. After a restore without <code>files-volatile</code>, the database still records the renditions, so add <code>--force</code> to make them although they seem to exist:</p>
+<p>A backup made otherwise than above may have left out <code>files-volatile</code>. With the Media module installed, the <a href="../media/commands.html#regenerate"><code>regenerate</code></a> command makes the renditions of every picture, video and recording under a folder, and with the Archive, <a href="../archive/commands.html#regenerate-face-crops"><code>regenerate-face-crops</code></a> the face crops. The database still records the renditions, so add <code>--force</code> to make them although they seem to exist:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal, as the administrator</span>
 <span class="hljs-built_in">nohup</span> regenerate --force /archive</code></pre></div>
-<p>The face crops go a page at a time: <code>regenerate-face-crops --missing --limit 1000</code> prints where the next page starts, and <code>--after</code> with that id goes on from there, until it says nothing is left.</p>
+<p>The face crops go a page at a time: <code>regenerate-face-crops --limit 1000</code> prints where the next page starts, and <code>--after</code> with that id goes on from there, until it says nothing is left.</p>
 <p><a href="../reference/commands-core.html#nohup"><code>nohup</code></a> lets it run on when you close the terminal and logs it under <code>/var/logs/jobs</code>. It needs the media service, and over a large archive it takes as long as the first processing did. <code>regenerate --force &#39;/archive/albums/Summer 1987&#39;</code> does one album first, so you can check the result.</p>
 <h2 id="move-ein-to-another-machine">Move EiN to another machine<a class="anchor" href="#move-ein-to-another-machine" aria-label="Link to this section"></a></h2>
 <p>Moving is a backup on the old machine and a restore on the new one:</p>
 <ol>
-<li>On the old machine, <a href="#back-up-ein">back up EiN</a> to a disk you can take along, or to a folder you then copy to the new machine with <code>rsync -a</code> over SSH.</li>
-<li>On the new machine, follow <a href="#restore-a-backup">Restore a backup</a> from step 1, giving the paths where the backup is.</li>
+<li>On the old machine, stop EiN, with <code>podman compose stop core</code> in <code>~/ein</code>, so no one adds pictures there that the backup would not have, and <a href="#back-up-ein">back up EiN</a> to a disk you can take along, or to a folder you then copy to the new machine with <code>rsync -aH</code> over SSH (<code>-H</code> keeps the backups&#39; shared files shared).</li>
+<li>On the new machine, <a href="#restore-a-backup">restore it</a> with the installer.</li>
 <li>Point the family&#39;s bookmarks, phones and SFTP clients at the new machine&#39;s address. EiN&#39;s SSH host key, <code>/etc/ssh_host_key</code> in the tree, moves with the database, so SSH and SFTP clients see the same key as before.</li>
 </ol>
-<p>The old machine keeps running until you stop it. Stop it after the move, with <code>podman compose down</code> in <code>~/ein</code>, so no one goes on adding pictures there.</p>
-<p>If <code>CREATE EXTENSION</code> in step 4 says that TimescaleDB has no installation script for the version, the new machine&#39;s database image no longer carries the version the old one used. Update the old EiN first, so both run the same image, as <a href="updating.html">Updating</a> describes, and take the backup again.</p>
+<p>Remove the old installation once the new one shows your files, as <a href="#remove-ein">Remove EiN</a> describes.</p>
 <h2 id="move-the-data-folder-to-another-disk">Move the data folder to another disk<a class="anchor" href="#move-the-data-folder-to-another-disk" aria-label="Link to this section"></a></h2>
 <p>The data folder can be moved on the same machine, such as to a larger disk mounted at <code>/srv/ein-data</code>:</p>
 <ol>
@@ -380,32 +399,40 @@ podman unshare <span class="hljs-built_in">rm</span> -rf ~/ein</code></pre></div
 </tr>
 </thead>
 <tbody><tr>
-<td><code>db=$(…)</code> is empty, and <code>podman exec</code> says it needs a container</td>
-<td>The database is not running. Start it with <code>podman compose up -d db</code>, and check <code>podman compose ps</code>. Under Docker, use <code>docker ps</code> in the <code>db=$(…)</code> line.</td>
+<td><code>setup.sh: the database is not running, and a backup dumps it</code></td>
+<td>Start EiN, <code>podman compose up -d</code> in <code>~/ein</code>, and back up again.</td>
 </tr>
 <tr>
-<td><code>CREATE EXTENSION</code> says there is no installation script for the version</td>
-<td>The database image does not carry the TimescaleDB version the dump was made with; see <a href="#move-ein-to-another-machine">Move EiN to another machine</a>.</td>
+<td><code>setup.sh: --backup copies the files with rsync, which is not installed here</code></td>
+<td>Install <code>rsync</code> with the system&#39;s package manager, such as <code>sudo apt install rsync</code>.</td>
+</tr>
+<tr>
+<td><code>rsync</code> says permission denied</td>
+<td>Root ran <code>setup.sh</code>, so the data folder belongs to the user 65532: back up and restore as root (<a href="#under-docker">Under Docker</a>).</td>
+</tr>
+<tr>
+<td><code>setup.sh: the database&#39;s dump failed</code></td>
+<td>The output above it says why. A dump that waited a minute for a table EiN held stops; back up again. Nothing of the backup is kept but <code>.&lt;time&gt;.partial</code>, which the next one removes.</td>
+</tr>
+<tr>
+<td><code>setup.sh: the backup&#39;s database is of TimescaleDB …, which this database image does not have</code></td>
+<td>The restore runs another release of the database than the one the backup was made with, as when it was built from your own source. Install the database&#39;s release that <code>EIN_DB_VERSION</code> in the backup&#39;s <code>env</code> names, or make the backup again on an EiN with the same database.</td>
+</tr>
+<tr>
+<td><code>setup.sh: the backup&#39;s database did not load</code></td>
+<td><code>pg_restore</code>&#39;s output above it says why. Run <code>~/ein/setup.sh</code> again once it is fixed: it loads the dump again from the start.</td>
+</tr>
+<tr>
+<td><code>setup.sh: the database of an earlier install is here</code> at a restore on a new machine</td>
+<td>A database is in the data folder or the volume <code>ein_db</code> already, without its <code>.env</code>. Remove it as the message says, or restore into another data folder with <code>--data</code>.</td>
 </tr>
 <tr>
 <td>With the Archive, after a restore, pictures show without thumbnails</td>
-<td>The renditions were not restored. <a href="#make-the-renditions-again">Make the renditions again</a>.</td>
+<td>The backup holds no renditions, as one made by hand may not. <a href="#make-the-renditions-again">Make the renditions again</a>.</td>
 </tr>
 <tr>
 <td>After a restore, some pictures open as a broken image</td>
 <td>Their files are missing from the data folder: the files and the database came from different moments. Restore both from the same backup.</td>
-</tr>
-<tr>
-<td>A module is missing after a restore</td>
-<td>It was installed from <strong>Settings → Modules</strong> and its folder was not restored. Install it again there; see <a href="modules.html">Modules</a>.</td>
-</tr>
-<tr>
-<td><code>rsync</code> says permission denied</td>
-<td>Under Docker the data folder belongs to root; run it with <code>sudo</code>.</td>
-</tr>
-<tr>
-<td>The update after a backup reports that EiN did not come up</td>
-<td>A dump was still running when EiN started. Wait for it to finish, then <code>podman compose restart core</code>.</td>
 </tr>
 </tbody></table>
 </div>
@@ -426,7 +453,7 @@ podman unshare <span class="hljs-built_in">rm</span> -rf ~/ein</code></pre></div
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/data.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-makes-up-your-data">What makes up your data</a></li><li class="nested"><a href="#why-the-database-and-the-files-belong-together">Why the database and the files belong together</a></li><li><a href="#back-up-ein">Back up EiN</a></li><li class="nested"><a href="#under-docker">Under Docker</a></li><li><a href="#restore-a-backup">Restore a backup</a></li><li class="nested"><a href="#make-the-renditions-again">Make the renditions again</a></li><li><a href="#move-ein-to-another-machine">Move EiN to another machine</a></li><li><a href="#move-the-data-folder-to-another-disk">Move the data folder to another disk</a></li><li><a href="#get-your-files-out-without-ein">Get your files out without EiN</a></li><li><a href="#see-what-takes-room">See what takes room</a></li><li><a href="#delete-things-and-free-space">Delete things and free space</a></li><li><a href="#remove-ein">Remove EiN</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-makes-up-your-data">What makes up your data</a></li><li class="nested"><a href="#why-the-database-and-the-files-belong-together">Why the database and the files belong together</a></li><li><a href="#back-up-ein">Back up EiN</a></li><li class="nested"><a href="#back-up-on-a-timer">Back up on a timer</a></li><li class="nested"><a href="#copy-the-backups-off-the-machine">Copy the backups off the machine</a></li><li class="nested"><a href="#under-docker">Under Docker</a></li><li><a href="#restore-a-backup">Restore a backup</a></li><li class="nested"><a href="#make-the-renditions-again">Make the renditions again</a></li><li><a href="#move-ein-to-another-machine">Move EiN to another machine</a></li><li><a href="#move-the-data-folder-to-another-disk">Move the data folder to another disk</a></li><li><a href="#get-your-files-out-without-ein">Get your files out without EiN</a></li><li><a href="#see-what-takes-room">See what takes room</a></li><li><a href="#delete-things-and-free-space">Delete things and free space</a></li><li><a href="#remove-ein">Remove EiN</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

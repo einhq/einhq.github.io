@@ -351,7 +351,7 @@ The linked files always show the module's current version. A copied file is your
 
 ## Back up and restore
 
-The files in EiN's tree are in the database, so a backup of the database keeps them all: `/etc/config`, `/etc/fstab`, the host key, everyone's `~/.ssh` and `~/.bashrc`. On the machine, keep `.env` and the data folder besides. [Your data: backup, moving and removing](../admin/data.md) says how. EiN has no command that exports its configuration files on their own; copy one with `cat` or over SFTP when you want it apart.
+The files in EiN's tree are in the database, so a backup of the database keeps them all: `/etc/config`, `/etc/fstab`, the host key, everyone's `~/.ssh` and `~/.bashrc`. `setup.sh --backup` takes the database with `.env` and the data folder beside it; [Your data: backup, moving and removing](../admin/data.md) says how. EiN has no command that exports its configuration files on their own; copy one with `cat` or over SFTP when you want it apart.
 
 ## When a file does not do what you expect
 

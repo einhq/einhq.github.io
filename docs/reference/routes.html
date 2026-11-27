@@ -584,6 +584,16 @@ You meet them in links to files, in scripts, and in a reverse proxy&#39;s config
 <td>Fixes from a tracker that sends only <code>GET</code>s, such as OsmAnd: its query is the fix</td>
 </tr>
 <tr>
+<td><code>/file/&lt;stream&gt;?mode=w</code>, <code>?mode=r</code></td>
+<td>WebSocket</td>
+<td>A stream node held open: the socket writes it, each message a write, or reads it, each write a message; with <code>&amp;invite=&lt;token&gt;</code>, as an <a href="../admin/permissions.html#invitations">invitation</a>; see <a href="../develop/modules.html#talk-live-with-a-page">Talk live with a page</a></td>
+</tr>
+<tr>
+<td><code>/__invite/&lt;token&gt;</code></td>
+<td><code>GET</code></td>
+<td>What an <a href="../admin/permissions.html#invitations">invitation</a> opens and until when, as JSON, to a page at any address; <code>404</code> once it opens nothing</td>
+</tr>
+<tr>
 <td><code>/__shell</code></td>
 <td></td>
 <td>The connection the Web UI talks to EiN over; a proxy must pass it on as a WebSocket</td>

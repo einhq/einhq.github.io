@@ -2,7 +2,7 @@
 
 # Node types
 
-Every node has a type, which decides what it holds and how it behaves. These are the 33 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
+Every node has a type, which decides what it holds and how it behaves. These are the 35 types of an EiN with all its modules. [Nodes and node types](../concepts/nodes.md) explains what a node is.
 
 ## Content
 
@@ -45,6 +45,7 @@ How EiN runs: its commands, logs, queues and the other parts of the system that 
 | `device-app` App pairing | The EiN app's pairing with a phone: a one-time pairing code waiting for the app and the token the app was given, each kept as its SHA-256, in the phone's child .app, readable by the administrator alone. `device-app` pairs the app and takes it away. |  | Core |
 | `device-key` Device key | The key a device carries to write to /file/dev/<device> without signing in, as a phone posting its position does: the device's child .key, readable by the administrator alone. `device-key` makes, shows and takes it away. |  | Core |
 | `embedding` Embedding | A numeric fingerprint of an image, a face or a text, kept for similarity search: what finds photos by what they show and faces of the same person. |  | Core |
+| `invitation` Invitation | A token that opens stream nodes over a WebSocket, each to read or to write, and socket nodes to connect to, to someone with no account here, from a page of any address, as the account that made it; under /var/invitations, keeping only the token's hash, with when it expires and how often it was used. `invitation` makes, lists and turns them off. |  | Core |
 | `log` Log | An append-only record of entries kept for a retention period, such as the system log under /var/logs. A device's readings and events are logs under it, one an endpoint. |  | Core |
 | `null` Null | /dev/null: reading it gives nothing and what is written to it is thrown away, for output nobody wants. |  | Core |
 | `pool` Pool | Background jobs waiting for a worker with the right resources, under /var/pools. `pool stat` shows what is waiting. |  | Core |
@@ -52,6 +53,7 @@ How EiN runs: its commands, logs, queues and the other parts of the system that 
 | `router` Router | A live broadcast channel: what is written reaches every current reader and nothing is kept. /dev/events is one. |  | Core |
 | `session` Session | A signed-in connection — a browser, an SSH login, a service — under /var/sessions. Removed when it ends. |  | Core |
 | `share-link` Share link | A link that opens an album, and what it holds, to whoever has it, without signing in; under /var/links, with when it expires and how often it was opened. `share-link` makes, lists and turns them off. |  | Core |
-| `stream` Stream | Live bytes from one writer to whoever reads, such as a camera's video under its device, which its driver writes. Nothing is kept: a reader gets the bytes from the moment it opens it (`cat /dev/front-door/main.ts > door.ts` records the camera until stopped). |  | Core |
+| `socket` Socket | A meeting point between one listener and its clients, such as a module's service and the pages that talk to it. Its owner listens on it and accepts connections; whoever may read and write it connects, each connection two-way whole messages between that client and the listener alone, and nothing is kept. A page connects over a WebSocket at its `/file/` address, `?mode=rw`. |  | Core |
+| `stream` Stream | Live bytes from one writer to whoever reads, such as a camera's video under its device, which its driver writes. Nothing is kept: a reader gets the bytes from the moment it opens it (`cat /dev/front-door/main.ts > door.ts` records the camera until stopped). A page holds one open over a WebSocket at its `/file/` address, `?mode=w` as its writer, `?mode=r` as a reader. |  | Core |
 | `tty` Terminal | An interactive terminal belonging to a session, with its size and working directory. |  | Core |
 | `user-invite` Sign-in link | A link an administrator makes for an account, with which its person chooses their own password once at /invite/<token> before it expires: the account's child .invite, readable by the administrator alone. `user-invite` makes, shows and takes it away. |  | Core |

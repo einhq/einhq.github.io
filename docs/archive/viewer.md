@@ -29,7 +29,7 @@ their name, opens over the viewer: Back returns to the picture you were on.
 
 ## What the viewer shows
 
-![The viewer on a photo of Ruby Wrenfield, Helen Okafor and David Okafor on a coastal road, with their names on the face boxes, the bar under the picture, and the details panel on the right listing the camera, the album, the three people with their ages, the place with a map, the weather, and similar pictures](../../assets/shots/lightbox.webp "The viewer on a computer. The bar under the picture gives the position in the list, the date and the place; the details panel beside it says who took it, who is in it and how old they were that day.")
+![The viewer on a photo of Ruby Wrenfield, Helen Okafor and David Okafor on a coastal road, with their names on the face boxes, the bar under the picture, and the details panel on the right, with the file's name and close at its top, listing the camera, the album, the three people with their ages, the place with a map, the weather, and similar pictures](../../assets/shots/lightbox.webp "The viewer on a computer. The bar under the picture gives the position in the list, the date and the place; the details panel beside it says who took it, who is in it and how old they were that day.")
 
 On a computer:
 

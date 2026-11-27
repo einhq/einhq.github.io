@@ -37,7 +37,7 @@ Open **Settings** in the sidebar and choose the **Modules** tab. Everyone who is
 tab; for anyone but an administrator it is the only one, and it shows the modules without the
 buttons that change them.
 
-![The Modules tab of Settings: the Install button beside the filter, album-folders, archive, assistant, automation, dashboard, ems, media, recipes and todo listed at the left with their versions, and archive open at the right with its version, Active and its description, the buttons Update, Remove and Documentation, its tabs Overview, Dependencies, Services, Pages, Commands, Settings and Node types, and on Overview its details beside the pages of its guide](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
+![The Modules tab of Settings: the filter with the Install button and the Services beside EiN button, the list beginning with Overview, "Everything is up to date", then album-folders, archive, assistant, automation, dashboard, devices, ems, media and recipes with their versions, and archive open at the right with its version, Active, its description and the Documentation button, its tabs Overview, Services, Pages, Commands, Settings and Node types, and on Overview what it needs (ems and media), what needs it (album-folders), its details (it comes with the deployment) and the groups it is available to](../../assets/shots/settings-modules.webp "Each installed module, whether it works, and everything it brings, in one place.")
 
 Each module has a picture of its own, a pattern of hats with its initials, in a colour of its own.
 The colour comes from the module's name, so a module has the same one here, on the install panel and
@@ -141,7 +141,7 @@ the module.
    (see [Keep a module to some groups](#keep-a-module-to-some-groups)), then choose **Install** and
    the module's name.
 
-![The Install a module panel on Settings → Modules: its Refresh button, then the group Installed with album-folders, archive and assistant from github.com/einhq, a row each marked The deployment's, and at the foot the From a repository's address box with its Install button](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
+![The Install a module panel on Settings → Modules: its Refresh button, the line that every published module is installed and none has a newer release this EiN can run, then the group Installed, 11, with album-folders, archive, assistant and the rest, each with its version and description and marked The deployment's](../../assets/shots/modules-published.webp "The published modules and what is installed of each; these came with the deployment, so none offers Install.")
 
 EiN fetches the module, checks it, installs any module it needs that is missing, sets them all up
 and starts their services. Its entries in the sidebar and its pages appear without reloading the

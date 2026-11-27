@@ -494,10 +494,10 @@ any password that is not empty, so how strong yours is is up to you.</p>
 <p>The new password is the one you sign in with from then on, in the browser, over SSH and SFTP and
 over <a href="webdav.html">WebDAV</a>, where a program such as a phone&#39;s backup app needs it at its next request.
 A key you added for SSH keeps working; see <a href="../shell/ssh-sftp.html">SSH and SFTP</a>.</p>
-<p>Changing your password does not sign out the browsers and terminals where you are signed in
-already. If you change it because someone else may know it, ask an administrator to choose
-<strong>Disable sign-in</strong> for your account and then <strong>Enable sign-in</strong>: that signs your account out
-everywhere.</p>
+<p>Changing your password signs your account out everywhere else: other browsers, terminals, SSH
+connections and the app are signed out and have to sign in again. Where you changed it stays signed
+in. So if you change it because someone else may know it, whatever they signed in with ends with it;
+look over your SSH keys too, which a password change keeps.</p>
 <p>If the password is not changed, the reason shows in a red box above the fields:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -516,6 +516,11 @@ everywhere.</p>
 <td><code>user passwd: no existing password found, contact admin</code></td>
 <td>Your account has no password to check against.</td>
 <td>Ask an administrator for a sign-in link.</td>
+</tr>
+<tr>
+<td><code>user passwd: too many failed sign-ins; try again in 8 s</code></td>
+<td><strong>Current password</strong> was wrong several times, as a sign-in would be.</td>
+<td>Wait the time it says and type it again.</td>
 </tr>
 </tbody></table>
 </div>
@@ -668,7 +673,7 @@ want it back.&quot;</p>
 <p>The days count from when you deleted it; for things deleted together, from the last time something
 was added to that row. EiN clears out what is older when it starts and every 12 hours after that,
 so something can stay up to half a day past its time. Once it is cleared, nothing in EiN brings it
-back: EiN has no backup of its own; see <a href="../admin/data.html">Your data: backup, moving and removing</a>.</p>
+back but restoring a backup of the whole EiN, as it was then; see <a href="../admin/data.html">Your data: backup, moving and removing</a>.</p>
 <h3 id="the-trash-in-the-terminal">The trash in the terminal<a class="anchor" href="#the-trash-in-the-terminal" aria-label="Link to this section"></a></h3>
 <p>The <a href="../reference/commands-core.html#trash"><code>trash</code></a> command works on the same trash as the page:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>

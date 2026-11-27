@@ -63,15 +63,16 @@ The commands on this page are written for podman. With Docker, write `docker com
 
 ### What the container runs
 
-| What     | Value                                                                                     |
-| -------- | ----------------------------------------------------------------------------------------- |
-| Model    | `Qwen3.5-4B-Q8_0.gguf` from `unsloth/Qwen3.5-4B-GGUF`, named `qwen3.5-4b`                 |
-| Server   | llama.cpp's server, a ready-made image pinned to one build                                |
-| Address  | `http://llm:8190`, on the compose network only; nothing outside the containers reaches it |
-| Context  | 32768 tokens: the most of a conversation the model reads at once, cached at 8 bits        |
-| Requests | One at a time; a second question waits until the first is answered                        |
-| Memory   | At most 10 GB (`LLM_MEMORY`)                                                              |
-| Thinking | Off, unless a question asks for it (the chat's **Think harder**)                          |
+| What     | Value                                                                                           |
+| -------- | ----------------------------------------------------------------------------------------------- |
+| Model    | `Qwen3.5-4B-Q8_0.gguf` from `unsloth/Qwen3.5-4B-GGUF`, named `qwen3.5-4b`                       |
+| Server   | llama.cpp's server, a ready-made image pinned to one build                                      |
+| Address  | `http://llm:8190`, on the compose network only; nothing outside the containers reaches it       |
+| Key      | `LLM_KEY` in `.env`, which `setup.sh` makes and gives EiN; the model answers nothing without it |
+| Context  | 32768 tokens: the most of a conversation the model reads at once, cached at 8 bits              |
+| Requests | One at a time; a second question waits until the first is answered                              |
+| Memory   | At most 10 GB (`LLM_MEMORY`)                                                                    |
+| Thinking | Off, unless a question asks for it (the chat's **Think harder**)                                |
 
 The server keeps what it last read in a cache, so a follow-up question in the same chat reads only the new message. It stays loaded between questions.
 
@@ -118,6 +119,9 @@ These go in `~/ein/.env` and take effect at the next `podman compose up -d`.
 ### On the Settings page
 
 1. Sign in as an administrator, choose **Settings** in the sidebar, and **Language model** under **Set up**.
+
+   ![The Language model page under Set up on Settings → System: Who answers the chat, with This machine chosen, "The model setup.sh --llm runs beside EiN. Nothing leaves the machine.", and the choices Anthropic, OpenAI, Mistral AI and Another service, each with a line on what it takes](../../assets/shots/settings-model.webp "The model on this machine, or a provider's with your key: one choice, and the page asks for what it needs.")
+
 2. Under **Who answers the chat**, choose the provider: **Anthropic**, **OpenAI** or **Mistral AI**. For any other service that speaks the OpenAI chat API, such as OpenRouter, Groq or an Ollama of your own, choose **Another service** and give its **Name**, which the chat shows, and its **Address**, without `/v1`.
 3. Paste the key the provider gave you in **Key**. The field's description links to the page in your provider account where keys are made. A server of your own may need none.
 4. **Model** suggests a few of the provider's models and starts with the first; keep it or type another, as the provider writes it.
@@ -126,7 +130,7 @@ These go in `~/ein/.env` and take effect at the next `podman compose up -d`.
 
 The page says, above **Save**, that questions and what the assistant reads to answer them leave the machine; tell the people who use your EiN before you switch. To go back to the model on your machine, choose **This machine** and **Save**: the four settings are cleared, so what `.env` says is in force again.
 
-A key belongs to its provider. Switching to another service without giving a key removes the one saved here, so it is never sent to the new address. A key that comes from `.env` cannot be removed on the page, so the page asks for the new service's own key before it saves.
+A key belongs to its provider. Switching to another service without giving a key removes the one saved here, so it is never sent to the new address. A key that comes from `.env` stays there, and EiN sends it only to the address `.env` names, so another service chosen here is sent the key given for it on the page, or none; a provider from the list asks for its key before it saves.
 
 ### In `.env`
 
@@ -181,7 +185,9 @@ What goes to the provider is each question, the page the person is on, their nam
 
 ### How the key is kept
 
-The key is a secret. No shell in EiN sees it, `config-get CFG_LLM_KEY` says only whether it is set, and the settings page shows **Set — type a new one to replace it** rather than the key. A key saved on the settings page is kept in `/etc/keys`, which only an administrator can read; one in `.env` stays in EiN's own process. EiN sends the key only to the address in `CFG_LLM_URL` as the system has it, never to an address someone puts in front of a command.
+The key is a secret. No shell in EiN sees it, `config-get CFG_LLM_KEY` says only whether it is set, and the settings page shows **Set — type a new one to replace it** rather than the key. A key saved on the settings page is kept in `/etc/keys`, which only an administrator can read; one in `.env` stays in EiN's own process. EiN sends the key only to the address in `CFG_LLM_URL` as the system has it, never to an address someone puts in front of a command. A key in `.env` goes only to the address `.env` names: the installer's key for the model on this machine is never sent to a service chosen on the settings page, which gets the key given there, or none.
+
+The model on this machine wants a key too. `setup.sh` makes it, `LLM_KEY` in `.env`, and gives it to the model and to EiN, which has it as `CFG_LLM_KEY` **From deployment**; a `.env` that has none gets one at the next `./setup.sh`. Choosing **This machine** on the **Language model** page brings it back after a provider.
 
 ## Check that the model answers
 
@@ -215,7 +221,7 @@ All of these are system settings, on **Settings → System → Assistant** (**La
 | ------------------------------------------------------------------- | ----------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`CFG_LLM_URL`](../reference/settings.md#cfg_llm_url)               | **Language model address**                | `http://127.0.0.1:8190` | The API's address, without `/v1`. The compose install sets `http://llm:8190`.                                                                                                                                                                         |
 | [`CFG_LLM_MODEL`](../reference/settings.md#cfg_llm_model)           | **Language model**                        | `qwen3.5-4b`            | The model name sent with each request. llama.cpp answers with the model it loaded, whatever this says.                                                                                                                                                |
-| [`CFG_LLM_KEY`](../reference/settings.md#cfg_llm_key)               | **Language model key**                    | not set                 | The bearer key a provider expects.                                                                                                                                                                                                                    |
+| [`CFG_LLM_KEY`](../reference/settings.md#cfg_llm_key)               | **Language model key**                    | not set                 | The bearer key the model expects: `LLM_KEY` from `.env` for the model on this machine, the provider's own for a hosted one.                                                                                                                           |
 | [`CFG_LLM_PROVIDER`](../reference/settings.md#cfg_llm_provider)     | **Language model provider**               | empty                   | The provider's name. Empty means the model runs on this host.                                                                                                                                                                                         |
 | [`CFG_LLM_CARD`](../reference/settings.md#cfg_llm_card)             | **Where our language model runs**         | empty                   | `card` or `cpu`, for the status lines. `setup.sh --llm` sets it from `EIN_GPU`.                                                                                                                                                                       |
 | [`CFG_LLM_THINKING`](../reference/settings.md#cfg_llm_thinking)     | **Think before answering**                | empty                   | `1` or `0` turns the model's thinking on or off for every question in the chat that does not ask otherwise. `llm-chat`, and the search box through it, thinks only when asked with `--think`. Only llama.cpp reads it; empty leaves it to the server. |
@@ -273,6 +279,7 @@ This removes the `llm` container and restarts EiN. The model file stays in the `
 | The `llm` container restarts again and again                                          | It is out of memory, or the card filled while it loaded. Look at `podman compose logs llm`; give it more with `LLM_MEMORY`, or leave more of the card free for it.                                                                                                                                                                                             |
 | `OpenAI does not offer qwen3.5-4b; the chat's questions to it fail`                   | `CFG_LLM_MODEL` is not set, or names a model the provider does not have. Set it to one of the provider's models.                                                                                                                                                                                                                                               |
 | A hosted model answers `HTTP 401` in the error card's small type                      | The key is wrong or missing. Set `CFG_LLM_KEY` again. A key saved on the settings page wins over the one in `.env`.                                                                                                                                                                                                                                            |
+| The model on this machine answers `HTTP 401` in the error card's small type           | EiN's key is not the one the model takes. A **Language model key** saved on the settings page wins over `LLM_KEY` from `.env`: choose **This machine** on the **Language model** page and **Save**. An installation whose `.env` has no `LLM_KEY` gets one, for both, at the next `./setup.sh`.                                                                |
 | You changed `CFG_LLM_URL` in `.env` and nothing changed                               | The setting is saved on **Settings → System**, which wins. Click **Restore inherited value** there, or change it there instead.                                                                                                                                                                                                                                |
 | **Answer too long** in the chat                                                       | The answer reached **Answer length (tokens)**. Asking for less usually helps; a higher `CFG_LLM_MAX_TOKENS` lets the model write more.                                                                                                                                                                                                                         |
 | The chat has no provider line, but the model is hosted                                | `CFG_LLM_PROVIDER` is empty. Set it, so the people using EiN know where their questions go.                                                                                                                                                                                                                                                                    |

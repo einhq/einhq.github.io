@@ -376,7 +376,10 @@ the Archive&#39;s, which <a href="commands.html">Archive commands</a> lists with
 <h3 id="close-gaps-the-pipelines-missed">Close gaps the pipelines missed<a class="anchor" href="#close-gaps-the-pipelines-missed" aria-label="Link to this section"></a></h3>
 <p><code>media-scan</code> walks a folder and announces each file that was never taken in, or that lacks
 something a pipeline should have given it: its date and place, faces or voices, its address, or
-the weather it was taken in. Each pipeline then skips what is already done.</p>
+the weather it was taken in. Each pipeline then skips what is already done. It passes over EiN&#39;s
+own folders, <code>/usr</code>, <code>/etc</code>, <code>/var</code>, <code>/dev</code> and <code>/tmp</code>, whose pictures are nobody&#39;s media, and over
+work that failed on a file that has not changed since: that work is run again like any other
+<a href="../admin/processing.html">failed work</a>, and the scan says how many it left to that.</p>
 <p>What describes a file is the Media module&#39;s to keep current, in every folder:
 <a href="../media/index.html#renditions-kept-current">renditions</a>, <a href="../media/index.html#picture-vectors">picture vectors</a>,
 <a href="../media/index.html#fingerprints">fingerprints</a> and <a href="../media/index.html#text-and-transcripts-kept-current">text, transcripts and their vectors</a>.</p>

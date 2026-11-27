@@ -198,9 +198,10 @@ service is built from its newest source, and <code>setup.sh</code> only says whe
 modules take.</p>
 <h2 id="before-you-update">Before you update<a class="anchor" href="#before-you-update" aria-label="Link to this section"></a></h2>
 <ol>
-<li>Back up. An update cannot be undone: there is no command to go back to the previous version,
-and the database is changed in place when the new EiN starts. <a href="data.html">Your data</a> says what to
-copy and why the database and the data folder go together.</li>
+<li>Back up: <code>~/ein/setup.sh --backup /mnt/backup/ein</code>. An update cannot be undone: there is no
+command to go back to the previous version, and the database is changed in place when the new
+EiN starts; <code>setup.sh --restore</code> puts the backup back. <a href="data.html#back-up-ein">Your data</a> explains
+both.</li>
 <li>Make sure the admin password is one you know. A first one <code>setup.sh</code> made is
 <code>INITIAL_ADMIN_PASSWORD</code> in <code>~/ein/.env</code> until you delete that line; one you chose at the
 install is not kept there. An older <code>.env</code> has no such line, and the random password a new EiN
@@ -274,6 +275,17 @@ several, one after another. A service whose new image does not come up, EiN that
 within 10 minutes or a service that stops, is put back on the image it ran before, and <code>setup.sh</code>
 stops with <code>setup.sh: core did not come up on its new image, and runs on the one it ran before</code>
 under the service&#39;s last log lines.</p>
+<h3 id="update-through-a-release">Update through a release<a class="anchor" href="#update-through-a-release" aria-label="Link to this section"></a></h3>
+<p>Now and then an update deletes the code that brings the database&#39;s tables from very old releases up
+to date. An EiN that is too old to update to the newest at once does not start on the new image, and
+<code>setup.sh</code> puts it back on the one it ran, with a line like this above its message:</p>
+<div class="code"><pre tabindex="0"><code>the nodes tables of root are at schema version 3, which this EiN no longer updates from: update through EiN 0.4.0 first, then to this one</code></pre></div>
+<p>Update to the release it names first, and then to the newest:</p>
+<div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># on the machine EiN runs on, as your own user</span>
+~/ein/setup.sh --only core --core-version 0.4.0
+~/ein/setup.sh</code></pre></div>
+<p>The first run ends with <code>EiN runs its release 0.4.0. Run ./setup.sh again to update it to the newest</code>. <code>--core-version</code> takes a published release that is not older than the one that runs; from
+another source, it is the tag <code>v0.4.0</code> of <code>core</code>.</p>
 <p>Every run of <code>setup.sh</code> is an update, also one that only adds or removes an option, such as
 <code>./setup.sh --ems</code>. To apply a changed line of <code>.env</code> without updating, run <code>podman compose up -d</code>
 in <code>~/ein</code> instead; <a href="configuration.html#set-a-value-in-the-deployment">Configuration</a> explains it.</p>
@@ -327,7 +339,12 @@ with <code>--remove-orphans</code>, so a service whose option you turned off sto
 <h3 id="what-happens-when-the-new-ein-starts">What happens when the new EiN starts<a class="anchor" href="#what-happens-when-the-new-ein-starts" aria-label="Link to this section"></a></h3>
 <p>EiN does the rest of an update itself, at its start:</p>
 <ul>
-<li>It brings its database tables up to date. There is no separate migration step to run.</li>
+<li>It brings its database tables up to date. There is no separate migration step to run. The
+database records which version its tables are at, and EiN makes only the changes that came
+after it, in order, once each, and logs each one as <code>schema migrated</code>. A start that stops part
+way goes on from there the next time. An EiN that goes back to the image it ran before, as
+<code>setup.sh</code> does when the new one does not come up, runs on the tables the new one changed and
+logs <code>schema newer than this EiN</code>.</li>
 <li>It installs a module that <code>EIN_MODULES</code> names and that is missing. It does not update modules that
 are installed already and that it can run.</li>
 <li>It replaces a module installed at a release written for a module API it does not provide, as
@@ -417,6 +434,10 @@ so your running EiN, the database and the data folder are not touched.</p>
 <td>It runs on an empty database, such as one under the other container engine. See <a href="install.html#keep-to-one-engine">Keep to one engine</a>.</td>
 </tr>
 <tr>
+<td><code>update through EiN &lt;release&gt; first, then to this one</code> in the log lines above <code>core did not come up</code></td>
+<td>The installed EiN is too old to update to the newest at once. See <a href="#update-through-a-release">Update through a release</a>.</td>
+</tr>
+<tr>
 <td><code>setup.sh: core did not come up on its new image, and runs on the one it ran before</code></td>
 <td>EiN runs as it did before the update. The log lines above the message say why the new image did not start; <a href="troubleshooting.html">Troubleshooting</a> covers what they may say. A later update tries the newest image again.</td>
 </tr>
@@ -453,7 +474,7 @@ wrong after an update.</li>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/admin/updating.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-updates-work">How updates work</a></li><li class="nested"><a href="#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a></li><li><a href="#before-you-update">Before you update</a></li><li><a href="#update-ein">Update EiN</a></li><li class="nested"><a href="#update-with-setupsh-alone">Update with setup.sh alone</a></li><li><a href="#what-an-update-changes-and-what-it-keeps">What an update changes and what it keeps</a></li><li class="nested"><a href="#what-happens-when-the-new-ein-starts">What happens when the new EiN starts</a></li><li><a href="#see-which-version-runs">See which version runs</a></li><li><a href="#check-that-all-is-well-after-an-update">Check that all is well after an update</a></li><li><a href="#free-the-space-old-images-take">Free the space old images take</a></li><li><a href="#when-an-update-goes-differently">When an update goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#how-updates-work">How updates work</a></li><li class="nested"><a href="#the-media-service-and-the-sidecar-follow-their-modules">The media service and the sidecar follow their modules</a></li><li><a href="#before-you-update">Before you update</a></li><li><a href="#update-ein">Update EiN</a></li><li class="nested"><a href="#update-with-setupsh-alone">Update with setup.sh alone</a></li><li class="nested"><a href="#update-through-a-release">Update through a release</a></li><li><a href="#what-an-update-changes-and-what-it-keeps">What an update changes and what it keeps</a></li><li class="nested"><a href="#what-happens-when-the-new-ein-starts">What happens when the new EiN starts</a></li><li><a href="#see-which-version-runs">See which version runs</a></li><li><a href="#check-that-all-is-well-after-an-update">Check that all is well after an update</a></li><li><a href="#free-the-space-old-images-take">Free the space old images take</a></li><li><a href="#when-an-update-goes-differently">When an update goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

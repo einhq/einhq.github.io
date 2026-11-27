@@ -465,7 +465,7 @@ them, all set up by <code>setup.sh</code>:</p>
 </thead>
 <tbody><tr>
 <td>The address</td>
-<td><code>CFG_EMS_URL</code> for EiN, in <code>compose.yaml</code></td>
+<td><code>CFG_EMS_URL</code> for EiN, in <code>compose.yaml</code> unless <code>.env</code> names one</td>
 <td><code>http://ems:8181</code></td>
 </tr>
 <tr>
@@ -482,8 +482,24 @@ them, all set up by <code>setup.sh</code>:</p>
 </div>
 <p>The key is a secret: no shell in EiN sees it, and the settings page never shows it once it is set.
 The media service accepts a request only with that key. Leave <code>CFG_EMS_URL</code>, <code>EMS_KEY</code> and
-<code>EMS_PORT</code> as <code>setup.sh</code> and the compose files set them; <a href="../admin/configuration.html">Configuration</a>
+<code>EMS_PORT</code> as <code>setup.sh</code> and the compose files set them, unless EiN uses a media service on another
+machine (<a href="#a-media-service-on-another-machine">below</a>); <a href="../admin/configuration.html">Configuration</a>
 explains how a value set in the deployment relates to the settings page.</p>
+<h3 id="a-media-service-on-another-machine">A media service on another machine<a class="anchor" href="#a-media-service-on-another-machine" aria-label="Link to this section"></a></h3>
+<p>EiN can use a media service another machine runs, such as one with a graphics card, instead of one
+of its own: install EiN without <code>--ems</code> (or run <code>./setup.sh --no-ems</code>), put three lines in
+<code>~/ein/.env</code> and run <code>./setup.sh</code>:</p>
+<div class="code" data-lang="ini"><pre tabindex="0"><code><span class="hljs-comment"># in ~/ein/.env</span>
+<span class="hljs-attr">CFG_EMS_URL</span>=http://<span class="hljs-number">192.168</span>.<span class="hljs-number">1.20</span>:<span class="hljs-number">18181</span>
+<span class="hljs-attr">EMS_KEY</span>=<span class="hljs-number">4</span>f6c…e1
+<span class="hljs-attr">CFG_EMS_FILES_ADDRESS</span>=<span class="hljs-number">192.168</span>.<span class="hljs-number">1.10</span>:<span class="hljs-number">2224</span></code></pre></div>
+<p><code>CFG_EMS_URL</code> is where that media service answers, published there as in
+<a href="#callers-on-other-machines">Callers on other machines</a>, and <code>EMS_KEY</code> the key of this EiN among its
+callers, a line in that machine&#39;s <code>ems.keys</code>. <code>CFG_EMS_FILES_ADDRESS</code> is this machine&#39;s address and
+port as that machine reaches them, where it reads the files of each request; <code>setup.sh</code> publishes
+the port on <code>EIN_BIND</code>. With <code>EIN_BIND=127.0.0.1</code> that machine cannot reach it there: publish the
+port on an address it reaches with a compose file of your own beside the others, named in
+<code>COMPOSE_FILE</code> in <code>.env</code>.</p>
 <h3 id="callers-on-other-machines">Callers on other machines<a class="anchor" href="#callers-on-other-machines" aria-label="Link to this section"></a></h3>
 <p>A program on another machine of your network can use the media service too, such as a scanning
 station that sends it photos to restore. Two lines make that possible:</p>
@@ -530,7 +546,7 @@ no request that names a file, and those steps wait the same way.</li>
 </ul>
 <p>A media service on another machine reaches EiN&#39;s machine at the address you set: put
 <code>CFG_EMS_FILES_ADDRESS</code>, as <code>host:port</code>, in <code>~/ein/.env</code> and run <code>./setup.sh</code>, which then publishes
-the port on <code>EIN_BIND</code>. A second media service beside the first reaches it at an address of its own
+the port on <code>EIN_BIND</code> (<a href="#a-media-service-on-another-machine">A media service on another machine</a>). A second media service beside the first reaches it at an address of its own
 (<a href="instances.html">More than one media service</a>).</p>
 <h4 id="encrypting-the-files-way">Encrypting the files&#39; way<a class="anchor" href="#encrypting-the-files-way" aria-label="Link to this section"></a></h4>
 <p>When the media service reaches EiN over a network you do not trust, turn on
@@ -1073,7 +1089,7 @@ and podman downloads or builds it in a folder beside its own storage, not in <co
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/ems/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#models-tools-and-their-licences">Models, tools and their licences</a></li><li class="nested"><a href="#using-ein-commercially">Using EiN commercially</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li class="nested"><a href="#callers-on-other-machines">Callers on other machines</a></li><li class="nested"><a href="#how-the-media-service-reaches-your-files">How the media service reaches your files</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-status-page">On the Status page</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#two-parts">Two parts</a></li><li><a href="#what-the-media-service-does">What the media service does</a></li><li><a href="#what-happens-without-it">What happens without it</a></li><li><a href="#models-tools-and-their-licences">Models, tools and their licences</a></li><li class="nested"><a href="#using-ein-commercially">Using EiN commercially</a></li><li><a href="#add-the-media-service">Add the media service</a></li><li><a href="#how-ein-reaches-it">How EiN reaches it</a></li><li class="nested"><a href="#a-media-service-on-another-machine">A media service on another machine</a></li><li class="nested"><a href="#callers-on-other-machines">Callers on other machines</a></li><li class="nested"><a href="#how-the-media-service-reaches-your-files">How the media service reaches your files</a></li><li><a href="#check-that-it-is-running">Check that it is running</a></li><li class="nested"><a href="#on-the-status-page">On the Status page</a></li><li class="nested"><a href="#the-health-checks">The health checks</a></li><li class="nested"><a href="#in-the-terminal">In the terminal</a></li><li class="nested"><a href="#on-the-machine">On the machine</a></li><li><a href="#the-graphics-card">The graphics card</a></li><li><a href="#change-how-it-works">Change how it works</a></li><li class="nested"><a href="#settings-on-eins-side">Settings on EiN's side</a></li><li><a href="#when-the-media-service-restarts">When the media service restarts</a></li><li><a href="#update-the-media-service">Update the media service</a></li><li><a href="#when-something-goes-differently">When something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

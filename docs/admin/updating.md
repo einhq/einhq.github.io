@@ -74,9 +74,10 @@ modules take.
 
 ## Before you update
 
-1. Back up. An update cannot be undone: there is no command to go back to the previous version,
-   and the database is changed in place when the new EiN starts. [Your data](data.md) says what to
-   copy and why the database and the data folder go together.
+1. Back up: `~/ein/setup.sh --backup /mnt/backup/ein`. An update cannot be undone: there is no
+   command to go back to the previous version, and the database is changed in place when the new
+   EiN starts; `setup.sh --restore` puts the backup back. [Your data](data.md#back-up-ein) explains
+   both.
 2. Make sure the admin password is one you know. A first one `setup.sh` made is
    `INITIAL_ADMIN_PASSWORD` in `~/ein/.env` until you delete that line; one you chose at the
    install is not kept there. An older `.env` has no such line, and the random password a new EiN
@@ -166,6 +167,28 @@ within 10 minutes or a service that stops, is put back on the image it ran befor
 stops with `setup.sh: core did not come up on its new image, and runs on the one it ran before`
 under the service's last log lines.
 
+### Update through a release
+
+Now and then an update deletes the code that brings the database's tables from very old releases up
+to date. An EiN that is too old to update to the newest at once does not start on the new image, and
+`setup.sh` puts it back on the one it ran, with a line like this above its message:
+
+```text
+the nodes tables of root are at schema version 3, which this EiN no longer updates from: update through EiN 0.4.0 first, then to this one
+```
+
+Update to the release it names first, and then to the newest:
+
+```bash
+# on the machine EiN runs on, as your own user
+~/ein/setup.sh --only core --core-version 0.4.0
+~/ein/setup.sh
+```
+
+The first run ends with `EiN runs its release 0.4.0. Run ./setup.sh again to update it to the
+newest`. `--core-version` takes a published release that is not older than the one that runs; from
+another source, it is the tag `v0.4.0` of `core`.
+
 Every run of `setup.sh` is an update, also one that only adds or removes an option, such as
 `./setup.sh --ems`. To apply a changed line of `.env` without updating, run `podman compose up -d`
 in `~/ein` instead; [Configuration](configuration.md#set-a-value-in-the-deployment) explains it.
@@ -200,7 +223,12 @@ with `--remove-orphans`, so a service whose option you turned off stops.
 
 EiN does the rest of an update itself, at its start:
 
-- It brings its database tables up to date. There is no separate migration step to run.
+- It brings its database tables up to date. There is no separate migration step to run. The
+  database records which version its tables are at, and EiN makes only the changes that came
+  after it, in order, once each, and logs each one as `schema migrated`. A start that stops part
+  way goes on from there the next time. An EiN that goes back to the image it ran before, as
+  `setup.sh` does when the new one does not come up, runs on the tables the new one changed and
+  logs `schema newer than this EiN`.
 - It installs a module that `EIN_MODULES` names and that is missing. It does not update modules that
   are installed already and that it can run.
 - It replaces a module installed at a release written for a module API it does not provide, as
@@ -283,6 +311,7 @@ The commands are written for podman; with Docker, write `docker compose` for `po
 | `setup.sh: the images did not build, so EiN runs on as it was; the build's output is above`                     | Nothing was changed. When the build's output shows a download that failed, run `setup.sh` again later; otherwise the output names what stopped the build.                                                                  |
 | `setup.sh: EiN did not answer at http://127.0.0.1:8080/ in 10 minutes: podman compose logs core`                | Read the log it names. `podman compose ps` shows whether `db` became healthy; EiN does not start before it. [Troubleshooting](troubleshooting.md) covers what the log may say.                                             |
 | EiN does not take your admin password and has none of your content                                              | It runs on an empty database, such as one under the other container engine. See [Keep to one engine](install.md#keep-to-one-engine).                                                                                       |
+| `update through EiN <release> first, then to this one` in the log lines above `core did not come up`            | The installed EiN is too old to update to the newest at once. See [Update through a release](#update-through-a-release).                                                                                                   |
 | `setup.sh: core did not come up on its new image, and runs on the one it ran before`                            | EiN runs as it did before the update. The log lines above the message say why the new image did not start; [Troubleshooting](troubleshooting.md) covers what they may say. A later update tries the newest image again.    |
 | A module is still the old version                                                                               | `setup.sh` does not update modules, and EiN's start replaces only one it cannot run. Use **Update** on **Settings → Modules**.                                                                                             |
 | A module's pages or commands are gone, and **Settings → Modules** shows a badge on it                           | It does not fit the new EiN, and EiN found no release of it that does. The lines at the end of `setup.sh`'s output say why; [When a module does not work](modules.md#when-a-module-does-not-work) explains each message.   |

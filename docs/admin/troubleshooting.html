@@ -328,7 +328,7 @@ pipeline-heal --now --apply  <span class="hljs-comment"># does it</span></code><
 </tr>
 </tbody></table>
 </div>
-<p>With the Archive, a kind can also wait for the media service; see <a href="#media-service">Media service</a>. <code>pipeline-overview</code> and <code>pool-stat</code> show the counts behind these checks, and <code>top</code> shows them live. <code>pipeline-repair</code> finds instances marked finished while steps of theirs still wait, and with <code>--apply</code> sets them running again; run it without <code>--apply</code> first to see what it would change.</p>
+<p>With the Archive, a kind can also wait for the media service; see <a href="#media-service">Media service</a>. <code>pipeline-overview</code> and <code>pool-stat</code> show the counts behind these checks, and <code>top</code> shows them live. A step that could not run reads <code>waiting</code>, as one waiting its turn does: <code>pipeline-overview</code> lists each kind held so, such as <code>held media ingest: 200 waiting, could not run for 3h12m: ems: media.probe unreachable: …</code>, and <code>pipeline-status &lt;pipeline&gt;/&lt;id&gt;</code> says why each waiting or failed step of an instance is so. <code>pipeline-repair</code> finds instances marked finished while steps of theirs still wait, and with <code>--apply</code> sets them running again; run it without <code>--apply</code> first to see what it would change.</p>
 <h2 id="a-service-has-stopped">A service has stopped<a class="anchor" href="#a-service-has-stopped" aria-label="Link to this section"></a></h2>
 <p>EiN runs its own services inside its container: the Web UI, SSH, the pipeline engine, and each module&#39;s. A service that stops on its own is started again, but after three restarts within a minute EiN leaves it <code>failed</code>.</p>
 <ol>
@@ -498,6 +498,10 @@ llm-status --checks</code></pre></div>
 <tr>
 <td><code>health</code> says <code>http://ems:8181 is not answering; work that needs it waits</code></td>
 <td>The media service was never installed, is starting or has stopped. See <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
+</tr>
+<tr>
+<td><code>pipeline-overview</code> says <code>held … could not run for …: ems: … unreachable</code></td>
+<td>The same: the media service is not answering, and every step that calls it waits. Nothing has failed, and the work goes on once it answers. See <a href="#thumbnails-faces-and-text-are-missing">Thumbnails, faces and text are missing</a>.</td>
 </tr>
 <tr>
 <td>A <code>fail</code> check named <code>ems gpu</code></td>

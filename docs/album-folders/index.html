@@ -220,9 +220,11 @@ only counts what it would change:</p>
 album-folders <span class="hljs-built_in">sync</span> <span class="hljs-string">&quot;/archive/albums/Summer 1987&quot;</span> --dry-run</code></pre></div>
 <p><a href="commands.html">Album folders commands</a> has every option.</p>
 <h2 id="backups">Backups<a class="anchor" href="#backups" aria-label="Link to this section"></a></h2>
-<p>The <a href="../admin/data.html#back-up-ein">backup</a> copies the data folder with <code>rsync -a</code>, which copies a
-hard link as a file of its own and so stores every picture in an album twice. Leave the folders out
-with <code>--exclude /files/albums</code>: EiN makes them again from the albums after a restore.</p>
+<p>A <a href="../admin/data.html#back-up-ein">backup</a> leaves <code>files/albums</code> out, since its files are second names
+for the originals it holds already, and EiN makes the folders again from the albums after a restore.
+A copy of the data folder of your own, such as with <code>rsync -a</code>, copies a hard link as a file of its
+own and so stores every picture in an album twice: leave the folders out with
+<code>--exclude /files/albums</code>.</p>
 <h2 id="if-something-looks-different">If something looks different<a class="anchor" href="#if-something-looks-different" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>

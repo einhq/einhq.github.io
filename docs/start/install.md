@@ -270,7 +270,7 @@ With the media service and the model, two parts are still getting ready when the
 | `~/ein/data`, or the folder you chose | your originals, the thumbnails and other renditions, scratch space, the language model and the installed modules |
 | `~/ein/data/db`                       | the database: every name, folder, album, person, setting and account                                             |
 
-Keep `.env` safe. EiN has no backup command; [Your data](../admin/data.md) explains what to copy and why the database and the data folder belong together.
+Keep `.env` safe. `~/ein/setup.sh --backup /mnt/backup/ein` backs up EiN, `.env` with it; [Your data](../admin/data.md) explains it, and why the database and the data folder belong together.
 
 ## Sign in
 

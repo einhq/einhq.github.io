@@ -174,6 +174,10 @@ llm-status --checks</code></pre></div>
 <td><code>http://llm:8190</code>, on the compose network only; nothing outside the containers reaches it</td>
 </tr>
 <tr>
+<td>Key</td>
+<td><code>LLM_KEY</code> in <code>.env</code>, which <code>setup.sh</code> makes and gives EiN; the model answers nothing without it</td>
+</tr>
+<tr>
 <td>Context</td>
 <td>32768 tokens: the most of a conversation the model reads at once, cached at 8 bits</td>
 </tr>
@@ -245,15 +249,22 @@ podman compose up -d llm</code></pre></div>
 <h2 id="use-a-hosted-provider-instead">Use a hosted provider instead<a class="anchor" href="#use-a-hosted-provider-instead" aria-label="Link to this section"></a></h2>
 <h3 id="on-the-settings-page">On the Settings page<a class="anchor" href="#on-the-settings-page" aria-label="Link to this section"></a></h3>
 <ol>
-<li>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>Language model</strong> under <strong>Set up</strong>.</li>
-<li>Under <strong>Who answers the chat</strong>, choose the provider: <strong>Anthropic</strong>, <strong>OpenAI</strong> or <strong>Mistral AI</strong>. For any other service that speaks the OpenAI chat API, such as OpenRouter, Groq or an Ollama of your own, choose <strong>Another service</strong> and give its <strong>Name</strong>, which the chat shows, and its <strong>Address</strong>, without <code>/v1</code>.</li>
-<li>Paste the key the provider gave you in <strong>Key</strong>. The field&#39;s description links to the page in your provider account where keys are made. A server of your own may need none.</li>
-<li><strong>Model</strong> suggests a few of the provider&#39;s models and starts with the first; keep it or type another, as the provider writes it.</li>
-<li>Choose <strong>Save</strong>. The four settings are saved together and <code>llm-link</code> restarts once (&quot;Restarted llm-link.&quot;). Under <strong>Now</strong>, the page asks the model whether it answers, as <code>llm-status --checks</code> does.</li>
-<li>Once the key is saved, <strong>Model</strong> lists every model the provider offers: pick another and <strong>Save</strong> again to change it.</li>
+<li><p>Sign in as an administrator, choose <strong>Settings</strong> in the sidebar, and <strong>Language model</strong> under <strong>Set up</strong>.</p>
+<figure class="shot"><a href="../../assets/shots/settings-model@2x.webp"><img src="../../assets/shots/settings-model.webp" srcset="../../assets/shots/settings-model.webp 1x, ../../assets/shots/settings-model@2x.webp 2x" alt="The Language model page under Set up on Settings → System: Who answers the chat, with This machine chosen, &quot;The model setup.sh --llm runs beside EiN. Nothing leaves the machine.&quot;, and the choices Anthropic, OpenAI, Mistral AI and Another service, each with a line on what it takes" width="1440" height="900" loading="lazy" decoding="async"></a><figcaption>The model on this machine, or a provider&#39;s with your key: one choice, and the page asks for what it needs.</figcaption></figure>
+</li>
+<li><p>Under <strong>Who answers the chat</strong>, choose the provider: <strong>Anthropic</strong>, <strong>OpenAI</strong> or <strong>Mistral AI</strong>. For any other service that speaks the OpenAI chat API, such as OpenRouter, Groq or an Ollama of your own, choose <strong>Another service</strong> and give its <strong>Name</strong>, which the chat shows, and its <strong>Address</strong>, without <code>/v1</code>.</p>
+</li>
+<li><p>Paste the key the provider gave you in <strong>Key</strong>. The field&#39;s description links to the page in your provider account where keys are made. A server of your own may need none.</p>
+</li>
+<li><p><strong>Model</strong> suggests a few of the provider&#39;s models and starts with the first; keep it or type another, as the provider writes it.</p>
+</li>
+<li><p>Choose <strong>Save</strong>. The four settings are saved together and <code>llm-link</code> restarts once (&quot;Restarted llm-link.&quot;). Under <strong>Now</strong>, the page asks the model whether it answers, as <code>llm-status --checks</code> does.</p>
+</li>
+<li><p>Once the key is saved, <strong>Model</strong> lists every model the provider offers: pick another and <strong>Save</strong> again to change it.</p>
+</li>
 </ol>
 <p>The page says, above <strong>Save</strong>, that questions and what the assistant reads to answer them leave the machine; tell the people who use your EiN before you switch. To go back to the model on your machine, choose <strong>This machine</strong> and <strong>Save</strong>: the four settings are cleared, so what <code>.env</code> says is in force again.</p>
-<p>A key belongs to its provider. Switching to another service without giving a key removes the one saved here, so it is never sent to the new address. A key that comes from <code>.env</code> cannot be removed on the page, so the page asks for the new service&#39;s own key before it saves.</p>
+<p>A key belongs to its provider. Switching to another service without giving a key removes the one saved here, so it is never sent to the new address. A key that comes from <code>.env</code> stays there, and EiN sends it only to the address <code>.env</code> names, so another service chosen here is sent the key given for it on the page, or none; a provider from the list asks for its key before it saves.</p>
 <h3 id="in-env">In <code>.env</code><a class="anchor" href="#in-env" aria-label="Link to this section"></a></h3>
 <ol>
 <li><p>Open <code>~/ein/.env</code> on the machine EiN runs on. The file has the lines ready, commented out. Remove the <code>#</code> and fill them in:</p>
@@ -287,7 +298,8 @@ warn  llm model  &lt;model&gt; is untried: the prompts, the fast path and the ev
 <div class="code"><pre tabindex="0"><code>Answered by OpenAI: your questions, and the names, places and search results used to answer them, leave this server.</code></pre></div>
 <p>What goes to the provider is each question, the page the person is on, their name, and everything the commands print while the assistant looks things up: names, dates, places, captions, and the text of files it reads. Sentences typed into the search box go there too, since the search parser asks the same model. Pictures, videos and recordings are never sent. Tell the people who use your EiN before you switch.</p>
 <h3 id="how-the-key-is-kept">How the key is kept<a class="anchor" href="#how-the-key-is-kept" aria-label="Link to this section"></a></h3>
-<p>The key is a secret. No shell in EiN sees it, <code>config-get CFG_LLM_KEY</code> says only whether it is set, and the settings page shows <strong>Set — type a new one to replace it</strong> rather than the key. A key saved on the settings page is kept in <code>/etc/keys</code>, which only an administrator can read; one in <code>.env</code> stays in EiN&#39;s own process. EiN sends the key only to the address in <code>CFG_LLM_URL</code> as the system has it, never to an address someone puts in front of a command.</p>
+<p>The key is a secret. No shell in EiN sees it, <code>config-get CFG_LLM_KEY</code> says only whether it is set, and the settings page shows <strong>Set — type a new one to replace it</strong> rather than the key. A key saved on the settings page is kept in <code>/etc/keys</code>, which only an administrator can read; one in <code>.env</code> stays in EiN&#39;s own process. EiN sends the key only to the address in <code>CFG_LLM_URL</code> as the system has it, never to an address someone puts in front of a command. A key in <code>.env</code> goes only to the address <code>.env</code> names: the installer&#39;s key for the model on this machine is never sent to a service chosen on the settings page, which gets the key given there, or none.</p>
+<p>The model on this machine wants a key too. <code>setup.sh</code> makes it, <code>LLM_KEY</code> in <code>.env</code>, and gives it to the model and to EiN, which has it as <code>CFG_LLM_KEY</code> <strong>From deployment</strong>; a <code>.env</code> that has none gets one at the next <code>./setup.sh</code>. Choosing <strong>This machine</strong> on the <strong>Language model</strong> page brings it back after a provider.</p>
 <h2 id="check-that-the-model-answers">Check that the model answers<a class="anchor" href="#check-that-the-model-answers" aria-label="Link to this section"></a></h2>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -359,7 +371,7 @@ llm-link: http://llm:8190 is not answering; the chat cannot answer until it does
 <td><a href="../reference/settings.html#cfg_llm_key"><code>CFG_LLM_KEY</code></a></td>
 <td><strong>Language model key</strong></td>
 <td>not set</td>
-<td>The bearer key a provider expects.</td>
+<td>The bearer key the model expects: <code>LLM_KEY</code> from <code>.env</code> for the model on this machine, the provider&#39;s own for a hosted one.</td>
 </tr>
 <tr>
 <td><a href="../reference/settings.html#cfg_llm_provider"><code>CFG_LLM_PROVIDER</code></a></td>
@@ -453,6 +465,10 @@ agent-eval --<span class="hljs-built_in">limit</span> 5 --verbose
 <tr>
 <td>A hosted model answers <code>HTTP 401</code> in the error card&#39;s small type</td>
 <td>The key is wrong or missing. Set <code>CFG_LLM_KEY</code> again. A key saved on the settings page wins over the one in <code>.env</code>.</td>
+</tr>
+<tr>
+<td>The model on this machine answers <code>HTTP 401</code> in the error card&#39;s small type</td>
+<td>EiN&#39;s key is not the one the model takes. A <strong>Language model key</strong> saved on the settings page wins over <code>LLM_KEY</code> from <code>.env</code>: choose <strong>This machine</strong> on the <strong>Language model</strong> page and <strong>Save</strong>. An installation whose <code>.env</code> has no <code>LLM_KEY</code> gets one, for both, at the next <code>./setup.sh</code>.</td>
 </tr>
 <tr>
 <td>You changed <code>CFG_LLM_URL</code> in <code>.env</code> and nothing changed</td>

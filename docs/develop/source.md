@@ -74,13 +74,13 @@ git clone https://github.com/einhq/db.git ein-db
 bash ein-db/run.sh
 ```
 
-`run.sh` builds the image, starts a container named `postgres` on the host's network and waits until it answers. Its last line is the connection string:
+`run.sh` builds the image, starts a container named `postgres` on the host's network, listening on this machine's loopback address alone, and waits until it answers. Its first run makes a password for the database and keeps it in `~/services/postgres.password`, which only you can read. Its last line is the connection string, with that password:
 
 ```text
-postgres://ein:ein@localhost:5432/ein
+postgres://ein:<the password>@localhost:5432/ein
 ```
 
-That is what EiN connects to when `POSTGRES_URL` is unset, so a database started this way needs no setting. The data lives in `~/services/postgres` and stays when you run `run.sh` again, which rebuilds on the newest base image and restarts the container. Set `PGDATA_HOST_PATH`, `PGPORT`, `PG_CONTAINER_NAME`, `POSTGRES_USER`, `POSTGRES_PASSWORD` or `POSTGRES_DB` in front of `bash` to change them; the db repository's README has the table.
+Give it to EiN as `POSTGRES_URL`, such as with `export POSTGRES_URL=$(bash ein-db/run.sh | tail -n 1)` in the shell you start EiN from. The data lives in `~/services/postgres` and stays when you run `run.sh` again, which rebuilds on the newest base image and restarts the container. Set `PGDATA_HOST_PATH`, `PGPORT`, `PG_CONTAINER_NAME`, `POSTGRES_USER`, `POSTGRES_PASSWORD` or `POSTGRES_DB` in front of `bash` to change them; the db repository's README has the table. The database takes the password `run.sh` is given, or the one it keeps, at every start.
 
 EiN creates the extensions it uses in its database, and updates them after a new image, at every start. You never run SQL to set it up.
 
@@ -265,7 +265,7 @@ From `https://github.com/einhq`, `setup.sh` pulls the releases of core, db and e
 
 ## When something goes differently
 
-- **`deno task dev` stops at `Connecting to database...`.** PostgreSQL is not answering at `POSTGRES_URL`. Check that the container runs with `podman ps`, and run `bash ein-db/run.sh` again; it reports `postgres did not answer on port 5432` when the server does not come up.
+- **`deno task dev` stops at `Connecting to database...`.** PostgreSQL is not answering at `POSTGRES_URL`. Check that the container runs with `podman ps`, and run `bash ein-db/run.sh` again; it reports `postgres did not answer on port 5432` when the server does not come up. `password authentication failed for user "ein"` means `POSTGRES_URL` lacks the password: set it to the line `run.sh` printed.
 - **The browser shows a terminal instead of the Web UI.** The Web UI was not bundled when EiN started. Run `deno task bundle-ui` and restart EiN.
 - **`make container-run` fails on a missing folder.** Create `old/` in the checkout, or set `OLD_PATH` to a folder that exists.
 - **A module's page shows the old version.** Run `ui-build <name>` in EiN's terminal, then reload the page.

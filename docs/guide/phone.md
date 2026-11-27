@@ -451,8 +451,8 @@ position reports waiting on the phone until it has one; see [The EiN app](#the-e
 
 - **The terminal.** There is no terminal button on a phone. With a keyboard connected to it,
   <kbd>Alt</kbd>+<kbd>T</kbd> still opens it; see [The terminal](../shell/terminal.md).
-- **Keyboard shortcuts**, unless a keyboard is connected. **Shortcuts** in the account menu still
-  lists them.
+- **Keyboard shortcuts**, unless a keyboard is connected, and so no **Shortcuts** in the account
+  menu. With a keyboard connected, <kbd>?</kbd> still lists them.
 - **Edit faces** in the Archive's viewer while the phone is held upright; turn it sideways to draw face boxes.
 - **Keys in the Archive's staging Sort tab**, and selecting several groups there; see [Sorting in staging](../archive/staging.md#on-a-phone).
 

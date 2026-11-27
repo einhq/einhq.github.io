@@ -187,18 +187,18 @@ ok    intake           12 matched triggers waiting to start pipeline work
 ok    kind faces       1,188 left, 420/h  eta 2.8h
 ```
 
-| What you want to know                                   | Command                                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| The verdict and the checks                              | [`health`](../reference/commands-core.md#health)                                     |
-| CPU, memory and event-loop lag, with history            | [`host-metrics`](../reference/commands-core.md#host-metrics)                         |
-| Free space per tier, when it fills, the database's size | [`df`](../reference/commands-core.md#df)                                             |
-| Which instance, its versions and uptime                 | [`system-info`](../reference/commands-core.md#system-info)                           |
-| Each pool and kind of job: left, rates, oldest waiting  | [`pool-stat`](../reference/commands-core.md#pool-stat)                               |
-| Every pipeline's counts and rates                       | [`pipeline-overview`](../reference/commands-core.md#pipeline-overview)               |
-| The meters services add, such as the card's memory      | [`gauges`](../reference/commands-core.md#gauges)                                     |
-| The services and their status lines                     | [`service-list --detail`](../reference/commands-core.md#service-list)                |
-| The last problems in the log                            | [`dmesg --level warn -n 10`](../reference/commands-core.md#dmesg)                    |
-| What is running now, and who is connected               | [`ps`](../reference/commands-core.md#ps), [`who`](../reference/commands-core.md#who) |
+| What you want to know                                                                 | Command                                                                              |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| The verdict and the checks                                                            | [`health`](../reference/commands-core.md#health)                                     |
+| CPU, memory and event-loop lag, with history                                          | [`host-metrics`](../reference/commands-core.md#host-metrics)                         |
+| Free space per tier, when it fills, the database's size                               | [`df`](../reference/commands-core.md#df)                                             |
+| Which instance, its versions and uptime                                               | [`system-info`](../reference/commands-core.md#system-info)                           |
+| Each pool and kind of job: left, rates, oldest waiting                                | [`pool-stat`](../reference/commands-core.md#pool-stat)                               |
+| Every pipeline's counts and rates, and the kinds of work a service that is down holds | [`pipeline-overview`](../reference/commands-core.md#pipeline-overview)               |
+| The meters services add, such as the card's memory                                    | [`gauges`](../reference/commands-core.md#gauges)                                     |
+| The services and their status lines                                                   | [`service-list --detail`](../reference/commands-core.md#service-list)                |
+| The last problems in the log                                                          | [`dmesg --level warn -n 10`](../reference/commands-core.md#dmesg)                    |
+| What is running now, and who is connected                                             | [`ps`](../reference/commands-core.md#ps), [`who`](../reference/commands-core.md#who) |
 
 `ps` and `who` show the administrator everyone's commands and sessions, and anyone else their own.
 A visitor, someone who has not signed in or who opened a share link, sees only what their own

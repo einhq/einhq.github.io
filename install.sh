@@ -17,6 +17,12 @@
 # An official module's name alone (MODULES below) is that module with the services it needs:
 # archive is --ems --module archive, assistant --llm --module assistant.
 #
+#   curl -fsSL https://einhq.eu/install.sh | bash -s -- --restore /mnt/backup/ein
+#
+# installs EiN from a backup setup.sh --backup made, the newest in that folder: it asks only where EiN
+# goes, checks the machine for the options, the modules and the source the backup's .env names, and
+# setup.sh --restore puts the backup back.
+#
 #   --home DIR          where EiN goes (default: ~/ein); its ./setup.sh updates it or adds an option later
 #   --yes, -y           ask nothing: the defaults, and what the options say
 #   --check             check the machine against what the options ask for, and stop
@@ -61,7 +67,7 @@ main() {
   local home= yes=0 check=0 interactive=0 pass=() installed= installed_key=
   key=${EIN_SOURCE_KEY:-}
   source= insecure=0 data= data_given=0 http_port= ssh_port= bind= modules= named=0 ems=0 llm=0
-  container= container_version= engine_choice=
+  container= container_version= engine_choice= restore=
   # install.sh's own options taken out; the rest are setup.sh's, passed on.
   while [ $# -gt 0 ]; do
     case $1 in
@@ -116,9 +122,10 @@ main() {
   expand "${pass[@]}"
   pass=("${expanded[@]}")
   options "${pass[@]}" || return 1
+  [ -z "$restore" ] || restored_settings
 
   if [ ! -f "$home/.env" ]; then
-    if [ "$interactive" = 1 ]; then
+    if [ "$interactive" = 1 ] && [ -z "$restore" ]; then
       questions || return 1
     elif [ "$yes" = 0 ] && [ "$check" = 0 ]; then
       echo "No terminal to ask on: installing with the defaults and the options given, as --yes does."
@@ -243,6 +250,7 @@ options() {
       ssh-port) ssh_port=$arg ;;
       bind) bind=$arg ;;
       engine) engine_choice=$arg ;;
+      restore) restore=$(absolute "$arg") ;;
     esac
     if [ -n "$next" ]; then
       next=
@@ -255,14 +263,31 @@ options() {
       --no-llm) llm=0 ;;
       --insecure-source) insecure=1 ;;
       --module | --source | --data | --http-port | --ssh-port | --bind | --engine) next=${arg#--} ;;
+      --restore) next=restore ;;
       --db-dir | --only) next=value ;;
     esac
   done
-  # setup.sh would take the folder as given, relative to ~/ein: it gets it whole.
+  # setup.sh would take a folder as given, relative to ~/ein: it gets it whole.
   local i
   for i in "${!pass[@]}"; do
-    [ "${pass[i]}" != --data ] || [ $((i + 1)) -ge ${#pass[@]} ] || pass[i + 1]=$(absolute "${pass[i + 1]}")
+    case ${pass[i]} in --data | --restore) [ $((i + 1)) -ge ${#pass[@]} ] || pass[i + 1]=$(absolute "${pass[i + 1]}") ;; esac
   done
+}
+
+# What the backup --restore names was installed with, from its .env, for the checks and as the
+# source, unless an installation here or --source names one: its options, its modules, its source
+# and the source's token. setup.sh says what is wrong with a folder that holds no backup.
+restored_settings() {
+  local env=$restore/env
+  [ -f "$env" ] || env=$restore/latest/env
+  [ -r "$env" ] || return 0
+  grep -qx 'EIN_EMS=1' "$env" && ems=1
+  grep -qx 'EIN_LLM=1' "$env" && llm=1
+  modules=$(sed -n 's/^EIN_MODULES=//p' "$env" | tr -d '"')
+  [ -n "$installed" ] || {
+    installed=$(sed -n 's/^EIN_SOURCE=//p' "$env")
+    installed_key=$(sed -n 's/^EIN_SOURCE_KEY=//p' "$env")
+  }
 }
 
 # The questions of a first install, each unless an option answered it, then what they add up to, to

@@ -322,6 +322,10 @@ Install? [Y/n]</code></pre></div>
 <td>Updates one service, <code>core</code>, <code>ems</code>, <code>db</code>, <code>llm</code>, <code>devices</code> or <code>supervisor</code>, or several separated by commas, such as <code>core,db</code>, one after another: downloads its newest image, or builds it from another source, and restarts it alone, leaving the others running (<code>db</code> restarts EiN with it). A service whose new image does not come up is put back on the image it ran, and <code>setup.sh</code> fails, saying so. It updates an installation, so it needs <code>.env</code>, and takes no other option.</td>
 </tr>
 <tr>
+<td><code>--core-version &lt;x.y.z&gt;</code></td>
+<td>Updates EiN to this release instead of the newest, as EiN asks when it cannot update from the one installed at once. Beside <code>--only core</code>, or in a full run. The release must be published (from another source, a tag <code>v&lt;x.y.z&gt;</code> of <code>core</code>), and not older than the one that runs: going back is restoring a backup. The next run without it updates EiN to the newest again. See <a href="updating.html#update-through-a-release">Update through a release</a>.</td>
+</tr>
+<tr>
 <td><code>--source &lt;address&gt;</code></td>
 <td>Fetches the sources from this organisation instead of <code>https://github.com/einhq</code>, such as <code>https://forge.example:3000/ein</code> on a Forgejo or a Gitea. Sets <code>EIN_SOURCE</code>. See <a href="#where-the-sources-come-from">Where the sources come from</a>.</td>
 </tr>
@@ -334,12 +338,24 @@ Install? [Y/n]</code></pre></div>
 <td>Keeps the database in this folder, an absolute path, instead of <code>db</code> in the data folder, such as on a faster disk. Sets <code>EIN_DB_DIR</code>. The folder must be empty or hold a database.</td>
 </tr>
 <tr>
+<td><code>--backup &lt;folder&gt;</code></td>
+<td>Backs up EiN into a new folder in this one, named by the time it began: the database as a dump, <code>.env</code>, and the data folder&#39;s files, renditions, older files and modules. EiN is paused for a few seconds of it. A file the backup before holds unchanged is shared with it. Takes <code>--keep</code> beside it, and no other option. See <a href="data.html#back-up-ein">Back up EiN</a>.</td>
+</tr>
+<tr>
+<td><code>--keep &lt;n&gt;</code></td>
+<td>With <code>--backup</code>: removes all but the newest <code>n</code> backups in the folder.</td>
+</tr>
+<tr>
+<td><code>--restore &lt;folder&gt;</code></td>
+<td>Puts back the newest backup in this folder, or the backup the folder is, and starts EiN on it, replacing what the installation here holds; on a new machine it installs EiN from it, with <code>--data</code>, <code>--db-dir</code> and <code>--engine</code> as at an install. See <a href="data.html#restore-a-backup">Restore a backup</a>.</td>
+</tr>
+<tr>
 <td><code>-h</code>, <code>--help</code></td>
 <td>Prints the help and stops.</td>
 </tr>
 </tbody></table>
 </div>
-<p>An option other than <code>--only</code> is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
+<p>An option other than <code>--only</code>, <code>--core-version</code>, <code>--backup</code>, <code>--keep</code> and <code>--restore</code> is kept in <code>.env</code> once given, so a run without it keeps it: <code>~/ein/setup.sh</code> alone runs with the options you chose before. Anything else stops <code>setup.sh</code> with <code>setup.sh: unknown option &lt;option&gt; (--help lists them)</code>.</p>
 <p>With no module installed, EiN is core alone: the tree, the shell, accounts and the frame of the Web UI. <code>--module</code> only adds names; there is no option that takes one out. To stop EiN installing a module at its start, remove its name from <code>EIN_MODULES</code> in <code>~/ein/.env</code>. <a href="modules.html">Modules</a> explains installing, updating and removing modules, which EiN does itself, not <code>setup.sh</code>.</p>
 <h2 id="the-variables">The variables<a class="anchor" href="#the-variables" aria-label="Link to this section"></a></h2>
 <p>Every setting is an option. Only the secrets come in the environment, so they stay off the command line, which others on the machine can see:</p>
@@ -900,6 +916,10 @@ podman compose down
 <tr>
 <td><code>EIN_HTTP_PORT</code>, <code>EIN_SSH_PORT</code></td>
 <td>the ports on the machine for the Web UI and for SSH and SFTP, which <code>--http-port</code> and <code>--ssh-port</code> set; <code>setup.sh</code> moves one to the next free port when something else uses it while EiN is stopped</td>
+</tr>
+<tr>
+<td><code>CFG_EMS_URL</code>, <code>CFG_EMS_FILES_ADDRESS</code></td>
+<td>a media service on another machine instead of <code>--ems</code>, with <code>EMS_KEY</code> the key of this EiN in its <code>ems.keys</code>; see <a href="../ems/index.html#a-media-service-on-another-machine">A media service on another machine</a></td>
 </tr>
 <tr>
 <td><code>CFG_LLM_…</code></td>

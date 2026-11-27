@@ -155,9 +155,11 @@ album-folders sync "/archive/albums/Summer 1987" --dry-run
 
 ## Backups
 
-The [backup](../admin/data.md#back-up-ein) copies the data folder with `rsync -a`, which copies a
-hard link as a file of its own and so stores every picture in an album twice. Leave the folders out
-with `--exclude /files/albums`: EiN makes them again from the albums after a restore.
+A [backup](../admin/data.md#back-up-ein) leaves `files/albums` out, since its files are second names
+for the originals it holds already, and EiN makes the folders again from the albums after a restore.
+A copy of the data folder of your own, such as with `rsync -a`, copies a hard link as a file of its
+own and so stores every picture in an album twice: leave the folders out with
+`--exclude /files/albums`.
 
 ## If something looks different
 

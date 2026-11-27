@@ -121,6 +121,8 @@ With the Archive, on a machine with more cores than the minimum, raise the media
 1. Sign in as an administrator, choose **Settings** in the sidebar, under **System**, and **Processing** under **Set up**.
 2. Choose **More**, half the machine's cores, or **Full**, all of them but one, and **Save**. The page says in a sentence what the level comes to, and the line under it "Restarted media-worker, pipeline-engine."
 
+![The Processing page under Set up on Settings → System: How much runs at once, with Standard, More (half of this machine's 6 cores) and Full (all of them but one) chosen, and under Now what Full comes to: media work worth 5 slots at once, with up to 6 jobs in flight and 2 kept for work after import](../../assets/shots/settings-processing.webp "A level instead of numbers: the page says what it comes to on this machine.")
+
 [Media](../media/index.md#how-much-runs-at-once) says what each level sets. To set the budget yourself instead:
 
 1. Sign in as an administrator and choose **Settings** in the sidebar, under **System**.

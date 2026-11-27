@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Node types – EiN documentation</title>
-    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 33 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta name="description" content="Every node has a type, which decides what it holds and how it behaves. These are the 35 types of an EiN with all its modules. Nodes and node types explains what a node is.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/node-types.html">
     <meta property="og:title" content="Node types – EiN documentation">
-    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 33 types of an EiN with all its modules. Nodes and node types explains what a node is.">
+    <meta property="og:description" content="Every node has a type, which decides what it holds and how it behaves. These are the 35 types of an EiN with all its modules. Nodes and node types explains what a node is.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -94,7 +94,7 @@
           <h1>Node types</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `docs node-types` on a running EiN: make reference, never by hand. --><p>Every node has a type, which decides what it holds and how it behaves. These are the 33 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
+<!-- Written by tools/reference.ts from `docs node-types` on a running EiN: make reference, never by hand. --><p>Every node has a type, which decides what it holds and how it behaves. These are the 35 types of an EiN with all its modules. <a href="../concepts/nodes.html">Nodes and node types</a> explains what a node is.</p>
 <h2 id="content">Content<a class="anchor" href="#content" aria-label="Link to this section"></a></h2>
 <p>What the archive is made of: what people add, and what EiN works out about it.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -259,6 +259,12 @@
 <td>Core</td>
 </tr>
 <tr>
+<td><code>invitation</code> Invitation</td>
+<td>A token that opens stream nodes over a WebSocket, each to read or to write, and socket nodes to connect to, to someone with no account here, from a page of any address, as the account that made it; under /var/invitations, keeping only the token&#39;s hash, with when it expires and how often it was used. <code>invitation</code> makes, lists and turns them off.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
 <td><code>log</code> Log</td>
 <td>An append-only record of entries kept for a retention period, such as the system log under /var/logs. A device&#39;s readings and events are logs under it, one an endpoint.</td>
 <td></td>
@@ -301,8 +307,14 @@
 <td>Core</td>
 </tr>
 <tr>
+<td><code>socket</code> Socket</td>
+<td>A meeting point between one listener and its clients, such as a module&#39;s service and the pages that talk to it. Its owner listens on it and accepts connections; whoever may read and write it connects, each connection two-way whole messages between that client and the listener alone, and nothing is kept. A page connects over a WebSocket at its <code>/file/</code> address, <code>?mode=rw</code>.</td>
+<td></td>
+<td>Core</td>
+</tr>
+<tr>
 <td><code>stream</code> Stream</td>
-<td>Live bytes from one writer to whoever reads, such as a camera&#39;s video under its device, which its driver writes. Nothing is kept: a reader gets the bytes from the moment it opens it (<code>cat /dev/front-door/main.ts &gt; door.ts</code> records the camera until stopped).</td>
+<td>Live bytes from one writer to whoever reads, such as a camera&#39;s video under its device, which its driver writes. Nothing is kept: a reader gets the bytes from the moment it opens it (<code>cat /dev/front-door/main.ts &gt; door.ts</code> records the camera until stopped). A page holds one open over a WebSocket at its <code>/file/</code> address, <code>?mode=w</code> as its writer, <code>?mode=r</code> as a reader.</td>
 <td></td>
 <td>Core</td>
 </tr>

@@ -237,7 +237,11 @@ const SHOTS: Shot[] = [
     },
   },
   { id: 'system-log', run: (page) => open(page, '/system?tab=log', 5000) },
+  // Settings → System opens on the first page under Set up; three more of those pages, the modules'.
   { id: 'settings', run: (page) => open(page, '/settings', 4000) },
+  { id: 'settings-model', run: (page) => open(page, '/settings?view=assistant.model', 5000) },
+  { id: 'settings-mqtt', run: (page) => open(page, '/settings?view=devices.mqtt', 5000) },
+  { id: 'settings-processing', run: (page) => open(page, '/settings?view=media.processing', 5000) },
   { id: 'settings-users', run: (page) => open(page, '/settings?tab=users', 4000) },
   { id: 'settings-permissions', run: (page) => open(page, '/settings?tab=permissions', 4000) },
   { id: 'docs', run: (page) => open(page, '/docs', 4000) },
@@ -297,6 +301,8 @@ const SHOTS: Shot[] = [
       await settle(page, 1500);
     },
   },
+  // Staging's Inbox, where Upload puts what it brings.
+  { id: 'staging', run: (page) => open(page, '/staging', 5000) },
   { id: 'album-info', run: (page) => open(page, `${album('sailing-2025')}?tab=info`, 5000) },
   { id: 'album-map', run: (page) => open(page, `${album('sailing-2025')}?tab=map`, 6000) },
   {

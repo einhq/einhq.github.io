@@ -140,6 +140,9 @@ Give EiN the broker's address and an account on it:
 
 1. Sign in as an administrator, choose **Settings** in the sidebar, and **MQTT broker** under
    **Set up**.
+
+   ![The MQTT broker page under Set up on Settings → System: the Broker field, empty and marked Default, with mqtt://host:1883 as its hint, the User and Password fields, and under Now "No broker is set: devices are not heard over MQTT. Those EiN asks over the network are still read."](../../assets/shots/settings-mqtt.webp "The broker, the account EiN signs in with, and under Now whether it is heard.")
+
 2. Fill in **Broker**, `mqtt://host:1883`, or `mqtts://host:8883` for a broker that takes TLS, and
    the **User** and **Password** EiN signs in with.
 3. Choose **Save**. The three are saved together and `devices-bridge` restarts once. Under
@@ -824,9 +827,11 @@ monitor. It shows what it is given full screen, and waits in between.
 
 From then on it is listed in **Show on** for everyone who may use it, and its `show`, `play`, `pause`,
 `stop`, `seek`, `volume` and `muted` work as a Cast screen's do. It plays each thing in a form the
-browser says it plays: a video the browser cannot play as it is goes as one stream made by the media
-service, which cannot be sought in, unless its `video` setting is `av1`, for a browser that plays
-AV1 (Chrome, Edge and Firefox do). Until the first tap a video plays muted, with **Tap for sound** in a
+browser says it plays: a video the browser cannot play as it is is made by the media service as it
+plays, as HLS for a browser with its own HLS player, such as Chrome, and otherwise as one stream,
+which cannot be sought in; unless its `video` setting is `av1`, for a browser that plays AV1 (Chrome,
+Edge and Firefox do). A page, such as an album's slideshow or a dashboard, plays as live
+video, kept at its newest moment. Until the first tap a video plays muted, with **Tap for sound** in a
 corner. The pointer hides after a few seconds.
 
 The browser keeps the address, so opening `/display` again, or starting the browser again, makes it

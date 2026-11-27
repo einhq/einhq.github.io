@@ -49,6 +49,7 @@ Where the tree keeps each kind of thing, exported for every shell, so `cd $LOGS_
 | `LOGS_PATH` |  | Logs and metrics. |
 | `SESSIONS_PATH` |  | Open sessions. |
 | `LINKS_PATH` |  | Share links: one node per link that opens an album without signing in. |
+| `INVITATIONS_PATH` |  | Invitations: one node per invitation that opens stream and socket nodes over a WebSocket to someone with no account here. |
 | `QUEUES_PATH` |  | Queues. |
 | `PIPELINE_QUEUE_PATH` |  | The queue the pipeline engine works from. |
 | `POOLS_PATH` |  | Job pools. |

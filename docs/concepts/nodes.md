@@ -201,16 +201,16 @@ Each option may be given several times. The attributes you do not name are left 
 
 A node's type decides whether it holds content, and of what kind. `cat` prints it:
 
-| Type        | Content                                                  |
-| ----------- | -------------------------------------------------------- |
-| `file`      | Its bytes: a photo, a video, a text.                     |
-| `log`       | Lines with a time each, kept for a retention period.     |
-| `queue`     | Messages waiting to be read; reading one removes it.     |
-| `router`    | Nothing kept: what is written reaches whoever reads now. |
-| `position`  | A point, a circle or an outline on the map.              |
-| `track`     | Timestamped GPS points.                                  |
-| `control`   | The states its device reported, a line with a time each. |
-| `embedding` | A numeric fingerprint, for similarity search.            |
+| Type        | Content                                                                                           |
+| ----------- | ------------------------------------------------------------------------------------------------- |
+| `file`      | Its bytes: a photo, a video, a text.                                                              |
+| `log`       | Lines with a time each, kept for a retention period.                                              |
+| `queue`     | Messages waiting to be read; reading one removes it, so only those who may write a queue read it. |
+| `router`    | Nothing kept: what is written reaches whoever reads now.                                          |
+| `position`  | A point, a circle or an outline on the map.                                                       |
+| `track`     | Timestamped GPS points.                                                                           |
+| `control`   | The states its device reported, a line with a time each.                                          |
+| `embedding` | A numeric fingerprint, for similarity search.                                                     |
 
 A `directory`, `album` or `person` holds no content, only attributes and children, and so does a
 `device`: what is written to a device or a control goes to the device's driver, which sends it on

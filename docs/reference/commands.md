@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 478 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 480 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 235 in full](commands-core.md).
+[All 237 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -108,6 +108,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [host-metrics](commands-core.md#host-metrics) | The machine's CPU and memory, this container's share of each, and event-loop lag now, with their recent history from metrics-sampler. |
 | [http-server](commands-core.md#http-server) | Start an HTTP server. |
 | [info](commands-core.md#info) | Display node ID and type. |
+| [invitation](commands-core.md#invitation) | Make, list and turn off invitations: tokens that open stream and socket nodes over a WebSocket to someone with no account here. |
 | [jq](commands-core.md#jq) | Lightweight JSON processor. |
 | [label](commands-core.md#label) | Manage labels/tags (add, remove, list, prune) |
 | [labels](commands-core.md#labels) | List labels (all, or of a node); search --tag <label> finds what carries one. |
@@ -130,6 +131,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [mkrouter](commands-core.md#mkrouter) | Create a router node. |
 | [mod](commands-core.md#mod) | Module management. |
 | [mod-cache](commands-core.md#mod-cache) | Pre-fetch a module's TypeScript command dependencies. |
+| [mod-changelog](commands-core.md#mod-changelog) | An installed module's commits, newest first, from what an update would install down past the one installed, each with its release tags; marked which is installed and which an update brings. |
 | [mod-groups](commands-core.md#mod-groups) | Say which groups a module is kept to, or keep it to some groups, or make it everyone's again. |
 | [mod-info](commands-core.md#mod-info) | Show module information. |
 | [mod-install](commands-core.md#mod-install) | Install modules from their repositories, or update them, with the dependencies they lack, and set them up: one install at a time, which goes on when the session ends. |
@@ -152,7 +154,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [pipeline-heal](commands-core.md#pipeline-heal) | Rerun failed instances after a growing wait, and mark those that keep failing for a person. |
 | [pipeline-instances](commands-core.md#pipeline-instances) | List pipeline instances — running, failed or completed — newest first. |
 | [pipeline-list](commands-core.md#pipeline-list) | List pipeline definitions. |
-| [pipeline-overview](commands-core.md#pipeline-overview) | Pipeline workload summary: instance counts (running, failed, completed), queue depths, active instances, completion rate. |
+| [pipeline-overview](commands-core.md#pipeline-overview) | Pipeline workload summary: instance counts (running, failed, completed), queue depths, active instances, completion rate, and the pool kinds held because a service their steps call cannot run them. |
 | [pipeline-prune](commands-core.md#pipeline-prune) | Remove completed and cancelled pipeline instances; failed ones only when asked. |
 | [pipeline-remove](commands-core.md#pipeline-remove) | Remove pipeline instances (cancels running ones first) |
 | [pipeline-repair](commands-core.md#pipeline-repair) | Return instances marked terminal while still holding unfinished steps to running. |
@@ -239,18 +241,18 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [unzip](commands-core.md#unzip) | Expand a zip archive into a directory, streaming each entry. Refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A softlink below the directory is not followed: the entries through it fail. A file already there at its entry’s size is left as it is, so a run that stopped can be run again. |
 | [user](commands-core.md#user) | Manage users. |
 | [user-create](commands-core.md#user-create) | Create a user account and its home with its own group (an existing group of its name when that group's gid is free as a uid) and link it into its own and its other groups. |
-| [user-delete](commands-core.md#user-delete) | Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user. |
-| [user-disable](commands-core.md#user-disable) | Disable a user account and end its open sessions. |
+| [user-delete](commands-core.md#user-delete) | Delete a user account, its home, its own group, and its open sessions; what it owned goes to another user, or with --unused it goes only when nothing outside it names it. |
+| [user-disable](commands-core.md#user-disable) | Disable a user account and end its open sessions; a home that holds nothing but directories is removed. |
 | [user-elevate](commands-core.md#user-elevate) | Make this shell an administrator's, or with --session the whole sign-in, for a member of the sudo group, after entering the password again. |
-| [user-enable](commands-core.md#user-enable) | Enable a disabled user account. |
+| [user-enable](commands-core.md#user-enable) | Enable a disabled user account, making its home again when disabling removed it. |
 | [user-exists](commands-core.md#user-exists) | Check if a user account exists. |
 | [user-groups](commands-core.md#user-groups) | List groups a user belongs to. |
 | [user-id](commands-core.md#user-id) | Print user and group IDs. |
 | [user-info](commands-core.md#user-info) | Display user account information. |
 | [user-invite](commands-core.md#user-invite) | An account's sign-in link, with which its person chooses their own password at /invite/<token>: shown, made new (--new) or taken away (--off); for an administrator. |
-| [user-invite-accept](commands-core.md#user-invite-accept) | Which account a sign-in link is for, and with --password, choose its password with it, which spends the link and signs in. |
+| [user-invite-accept](commands-core.md#user-invite-accept) | Which account a sign-in link is for, and with --password, choose its password with it, which spends the link, ends the account's other sign-ins and signs in. |
 | [user-list](commands-core.md#user-list) | List the user accounts; as JSON with each one's primary group, e-mail address, description, person and built-in role, and for an administrator whether a password is set. |
-| [user-passwd](commands-core.md#user-passwd) | Change user password. |
+| [user-passwd](commands-core.md#user-passwd) | Change user password; the account's other sign-ins end. |
 | [user-resolve](commands-core.md#user-resolve) | Resolve username to UID or vice versa. |
 | [user-set-primary-group](commands-core.md#user-set-primary-group) | Set a user's primary group. |
 | [user-update](commands-core.md#user-update) | Update an account's display name, description and (an administrator only) e-mail address; anyone may update their own name and description. |

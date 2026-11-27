@@ -173,7 +173,8 @@ computer with <code>ssh-keygen</code> and accept the defaults.</p>
 ssh-copy-id -s -p 2222 helen@ein.local</code></pre></div>
 <p>It asks for your EiN password this one time. The <code>-s</code> matters: it makes <code>ssh-copy-id</code> copy the
 key over SFTP. Without it, <code>ssh-copy-id</code> sends a script of Unix shell commands, which EiN&#39;s shell
-does not run.</p>
+does not run. Where the administrator has turned passwords over SSH off, <code>ssh-copy-id</code> cannot
+sign in: add the key from EiN&#39;s terminal instead, as below.</p>
 </li>
 <li><p>Log in as before. <code>ssh</code> and <code>sftp</code> now use the key and do not ask for the password.</p>
 </li>
@@ -188,7 +189,8 @@ sign in as you. Your home, <code>~/.ssh</code> and <code>authorized_keys</code> 
 administrator), writable by neither group nor others nor by anyone else through an access list, and
 none of them may be a link. <code>ssh-copy-id -s</code> sets the modes for you.</p>
 <h3 id="add-a-key-without-ssh-copy-id">Add a key without ssh-copy-id<a class="anchor" href="#add-a-key-without-ssh-copy-id" aria-label="Link to this section"></a></h3>
-<p>Where <code>ssh-copy-id</code> is missing, as on Windows, add the key from EiN&#39;s terminal. Copy the contents of
+<p>Where <code>ssh-copy-id</code> is missing, as on Windows, or passwords over SSH are off, add the key from EiN&#39;s
+terminal in the Web UI. Copy the contents of
 your public key file (<code>id_ed25519.pub</code> in the <code>.ssh</code> folder of your home on your own computer), then:</p>
 <div class="code" data-lang="bash"><pre tabindex="0"><code><span class="hljs-comment"># in EiN&#x27;s terminal</span>
 <span class="hljs-built_in">mkdir</span> -p ~/.ssh
@@ -296,6 +298,9 @@ it needs an <code>rsync</code> program on EiN&#39;s side, and EiN&#39;s shell ha
 <li>Every account with a password can sign in over SSH and SFTP; no group membership is needed. Being in
 the group <code>ssh</code> is about reaching other machines from EiN, not about reaching EiN (see
 <a href="remote.html">Reaching other machines</a>).</li>
+<li>The administrator can turn passwords over SSH and SFTP off with the setting <strong>Passwords over SSH and
+SFTP</strong> (<code>CFG_SSH_PASSWORD_AUTH</code>), so that only a key signs in. The Web UI and WebDAV still take the
+password. See <a href="../admin/network.html#before-you-open-ein-to-the-internet">Ports, HTTPS and remote access</a>.</li>
 <li>An account still waiting for a password, such as one imported without one, cannot sign in over SSH,
 with a key or with a password, nor anywhere else, until the administrator sets one for it.</li>
 <li>A disabled account cannot sign in at all, and disabling an account, or deleting it, ends the SSH and
@@ -325,6 +330,11 @@ agent.</p>
 <td><code>Permission denied (publickey,password)</code> with the right password</td>
 <td>The account still waits for a password, is disabled, or your address is held back after failed attempts.</td>
 <td>Ask your administrator to set a password or enable the account, or wait and try again.</td>
+</tr>
+<tr>
+<td><code>Permission denied (publickey)</code> without asking for a password</td>
+<td>Passwords over SSH are off, and no key of yours is in <code>~/.ssh/authorized_keys</code> or it is not used.</td>
+<td>Add your key from EiN&#39;s terminal in the Web UI, as in <a href="#add-a-key-without-ssh-copy-id">Add a key without ssh-copy-id</a>.</td>
 </tr>
 <tr>
 <td>The key is not used and you are asked for the password</td>
