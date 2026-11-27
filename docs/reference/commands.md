@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 487 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 490 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -21,7 +21,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Core
 
-[All 237 in full](commands-core.md).
+[All 240 in full](commands-core.md).
 
 | Command | What it does |
 | --- | --- |
@@ -103,6 +103,8 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [group-remove-member](commands-core.md#group-remove-member) | Remove a user from a group; from users (everyone), take the account out of what is shared with every account. |
 | [group-resolve](commands-core.md#group-resolve) | Resolve group name to GID or vice versa. |
 | [group-update](commands-core.md#group-update) | Update a group's title or description; its gid is fixed when it is created. |
+| [gunzip](commands-core.md#gunzip) | Decompress each FILE.gz into FILE (FILE.tgz into FILE.tar), removing it unless -k; with no file, or -, stdin to stdout. Reads several gzip members one after another, and zeros after the last, as one stream. |
+| [gzip](commands-core.md#gzip) | Compress each file into FILE.gz, removing the file unless -k, or decompress it with -d; with no file, or -, stdin to stdout. Streams the bytes, so a file of any size takes little memory. |
 | [head](commands-core.md#head) | Output the first part of files, logs, or stdin; on a queue, the next entries without consuming them. |
 | [health](commands-core.md#health) | Say whether the system is healthy, catching up, stuck or needs a person, and the checks that decide it. |
 | [host-metrics](commands-core.md#host-metrics) | The machine's CPU and memory, this container's share of each, and event-loop lag now, with their recent history from metrics-sampler. |
@@ -227,6 +229,7 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [supervisor-update](commands-core.md#supervisor-update) | Have the supervisor update services beside EiN now, EiN among them; every one with a newer release when none is named. |
 | [system-info](commands-core.md#system-info) | Which instance this is: host name, uptime, core's version and commit, the module API, each module's commit, the PostgreSQL and Deno versions, and its time zone. |
 | [tail](commands-core.md#tail) | Output the last part of files, logs, or stdin (with -f to follow) |
+| [tar](commands-core.md#tar) | List (-t) or expand (-x) a tar archive, gzip-compressed or not, streaming each entry. Expanding refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A softlink below the directory is not followed. A file already there at its entry’s size is left as it is, so a run that stopped can be run again. Softlinks and hard links are made as links; devices and fifos are not expanded. |
 | [top](commands-core.md#top) | Watch the system live: CPU graph, memory and event-loop lag, disks, pipeline work, running commands, sessions, services and recent problems. Keys: q quits, arrows scroll, s sorts, + and - change the interval, p pauses. |
 | [tr](commands-core.md#tr) | Translate or delete characters. |
 | [trash](commands-core.md#trash) | Move nodes into the reader's trash, alone or as one batch, list it, restore entries, or empty it. |

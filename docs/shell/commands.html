@@ -142,8 +142,8 @@
 <td><a href="../reference/commands-core.html#cat">cat</a></td>
 </tr>
 <tr>
-<td>The first or last lines of a file</td>
-<td><code>head -n 20 notes.txt</code>, <code>tail -n 50 notes.txt</code></td>
+<td>The first or last lines of a file, or its bytes</td>
+<td><code>head -n 20 notes.txt</code>, <code>tail -n 50 notes.txt</code>; <code>tail -c +5469 installer.sh &gt; game.tar.gz</code> (from byte 5469 on, as it is)</td>
 <td><a href="../reference/commands-core.html#head">head</a>, <a href="../reference/commands-core.html#tail">tail</a></td>
 </tr>
 <tr>
@@ -230,6 +230,16 @@
 <td>Unpack a zip file</td>
 <td><code>unzip -d ~/unpacked ~/takeout-001.zip</code></td>
 <td><a href="../reference/commands-core.html#unzip">unzip</a></td>
+</tr>
+<tr>
+<td>Unpack a tar or .tar.gz file, or list it</td>
+<td><code>tar -xzf ~/game-1.2.tar.gz -C ~/games</code>, <code>tar -tvf ~/backup.tar</code></td>
+<td><a href="../reference/commands-core.html#tar">tar</a></td>
+</tr>
+<tr>
+<td>Compress a file, or decompress one</td>
+<td><code>gzip -k notes.txt</code>, <code>gunzip notes.txt.gz</code>, <code>gunzip -c old.log.gz | grep error</code></td>
+<td><a href="../reference/commands-core.html#gzip">gzip</a>, <a href="../reference/commands-core.html#gunzip">gunzip</a></td>
 </tr>
 <tr>
 <td>Bookmark a node, list bookmarks</td>
@@ -1083,8 +1093,8 @@ queue. Use <code>queue-peek</code> to look.</p>
 <td><code>acl</code></td>
 </tr>
 <tr>
-<td><code>tar</code>, <code>rsync</code>, <code>curl</code>, <code>wget</code>, <code>diff</code>, <code>tee</code></td>
-<td>none in EiN; <code>unzip</code> unpacks zip files, and <code>scp</code> copies over SSH</td>
+<td><code>rsync</code>, <code>wget</code>, <code>diff</code>, <code>tee</code></td>
+<td>none in EiN; <code>scp</code> copies over SSH, and administrators download with <code>curl</code></td>
 </tr>
 </tbody></table>
 </div>

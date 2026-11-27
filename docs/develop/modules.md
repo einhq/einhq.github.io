@@ -112,6 +112,7 @@ Start `mod.json` with who the module is and the core it is written for:
 | `roots`       | Folders under `/archive` the module's content lives in; setup creates a missing one and nothing ever removes one        |
 | `nodeTypes`   | The node types it defines, for the documentation; one with a `root` is what an `@` in the search box completes to       |
 | `ui.routes`   | Its pages, each route with the file that draws it                                                                       |
+| `ui.workers`  | Web Workers its pages start, each name with its script                                                                  |
 
 `mod info` on any installed module shows the range it asks for under **Core API**, followed by the
 core API this EiN provides, which `system-info` also shows on its `api` line. A module without `coreApi` still installs,
@@ -364,6 +365,7 @@ A page imports only what the Web UI lends it, its own files, and anything at all
 | `@ein/ui/components`, `@ein/ui/hooks`, `@ein/ui/lib`, `@ein/ui/signals`, `@ein/ui/theme` | The interface's own parts                                                   |
 | `@ein/paths`                                                                             | Core's path names                                                           |
 | Your module's files, CSS and CSS modules included                                        | By relative path or through its `imports`                                   |
+| A script EiN serves, by its path: `import('/file/usr/modules/recipes/glue.js')`          | Not bundled; the browser loads it when the import runs                      |
 
 Anything else stops the build with a message naming the file and the import.
 
@@ -408,6 +410,60 @@ A page that draws something to drag and zoom, as a map or a diagram, takes the g
 `usePanZoom` in `@ein/ui/hooks`: dragging, pinching, the wheel about the cursor and a double tap,
 with `ignore` for what on the drawing keeps a press to itself, such as a card dragged on it. The
 family tree draws with it, and so does the Automation module's graph.
+
+### A Web Worker for a page
+
+Work that would stall the page, such as a solver, a decoder or a program compiled to WebAssembly,
+runs in a Web Worker. Name the worker and its script in `mod.json`
+([`ui.workers`](manifest.md#uiworkers)):
+
+```json
+"ui": {
+  "routes": { "/solver": "ui/pages/solver.tsx" },
+  "workers": { "solver": "ui/solver/worker.ts" }
+}
+```
+
+The script runs in the worker. It may import your module's own files and what the modules it
+depends on export, but nothing the Web UI lends a page: a worker has no React, Mantine or
+`@ein/ui/*`.
+
+```ts
+// ui/solver/worker.ts
+import { solve } from './solve.ts';
+
+declare const self: DedicatedWorkerGlobalScope;
+
+self.onmessage = (event: MessageEvent<string>) => self.postMessage(solve(event.data));
+```
+
+The page starts it with `moduleWorker` from `@ein/ui/lib`, by your module's name and the worker's,
+which gives a `Worker` of type `module`; the options are a `Worker`'s, `name` among them, without
+`type`. It throws when the module has no worker of that name, for example before `ui-build` has
+run since the field was added.
+
+```tsx
+import { useEffect, useState } from 'react';
+import { moduleWorker } from '@ein/ui/lib';
+
+export default function Solver() {
+  const [answer, setAnswer] = useState('');
+  useEffect(() => {
+    const worker = moduleWorker('recipes', 'solver');
+    worker.onmessage = (event: MessageEvent<string>) => setAnswer(event.data);
+    worker.postMessage('2 + 2');
+    return () => worker.terminate();
+  }, []);
+  return <p>{answer}</p>;
+}
+```
+
+The worker reads files from EiN as the person on the page, with their session: `fetch('/file/…')`,
+an `XMLHttpRequest`, synchronous too, for a byte range of a file (`Range: bytes=0-1023`), and
+`import('/file/usr/modules/recipes/…')` for a script the module keeps outside the build, such as a
+program's JavaScript glue. It may compile WebAssembly, and draw on an `OffscreenCanvas` the page
+hands it. `deno task check` checks a TypeScript worker with the `webworker` library instead of the
+`dom` one a page gets, so `document` is an error in it and `FileReaderSync` is not.
 
 ## Add a setting
 
@@ -825,6 +881,7 @@ Its pages are drawn by Games' components, which takes `"coreApi": "^0.15.75"` or
 Games exports the contract a game module writes against: `@games/api`, the data (`GamesDropIn`,
 `GameEntry`, `DropRule`, `MultiplayerSpec`, `ServerInfo`); `@games/adapter`, the engine's interface
 (`GameAdapter`); `@games/page` and `@games/card`, the play page and the dashboard's card;
+`@games/worker` and `@games/engine`, the two ends of the worker the engine runs in;
 `@games/net` and `@games/host`, playing together; and `@games/png`, for covers. The examples below
 are of `rover`, a module whose games are called Star Rover.
 
@@ -1025,26 +1082,198 @@ export const adapter: GameAdapter<RoverGame> = {
 
 The page runs the `RunningGame` it answers:
 
-| Member                              | What it is for                                                                                                                                                                                                               |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `step()`                            | Run the game on, once each animation frame, which stop while the page is hidden. Throws when the game ends: what `quitted()` recognises when the player chose Quit, anything else when it failed                             |
-| `frames()`                          | How many frames the game has drawn; a new number is a new frame to copy                                                                                                                                                      |
-| `width()`, `height()`               | The frame's size, which the game's video options may change                                                                                                                                                                  |
-| `draw(image)`                       | Copy the current frame into `image`, an `ImageData` of that size                                                                                                                                                             |
-| `key(pressed, code)`                | A key (`KeyboardEvent.code`) went down or up; answers whether the game takes it, which the page then keeps from EiN                                                                                                          |
-| `button(pressed, button)`           | A mouse button went down or up while the game has the mouse; answers whether it takes it                                                                                                                                     |
-| `mouse(dx, dy)`                     | The mouse moved while the game has it                                                                                                                                                                                        |
-| `wheel(up)`                         | The wheel turned while the game has the mouse                                                                                                                                                                                |
-| `keep()`                            | Write the player's settings now, as the game does on Quit: the page is closing, or stops the game                                                                                                                            |
-| `disconnect()`                      | Leave the hosted game, telling its server                                                                                                                                                                                    |
-| `menu()`                            | Whether a menu of the game's or its console is up, which the player works without the mouse. Optional: with it, the game has the mouse on the page only while none is up, and the browser's own **Escape** opens its menu    |
-| `fullscreen()`, `setFullscreen(on)` | Whether the game is to be shown fullscreen, as its own video menu sets it. Optional: the page follows it, and sets it for **F11**, its button, or the browser leaving fullscreen itself. Without them the page keeps its own |
+| Member                              | What it is for                                                                                                                                                                                                                                                                                       |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `step()`                            | Run the game on, once each animation frame, which stop while the page is hidden. Throws when the game ends: what `quitted()` recognises when the player chose Quit, anything else when it failed                                                                                                     |
+| `frames()`                          | How many frames the game has drawn; a new number is a new frame to show                                                                                                                                                                                                                              |
+| `width()`, `height()`               | The frame's size, which the game's video options may change                                                                                                                                                                                                                                          |
+| `draw(image)`                       | Copy the current frame into `image`, an `ImageData` of that size. A game gives `draw` or `paint`, not both: `draw` when its frame is pixels it can copy at once                                                                                                                                      |
+| `paint(context)`                    | Draw the current frame onto `context`, a `CanvasRenderingContext2D` whose canvas the page has made that size, for a game that has its frame as something drawable: an `ImageBitmap` from a worker's `OffscreenCanvas`, or a canvas of its own                                                        |
+| `key(pressed, code)`                | A key (`KeyboardEvent.code`) went down or up; answers whether the game takes it, which the page then keeps from EiN                                                                                                                                                                                  |
+| `button(pressed, button)`           | A mouse button went down or up while the game has the mouse; answers whether it takes it                                                                                                                                                                                                             |
+| `mouse(dx, dy)`                     | The mouse moved while the game has it                                                                                                                                                                                                                                                                |
+| `wheel(up)`                         | The wheel turned while the game has the mouse                                                                                                                                                                                                                                                        |
+| `keep()`                            | Write the player's settings now, as the game does on Quit: the page is closing, or stops the game                                                                                                                                                                                                    |
+| `disconnect()`                      | Leave the hosted game, telling its server                                                                                                                                                                                                                                                            |
+| `stop()`                            | The page or card is done with the game: it was stopped, it ended, Quit included, or another game took its place. Called once, after `keep()` and `disconnect()`, but not when the tab closes, since the browser may bring the page back. Optional: `startWorkerGame`'s ends the engine's worker then |
+| `menu()`                            | Whether a menu of the game's or its console is up, which the player works without the mouse. Optional: with it, the game has the mouse on the page only while none is up, and the browser's own **Escape** opens its menu                                                                            |
+| `fullscreen()`, `setFullscreen(on)` | Whether the game is to be shown fullscreen, as its own video menu sets it. Optional: the page follows it, and sets it for **F11**, its button, or the browser leaving fullscreen itself. Without them the page keeps its own                                                                         |
 
 `quitted(error)` recognises an engine built with Emscripten exiting with status 0, which Quit in its
 menu does; the page then shows **Play** again. Every key and button a game took down is let go of
 for it when the frame loses the focus or the game the mouse. Fullscreen, **Escape** and **F11**
 are the game's (the keyboard lock of Chrome and Edge, over HTTPS), and a game played with the mouse keeps it
 until fullscreen is turned off or the game ends.
+
+### The engine in a worker
+
+A game's engine runs in a Web Worker of its module, not on the page: there it may read the game's
+files a piece at a time as it asks for them, with synchronous range requests, and a slow frame does
+not stall the page. Games gives both ends, so `start` is one call. The engine has a platform layer
+of its own, as doomgeneric's is, and not SDL: SDL's browser port listens to the page's DOM events,
+which a worker has none of. Everything between the two goes by `postMessage`, frames and sound
+transferred rather than copied, and nothing is shared memory: EiN's pages are not cross-origin
+isolated, so neither a page nor a worker has `SharedArrayBuffer`.
+
+Name the worker in `mod.json` ([A Web Worker for a page](#a-web-worker-for-a-page)):
+
+```json
+"ui": {
+  "routes": { "/rover/:game": "ui/pages/play.tsx" },
+  "workers": { "engine": "ui/rover/engine-worker.ts" }
+}
+```
+
+What the engine is started with is the module's own, in a file both ends import:
+
+```ts
+// ui/rover/start.ts
+/** What the engine's worker is started with. */
+export type RoverStart = { glue: string; wasm: string; args: string[] };
+```
+
+The worker is type-checked without the DOM, so a file it imports, even for a type, imports neither
+`@ein/ui/*` nor `@games/worker` nor the page's own files.
+
+The adapter's `start` starts it with `startWorkerGame` from `@games/worker`, by the module's name and
+the worker's, which answers the `RunningGame` once the engine has started:
+
+```ts
+// ui/rover/engine.ts
+import { fileUrl } from '@ein/ui/lib';
+import type { StartOptions } from '@games/adapter';
+import { keyControls, startWorkerGame } from '@games/worker';
+import type { RoverGame } from '../adapter.ts';
+import { roverKey } from './keys.ts';
+import type { RoverStart } from './start.ts';
+
+export const startRover = ({ game, kept, map, ...options }: StartOptions<RoverGame>) =>
+  startWorkerGame<RoverStart>('rover', 'engine', {
+    payload: {
+      glue: fileUrl('/usr/modules/rover/assets/rover.js'),
+      wasm: fileUrl('/usr/modules/rover/assets/rover.wasm'),
+      args: ['rover', ...(map ? ['+map', map] : [])],
+    },
+    lazy: game.data.map((name) => ({ path: `/rover/${name}`, url: fileUrl(`${game.path}/${name}`) })),
+    files: kept.map((file) => ({ path: `/home/${file.name}`, data: file.data })),
+    controls: (post) => keyControls(post, { key: roverKey, button: (button) => 200 + button, wheel: { up: 210, down: 211 } }),
+  }, options);
+```
+
+| `startWorkerGame(module, worker, start, options)` | What it is                                                                                                                                                                                                                                         |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `start.payload`                                   | The module's own start message for its engine: its build's URLs, its command line, whether it plays its demos. The worker has it as `boot.payload`                                                                                                 |
+| `start.lazy`                                      | Files the engine reads from EiN as it asks: each its path in the engine's file system, its `url` (`fileUrl` of its EiN path) and its `size`, which EiN is asked for when not given                                                                 |
+| `start.files`                                     | Files the engine is given whole, each its path and its bytes: small ones, and the player's `kept` files                                                                                                                                            |
+| `start.music`                                     | The game's music, `{ folder, tracks }`, the file of each track by its number, which the page plays when the engine asks                                                                                                                            |
+| `start.controls(post)`                            | The game's `key`, `button` and `wheel`, and optionally `mouse` and `step`: what each posts to the engine, `{ type: 'key', pressed, key }`, `char`, `mouse`, `button`, or `{ type: 'input', data }` for anything else. `step` runs before each tick |
+| `options`                                         | `sound`, `log`, `onKeep` and `online` of the `StartOptions`, as `start` was given them                                                                                                                                                             |
+
+`keyControls(post, { key, button, wheel })` is the controls of an engine that takes everything as its
+keys: `key(code)` and `button(button)` give the engine's number for a key or a mouse button, or
+nothing for one it does not take, and the wheel presses and lets go of its two keys. A game whose
+engine wants a gamepad posts its buttons from `step`, since a worker cannot read gamepads. `fetchFile(path)`
+fetches a file of EiN's whole, for `files`.
+
+Each animation frame the page sends the worker a tick, with the datagrams that came for the game's
+sockets, and never a second before the first is answered; it paints the frame the answer carries,
+and `menu()` and `fullscreen()` say what the answer said. The sound the engine mixes is played from
+a queue of at most 0.2 s, which starts once a little more than the page plays at a time is waiting.
+`keep()`, `disconnect()` and `setFullscreen()` are posted, and `stop()` ends the worker once it has
+done what it was asked before. A game that fails to start throws, with the error the worker gave,
+and Quit ends it as `quitted` recognises.
+
+The worker hands its engine to `serveEngine` from `@games/engine`, which answers the page:
+
+```ts
+// ui/rover/engine-worker.ts
+import { argv, type EmscriptenModule, type Engine, FrameCanvas, heapSound, keptPath, serveEngine, startEmscripten } from '@games/engine';
+import type { RoverStart } from './start.ts';
+
+/** What the engine's platform layer exports, beside Emscripten's own. */
+type RoverModule = EmscriptenModule & {
+  _ein_start(argc: number, argv: number): void;
+  _ein_tick(): void;
+  _ein_key(pressed: number, key: number): void;
+  _ein_frames(): number;
+  _ein_screen(): number;
+  _ein_width(): number;
+  _ein_height(): number;
+  _ein_audio_rate(rate: number): void;
+  _ein_audio_render(at: number, frames: number): void;
+  _ein_write_config(): void;
+};
+
+let rover: RoverModule;
+let drawn = 0;
+const frames = new FrameCanvas();
+let sound: ((count: number) => Int16Array<ArrayBuffer>) | undefined;
+
+const engine: Engine<RoverStart> = {
+  async boot(boot) {
+    rover = await startEmscripten<RoverModule>(boot, boot.payload, {
+      // `./rover/rover.cfg` is the player's rover.cfg, in /home.
+      written: (path) => ({ path: `/home/${keptPath(path, 1)}`, name: keptPath(path, 1) }),
+    });
+    if (boot.sampleRate) {
+      rover._ein_audio_rate(boot.sampleRate);
+      sound = heapSound(rover, (at, count) => rover._ein_audio_render(at, count));
+    }
+    rover._ein_start(boot.payload.args.length, argv(rover, boot.payload.args));
+  },
+  tick: () => rover._ein_tick(),
+  frame() {
+    if (rover._ein_frames() === drawn) return undefined;
+    drawn = rover._ein_frames();
+    const [width, height] = [rover._ein_width(), rover._ein_height()];
+    return frames.rgba(new Uint8Array(rover.HEAPU8.buffer, rover._ein_screen()), width, height);
+  },
+  sound: (count) => sound?.(count),
+  key: (pressed, key) => rover._ein_key(pressed ? 1 : 0, key),
+  keep: () => rover._ein_write_config(),
+};
+
+serveEngine(engine);
+```
+
+An `Engine` is the module's; `boot`, `tick` and `frame` are required:
+
+| Member                                        | What it is for                                                                                                                                                                                                                              |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `boot(boot)`                                  | Load the engine and start the game; the page hears it started once it resolves. `boot` has the `payload`, `lazy`, `files`, `screen` (the screen's size in its pixels), `sampleRate` when the game has sound, and the page's services, below |
+| `tick()`                                      | Run the game on by a frame, or by the time since the last tick. It may answer a promise, as an engine under ASYNCIFY that waits for its next frame does: nothing else is called until it resolves                                           |
+| `frame()`                                     | The frame drawn since it was last asked, as an `ImageBitmap`; nothing when there is none new                                                                                                                                                |
+| `sound(frames)`                               | The next `frames` frames of sound at `sampleRate`, interleaved 16-bit stereo. The worker asks at each tick for the time since the last, at most a quarter of a second                                                                       |
+| `key`, `char`, `mouse`, `button`              | Input as the page's controls posted it, in order, between ticks                                                                                                                                                                             |
+| `input(data)`                                 | Whatever else the controls posted as `{ type: 'input', data }`                                                                                                                                                                              |
+| `menu()`, `fullscreen()`, `setFullscreen(on)` | As the `RunningGame`'s, read after each tick                                                                                                                                                                                                |
+| `keep()`                                      | Write the player's settings: asked by the page as it stops the game or closes, and by the worker as a menu or the console closes, where settings change, since a tab that closes cannot wait for its worker                                 |
+| `disconnect()`                                | Leave the hosted game                                                                                                                                                                                                                       |
+
+Anything `boot` or a tick throws ends the game, Emscripten's `ExitStatus` of 0 as Quit. The page's
+services on `boot` are `log(line)`; `keep({ files, folder })`, files of the player's for `onKeep`;
+`network`, when the game plays online, with `open(port)` (0 for a free port), `close`, `send(from,
+ip, to, data)`, `recv(port)` and `waiting(port)`, as a `Network`'s; `music`, when the page plays the
+game's music, a `MusicSink`; and `end(error?)`, for an engine that ends outside a tick, as one whose
+main loop runs on its own does.
+
+For an engine built with Emscripten, `@games/engine` has the rest. Build it as an ES module
+(`-sMODULARIZE -sEXPORT_ES6`) that does not run its `main` by itself (`-sINVOKE_RUN=0`), with `FS`
+and the heap views it uses exported, and keep the glue and the wasm in the module's files, outside
+the UI build:
+
+| Helper                                           | What it does                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `startEmscripten(boot, { glue, wasm }, options)` | Loads the glue and compiles the wasm from its bytes, gives `Module` the page's services where the platform layer calls them (`print`, `printErr`, `einNet`, `einMusic`, and `einWrote(path)` with `options.written`), puts `lazy` and `files` in its file system, and answers the module. `options.canvas` is the canvas the engine draws on with WebGL, `options.module` more of `Module`'s options |
+| `lazyFile(fs, path, url, size?)`                 | A file of the engine's file system read from EiN a megabyte at a time, each piece fetched once with a synchronous range request                                                                                                                                                                                                                                                                      |
+| `FrameCanvas`                                    | The `OffscreenCanvas` frames come from: `take()` what the engine drew on `canvas` with WebGL, `rgba(pixels, width, height)` a frame of R, G, B, A bytes from the engine's memory                                                                                                                                                                                                                     |
+| `heapSound(module, render)`                      | An `Engine.sound` from a mixer that renders into the engine's memory                                                                                                                                                                                                                                                                                                                                 |
+| `argv(module, args)`                             | A command line as a C program's `argv`                                                                                                                                                                                                                                                                                                                                                               |
+| `ChangedFiles`, `keptPath(path, skip)`           | Which written files differ from what the page already has, so a settings file written again unchanged is not saved again; and a written path's name among the kept files, without its first folders                                                                                                                                                                                                  |
+
+`einWrote(path)` hands the page the file the game wrote at `path`, when it changed, or a folder, a
+save slot, with all its files; `written` says where the path is in the file system and its name
+among the kept files.
 
 ### Saves
 
@@ -1342,6 +1571,7 @@ show them afterwards.
 | `recipes: export './api' points at a missing file: ./lib/api.ts`              | Fix the path in `exports`                                                                                              |
 | `recipes: ui.routes['/recipes'] must be a .tsx page: ui/pages/recipes.ts`     | A page is a `.tsx` file                                                                                                |
 | `ui-build: recipes: …: '…' is neither lent by the shell nor the module's own` | The page imports a package the interface does not lend; see the table in [Add a page](#add-a-page-and-a-sidebar-entry) |
+| `ui-build: recipes: …: '…' is not the module's own; a worker imports …`       | A worker imports only its module's files and its dependencies' exports; see [A Web Worker](#a-web-worker-for-a-page)   |
 | `recipe-list: command not found`                                              | `mod setup` has not run since `bin/` was made, or the file is not in `bin/`; run `mod setup recipes`                   |
 | `Access denied` when someone else runs a command                              | The file has no execute bit; `chmod 755` it, and commit the mode                                                       |
 | The sidebar entry does not appear                                             | Run `ui-nav` and read its warnings: a missing field or an unknown section leaves an entry out                          |

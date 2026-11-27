@@ -8,7 +8,9 @@ for the administrator who sets the games up.
 
 The games themselves come from **game modules**. Games names none of them: each game module brings
 the engine that plays its games and the commands that fetch and list them, and Games gives every one
-of them the same page, the same saves and the same way of playing together.
+of them the same page, the same saves and the same way of playing together. A game's engine runs
+beside the page in the browser, in a worker of its own, and reads the game's files from EiN as it
+needs them, so a large game starts without downloading all of it first.
 
 ## Install it
 

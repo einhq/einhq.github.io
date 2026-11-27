@@ -335,6 +335,10 @@ aliases (<code>@recipes/…</code>).</p>
 <td><code>ui.routes</code></td>
 <td>Its pages, each route with the file that draws it</td>
 </tr>
+<tr>
+<td><code>ui.workers</code></td>
+<td>Web Workers its pages start, each name with its script</td>
+</tr>
 </tbody></table>
 </div>
 <p><code>mod info</code> on any installed module shows the range it asks for under <strong>Core API</strong>, followed by the
@@ -661,6 +665,10 @@ section.</p>
 <td>Your module&#39;s files, CSS and CSS modules included</td>
 <td>By relative path or through its <code>imports</code></td>
 </tr>
+<tr>
+<td>A script EiN serves, by its path: <code>import(&#39;/file/usr/modules/recipes/glue.js&#39;)</code></td>
+<td>Not bundled; the browser loads it when the import runs</td>
+</tr>
 </tbody></table>
 </div>
 <p>Anything else stops the build with a message naming the file and the import.</p>
@@ -714,6 +722,46 @@ same way by the folder: <code>&quot;/etc/things/&quot;: &quot;/things/{rest}&quo
 <code>usePanZoom</code> in <code>@ein/ui/hooks</code>: dragging, pinching, the wheel about the cursor and a double tap,
 with <code>ignore</code> for what on the drawing keeps a press to itself, such as a card dragged on it. The
 family tree draws with it, and so does the Automation module&#39;s graph.</p>
+<h3 id="a-web-worker-for-a-page">A Web Worker for a page<a class="anchor" href="#a-web-worker-for-a-page" aria-label="Link to this section"></a></h3>
+<p>Work that would stall the page, such as a solver, a decoder or a program compiled to WebAssembly,
+runs in a Web Worker. Name the worker and its script in <code>mod.json</code>
+(<a href="manifest.html#uiworkers"><code>ui.workers</code></a>):</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;ui&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;routes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;/solver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/pages/solver.tsx&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;workers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;solver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/solver/worker.ts&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>The script runs in the worker. It may import your module&#39;s own files and what the modules it
+depends on export, but nothing the Web UI lends a page: a worker has no React, Mantine or
+<code>@ein/ui/*</code>.</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-comment">// ui/solver/worker.ts</span>
+<span class="hljs-keyword">import</span> { solve } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./solve.ts&#x27;</span>;
+
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">self</span>: <span class="hljs-title class_">DedicatedWorkerGlobalScope</span>;
+
+<span class="hljs-variable language_">self</span>.<span class="hljs-property">onmessage</span> = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">event</span>: <span class="hljs-title class_">MessageEvent</span>&lt;<span class="hljs-built_in">string</span>&gt;</span>) =&gt;</span> <span class="hljs-variable language_">self</span>.<span class="hljs-title function_">postMessage</span>(<span class="hljs-title function_">solve</span>(event.<span class="hljs-property">data</span>));</code></pre></div>
+<p>The page starts it with <code>moduleWorker</code> from <code>@ein/ui/lib</code>, by your module&#39;s name and the worker&#39;s,
+which gives a <code>Worker</code> of type <code>module</code>; the options are a <code>Worker</code>&#39;s, <code>name</code> among them, without
+<code>type</code>. It throws when the module has no worker of that name, for example before <code>ui-build</code> has
+run since the field was added.</p>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>import { useEffect, useState } from 'react';
+import { moduleWorker } from '@ein/ui/lib';
+
+export default function Solver() {
+  const [answer, setAnswer] = useState('');
+  useEffect(() =&gt; {
+    const worker = moduleWorker('recipes', 'solver');
+    worker.onmessage = (event: MessageEvent&lt;string&gt;) =&gt; setAnswer(event.data);
+    worker.postMessage('2 + 2');
+    return () =&gt; worker.terminate();
+  }, []);
+  return &lt;p&gt;{answer}&lt;/p&gt;;
+}</code></pre></div>
+<p>The worker reads files from EiN as the person on the page, with their session: <code>fetch(&#39;/file/…&#39;)</code>,
+an <code>XMLHttpRequest</code>, synchronous too, for a byte range of a file (<code>Range: bytes=0-1023</code>), and
+<code>import(&#39;/file/usr/modules/recipes/…&#39;)</code> for a script the module keeps outside the build, such as a
+program&#39;s JavaScript glue. It may compile WebAssembly, and draw on an <code>OffscreenCanvas</code> the page
+hands it. <code>deno task check</code> checks a TypeScript worker with the <code>webworker</code> library instead of the
+<code>dom</code> one a page gets, so <code>document</code> is an error in it and <code>FileReaderSync</code> is not.</p>
 <h2 id="add-a-setting">Add a setting<a class="anchor" href="#add-a-setting" aria-label="Link to this section"></a></h2>
 <p>A module owns settings by listing them in <code>mod.json</code> under <code>config.options</code>. Setup adds them to
 <strong>Settings</strong> and <code>config</code>; the values live in <code>/etc/config</code> and each person&#39;s <code>~/.config</code>, and every
@@ -1211,6 +1259,7 @@ of the game module&#39;s is in EiN: it depends on Games, as any module depends o
 <p>Games exports the contract a game module writes against: <code>@games/api</code>, the data (<code>GamesDropIn</code>,
 <code>GameEntry</code>, <code>DropRule</code>, <code>MultiplayerSpec</code>, <code>ServerInfo</code>); <code>@games/adapter</code>, the engine&#39;s interface
 (<code>GameAdapter</code>); <code>@games/page</code> and <code>@games/card</code>, the play page and the dashboard&#39;s card;
+<code>@games/worker</code> and <code>@games/engine</code>, the two ends of the worker the engine runs in;
 <code>@games/net</code> and <code>@games/host</code>, playing together; and <code>@games/png</code>, for covers. The examples below
 are of <code>rover</code>, a module whose games are called Star Rover.</p>
 <h3 id="the-drop-in">The drop-in<a class="anchor" href="#the-drop-in" aria-label="Link to this section"></a></h3>
@@ -1532,7 +1581,7 @@ the card drive:</p>
 </tr>
 <tr>
 <td><code>frames()</code></td>
-<td>How many frames the game has drawn; a new number is a new frame to copy</td>
+<td>How many frames the game has drawn; a new number is a new frame to show</td>
 </tr>
 <tr>
 <td><code>width()</code>, <code>height()</code></td>
@@ -1540,7 +1589,11 @@ the card drive:</p>
 </tr>
 <tr>
 <td><code>draw(image)</code></td>
-<td>Copy the current frame into <code>image</code>, an <code>ImageData</code> of that size</td>
+<td>Copy the current frame into <code>image</code>, an <code>ImageData</code> of that size. A game gives <code>draw</code> or <code>paint</code>, not both: <code>draw</code> when its frame is pixels it can copy at once</td>
+</tr>
+<tr>
+<td><code>paint(context)</code></td>
+<td>Draw the current frame onto <code>context</code>, a <code>CanvasRenderingContext2D</code> whose canvas the page has made that size, for a game that has its frame as something drawable: an <code>ImageBitmap</code> from a worker&#39;s <code>OffscreenCanvas</code>, or a canvas of its own</td>
 </tr>
 <tr>
 <td><code>key(pressed, code)</code></td>
@@ -1567,6 +1620,10 @@ the card drive:</p>
 <td>Leave the hosted game, telling its server</td>
 </tr>
 <tr>
+<td><code>stop()</code></td>
+<td>The page or card is done with the game: it was stopped, it ended, Quit included, or another game took its place. Called once, after <code>keep()</code> and <code>disconnect()</code>, but not when the tab closes, since the browser may bring the page back. Optional: <code>startWorkerGame</code>&#39;s ends the engine&#39;s worker then</td>
+</tr>
+<tr>
 <td><code>menu()</code></td>
 <td>Whether a menu of the game&#39;s or its console is up, which the player works without the mouse. Optional: with it, the game has the mouse on the page only while none is up, and the browser&#39;s own <strong>Escape</strong> opens its menu</td>
 </tr>
@@ -1581,6 +1638,231 @@ menu does; the page then shows <strong>Play</strong> again. Every key and button
 for it when the frame loses the focus or the game the mouse. Fullscreen, <strong>Escape</strong> and <strong>F11</strong>
 are the game&#39;s (the keyboard lock of Chrome and Edge, over HTTPS), and a game played with the mouse keeps it
 until fullscreen is turned off or the game ends.</p>
+<h3 id="the-engine-in-a-worker">The engine in a worker<a class="anchor" href="#the-engine-in-a-worker" aria-label="Link to this section"></a></h3>
+<p>A game&#39;s engine runs in a Web Worker of its module, not on the page: there it may read the game&#39;s
+files a piece at a time as it asks for them, with synchronous range requests, and a slow frame does
+not stall the page. Games gives both ends, so <code>start</code> is one call. The engine has a platform layer
+of its own, as doomgeneric&#39;s is, and not SDL: SDL&#39;s browser port listens to the page&#39;s DOM events,
+which a worker has none of. Everything between the two goes by <code>postMessage</code>, frames and sound
+transferred rather than copied, and nothing is shared memory: EiN&#39;s pages are not cross-origin
+isolated, so neither a page nor a worker has <code>SharedArrayBuffer</code>.</p>
+<p>Name the worker in <code>mod.json</code> (<a href="#a-web-worker-for-a-page">A Web Worker for a page</a>):</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;ui&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;routes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;/rover/:game&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/pages/play.tsx&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;workers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;engine&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/rover/engine-worker.ts&quot;</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>What the engine is started with is the module&#39;s own, in a file both ends import:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-comment">// ui/rover/start.ts</span>
+<span class="hljs-comment">/** What the engine&#x27;s worker is started with. */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">RoverStart</span> = { <span class="hljs-attr">glue</span>: <span class="hljs-built_in">string</span>; <span class="hljs-attr">wasm</span>: <span class="hljs-built_in">string</span>; <span class="hljs-attr">args</span>: <span class="hljs-built_in">string</span>[] };</code></pre></div>
+<p>The worker is type-checked without the DOM, so a file it imports, even for a type, imports neither
+<code>@ein/ui/*</code> nor <code>@games/worker</code> nor the page&#39;s own files.</p>
+<p>The adapter&#39;s <code>start</code> starts it with <code>startWorkerGame</code> from <code>@games/worker</code>, by the module&#39;s name and
+the worker&#39;s, which answers the <code>RunningGame</code> once the engine has started:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-comment">// ui/rover/engine.ts</span>
+<span class="hljs-keyword">import</span> { fileUrl } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/ui/lib&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">StartOptions</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@games/adapter&#x27;</span>;
+<span class="hljs-keyword">import</span> { keyControls, startWorkerGame } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@games/worker&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">RoverGame</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../adapter.ts&#x27;</span>;
+<span class="hljs-keyword">import</span> { roverKey } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./keys.ts&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">RoverStart</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./start.ts&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">startRover</span> = (<span class="hljs-params">{ game, kept, map, ...options }: <span class="hljs-title class_">StartOptions</span>&lt;<span class="hljs-title class_">RoverGame</span>&gt;</span>) =&gt;
+  startWorkerGame&lt;<span class="hljs-title class_">RoverStart</span>&gt;(<span class="hljs-string">&#x27;rover&#x27;</span>, <span class="hljs-string">&#x27;engine&#x27;</span>, {
+    <span class="hljs-attr">payload</span>: {
+      <span class="hljs-attr">glue</span>: <span class="hljs-title function_">fileUrl</span>(<span class="hljs-string">&#x27;/usr/modules/rover/assets/rover.js&#x27;</span>),
+      <span class="hljs-attr">wasm</span>: <span class="hljs-title function_">fileUrl</span>(<span class="hljs-string">&#x27;/usr/modules/rover/assets/rover.wasm&#x27;</span>),
+      <span class="hljs-attr">args</span>: [<span class="hljs-string">&#x27;rover&#x27;</span>, ...(map ? [<span class="hljs-string">&#x27;+map&#x27;</span>, map] : [])],
+    },
+    <span class="hljs-attr">lazy</span>: game.<span class="hljs-property">data</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> ({ <span class="hljs-attr">path</span>: <span class="hljs-string">`/rover/<span class="hljs-subst">${name}</span>`</span>, <span class="hljs-attr">url</span>: <span class="hljs-title function_">fileUrl</span>(<span class="hljs-string">`<span class="hljs-subst">${game.path}</span>/<span class="hljs-subst">${name}</span>`</span>) })),
+    <span class="hljs-attr">files</span>: kept.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">file</span>) =&gt;</span> ({ <span class="hljs-attr">path</span>: <span class="hljs-string">`/home/<span class="hljs-subst">${file.name}</span>`</span>, <span class="hljs-attr">data</span>: file.<span class="hljs-property">data</span> })),
+    <span class="hljs-attr">controls</span>: <span class="hljs-function">(<span class="hljs-params">post</span>) =&gt;</span> <span class="hljs-title function_">keyControls</span>(post, { <span class="hljs-attr">key</span>: roverKey, <span class="hljs-attr">button</span>: <span class="hljs-function">(<span class="hljs-params">button</span>) =&gt;</span> <span class="hljs-number">200</span> + button, <span class="hljs-attr">wheel</span>: { <span class="hljs-attr">up</span>: <span class="hljs-number">210</span>, <span class="hljs-attr">down</span>: <span class="hljs-number">211</span> } }),
+  }, options);</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th><code>startWorkerGame(module, worker, start, options)</code></th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>start.payload</code></td>
+<td>The module&#39;s own start message for its engine: its build&#39;s URLs, its command line, whether it plays its demos. The worker has it as <code>boot.payload</code></td>
+</tr>
+<tr>
+<td><code>start.lazy</code></td>
+<td>Files the engine reads from EiN as it asks: each its path in the engine&#39;s file system, its <code>url</code> (<code>fileUrl</code> of its EiN path) and its <code>size</code>, which EiN is asked for when not given</td>
+</tr>
+<tr>
+<td><code>start.files</code></td>
+<td>Files the engine is given whole, each its path and its bytes: small ones, and the player&#39;s <code>kept</code> files</td>
+</tr>
+<tr>
+<td><code>start.music</code></td>
+<td>The game&#39;s music, <code>{ folder, tracks }</code>, the file of each track by its number, which the page plays when the engine asks</td>
+</tr>
+<tr>
+<td><code>start.controls(post)</code></td>
+<td>The game&#39;s <code>key</code>, <code>button</code> and <code>wheel</code>, and optionally <code>mouse</code> and <code>step</code>: what each posts to the engine, <code>{ type: &#39;key&#39;, pressed, key }</code>, <code>char</code>, <code>mouse</code>, <code>button</code>, or <code>{ type: &#39;input&#39;, data }</code> for anything else. <code>step</code> runs before each tick</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td><code>sound</code>, <code>log</code>, <code>onKeep</code> and <code>online</code> of the <code>StartOptions</code>, as <code>start</code> was given them</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>keyControls(post, { key, button, wheel })</code> is the controls of an engine that takes everything as its
+keys: <code>key(code)</code> and <code>button(button)</code> give the engine&#39;s number for a key or a mouse button, or
+nothing for one it does not take, and the wheel presses and lets go of its two keys. A game whose
+engine wants a gamepad posts its buttons from <code>step</code>, since a worker cannot read gamepads. <code>fetchFile(path)</code>
+fetches a file of EiN&#39;s whole, for <code>files</code>.</p>
+<p>Each animation frame the page sends the worker a tick, with the datagrams that came for the game&#39;s
+sockets, and never a second before the first is answered; it paints the frame the answer carries,
+and <code>menu()</code> and <code>fullscreen()</code> say what the answer said. The sound the engine mixes is played from
+a queue of at most 0.2 s, which starts once a little more than the page plays at a time is waiting.
+<code>keep()</code>, <code>disconnect()</code> and <code>setFullscreen()</code> are posted, and <code>stop()</code> ends the worker once it has
+done what it was asked before. A game that fails to start throws, with the error the worker gave,
+and Quit ends it as <code>quitted</code> recognises.</p>
+<p>The worker hands its engine to <code>serveEngine</code> from <code>@games/engine</code>, which answers the page:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-comment">// ui/rover/engine-worker.ts</span>
+<span class="hljs-keyword">import</span> { argv, <span class="hljs-keyword">type</span> <span class="hljs-title class_">EmscriptenModule</span>, <span class="hljs-keyword">type</span> <span class="hljs-title class_">Engine</span>, <span class="hljs-title class_">FrameCanvas</span>, heapSound, keptPath, serveEngine, startEmscripten } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@games/engine&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">RoverStart</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./start.ts&#x27;</span>;
+
+<span class="hljs-comment">/** What the engine&#x27;s platform layer exports, beside Emscripten&#x27;s own. */</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">RoverModule</span> = <span class="hljs-title class_">EmscriptenModule</span> &amp; {
+  <span class="hljs-title function_">_ein_start</span>(<span class="hljs-attr">argc</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">argv</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">_ein_tick</span>(): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">_ein_key</span>(<span class="hljs-attr">pressed</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">key</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">_ein_frames</span>(): <span class="hljs-built_in">number</span>;
+  <span class="hljs-title function_">_ein_screen</span>(): <span class="hljs-built_in">number</span>;
+  <span class="hljs-title function_">_ein_width</span>(): <span class="hljs-built_in">number</span>;
+  <span class="hljs-title function_">_ein_height</span>(): <span class="hljs-built_in">number</span>;
+  <span class="hljs-title function_">_ein_audio_rate</span>(<span class="hljs-attr">rate</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">_ein_audio_render</span>(<span class="hljs-attr">at</span>: <span class="hljs-built_in">number</span>, <span class="hljs-attr">frames</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+  <span class="hljs-title function_">_ein_write_config</span>(): <span class="hljs-built_in">void</span>;
+};
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">rover</span>: <span class="hljs-title class_">RoverModule</span>;
+<span class="hljs-keyword">let</span> drawn = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">const</span> frames = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FrameCanvas</span>();
+<span class="hljs-keyword">let</span> <span class="hljs-attr">sound</span>: (<span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">count</span>: <span class="hljs-built_in">number</span></span>) =&gt;</span> <span class="hljs-title class_">Int16Array</span>&lt;<span class="hljs-title class_">ArrayBuffer</span>&gt;) | <span class="hljs-literal">undefined</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-attr">engine</span>: <span class="hljs-title class_">Engine</span>&lt;<span class="hljs-title class_">RoverStart</span>&gt; = {
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">boot</span>(<span class="hljs-params">boot</span>) {
+    rover = <span class="hljs-keyword">await</span> startEmscripten&lt;<span class="hljs-title class_">RoverModule</span>&gt;(boot, boot.<span class="hljs-property">payload</span>, {
+      <span class="hljs-comment">// `./rover/rover.cfg` is the player&#x27;s rover.cfg, in /home.</span>
+      <span class="hljs-attr">written</span>: <span class="hljs-function">(<span class="hljs-params">path</span>) =&gt;</span> ({ <span class="hljs-attr">path</span>: <span class="hljs-string">`/home/<span class="hljs-subst">${keptPath(path, <span class="hljs-number">1</span>)}</span>`</span>, <span class="hljs-attr">name</span>: <span class="hljs-title function_">keptPath</span>(path, <span class="hljs-number">1</span>) }),
+    });
+    <span class="hljs-keyword">if</span> (boot.<span class="hljs-property">sampleRate</span>) {
+      rover.<span class="hljs-title function_">_ein_audio_rate</span>(boot.<span class="hljs-property">sampleRate</span>);
+      sound = <span class="hljs-title function_">heapSound</span>(rover, <span class="hljs-function">(<span class="hljs-params">at, count</span>) =&gt;</span> rover.<span class="hljs-title function_">_ein_audio_render</span>(at, count));
+    }
+    rover.<span class="hljs-title function_">_ein_start</span>(boot.<span class="hljs-property">payload</span>.<span class="hljs-property">args</span>.<span class="hljs-property">length</span>, <span class="hljs-title function_">argv</span>(rover, boot.<span class="hljs-property">payload</span>.<span class="hljs-property">args</span>));
+  },
+  <span class="hljs-attr">tick</span>: <span class="hljs-function">() =&gt;</span> rover.<span class="hljs-title function_">_ein_tick</span>(),
+  <span class="hljs-title function_">frame</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">if</span> (rover.<span class="hljs-title function_">_ein_frames</span>() === drawn) <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+    drawn = rover.<span class="hljs-title function_">_ein_frames</span>();
+    <span class="hljs-keyword">const</span> [width, height] = [rover.<span class="hljs-title function_">_ein_width</span>(), rover.<span class="hljs-title function_">_ein_height</span>()];
+    <span class="hljs-keyword">return</span> frames.<span class="hljs-title function_">rgba</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Uint8Array</span>(rover.<span class="hljs-property">HEAPU8</span>.<span class="hljs-property">buffer</span>, rover.<span class="hljs-title function_">_ein_screen</span>()), width, height);
+  },
+  <span class="hljs-attr">sound</span>: <span class="hljs-function">(<span class="hljs-params">count</span>) =&gt;</span> sound?.(count),
+  <span class="hljs-attr">key</span>: <span class="hljs-function">(<span class="hljs-params">pressed, key</span>) =&gt;</span> rover.<span class="hljs-title function_">_ein_key</span>(pressed ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>, key),
+  <span class="hljs-attr">keep</span>: <span class="hljs-function">() =&gt;</span> rover.<span class="hljs-title function_">_ein_write_config</span>(),
+};
+
+<span class="hljs-title function_">serveEngine</span>(engine);</code></pre></div>
+<p>An <code>Engine</code> is the module&#39;s; <code>boot</code>, <code>tick</code> and <code>frame</code> are required:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>boot(boot)</code></td>
+<td>Load the engine and start the game; the page hears it started once it resolves. <code>boot</code> has the <code>payload</code>, <code>lazy</code>, <code>files</code>, <code>screen</code> (the screen&#39;s size in its pixels), <code>sampleRate</code> when the game has sound, and the page&#39;s services, below</td>
+</tr>
+<tr>
+<td><code>tick()</code></td>
+<td>Run the game on by a frame, or by the time since the last tick. It may answer a promise, as an engine under ASYNCIFY that waits for its next frame does: nothing else is called until it resolves</td>
+</tr>
+<tr>
+<td><code>frame()</code></td>
+<td>The frame drawn since it was last asked, as an <code>ImageBitmap</code>; nothing when there is none new</td>
+</tr>
+<tr>
+<td><code>sound(frames)</code></td>
+<td>The next <code>frames</code> frames of sound at <code>sampleRate</code>, interleaved 16-bit stereo. The worker asks at each tick for the time since the last, at most a quarter of a second</td>
+</tr>
+<tr>
+<td><code>key</code>, <code>char</code>, <code>mouse</code>, <code>button</code></td>
+<td>Input as the page&#39;s controls posted it, in order, between ticks</td>
+</tr>
+<tr>
+<td><code>input(data)</code></td>
+<td>Whatever else the controls posted as <code>{ type: &#39;input&#39;, data }</code></td>
+</tr>
+<tr>
+<td><code>menu()</code>, <code>fullscreen()</code>, <code>setFullscreen(on)</code></td>
+<td>As the <code>RunningGame</code>&#39;s, read after each tick</td>
+</tr>
+<tr>
+<td><code>keep()</code></td>
+<td>Write the player&#39;s settings: asked by the page as it stops the game or closes, and by the worker as a menu or the console closes, where settings change, since a tab that closes cannot wait for its worker</td>
+</tr>
+<tr>
+<td><code>disconnect()</code></td>
+<td>Leave the hosted game</td>
+</tr>
+</tbody></table>
+</div>
+<p>Anything <code>boot</code> or a tick throws ends the game, Emscripten&#39;s <code>ExitStatus</code> of 0 as Quit. The page&#39;s
+services on <code>boot</code> are <code>log(line)</code>; <code>keep({ files, folder })</code>, files of the player&#39;s for <code>onKeep</code>;
+<code>network</code>, when the game plays online, with <code>open(port)</code> (0 for a free port), <code>close</code>, <code>send(from, ip, to, data)</code>, <code>recv(port)</code> and <code>waiting(port)</code>, as a <code>Network</code>&#39;s; <code>music</code>, when the page plays the
+game&#39;s music, a <code>MusicSink</code>; and <code>end(error?)</code>, for an engine that ends outside a tick, as one whose
+main loop runs on its own does.</p>
+<p>For an engine built with Emscripten, <code>@games/engine</code> has the rest. Build it as an ES module
+(<code>-sMODULARIZE -sEXPORT_ES6</code>) that does not run its <code>main</code> by itself (<code>-sINVOKE_RUN=0</code>), with <code>FS</code>
+and the heap views it uses exported, and keep the glue and the wasm in the module&#39;s files, outside
+the UI build:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Helper</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>startEmscripten(boot, { glue, wasm }, options)</code></td>
+<td>Loads the glue and compiles the wasm from its bytes, gives <code>Module</code> the page&#39;s services where the platform layer calls them (<code>print</code>, <code>printErr</code>, <code>einNet</code>, <code>einMusic</code>, and <code>einWrote(path)</code> with <code>options.written</code>), puts <code>lazy</code> and <code>files</code> in its file system, and answers the module. <code>options.canvas</code> is the canvas the engine draws on with WebGL, <code>options.module</code> more of <code>Module</code>&#39;s options</td>
+</tr>
+<tr>
+<td><code>lazyFile(fs, path, url, size?)</code></td>
+<td>A file of the engine&#39;s file system read from EiN a megabyte at a time, each piece fetched once with a synchronous range request</td>
+</tr>
+<tr>
+<td><code>FrameCanvas</code></td>
+<td>The <code>OffscreenCanvas</code> frames come from: <code>take()</code> what the engine drew on <code>canvas</code> with WebGL, <code>rgba(pixels, width, height)</code> a frame of R, G, B, A bytes from the engine&#39;s memory</td>
+</tr>
+<tr>
+<td><code>heapSound(module, render)</code></td>
+<td>An <code>Engine.sound</code> from a mixer that renders into the engine&#39;s memory</td>
+</tr>
+<tr>
+<td><code>argv(module, args)</code></td>
+<td>A command line as a C program&#39;s <code>argv</code></td>
+</tr>
+<tr>
+<td><code>ChangedFiles</code>, <code>keptPath(path, skip)</code></td>
+<td>Which written files differ from what the page already has, so a settings file written again unchanged is not saved again; and a written path&#39;s name among the kept files, without its first folders</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>einWrote(path)</code> hands the page the file the game wrote at <code>path</code>, when it changed, or a folder, a
+save slot, with all its files; <code>written</code> says where the path is in the file system and its name
+among the kept files.</p>
 <h3 id="saves">Saves<a class="anchor" href="#saves" aria-label="Link to this section"></a></h3>
 <p>What the game keeps of a player is in their home, <code>~/.rover/&lt;game id&gt;</code>, a folder for each game, so a
 save is only ever loaded into the game it was made in. The page makes the folder, reads the files
@@ -1892,6 +2174,10 @@ show them afterwards.</p>
 <td>The page imports a package the interface does not lend; see the table in <a href="#add-a-page-and-a-sidebar-entry">Add a page</a></td>
 </tr>
 <tr>
+<td><code>ui-build: recipes: …: &#39;…&#39; is not the module&#39;s own; a worker imports …</code></td>
+<td>A worker imports only its module&#39;s files and its dependencies&#39; exports; see <a href="#a-web-worker-for-a-page">A Web Worker</a></td>
+</tr>
+<tr>
 <td><code>recipe-list: command not found</code></td>
 <td><code>mod setup</code> has not run since <code>bin/</code> was made, or the file is not in <code>bin/</code>; run <code>mod setup recipes</code></td>
 </tr>
@@ -1930,7 +2216,7 @@ show them afterwards.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#talk-live-with-a-page">Talk live with a page</a></li><li class="nested"><a href="#a-conversation-a-socket">A conversation: a socket</a></li><li class="nested"><a href="#one-writer-many-readers-a-stream">One writer, many readers: a stream</a></li><li class="nested"><a href="#who-may-open-them-and-how-they-end">Who may open them, and how they end</a></li><li class="nested"><a href="#someone-with-no-account-here">Someone with no account here</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#offer-games">Offer games</a></li><li class="nested"><a href="#the-drop-in">The drop-in</a></li><li class="nested"><a href="#the-list-command">The list command</a></li><li class="nested"><a href="#the-page-and-the-card">The page and the card</a></li><li class="nested"><a href="#the-adapter">The adapter</a></li><li class="nested"><a href="#saves">Saves</a></li><li class="nested"><a href="#dropped-files">Dropped files</a></li><li class="nested"><a href="#playing-together">Playing together</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li class="nested"><a href="#a-web-worker-for-a-page">A Web Worker for a page</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#talk-live-with-a-page">Talk live with a page</a></li><li class="nested"><a href="#a-conversation-a-socket">A conversation: a socket</a></li><li class="nested"><a href="#one-writer-many-readers-a-stream">One writer, many readers: a stream</a></li><li class="nested"><a href="#who-may-open-them-and-how-they-end">Who may open them, and how they end</a></li><li class="nested"><a href="#someone-with-no-account-here">Someone with no account here</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#offer-games">Offer games</a></li><li class="nested"><a href="#the-drop-in">The drop-in</a></li><li class="nested"><a href="#the-list-command">The list command</a></li><li class="nested"><a href="#the-page-and-the-card">The page and the card</a></li><li class="nested"><a href="#the-adapter">The adapter</a></li><li class="nested"><a href="#the-engine-in-a-worker">The engine in a worker</a></li><li class="nested"><a href="#saves">Saves</a></li><li class="nested"><a href="#dropped-files">Dropped files</a></li><li class="nested"><a href="#playing-together">Playing together</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

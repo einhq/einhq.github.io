@@ -385,8 +385,8 @@ your permissions the same way.</p>
 <td>Written as on any WebDAV server, such as by a phone&#39;s backup app, and frozen as an upload is; a frozen file is not written over. See <a href="../guide/webdav.html">WebDAV</a>.</td>
 </tr>
 <tr>
-<td>A shell redirect, <code>cp</code>, <code>unzip</code></td>
-<td>Written by the command, in EiN&#39;s terminal or over SSH. <code>unzip</code> refuses an archive whose files would not leave a tenth of their size free, and follows no softlink below the folder it expands into.</td>
+<td>A shell redirect, <code>cp</code>, <code>unzip</code>, <code>tar</code></td>
+<td>Written by the command, in EiN&#39;s terminal or over SSH. <code>unzip</code> and <code>tar</code> refuse an archive whose files would not leave a tenth of their size free, and follow no softlink below the folder they expand into.</td>
 </tr>
 <tr>
 <td><strong>Download</strong> in the Web UI</td>
@@ -611,9 +611,9 @@ how to make room.</p>
 <td>It takes its first sample as it starts, so wait a minute. If it stays, see <a href="../admin/services-logs.html">Services and logs</a>.</td>
 </tr>
 <tr>
-<td><code>unzip</code> says <code>not enough space</code></td>
-<td>The files in the zip would not leave a tenth of their size free.</td>
-<td>Free space on the disk, or expand the zip on a machine with room and copy the files in.</td>
+<td><code>unzip</code> or <code>tar</code> says <code>not enough space</code></td>
+<td>The files in the archive would not leave a tenth of their size free.</td>
+<td>Free space on the disk, or expand the archive on a machine with room and copy the files in.</td>
 </tr>
 </tbody></table>
 </div>

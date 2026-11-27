@@ -2,9 +2,9 @@
 
 # Core commands
 
-The commands every EiN has, whatever modules it runs. 237 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
+The commands every EiN has, whatever modules it runs. 240 of them, by name. Every command also says this with `--help`; [Commands](commands.md) explains how to read an entry.
 
-[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [base64](#base64) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [curl](#curl) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-app](#device-app) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [invitation](#invitation) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-changelog](#mod-changelog) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [ui-notice](#ui-notice) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
+[abspath](#abspath) · [access-log](#access-log) · [access-log-purge](#access-log-purge) · [acl](#acl) · [admin](#admin) · [attrs](#attrs) · [audit](#audit) · [awk](#awk) · [base64](#base64) · [basename](#basename) · [cat](#cat) · [chmod](#chmod) · [chown](#chown) · [clear](#clear) · [comment](#comment) · [completion](#completion) · [completion-arg](#completion-arg) · [completion-commands](#completion-commands) · [completion-entity](#completion-entity) · [completion-group](#completion-group) · [completion-path](#completion-path) · [completion-subcommand](#completion-subcommand) · [completion-user](#completion-user) · [config](#config) · [config-get](#config-get) · [config-list](#config-list) · [config-publish](#config-publish) · [config-set](#config-set) · [config-unset](#config-unset) · [cp](#cp) · [curl](#curl) · [cut](#cut) · [date](#date) · [detach](#detach) · [device-app](#device-app) · [device-config](#device-config) · [device-create](#device-create) · [device-forget](#device-forget) · [device-history](#device-history) · [device-key](#device-key) · [device-label](#device-label) · [device-show](#device-show) · [devices](#devices) · [df](#df) · [dirname](#dirname) · [dmesg](#dmesg) · [docs](#docs) · [docs-commands](#docs-commands) · [docs-env](#docs-env) · [docs-find](#docs-find) · [docs-node-types](#docs-node-types) · [du](#du) · [edit](#edit) · [env](#env) · [events](#events) · [facets](#facets) · [file-stat](#file-stat) · [file-sync](#file-sync) · [find](#find) · [find-containing](#find-containing) · [find-nearby](#find-nearby) · [find-similar](#find-similar) · [fold](#fold) · [gauges](#gauges) · [grep](#grep) · [group](#group) · [group-add-member](#group-add-member) · [group-create](#group-create) · [group-delete](#group-delete) · [group-exists](#group-exists) · [group-home](#group-home) · [group-info](#group-info) · [group-is-member](#group-is-member) · [group-list](#group-list) · [group-members](#group-members) · [group-remove-member](#group-remove-member) · [group-resolve](#group-resolve) · [group-update](#group-update) · [gunzip](#gunzip) · [gzip](#gzip) · [head](#head) · [health](#health) · [host-metrics](#host-metrics) · [http-server](#http-server) · [info](#info) · [invitation](#invitation) · [jq](#jq) · [label](#label) · [labels](#labels) · [ln](#ln) · [log-append](#log-append) · [log-read](#log-read) · [login](#login) · [logout](#logout) · [ls](#ls) · [members](#members) · [metrics-sampler](#metrics-sampler) · [mime](#mime) · [mkbuf](#mkbuf) · [mkdir](#mkdir) · [mkfile](#mkfile) · [mklog](#mklog) · [mknode](#mknode) · [mkpool](#mkpool) · [mkqueue](#mkqueue) · [mkrouter](#mkrouter) · [mod](#mod) · [mod-cache](#mod-cache) · [mod-changelog](#mod-changelog) · [mod-groups](#mod-groups) · [mod-info](#mod-info) · [mod-install](#mod-install) · [mod-list](#mod-list) · [mod-outdated](#mod-outdated) · [mod-remove](#mod-remove) · [mod-search](#mod-search) · [mod-setup](#mod-setup) · [mod-status](#mod-status) · [mount](#mount) · [mv](#mv) · [news](#news) · [nohup](#nohup) · [onthisday](#onthisday) · [parse-search](#parse-search) · [pipeline](#pipeline) · [pipeline-cancel](#pipeline-cancel) · [pipeline-define](#pipeline-define) · [pipeline-engine](#pipeline-engine) · [pipeline-heal](#pipeline-heal) · [pipeline-instances](#pipeline-instances) · [pipeline-list](#pipeline-list) · [pipeline-overview](#pipeline-overview) · [pipeline-prune](#pipeline-prune) · [pipeline-remove](#pipeline-remove) · [pipeline-repair](#pipeline-repair) · [pipeline-rerun](#pipeline-rerun) · [pipeline-restart](#pipeline-restart) · [pipeline-start](#pipeline-start) · [pipeline-status](#pipeline-status) · [pipeline-step-restart](#pipeline-step-restart) · [pipeline-undefine](#pipeline-undefine) · [pipeline-worker](#pipeline-worker) · [pool](#pool) · [pool-add](#pool-add) · [pool-cancel](#pool-cancel) · [pool-claim](#pool-claim) · [pool-list](#pool-list) · [pool-purge](#pool-purge) · [pool-retry](#pool-retry) · [pool-stat](#pool-stat) · [pool-wake](#pool-wake) · [position-get](#position-get) · [position-set](#position-set) · [props](#props) · [ps](#ps) · [queue-dead](#queue-dead) · [queue-peek](#queue-peek) · [reach-check](#reach-check) · [relate](#relate) · [relations-guard](#relations-guard) · [renditions](#renditions) · [resolve-id](#resolve-id) · [rev](#rev) · [rm](#rm) · [rmdir](#rmdir) · [runas](#runas) · [scp](#scp) · [search](#search) · [sed](#sed) · [seq](#seq) · [service](#service) · [service-add](#service-add) · [service-disable](#service-disable) · [service-enable](#service-enable) · [service-list](#service-list) · [service-remove](#service-remove) · [service-restart](#service-restart) · [service-start](#service-start) · [service-start-all](#service-start-all) · [service-status](#service-status) · [service-stop](#service-stop) · [service-stop-all](#service-stop-all) · [session-reap](#session-reap) · [share](#share) · [share-info](#share-info) · [share-link](#share-link) · [share-set](#share-set) · [sleep](#sleep) · [sort](#sort) · [ssh](#ssh) · [ssh-copy-id](#ssh-copy-id) · [ssh-keygen](#ssh-keygen) · [ssh-server](#ssh-server) · [star](#star) · [stat](#stat) · [stats-overview](#stats-overview) · [stream-file](#stream-file) · [stream-page](#stream-page) · [supervisor](#supervisor) · [supervisor-install](#supervisor-install) · [supervisor-status](#supervisor-status) · [supervisor-update](#supervisor-update) · [system-info](#system-info) · [tail](#tail) · [tar](#tar) · [top](#top) · [tr](#tr) · [trash](#trash) · [truncate](#truncate) · [ui-build](#ui-build) · [ui-icons](#ui-icons) · [ui-nav](#ui-nav) · [ui-notice](#ui-notice) · [uniq](#uniq) · [unmount](#unmount) · [unrelate](#unrelate) · [unzip](#unzip) · [user](#user) · [user-create](#user-create) · [user-delete](#user-delete) · [user-disable](#user-disable) · [user-elevate](#user-elevate) · [user-enable](#user-enable) · [user-exists](#user-exists) · [user-groups](#user-groups) · [user-id](#user-id) · [user-info](#user-info) · [user-invite](#user-invite) · [user-invite-accept](#user-invite-accept) · [user-list](#user-list) · [user-passwd](#user-passwd) · [user-resolve](#user-resolve) · [user-set-primary-group](#user-set-primary-group) · [user-update](#user-update) · [user-whoami](#user-whoami) · [uuid](#uuid) · [wc](#wc) · [who](#who) · [www](#www) · [xargs](#xargs)
 
 ## A
 
@@ -1549,6 +1549,58 @@ group-update [--title=<string>] [--description=<string>] <groupname>
 | `--title=<string>` | set display title. |
 | `--description=<string>` | set description. |
 
+### `gunzip`
+
+Decompress each FILE.gz into FILE (FILE.tgz into FILE.tar), removing it unless -k; with no file, or -, stdin to stdout. Reads several gzip members one after another, and zeros after the last, as one stream.
+
+<small>changes things</small>
+
+```text
+gunzip [-c] [-k] [-f] [<file>...]
+```
+
+| Argument | What it is |
+| --- | --- |
+| `[<file>...]` | a .gz or .tgz file to decompress (default: stdin to stdout) |
+
+| Option | What it does |
+| --- | --- |
+| `-c` | write to stdout and leave the files as they are. |
+| `-k` | keep each file beside its copy. |
+| `-f` | write over a copy already there; with gzip, write compressed data to a terminal. |
+
+```bash
+gunzip /home/anna/downloads/maps.tar.gz
+gunzip -c /home/anna/logs/old.log.gz | grep error
+```
+
+### `gzip`
+
+Compress each file into FILE.gz, removing the file unless -k, or decompress it with -d; with no file, or -, stdin to stdout. Streams the bytes, so a file of any size takes little memory.
+
+<small>changes things</small>
+
+```text
+gzip [-d] [-c] [-k] [-f] [-1] [<file>...]
+```
+
+| Argument | What it is |
+| --- | --- |
+| `[<file>...]` | a file to compress or decompress (default: stdin to stdout) |
+
+| Option | What it does |
+| --- | --- |
+| `-d` | decompress, as gunzip does. |
+| `-c` | write to stdout and leave the files as they are. |
+| `-k` | keep each file beside its copy. |
+| `-f` | write over a copy already there; with gzip, write compressed data to a terminal. |
+| `-1` | compress fastest; -2 to -9 compress better, -9 best (default -6) |
+
+```bash
+gzip -k /home/anna/notes/journal.txt
+cat /home/anna/notes/journal.txt | gzip > /home/anna/notes/journal.txt.gz
+```
+
 ## H
 
 ### `head`
@@ -1568,7 +1620,7 @@ head [-n <string>] [-c <string>] <path>
 | Option | What it does |
 | --- | --- |
 | `-n <string>` | print the first NUM lines instead of the first 10 (-NUM works too) |
-| `-c <string>` | print the first NUM bytes. |
+| `-c <string>` | print the first NUM bytes, as they are, so a binary file can be cut. |
 
 ```bash
 head -n 20 /archive/albums/Exempelalbum_2019/files/notes.txt
@@ -3933,8 +3985,42 @@ tail [-n <string>] [-c <string>] [-f] [<path>]
 | Option | What it does |
 | --- | --- |
 | `-n <string>` | output the last NUM lines, or use +NUM for starting at line NUM (-NUM works too) |
-| `-c <string>` | output the last NUM bytes, or use +NUM for starting at byte NUM. |
+| `-c <string>` | output the last NUM bytes, or use +NUM for starting at byte NUM; the bytes as they are, so a binary file can be cut. |
 | `-f` | follow: keep the output live as the log/file grows. |
+
+### `tar`
+
+List (-t) or expand (-x) a tar archive, gzip-compressed or not, streaming each entry. Expanding refuses an archive with an entry that would land outside the directory, or whose files would not leave a tenth of their size free. A softlink below the directory is not followed. A file already there at its entry’s size is left as it is, so a run that stopped can be run again. Softlinks and hard links are made as links; devices and fifos are not expanded.
+
+<small>reads only</small>
+
+```text
+tar [-x] [-t] [-f <path>] [-z] [-C <path>] [--strip-components=<number>] [-O] [-v] [--overwrite] [<member>...]
+```
+
+| Argument | What it is |
+| --- | --- |
+| `[<member>...]` | an entry to list or expand, with everything under it (default: all of them) |
+
+| Option | What it does |
+| --- | --- |
+| `-x` | expand the archive. |
+| `-t` | list what the archive holds. |
+| `-f <path>` | the archive, - for stdin (default: stdin) |
+| `-z` | the archive is gzip-compressed (known by its first bytes without it too) |
+| `-C <path>` | the directory to expand into, made if missing (default: the current one) |
+| `--strip-components=<number>` | drop this many leading names from each entry’s path; an entry with no more is passed over. |
+| `-O` | with -x, write the files’ bytes to stdout instead of expanding them. |
+| `-v` | name each entry as it is expanded; with -t, list mode, size and time too. |
+| `--overwrite` | write over a file or link already there. |
+
+```bash
+tar -xzf /home/anna/downloads/game-1.2.tar.gz -C /home/anna/games
+tar -tvf /home/anna/downloads/backup.tar
+tail -c +5469 /home/anna/downloads/installer.gz.sh | tar -xz -C /home/anna/game --strip-components 1 data/levels
+```
+
+With `JSON_OUTPUT=1`: with -x in JSON mode, TarAnswer: the files, directories, links and bytes written, the ones left as they were, and each entry not expanded with why; with -t, a TarListEntry per entry. Exits non-zero when any entry was not expanded or a name given matched none.
 
 ### `top`
 

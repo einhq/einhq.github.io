@@ -61,6 +61,7 @@ A module that adds a few commands, one setting and one page needs little more th
 | `ui.routes`         | its pages, by route                                             | `ui-build`                  |
 | `ui.open`           | which route opens a node of a type                              | `ui-build`, browser         |
 | `ui.shareLinks`     | which nodes the Share dialog offers a link for                  | browser                     |
+| `ui.workers`        | Web Workers its pages start, by name                            | `ui-build`                  |
 
 EiN runs `mod setup --all` at every start, for every installed module in dependency order, so a field read by `mod setup` takes effect the next time EiN starts or the next time you run `mod setup <name>`. "Loading, type checks" means the field is read when the module's TypeScript is loaded, and by `deno task check` through the module's generated `deno.jsonc`. `ui-build` bundles the modules' pages; `mod setup` runs it after it has set modules up.
 
@@ -334,6 +335,19 @@ A route is a path below `/` made of literal and `:param` segments; `/` itself is
 `ui-build` bundles the pages inside the running EiN whenever modules are set up or removed, and the browser loads a module's bundle the first time one of its routes is opened. When two modules give the same route, the module whose name sorts later is left out: its pages are not served and `ui-build` reports `/cameras is archive's route already`. A route at the exact path of one of the Web UI's own pages is never reached, since the interface's own is matched first.
 
 How a route is shown, as a page, in a dialog, in the side drawer or full screen, is decided by the entry that opens it in the module's `ui/nav.json`, not by the route. [Writing a module](modules.md) covers navigation entries.
+
+### `ui.workers`
+
+Web Workers the module's pages start: each worker's name with its script, relative to the module's root.
+
+```json
+"ui": {
+  "routes": { "/solver": "ui/pages/solver.tsx" },
+  "workers": { "solver": "ui/solver/worker.ts" }
+}
+```
+
+A name is made of letters, digits, `-` and `_`, and the script is a `.ts` or `.js` file inside the module. The module needs `ui.routes` too, as its pages are what start its workers. `ui-build` bundles each worker into a script of its own, from what it imports of the module's files and of what the modules it depends on export; the Web UI lends a worker nothing, so it imports no React, Mantine or `@ein/ui/*`, and no CSS. A page starts one with `moduleWorker` from `@ein/ui/lib` ([A Web Worker for a page](modules.md#a-web-worker-for-a-page)). The field needs core's module contract 0.15.77 or later.
 
 ### `ui.open`
 
