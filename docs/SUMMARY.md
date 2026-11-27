@@ -139,6 +139,11 @@
 - [Västtrafik](vasttrafik/index.md)
 - [Västtrafik commands](vasttrafik/commands.md)
 
+## Games
+
+- [Games](games/index.md)
+- [Games commands](games/commands.md)
+
 ## Devices
 
 - [Devices](devices/index.md)

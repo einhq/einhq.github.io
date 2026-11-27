@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Commands – EiN documentation</title>
-    <meta name="description" content="Every command an EiN with all its modules has: 480 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta name="description" content="Every command an EiN with all its modules has: 487 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/reference/commands.html">
     <meta property="og:title" content="Commands – EiN documentation">
-    <meta property="og:description" content="Every command an EiN with all its modules has: 480 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
+    <meta property="og:description" content="Every command an EiN with all its modules has: 487 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -79,6 +79,7 @@
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
+<section><h2>Games</h2><ul><li><a href="../games/index.html">Games</a></li><li><a href="../games/commands.html">Games commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -94,7 +95,7 @@
           <h1>Commands</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>Every command an EiN with all its modules has: 480 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>Every command an EiN with all its modules has: 487 of them. Each module&#39;s page describes its commands in full; this page lists them by what they are for, in a line each.</p>
 <h2 id="reading-an-entry">Reading an entry<a class="anchor" href="#reading-an-entry" aria-label="Link to this section"></a></h2>
 <p>Each command is shown with how it is typed:</p>
 <div class="code"><pre tabindex="0"><code>share-link [--expires=&lt;string&gt;] [--never] [--session] &lt;subcommand&gt; &lt;target&gt;</code></pre></div>
@@ -1905,6 +1906,45 @@
 </tr>
 </tbody></table>
 </div>
+<h2 id="games">Games<a class="anchor" href="#games" aria-label="Link to this section"></a></h2>
+<p><a href="../games/commands.html">All 7 in full</a>.</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="../games/commands.html#games-host">games-host</a></td>
+<td>Host a game that others here join, or guests from another EiN with games-invite: its module&#39;s service runs it until you stop it with games-stop or nobody has played for five minutes.</td>
+</tr>
+<tr>
+<td><a href="../games/commands.html#games-invite">games-invite</a></td>
+<td>Invite someone on another EiN into a hosted game: an invitation that connects whoever has its link to the game&#39;s socket, played with their own EiN&#39;s copy of the game.</td>
+</tr>
+<tr>
+<td><a href="../games/commands.html#games-join">games-join</a></td>
+<td>The way into a hosted game: its socket node, which a player&#39;s page connects to and carries the game&#39;s datagrams both ways over, and the address the game connects to.</td>
+</tr>
+<tr>
+<td><a href="../games/commands.html#games-list">games-list</a></td>
+<td>List the game modules installed and their games: each module&#39;s drop-in in /etc/games.d, and the games its list command answers, run as the caller.</td>
+</tr>
+<tr>
+<td><a href="../games/commands.html#games-relay">games-relay</a></td>
+<td>Run the games hosted of every game module whose players play peer to peer, passing each player&#39;s datagrams to the others; no game runs on the server (the games-relay service)</td>
+</tr>
+<tr>
+<td><a href="../games/commands.html#games-servers">games-servers</a></td>
+<td>List the games people host, of every game module or of one, with who plays in each.</td>
+</tr>
+<tr>
+<td><a href="../games/commands.html#games-stop">games-stop</a></td>
+<td>Stop a hosted game, which drops everyone in it; the one who hosted it or an administrator may.</td>
+</tr>
+</tbody></table>
+</div>
 <h2 id="media">Media<a class="anchor" href="#media" aria-label="Link to this section"></a></h2>
 <p><a href="../media/commands.html">All 24 in full</a>.</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
@@ -2164,7 +2204,7 @@
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/reference/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#automation">Automation</a></li><li><a href="#dashboards">Dashboards</a></li><li><a href="#devices">Devices</a></li><li><a href="#media-service">Media service</a></li><li><a href="#media">Media</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#todo">Todo</a></li><li><a href="#västtrafik">Västtrafik</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#reading-an-entry">Reading an entry</a></li><li><a href="#core">Core</a></li><li><a href="#album-folders">Album folders</a></li><li><a href="#archive">Archive</a></li><li><a href="#assistant">Assistant</a></li><li><a href="#automation">Automation</a></li><li><a href="#dashboards">Dashboards</a></li><li><a href="#devices">Devices</a></li><li><a href="#media-service">Media service</a></li><li><a href="#games">Games</a></li><li><a href="#media">Media</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#todo">Todo</a></li><li><a href="#västtrafik">Västtrafik</a></li></ul></aside>
     </div>
   </body>
 </html>

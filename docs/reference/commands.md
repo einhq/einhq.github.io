@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 480 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 487 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -502,6 +502,20 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 | [ems-text-embed](../ems/commands.md#ems-text-embed) | Texts as vectors, by EMS's current text model, to compare by meaning. |
 | [page-stream](../ems/commands.md#page-stream) | Stream a page of EiN as live video for a screen (a Cast or DLNA TV), rendered by the media service. |
 | [stream-transcode](../ems/commands.md#stream-transcode) | Transcode a live stream (a camera) into another as H.264, by the media service, for a browser or a screen that cannot play it as it comes. |
+
+## Games
+
+[All 7 in full](../games/commands.md).
+
+| Command | What it does |
+| --- | --- |
+| [games-host](../games/commands.md#games-host) | Host a game that others here join, or guests from another EiN with games-invite: its module's service runs it until you stop it with games-stop or nobody has played for five minutes. |
+| [games-invite](../games/commands.md#games-invite) | Invite someone on another EiN into a hosted game: an invitation that connects whoever has its link to the game's socket, played with their own EiN's copy of the game. |
+| [games-join](../games/commands.md#games-join) | The way into a hosted game: its socket node, which a player's page connects to and carries the game's datagrams both ways over, and the address the game connects to. |
+| [games-list](../games/commands.md#games-list) | List the game modules installed and their games: each module's drop-in in /etc/games.d, and the games its list command answers, run as the caller. |
+| [games-relay](../games/commands.md#games-relay) | Run the games hosted of every game module whose players play peer to peer, passing each player's datagrams to the others; no game runs on the server (the games-relay service) |
+| [games-servers](../games/commands.md#games-servers) | List the games people host, of every game module or of one, with who plays in each. |
+| [games-stop](../games/commands.md#games-stop) | Stop a hosted game, which drops everyone in it; the one who hosted it or an administrator may. |
 
 ## Media
 

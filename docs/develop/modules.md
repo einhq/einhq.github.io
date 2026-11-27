@@ -807,6 +807,422 @@ changes on a clock. On a screen opened from a [display link](../dashboard/screen
 signed in (`isAuthenticated` is false): draw no controls there and link nowhere, since every write
 is refused. `dashboard-cards` lists what the modules offer and says what in a list could not be read.
 
+## Offer games
+
+With the [Games](../games/index.md) module installed, the **Games** page shows a card for each game
+the installed game modules have, and plays each on a page that is the same for every game. A game
+module brings only its engine, the commands that list and fetch its games, and the routes that hand
+the engine to Games. Games, its commands and its documentation never name a game module, and nothing
+of the game module's is in EiN: it depends on Games, as any module depends on another
+([Use another module](#use-another-module)):
+
+```json
+"dependencies": { "games": "^0.1.0" }
+```
+
+Its pages are drawn by Games' components, which takes `"coreApi": "^0.15.75"` or later.
+
+Games exports the contract a game module writes against: `@games/api`, the data (`GamesDropIn`,
+`GameEntry`, `DropRule`, `MultiplayerSpec`, `ServerInfo`); `@games/adapter`, the engine's interface
+(`GameAdapter`); `@games/page` and `@games/card`, the play page and the dashboard's card;
+`@games/net` and `@games/host`, playing together; and `@games/png`, for covers. The examples below
+are of `rover`, a module whose games are called Star Rover.
+
+### The drop-in
+
+A game module says what it is in `etc/games.d/games.json`, which `mod setup` links as
+`/etc/games.d/rover/games.json`. Games reads every module's drop-in there, without running the
+module:
+
+```json
+{
+  "title": "Star Rover",
+  "icon": "rocket",
+  "route": "/rover",
+  "list": "rover-list",
+  "fetch": "rover-fetch",
+  "folder": "/groups/users/rover",
+  "drops": [
+    { "place": "own-folder", "label": "a Star Rover game", "name": "\\.rvr$", "magic": [{ "at": 0, "text": "RVR1" }] },
+    { "place": "module", "label": "Star Rover's game data", "contains": "rover.dat" },
+    { "place": "game", "label": "a Star Rover map", "name": "\\.map$", "into": "maps", "families": ["rover2"] }
+  ],
+  "multiplayer": {
+    "modes": [{ "value": "deathmatch", "label": "Deathmatch" }, { "value": "coop", "label": "Cooperative" }],
+    "maxPlayers": 8,
+    "defaultPlayers": 4,
+    "defaultMaps": ["arena3", "level1"],
+    "transport": "server"
+  }
+}
+```
+
+| Field         | What it is                                                                                                                                                                 |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`       | The module's name for its games, as the Games page and its chooser of a dropped file say it                                                                                |
+| `icon`        | A [Tabler](https://tabler.io/icons) icon name, or a picture's path in EiN's tree; a card without a cover stands with it                                                    |
+| `route`       | Where its games are played: a game's page is `<route>/<id>`, which the module's `mod.json` routes. A path, without a query or a `/` at its end                             |
+| `list`        | The command that lists its games, run as the person looking ([The list command](#the-list-command))                                                                        |
+| `fetch`       | The command that fetches an offered game, given its id; only an administrator is offered it, since it downloads. Without it, offered games are shown and cannot be fetched |
+| `folder`      | Where its games are, an absolute path, such as a folder in the household's shared home; a dropped thing placed `module` or `own-folder` goes into it                       |
+| `drops`       | The rules it recognises dropped files by ([Dropped files](#dropped-files))                                                                                                 |
+| `multiplayer` | How its games are played together, when they are ([Playing together](#playing-together))                                                                                   |
+
+A drop-in with one wrong part is wrong as a whole: `games-list` leaves the module out and says why
+among its problems, which the Games page shows its administrator.
+
+### The list command
+
+`games-list` runs every module's `list` command as the caller, with `JSON_OUTPUT=1` in front, and
+reads its answer as a list of `GameEntry`, one for each game, installed or offered. The answer may
+hold more of a game, what the module's own page needs to start it; Games reads only these:
+
+| Field         | What it is                                                                                                                                                |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | Which game it is in the module, the last part of its page's route; unique in the module. Required                                                         |
+| `title`       | Its name on its card and its page. Required                                                                                                               |
+| `state`       | `installed`, here and playable, or `offered`, free to fetch with `fetch`. Required                                                                        |
+| `detail`      | A line under an installed game's title: what it is, how large                                                                                             |
+| `description` | What the game is, a sentence or two, shown under its title on its page; for the games the module knows                                                    |
+| `about`       | What an offered game is                                                                                                                                   |
+| `download`    | The bytes fetching an offered game downloads                                                                                                              |
+| `size`        | An installed game's bytes                                                                                                                                 |
+| `cover`       | Its picture, at the game's own shape: a path in EiN's tree, or a `data:` URL                                                                              |
+| `path`        | An installed game's folder or file. **Delete game** removes it, and a dropped file placed `game` goes into it; without it neither is offered              |
+| `family`      | What plays it, when the module has more than one engine (`rover`, `rover2`): drop rules name families, and an invitation is played with a game of its own |
+| `maps`        | An installed game's maps by name (`level1`, `arena3`): what it is hosted on, and started on                                                               |
+| `hostable`    | Whether it can be hosted for others to join: the module plays together, and the game has maps                                                             |
+| `sealed`      | A game that reads nothing but its own files, as a shareware episode does: dropped files are never put into it                                             |
+
+```json
+[
+  {
+    "id": "classic",
+    "title": "Star Rover",
+    "state": "installed",
+    "detail": "The first episode, 12 MB",
+    "size": 12582912,
+    "cover": "data:image/png;base64,iVBORw0…",
+    "path": "/groups/users/rover/classic",
+    "family": "rover",
+    "maps": ["level1", "level2", "arena3"],
+    "hostable": true
+  },
+  { "id": "return", "title": "Star Rover: The Return", "state": "offered", "about": "The free demo of the second game", "download": 48234496 }
+]
+```
+
+An entry without an `id`, a `title` or a `state`, or with an `id` listed before, is left out and
+named among the problems. A module that decodes a game's picture from the game's own files encodes
+it with `@games/png`, which uses nothing but web standards and so runs in a command:
+`pngDataUrl(width, height, rgba)` answers a `data:` URL from RGBA pixels a row after another, and
+`encodePng` the PNG file's bytes.
+
+### The page and the card
+
+A game's page is a route of the module's own, since a route cannot load another module's engine:
+
+```json
+"ui": {
+  "routes": {
+    "/rover/:game": "ui/pages/play.tsx",
+    "/cards/rover/demo": "ui/cards/demo.tsx"
+  }
+}
+```
+
+Each file is little more than Games' component, given the module's adapter:
+
+```tsx
+// ui/pages/play.tsx: a game's page
+import { GamePage } from '@games/page';
+import { adapter } from '../adapter.ts';
+
+export { gamePageHandle as handle } from '@games/page';
+export default function Play() {
+  return <GamePage adapter={adapter} />;
+}
+```
+
+```tsx
+// ui/cards/demo.tsx: the dashboard's card
+import { DemoCard } from '@games/card';
+import { adapter } from '../adapter.ts';
+
+export default function Demo() {
+  return <DemoCard adapter={adapter} />;
+}
+```
+
+`GamePage` is everything on a game's page: the header with the cover, the trail back to **Games**,
+**Play on a map**, sound, fullscreen, **Delete game**, **Fetch** for an offered game and playing
+together; the frame with **Play**, loading and errors, and the line under it; the keys, the mouse
+and the saves. `gamePageHandle` draws it edge to edge. `DemoCard` plays the game its `game` query
+parameter names, else the first installed, with `demo: true`: no sound, no keys, no mouse. The
+module offers it to dashboards as any card ([Offer cards to dashboards](#offer-cards-to-dashboards)),
+with the game as a parameter its list command fills:
+
+```json
+"params": {
+  "type": "object",
+  "properties": {
+    "game": { "type": "string", "title": "Game", "x-choices": { "command": "rover-list", "value": "id", "label": "title", "where": { "state": "installed" } } }
+  }
+}
+```
+
+### The adapter
+
+The module's engine is behind one interface, `GameAdapter` from `@games/adapter`, which the page and
+the card drive:
+
+```ts
+import type { GameAdapter } from '@games/adapter';
+import type { GameEntry } from '@games/api';
+import { execCommand } from '@ein/ui/signals';
+import { startRover } from './engine.ts';
+
+/** A game as rover-list answers it, with what the engine needs to start it. */
+export type RoverGame = GameEntry & { data: string[] };
+
+export const adapter: GameAdapter<RoverGame> = {
+  module: 'rover',
+  title: 'Star Rover',
+  list: () => execCommand<RoverGame[]>('rover-list'),
+  start: startRover,
+  help: 'The mouse steers and fires, W A S D move, Space jumps, Escape opens the menu.',
+  pointer: true,
+  kept: { pattern: /^(rover\.cfg|save\/s\d+\/[^/]+)$/, depth: 2 },
+  startsOnMap: true,
+};
+```
+
+| Member        | What it is for                                                                                                                                                                                                                                       |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `module`      | The module's name, as its drop-in's folder in `/etc/games.d` is named                                                                                                                                                                                |
+| `title`       | What the page says before it knows the game                                                                                                                                                                                                          |
+| `list()`      | The module's games, with all `start` needs: its list command's answer                                                                                                                                                                                |
+| `start()`     | Load the engine and the game's files, and start it; answers a `RunningGame`                                                                                                                                                                          |
+| `help`        | The line under the frame: how the game is played                                                                                                                                                                                                     |
+| `pointer`     | Whether the game is played with the mouse: a click on it then hands it the mouse (the browser's pointer lock), and fullscreen does too                                                                                                               |
+| `kept`        | The player's files the game keeps, by their paths in the player's saves folder: those `pattern` matches, found `depth` folders deep; those `shared` matches too are kept once for every game of the module. None for a game that keeps nothing       |
+| `startsOnMap` | Whether a game can start on one of its `maps`, which the page then offers as **Play on a map**                                                                                                                                                       |
+| `frame`       | The shape the game is always shown at, whatever size it draws at: 640 by 480 for an engine drawing 320 by 200 for a 4:3 screen. Without it the shape is each frame's own, starting at 640 by 480, so a wider video mode the player picks shows wider |
+
+`start` is given `StartOptions`:
+
+| Option   | What it is                                                                                                                                                                                                                     |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `game`   | The entry, as `list` answered it                                                                                                                                                                                               |
+| `sound`  | The game's sound on Web Audio, opened in the click on **Play**: `effects(render)` pulls the samples the engine mixes, `music(folder, tracks)` plays a track's file, and an engine's own nodes go to `output`. None on the card |
+| `log`    | Where the game's printed lines go, one at a time; the last few are shown when it fails                                                                                                                                         |
+| `kept`   | The player's kept files, each its path in the saves folder and its bytes, for the game to read as it starts                                                                                                                    |
+| `onKeep` | Call it with each file the game writes that is to be kept, a save or its settings; with `folder`, a save slot's folder whose files replace all it had. None without an account                                                 |
+| `name`   | The player's account's name, to play under when they have none of their own in the game                                                                                                                                        |
+| `map`    | The map to start on, with `startsOnMap`                                                                                                                                                                                        |
+| `online` | A hosted game to play in: `network`, the `Network` to it, and `address`, what the engine connects to ([Playing together](#playing-together))                                                                                   |
+| `demo`   | Play the game's own demos, as it does when nobody plays, for the card                                                                                                                                                          |
+
+The page runs the `RunningGame` it answers:
+
+| Member                              | What it is for                                                                                                                                                                                                               |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `step()`                            | Run the game on, once each animation frame, which stop while the page is hidden. Throws when the game ends: what `quitted()` recognises when the player chose Quit, anything else when it failed                             |
+| `frames()`                          | How many frames the game has drawn; a new number is a new frame to copy                                                                                                                                                      |
+| `width()`, `height()`               | The frame's size, which the game's video options may change                                                                                                                                                                  |
+| `draw(image)`                       | Copy the current frame into `image`, an `ImageData` of that size                                                                                                                                                             |
+| `key(pressed, code)`                | A key (`KeyboardEvent.code`) went down or up; answers whether the game takes it, which the page then keeps from EiN                                                                                                          |
+| `button(pressed, button)`           | A mouse button went down or up while the game has the mouse; answers whether it takes it                                                                                                                                     |
+| `mouse(dx, dy)`                     | The mouse moved while the game has it                                                                                                                                                                                        |
+| `wheel(up)`                         | The wheel turned while the game has the mouse                                                                                                                                                                                |
+| `keep()`                            | Write the player's settings now, as the game does on Quit: the page is closing, or stops the game                                                                                                                            |
+| `disconnect()`                      | Leave the hosted game, telling its server                                                                                                                                                                                    |
+| `menu()`                            | Whether a menu of the game's or its console is up, which the player works without the mouse. Optional: with it, the game has the mouse on the page only while none is up, and the browser's own **Escape** opens its menu    |
+| `fullscreen()`, `setFullscreen(on)` | Whether the game is to be shown fullscreen, as its own video menu sets it. Optional: the page follows it, and sets it for **F11**, its button, or the browser leaving fullscreen itself. Without them the page keeps its own |
+
+`quitted(error)` recognises an engine built with Emscripten exiting with status 0, which Quit in its
+menu does; the page then shows **Play** again. Every key and button a game took down is let go of
+for it when the frame loses the focus or the game the mouse. Fullscreen, **Escape** and **F11**
+are the game's (the keyboard lock of Chrome and Edge, over HTTPS), and a game played with the mouse keeps it
+until fullscreen is turned off or the game ends.
+
+### Saves
+
+What the game keeps of a player is in their home, `~/.rover/<game id>`, a folder for each game, so a
+save is only ever loaded into the game it was made in. The page makes the folder, reads the files
+`kept` matches into `StartOptions.kept` before the game starts, and writes each `onKeep` hands it
+in the order the game wrote them. A save slot written as a whole (`{ files, folder: 'save/s1' }`)
+empties the slot's folder first. Files `kept.shared` matches as well are kept once for every game of
+the module, in `~/.rover` itself: settings a player has whatever they play, as
+`kept: { pattern: /^(rover\.cfg|save\/s\d+\/[^/]+)$/, depth: 2, shared: /^rover\.cfg$/ }` keeps the
+key bindings in `~/.rover/rover.cfg`. Someone not signed in keeps nothing.
+
+### Dropped files
+
+Each rule in `drops` is tried on each thing dropped on the Games page, a file or a folder, in the
+browser, before anything is uploaded. Every condition a rule gives must hold, and it gives at least
+one of `name`, `contains` and `magic`:
+
+| Field      | What it is                                                                                                                                                                                                                                                                 |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `place`    | Where a match goes: `module`, into the module's `folder` as it was dropped, a folder by its name; `own-folder`, a file into a folder of its own in `folder`, named after the file without its extension (a game that is one file); `game`, into an installed game's `path` |
+| `label`    | What the match is, in the chooser and the notice: `a Star Rover map`. Required                                                                                                                                                                                             |
+| `name`     | A regular expression the file's or the folder's name matches, without regard to case                                                                                                                                                                                       |
+| `contains` | A dropped folder: the name of a file at its top, without regard to case                                                                                                                                                                                                    |
+| `magic`    | A dropped file: bytes it starts with, any one of a list of `{ "at": offset, "text": "RVR1" }` (printable ASCII) or `{ "at": offset, "hex": "52565231" }`                                                                                                                   |
+| `into`     | With `game`: the folder under the game's `path` it goes into, such as `maps`                                                                                                                                                                                               |
+| `families` | With `game`: the families of the games that take it; every installed game of the module's when not given                                                                                                                                                                   |
+
+A `game` rule is a place for each installed game it fits, and none when no game fits. When exactly
+one place holds for a thing, it is uploaded there; when several do, across rules, games and modules,
+or none, the person chooses: among those that hold, or, when none does, any module's folder and any
+installed game. Nothing starts by itself.
+
+### Playing together
+
+A game is hosted, joined and stopped by Games' commands, the same for every module:
+`games-host <module> <game> [map] --max N --mode M`, `games-servers`, `games-join <id>`,
+`games-invite <id>` and `games-stop <id>`. A hosted game is a folder,
+`/groups/users/games/servers/<module>/<id>`, with its `server.json` (`ServerInfo`: its game, map,
+mode, who hosted it, its state and players) and one socket node, `socket`, which each player's page
+connects to with `rw`, or with an invitation from another EiN
+([Talk live with a page](#talk-live-with-a-page)). The service that runs the module's games makes
+the module's folder, which is how `games-host` knows the service runs, and runs each game
+`games-host` asks for in it.
+
+The drop-in's `multiplayer` says how:
+
+| Field            | What it is                                                                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `modes`          | The ways a game is hosted, `{ "value", "label" }`: `value` is what the module's server takes, `label` what the page says. The first is the default |
+| `maxPlayers`     | The most players a game is hosted for, from 2                                                                                                      |
+| `defaultPlayers` | The players a host is offered first, from 2 to `maxPlayers`                                                                                        |
+| `defaultMaps`    | The maps offered first, in order, when a game has them; else its first                                                                             |
+| `transport`      | `server`, the players play against a server the module's own service runs; `relay`, they play peer to peer, through Games' `games-relay`           |
+
+Either way a link carries one datagram in each message. The engine's socket layer hands its
+datagrams to a `Network` from `@games/net` in place of UDP, and reads them from it:
+`open(port)` (0 for a free port), `close(port)`, `send(from, ip, to, data)`, `recv(port)`, which
+answers `{ ip, port, data }` or nothing, and `waiting(port)`. An address is one number, as
+`addressNumber('10.66.0.1')` and `addressText` turn it. A socket keeps 256 datagrams unread before
+it drops the oldest, and a datagram for nobody is dropped, as UDP drops it.
+
+#### Against a server
+
+Each message is a frame: the port the datagram is from and the port it is for, two bytes each,
+big-endian (`FRAME_HEADER`, 4 bytes), then its bytes, at most 65,535. `frame(from, to, data)` and
+`unframe(message)` make and read one. A player sees the server at `SERVER_ADDRESS`, `10.66.0.1`,
+which is `online.address`: the page's `Network` sends every datagram up the link, whatever address
+it is for, and gives every one that comes down as from that address.
+
+The module's own service runs its games with `GameServers` from `@games/host` and a `ServerEngine`
+of its own. The service is a command with `admin: true` and `daemon: true` in its `spec`, run by
+`services/rover-server/start.sh`:
+
+```ts
+#!ts
+/** rover-server — the rover-server service: runs every hosted Star Rover game until it is stopped. */
+import type { CmdReturn, Command } from '@ein/client';
+import { GameServers } from '@games/host';
+import { roverEngine } from '@rover/server';
+
+const roverServer = async (cmd: Command): CmdReturn => {
+  const stopped = new Promise<void>((resolve) => cmd.onInterrupt(resolve));
+  await new GameServers(cmd, ['rover'], roverEngine()).run(stopped);
+  return 0;
+};
+
+roverServer.spec = {
+  name: 'rover-server',
+  admin: true,
+  daemon: true,
+  effect: 'write' as const,
+  json: false,
+  description: 'Run the Star Rover games hosted here (the rover-server service)',
+  args: [],
+  flags: [],
+};
+
+export default roverServer;
+```
+
+Its `start.sh` is the one line `rover-server`, and its `config.json` says what it is and how to
+count what it runs, as Games' own `games-relay` does:
+
+```json
+{
+  "description": "Runs the Star Rover games hosted here",
+  "restartPolicy": "on-failure",
+  "statusCommand": "games-servers --module rover --count"
+}
+```
+
+`GameServers` does everything but the game: it makes the module's folder and empties it as it
+starts, starts each game whose `server.json` says `starting` and marks it `running` once it runs,
+stops one asked to stop (`games-stop` leaves a `stop` file in its folder) or whose folder has gone, stops one nobody has played for five
+minutes, and keeps a failed one listed for a minute with why. It makes each game's socket and
+listens on it. Whoever connects sits down at an address of the game's, `10.66.0.2`, `10.66.0.3` and
+on (`playerAddress(n)`), kept by their seat's name, the account's or `guest` for an invitation's,
+with `-2`, `-3` for another of the same, so a player who reloads the page is the same player to the
+game. It gives the engine every frame a player sends with their address, and sends every frame the
+engine gives for an address down that player's link.
+
+```ts
+type ServerEngine = { start(info: ServerInfo, io: ServerIo): Promise<HostedGame> };
+```
+
+- `start` resolves once the game runs, within two minutes, or rejects with why it did not start,
+  which `games-host` and the page say. Run the game in a worker, so a slow frame never holds up EiN.
+- `HostedGame` is `deliver(ip, frame)`, a frame a player sent, the engine's to keep; `seated(ip,
+  seat)`, called before anything a new player sends, which answers why they may not play when they
+  may not, and the service then closes their link; `left(ip)`, their link closed; and `stop()`.
+- `ServerIo` is what the game has of the service: `send(ip, frame)`, `log(line)`, `ended(error?)`
+  when the game ends by itself, and `status(map, players)`. Call `status` every few seconds with the
+  map and who plays, each by their address, with `name`, `frags` and `ping` as the game knows them:
+  it is written into `server.json` when it changed, and a game whose status has listed nobody for
+  five minutes is stopped.
+
+A server in a worker reads its players' datagrams while it runs without returning, when no message
+could reach it: the service writes each frame into a `Ring` (`@games/net`), memory the two share,
+and the worker's `Network` reads it in its `pump`, given as the second argument, before each read.
+
+#### Through the relay
+
+A module whose engine plays peer to peer needs no service: `games-relay`, Games' own, runs every
+relayed game with no game on the server, seats as many players as it was hosted for, and passes
+each datagram on. A relayed frame starts with an address, four bytes, big-endian, then is a frame as
+above (`RELAY_HEADER`, 8 bytes, then the datagram):
+
+- **Up a link**, from a player, the address is whom the datagram is for: another player's address,
+  or `BROADCAST_ADDRESS`, `255.255.255.255`, for every other player. The relay drops a datagram for
+  any other address, its sender's own included.
+- **Down a link**, to a player, the address is whom it is from. The ports and the bytes are passed
+  on as they came.
+
+The relay's own word is JSON, in a frame from `SERVER_ADDRESS`, port `CONTROL_PORT` (0), to port 0,
+where an engine's sockets never are (`RelayControl`):
+
+```json
+{ "type": "roster", "you": "10.66.0.3", "players": [{ "address": "10.66.0.2", "seat": "anna" }, { "address": "10.66.0.3", "seat": "olle" }] }
+```
+
+```json
+{ "type": "refused", "reason": "the game has room for 4 players, and that many play" }
+```
+
+Every player is sent the roster when they sit down, with their own address as `you`, and again
+whenever someone sits down or leaves. It lists every player, them too, by address, in the same
+order for everyone, so peers that number their players agree on the numbers. A player the game has
+no room for is sent `refused`, and their link is closed.
+
+The page gives a relayed game's engine a `RelayNetwork` as `online.network`, and the relay's
+`SERVER_ADDRESS` as `address`. Once the first roster has come, which the page waits for before it
+starts the game, `self` is the player's own address and `players` who plays, `seated` has settled,
+and `onRoster(listener)` hears each later roster. `send` sends each datagram to the address it is
+for, or `BROADCAST_ADDRESS`; one to the player's own address comes back without leaving, and `recv`
+gives each with the address it is from. `relayFrame`, `unrelayFrame` and `controlFrame` make and
+read the frames, for an engine or a test that speaks to the relay itself.
+
 ## Write documentation for it
 
 A module's documentation in EiN comes from what it already declares: each command's `spec` or
@@ -837,6 +1253,12 @@ installed modules depend on it.
 To share your own files, export them: `"exports": { "./api": "./lib/api.ts" }` is imported
 elsewhere as `@recipes/api`. By convention `./api` holds the types of what your commands answer as
 JSON, imports nothing but other such files, and is what your own pages import too.
+
+Your pages may import a dependency's exports too, components and code as well as types: the
+exported file and what it imports are bundled into your pages, so a page of yours can be drawn by
+another module's component, as a [game module's](#offer-games) is. When that module is updated,
+your pages are bundled again with it. This came with core's module contract 0.15.75: give a module
+that does it `"coreApi": "^0.15.75"`.
 
 ## Test it
 
@@ -932,6 +1354,7 @@ show them afterwards.
 - [The module manifest](manifest.md): every field of `mod.json`
 - [Writing a driver](drivers.md): bringing a kind of device to EiN
 - [Teaching the assistant](../assistant/teaching.md): making the assistant use your module's commands
+- [Games](../games/index.md): the page a game module's games are played on
 - [Building from source](source.md): a checkout of core to type-check and test modules in
 - [Modules](../admin/modules.md): installing, updating and removing modules as an administrator
 - [The shell language](../shell/bash.md): the language bash commands and services are written in

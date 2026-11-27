@@ -79,6 +79,7 @@
 <section><h2>Recipes</h2><ul><li><a href="../recipes/index.html">Recipes</a></li><li><a href="../recipes/commands.html">Recipes commands</a></li></ul></section>
 <section><h2>Dashboards</h2><ul><li><a href="../dashboard/index.html">Dashboards</a></li><li><a href="../dashboard/screens.html">Show a dashboard on a screen</a></li><li><a href="../dashboard/commands.html">Dashboards commands</a></li></ul></section>
 <section><h2>Västtrafik</h2><ul><li><a href="../vasttrafik/index.html">Västtrafik</a></li><li><a href="../vasttrafik/commands.html">Västtrafik commands</a></li></ul></section>
+<section><h2>Games</h2><ul><li><a href="../games/index.html">Games</a></li><li><a href="../games/commands.html">Games commands</a></li></ul></section>
 <section><h2>Devices</h2><ul><li><a href="../devices/index.html">Devices</a></li><li><a href="../devices/commands.html">Devices commands</a></li></ul></section>
 <section><h2>Automation</h2><ul><li><a href="../automation/index.html">Automation</a></li><li><a href="../automation/automations.html">Automations</a></li><li><a href="../automation/virtual-devices.html">Virtual devices</a></li><li><a href="../automation/commands.html">Automation commands</a></li></ul></section>
 <section><h2>Media</h2><ul><li><a href="../media/index.html">Media</a></li><li><a href="../media/commands.html">Media commands</a></li></ul></section>
@@ -1198,6 +1199,579 @@ itself current, with <code>useNodeEvents</code> for what changes by events or <c
 changes on a clock. On a screen opened from a <a href="../dashboard/screens.html">display link</a> nobody is
 signed in (<code>isAuthenticated</code> is false): draw no controls there and link nowhere, since every write
 is refused. <code>dashboard-cards</code> lists what the modules offer and says what in a list could not be read.</p>
+<h2 id="offer-games">Offer games<a class="anchor" href="#offer-games" aria-label="Link to this section"></a></h2>
+<p>With the <a href="../games/index.html">Games</a> module installed, the <strong>Games</strong> page shows a card for each game
+the installed game modules have, and plays each on a page that is the same for every game. A game
+module brings only its engine, the commands that list and fetch its games, and the routes that hand
+the engine to Games. Games, its commands and its documentation never name a game module, and nothing
+of the game module&#39;s is in EiN: it depends on Games, as any module depends on another
+(<a href="#use-another-module">Use another module</a>):</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;games&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.1.0&quot;</span> <span class="hljs-punctuation">}</span></code></pre></div>
+<p>Its pages are drawn by Games&#39; components, which takes <code>&quot;coreApi&quot;: &quot;^0.15.75&quot;</code> or later.</p>
+<p>Games exports the contract a game module writes against: <code>@games/api</code>, the data (<code>GamesDropIn</code>,
+<code>GameEntry</code>, <code>DropRule</code>, <code>MultiplayerSpec</code>, <code>ServerInfo</code>); <code>@games/adapter</code>, the engine&#39;s interface
+(<code>GameAdapter</code>); <code>@games/page</code> and <code>@games/card</code>, the play page and the dashboard&#39;s card;
+<code>@games/net</code> and <code>@games/host</code>, playing together; and <code>@games/png</code>, for covers. The examples below
+are of <code>rover</code>, a module whose games are called Star Rover.</p>
+<h3 id="the-drop-in">The drop-in<a class="anchor" href="#the-drop-in" aria-label="Link to this section"></a></h3>
+<p>A game module says what it is in <code>etc/games.d/games.json</code>, which <code>mod setup</code> links as
+<code>/etc/games.d/rover/games.json</code>. Games reads every module&#39;s drop-in there, without running the
+module:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Star Rover&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;icon&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rocket&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;route&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/rover&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;list&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rover-list&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fetch&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rover-fetch&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;folder&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/groups/users/rover&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;drops&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;own-folder&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;a Star Rover game&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\\.rvr$&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;magic&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;at&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;RVR1&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;module&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Star Rover&#x27;s game data&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;contains&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rover.dat&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;place&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;game&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;a Star Rover map&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\\.map$&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;into&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;maps&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;families&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;rover2&quot;</span><span class="hljs-punctuation">]</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;multiplayer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;modes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deathmatch&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Deathmatch&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;coop&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Cooperative&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;maxPlayers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;defaultPlayers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;defaultMaps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;arena3&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;level1&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;transport&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;server&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>The module&#39;s name for its games, as the Games page and its chooser of a dropped file say it</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>A <a href="https://tabler.io/icons">Tabler</a> icon name, or a picture&#39;s path in EiN&#39;s tree; a card without a cover stands with it</td>
+</tr>
+<tr>
+<td><code>route</code></td>
+<td>Where its games are played: a game&#39;s page is <code>&lt;route&gt;/&lt;id&gt;</code>, which the module&#39;s <code>mod.json</code> routes. A path, without a query or a <code>/</code> at its end</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>The command that lists its games, run as the person looking (<a href="#the-list-command">The list command</a>)</td>
+</tr>
+<tr>
+<td><code>fetch</code></td>
+<td>The command that fetches an offered game, given its id; only an administrator is offered it, since it downloads. Without it, offered games are shown and cannot be fetched</td>
+</tr>
+<tr>
+<td><code>folder</code></td>
+<td>Where its games are, an absolute path, such as a folder in the household&#39;s shared home; a dropped thing placed <code>module</code> or <code>own-folder</code> goes into it</td>
+</tr>
+<tr>
+<td><code>drops</code></td>
+<td>The rules it recognises dropped files by (<a href="#dropped-files">Dropped files</a>)</td>
+</tr>
+<tr>
+<td><code>multiplayer</code></td>
+<td>How its games are played together, when they are (<a href="#playing-together">Playing together</a>)</td>
+</tr>
+</tbody></table>
+</div>
+<p>A drop-in with one wrong part is wrong as a whole: <code>games-list</code> leaves the module out and says why
+among its problems, which the Games page shows its administrator.</p>
+<h3 id="the-list-command">The list command<a class="anchor" href="#the-list-command" aria-label="Link to this section"></a></h3>
+<p><code>games-list</code> runs every module&#39;s <code>list</code> command as the caller, with <code>JSON_OUTPUT=1</code> in front, and
+reads its answer as a list of <code>GameEntry</code>, one for each game, installed or offered. The answer may
+hold more of a game, what the module&#39;s own page needs to start it; Games reads only these:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>Which game it is in the module, the last part of its page&#39;s route; unique in the module. Required</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Its name on its card and its page. Required</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td><code>installed</code>, here and playable, or <code>offered</code>, free to fetch with <code>fetch</code>. Required</td>
+</tr>
+<tr>
+<td><code>detail</code></td>
+<td>A line under an installed game&#39;s title: what it is, how large</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>What the game is, a sentence or two, shown under its title on its page; for the games the module knows</td>
+</tr>
+<tr>
+<td><code>about</code></td>
+<td>What an offered game is</td>
+</tr>
+<tr>
+<td><code>download</code></td>
+<td>The bytes fetching an offered game downloads</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>An installed game&#39;s bytes</td>
+</tr>
+<tr>
+<td><code>cover</code></td>
+<td>Its picture, at the game&#39;s own shape: a path in EiN&#39;s tree, or a <code>data:</code> URL</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>An installed game&#39;s folder or file. <strong>Delete game</strong> removes it, and a dropped file placed <code>game</code> goes into it; without it neither is offered</td>
+</tr>
+<tr>
+<td><code>family</code></td>
+<td>What plays it, when the module has more than one engine (<code>rover</code>, <code>rover2</code>): drop rules name families, and an invitation is played with a game of its own</td>
+</tr>
+<tr>
+<td><code>maps</code></td>
+<td>An installed game&#39;s maps by name (<code>level1</code>, <code>arena3</code>): what it is hosted on, and started on</td>
+</tr>
+<tr>
+<td><code>hostable</code></td>
+<td>Whether it can be hosted for others to join: the module plays together, and the game has maps</td>
+</tr>
+<tr>
+<td><code>sealed</code></td>
+<td>A game that reads nothing but its own files, as a shareware episode does: dropped files are never put into it</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;classic&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Star Rover&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;installed&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;detail&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The first episode, 12 MB&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12582912</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cover&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;data:image/png;base64,iVBORw0…&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/groups/users/rover/classic&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;family&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rover&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;maps&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;level1&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;level2&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;arena3&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;hostable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;return&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Star Rover: The Return&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;offered&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;about&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;The free demo of the second game&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;download&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">48234496</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span></code></pre></div>
+<p>An entry without an <code>id</code>, a <code>title</code> or a <code>state</code>, or with an <code>id</code> listed before, is left out and
+named among the problems. A module that decodes a game&#39;s picture from the game&#39;s own files encodes
+it with <code>@games/png</code>, which uses nothing but web standards and so runs in a command:
+<code>pngDataUrl(width, height, rgba)</code> answers a <code>data:</code> URL from RGBA pixels a row after another, and
+<code>encodePng</code> the PNG file&#39;s bytes.</p>
+<h3 id="the-page-and-the-card">The page and the card<a class="anchor" href="#the-page-and-the-card" aria-label="Link to this section"></a></h3>
+<p>A game&#39;s page is a route of the module&#39;s own, since a route cannot load another module&#39;s engine:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;ui&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;routes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;/rover/:game&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/pages/play.tsx&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;/cards/rover/demo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ui/cards/demo.tsx&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p>Each file is little more than Games&#39; component, given the module&#39;s adapter:</p>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>// ui/pages/play.tsx: a game's page
+import { GamePage } from '@games/page';
+import { adapter } from '../adapter.ts';
+
+export { gamePageHandle as handle } from '@games/page';
+export default function Play() {
+  return &lt;GamePage adapter={adapter} /&gt;;
+}</code></pre></div>
+<div class="code" data-lang="tsx"><pre tabindex="0"><code>// ui/cards/demo.tsx: the dashboard's card
+import { DemoCard } from '@games/card';
+import { adapter } from '../adapter.ts';
+
+export default function Demo() {
+  return &lt;DemoCard adapter={adapter} /&gt;;
+}</code></pre></div>
+<p><code>GamePage</code> is everything on a game&#39;s page: the header with the cover, the trail back to <strong>Games</strong>,
+<strong>Play on a map</strong>, sound, fullscreen, <strong>Delete game</strong>, <strong>Fetch</strong> for an offered game and playing
+together; the frame with <strong>Play</strong>, loading and errors, and the line under it; the keys, the mouse
+and the saves. <code>gamePageHandle</code> draws it edge to edge. <code>DemoCard</code> plays the game its <code>game</code> query
+parameter names, else the first installed, with <code>demo: true</code>: no sound, no keys, no mouse. The
+module offers it to dashboards as any card (<a href="#offer-cards-to-dashboards">Offer cards to dashboards</a>),
+with the game as a parameter its list command fills:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-attr">&quot;params&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;game&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Game&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;x-choices&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rover-list&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;id&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;title&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;where&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;installed&quot;</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<h3 id="the-adapter">The adapter<a class="anchor" href="#the-adapter" aria-label="Link to this section"></a></h3>
+<p>The module&#39;s engine is behind one interface, <code>GameAdapter</code> from <code>@games/adapter</code>, which the page and
+the card drive:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">GameAdapter</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@games/adapter&#x27;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">GameEntry</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@games/api&#x27;</span>;
+<span class="hljs-keyword">import</span> { execCommand } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/ui/signals&#x27;</span>;
+<span class="hljs-keyword">import</span> { startRover } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./engine.ts&#x27;</span>;
+
+<span class="hljs-comment">/** A game as rover-list answers it, with what the engine needs to start it. */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">RoverGame</span> = <span class="hljs-title class_">GameEntry</span> &amp; { <span class="hljs-attr">data</span>: <span class="hljs-built_in">string</span>[] };
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-attr">adapter</span>: <span class="hljs-title class_">GameAdapter</span>&lt;<span class="hljs-title class_">RoverGame</span>&gt; = {
+  <span class="hljs-attr">module</span>: <span class="hljs-string">&#x27;rover&#x27;</span>,
+  <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Star Rover&#x27;</span>,
+  <span class="hljs-attr">list</span>: <span class="hljs-function">() =&gt;</span> execCommand&lt;<span class="hljs-title class_">RoverGame</span>[]&gt;(<span class="hljs-string">&#x27;rover-list&#x27;</span>),
+  <span class="hljs-attr">start</span>: startRover,
+  <span class="hljs-attr">help</span>: <span class="hljs-string">&#x27;The mouse steers and fires, W A S D move, Space jumps, Escape opens the menu.&#x27;</span>,
+  <span class="hljs-attr">pointer</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">kept</span>: { <span class="hljs-attr">pattern</span>: <span class="hljs-regexp">/^(rover\.cfg|save\/s\d+\/[^/]+)$/</span>, <span class="hljs-attr">depth</span>: <span class="hljs-number">2</span> },
+  <span class="hljs-attr">startsOnMap</span>: <span class="hljs-literal">true</span>,
+};</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>module</code></td>
+<td>The module&#39;s name, as its drop-in&#39;s folder in <code>/etc/games.d</code> is named</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>What the page says before it knows the game</td>
+</tr>
+<tr>
+<td><code>list()</code></td>
+<td>The module&#39;s games, with all <code>start</code> needs: its list command&#39;s answer</td>
+</tr>
+<tr>
+<td><code>start()</code></td>
+<td>Load the engine and the game&#39;s files, and start it; answers a <code>RunningGame</code></td>
+</tr>
+<tr>
+<td><code>help</code></td>
+<td>The line under the frame: how the game is played</td>
+</tr>
+<tr>
+<td><code>pointer</code></td>
+<td>Whether the game is played with the mouse: a click on it then hands it the mouse (the browser&#39;s pointer lock), and fullscreen does too</td>
+</tr>
+<tr>
+<td><code>kept</code></td>
+<td>The player&#39;s files the game keeps, by their paths in the player&#39;s saves folder: those <code>pattern</code> matches, found <code>depth</code> folders deep; those <code>shared</code> matches too are kept once for every game of the module. None for a game that keeps nothing</td>
+</tr>
+<tr>
+<td><code>startsOnMap</code></td>
+<td>Whether a game can start on one of its <code>maps</code>, which the page then offers as <strong>Play on a map</strong></td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td>The shape the game is always shown at, whatever size it draws at: 640 by 480 for an engine drawing 320 by 200 for a 4:3 screen. Without it the shape is each frame&#39;s own, starting at 640 by 480, so a wider video mode the player picks shows wider</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>start</code> is given <code>StartOptions</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>game</code></td>
+<td>The entry, as <code>list</code> answered it</td>
+</tr>
+<tr>
+<td><code>sound</code></td>
+<td>The game&#39;s sound on Web Audio, opened in the click on <strong>Play</strong>: <code>effects(render)</code> pulls the samples the engine mixes, <code>music(folder, tracks)</code> plays a track&#39;s file, and an engine&#39;s own nodes go to <code>output</code>. None on the card</td>
+</tr>
+<tr>
+<td><code>log</code></td>
+<td>Where the game&#39;s printed lines go, one at a time; the last few are shown when it fails</td>
+</tr>
+<tr>
+<td><code>kept</code></td>
+<td>The player&#39;s kept files, each its path in the saves folder and its bytes, for the game to read as it starts</td>
+</tr>
+<tr>
+<td><code>onKeep</code></td>
+<td>Call it with each file the game writes that is to be kept, a save or its settings; with <code>folder</code>, a save slot&#39;s folder whose files replace all it had. None without an account</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>The player&#39;s account&#39;s name, to play under when they have none of their own in the game</td>
+</tr>
+<tr>
+<td><code>map</code></td>
+<td>The map to start on, with <code>startsOnMap</code></td>
+</tr>
+<tr>
+<td><code>online</code></td>
+<td>A hosted game to play in: <code>network</code>, the <code>Network</code> to it, and <code>address</code>, what the engine connects to (<a href="#playing-together">Playing together</a>)</td>
+</tr>
+<tr>
+<td><code>demo</code></td>
+<td>Play the game&#39;s own demos, as it does when nobody plays, for the card</td>
+</tr>
+</tbody></table>
+</div>
+<p>The page runs the <code>RunningGame</code> it answers:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>step()</code></td>
+<td>Run the game on, once each animation frame, which stop while the page is hidden. Throws when the game ends: what <code>quitted()</code> recognises when the player chose Quit, anything else when it failed</td>
+</tr>
+<tr>
+<td><code>frames()</code></td>
+<td>How many frames the game has drawn; a new number is a new frame to copy</td>
+</tr>
+<tr>
+<td><code>width()</code>, <code>height()</code></td>
+<td>The frame&#39;s size, which the game&#39;s video options may change</td>
+</tr>
+<tr>
+<td><code>draw(image)</code></td>
+<td>Copy the current frame into <code>image</code>, an <code>ImageData</code> of that size</td>
+</tr>
+<tr>
+<td><code>key(pressed, code)</code></td>
+<td>A key (<code>KeyboardEvent.code</code>) went down or up; answers whether the game takes it, which the page then keeps from EiN</td>
+</tr>
+<tr>
+<td><code>button(pressed, button)</code></td>
+<td>A mouse button went down or up while the game has the mouse; answers whether it takes it</td>
+</tr>
+<tr>
+<td><code>mouse(dx, dy)</code></td>
+<td>The mouse moved while the game has it</td>
+</tr>
+<tr>
+<td><code>wheel(up)</code></td>
+<td>The wheel turned while the game has the mouse</td>
+</tr>
+<tr>
+<td><code>keep()</code></td>
+<td>Write the player&#39;s settings now, as the game does on Quit: the page is closing, or stops the game</td>
+</tr>
+<tr>
+<td><code>disconnect()</code></td>
+<td>Leave the hosted game, telling its server</td>
+</tr>
+<tr>
+<td><code>menu()</code></td>
+<td>Whether a menu of the game&#39;s or its console is up, which the player works without the mouse. Optional: with it, the game has the mouse on the page only while none is up, and the browser&#39;s own <strong>Escape</strong> opens its menu</td>
+</tr>
+<tr>
+<td><code>fullscreen()</code>, <code>setFullscreen(on)</code></td>
+<td>Whether the game is to be shown fullscreen, as its own video menu sets it. Optional: the page follows it, and sets it for <strong>F11</strong>, its button, or the browser leaving fullscreen itself. Without them the page keeps its own</td>
+</tr>
+</tbody></table>
+</div>
+<p><code>quitted(error)</code> recognises an engine built with Emscripten exiting with status 0, which Quit in its
+menu does; the page then shows <strong>Play</strong> again. Every key and button a game took down is let go of
+for it when the frame loses the focus or the game the mouse. Fullscreen, <strong>Escape</strong> and <strong>F11</strong>
+are the game&#39;s (the keyboard lock of Chrome and Edge, over HTTPS), and a game played with the mouse keeps it
+until fullscreen is turned off or the game ends.</p>
+<h3 id="saves">Saves<a class="anchor" href="#saves" aria-label="Link to this section"></a></h3>
+<p>What the game keeps of a player is in their home, <code>~/.rover/&lt;game id&gt;</code>, a folder for each game, so a
+save is only ever loaded into the game it was made in. The page makes the folder, reads the files
+<code>kept</code> matches into <code>StartOptions.kept</code> before the game starts, and writes each <code>onKeep</code> hands it
+in the order the game wrote them. A save slot written as a whole (<code>{ files, folder: &#39;save/s1&#39; }</code>)
+empties the slot&#39;s folder first. Files <code>kept.shared</code> matches as well are kept once for every game of
+the module, in <code>~/.rover</code> itself: settings a player has whatever they play, as
+<code>kept: { pattern: /^(rover\.cfg|save\/s\d+\/[^/]+)$/, depth: 2, shared: /^rover\.cfg$/ }</code> keeps the
+key bindings in <code>~/.rover/rover.cfg</code>. Someone not signed in keeps nothing.</p>
+<h3 id="dropped-files">Dropped files<a class="anchor" href="#dropped-files" aria-label="Link to this section"></a></h3>
+<p>Each rule in <code>drops</code> is tried on each thing dropped on the Games page, a file or a folder, in the
+browser, before anything is uploaded. Every condition a rule gives must hold, and it gives at least
+one of <code>name</code>, <code>contains</code> and <code>magic</code>:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>place</code></td>
+<td>Where a match goes: <code>module</code>, into the module&#39;s <code>folder</code> as it was dropped, a folder by its name; <code>own-folder</code>, a file into a folder of its own in <code>folder</code>, named after the file without its extension (a game that is one file); <code>game</code>, into an installed game&#39;s <code>path</code></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>What the match is, in the chooser and the notice: <code>a Star Rover map</code>. Required</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>A regular expression the file&#39;s or the folder&#39;s name matches, without regard to case</td>
+</tr>
+<tr>
+<td><code>contains</code></td>
+<td>A dropped folder: the name of a file at its top, without regard to case</td>
+</tr>
+<tr>
+<td><code>magic</code></td>
+<td>A dropped file: bytes it starts with, any one of a list of <code>{ &quot;at&quot;: offset, &quot;text&quot;: &quot;RVR1&quot; }</code> (printable ASCII) or <code>{ &quot;at&quot;: offset, &quot;hex&quot;: &quot;52565231&quot; }</code></td>
+</tr>
+<tr>
+<td><code>into</code></td>
+<td>With <code>game</code>: the folder under the game&#39;s <code>path</code> it goes into, such as <code>maps</code></td>
+</tr>
+<tr>
+<td><code>families</code></td>
+<td>With <code>game</code>: the families of the games that take it; every installed game of the module&#39;s when not given</td>
+</tr>
+</tbody></table>
+</div>
+<p>A <code>game</code> rule is a place for each installed game it fits, and none when no game fits. When exactly
+one place holds for a thing, it is uploaded there; when several do, across rules, games and modules,
+or none, the person chooses: among those that hold, or, when none does, any module&#39;s folder and any
+installed game. Nothing starts by itself.</p>
+<h3 id="playing-together">Playing together<a class="anchor" href="#playing-together" aria-label="Link to this section"></a></h3>
+<p>A game is hosted, joined and stopped by Games&#39; commands, the same for every module:
+<code>games-host &lt;module&gt; &lt;game&gt; [map] --max N --mode M</code>, <code>games-servers</code>, <code>games-join &lt;id&gt;</code>,
+<code>games-invite &lt;id&gt;</code> and <code>games-stop &lt;id&gt;</code>. A hosted game is a folder,
+<code>/groups/users/games/servers/&lt;module&gt;/&lt;id&gt;</code>, with its <code>server.json</code> (<code>ServerInfo</code>: its game, map,
+mode, who hosted it, its state and players) and one socket node, <code>socket</code>, which each player&#39;s page
+connects to with <code>rw</code>, or with an invitation from another EiN
+(<a href="#talk-live-with-a-page">Talk live with a page</a>). The service that runs the module&#39;s games makes
+the module&#39;s folder, which is how <code>games-host</code> knows the service runs, and runs each game
+<code>games-host</code> asks for in it.</p>
+<p>The drop-in&#39;s <code>multiplayer</code> says how:</p>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>modes</code></td>
+<td>The ways a game is hosted, <code>{ &quot;value&quot;, &quot;label&quot; }</code>: <code>value</code> is what the module&#39;s server takes, <code>label</code> what the page says. The first is the default</td>
+</tr>
+<tr>
+<td><code>maxPlayers</code></td>
+<td>The most players a game is hosted for, from 2</td>
+</tr>
+<tr>
+<td><code>defaultPlayers</code></td>
+<td>The players a host is offered first, from 2 to <code>maxPlayers</code></td>
+</tr>
+<tr>
+<td><code>defaultMaps</code></td>
+<td>The maps offered first, in order, when a game has them; else its first</td>
+</tr>
+<tr>
+<td><code>transport</code></td>
+<td><code>server</code>, the players play against a server the module&#39;s own service runs; <code>relay</code>, they play peer to peer, through Games&#39; <code>games-relay</code></td>
+</tr>
+</tbody></table>
+</div>
+<p>Either way a link carries one datagram in each message. The engine&#39;s socket layer hands its
+datagrams to a <code>Network</code> from <code>@games/net</code> in place of UDP, and reads them from it:
+<code>open(port)</code> (0 for a free port), <code>close(port)</code>, <code>send(from, ip, to, data)</code>, <code>recv(port)</code>, which
+answers <code>{ ip, port, data }</code> or nothing, and <code>waiting(port)</code>. An address is one number, as
+<code>addressNumber(&#39;10.66.0.1&#39;)</code> and <code>addressText</code> turn it. A socket keeps 256 datagrams unread before
+it drops the oldest, and a datagram for nobody is dropped, as UDP drops it.</p>
+<h4 id="against-a-server">Against a server<a class="anchor" href="#against-a-server" aria-label="Link to this section"></a></h4>
+<p>Each message is a frame: the port the datagram is from and the port it is for, two bytes each,
+big-endian (<code>FRAME_HEADER</code>, 4 bytes), then its bytes, at most 65,535. <code>frame(from, to, data)</code> and
+<code>unframe(message)</code> make and read one. A player sees the server at <code>SERVER_ADDRESS</code>, <code>10.66.0.1</code>,
+which is <code>online.address</code>: the page&#39;s <code>Network</code> sends every datagram up the link, whatever address
+it is for, and gives every one that comes down as from that address.</p>
+<p>The module&#39;s own service runs its games with <code>GameServers</code> from <code>@games/host</code> and a <code>ServerEngine</code>
+of its own. The service is a command with <code>admin: true</code> and <code>daemon: true</code> in its <code>spec</code>, run by
+<code>services/rover-server/start.sh</code>:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code>#!ts
+<span class="hljs-comment">/** rover-server — the rover-server service: runs every hosted Star Rover game until it is stopped. */</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">CmdReturn</span>, <span class="hljs-title class_">Command</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@ein/client&#x27;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">GameServers</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@games/host&#x27;</span>;
+<span class="hljs-keyword">import</span> { roverEngine } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@rover/server&#x27;</span>;
+
+<span class="hljs-keyword">const</span> roverServer = <span class="hljs-title function_">async</span> (<span class="hljs-attr">cmd</span>: <span class="hljs-title class_">Command</span>): <span class="hljs-function"><span class="hljs-params">CmdReturn</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> stopped = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt;(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> cmd.<span class="hljs-title function_">onInterrupt</span>(resolve));
+  <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GameServers</span>(cmd, [<span class="hljs-string">&#x27;rover&#x27;</span>], <span class="hljs-title function_">roverEngine</span>()).<span class="hljs-title function_">run</span>(stopped);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+};
+
+roverServer.<span class="hljs-property">spec</span> = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rover-server&#x27;</span>,
+  <span class="hljs-attr">admin</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">daemon</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">effect</span>: <span class="hljs-string">&#x27;write&#x27;</span> <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>,
+  <span class="hljs-attr">json</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Run the Star Rover games hosted here (the rover-server service)&#x27;</span>,
+  <span class="hljs-attr">args</span>: [],
+  <span class="hljs-attr">flags</span>: [],
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> roverServer;</code></pre></div>
+<p>Its <code>start.sh</code> is the one line <code>rover-server</code>, and its <code>config.json</code> says what it is and how to
+count what it runs, as Games&#39; own <code>games-relay</code> does:</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Runs the Star Rover games hosted here&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;restartPolicy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;on-failure&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;statusCommand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;games-servers --module rover --count&quot;</span>
+<span class="hljs-punctuation">}</span></code></pre></div>
+<p><code>GameServers</code> does everything but the game: it makes the module&#39;s folder and empties it as it
+starts, starts each game whose <code>server.json</code> says <code>starting</code> and marks it <code>running</code> once it runs,
+stops one asked to stop (<code>games-stop</code> leaves a <code>stop</code> file in its folder) or whose folder has gone, stops one nobody has played for five
+minutes, and keeps a failed one listed for a minute with why. It makes each game&#39;s socket and
+listens on it. Whoever connects sits down at an address of the game&#39;s, <code>10.66.0.2</code>, <code>10.66.0.3</code> and
+on (<code>playerAddress(n)</code>), kept by their seat&#39;s name, the account&#39;s or <code>guest</code> for an invitation&#39;s,
+with <code>-2</code>, <code>-3</code> for another of the same, so a player who reloads the page is the same player to the
+game. It gives the engine every frame a player sends with their address, and sends every frame the
+engine gives for an address down that player&#39;s link.</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-keyword">type</span> <span class="hljs-title class_">ServerEngine</span> = { <span class="hljs-title function_">start</span>(<span class="hljs-attr">info</span>: <span class="hljs-title class_">ServerInfo</span>, <span class="hljs-attr">io</span>: <span class="hljs-title class_">ServerIo</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">HostedGame</span>&gt; };</code></pre></div>
+<ul>
+<li><code>start</code> resolves once the game runs, within two minutes, or rejects with why it did not start,
+which <code>games-host</code> and the page say. Run the game in a worker, so a slow frame never holds up EiN.</li>
+<li><code>HostedGame</code> is <code>deliver(ip, frame)</code>, a frame a player sent, the engine&#39;s to keep; <code>seated(ip, seat)</code>, called before anything a new player sends, which answers why they may not play when they
+may not, and the service then closes their link; <code>left(ip)</code>, their link closed; and <code>stop()</code>.</li>
+<li><code>ServerIo</code> is what the game has of the service: <code>send(ip, frame)</code>, <code>log(line)</code>, <code>ended(error?)</code>
+when the game ends by itself, and <code>status(map, players)</code>. Call <code>status</code> every few seconds with the
+map and who plays, each by their address, with <code>name</code>, <code>frags</code> and <code>ping</code> as the game knows them:
+it is written into <code>server.json</code> when it changed, and a game whose status has listed nobody for
+five minutes is stopped.</li>
+</ul>
+<p>A server in a worker reads its players&#39; datagrams while it runs without returning, when no message
+could reach it: the service writes each frame into a <code>Ring</code> (<code>@games/net</code>), memory the two share,
+and the worker&#39;s <code>Network</code> reads it in its <code>pump</code>, given as the second argument, before each read.</p>
+<h4 id="through-the-relay">Through the relay<a class="anchor" href="#through-the-relay" aria-label="Link to this section"></a></h4>
+<p>A module whose engine plays peer to peer needs no service: <code>games-relay</code>, Games&#39; own, runs every
+relayed game with no game on the server, seats as many players as it was hosted for, and passes
+each datagram on. A relayed frame starts with an address, four bytes, big-endian, then is a frame as
+above (<code>RELAY_HEADER</code>, 8 bytes, then the datagram):</p>
+<ul>
+<li><strong>Up a link</strong>, from a player, the address is whom the datagram is for: another player&#39;s address,
+or <code>BROADCAST_ADDRESS</code>, <code>255.255.255.255</code>, for every other player. The relay drops a datagram for
+any other address, its sender&#39;s own included.</li>
+<li><strong>Down a link</strong>, to a player, the address is whom it is from. The ports and the bytes are passed
+on as they came.</li>
+</ul>
+<p>The relay&#39;s own word is JSON, in a frame from <code>SERVER_ADDRESS</code>, port <code>CONTROL_PORT</code> (0), to port 0,
+where an engine&#39;s sockets never are (<code>RelayControl</code>):</p>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;roster&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;you&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.66.0.3&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;players&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.66.0.2&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;seat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;anna&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.66.0.3&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;seat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;olle&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">]</span> <span class="hljs-punctuation">}</span></code></pre></div>
+<div class="code" data-lang="json"><pre tabindex="0"><code><span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;refused&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;reason&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;the game has room for 4 players, and that many play&quot;</span> <span class="hljs-punctuation">}</span></code></pre></div>
+<p>Every player is sent the roster when they sit down, with their own address as <code>you</code>, and again
+whenever someone sits down or leaves. It lists every player, them too, by address, in the same
+order for everyone, so peers that number their players agree on the numbers. A player the game has
+no room for is sent <code>refused</code>, and their link is closed.</p>
+<p>The page gives a relayed game&#39;s engine a <code>RelayNetwork</code> as <code>online.network</code>, and the relay&#39;s
+<code>SERVER_ADDRESS</code> as <code>address</code>. Once the first roster has come, which the page waits for before it
+starts the game, <code>self</code> is the player&#39;s own address and <code>players</code> who plays, <code>seated</code> has settled,
+and <code>onRoster(listener)</code> hears each later roster. <code>send</code> sends each datagram to the address it is
+for, or <code>BROADCAST_ADDRESS</code>; one to the player&#39;s own address comes back without leaving, and <code>recv</code>
+gives each with the address it is from. <code>relayFrame</code>, <code>unrelayFrame</code> and <code>controlFrame</code> make and
+read the frames, for an engine or a test that speaks to the relay itself.</p>
 <h2 id="write-documentation-for-it">Write documentation for it<a class="anchor" href="#write-documentation-for-it" aria-label="Link to this section"></a></h2>
 <p>A module&#39;s documentation in EiN comes from what it already declares: each command&#39;s <code>spec</code> or
 <code>arg</code> lines, each setting&#39;s <code>label</code> and <code>description</code>, and in <code>mod.json</code> its <code>nodeTypes</code> and the
@@ -1219,6 +1793,11 @@ installed modules depend on it.</p>
 <p>To share your own files, export them: <code>&quot;exports&quot;: { &quot;./api&quot;: &quot;./lib/api.ts&quot; }</code> is imported
 elsewhere as <code>@recipes/api</code>. By convention <code>./api</code> holds the types of what your commands answer as
 JSON, imports nothing but other such files, and is what your own pages import too.</p>
+<p>Your pages may import a dependency&#39;s exports too, components and code as well as types: the
+exported file and what it imports are bundled into your pages, so a page of yours can be drawn by
+another module&#39;s component, as a <a href="#offer-games">game module&#39;s</a> is. When that module is updated,
+your pages are bundled again with it. This came with core&#39;s module contract 0.15.75: give a module
+that does it <code>&quot;coreApi&quot;: &quot;^0.15.75&quot;</code>.</p>
 <h2 id="test-it">Test it<a class="anchor" href="#test-it" aria-label="Link to this section"></a></h2>
 <p>A module&#39;s tests run inside a checkout of core, with the module in its <code>modules/</code> folder; see
 <a href="source.html">Building from source</a>. There, <code>deno task sync:modules</code> writes the module&#39;s
@@ -1336,6 +1915,7 @@ show them afterwards.</p>
 <li><a href="manifest.html">The module manifest</a>: every field of <code>mod.json</code></li>
 <li><a href="drivers.html">Writing a driver</a>: bringing a kind of device to EiN</li>
 <li><a href="../assistant/teaching.html">Teaching the assistant</a>: making the assistant use your module&#39;s commands</li>
+<li><a href="../games/index.html">Games</a>: the page a game module&#39;s games are played on</li>
 <li><a href="source.html">Building from source</a>: a checkout of core to type-check and test modules in</li>
 <li><a href="../admin/modules.html">Modules</a>: installing, updating and removing modules as an administrator</li>
 <li><a href="../shell/bash.html">The shell language</a>: the language bash commands and services are written in</li>
@@ -1350,7 +1930,7 @@ show them afterwards.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/develop/modules.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#talk-live-with-a-page">Talk live with a page</a></li><li class="nested"><a href="#a-conversation-a-socket">A conversation: a socket</a></li><li class="nested"><a href="#one-writer-many-readers-a-stream">One writer, many readers: a stream</a></li><li class="nested"><a href="#who-may-open-them-and-how-they-end">Who may open them, and how they end</a></li><li class="nested"><a href="#someone-with-no-account-here">Someone with no account here</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#what-a-module-is">What a module is</a></li><li><a href="#before-you-start">Before you start</a></li><li><a href="#lay-out-the-module">Lay out the module</a></li><li><a href="#write-the-manifest">Write the manifest</a></li><li><a href="#add-a-command-in-bash">Add a command in bash</a></li><li><a href="#add-a-command-in-typescript">Add a command in TypeScript</a></li><li><a href="#try-the-module-on-your-ein">Try the module on your EiN</a></li><li><a href="#change-it-and-see-the-change">Change it and see the change</a></li><li><a href="#add-a-page-and-a-sidebar-entry">Add a page and a sidebar entry</a></li><li class="nested"><a href="#where-an-entry-opens-a-route">Where an entry opens a route</a></li><li><a href="#add-a-setting">Add a setting</a></li><li class="nested"><a href="#give-a-settings-view">Give a settings view</a></li><li><a href="#run-something-in-the-background">Run something in the background</a></li><li><a href="#talk-live-with-a-page">Talk live with a page</a></li><li class="nested"><a href="#a-conversation-a-socket">A conversation: a socket</a></li><li class="nested"><a href="#one-writer-many-readers-a-stream">One writer, many readers: a stream</a></li><li class="nested"><a href="#who-may-open-them-and-how-they-end">Who may open them, and how they end</a></li><li class="nested"><a href="#someone-with-no-account-here">Someone with no account here</a></li><li><a href="#react-to-changes-with-pipelines">React to changes with pipelines</a></li><li><a href="#plug-into-search-the-home-page-and-other-places">Plug into search, the home page and other places</a></li><li><a href="#offer-cards-to-dashboards">Offer cards to dashboards</a></li><li><a href="#offer-games">Offer games</a></li><li class="nested"><a href="#the-drop-in">The drop-in</a></li><li class="nested"><a href="#the-list-command">The list command</a></li><li class="nested"><a href="#the-page-and-the-card">The page and the card</a></li><li class="nested"><a href="#the-adapter">The adapter</a></li><li class="nested"><a href="#saves">Saves</a></li><li class="nested"><a href="#dropped-files">Dropped files</a></li><li class="nested"><a href="#playing-together">Playing together</a></li><li><a href="#write-documentation-for-it">Write documentation for it</a></li><li><a href="#use-another-module">Use another module</a></li><li><a href="#test-it">Test it</a></li><li><a href="#publish-it">Publish it</a></li><li><a href="#remove-it">Remove it</a></li><li><a href="#if-something-goes-differently">If something goes differently</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -79,6 +79,7 @@ const MODULES: Record<string, string> = {
   dashboard: 'Dashboards',
   devices: 'Devices',
   ems: 'Media service',
+  games: 'Games',
   media: 'Media',
   recipes: 'Recipes',
   todo: 'Todo',
