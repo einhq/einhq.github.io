@@ -2,11 +2,32 @@
 
 # Games commands
 
-The commands the games module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
+The commands the games module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with `--help`; [Commands](../reference/commands.md) explains how to read an entry.
 
-[games-host](#games-host) · [games-invite](#games-invite) · [games-join](#games-join) · [games-list](#games-list) · [games-relay](#games-relay) · [games-servers](#games-servers) · [games-stop](#games-stop)
+[games-folders](#games-folders) · [games-host](#games-host) · [games-invite](#games-invite) · [games-join](#games-join) · [games-list](#games-list) · [games-relay](#games-relay) · [games-servers](#games-servers) · [games-stop](#games-stop)
 
 ## G
+
+### `games-folders`
+
+Keep each game module's folder out of the media work, so the pictures in it are not taken for the family's photos: give it an empty processing attribute. The games-folders pipeline does it for a game module's folder as it is made.
+
+<small>administrators only · changes things</small>
+
+```text
+games-folders <folder>
+```
+
+| Argument   | What it is                                               |
+| ---------- | -------------------------------------------------------- |
+| `<folder>` | one game module's folder; every module's when not given. |
+
+```bash
+games-folders
+games-folders /groups/users/rover
+```
+
+With `JSON_OUTPUT=1`: One entry per game module: its name, its folder and what was done: kept (given the attribute now), already (it had it) or missing (the folder is not there yet).
 
 ### `games-host`
 
@@ -95,7 +116,7 @@ games-list
 games-list
 ```
 
-With `JSON_OUTPUT=1`: The game modules (title, icon, the route a game is played at, its list and fetch commands, its folder, the rules it takes dropped files by, how it plays together), every game each lists (id, module, title, installed or offered, size or download, cover, path, family, maps), installed games first, and what could not be read: a drop-in that is wrong, a list command that failed.
+With `JSON_OUTPUT=1`: The game modules (title, icon, the route a game is played at, its list and fetch commands, its folder, the rules it takes dropped files by, how it plays together, how to add its games in Markdown), every game each lists (id, module, title, installed or offered, size or download, cover, path, family, maps), installed games first, and what could not be read: a drop-in that is wrong, a list command that failed.
 
 ### `games-relay`
 

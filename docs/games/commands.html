@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Games commands – EiN documentation</title>
-    <meta name="description" content="The commands the games module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta name="description" content="The commands the games module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta name="theme-color" content="#12151c">
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://einhq.eu/docs/games/commands.html">
     <meta property="og:title" content="Games commands – EiN documentation">
-    <meta property="og:description" content="The commands the games module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
+    <meta property="og:description" content="The commands the games module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with --help; Commands explains how to read an entry.">
     <meta property="og:image" content="https://einhq.eu/assets/og.jpg">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="EiN">
@@ -95,9 +95,29 @@
           <h1>Games commands</h1>
         </header>
         <article class="prose">
-<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>The commands the games module adds. They are there once the module is installed. 7 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
-<p><a href="#games-host">games-host</a> · <a href="#games-invite">games-invite</a> · <a href="#games-join">games-join</a> · <a href="#games-list">games-list</a> · <a href="#games-relay">games-relay</a> · <a href="#games-servers">games-servers</a> · <a href="#games-stop">games-stop</a></p>
+<!-- Written by tools/reference.ts from `docs commands` on a running EiN: make reference, never by hand. --><p>The commands the games module adds. They are there once the module is installed. 8 of them, by name. Every command also says this with <code>--help</code>; <a href="../reference/commands.html">Commands</a> explains how to read an entry.</p>
+<p><a href="#games-folders">games-folders</a> · <a href="#games-host">games-host</a> · <a href="#games-invite">games-invite</a> · <a href="#games-join">games-join</a> · <a href="#games-list">games-list</a> · <a href="#games-relay">games-relay</a> · <a href="#games-servers">games-servers</a> · <a href="#games-stop">games-stop</a></p>
 <h2 id="g">G<a class="anchor" href="#g" aria-label="Link to this section"></a></h2>
+<h3 id="games-folders"><code>games-folders</code><a class="anchor" href="#games-folders" aria-label="Link to this section"></a></h3>
+<p>Keep each game module&#39;s folder out of the media work, so the pictures in it are not taken for the family&#39;s photos: give it an empty processing attribute. The games-folders pipeline does it for a game module&#39;s folder as it is made.</p>
+<p><small>administrators only · changes things</small></p>
+<div class="code"><pre tabindex="0"><code>games-folders &lt;folder&gt;</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;folder&gt;</code></td>
+<td>one game module&#39;s folder; every module&#39;s when not given.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="code" data-lang="bash"><pre tabindex="0"><code>games-folders
+games-folders /groups/users/rover</code></pre></div>
+<p>With <code>JSON_OUTPUT=1</code>: One entry per game module: its name, its folder and what was done: kept (given the attribute now), already (it had it) or missing (the folder is not there yet).</p>
 <h3 id="games-host"><code>games-host</code><a class="anchor" href="#games-host" aria-label="Link to this section"></a></h3>
 <p>Host a game that others here join, or guests from another EiN with games-invite: its module&#39;s service runs it until you stop it with games-stop or nobody has played for five minutes.</p>
 <p><small>changes things</small></p>
@@ -200,7 +220,7 @@ games-invite k3x9 --hours 2</code></pre></div>
 <p><small>reads only</small></p>
 <div class="code"><pre tabindex="0"><code>games-list</code></pre></div>
 <div class="code" data-lang="bash"><pre tabindex="0"><code>games-list</code></pre></div>
-<p>With <code>JSON_OUTPUT=1</code>: The game modules (title, icon, the route a game is played at, its list and fetch commands, its folder, the rules it takes dropped files by, how it plays together), every game each lists (id, module, title, installed or offered, size or download, cover, path, family, maps), installed games first, and what could not be read: a drop-in that is wrong, a list command that failed.</p>
+<p>With <code>JSON_OUTPUT=1</code>: The game modules (title, icon, the route a game is played at, its list and fetch commands, its folder, the rules it takes dropped files by, how it plays together, how to add its games in Markdown), every game each lists (id, module, title, installed or offered, size or download, cover, path, family, maps), installed games first, and what could not be read: a drop-in that is wrong, a list command that failed.</p>
 <h3 id="games-relay"><code>games-relay</code><a class="anchor" href="#games-relay" aria-label="Link to this section"></a></h3>
 <p>Run the games hosted of every game module whose players play peer to peer, passing each player&#39;s datagrams to the others; no game runs on the server (the games-relay service)</p>
 <p><small>administrators only · changes things</small></p>
@@ -260,7 +280,7 @@ games-servers --module arcade --count</code></pre></div>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/games/commands.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#g">G</a></li><li class="nested"><a href="#games-host">games-host</a></li><li class="nested"><a href="#games-invite">games-invite</a></li><li class="nested"><a href="#games-join">games-join</a></li><li class="nested"><a href="#games-list">games-list</a></li><li class="nested"><a href="#games-relay">games-relay</a></li><li class="nested"><a href="#games-servers">games-servers</a></li><li class="nested"><a href="#games-stop">games-stop</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#g">G</a></li><li class="nested"><a href="#games-folders">games-folders</a></li><li class="nested"><a href="#games-host">games-host</a></li><li class="nested"><a href="#games-invite">games-invite</a></li><li class="nested"><a href="#games-join">games-join</a></li><li class="nested"><a href="#games-list">games-list</a></li><li class="nested"><a href="#games-relay">games-relay</a></li><li class="nested"><a href="#games-servers">games-servers</a></li><li class="nested"><a href="#games-stop">games-stop</a></li></ul></aside>
     </div>
   </body>
 </html>

@@ -1315,7 +1315,7 @@ module:</p>
 </tr>
 <tr>
 <td><code>folder</code></td>
-<td>Where its games are, an absolute path, such as a folder in the household&#39;s shared home; a dropped thing placed <code>module</code> or <code>own-folder</code> goes into it</td>
+<td>Where its games are, an absolute path, such as a folder in the household&#39;s shared home; a dropped thing placed <code>module</code> or <code>own-folder</code> goes into it. Games keeps it out of the media work as it is made in <code>/groups/users</code> (<code>games-folders</code>)</td>
 </tr>
 <tr>
 <td><code>drops</code></td>
@@ -1329,6 +1329,25 @@ module:</p>
 </div>
 <p>A drop-in with one wrong part is wrong as a whole: <code>games-list</code> leaves the module out and says why
 among its problems, which the Games page shows its administrator.</p>
+<p>Beside it, <code>etc/games.d/help.md</code> shows how to put the module&#39;s games together before they are
+dropped, by example more than in words: a game&#39;s folder as it is dropped, with its data files, its
+music and its maps, and a line on anything that is not played. It is Markdown without a title of
+its own, its headings from <code>####</code> on: the Games page&#39;s <strong>How to add games</strong> shows it in a card under
+the drop-in&#39;s <code>icon</code>, <code>title</code> and <code>folder</code>, and <code>games-list</code> answers it as the module&#39;s <code>help</code>. A
+module without one shows its folder alone. A fence marked <code>text</code> keeps a folder&#39;s tree as it is
+written:</p>
+<div class="code" data-lang="markdown"><pre tabindex="0"><code>Drop the game's folder.
+
+#### Star Rover
+
+```text
+rover/
+├── rover.dat
+├── maps/
+│   └── mymap.map         optional
+└── music/                optional
+    └── track02.ogg
+```</code></pre></div>
 <h3 id="the-list-command">The list command<a class="anchor" href="#the-list-command" aria-label="Link to this section"></a></h3>
 <p><code>games-list</code> runs every module&#39;s <code>list</code> command as the caller, with <code>JSON_OUTPUT=1</code> in front, and
 reads its answer as a list of <code>GameEntry</code>, one for each game, installed or offered. The answer may
@@ -1377,6 +1396,10 @@ hold more of a game, what the module&#39;s own page needs to start it; Games rea
 <td>Its picture, at the game&#39;s own shape: a path in EiN&#39;s tree, or a <code>data:</code> URL</td>
 </tr>
 <tr>
+<td><code>coverPath</code></td>
+<td>An installed game: where a picture of it taken on its page goes, a PNG in EiN&#39;s tree that the module reads <code>cover</code> from from then on; without it the page does not offer <strong>Use this frame as cover</strong></td>
+</tr>
+<tr>
 <td><code>path</code></td>
 <td>An installed game&#39;s folder or file. <strong>Delete game</strong> removes it, and a dropped file placed <code>game</code> goes into it; without it neither is offered</td>
 </tr>
@@ -1387,6 +1410,10 @@ hold more of a game, what the module&#39;s own page needs to start it; Games rea
 <tr>
 <td><code>maps</code></td>
 <td>An installed game&#39;s maps by name (<code>level1</code>, <code>arena3</code>): what it is hosted on, and started on</td>
+</tr>
+<tr>
+<td><code>mapTitles</code></td>
+<td>The titles the game itself shows for its <code>maps</code>, by name (<code>e1m1</code>: <code>The Slipgate Complex</code>), which <strong>Play on a map</strong> lists and filters by</td>
 </tr>
 <tr>
 <td><code>hostable</code></td>
@@ -1501,7 +1528,11 @@ the card drive:</p>
 </tr>
 <tr>
 <td><code>help</code></td>
-<td>The line under the frame: how the game is played</td>
+<td>The line under the game&#39;s description: how the game is played. Left out while the header shows the keys&#39; panel</td>
+</tr>
+<tr>
+<td><code>keys</code></td>
+<td>The game&#39;s controller drawn with the player&#39;s keys on it (<code>GameKeys</code>), which the page shows where a keyboard plays: below. None for a game whose keys <code>help</code> says</td>
 </tr>
 <tr>
 <td><code>pointer</code></td>
@@ -1521,6 +1552,40 @@ the card drive:</p>
 </tr>
 </tbody></table>
 </div>
+<p>A game played on a controller, such as a console&#39;s pad, can have the page draw it, with the
+player&#39;s key on each button, and let the player change them. <code>keys</code> is a <code>GameKeys</code>:</p>
+<div class="code" data-lang="ts"><pre tabindex="0"><code><span class="hljs-attr">keys</span>: {
+  <span class="hljs-title class_">Pad</span>: <span class="hljs-title class_">RoverPad</span>,
+  <span class="hljs-attr">has</span>: <span class="hljs-function">(<span class="hljs-params">game</span>) =&gt;</span> game.<span class="hljs-property">pad</span> !== <span class="hljs-literal">undefined</span>,
+  <span class="hljs-attr">shortcuts</span>: [{ <span class="hljs-attr">key</span>: <span class="hljs-string">&#x27;F2&#x27;</span>, <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;device-floppy&#x27;</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">&#x27;Save state&#x27;</span> }],
+},</code></pre></div>
+<div class="table-scroll" role="region" tabindex="0"><table>
+<thead>
+<tr>
+<th>Member</th>
+<th>What it is for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Pad</code></td>
+<td>A component, <code>{ game, editable }</code>: the game&#39;s controller with the player&#39;s keys on it. In the header <code>editable</code> is false, to look at; in the <strong>Keys</strong> dialog it is true, where a click on a button and then a key gives the button that key</td>
+</tr>
+<tr>
+<td><code>has(game)</code></td>
+<td>Whether the game has a controller to draw; every game when left out</td>
+</tr>
+<tr>
+<td><code>shortcuts</code></td>
+<td>The module&#39;s keys of its own beside the controller&#39;s, a row each: the key, a <a href="https://tabler.io/icons">Tabler icon</a>&#39;s name and what it does</td>
+</tr>
+</tbody></table>
+</div>
+<p>On a computer with a mouse, a header at least 1100 pixels wide shows the controller at its top right, above its buttons,
+on a dark panel, then the <code>shortcuts</code> and the page&#39;s own <kbd>F11</kbd> <strong>Fullscreen</strong>, whose row
+is the fullscreen button; the header&#39;s fullscreen button and the help line&#39;s sentence on
+<kbd>F11</kbd> are left out then. <strong>Keys</strong> under <strong>⋮</strong> opens the dialog wherever the module draws a
+controller and a keyboard plays. Which keys the player has, and where they are kept, is the
+module&#39;s: a file in the player&#39;s module folder, <code>~/.rover/keys.json</code>, has them on every computer.</p>
 <p><code>start</code> is given <code>StartOptions</code>:</p>
 <div class="table-scroll" role="region" tabindex="0"><table>
 <thead>
@@ -1720,7 +1785,8 @@ fetches a file of EiN&#39;s whole, for <code>files</code>.</p>
 sockets, and never a second before the first is answered; it paints the frame the answer carries,
 and <code>menu()</code> and <code>fullscreen()</code> say what the answer said. The sound the engine mixes is played from
 a queue of at most 0.2 s, which starts once a little more than the page plays at a time is waiting.
-<code>keep()</code>, <code>disconnect()</code> and <code>setFullscreen()</code> are posted, and <code>stop()</code> ends the worker once it has
+<code>keep()</code>, <code>disconnect()</code> and, for an engine with a fullscreen of its own, <code>setFullscreen()</code> are
+posted; for one without <code>setFullscreen</code>, the page keeps fullscreen itself. <code>stop()</code> ends the worker once it has
 done what it was asked before. A game that fails to start throws, with the error the worker gave,
 and Quit ends it as <code>quitted</code> recognises.</p>
 <p>The worker hands its engine to <code>serveEngine</code> from <code>@games/engine</code>, which answers the page:</p>

@@ -127,9 +127,10 @@ Once it is downloaded, it moves up among the installed games.</p>
 <p>To the administrator, the page also lists at its foot what the game modules could not answer, such
 as a game module whose list of games failed.</p>
 <h2 id="play-a-game">Play a game<a class="anchor" href="#play-a-game" aria-label="Link to this section"></a></h2>
-<p>Choose a game&#39;s card. Its page has the game&#39;s picture and title in the header, with <strong>Games ›</strong>
-above the title to go back. Under the title are what the game is, for a game its module knows, and
-how it is played: its keys, what a click does now, and that <kbd>F11</kbd> toggles fullscreen. Below
+<p>Choose a game&#39;s card. Its page has the game&#39;s picture and title in the header, at its foot, with
+<strong>Games ›</strong> above the title to go back, and its buttons at the bottom right. Under the title are what
+the game is, for a game its module knows, and how it is played: its keys, what a click does now, and
+that <kbd>F11</kbd> toggles fullscreen. Below
 is the game&#39;s frame, its cover whole and dimmed behind the play button, at the game&#39;s shape,
 until the game runs and again after it ends. Choose the play button to start it.</p>
 <ul>
@@ -143,6 +144,18 @@ up and the game&#39;s again when you close it, and the <kbd>Escape</kbd> that gi
 opens the menu too. If the browser does not hand the mouse back as the menu closes (Chrome does
 not after you took the mouse back with <kbd>Escape</kbd>), click the game. The line under the title says
 which is the case.</li>
+<li><strong>The keys, drawn</strong>: a game module may draw its game&#39;s controller, such as a console&#39;s pad. On a
+computer with a mouse, a wide enough header then shows it on a dark panel at its top right, above the
+buttons, with your
+key on each of its buttons, and beside it a row for each of the game&#39;s other keys, ending with
+<kbd>F11</kbd> <strong>Fullscreen</strong>, which you can click as the fullscreen button. The line under the title then
+leaves the keys to the panel. <strong>Keys</strong> under <strong>⋮</strong> in the header shows the controller in a dialog,
+also where the header is too narrow for the panel: click a button on it, then press the key you
+want for it, or <kbd>Escape</kbd> to keep the one it has. A button that had that key takes the old
+one, and <strong>Reset</strong> goes back to the game module&#39;s own keys. Your keys are kept by the game module,
+for you alone, on every computer.
+A game whose keys are bound in its own menus has them shown only, and the dialog says where in the
+game they are changed.</li>
 <li><strong>Fullscreen</strong>: <kbd>F11</kbd>, or the button in the header, shows the running game on the whole
 screen, and again leaves it; a game may offer it in its own video menu as well. A game always
 starts in the page, since a browser goes fullscreen only when you press a key or click. In
@@ -160,8 +173,9 @@ Leaving the page stops the game. When a game stops by itself with an error, the 
 the last lines the game wrote, which often say why, and <strong>Play again</strong>.</p>
 <h3 id="start-on-a-map">Start on a map<a class="anchor" href="#start-on-a-map" aria-label="Link to this section"></a></h3>
 <p>Some games can start on any of their maps, rather than at their own beginning. Their page has a
-<strong>Play on a map</strong> box in the header: type part of the map&#39;s name, such as <code>arena</code>, and choose
-<code>arena3</code> to start the game there.</p>
+<strong>Play on a map</strong> button (a map) in the header. It opens a list of the game&#39;s maps, with their titles
+where the game has them, and a filter at its top: type part of a map&#39;s name or title, such as
+<code>arena</code>, and choose <code>arena3</code> to start the game there.</p>
 <h3 id="saved-games-and-settings">Saved games and settings<a class="anchor" href="#saved-games-and-settings" aria-label="Link to this section"></a></h3>
 <p>When you are signed in, what the game writes for you, its saved games and its settings, is kept in
 your home, in a folder of each game&#39;s: <code>~/.rover/classic</code> for the game <code>classic</code> of a game module
@@ -170,13 +184,26 @@ own menus list your saved games. Nobody else sees them, and each game has its ow
 ever loaded into the game it was made in. A game module may keep your settings once for all its
 games, in <code>~/.rover</code> itself, so your key bindings are the same whichever of its games you play.
 Without an account nothing is kept beyond the page.</p>
+<h3 id="use-a-frame-as-the-games-picture">Use a frame as the game&#39;s picture<a class="anchor" href="#use-a-frame-as-the-games-picture" aria-label="Link to this section"></a></h3>
+<p>While a game runs, <strong>Use this frame as cover</strong> under <strong>⋮</strong> in the header takes what is on the screen
+at that moment as the game&#39;s picture: its title screen, say, or a moment you like. The game goes on
+running. The picture is the frame as the game draws it, at its own size, and it is the game&#39;s for
+everyone here, on its card and behind the play button, until someone takes another. It is offered for
+the games whose module says where a game&#39;s picture goes; writing it needs the right to write there,
+as the games themselves do.</p>
 <h3 id="delete-a-game">Delete a game<a class="anchor" href="#delete-a-game" aria-label="Link to this section"></a></h3>
 <p><strong>Delete game</strong> under <strong>⋮</strong> in the header removes the game&#39;s files from EiN, for everyone who plays
 here, after asking. What players keep of it, their saves, stays in their homes. Deleting it needs
 the right to remove its files, which an administrator has.</p>
 <h2 id="add-games-and-maps-by-dropping-them">Add games and maps by dropping them<a class="anchor" href="#add-games-and-maps-by-dropping-them" aria-label="Link to this section"></a></h2>
 <p>Drop a game&#39;s files or folder anywhere on the Games page to add it, and drop a map to add it to a
-game you have. While you drag files over the page it says &quot;Drop games and maps to add them&quot;.</p>
+game you have. While you drag files over the page it says &quot;Drop games and maps to add them&quot;.
+<strong>Upload files</strong> and <strong>Upload folder</strong> in the header pick them instead; what you pick goes where a
+drop of it would.</p>
+<p>How each game module wants its games put together, which files a game is, how its folder is laid
+out, where its music goes and in which format, is under <strong>?</strong> in the header (<strong>How to add games</strong>,
+also on the page while it has no games): a card for each installed game module, with the folder its
+games go into and examples of the folders it takes.</p>
 <p>Each game module says which files are its own: by their names, such as a name ending in <code>.rvr</code>; for
 a folder, by a file at its top; and for a file, by the bytes it starts with. The page tries every
 thing you drop, a file or a folder, against each module&#39;s rules, without uploading anything first:</p>
@@ -193,6 +220,14 @@ the rest.</li>
 says what went where, such as &quot;Uploaded level9.map, a Star Rover map, into Star Rover › maps&quot;, and
 the cards are read again. Nothing starts by itself: a new game is a new card, and a new map is
 played from its game&#39;s page, with <strong>Play on a map</strong> or as the map to host a game on.</p>
+<h3 id="game-pictures-are-not-photos">Game pictures are not photos<a class="anchor" href="#game-pictures-are-not-photos" aria-label="Link to this section"></a></h3>
+<p>A game module&#39;s folder, and every picture in it, such as a game&#39;s cover or a scraper&#39;s box art, is
+kept out of EiN&#39;s media work: the pictures are not given sizes, their faces are not looked for,
+their text is not read and they are not found by search, as the family&#39;s photos are. Games does it
+as the folder is made, by giving it an empty <code>processing</code> attribute
+(<a href="../concepts/pipelines.html#which-processing-a-folder-wants">Which processing a folder wants</a>). A folder
+that was there before its game module was installed is kept out by running <code>games-folders</code> once, as
+the administrator.</p>
 <h2 id="play-together">Play together<a class="anchor" href="#play-together" aria-label="Link to this section"></a></h2>
 <p>A game that can be played together, one whose module plays together and that has maps, has more
 buttons in its header: <strong>Start server</strong>, <strong>Invite</strong> and <strong>Connect</strong>.</p>
@@ -249,7 +284,8 @@ games-host rover classic arena3 --max 4 --mode deathmatch
 <span class="hljs-comment"># k3x9</span>
 games-servers                             <span class="hljs-comment"># the games hosted, and who plays in each</span>
 games-invite k3x9 --hours 2               <span class="hljs-comment"># an invitation&#x27;s link, valid two hours</span>
-games-stop k3x9</code></pre></div>
+games-stop k3x9
+games-folders                             <span class="hljs-comment"># keep the game modules&#x27; folders out of the media work</span></code></pre></div>
 <p><code>games-host</code> answers the hosted game&#39;s id once it runs, and <code>games-servers</code> lists each with its
 module, game, map, mode, players and state. <code>games-invite</code> answers the link&#39;s path on this EiN&#39;s
 address: put the address in front of it before you send it, such as
@@ -269,7 +305,7 @@ commands, are the game module&#39;s.</p>
           <p class="page-source"><a href="https://github.com/einhq/einhq.github.io/blob/main/docs/games/index.md">This page's source</a> · <a href="../../">einhq.eu</a></p>
         </footer>
       </main>
-      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#the-games-page">The Games page</a></li><li><a href="#play-a-game">Play a game</a></li><li class="nested"><a href="#start-on-a-map">Start on a map</a></li><li class="nested"><a href="#saved-games-and-settings">Saved games and settings</a></li><li class="nested"><a href="#delete-a-game">Delete a game</a></li><li><a href="#add-games-and-maps-by-dropping-them">Add games and maps by dropping them</a></li><li><a href="#play-together">Play together</a></li><li class="nested"><a href="#start-a-server-here">Start a server here</a></li><li class="nested"><a href="#invite-someone-from-another-ein">Invite someone from another EiN</a></li><li class="nested"><a href="#connect-to-a-game-on-another-ein">Connect to a game on another EiN</a></li><li class="nested"><a href="#the-services-that-run-them">The services that run them</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
+      <aside class="docs-toc" aria-labelledby="toc-title"><p id="toc-title">On this page</p><ul><li><a href="#install-it">Install it</a></li><li><a href="#the-games-page">The Games page</a></li><li><a href="#play-a-game">Play a game</a></li><li class="nested"><a href="#start-on-a-map">Start on a map</a></li><li class="nested"><a href="#saved-games-and-settings">Saved games and settings</a></li><li class="nested"><a href="#use-a-frame-as-the-games-picture">Use a frame as the game's picture</a></li><li class="nested"><a href="#delete-a-game">Delete a game</a></li><li><a href="#add-games-and-maps-by-dropping-them">Add games and maps by dropping them</a></li><li class="nested"><a href="#game-pictures-are-not-photos">Game pictures are not photos</a></li><li><a href="#play-together">Play together</a></li><li class="nested"><a href="#start-a-server-here">Start a server here</a></li><li class="nested"><a href="#invite-someone-from-another-ein">Invite someone from another EiN</a></li><li class="nested"><a href="#connect-to-a-game-on-another-ein">Connect to a game on another EiN</a></li><li class="nested"><a href="#the-services-that-run-them">The services that run them</a></li><li><a href="#on-a-dashboard">On a dashboard</a></li><li><a href="#from-the-terminal">From the terminal</a></li><li><a href="#related-pages">Related pages</a></li></ul></aside>
     </div>
   </body>
 </html>

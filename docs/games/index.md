@@ -46,9 +46,10 @@ as a game module whose list of games failed.
 
 ## Play a game
 
-Choose a game's card. Its page has the game's picture and title in the header, with **Games ›**
-above the title to go back. Under the title are what the game is, for a game its module knows, and
-how it is played: its keys, what a click does now, and that <kbd>F11</kbd> toggles fullscreen. Below
+Choose a game's card. Its page has the game's picture and title in the header, at its foot, with
+**Games ›** above the title to go back, and its buttons at the bottom right. Under the title are what
+the game is, for a game its module knows, and how it is played: its keys, what a click does now, and
+that <kbd>F11</kbd> toggles fullscreen. Below
 is the game's frame, its cover whole and dimmed behind the play button, at the game's shape,
 until the game runs and again after it ends. Choose the play button to start it.
 
@@ -62,6 +63,18 @@ until the game runs and again after it ends. Choose the play button to start it.
   opens the menu too. If the browser does not hand the mouse back as the menu closes (Chrome does
   not after you took the mouse back with <kbd>Escape</kbd>), click the game. The line under the title says
   which is the case.
+- **The keys, drawn**: a game module may draw its game's controller, such as a console's pad. On a
+  computer with a mouse, a wide enough header then shows it on a dark panel at its top right, above the
+  buttons, with your
+  key on each of its buttons, and beside it a row for each of the game's other keys, ending with
+  <kbd>F11</kbd> **Fullscreen**, which you can click as the fullscreen button. The line under the title then
+  leaves the keys to the panel. **Keys** under **⋮** in the header shows the controller in a dialog,
+  also where the header is too narrow for the panel: click a button on it, then press the key you
+  want for it, or <kbd>Escape</kbd> to keep the one it has. A button that had that key takes the old
+  one, and **Reset** goes back to the game module's own keys. Your keys are kept by the game module,
+  for you alone, on every computer.
+  A game whose keys are bound in its own menus has them shown only, and the dialog says where in the
+  game they are changed.
 - **Fullscreen**: <kbd>F11</kbd>, or the button in the header, shows the running game on the whole
   screen, and again leaves it; a game may offer it in its own video menu as well. A game always
   starts in the page, since a browser goes fullscreen only when you press a key or click. In
@@ -81,8 +94,9 @@ the last lines the game wrote, which often say why, and **Play again**.
 ### Start on a map
 
 Some games can start on any of their maps, rather than at their own beginning. Their page has a
-**Play on a map** box in the header: type part of the map's name, such as `arena`, and choose
-`arena3` to start the game there.
+**Play on a map** button (a map) in the header. It opens a list of the game's maps, with their titles
+where the game has them, and a filter at its top: type part of a map's name or title, such as
+`arena`, and choose `arena3` to start the game there.
 
 ### Saved games and settings
 
@@ -94,6 +108,15 @@ ever loaded into the game it was made in. A game module may keep your settings o
 games, in `~/.rover` itself, so your key bindings are the same whichever of its games you play.
 Without an account nothing is kept beyond the page.
 
+### Use a frame as the game's picture
+
+While a game runs, **Use this frame as cover** under **⋮** in the header takes what is on the screen
+at that moment as the game's picture: its title screen, say, or a moment you like. The game goes on
+running. The picture is the frame as the game draws it, at its own size, and it is the game's for
+everyone here, on its card and behind the play button, until someone takes another. It is offered for
+the games whose module says where a game's picture goes; writing it needs the right to write there,
+as the games themselves do.
+
 ### Delete a game
 
 **Delete game** under **⋮** in the header removes the game's files from EiN, for everyone who plays
@@ -104,6 +127,13 @@ the right to remove its files, which an administrator has.
 
 Drop a game's files or folder anywhere on the Games page to add it, and drop a map to add it to a
 game you have. While you drag files over the page it says "Drop games and maps to add them".
+**Upload files** and **Upload folder** in the header pick them instead; what you pick goes where a
+drop of it would.
+
+How each game module wants its games put together, which files a game is, how its folder is laid
+out, where its music goes and in which format, is under **?** in the header (**How to add games**,
+also on the page while it has no games): a card for each installed game module, with the folder its
+games go into and examples of the folders it takes.
 
 Each game module says which files are its own: by their names, such as a name ending in `.rvr`; for
 a folder, by a file at its top; and for a file, by the bytes it starts with. The page tries every
@@ -121,6 +151,16 @@ What is uploaded goes through EiN's uploads, as any upload does, and once it has
 says what went where, such as "Uploaded level9.map, a Star Rover map, into Star Rover › maps", and
 the cards are read again. Nothing starts by itself: a new game is a new card, and a new map is
 played from its game's page, with **Play on a map** or as the map to host a game on.
+
+### Game pictures are not photos
+
+A game module's folder, and every picture in it, such as a game's cover or a scraper's box art, is
+kept out of EiN's media work: the pictures are not given sizes, their faces are not looked for,
+their text is not read and they are not found by search, as the family's photos are. Games does it
+as the folder is made, by giving it an empty `processing` attribute
+([Which processing a folder wants](../concepts/pipelines.md#which-processing-a-folder-wants)). A folder
+that was there before its game module was installed is kept out by running `games-folders` once, as
+the administrator.
 
 ## Play together
 
@@ -201,6 +241,7 @@ games-host rover classic arena3 --max 4 --mode deathmatch
 games-servers                             # the games hosted, and who plays in each
 games-invite k3x9 --hours 2               # an invitation's link, valid two hours
 games-stop k3x9
+games-folders                             # keep the game modules' folders out of the media work
 ```
 
 `games-host` answers the hosted game's id once it runs, and `games-servers` lists each with its

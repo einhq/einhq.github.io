@@ -914,19 +914,42 @@ module:
 }
 ```
 
-| Field         | What it is                                                                                                                                                                 |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`       | The module's name for its games, as the Games page and its chooser of a dropped file say it                                                                                |
-| `icon`        | A [Tabler](https://tabler.io/icons) icon name, or a picture's path in EiN's tree; a card without a cover stands with it                                                    |
-| `route`       | Where its games are played: a game's page is `<route>/<id>`, which the module's `mod.json` routes. A path, without a query or a `/` at its end                             |
-| `list`        | The command that lists its games, run as the person looking ([The list command](#the-list-command))                                                                        |
-| `fetch`       | The command that fetches an offered game, given its id; only an administrator is offered it, since it downloads. Without it, offered games are shown and cannot be fetched |
-| `folder`      | Where its games are, an absolute path, such as a folder in the household's shared home; a dropped thing placed `module` or `own-folder` goes into it                       |
-| `drops`       | The rules it recognises dropped files by ([Dropped files](#dropped-files))                                                                                                 |
-| `multiplayer` | How its games are played together, when they are ([Playing together](#playing-together))                                                                                   |
+| Field         | What it is                                                                                                                                                                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`       | The module's name for its games, as the Games page and its chooser of a dropped file say it                                                                                                                                                   |
+| `icon`        | A [Tabler](https://tabler.io/icons) icon name, or a picture's path in EiN's tree; a card without a cover stands with it                                                                                                                       |
+| `route`       | Where its games are played: a game's page is `<route>/<id>`, which the module's `mod.json` routes. A path, without a query or a `/` at its end                                                                                                |
+| `list`        | The command that lists its games, run as the person looking ([The list command](#the-list-command))                                                                                                                                           |
+| `fetch`       | The command that fetches an offered game, given its id; only an administrator is offered it, since it downloads. Without it, offered games are shown and cannot be fetched                                                                    |
+| `folder`      | Where its games are, an absolute path, such as a folder in the household's shared home; a dropped thing placed `module` or `own-folder` goes into it. Games keeps it out of the media work as it is made in `/groups/users` (`games-folders`) |
+| `drops`       | The rules it recognises dropped files by ([Dropped files](#dropped-files))                                                                                                                                                                    |
+| `multiplayer` | How its games are played together, when they are ([Playing together](#playing-together))                                                                                                                                                      |
 
 A drop-in with one wrong part is wrong as a whole: `games-list` leaves the module out and says why
 among its problems, which the Games page shows its administrator.
+
+Beside it, `etc/games.d/help.md` shows how to put the module's games together before they are
+dropped, by example more than in words: a game's folder as it is dropped, with its data files, its
+music and its maps, and a line on anything that is not played. It is Markdown without a title of
+its own, its headings from `####` on: the Games page's **How to add games** shows it in a card under
+the drop-in's `icon`, `title` and `folder`, and `games-list` answers it as the module's `help`. A
+module without one shows its folder alone. A fence marked `text` keeps a folder's tree as it is
+written:
+
+````markdown
+Drop the game's folder.
+
+#### Star Rover
+
+```text
+rover/
+├── rover.dat
+├── maps/
+│   └── mymap.map         optional
+└── music/                optional
+    └── track02.ogg
+```
+````
 
 ### The list command
 
@@ -934,22 +957,24 @@ among its problems, which the Games page shows its administrator.
 reads its answer as a list of `GameEntry`, one for each game, installed or offered. The answer may
 hold more of a game, what the module's own page needs to start it; Games reads only these:
 
-| Field         | What it is                                                                                                                                                |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`          | Which game it is in the module, the last part of its page's route; unique in the module. Required                                                         |
-| `title`       | Its name on its card and its page. Required                                                                                                               |
-| `state`       | `installed`, here and playable, or `offered`, free to fetch with `fetch`. Required                                                                        |
-| `detail`      | A line under an installed game's title: what it is, how large                                                                                             |
-| `description` | What the game is, a sentence or two, shown under its title on its page; for the games the module knows                                                    |
-| `about`       | What an offered game is                                                                                                                                   |
-| `download`    | The bytes fetching an offered game downloads                                                                                                              |
-| `size`        | An installed game's bytes                                                                                                                                 |
-| `cover`       | Its picture, at the game's own shape: a path in EiN's tree, or a `data:` URL                                                                              |
-| `path`        | An installed game's folder or file. **Delete game** removes it, and a dropped file placed `game` goes into it; without it neither is offered              |
-| `family`      | What plays it, when the module has more than one engine (`rover`, `rover2`): drop rules name families, and an invitation is played with a game of its own |
-| `maps`        | An installed game's maps by name (`level1`, `arena3`): what it is hosted on, and started on                                                               |
-| `hostable`    | Whether it can be hosted for others to join: the module plays together, and the game has maps                                                             |
-| `sealed`      | A game that reads nothing but its own files, as a shareware episode does: dropped files are never put into it                                             |
+| Field         | What it is                                                                                                                                                                                           |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`          | Which game it is in the module, the last part of its page's route; unique in the module. Required                                                                                                    |
+| `title`       | Its name on its card and its page. Required                                                                                                                                                          |
+| `state`       | `installed`, here and playable, or `offered`, free to fetch with `fetch`. Required                                                                                                                   |
+| `detail`      | A line under an installed game's title: what it is, how large                                                                                                                                        |
+| `description` | What the game is, a sentence or two, shown under its title on its page; for the games the module knows                                                                                               |
+| `about`       | What an offered game is                                                                                                                                                                              |
+| `download`    | The bytes fetching an offered game downloads                                                                                                                                                         |
+| `size`        | An installed game's bytes                                                                                                                                                                            |
+| `cover`       | Its picture, at the game's own shape: a path in EiN's tree, or a `data:` URL                                                                                                                         |
+| `coverPath`   | An installed game: where a picture of it taken on its page goes, a PNG in EiN's tree that the module reads `cover` from from then on; without it the page does not offer **Use this frame as cover** |
+| `path`        | An installed game's folder or file. **Delete game** removes it, and a dropped file placed `game` goes into it; without it neither is offered                                                         |
+| `family`      | What plays it, when the module has more than one engine (`rover`, `rover2`): drop rules name families, and an invitation is played with a game of its own                                            |
+| `maps`        | An installed game's maps by name (`level1`, `arena3`): what it is hosted on, and started on                                                                                                          |
+| `mapTitles`   | The titles the game itself shows for its `maps`, by name (`e1m1`: `The Slipgate Complex`), which **Play on a map** lists and filters by                                                              |
+| `hostable`    | Whether it can be hosted for others to join: the module plays together, and the game has maps                                                                                                        |
+| `sealed`      | A game that reads nothing but its own files, as a shareware episode does: dropped files are never put into it                                                                                        |
 
 ```json
 [
@@ -1060,11 +1085,36 @@ export const adapter: GameAdapter<RoverGame> = {
 | `title`       | What the page says before it knows the game                                                                                                                                                                                                          |
 | `list()`      | The module's games, with all `start` needs: its list command's answer                                                                                                                                                                                |
 | `start()`     | Load the engine and the game's files, and start it; answers a `RunningGame`                                                                                                                                                                          |
-| `help`        | The line under the frame: how the game is played                                                                                                                                                                                                     |
+| `help`        | The line under the game's description: how the game is played. Left out while the header shows the keys' panel                                                                                                                                       |
+| `keys`        | The game's controller drawn with the player's keys on it (`GameKeys`), which the page shows where a keyboard plays: below. None for a game whose keys `help` says                                                                                    |
 | `pointer`     | Whether the game is played with the mouse: a click on it then hands it the mouse (the browser's pointer lock), and fullscreen does too                                                                                                               |
 | `kept`        | The player's files the game keeps, by their paths in the player's saves folder: those `pattern` matches, found `depth` folders deep; those `shared` matches too are kept once for every game of the module. None for a game that keeps nothing       |
 | `startsOnMap` | Whether a game can start on one of its `maps`, which the page then offers as **Play on a map**                                                                                                                                                       |
 | `frame`       | The shape the game is always shown at, whatever size it draws at: 640 by 480 for an engine drawing 320 by 200 for a 4:3 screen. Without it the shape is each frame's own, starting at 640 by 480, so a wider video mode the player picks shows wider |
+
+A game played on a controller, such as a console's pad, can have the page draw it, with the
+player's key on each button, and let the player change them. `keys` is a `GameKeys`:
+
+```ts
+keys: {
+  Pad: RoverPad,
+  has: (game) => game.pad !== undefined,
+  shortcuts: [{ key: 'F2', icon: 'device-floppy', label: 'Save state' }],
+},
+```
+
+| Member      | What it is for                                                                                                                                                                                                                              |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Pad`       | A component, `{ game, editable }`: the game's controller with the player's keys on it. In the header `editable` is false, to look at; in the **Keys** dialog it is true, where a click on a button and then a key gives the button that key |
+| `has(game)` | Whether the game has a controller to draw; every game when left out                                                                                                                                                                         |
+| `shortcuts` | The module's keys of its own beside the controller's, a row each: the key, a [Tabler icon](https://tabler.io/icons)'s name and what it does                                                                                                 |
+
+On a computer with a mouse, a header at least 1100 pixels wide shows the controller at its top right, above its buttons,
+on a dark panel, then the `shortcuts` and the page's own <kbd>F11</kbd> **Fullscreen**, whose row
+is the fullscreen button; the header's fullscreen button and the help line's sentence on
+<kbd>F11</kbd> are left out then. **Keys** under **⋮** opens the dialog wherever the module draws a
+controller and a keyboard plays. Which keys the player has, and where they are kept, is the
+module's: a file in the player's module folder, `~/.rover/keys.json`, has them on every computer.
 
 `start` is given `StartOptions`:
 
@@ -1179,7 +1229,8 @@ Each animation frame the page sends the worker a tick, with the datagrams that c
 sockets, and never a second before the first is answered; it paints the frame the answer carries,
 and `menu()` and `fullscreen()` say what the answer said. The sound the engine mixes is played from
 a queue of at most 0.2 s, which starts once a little more than the page plays at a time is waiting.
-`keep()`, `disconnect()` and `setFullscreen()` are posted, and `stop()` ends the worker once it has
+`keep()`, `disconnect()` and, for an engine with a fullscreen of its own, `setFullscreen()` are
+posted; for one without `setFullscreen`, the page keeps fullscreen itself. `stop()` ends the worker once it has
 done what it was asked before. A game that fails to start throws, with the error the worker gave,
 and Quit ends it as `quitted` recognises.
 

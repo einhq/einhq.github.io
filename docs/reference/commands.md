@@ -2,7 +2,7 @@
 
 # Commands
 
-Every command an EiN with all its modules has: 490 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
+Every command an EiN with all its modules has: 491 of them. Each module's page describes its commands in full; this page lists them by what they are for, in a line each.
 
 ## Reading an entry
 
@@ -508,10 +508,11 @@ A command of a family, such as `mod-install` or `user-passwd`, can be typed as t
 
 ## Games
 
-[All 7 in full](../games/commands.md).
+[All 8 in full](../games/commands.md).
 
 | Command | What it does |
 | --- | --- |
+| [games-folders](../games/commands.md#games-folders) | Keep each game module's folder out of the media work, so the pictures in it are not taken for the family's photos: give it an empty processing attribute. The games-folders pipeline does it for a game module's folder as it is made. |
 | [games-host](../games/commands.md#games-host) | Host a game that others here join, or guests from another EiN with games-invite: its module's service runs it until you stop it with games-stop or nobody has played for five minutes. |
 | [games-invite](../games/commands.md#games-invite) | Invite someone on another EiN into a hosted game: an invitation that connects whoever has its link to the game's socket, played with their own EiN's copy of the game. |
 | [games-join](../games/commands.md#games-join) | The way into a hosted game: its socket node, which a player's page connects to and carries the game's datagrams both ways over, and the address the game connects to. |
